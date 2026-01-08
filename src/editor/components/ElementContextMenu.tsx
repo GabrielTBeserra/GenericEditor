@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import * as ContextMenu from '@radix-ui/react-context-menu';
 import { Dialog, Button, Flex, TextArea, TextField, Text, Badge } from '@radix-ui/themes';
 import { ChevronRightIcon } from '@radix-ui/react-icons';
-import { useEditor, IElement } from '../context';
+import { useEditor, type IElement } from '../context';
 import './context-menu.css';
 
 export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: IElement }> = ({ children, element }) => {
@@ -160,13 +160,11 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                     <Dialog.Title>Vincular Dados Manualmente</Dialog.Title>
                     <Flex direction="column" gap="3">
                          <Text size="2">Nome da propriedade (ex: titulo, preco, imagem):</Text>
-                        <TextField.Root>
-                            <TextField.Input 
+                        <TextField.Root 
                                 value={tempBinding} 
                                 onChange={e => setTempBinding(e.target.value)} 
                                 placeholder="propriedade" 
                             />
-                        </TextField.Root>
                         <Flex gap="3" justify="end">
                             <Dialog.Close>
                                 <Button variant="soft" color="gray">Cancelar</Button>

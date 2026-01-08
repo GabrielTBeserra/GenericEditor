@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, type ReactNode } from 'react';
 
 export interface IElement {
     id: string;
@@ -8,6 +8,7 @@ export interface IElement {
     y: number;
     width: number;
     height: number;
+    rotation?: number; // Rotation in degrees
     style?: React.CSSProperties;
     dataBinding?: string;
 }

@@ -1,23 +1,8 @@
-import { IElement, IListSettings } from '../context';
+import type { IElement, IListSettings } from '../context';
 
-const camelToKebab = (string: string) => {
-    return string.replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, '$1-$2').toLowerCase();
-};
 
-const styleObjectToString = (style: React.CSSProperties | undefined): string => {
-    if (!style) return '';
-    return Object.entries(style)
-        .map(([key, value]) => {
-            if (value === undefined || value === null) return '';
-            const cssKey = camelToKebab(key);
-            // Handle number values that need px (simplified)
-            const needsPx = ['width', 'height', 'top', 'left', 'right', 'bottom', 'fontSize', 'borderRadius', 'padding', 'margin', 'borderWidth'].includes(key);
-            const cssValue = (typeof value === 'number' && needsPx) ? `${value}px` : value;
-            return `${cssKey}: ${cssValue}`;
-        })
-        .filter(Boolean)
-        .join('; ');
-};
+
+
 
 interface RenderOptions {
     isList?: boolean;
@@ -97,6 +82,7 @@ function renderTemplate(elements, data, options = {}) {
                 top: element.y + offsetY,
                 width: element.width,
                 height: element.height,
+                transform: element.rotation ? \`rotate(\${element.rotation}deg)\` : undefined,
                 overflow: 'hidden',
                 ...element.style
             };

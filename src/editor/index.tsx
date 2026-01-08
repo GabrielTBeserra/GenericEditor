@@ -4,7 +4,7 @@ import { Theme, Flex, Box, Button, Text, Badge, DropdownMenu, ScrollArea, IconBu
 import { Group, Panel, Separator } from 'react-resizable-panels';
 import { EyeOpenIcon, EyeNoneIcon, DoubleArrowLeftIcon, DoubleArrowRightIcon, Share1Icon } from '@radix-ui/react-icons';
 import type { ILayout } from './types';
-import { EditorProvider, useEditor } from './context';
+import { EditorProvider, useEditor, type IElement } from './context';
 import { Canvas } from './components/Canvas';
 import { Preview } from './components/Preview';
 
@@ -38,7 +38,7 @@ const EditorContent: React.FC<EditorProps> = ({ layout, initialState, onSave }) 
 
     const handleAddElement = (type: string) => {
         console.log(`Adding element of type: ${type}`);
-        addElement({ type, content: `New ${type}` });
+        addElement({ type: type as IElement['type'], content: `New ${type}` });
     };
 
     const handleSave = () => {

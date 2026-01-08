@@ -1,5 +1,5 @@
 import React from 'react';
-import { useEditor, IElement } from '../context';
+import { useEditor, type IElement } from '../context';
 import { Flex, Box, Text, ScrollArea } from '@radix-ui/themes';
 import { motion } from 'framer-motion';
 
@@ -33,7 +33,7 @@ const PreviewElementRenderer: React.FC<{ element: IElement; offsetY?: number; da
         top: 0,
         width: `${element.width}px`,
         height: `${element.height}px`,
-        transform: `translate(${element.x}px, ${element.y + offsetY}px)`,
+        transform: `translate(${element.x}px, ${element.y + offsetY}px) rotate(${element.rotation || 0}deg)`,
         padding: element.type === 'image' ? 0 : '8px',
         overflow: 'hidden',
         ...element.style
@@ -50,7 +50,7 @@ const PreviewElementRenderer: React.FC<{ element: IElement; offsetY?: number; da
                     <img 
                         src={content} 
                         alt="Element" 
-                        style={{ width: '100%', height: '100%', objectFit: (element.style.objectFit as any) || 'cover', display: 'block' }} 
+                        style={{ width: '100%', height: '100%', objectFit: (element.style?.objectFit as any) || 'cover', display: 'block' }} 
                     />
                 ) : (
                     <Box style={{ width: '100%', height: '100%', backgroundColor: '#eee', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>

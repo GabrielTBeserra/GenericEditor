@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { GenericEditor as Editor } from './editor';
 import './App.css'
 import { generateHTML } from './editor/utils/htmlGenerator';

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Dialog, Button, Flex, Text, TextArea, Tabs, IconButton, Box } from '@radix-ui/themes';
+import { Dialog, Button, Flex, Text, TextArea, Tabs, Box } from '@radix-ui/themes';
 import { Share1Icon, CopyIcon, CheckIcon, DownloadIcon, UploadIcon } from '@radix-ui/react-icons';
 import { useEditor } from '../context';
 import { getRendererCode } from '../utils/htmlGenerator';

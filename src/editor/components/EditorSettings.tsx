@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Dialog, Button, Flex, Text, TextField, TextArea, Select, Switch, Box, Tabs } from '@radix-ui/themes';
+import { Dialog, Button, Flex, Text, TextField, TextArea, Select, Box, Tabs } from '@radix-ui/themes';
 import { GearIcon } from '@radix-ui/react-icons';
 import { useEditor } from '../context';
 
