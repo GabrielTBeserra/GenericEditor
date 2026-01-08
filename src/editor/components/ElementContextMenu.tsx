@@ -1,11 +1,36 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import * as ContextMenu from '@radix-ui/react-context-menu';
+import { Dialog, Button, Flex, TextArea, TextField, Text, Badge } from '@radix-ui/themes';
 import { ChevronRightIcon } from '@radix-ui/react-icons';
 import { useEditor, IElement } from '../context';
 import './context-menu.css';
 
 export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: IElement }> = ({ children, element }) => {
     const { updateElement, removeElement, addElement, moveElement, state } = useEditor();
+    const [isEditContentOpen, setIsEditContentOpen] = useState(false);
+    const [isBindDataOpen, setIsBindDataOpen] = useState(false);
+    const [tempContent, setTempContent] = useState(element.content);
+    const [tempBinding, setTempBinding] = useState(element.dataBinding || "");
+    const textAreaRef = useRef<HTMLTextAreaElement>(null);
+
+    const handleInsertVariable = (variable: string) => {
+        const textarea = textAreaRef.current;
+        if (textarea) {
+            const start = textarea.selectionStart;
+            const end = textarea.selectionEnd;
+            const text = tempContent;
+            const newText = text.substring(0, start) + `{{${variable}}}` + text.substring(end);
+            setTempContent(newText);
+            
+            setTimeout(() => {
+                textarea.focus();
+                const newCursorPos = start + variable.length + 4; // {{ + }} = 4 chars
+                textarea.setSelectionRange(newCursorPos, newCursorPos);
+            }, 0);
+        } else {
+             setTempContent(prev => prev + `{{${variable}}}`);
+        }
+    };
 
     const handleUpdateStyle = (style: React.CSSProperties) => {
         updateElement(element.id, {
@@ -62,8 +87,96 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
         }
     };
 
+    const handleOpenBindData = () => {
+        setTempBinding(element.dataBinding || "");
+        setIsBindDataOpen(true);
+    };
+
+    const handleSaveBinding = () => {
+        const propName = tempBinding;
+        const updates: Partial<IElement> = { dataBinding: propName };
+        if (element.type === 'text') {
+            updates.content = `{{${propName}}}`;
+        }
+        updateElement(element.id, updates);
+        setIsBindDataOpen(false);
+    };
+
+    const handleOpenEditContent = () => {
+        setTempContent(element.content);
+        setIsEditContentOpen(true);
+    };
+
+    const handleSaveContent = () => {
+        updateElement(element.id, { content: tempContent });
+        setIsEditContentOpen(false);
+    };
+
     return (
         <>
+            <Dialog.Root open={isEditContentOpen} onOpenChange={setIsEditContentOpen}>
+                <Dialog.Content style={{ maxWidth: 450 }}>
+                    <Dialog.Title>Editar Texto</Dialog.Title>
+                    <Flex direction="column" gap="3">
+                        <TextArea 
+                            ref={textAreaRef}
+                            value={tempContent} 
+                            onChange={e => setTempContent(e.target.value)} 
+                            placeholder="Digite o novo texto..."
+                            style={{ height: 100 }}
+                        />
+                        
+                        {state.availableProps && state.availableProps.length > 0 && (
+                            <Flex direction="column" gap="2">
+                                <Text size="1" color="gray">Inserir variável:</Text>
+                                <Flex gap="2" wrap="wrap">
+                                    {state.availableProps.map(prop => (
+                                        <Badge 
+                                            key={prop.dataName} 
+                                            color="blue" 
+                                            variant="surface" 
+                                            style={{ cursor: 'pointer' }}
+                                            onClick={() => handleInsertVariable(prop.dataName)}
+                                        >
+                                            {prop.name}
+                                        </Badge>
+                                    ))}
+                                </Flex>
+                            </Flex>
+                        )}
+
+                        <Flex gap="3" justify="end">
+                            <Dialog.Close>
+                                <Button variant="soft" color="gray">Cancelar</Button>
+                            </Dialog.Close>
+                            <Button onClick={handleSaveContent}>Salvar</Button>
+                        </Flex>
+                    </Flex>
+                </Dialog.Content>
+            </Dialog.Root>
+
+            <Dialog.Root open={isBindDataOpen} onOpenChange={setIsBindDataOpen}>
+                <Dialog.Content style={{ maxWidth: 450 }}>
+                    <Dialog.Title>Vincular Dados Manualmente</Dialog.Title>
+                    <Flex direction="column" gap="3">
+                         <Text size="2">Nome da propriedade (ex: titulo, preco, imagem):</Text>
+                        <TextField.Root>
+                            <TextField.Input 
+                                value={tempBinding} 
+                                onChange={e => setTempBinding(e.target.value)} 
+                                placeholder="propriedade" 
+                            />
+                        </TextField.Root>
+                        <Flex gap="3" justify="end">
+                            <Dialog.Close>
+                                <Button variant="soft" color="gray">Cancelar</Button>
+                            </Dialog.Close>
+                            <Button onClick={handleSaveBinding}>Vincular</Button>
+                        </Flex>
+                    </Flex>
+                </Dialog.Content>
+            </Dialog.Root>
+
             <input 
                 type="file" 
                 ref={fileInputRef} 
@@ -77,6 +190,68 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                 </ContextMenu.Trigger>
                 <ContextMenu.Portal>
                     <ContextMenu.Content className="ContextMenuContent">
+                        {/* Data Binding - New Feature */}
+                        <ContextMenu.Sub>
+                            <ContextMenu.SubTrigger className="ContextMenuSubTrigger">
+                                Vincular Dados {element.dataBinding && `(${element.dataBinding})`}
+                                <div className="RightSlot"><ChevronRightIcon /></div>
+                            </ContextMenu.SubTrigger>
+                            <ContextMenu.Portal>
+                                <ContextMenu.SubContent className="ContextMenuSubContent">
+                                    {state.availableProps && state.availableProps.length > 0 && (
+                                        <>
+                                            {state.availableProps.map(prop => (
+                                                <ContextMenu.Item 
+                                                    key={prop.dataName} 
+                                                    className="ContextMenuItem"
+                                                    onSelect={() => {
+                                                        const updates: Partial<IElement> = { dataBinding: prop.dataName };
+                                                        if (element.type === 'text') {
+                                                            updates.content = `{{${prop.dataName}}}`;
+                                                        }
+                                                        updateElement(element.id, updates);
+                                                    }}
+                                                >
+                                                    {prop.name}
+                                                    <div className="RightSlot" style={{ color: 'var(--gray-10)', fontSize: 10 }}>{prop.dataName}</div>
+                                                </ContextMenu.Item>
+                                            ))}
+                                            <ContextMenu.Separator className="ContextMenuSeparator" />
+                                        </>
+                                    )}
+                                    
+                                    <ContextMenu.Item className="ContextMenuItem" onSelect={handleOpenBindData}>
+                                        Outro / Manual...
+                                    </ContextMenu.Item>
+                                    
+                                    {element.dataBinding && (
+                                        <>
+                                            <ContextMenu.Separator className="ContextMenuSeparator" />
+                                            <ContextMenu.Item 
+                                                className="ContextMenuItem" 
+                                                style={{ color: 'var(--red-9)' }}
+                                                onSelect={() => updateElement(element.id, { dataBinding: undefined })}
+                                            >
+                                                Remover Vínculo
+                                            </ContextMenu.Item>
+                                        </>
+                                    )}
+                                </ContextMenu.SubContent>
+                            </ContextMenu.Portal>
+                        </ContextMenu.Sub>
+                        
+                        <ContextMenu.Separator className="ContextMenuSeparator" />
+
+                        {/* Text Specific Actions */}
+                        {element.type === 'text' && (
+                            <>
+                                <ContextMenu.Item className="ContextMenuItem" onSelect={handleOpenEditContent}>
+                                    Editar Texto...
+                                </ContextMenu.Item>
+                                <ContextMenu.Separator className="ContextMenuSeparator" />
+                            </>
+                        )}
+
                         {/* Common Actions */}
                         <ContextMenu.Item className="ContextMenuItem" onSelect={handleDuplicate}>
                             Duplicar

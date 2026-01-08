@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import '@radix-ui/themes/styles.css';
 import { Theme, Flex, Box, Button, Text, Badge, DropdownMenu, ScrollArea, IconButton } from '@radix-ui/themes';
 import { Group, Panel, Separator } from 'react-resizable-panels';
-import { EyeOpenIcon, EyeNoneIcon, DoubleArrowLeftIcon, DoubleArrowRightIcon } from '@radix-ui/react-icons';
+import { EyeOpenIcon, EyeNoneIcon, DoubleArrowLeftIcon, DoubleArrowRightIcon, Share1Icon } from '@radix-ui/react-icons';
 import type { ILayout } from './types';
 import { EditorProvider, useEditor } from './context';
 import { Canvas } from './components/Canvas';
@@ -10,16 +10,50 @@ import { Preview } from './components/Preview';
 
 interface EditorProps {
     layout: ILayout;
+    initialState?: any; // To load saved state
+    onSave?: (json: string) => void; // Callback for saving
 }
 
-const EditorContent: React.FC<EditorProps> = ({ layout }) => {
+const EditorContent: React.FC<EditorProps> = ({ layout, initialState, onSave }) => {
     const [isPreviewVisible, setIsPreviewVisible] = useState(true);
     const [isSidebarVisible, setIsSidebarVisible] = useState(true);
-    const { addElement } = useEditor();
+    const { addElement, loadState, state } = useEditor();
+
+    // Load initial state if provided
+    React.useEffect(() => {
+        if (initialState) {
+            try {
+                const parsed = typeof initialState === 'string' ? JSON.parse(initialState) : initialState;
+                 // Check if it's full state or just elements
+                if (Array.isArray(parsed)) {
+                    loadState({ elements: parsed });
+                } else if (parsed.elements) {
+                    loadState(parsed);
+                }
+            } catch (e) {
+                console.error("Failed to load initial state", e);
+            }
+        }
+    }, [initialState, loadState]);
 
     const handleAddElement = (type: string) => {
         console.log(`Adding element of type: ${type}`);
         addElement({ type, content: `New ${type}` });
+    };
+
+    const handleSave = () => {
+        if (onSave) {
+            const fullStateJson = JSON.stringify({
+                elements: state.elements,
+                listSettings: state.listSettings,
+                mockData: state.mockData,
+                singleMockData: state.singleMockData,
+                isList: state.isList
+            }, null, 2);
+            onSave(fullStateJson);
+        } else {
+            console.log("Salvar acionado, mas nenhum callback onSave foi fornecido.");
+        }
     };
 
     return (
@@ -28,30 +62,32 @@ const EditorContent: React.FC<EditorProps> = ({ layout }) => {
                 
                 {/* Sidebar - Toggleable */}
                 {isSidebarVisible && (
-                    <Box 
-                        width="250px" 
+                    <Flex 
+                        direction="column"
+                        width="280px" 
                         style={{ 
                             borderRight: '1px solid var(--gray-5)', 
                             backgroundColor: 'var(--gray-2)',
-                            flexShrink: 0
+                            flexShrink: 0,
+                            height: '100%'
                         }}
                     >
-                        <ScrollArea type="auto" scrollbars="vertical" style={{ height: '100%' }}>
+                        <ScrollArea type="auto" scrollbars="vertical" style={{ flex: 1 }}>
                             <Flex direction="column" gap="4" p="4">
                                 {/* Ações */}
                                 <Box>
-                                    <Text size="2" weight="bold" mb="2" as="div">Ações</Text>
+                                    <Text size="2" weight="bold" mb="2" as="div">Elementos</Text>
                                     
                                     <DropdownMenu.Root>
                                         <DropdownMenu.Trigger>
-                                            <Button variant="solid" color="green" style={{ width: '100%', cursor: 'pointer' }}>
-                                                Adicionar +
+                                            <Button variant="solid" color="green" size="3" style={{ width: '100%', cursor: 'pointer', justifyContent: 'center' }}>
+                                                Adicionar Novo +
                                             </Button>
                                         </DropdownMenu.Trigger>
-                                        <DropdownMenu.Content>
+                                        <DropdownMenu.Content style={{ width: '240px' }}>
                                             <DropdownMenu.Item onSelect={() => handleAddElement('text')}>Texto</DropdownMenu.Item>
                                             <DropdownMenu.Item onSelect={() => handleAddElement('image')}>Imagem</DropdownMenu.Item>
-                                            <DropdownMenu.Item onSelect={() => handleAddElement('box')}>Caixa</DropdownMenu.Item>
+                                            <DropdownMenu.Item onSelect={() => handleAddElement('box')}>Caixa (Container)</DropdownMenu.Item>
                                         </DropdownMenu.Content>
                                     </DropdownMenu.Root>
                                 </Box>
@@ -59,22 +95,43 @@ const EditorContent: React.FC<EditorProps> = ({ layout }) => {
                                 {/* Variáveis */}
                                 <Box>
                                     <Text size="2" weight="bold" mb="2" as="div">Variáveis Disponíveis</Text>
+                                    <Text size="1" color="gray" mb="2" as="div">Clique para copiar ou arraste (futuramente)</Text>
                                     <Flex direction="column" gap="2">
                                         {layout.props.map((prop, index) => (
-                                            <Badge key={index} color="blue" variant="soft" title={prop.dataName}>
+                                            <Badge key={index} color="blue" variant="soft" size="2" style={{ padding: '8px', justifyContent: 'flex-start' }} title={prop.dataName}>
                                                 {prop.name}
+                                                <Text color="gray" style={{ marginLeft: 'auto', fontSize: '10px' }}>{`{{${prop.dataName}}}`}</Text>
                                             </Badge>
                                         ))}
                                         {layout.props.length === 0 && (
                                             <Text size="1" color="gray" style={{ fontStyle: 'italic' }}>
-                                                Nenhuma variável disponível
+                                                Nenhuma variável configurada.
                                             </Text>
                                         )}
                                     </Flex>
                                 </Box>
                             </Flex>
                         </ScrollArea>
-                    </Box>
+
+                        {/* Footer Actions */}
+                        <Box p="4" pb="6" style={{ borderTop: '1px solid var(--gray-5)', backgroundColor: 'var(--color-background)' }}>
+                            <Flex direction="column" gap="3">
+                                <Box>
+                                    <Text size="2" weight="bold" mb="2" as="div">Ações</Text>
+                                    <Flex gap="3" direction="column">
+                                        <Button 
+                                            variant="soft" 
+                                            color="blue" 
+                                            style={{ width: '100%', justifyContent: 'center', cursor: 'pointer', marginBottom: '12px' }}
+                                            onClick={handleSave}
+                                        >
+                                            <Share1Icon /> Salvar Alterações
+                                        </Button>
+                                    </Flex>
+                                </Box>
+                            </Flex>
+                        </Box>
+                    </Flex>
                 )}
 
                 {/* Main Content Area (Resizable Split) */}
@@ -92,8 +149,9 @@ const EditorContent: React.FC<EditorProps> = ({ layout }) => {
                         </IconButton>
                     </Box>
 
-                    {/* Toggle Preview Button - Top Right */}
-                    <Box style={{ position: 'absolute', top: 10, right: 10, zIndex: 10 }}>
+                    {/* Top Right Controls */}
+                    <Flex style={{ position: 'absolute', top: 10, right: 10, zIndex: 10 }} gap="2">
+                        
                          <IconButton 
                             size="2" 
                             variant="soft" 
@@ -103,7 +161,7 @@ const EditorContent: React.FC<EditorProps> = ({ layout }) => {
                         >
                             {isPreviewVisible ? <EyeOpenIcon /> : <EyeNoneIcon />}
                         </IconButton>
-                    </Box>
+                    </Flex>
 
                     <Group orientation="horizontal" style={{ height: '100%', width: '100%' }}>
                         {/* Editor Canvas Area */}
@@ -143,9 +201,9 @@ const EditorContent: React.FC<EditorProps> = ({ layout }) => {
     );
 };
 
-export const Editor: React.FC<EditorProps> = (props) => {
+export const GenericEditor: React.FC<EditorProps> = (props) => {
     return (
-        <EditorProvider isList={props.layout.isList}>
+        <EditorProvider isList={props.layout.isList} availableProps={props.layout.props}>
             <EditorContent {...props} />
         </EditorProvider>
     );

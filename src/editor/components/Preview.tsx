@@ -1,8 +1,32 @@
 import React from 'react';
 import { useEditor, IElement } from '../context';
 import { Flex, Box, Text, ScrollArea } from '@radix-ui/themes';
+import { motion } from 'framer-motion';
 
-const PreviewElementRenderer: React.FC<{ element: IElement; offsetY?: number }> = ({ element, offsetY = 0 }) => {
+const PreviewElementRenderer: React.FC<{ element: IElement; offsetY?: number; dataContext?: any }> = ({ element, offsetY = 0, dataContext }) => {
+    // Resolve content based on data binding
+    let content = element.content;
+    if (dataContext) {
+        if (element.type === 'text') {
+             content = content.replace(/\{\{(.*?)\}\}/g, (match, key) => {
+                const val = dataContext[key.trim()];
+                return val !== undefined && val !== null ? String(val) : match;
+            });
+        } else if (element.type === 'image') {
+             if (element.dataBinding) {
+                const val = dataContext[element.dataBinding];
+                if (val !== undefined && val !== null) {
+                    content = String(val);
+                }
+             } else {
+                 content = content.replace(/\{\{(.*?)\}\}/g, (match, key) => {
+                    const val = dataContext[key.trim()];
+                    return val !== undefined && val !== null ? String(val) : match;
+                });
+             }
+        }
+    }
+
     const commonStyles: React.CSSProperties = {
         position: 'absolute',
         left: 0,
@@ -18,13 +42,13 @@ const PreviewElementRenderer: React.FC<{ element: IElement; offsetY?: number }> 
     return (
         <Box style={commonStyles}>
             {element.type === 'text' && (
-                <Text>{element.content}</Text>
+                <Text>{content}</Text>
             )}
             
             {element.type === 'image' && (
-                element.content ? (
+                content ? (
                     <img 
-                        src={element.content} 
+                        src={content} 
                         alt="Element" 
                         style={{ width: '100%', height: '100%', objectFit: (element.style.objectFit as any) || 'cover', display: 'block' }} 
                     />
@@ -42,6 +66,31 @@ const PreviewElementRenderer: React.FC<{ element: IElement; offsetY?: number }> 
     );
 };
 
+const ListItem: React.FC<{ children: React.ReactNode; index: number; height: number }> = ({ children, index, height }) => (
+    <motion.div
+        initial={{ opacity: 0, y: 20, scale: 0.95 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ 
+            duration: 0.4,
+            delay: index * 0.05,
+            ease: "easeOut"
+        }}
+        whileHover={{ 
+            scale: 1.02,
+            transition: { duration: 0.2 }
+        }}
+        style={{
+            position: 'relative',
+            height: height,
+            width: '100%',
+            marginBottom: '20px',
+            transformOrigin: 'center center'
+        }}
+    >
+        {children}
+    </motion.div>
+);
+
 export const Preview: React.FC = () => {
     const { state } = useEditor();
 
@@ -49,7 +98,7 @@ export const Preview: React.FC = () => {
     const itemHeight = React.useMemo(() => {
         if (state.elements.length === 0) return 0;
         const maxY = Math.max(...state.elements.map(el => el.y + el.height));
-        return maxY + 20; // 20px gap
+        return maxY; 
     }, [state.elements]);
 
     const renderContent = () => {
@@ -62,22 +111,53 @@ export const Preview: React.FC = () => {
         }
 
         if (state.isList) {
-            // Render 3 items to simulate a list
-            return Array.from({ length: 3 }).map((_, index) => (
-                <React.Fragment key={index}>
-                    {state.elements.map((el) => (
-                        <PreviewElementRenderer 
-                            key={`${el.id}-${index}`} 
-                            element={el} 
-                            offsetY={index * itemHeight} 
-                        />
+            // Determine data source
+            let listData = state.mockData.length > 0 ? state.mockData : Array.from({ length: 10 }).map((_, i) => ({ id: i }));
+
+            // Sort data if prop is set
+            if (state.listSettings.sortProp) {
+                const prop = state.listSettings.sortProp;
+                const order = state.listSettings.sortOrder === 'asc' ? 1 : -1;
+                
+                listData = [...listData].sort((a, b) => {
+                    const valA = a[prop];
+                    const valB = b[prop];
+                    if (valA < valB) return -1 * order;
+                    if (valA > valB) return 1 * order;
+                    return 0;
+                });
+            }
+
+            return (
+                <Flex 
+                    direction="column" 
+                    justify="end" 
+                    p="4" 
+                    style={{ width: '100%', minHeight: '100%' }}
+                >
+                    {listData.map((item, index) => (
+                        <ListItem key={index} index={index} height={itemHeight}>
+                            {state.elements.map((el) => (
+                                <PreviewElementRenderer 
+                                    key={`${el.id}-${index}`} 
+                                    element={el} 
+                                    offsetY={0} 
+                                    dataContext={item}
+                                />
+                            ))}
+                        </ListItem>
                     ))}
-                </React.Fragment>
-            ));
+                </Flex>
+            );
         }
 
+        // Non-list mode (Single Item)
         return state.elements.map((el) => (
-            <PreviewElementRenderer key={el.id} element={el} />
+            <PreviewElementRenderer 
+                key={el.id} 
+                element={el} 
+                dataContext={state.singleMockData} 
+            />
         ));
     };
 

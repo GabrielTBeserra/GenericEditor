@@ -1,7 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useEditor, IElement } from '../context';
-import { Flex, Box, Text, Button } from '@radix-ui/themes';
-import { Cross1Icon } from '@radix-ui/react-icons';
+import { Flex, Box, Text } from '@radix-ui/themes';
 import { Resizable } from 're-resizable';
 import { ElementContextMenu } from './ElementContextMenu';
 
@@ -10,10 +9,40 @@ interface CanvasProps {
 }
 
 const DraggableResizableElement: React.FC<{ element: IElement; isSelected: boolean }> = ({ element, isSelected }) => {
-    const { selectElement, removeElement, updateElement } = useEditor();
+    const { selectElement, removeElement, updateElement, state } = useEditor();
     const [isDragging, setIsDragging] = useState(false);
     const dragStartPos = useRef({ x: 0, y: 0 });
     const elementStartPos = useRef({ x: 0, y: 0 });
+
+    // Resolve content for display in Canvas
+    const dataContext = state.isList 
+        ? (state.mockData.length > 0 ? state.mockData[0] : null)
+        : state.singleMockData;
+
+    let displayContent = element.content;
+
+    if (dataContext) {
+        if (element.type === 'text') {
+            // Interpolation for Text: replaces {{variable}} with value
+            displayContent = displayContent.replace(/\{\{(.*?)\}\}/g, (match, key) => {
+                const val = dataContext[key.trim()];
+                return val !== undefined && val !== null ? String(val) : match;
+            });
+        } else if (element.type === 'image') {
+            // For image, prefer dataBinding if set, otherwise try interpolation on content (URL)
+            if (element.dataBinding) {
+                const val = dataContext[element.dataBinding];
+                if (val !== undefined && val !== null) {
+                    displayContent = String(val);
+                }
+            } else {
+                 displayContent = displayContent.replace(/\{\{(.*?)\}\}/g, (match, key) => {
+                    const val = dataContext[key.trim()];
+                    return val !== undefined && val !== null ? String(val) : match;
+                });
+            }
+        }
+    }
 
     const handleClick = (e: React.MouseEvent) => {
         e.stopPropagation();
@@ -110,13 +139,13 @@ const DraggableResizableElement: React.FC<{ element: IElement; isSelected: boole
                     }}
                 >
                     {element.type === 'text' && (
-                        <Text style={{ width: '100%', height: '100%' }}>{element.content}</Text>
+                        <Text style={{ width: '100%', height: '100%' }}>{displayContent}</Text>
                     )}
                     
                     {element.type === 'image' && (
-                        element.content ? (
+                        displayContent ? (
                             <img 
-                                src={element.content} 
+                                src={displayContent} 
                                 alt="Element" 
                                 style={{ width: '100%', height: '100%', objectFit: (element.style.objectFit as any) || 'cover', display: 'block', pointerEvents: 'none' }} 
                             />
@@ -130,6 +159,8 @@ const DraggableResizableElement: React.FC<{ element: IElement; isSelected: boole
                     {element.type === 'box' && (
                         <Box style={{ width: '100%', height: '100%' }} />
                     )}
+
+
                 </Box>
             </ElementContextMenu>
         </Resizable>

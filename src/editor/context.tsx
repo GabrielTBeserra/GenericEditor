@@ -9,12 +9,27 @@ export interface IElement {
     width: number;
     height: number;
     style?: React.CSSProperties;
+    dataBinding?: string;
+}
+
+export interface IListSettings {
+    sortProp?: string;
+    sortOrder: 'asc' | 'desc';
+}
+
+export interface IProp {
+    name: string;
+    dataName: string;
 }
 
 interface IEditorState {
     elements: IElement[];
     selectedElementId: string | null;
     isList: boolean;
+    mockData: any[]; // Used for list mode
+    singleMockData: Record<string, any>; // Used for non-list mode
+    listSettings: IListSettings;
+    availableProps: IProp[];
 }
 
 interface IEditorContext {
@@ -24,23 +39,44 @@ interface IEditorContext {
     selectElement: (id: string | null) => void;
     moveElement: (dragIndex: number, hoverIndex: number) => void;
     updateElement: (id: string, updates: Partial<IElement>) => void;
+    setMockData: (data: any[], singleData: Record<string, any>) => void;
+    updateListSettings: (settings: Partial<IListSettings>) => void;
+    loadState: (savedState: Partial<IEditorState>) => void;
 }
 
 const EditorContext = createContext<IEditorContext | undefined>(undefined);
 
-export const EditorProvider: React.FC<{ children: ReactNode; isList?: boolean }> = ({ children, isList = false }) => {
+export const EditorProvider: React.FC<{ children: ReactNode; isList?: boolean; availableProps?: IProp[] }> = ({ children, isList = false, availableProps = [] }) => {
     const [state, setState] = useState<IEditorState>({
         elements: [],
         selectedElementId: null,
-        isList
+        isList,
+        mockData: [],
+        singleMockData: {},
+        listSettings: {
+            sortOrder: 'asc'
+        },
+        availableProps
     });
 
-    // Update state if prop changes
+    // Update state if props change (only basic props, don't overwrite elements)
     React.useEffect(() => {
-        setState(prev => ({ ...prev, isList }));
-    }, [isList]);
+        setState(prev => ({ ...prev, isList, availableProps }));
+    }, [isList, availableProps]);
 
-    const addElement = (element: Omit<IElement, 'id' | 'x' | 'y' | 'width' | 'height'> & Partial<Pick<IElement, 'x' | 'y' | 'width' | 'height'>>) => {
+    const loadState = React.useCallback((savedState: Partial<IEditorState>) => {
+        setState(prev => ({
+            ...prev,
+            ...savedState,
+            // Ensure these are preserved if not present in savedState
+            isList: savedState.isList ?? prev.isList,
+            availableProps: savedState.availableProps ?? prev.availableProps,
+            // Reset selection
+            selectedElementId: null
+        }));
+    }, []);
+
+    const addElement = React.useCallback((element: Omit<IElement, 'id' | 'x' | 'y' | 'width' | 'height'> & Partial<Pick<IElement, 'x' | 'y' | 'width' | 'height'>>) => {
         const defaultStyles: React.CSSProperties = {};
         if (element.type === 'box') {
             defaultStyles.backgroundColor = 'var(--gray-4)';
@@ -62,38 +98,66 @@ export const EditorProvider: React.FC<{ children: ReactNode; isList?: boolean }>
             ...prev,
             elements: [...prev.elements, newElement]
         }));
-    };
+    }, []);
 
-    const removeElement = (id: string) => {
+    const removeElement = React.useCallback((id: string) => {
         setState(prev => ({
             ...prev,
             elements: prev.elements.filter(el => el.id !== id),
             selectedElementId: prev.selectedElementId === id ? null : prev.selectedElementId
         }));
-    };
+    }, []);
 
-    const selectElement = (id: string | null) => {
+    const selectElement = React.useCallback((id: string | null) => {
         setState(prev => ({ ...prev, selectedElementId: id }));
-    };
+    }, []);
 
-    const moveElement = (dragIndex: number, hoverIndex: number) => {
-        const draggedElement = state.elements[dragIndex];
-        const newElements = [...state.elements];
-        newElements.splice(dragIndex, 1);
-        newElements.splice(hoverIndex, 0, draggedElement);
-        
-        setState(prev => ({ ...prev, elements: newElements }));
-    };
+    const moveElement = React.useCallback((dragIndex: number, hoverIndex: number) => {
+        setState(prev => {
+            const newElements = [...prev.elements];
+            const draggedElement = newElements[dragIndex];
+            newElements.splice(dragIndex, 1);
+            newElements.splice(hoverIndex, 0, draggedElement);
+            return { ...prev, elements: newElements };
+        });
+    }, []);
 
-    const updateElement = (id: string, updates: Partial<IElement>) => {
+    const updateElement = React.useCallback((id: string, updates: Partial<IElement>) => {
         setState(prev => ({
             ...prev,
             elements: prev.elements.map(el => el.id === id ? { ...el, ...updates } : el)
         }));
-    };
+    }, []);
+
+    const setMockData = React.useCallback((data: any[], singleData: Record<string, any>) => {
+        setState(prev => ({
+            ...prev,
+            mockData: data,
+            singleMockData: singleData
+        }));
+    }, []);
+
+    const updateListSettings = React.useCallback((settings: Partial<IListSettings>) => {
+        setState(prev => ({
+            ...prev,
+            listSettings: { ...prev.listSettings, ...settings }
+        }));
+    }, []);
+
+    const contextValue = React.useMemo(() => ({
+        state,
+        addElement,
+        removeElement,
+        selectElement,
+        moveElement,
+        updateElement,
+        setMockData,
+        updateListSettings,
+        loadState
+    }), [state, addElement, removeElement, selectElement, moveElement, updateElement, setMockData, updateListSettings, loadState]);
 
     return (
-        <EditorContext.Provider value={{ state, addElement, removeElement, selectElement, moveElement, updateElement }}>
+        <EditorContext.Provider value={contextValue}>
             {children}
         </EditorContext.Provider>
     );
