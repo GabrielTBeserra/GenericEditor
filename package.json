@@ -12,7 +12,8 @@
     ".": {
       "import": "./dist/generic-editor.js",
       "require": "./dist/generic-editor.umd.cjs"
-    }
+    },
+    "./dist/generic-editor.css": "./dist/generic-editor.css"
   },
   "files": [
     "dist"
