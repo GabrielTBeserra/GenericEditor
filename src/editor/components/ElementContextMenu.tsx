@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import * as ContextMenu from '@radix-ui/react-context-menu';
-import { Dialog, Button, Flex, TextArea, TextField, Text, Badge } from '@radix-ui/themes';
+import { Dialog, Button, Flex, TextArea, TextField, Text, Badge, Theme } from '@radix-ui/themes';
 import { ChevronRightIcon } from '@radix-ui/react-icons';
 import { useEditor, type IElement } from '../context';
 import './context-menu.css';
@@ -186,7 +186,7 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                 <ContextMenu.Trigger asChild>
                     {children}
                 </ContextMenu.Trigger>
-                <ContextMenu.Portal>
+                <ContextMenu.Portal><Theme appearance={state.theme} style={{ display: "contents" }}>
                     <ContextMenu.Content className="ContextMenuContent">
                         {/* Data Binding - New Feature */}
                         <ContextMenu.Sub>
@@ -194,7 +194,7 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                                 Vincular Dados {element.dataBinding && `(${element.dataBinding})`}
                                 <div className="RightSlot"><ChevronRightIcon /></div>
                             </ContextMenu.SubTrigger>
-                            <ContextMenu.Portal>
+                            <ContextMenu.Portal><Theme appearance={state.theme} style={{ display: "contents" }}>
                                 <ContextMenu.SubContent className="ContextMenuSubContent">
                                     {state.availableProps && state.availableProps.length > 0 && (
                                         <>
@@ -235,7 +235,7 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                                         </>
                                     )}
                                 </ContextMenu.SubContent>
-                            </ContextMenu.Portal>
+                            </Theme></ContextMenu.Portal>
                         </ContextMenu.Sub>
                         
                         <ContextMenu.Separator className="ContextMenuSeparator" />
@@ -267,7 +267,7 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                                         Alterar Imagem
                                         <div className="RightSlot"><ChevronRightIcon /></div>
                                     </ContextMenu.SubTrigger>
-                                    <ContextMenu.Portal>
+                                    <ContextMenu.Portal><Theme appearance={state.theme} style={{ display: "contents" }}>
                                         <ContextMenu.SubContent className="ContextMenuSubContent">
                                             <ContextMenu.Item className="ContextMenuItem" onSelect={() => fileInputRef.current?.click()}>
                                                 Carregar do Computador
@@ -276,7 +276,7 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                                                 Inserir URL
                                             </ContextMenu.Item>
                                         </ContextMenu.SubContent>
-                                    </ContextMenu.Portal>
+                                    </Theme></ContextMenu.Portal>
                                 </ContextMenu.Sub>
                                 
                                 <ContextMenu.Sub>
@@ -284,7 +284,7 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                                         Ajuste da Imagem
                                         <div className="RightSlot"><ChevronRightIcon /></div>
                                     </ContextMenu.SubTrigger>
-                                    <ContextMenu.Portal>
+                                    <ContextMenu.Portal><Theme appearance={state.theme} style={{ display: "contents" }}>
                                         <ContextMenu.SubContent className="ContextMenuSubContent">
                                             <ContextMenu.Item className="ContextMenuItem" onSelect={() => handleUpdateStyle({ objectFit: 'cover' })}>
                                                 Preencher (Cover)
@@ -296,7 +296,7 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                                                 Esticar (Fill)
                                             </ContextMenu.Item>
                                         </ContextMenu.SubContent>
-                                    </ContextMenu.Portal>
+                                    </Theme></ContextMenu.Portal>
                                 </ContextMenu.Sub>
 
                                 <ContextMenu.Separator className="ContextMenuSeparator" />
@@ -309,7 +309,7 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                             Camadas
                             <div className="RightSlot"><ChevronRightIcon /></div>
                         </ContextMenu.SubTrigger>
-                        <ContextMenu.Portal>
+                        <ContextMenu.Portal><Theme appearance={state.theme} style={{ display: "contents" }}>
                             <ContextMenu.SubContent className="ContextMenuSubContent">
                                 <ContextMenu.Item className="ContextMenuItem" onSelect={handleBringToFront}>
                                     Trazer para frente
@@ -318,7 +318,7 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                                     Enviar para trás
                                 </ContextMenu.Item>
                             </ContextMenu.SubContent>
-                        </ContextMenu.Portal>
+                        </Theme></ContextMenu.Portal>
                     </ContextMenu.Sub>
                     
                      <ContextMenu.Separator className="ContextMenuSeparator" />
@@ -328,10 +328,32 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                         <>
                             <ContextMenu.Sub>
                                 <ContextMenu.SubTrigger className="ContextMenuSubTrigger">
+                                    Fonte
+                                    <div className="RightSlot"><ChevronRightIcon /></div>
+                                </ContextMenu.SubTrigger>
+                                <ContextMenu.Portal><Theme appearance={state.theme} style={{ display: "contents" }}>
+                                    <ContextMenu.SubContent className="ContextMenuSubContent" style={{ maxHeight: '300px', overflowY: 'auto' }}>
+                                        {state.availableFonts && state.availableFonts.map(font => (
+                                            <ContextMenu.Item 
+                                                key={font} 
+                                                className="ContextMenuItem"
+                                                onSelect={() => handleUpdateStyle({ fontFamily: font })}
+                                                style={{ fontFamily: font }}
+                                            >
+                                                {font}
+                                                {element.style?.fontFamily === font && <div className="RightSlot">✓</div>}
+                                            </ContextMenu.Item>
+                                        ))}
+                                    </ContextMenu.SubContent>
+                                </Theme></ContextMenu.Portal>
+                            </ContextMenu.Sub>
+
+                            <ContextMenu.Sub>
+                                <ContextMenu.SubTrigger className="ContextMenuSubTrigger">
                                     Tamanho da Fonte
                                     <div className="RightSlot"><ChevronRightIcon /></div>
                                 </ContextMenu.SubTrigger>
-                                <ContextMenu.Portal>
+                                <ContextMenu.Portal><Theme appearance={state.theme} style={{ display: "contents" }}>
                                     <ContextMenu.SubContent className="ContextMenuSubContent">
                                         {[12, 14, 16, 20, 24, 32, 48, 64].map(size => (
                                             <ContextMenu.Item 
@@ -343,7 +365,7 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                                             </ContextMenu.Item>
                                         ))}
                                     </ContextMenu.SubContent>
-                                </ContextMenu.Portal>
+                                </Theme></ContextMenu.Portal>
                             </ContextMenu.Sub>
                             
                              <ContextMenu.Sub>
@@ -351,7 +373,7 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                                     Cor do Texto
                                     <div className="RightSlot"><ChevronRightIcon /></div>
                                 </ContextMenu.SubTrigger>
-                                <ContextMenu.Portal>
+                                <ContextMenu.Portal><Theme appearance={state.theme} style={{ display: "contents" }}>
                                     <ContextMenu.SubContent className="ContextMenuSubContent">
                                         {colors.filter(c => c !== 'transparent').map(color => (
                                             <ContextMenu.Item 
@@ -364,7 +386,7 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                                             </ContextMenu.Item>
                                         ))}
                                     </ContextMenu.SubContent>
-                                </ContextMenu.Portal>
+                                </Theme></ContextMenu.Portal>
                             </ContextMenu.Sub>
                             
                             <ContextMenu.Sub>
@@ -372,12 +394,12 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                                     Peso da Fonte
                                     <div className="RightSlot"><ChevronRightIcon /></div>
                                 </ContextMenu.SubTrigger>
-                                <ContextMenu.Portal>
+                                <ContextMenu.Portal><Theme appearance={state.theme} style={{ display: "contents" }}>
                                     <ContextMenu.SubContent className="ContextMenuSubContent">
                                         <ContextMenu.Item className="ContextMenuItem" onSelect={() => handleUpdateStyle({ fontWeight: 'normal' })}>Normal</ContextMenu.Item>
                                         <ContextMenu.Item className="ContextMenuItem" onSelect={() => handleUpdateStyle({ fontWeight: 'bold' })}>Negrito</ContextMenu.Item>
                                     </ContextMenu.SubContent>
-                                </ContextMenu.Portal>
+                                </Theme></ContextMenu.Portal>
                             </ContextMenu.Sub>
 
                             <ContextMenu.Sub>
@@ -385,13 +407,13 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                                     Alinhamento
                                     <div className="RightSlot"><ChevronRightIcon /></div>
                                 </ContextMenu.SubTrigger>
-                                <ContextMenu.Portal>
+                                <ContextMenu.Portal><Theme appearance={state.theme} style={{ display: "contents" }}>
                                     <ContextMenu.SubContent className="ContextMenuSubContent">
                                         <ContextMenu.Item className="ContextMenuItem" onSelect={() => handleUpdateStyle({ textAlign: 'left' })}>Esquerda</ContextMenu.Item>
                                         <ContextMenu.Item className="ContextMenuItem" onSelect={() => handleUpdateStyle({ textAlign: 'center' })}>Centro</ContextMenu.Item>
                                         <ContextMenu.Item className="ContextMenuItem" onSelect={() => handleUpdateStyle({ textAlign: 'right' })}>Direita</ContextMenu.Item>
                                     </ContextMenu.SubContent>
-                                </ContextMenu.Portal>
+                                </Theme></ContextMenu.Portal>
                             </ContextMenu.Sub>
                         </>
                     )}
@@ -402,7 +424,7 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                             Cor de Fundo
                             <div className="RightSlot"><ChevronRightIcon /></div>
                         </ContextMenu.SubTrigger>
-                        <ContextMenu.Portal>
+                        <ContextMenu.Portal><Theme appearance={state.theme} style={{ display: "contents" }}>
                             <ContextMenu.SubContent className="ContextMenuSubContent">
                                 {colors.map(color => (
                                     <ContextMenu.Item 
@@ -415,7 +437,7 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                                     </ContextMenu.Item>
                                 ))}
                             </ContextMenu.SubContent>
-                        </ContextMenu.Portal>
+                        </Theme></ContextMenu.Portal>
                     </ContextMenu.Sub>
                     
                     {/* Border Radius */}
@@ -424,7 +446,7 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                             Arredondamento
                             <div className="RightSlot"><ChevronRightIcon /></div>
                         </ContextMenu.SubTrigger>
-                        <ContextMenu.Portal>
+                        <ContextMenu.Portal><Theme appearance={state.theme} style={{ display: "contents" }}>
                             <ContextMenu.SubContent className="ContextMenuSubContent">
                                 {[0, 4, 8, 12, 16, 24, '50%'].map(radius => (
                                     <ContextMenu.Item 
@@ -436,7 +458,7 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                                     </ContextMenu.Item>
                                 ))}
                             </ContextMenu.SubContent>
-                        </ContextMenu.Portal>
+                        </Theme></ContextMenu.Portal>
                     </ContextMenu.Sub>
                     
                     {/* Padding */}
@@ -445,7 +467,7 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                             Espaçamento
                             <div className="RightSlot"><ChevronRightIcon /></div>
                         </ContextMenu.SubTrigger>
-                        <ContextMenu.Portal>
+                        <ContextMenu.Portal><Theme appearance={state.theme} style={{ display: "contents" }}>
                             <ContextMenu.SubContent className="ContextMenuSubContent">
                                 {[0, 4, 8, 12, 16, 24, 32].map(padding => (
                                     <ContextMenu.Item 
@@ -457,7 +479,7 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                                     </ContextMenu.Item>
                                 ))}
                             </ContextMenu.SubContent>
-                        </ContextMenu.Portal>
+                        </Theme></ContextMenu.Portal>
                     </ContextMenu.Sub>
 
                      {/* Border */}
@@ -466,14 +488,14 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                             Borda
                             <div className="RightSlot"><ChevronRightIcon /></div>
                         </ContextMenu.SubTrigger>
-                        <ContextMenu.Portal>
+                        <ContextMenu.Portal><Theme appearance={state.theme} style={{ display: "contents" }}>
                             <ContextMenu.SubContent className="ContextMenuSubContent">
                                 <ContextMenu.Sub>
                                     <ContextMenu.SubTrigger className="ContextMenuSubTrigger">
                                         Cor da Borda
                                         <div className="RightSlot"><ChevronRightIcon /></div>
                                     </ContextMenu.SubTrigger>
-                                    <ContextMenu.Portal>
+                                    <ContextMenu.Portal><Theme appearance={state.theme} style={{ display: "contents" }}>
                                         <ContextMenu.SubContent className="ContextMenuSubContent">
                                             {colors.filter(c => c !== 'transparent').map(color => (
                                                 <ContextMenu.Item 
@@ -489,14 +511,14 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                                                 Sem Borda
                                             </ContextMenu.Item>
                                         </ContextMenu.SubContent>
-                                    </ContextMenu.Portal>
+                                    </Theme></ContextMenu.Portal>
                                 </ContextMenu.Sub>
                                 <ContextMenu.Sub>
                                     <ContextMenu.SubTrigger className="ContextMenuSubTrigger">
                                         Espessura
                                         <div className="RightSlot"><ChevronRightIcon /></div>
                                     </ContextMenu.SubTrigger>
-                                    <ContextMenu.Portal>
+                                    <ContextMenu.Portal><Theme appearance={state.theme} style={{ display: "contents" }}>
                                         <ContextMenu.SubContent className="ContextMenuSubContent">
                                             {[1, 2, 4, 8].map(w => (
                                                 <ContextMenu.Item 
@@ -508,14 +530,14 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                                                 </ContextMenu.Item>
                                             ))}
                                         </ContextMenu.SubContent>
-                                    </ContextMenu.Portal>
+                                    </Theme></ContextMenu.Portal>
                                 </ContextMenu.Sub>
                             </ContextMenu.SubContent>
-                        </ContextMenu.Portal>
+                        </Theme></ContextMenu.Portal>
                     </ContextMenu.Sub>
 
                 </ContextMenu.Content>
-            </ContextMenu.Portal>
+            </Theme></ContextMenu.Portal>
         </ContextMenu.Root>
         </>
     );

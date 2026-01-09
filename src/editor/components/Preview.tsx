@@ -168,7 +168,7 @@ export const Preview: React.FC = () => {
                 height: '100%',
                 position: 'relative',
                 overflow: 'hidden',
-                backgroundColor: 'white'
+                backgroundColor: 'var(--color-panel-solid)'
             }}
         >
             <ScrollArea type="auto" scrollbars="vertical" style={{ height: '100%', width: '100%' }}>

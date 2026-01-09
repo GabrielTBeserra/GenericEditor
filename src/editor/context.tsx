@@ -31,6 +31,8 @@ interface IEditorState {
     singleMockData: Record<string, any>; // Used for non-list mode
     listSettings: IListSettings;
     availableProps: IProp[];
+    availableFonts: string[];
+    theme: 'light' | 'dark';
 }
 
 interface IEditorContext {
@@ -47,7 +49,12 @@ interface IEditorContext {
 
 const EditorContext = createContext<IEditorContext | undefined>(undefined);
 
-export const EditorProvider: React.FC<{ children: ReactNode; isList?: boolean; availableProps?: IProp[] }> = ({ children, isList = false, availableProps = [] }) => {
+const SAFE_FONTS = [
+    'Arial', 'Helvetica', 'Times New Roman', 'Courier New', 'Verdana', 'Georgia',
+    'Palatino', 'Garamond', 'Bookman', 'Comic Sans MS', 'Trebuchet MS', 'Arial Black', 'Impact'
+];
+
+export const EditorProvider: React.FC<{ children: ReactNode; isList?: boolean; availableProps?: IProp[]; theme?: 'light' | 'dark' }> = ({ children, isList = false, availableProps = [], theme = 'light' }) => {
     const [state, setState] = useState<IEditorState>({
         elements: [],
         selectedElementId: null,
@@ -57,13 +64,37 @@ export const EditorProvider: React.FC<{ children: ReactNode; isList?: boolean; a
         listSettings: {
             sortOrder: 'asc'
         },
-        availableProps
+        availableProps,
+        availableFonts: [
+            ...SAFE_FONTS,
+            'Roboto',
+            'Open Sans',
+            'Lato',
+            'Montserrat'
+        ],
+        theme
     });
+
+    // Load fonts
+    React.useEffect(() => {
+        state.availableFonts.forEach(font => {
+            if (SAFE_FONTS.includes(font)) return;
+
+            const linkId = `font-${font.replace(/\s+/g, '-').toLowerCase()}`;
+            if (!document.getElementById(linkId)) {
+                const link = document.createElement('link');
+                link.id = linkId;
+                link.href = `https://fonts.googleapis.com/css2?family=${font.replace(/ /g, '+')}&display=swap`;
+                link.rel = 'stylesheet';
+                document.head.appendChild(link);
+            }
+        });
+    }, [state.availableFonts]);
 
     // Update state if props change (only basic props, don't overwrite elements)
     React.useEffect(() => {
-        setState(prev => ({ ...prev, isList, availableProps }));
-    }, [isList, availableProps]);
+        setState(prev => ({ ...prev, isList, availableProps, theme }));
+    }, [isList, availableProps, theme]);
 
     const loadState = React.useCallback((savedState: Partial<IEditorState>) => {
         setState(prev => ({
@@ -72,6 +103,7 @@ export const EditorProvider: React.FC<{ children: ReactNode; isList?: boolean; a
             // Ensure these are preserved if not present in savedState
             isList: savedState.isList ?? prev.isList,
             availableProps: savedState.availableProps ?? prev.availableProps,
+            availableFonts: savedState.availableFonts ?? prev.availableFonts,
             // Reset selection
             selectedElementId: null
         }));

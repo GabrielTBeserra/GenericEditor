@@ -12,9 +12,10 @@ interface EditorProps {
     layout: ILayout;
     initialState?: any; // To load saved state
     onSave?: (json: string) => void; // Callback for saving
+    theme?: 'light' | 'dark'; // Theme configuration
 }
 
-const EditorContent: React.FC<EditorProps> = ({ layout, initialState, onSave }) => {
+const EditorContent: React.FC<EditorProps> = ({ layout, initialState, onSave, theme = 'light' }) => {
     const [isPreviewVisible, setIsPreviewVisible] = useState(true);
     const [isSidebarVisible, setIsSidebarVisible] = useState(true);
     const { addElement, loadState, state } = useEditor();
@@ -43,24 +44,21 @@ const EditorContent: React.FC<EditorProps> = ({ layout, initialState, onSave }) 
 
     const handleSave = () => {
         if (onSave) {
-            const fullStateJson = JSON.stringify({
+            const stateToSave = {
                 elements: state.elements,
-                listSettings: state.listSettings,
+                isList: state.isList,
                 mockData: state.mockData,
                 singleMockData: state.singleMockData,
-                isList: state.isList
-            }, null, 2);
-            onSave(fullStateJson);
-        } else {
-            console.log("Salvar acionado, mas nenhum callback onSave foi fornecido.");
+                listSettings: state.listSettings
+            };
+            onSave(JSON.stringify(stateToSave, null, 2));
         }
     };
 
     return (
-        <Theme appearance="light" accentColor="blue" grayColor="slate" radius="medium" scaling="100%">
-            <Flex style={{ height: '100%', width: '100%', overflow: 'hidden' }}>
-                
-                {/* Sidebar - Toggleable */}
+        <Theme appearance={theme} accentColor="blue" grayColor="slate" radius="medium" scaling="100%">
+            <Flex direction="row" style={{ height: '100vh', width: '100%', overflow: 'hidden', backgroundColor: 'var(--color-background)' }}>
+                {/* Toolbar */}
                 {isSidebarVisible && (
                     <Flex 
                         direction="column"
@@ -203,7 +201,7 @@ const EditorContent: React.FC<EditorProps> = ({ layout, initialState, onSave }) 
 
 export const GenericEditor: React.FC<EditorProps> = (props) => {
     return (
-        <EditorProvider isList={props.layout.isList} availableProps={props.layout.props}>
+        <EditorProvider isList={props.layout.isList} availableProps={props.layout.props} theme={props.theme}>
             <EditorContent {...props} />
         </EditorProvider>
     );
