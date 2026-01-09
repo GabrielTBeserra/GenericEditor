@@ -8250,6 +8250,7 @@ const ElementContextMenu = ({ children: s, element: d }) => {
 		}),
 		V && createPortal(/* @__PURE__ */ jsxs(Fragment$1, { children: [/* @__PURE__ */ jsx("div", {
 			className: "custom-context-menu-overlay",
+			style: { zIndex: 2147483646 },
 			onClick: qD,
 			onContextMenu: (s) => {
 				s.preventDefault(), qD();
@@ -8258,7 +8259,8 @@ const ElementContextMenu = ({ children: s, element: d }) => {
 			className: "custom-context-menu",
 			style: {
 				top: Math.min(V.y, window.innerHeight - 300),
-				left: Math.min(V.x, window.innerWidth - 250)
+				left: Math.min(V.x, window.innerWidth - 250),
+				zIndex: 2147483647
 			},
 			children: [
 				/* @__PURE__ */ jsxs(SubMenu, {

@@ -5,7 +5,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 2147483646; /* Um a menos que o menu */
+  z-index: 2147483646 !important; /* Um a menos que o menu */
   background: transparent;
 }
 
@@ -17,7 +17,7 @@
   padding: 8px;
   box-shadow: 0 10px 38px -10px rgba(22, 23, 24, 0.35), 0 10px 20px -15px rgba(22, 23, 24, 0.2);
   border: 1px solid var(--gray-6);
-  z-index: 2147483647;
+  z-index: 2147483647 !important;
   display: flex;
   flex-direction: column;
 }

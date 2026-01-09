@@ -267,12 +267,13 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
             {/* Menu Customizado via Portal */}
             {menuPosition && createPortal(
                 <>
-                    <div className="custom-context-menu-overlay" onClick={closeMenu} onContextMenu={(e) => { e.preventDefault(); closeMenu(); }} />
+                    <div className="custom-context-menu-overlay" style={{ zIndex: 2147483646 }} onClick={closeMenu} onContextMenu={(e) => { e.preventDefault(); closeMenu(); }} />
                     <div 
                         className="custom-context-menu"
                         style={{ 
                             top: Math.min(menuPosition.y, window.innerHeight - 300), // Evita cortar embaixo (simplificado)
-                            left: Math.min(menuPosition.x, window.innerWidth - 250)  // Evita cortar a direita (simplificado)
+                            left: Math.min(menuPosition.x, window.innerWidth - 250),  // Evita cortar a direita (simplificado)
+                            zIndex: 2147483647
                         }}
                     >
                         {/* Data Binding */}
