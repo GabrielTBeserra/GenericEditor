@@ -3,6 +3,7 @@ import * as ContextMenu from '@radix-ui/react-context-menu';
 import { Dialog, Button, Flex, TextArea, TextField, Text, Badge } from '@radix-ui/themes';
 import { ChevronRightIcon, CheckIcon } from '@radix-ui/react-icons';
 import { useEditor, type IElement } from '../context';
+import { ElementAdvancedSettings } from './ElementAdvancedSettings';
 import './context-menu.css';
 
 export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: IElement }> = ({ children, element }) => {
@@ -11,6 +12,7 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
     // Estado dos Modais
     const [isEditContentOpen, setIsEditContentOpen] = useState(false);
     const [isBindDataOpen, setIsBindDataOpen] = useState(false);
+    const [isAdvancedSettingsOpen, setIsAdvancedSettingsOpen] = useState(false);
     
     // Estado Temporário para Edição
     const [tempContent, setTempContent] = useState(element.content);
@@ -184,6 +186,12 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                 </Dialog.Content>
             </Dialog.Root>
 
+            <ElementAdvancedSettings 
+                elementId={element.id} 
+                open={isAdvancedSettingsOpen} 
+                onOpenChange={setIsAdvancedSettingsOpen} 
+            />
+
             <input 
                 type="file" 
                 ref={fileInputRef} 
@@ -268,6 +276,11 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                         )}
 
                         {/* Common Actions */}
+                        <ContextMenu.Item className="ContextMenuItem" onSelect={() => setIsAdvancedSettingsOpen(true)}>
+                            Configurações Avançadas...
+                        </ContextMenu.Item>
+                        <ContextMenu.Separator className="ContextMenuSeparator" />
+
                         <ContextMenu.Item className="ContextMenuItem" onSelect={handleDuplicate}>Duplicar</ContextMenu.Item>
                         <ContextMenu.Item className="ContextMenuItem" onSelect={() => removeElement(element.id)}>Excluir</ContextMenu.Item>
                         <ContextMenu.Separator className="ContextMenuSeparator" />

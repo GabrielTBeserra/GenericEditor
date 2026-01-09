@@ -1,5 +1,24 @@
 import React, { createContext, useContext, useState, type ReactNode } from 'react';
 
+export interface IElementCondition {
+    id: string;
+    property: string;
+    operator: 'equals' | 'notEquals' | 'contains' | 'greaterThan' | 'lessThan' | 'truthy' | 'falsy';
+    value: string;
+    style: React.CSSProperties;
+}
+
+export interface IElementFormatting {
+    type: 'text' | 'number' | 'date' | 'boolean' | 'map';
+    dateFormat?: string;
+    numberFormat?: 'decimal' | 'currency' | 'percent';
+    currencySymbol?: string;
+    decimalPlaces?: number;
+    trueLabel?: string;
+    falseLabel?: string;
+    mapping?: Record<string, string>;
+}
+
 export interface IElement {
     id: string;
     type: 'text' | 'image' | 'box';
@@ -11,6 +30,8 @@ export interface IElement {
     rotation?: number; // Rotation in degrees
     style?: React.CSSProperties;
     dataBinding?: string;
+    formatting?: IElementFormatting;
+    conditions?: IElementCondition[];
 }
 
 export interface IListSettings {

@@ -28,6 +28,75 @@ export const getRendererCode = () => {
 function renderTemplate(elements, data, options = {}) {
     const { isList, listSettings, canvasHeight } = options;
 
+    const formatValue = (value, formatting) => {
+        if (!formatting || formatting.type === 'text') return value !== undefined && value !== null ? String(value) : '';
+        if (value === undefined || value === null) return '';
+
+        if (formatting.type === 'boolean') {
+             const isTrue = String(value) === 'true' || value === true || (typeof value === 'number' && value > 0);
+             return isTrue ? (formatting.trueLabel || 'Sim') : (formatting.falseLabel || 'Não');
+        }
+
+        if (formatting.type === 'date') {
+            try {
+                const date = new Date(value);
+                if (isNaN(date.getTime())) return String(value);
+                
+                if (formatting.dateFormat) {
+                     const d = date.getDate().toString().padStart(2, '0');
+                     const m = (date.getMonth() + 1).toString().padStart(2, '0');
+                     const y = date.getFullYear();
+                     const H = date.getHours().toString().padStart(2, '0');
+                     const M = date.getMinutes().toString().padStart(2, '0');
+                     const S = date.getSeconds().toString().padStart(2, '0');
+                     
+                     return formatting.dateFormat
+                        .replace('DD', d)
+                        .replace('MM', m)
+                        .replace('YYYY', String(y))
+                        .replace('HH', H)
+                        .replace('mm', M)
+                        .replace('ss', S);
+                }
+                return date.toLocaleDateString();
+            } catch (e) { return String(value); }
+        }
+
+        if (formatting.type === 'number') {
+             const num = parseFloat(value);
+             if (isNaN(num)) return String(value);
+             
+             if (formatting.numberFormat === 'currency') {
+                 return (formatting.currencySymbol || 'R$') + ' ' + num.toFixed(formatting.decimalPlaces || 2);
+             }
+             if (formatting.numberFormat === 'percent') {
+                 return num.toFixed(formatting.decimalPlaces || 0) + '%';
+             }
+             if (formatting.decimalPlaces !== undefined) {
+                 return num.toFixed(formatting.decimalPlaces);
+             }
+             return num.toFixed(formatting.decimalPlaces || 0);
+        }
+        
+        return String(value);
+    };
+
+    const checkCondition = (propValue, operator, ruleValue) => {
+        const val = String(propValue).toLowerCase();
+        const target = String(ruleValue).toLowerCase();
+        
+        switch (operator) {
+            case 'equals': return val === target;
+            case 'notEquals': return val !== target;
+            case 'contains': return val.includes(target);
+            case 'greaterThan': return parseFloat(val) > parseFloat(target);
+            case 'lessThan': return parseFloat(val) < parseFloat(target);
+            case 'truthy': return !!propValue;
+            case 'falsy': return !propValue;
+            default: return false;
+        }
+    };
+
     const camelToKebab = (string) => {
         return string.replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, '$1-$2').toLowerCase();
     };
@@ -52,10 +121,15 @@ function renderTemplate(elements, data, options = {}) {
             let content = element.content;
             let imgSrc = '';
 
+            // Resolve Content & Formatting
             if (element.type === 'text') {
                 content = content.replace(/\\{\\{(.*?)\\}\\}/g, (match, key) => {
                     const val = itemData[key.trim()];
-                    return val !== undefined && val !== null ? String(val) : match;
+                    if (val === undefined || val === null) return match;
+                    if (element.formatting) {
+                        return formatValue(val, element.formatting);
+                    }
+                    return String(val);
                 });
             } else if (element.type === 'image') {
                  if (element.dataBinding) {
@@ -73,6 +147,17 @@ function renderTemplate(elements, data, options = {}) {
                  }
             }
 
+            // Resolve Conditional Styles
+            let conditionalStyles = {};
+            if (element.conditions) {
+                element.conditions.forEach(rule => {
+                    const propVal = itemData[rule.property];
+                    if (checkCondition(propVal, rule.operator, rule.value)) {
+                         conditionalStyles = { ...conditionalStyles, ...rule.style };
+                    }
+                });
+            }
+
             const baseStyle = {
                 position: 'absolute',
                 left: element.x,
@@ -81,7 +166,8 @@ function renderTemplate(elements, data, options = {}) {
                 height: element.height,
                 transform: element.rotation ? \`rotate(\${element.rotation}deg)\` : undefined,
                 overflow: 'hidden',
-                ...element.style
+                ...element.style,
+                ...conditionalStyles
             };
             
             // Fix: remove padding if it's not explicitly set, or handle it for text

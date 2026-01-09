@@ -81,6 +81,22 @@ The editor offers an experience similar to design tools like Canva or Figma:
   - _Radius_: From 0px (square) to 50% (circle/oval).
   - _Thickness_: Adds a solid border from 1px to 4px.
 
+#### Advanced Settings (Formatting and Conditions)
+
+**Right-click** and select **Advanced Settings** to access powerful data formatting and conditional styling options.
+
+- **Data Formatting**:
+
+  - _Type_: Choose between Text (Default), Boolean (True/False), Date, or Number/Currency.
+  - _Boolean_: Define custom labels for true/false values (e.g., "Active" / "Inactive").
+  - _Date_: Custom date patterns (e.g., "DD/MM/YYYY HH:mm").
+  - _Number_: Format as Decimal, Currency (with symbol), or Percentage.
+
+- **Conditional Formatting**:
+  - Define rules to change the element's style based on data values.
+  - _Example_: If `price` is greater than `100`, set text color to `red`.
+  - Supports multiple rules with operators like Equals, Not Equals, Contains, Greater Than, Less Than, Truthy, and Falsy.
+
 ### Settings and Test Data
 
 At the top of the left sidebar, the **Settings** button (gear icon) allows you to simulate how the layout will look with real data.
@@ -204,7 +220,23 @@ The output of `onSave` is a JSON ready to be stored.
         "fontFamily": "Roboto",
         "textAlign": "center"
       },
-      "dataBinding": "nome" // Optional, used for direct binding
+      "dataBinding": "nome", // Optional, used for direct binding
+      "formatting": {
+        "type": "text" // 'text' | 'boolean' | 'date' | 'number'
+        // Extra fields based on type:
+        // trueLabel, falseLabel (boolean)
+        // dateFormat (date)
+        // numberFormat, currencySymbol, decimalPlaces (number)
+      },
+      "conditions": [
+        {
+          "id": "rule-1",
+          "property": "price",
+          "operator": "greaterThan",
+          "value": "100",
+          "style": { "color": "red", "fontWeight": "bold" }
+        }
+      ]
     }
   ],
   "listSettings": {
