@@ -1,6 +1,6 @@
 .ContextMenuContent, .ContextMenuSubContent {
   min-width: 220px;
-  background-color: var(--color-panel-solid);
+  background-color: var(--gray-3); /* Usando gray-3 para garantir fundo sólido em dark/light */
   border-radius: 12px;
   overflow: hidden;
   padding: 8px;
