@@ -16,7 +16,8 @@ export const ExportDialog: React.FC<{ onSaveExternal?: (json: string) => void }>
         listSettings: state.listSettings,
         mockData: state.mockData,
         singleMockData: state.singleMockData,
-        isList: state.isList
+        isList: state.isList,
+        canvasHeight: state.canvasHeight
     }, null, 2);
 
     const rendererCode = getRendererCode();

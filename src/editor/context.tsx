@@ -16,6 +16,8 @@ export interface IElement {
 export interface IListSettings {
     sortProp?: string;
     sortOrder: 'asc' | 'desc';
+    newestPosition?: 'top' | 'bottom';
+    scrollDirection?: 'up' | 'down';
 }
 
 export interface IProp {
@@ -30,6 +32,7 @@ interface IEditorState {
     mockData: any[]; // Used for list mode
     singleMockData: Record<string, any>; // Used for non-list mode
     listSettings: IListSettings;
+    canvasHeight?: number; // Height of the canvas in list mode
     availableProps: IProp[];
     availableFonts: string[];
     theme: 'light' | 'dark';
@@ -44,6 +47,7 @@ interface IEditorContext {
     updateElement: (id: string, updates: Partial<IElement>) => void;
     setMockData: (data: any[], singleData: Record<string, any>) => void;
     updateListSettings: (settings: Partial<IListSettings>) => void;
+    setCanvasHeight: (height: number) => void;
     loadState: (savedState: Partial<IEditorState>) => void;
 }
 
@@ -62,7 +66,9 @@ export const EditorProvider: React.FC<{ children: ReactNode; isList?: boolean; a
         mockData: [],
         singleMockData: {},
         listSettings: {
-            sortOrder: 'asc'
+            sortOrder: 'asc',
+            newestPosition: 'bottom',
+            scrollDirection: 'down'
         },
         availableProps,
         availableFonts: [
@@ -95,6 +101,10 @@ export const EditorProvider: React.FC<{ children: ReactNode; isList?: boolean; a
     React.useEffect(() => {
         setState(prev => ({ ...prev, isList, availableProps, theme }));
     }, [isList, availableProps, theme]);
+
+    const setCanvasHeight = React.useCallback((height: number) => {
+        setState(prev => ({ ...prev, canvasHeight: height }));
+    }, []);
 
     const loadState = React.useCallback((savedState: Partial<IEditorState>) => {
         setState(prev => ({
@@ -186,8 +196,9 @@ export const EditorProvider: React.FC<{ children: ReactNode; isList?: boolean; a
         updateElement,
         setMockData,
         updateListSettings,
+        setCanvasHeight,
         loadState
-    }), [state, addElement, removeElement, selectElement, moveElement, updateElement, setMockData, updateListSettings, loadState]);
+    }), [state, addElement, removeElement, selectElement, moveElement, updateElement, setMockData, updateListSettings, setCanvasHeight, loadState]);
 
     return (
         <EditorContext.Provider value={contextValue}>

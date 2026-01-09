@@ -7,6 +7,7 @@ import type { ILayout } from './types';
 import { EditorProvider, useEditor, type IElement } from './context';
 import { Canvas } from './components/Canvas';
 import { Preview } from './components/Preview';
+import { EditorSettings } from './components/EditorSettings';
 
 interface EditorProps {
     layout: ILayout;
@@ -49,7 +50,8 @@ const EditorContent: React.FC<EditorProps> = ({ layout, initialState, onSave, th
                 isList: state.isList,
                 mockData: state.mockData,
                 singleMockData: state.singleMockData,
-                listSettings: state.listSettings
+                listSettings: state.listSettings,
+                canvasHeight: state.canvasHeight
             };
             onSave(JSON.stringify(stateToSave, null, 2));
         }
@@ -97,6 +99,10 @@ const EditorContent: React.FC<EditorProps> = ({ layout, initialState, onSave, th
                                     >
                                         <Share1Icon /> Salvar Alterações
                                     </Button>
+
+                                    <Box mt="2">
+                                        <EditorSettings />
+                                    </Box>
                                 </Box>
                             </Flex>
                         </Box>

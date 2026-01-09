@@ -1,55 +1,104 @@
-/* Custom Context Menu CSS */
-.custom-context-menu-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 2147483646 !important; /* Um a menos que o menu */
-  background: transparent;
-}
+/* Radix UI Context Menu CSS */
 
-.custom-context-menu {
-  position: fixed;
+.ContextMenuContent,
+.ContextMenuSubContent {
   min-width: 220px;
-  background-color: var(--gray-3);
-  border-radius: 12px;
-  padding: 8px;
-  box-shadow: 0 10px 38px -10px rgba(22, 23, 24, 0.35), 0 10px 20px -15px rgba(22, 23, 24, 0.2);
+  background-color: var(--color-panel-solid); /* Fallback ou variável do tema */
+  border-radius: 8px; /* Mais moderno */
+  overflow: hidden;
+  padding: 5px;
+  box-shadow: 0px 10px 38px -10px rgba(22, 23, 24, 0.35), 0px 10px 20px -15px rgba(22, 23, 24, 0.2);
   border: 1px solid var(--gray-6);
-  z-index: 2147483647 !important;
-  display: flex;
-  flex-direction: column;
+  z-index: 2147483647; /* Alto z-index para ficar acima de tudo */
+  background-color: var(--gray-2); /* Ajuste para o tema escuro/claro */
 }
 
-.custom-menu-item {
+/* Fallback para background se variáveis não existirem, assumindo tema dark/light do radix */
+:root, .light, .light-theme {
+  --context-menu-bg: #ffffff;
+  --context-menu-item-hover: #f1f3f5;
+  --context-menu-text: #1c2024;
+}
+.dark, .dark-theme {
+  --context-menu-bg: #1e1e1e;
+  --context-menu-item-hover: #2e2e2e;
+  --context-menu-text: #ededed;
+}
+
+.ContextMenuContent,
+.ContextMenuSubContent {
+    background-color: var(--gray-2);
+}
+
+.ContextMenuItem,
+.ContextMenuCheckboxItem,
+.ContextMenuRadioItem,
+.ContextMenuSubTrigger {
   font-size: 13px;
   line-height: 1;
   color: var(--gray-12);
-  border-radius: 6px;
+  border-radius: 4px;
   display: flex;
   align-items: center;
   height: 32px;
   padding: 0 10px;
   position: relative;
   user-select: none;
+  outline: none;
   cursor: default;
-  margin-bottom: 2px;
-  text-decoration: none;
 }
 
-.custom-menu-item:hover {
-  background-color: var(--gray-5);
-  color: var(--gray-12);
+.ContextMenuSubTrigger[data-state='open'] {
+  background-color: var(--accent-4);
+  color: var(--accent-11);
 }
 
-.custom-menu-separator {
+.ContextMenuItem[data-disabled],
+.ContextMenuCheckboxItem[data-disabled],
+.ContextMenuRadioItem[data-disabled],
+.ContextMenuSubTrigger[data-disabled] {
+  color: var(--gray-8);
+  pointer-events: none;
+}
+
+.ContextMenuItem[data-highlighted],
+.ContextMenuCheckboxItem[data-highlighted],
+.ContextMenuRadioItem[data-highlighted],
+.ContextMenuSubTrigger[data-highlighted] {
+  background-color: var(--accent-9);
+  color: white;
+}
+/* Quando destacado, o ícone da direita também deve ficar branco */
+.ContextMenuItem[data-highlighted] .RightSlot,
+.ContextMenuSubTrigger[data-highlighted] .RightSlot {
+    color: white;
+}
+
+
+.ContextMenuSeparator {
   height: 1px;
   background-color: var(--gray-6);
   margin: 5px;
 }
 
-.custom-menu-right-slot {
+.ContextMenuLabel {
+  padding-left: 10px;
+  font-size: 11px;
+  line-height: 25px;
+  color: var(--gray-11);
+  font-weight: 500;
+}
+
+.ContextMenuItemIndicator {
+  position: absolute;
+  left: 0;
+  width: 25px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.RightSlot {
   margin-left: auto;
   padding-left: 20px;
   color: var(--gray-9);
@@ -57,33 +106,9 @@
   align-items: center;
 }
 
-.custom-menu-item:hover .custom-menu-right-slot {
-  color: var(--gray-12);
-}
-
-/* Submenu Logic */
-.custom-submenu {
-  display: none;
-  position: absolute;
-  left: 100%;
-  top: -4px; /* Ajuste fino para alinhar com o item pai */
-  min-width: 220px;
-  background-color: var(--gray-3);
-  border-radius: 12px;
-  padding: 8px;
-  box-shadow: 0 10px 38px -10px rgba(22, 23, 24, 0.35), 0 10px 20px -15px rgba(22, 23, 24, 0.2);
-  border: 1px solid var(--gray-6);
-  margin-left: 2px; /* Espacinho entre menu pai e filho */
-}
-
-/* Show submenu on hover */
-.custom-menu-item:hover > .custom-submenu {
-  display: flex;
-  flex-direction: column;
-}
-
-/* Scrollable submenu for fonts */
-.custom-submenu.scrollable {
-  max-height: 300px;
-  overflow-y: auto;
+/* Scrollable area for fonts */
+.ContextMenuScrollable {
+    max-height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }

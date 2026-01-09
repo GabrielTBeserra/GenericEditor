@@ -34,7 +34,7 @@ const PreviewElementRenderer: React.FC<{ element: IElement; offsetY?: number; da
         width: `${element.width}px`,
         height: `${element.height}px`,
         transform: `translate(${element.x}px, ${element.y + offsetY}px) rotate(${element.rotation || 0}deg)`,
-        padding: element.type === 'image' ? 0 : '8px',
+        padding: (element.type === 'image' || element.type === 'text') ? 0 : '8px',
         overflow: 'hidden',
         ...element.style
     };
@@ -96,10 +96,11 @@ export const Preview: React.FC = () => {
 
     // Calculate item height for list mode
     const itemHeight = React.useMemo(() => {
+        if (state.canvasHeight) return state.canvasHeight;
         if (state.elements.length === 0) return 0;
         const maxY = Math.max(...state.elements.map(el => el.y + el.height));
         return maxY; 
-    }, [state.elements]);
+    }, [state.elements, state.canvasHeight]);
 
     const renderContent = () => {
         if (state.elements.length === 0) {
@@ -128,10 +129,15 @@ export const Preview: React.FC = () => {
                 });
             }
 
+            // Handle newest position
+            if (state.listSettings.newestPosition === 'top') {
+                 listData = [...listData].reverse(); // Simple reverse for display if already sorted or raw
+            }
+
             return (
                 <Flex 
                     direction="column" 
-                    justify="end" 
+                    justify={state.listSettings.newestPosition === 'top' ? 'start' : 'end'} 
                     p="4" 
                     style={{ width: '100%', minHeight: '100%' }}
                 >

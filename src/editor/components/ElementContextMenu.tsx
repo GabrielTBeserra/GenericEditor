@@ -1,52 +1,12 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { createPortal } from 'react-dom';
+import React, { useState, useRef } from 'react';
+import * as ContextMenu from '@radix-ui/react-context-menu';
 import { Dialog, Button, Flex, TextArea, TextField, Text, Badge } from '@radix-ui/themes';
-import { ChevronRightIcon } from '@radix-ui/react-icons';
+import { ChevronRightIcon, CheckIcon } from '@radix-ui/react-icons';
 import { useEditor, type IElement } from '../context';
 import './context-menu.css';
 
-// Componentes Auxiliares para o Menu Customizado
-const MenuItem: React.FC<{ 
-    children: React.ReactNode; 
-    onClick?: () => void; 
-    rightSlot?: React.ReactNode;
-    style?: React.CSSProperties;
-    className?: string;
-}> = ({ children, onClick, rightSlot, style, className }) => (
-    <div 
-        className={`custom-menu-item ${className || ''}`} 
-        onClick={(e) => {
-            e.stopPropagation();
-            if (onClick) onClick();
-        }}
-        style={style}
-    >
-        {children}
-        {rightSlot && <div className="custom-menu-right-slot">{rightSlot}</div>}
-    </div>
-);
-
-const MenuSeparator: React.FC = () => <div className="custom-menu-separator" />;
-
-const SubMenu: React.FC<{ 
-    label: React.ReactNode; 
-    children: React.ReactNode; 
-    scrollable?: boolean 
-}> = ({ label, children, scrollable }) => (
-    <div className="custom-menu-item">
-        {label}
-        <div className="custom-menu-right-slot"><ChevronRightIcon /></div>
-        <div className={`custom-submenu ${scrollable ? 'scrollable' : ''}`}>
-            {children}
-        </div>
-    </div>
-);
-
 export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: IElement }> = ({ children, element }) => {
     const { updateElement, removeElement, addElement, moveElement, state } = useEditor();
-    
-    // Estado do Menu
-    const [menuPosition, setMenuPosition] = useState<{ x: number; y: number } | null>(null);
     
     // Estado dos Modais
     const [isEditContentOpen, setIsEditContentOpen] = useState(false);
@@ -57,25 +17,6 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
     const [tempBinding, setTempBinding] = useState(element.dataBinding || "");
     const textAreaRef = useRef<HTMLTextAreaElement>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
-
-    // Fechar menu ao rolar a página ou redimensionar
-    useEffect(() => {
-        const closeMenu = () => setMenuPosition(null);
-        window.addEventListener('scroll', closeMenu, true);
-        window.addEventListener('resize', closeMenu);
-        return () => {
-            window.removeEventListener('scroll', closeMenu, true);
-            window.removeEventListener('resize', closeMenu);
-        };
-    }, []);
-
-    const handleContextMenu = (e: React.MouseEvent) => {
-        e.preventDefault();
-        e.stopPropagation();
-        setMenuPosition({ x: e.clientX, y: e.clientY });
-    };
-
-    const closeMenu = () => setMenuPosition(null);
 
     // Ações do Editor
     const handleInsertVariable = (variable: string) => {
@@ -101,7 +42,6 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
         updateElement(element.id, {
             style: { ...element.style, ...style }
         });
-        closeMenu();
     };
     
     const handleBringToFront = () => {
@@ -109,7 +49,6 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
          if (index < state.elements.length - 1) {
              moveElement(index, state.elements.length - 1);
          }
-         closeMenu();
     };
     
     const handleSendToBack = () => {
@@ -117,7 +56,6 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
          if (index > 0) {
              moveElement(index, 0);
          }
-         closeMenu();
     };
 
     const handleDuplicate = () => {
@@ -130,7 +68,6 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
              height: element.height,
              style: element.style
          });
-         closeMenu();
     };
 
     const colors = ['#000000', '#FFFFFF', '#FF0000', '#00FF00', '#0000FF', '#FFA500', '#808080', '#800080', 'transparent'];
@@ -146,12 +83,10 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
             };
             reader.readAsDataURL(file);
         }
-        closeMenu();
     };
 
     const handleUrlInput = () => {
-        closeMenu();
-        // Pequeno timeout para garantir que o prompt não bloqueie o fechamento visual do menu
+        // Pequeno timeout para garantir que o menu feche antes do prompt
         setTimeout(() => {
             const url = window.prompt("Insira a URL da imagem:", element.content);
             if (url !== null) {
@@ -163,7 +98,6 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
     const handleOpenBindData = () => {
         setTempBinding(element.dataBinding || "");
         setIsBindDataOpen(true);
-        closeMenu();
     };
 
     const handleSaveBinding = () => {
@@ -179,7 +113,6 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
     const handleOpenEditContent = () => {
         setTempContent(element.content);
         setIsEditContentOpen(true);
-        closeMenu();
     };
 
     const handleSaveContent = () => {
@@ -189,12 +122,7 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
 
     return (
         <>
-            {/* Wrapper para capturar o clique direito */}
-            <div onContextMenu={handleContextMenu} style={{ display: 'contents' }}>
-                {children}
-            </div>
-
-            {/* Modais de Edição (Mantidos com Radix UI Dialog) */}
+            {/* Modais de Edição */}
             <Dialog.Root open={isEditContentOpen} onOpenChange={setIsEditContentOpen}>
                 <Dialog.Content style={{ maxWidth: 450 }}>
                     <Dialog.Title>Editar Texto</Dialog.Title>
@@ -264,210 +192,300 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                 onChange={handleFileChange} 
             />
 
-            {/* Menu Customizado via Portal */}
-            {menuPosition && createPortal(
-                <>
-                    <div className="custom-context-menu-overlay" style={{ zIndex: 2147483646 }} onClick={closeMenu} onContextMenu={(e) => { e.preventDefault(); closeMenu(); }} />
-                    <div 
-                        className="custom-context-menu"
-                        style={{ 
-                            top: Math.min(menuPosition.y, window.innerHeight - 300), // Evita cortar embaixo (simplificado)
-                            left: Math.min(menuPosition.x, window.innerWidth - 250),  // Evita cortar a direita (simplificado)
-                            zIndex: 2147483647
-                        }}
-                    >
-                        {/* Data Binding */}
-                        <SubMenu label={
-                            <>
-                                Vincular Dados {element.dataBinding && <span style={{fontSize: 10, marginLeft: 4, opacity: 0.7}}>({element.dataBinding})</span>}
-                            </>
-                        }>
-                            {state.availableProps && state.availableProps.length > 0 && (
-                                <>
-                                    {state.availableProps.map(prop => (
-                                        <MenuItem 
-                                            key={prop.dataName} 
-                                            onClick={() => {
-                                                const updates: Partial<IElement> = { dataBinding: prop.dataName };
-                                                if (element.type === 'text') {
-                                                    updates.content = `{{${prop.dataName}}}`;
-                                                }
-                                                updateElement(element.id, updates);
-                                                closeMenu();
-                                            }}
-                                            rightSlot={<span style={{fontSize: 10}}>{prop.dataName}</span>}
-                                        >
-                                            {prop.name}
-                                        </MenuItem>
-                                    ))}
-                                    <MenuSeparator />
-                                </>
-                            )}
-                            
-                            <MenuItem onClick={handleOpenBindData}>
-                                Outro / Manual...
-                            </MenuItem>
-                            
-                            {element.dataBinding && (
-                                <>
-                                    <MenuSeparator />
-                                    <MenuItem 
-                                        onClick={() => {
-                                            updateElement(element.id, { dataBinding: undefined });
-                                            closeMenu();
-                                        }}
-                                        style={{ color: 'var(--red-9)' }}
-                                    >
-                                        Remover Vínculo
-                                    </MenuItem>
-                                </>
-                            )}
-                        </SubMenu>
+            {/* Radix Context Menu */}
+            <ContextMenu.Root>
+                <ContextMenu.Trigger asChild>
+                    <div style={{ display: 'contents' }}>
+                        {children}
+                    </div>
+                </ContextMenu.Trigger>
+                
+                <ContextMenu.Portal>
+                    <ContextMenu.Content className="ContextMenuContent">
                         
-                        <MenuSeparator />
+                        {/* Data Binding */}
+                        <ContextMenu.Sub>
+                            <ContextMenu.SubTrigger className="ContextMenuSubTrigger">
+                                Vincular Dados
+                                {element.dataBinding && <span style={{fontSize: 10, marginLeft: 4, opacity: 0.7}}>({element.dataBinding})</span>}
+                                <div className="RightSlot">
+                                    <ChevronRightIcon />
+                                </div>
+                            </ContextMenu.SubTrigger>
+                            <ContextMenu.Portal>
+                                <ContextMenu.SubContent className="ContextMenuSubContent" sideOffset={2} alignOffset={-5}>
+                                    {state.availableProps && state.availableProps.length > 0 && (
+                                        <>
+                                            {state.availableProps.map(prop => (
+                                                <ContextMenu.Item 
+                                                    key={prop.dataName} 
+                                                    className="ContextMenuItem"
+                                                    onSelect={() => {
+                                                        const updates: Partial<IElement> = { dataBinding: prop.dataName };
+                                                        if (element.type === 'text') {
+                                                            updates.content = `{{${prop.dataName}}}`;
+                                                        }
+                                                        updateElement(element.id, updates);
+                                                    }}
+                                                >
+                                                    {prop.name} <div className="RightSlot">{prop.dataName}</div>
+                                                </ContextMenu.Item>
+                                            ))}
+                                            <ContextMenu.Separator className="ContextMenuSeparator" />
+                                        </>
+                                    )}
+                                    
+                                    <ContextMenu.Item className="ContextMenuItem" onSelect={handleOpenBindData}>
+                                        Outro / Manual...
+                                    </ContextMenu.Item>
+                                    
+                                    {element.dataBinding && (
+                                        <>
+                                            <ContextMenu.Separator className="ContextMenuSeparator" />
+                                            <ContextMenu.Item 
+                                                className="ContextMenuItem"
+                                                onSelect={() => updateElement(element.id, { dataBinding: undefined })}
+                                                style={{ color: 'var(--red-9)' }}
+                                            >
+                                                Remover Vínculo
+                                            </ContextMenu.Item>
+                                        </>
+                                    )}
+                                </ContextMenu.SubContent>
+                            </ContextMenu.Portal>
+                        </ContextMenu.Sub>
+                        
+                        <ContextMenu.Separator className="ContextMenuSeparator" />
 
                         {/* Text Specific Actions */}
                         {element.type === 'text' && (
                             <>
-                                <MenuItem onClick={handleOpenEditContent}>
+                                <ContextMenu.Item className="ContextMenuItem" onSelect={handleOpenEditContent}>
                                     Editar Texto...
-                                </MenuItem>
-                                <MenuSeparator />
+                                </ContextMenu.Item>
+                                <ContextMenu.Separator className="ContextMenuSeparator" />
                             </>
                         )}
 
                         {/* Common Actions */}
-                        <MenuItem onClick={handleDuplicate}>Duplicar</MenuItem>
-                        <MenuItem onClick={() => { removeElement(element.id); closeMenu(); }}>Excluir</MenuItem>
-                        <MenuSeparator />
+                        <ContextMenu.Item className="ContextMenuItem" onSelect={handleDuplicate}>Duplicar</ContextMenu.Item>
+                        <ContextMenu.Item className="ContextMenuItem" onSelect={() => removeElement(element.id)}>Excluir</ContextMenu.Item>
+                        <ContextMenu.Separator className="ContextMenuSeparator" />
                         
                         {/* Image Specific */}
                         {element.type === 'image' && (
                             <>
-                                <SubMenu label="Alterar Imagem">
-                                    <MenuItem onClick={() => { fileInputRef.current?.click(); closeMenu(); }}>Carregar do Computador</MenuItem>
-                                    <MenuItem onClick={handleUrlInput}>Inserir URL</MenuItem>
-                                </SubMenu>
+                                <ContextMenu.Sub>
+                                    <ContextMenu.SubTrigger className="ContextMenuSubTrigger">
+                                        Alterar Imagem
+                                        <div className="RightSlot"><ChevronRightIcon /></div>
+                                    </ContextMenu.SubTrigger>
+                                    <ContextMenu.Portal>
+                                        <ContextMenu.SubContent className="ContextMenuSubContent" sideOffset={2} alignOffset={-5}>
+                                            <ContextMenu.Item className="ContextMenuItem" onSelect={() => fileInputRef.current?.click()}>
+                                                Carregar do Computador
+                                            </ContextMenu.Item>
+                                            <ContextMenu.Item className="ContextMenuItem" onSelect={handleUrlInput}>
+                                                Inserir URL
+                                            </ContextMenu.Item>
+                                        </ContextMenu.SubContent>
+                                    </ContextMenu.Portal>
+                                </ContextMenu.Sub>
                                 
-                                <SubMenu label="Ajuste da Imagem">
-                                    <MenuItem onClick={() => handleUpdateStyle({ objectFit: 'cover' })}>Preencher (Cover)</MenuItem>
-                                    <MenuItem onClick={() => handleUpdateStyle({ objectFit: 'contain' })}>Ajustar (Contain)</MenuItem>
-                                    <MenuItem onClick={() => handleUpdateStyle({ objectFit: 'fill' })}>Esticar (Fill)</MenuItem>
-                                </SubMenu>
+                                <ContextMenu.Sub>
+                                    <ContextMenu.SubTrigger className="ContextMenuSubTrigger">
+                                        Ajuste da Imagem
+                                        <div className="RightSlot"><ChevronRightIcon /></div>
+                                    </ContextMenu.SubTrigger>
+                                    <ContextMenu.Portal>
+                                        <ContextMenu.SubContent className="ContextMenuSubContent" sideOffset={2} alignOffset={-5}>
+                                            <ContextMenu.Item className="ContextMenuItem" onSelect={() => handleUpdateStyle({ objectFit: 'cover' })}>Preencher (Cover)</ContextMenu.Item>
+                                            <ContextMenu.Item className="ContextMenuItem" onSelect={() => handleUpdateStyle({ objectFit: 'contain' })}>Ajustar (Contain)</ContextMenu.Item>
+                                            <ContextMenu.Item className="ContextMenuItem" onSelect={() => handleUpdateStyle({ objectFit: 'fill' })}>Esticar (Fill)</ContextMenu.Item>
+                                        </ContextMenu.SubContent>
+                                    </ContextMenu.Portal>
+                                </ContextMenu.Sub>
 
-                                <MenuSeparator />
+                                <ContextMenu.Separator className="ContextMenuSeparator" />
                             </>
                         )}
                         
                         {/* Layering */}
-                        <SubMenu label="Camadas">
-                            <MenuItem onClick={handleBringToFront}>Trazer para frente</MenuItem>
-                            <MenuItem onClick={handleSendToBack}>Enviar para trás</MenuItem>
-                        </SubMenu>
+                        <ContextMenu.Sub>
+                            <ContextMenu.SubTrigger className="ContextMenuSubTrigger">
+                                Camadas
+                                <div className="RightSlot"><ChevronRightIcon /></div>
+                            </ContextMenu.SubTrigger>
+                            <ContextMenu.Portal>
+                                <ContextMenu.SubContent className="ContextMenuSubContent" sideOffset={2} alignOffset={-5}>
+                                    <ContextMenu.Item className="ContextMenuItem" onSelect={handleBringToFront}>Trazer para frente</ContextMenu.Item>
+                                    <ContextMenu.Item className="ContextMenuItem" onSelect={handleSendToBack}>Enviar para trás</ContextMenu.Item>
+                                </ContextMenu.SubContent>
+                            </ContextMenu.Portal>
+                        </ContextMenu.Sub>
                         
-                        <MenuSeparator />
+                        <ContextMenu.Separator className="ContextMenuSeparator" />
 
                         {/* Text Styling */}
                         {element.type === 'text' && (
                             <>
-                                <SubMenu label="Fonte" scrollable>
-                                    {state.availableFonts && state.availableFonts.map(font => (
-                                        <MenuItem 
-                                            key={font} 
-                                            onClick={() => handleUpdateStyle({ fontFamily: font })}
-                                            style={{ fontFamily: font }}
-                                            rightSlot={element.style?.fontFamily === font ? '✓' : undefined}
-                                        >
-                                            {font}
-                                        </MenuItem>
-                                    ))}
-                                </SubMenu>
+                                <ContextMenu.Sub>
+                                    <ContextMenu.SubTrigger className="ContextMenuSubTrigger">
+                                        Fonte
+                                        <div className="RightSlot"><ChevronRightIcon /></div>
+                                    </ContextMenu.SubTrigger>
+                                    <ContextMenu.Portal>
+                                        <ContextMenu.SubContent className="ContextMenuSubContent ContextMenuScrollable" sideOffset={2} alignOffset={-5}>
+                                            {state.availableFonts && state.availableFonts.map(font => (
+                                                <ContextMenu.Item 
+                                                    key={font} 
+                                                    className="ContextMenuItem"
+                                                    onSelect={() => handleUpdateStyle({ fontFamily: font })}
+                                                    style={{ fontFamily: font }}
+                                                >
+                                                    {font}
+                                                    {element.style?.fontFamily === font && <div className="RightSlot"><CheckIcon /></div>}
+                                                </ContextMenu.Item>
+                                            ))}
+                                        </ContextMenu.SubContent>
+                                    </ContextMenu.Portal>
+                                </ContextMenu.Sub>
 
-                                <SubMenu label="Tamanho da Fonte">
-                                    {[12, 14, 16, 20, 24, 32, 48, 64].map(size => (
-                                        <MenuItem key={size} onClick={() => handleUpdateStyle({ fontSize: `${size}px` })}>
-                                            {size}px
-                                        </MenuItem>
-                                    ))}
-                                </SubMenu>
+                                <ContextMenu.Sub>
+                                    <ContextMenu.SubTrigger className="ContextMenuSubTrigger">
+                                        Tamanho da Fonte
+                                        <div className="RightSlot"><ChevronRightIcon /></div>
+                                    </ContextMenu.SubTrigger>
+                                    <ContextMenu.Portal>
+                                        <ContextMenu.SubContent className="ContextMenuSubContent" sideOffset={2} alignOffset={-5}>
+                                            {[12, 14, 16, 20, 24, 32, 48, 64].map(size => (
+                                                <ContextMenu.Item key={size} className="ContextMenuItem" onSelect={() => handleUpdateStyle({ fontSize: `${size}px` })}>
+                                                    {size}px
+                                                </ContextMenu.Item>
+                                            ))}
+                                        </ContextMenu.SubContent>
+                                    </ContextMenu.Portal>
+                                </ContextMenu.Sub>
                                 
-                                <SubMenu label="Cor do Texto">
-                                    {colors.filter(c => c !== 'transparent').map(color => (
-                                        <MenuItem key={color} onClick={() => handleUpdateStyle({ color })}>
-                                            <div style={{ width: 12, height: 12, backgroundColor: color, marginRight: 8, border: '1px solid #ccc' }} />
-                                            {color}
-                                        </MenuItem>
-                                    ))}
-                                </SubMenu>
+                                <ContextMenu.Sub>
+                                    <ContextMenu.SubTrigger className="ContextMenuSubTrigger">
+                                        Cor do Texto
+                                        <div className="RightSlot"><ChevronRightIcon /></div>
+                                    </ContextMenu.SubTrigger>
+                                    <ContextMenu.Portal>
+                                        <ContextMenu.SubContent className="ContextMenuSubContent" sideOffset={2} alignOffset={-5}>
+                                            {colors.filter(c => c !== 'transparent').map(color => (
+                                                <ContextMenu.Item key={color} className="ContextMenuItem" onSelect={() => handleUpdateStyle({ color })}>
+                                                    <div style={{ width: 12, height: 12, backgroundColor: color, marginRight: 8, border: '1px solid #ccc' }} />
+                                                    {color}
+                                                </ContextMenu.Item>
+                                            ))}
+                                        </ContextMenu.SubContent>
+                                    </ContextMenu.Portal>
+                                </ContextMenu.Sub>
                                 
-                                <SubMenu label="Peso da Fonte">
-                                    <MenuItem onClick={() => handleUpdateStyle({ fontWeight: 'normal' })}>Normal</MenuItem>
-                                    <MenuItem onClick={() => handleUpdateStyle({ fontWeight: 'bold' })}>Negrito</MenuItem>
-                                </SubMenu>
+                                <ContextMenu.Sub>
+                                    <ContextMenu.SubTrigger className="ContextMenuSubTrigger">
+                                        Peso da Fonte
+                                        <div className="RightSlot"><ChevronRightIcon /></div>
+                                    </ContextMenu.SubTrigger>
+                                    <ContextMenu.Portal>
+                                        <ContextMenu.SubContent className="ContextMenuSubContent" sideOffset={2} alignOffset={-5}>
+                                            <ContextMenu.Item className="ContextMenuItem" onSelect={() => handleUpdateStyle({ fontWeight: 'normal' })}>Normal</ContextMenu.Item>
+                                            <ContextMenu.Item className="ContextMenuItem" onSelect={() => handleUpdateStyle({ fontWeight: 'bold' })}>Negrito</ContextMenu.Item>
+                                        </ContextMenu.SubContent>
+                                    </ContextMenu.Portal>
+                                </ContextMenu.Sub>
 
-                                <SubMenu label="Alinhamento">
-                                    <MenuItem onClick={() => handleUpdateStyle({ textAlign: 'left' })}>Esquerda</MenuItem>
-                                    <MenuItem onClick={() => handleUpdateStyle({ textAlign: 'center' })}>Centro</MenuItem>
-                                    <MenuItem onClick={() => handleUpdateStyle({ textAlign: 'right' })}>Direita</MenuItem>
-                                </SubMenu>
+                                <ContextMenu.Sub>
+                                    <ContextMenu.SubTrigger className="ContextMenuSubTrigger">
+                                        Alinhamento
+                                        <div className="RightSlot"><ChevronRightIcon /></div>
+                                    </ContextMenu.SubTrigger>
+                                    <ContextMenu.Portal>
+                                        <ContextMenu.SubContent className="ContextMenuSubContent" sideOffset={2} alignOffset={-5}>
+                                            <ContextMenu.Item className="ContextMenuItem" onSelect={() => handleUpdateStyle({ textAlign: 'left' })}>Esquerda</ContextMenu.Item>
+                                            <ContextMenu.Item className="ContextMenuItem" onSelect={() => handleUpdateStyle({ textAlign: 'center' })}>Centro</ContextMenu.Item>
+                                            <ContextMenu.Item className="ContextMenuItem" onSelect={() => handleUpdateStyle({ textAlign: 'right' })}>Direita</ContextMenu.Item>
+                                        </ContextMenu.SubContent>
+                                    </ContextMenu.Portal>
+                                </ContextMenu.Sub>
+
+                                <ContextMenu.Sub>
+                                    <ContextMenu.SubTrigger className="ContextMenuSubTrigger">
+                                        Alinhamento Vertical
+                                        <div className="RightSlot"><ChevronRightIcon /></div>
+                                    </ContextMenu.SubTrigger>
+                                    <ContextMenu.Portal>
+                                        <ContextMenu.SubContent className="ContextMenuSubContent" sideOffset={2} alignOffset={-5}>
+                                            <ContextMenu.Item className="ContextMenuItem" onSelect={() => handleUpdateStyle({ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start' })}>Topo</ContextMenu.Item>
+                                            <ContextMenu.Item className="ContextMenuItem" onSelect={() => handleUpdateStyle({ display: 'flex', flexDirection: 'column', justifyContent: 'center' })}>Centro</ContextMenu.Item>
+                                            <ContextMenu.Item className="ContextMenuItem" onSelect={() => handleUpdateStyle({ display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' })}>Base</ContextMenu.Item>
+                                        </ContextMenu.SubContent>
+                                    </ContextMenu.Portal>
+                                </ContextMenu.Sub>
                             </>
                         )}
                         
                         {/* Background Color */}
-                        <SubMenu label="Cor de Fundo">
-                            {colors.map(color => (
-                                <MenuItem key={color} onClick={() => handleUpdateStyle({ backgroundColor: color })}>
-                                    <div style={{ width: 12, height: 12, backgroundColor: color, marginRight: 8, border: '1px solid #ccc' }} />
-                                    {color === 'transparent' ? 'Transparente' : color}
-                                </MenuItem>
-                            ))}
-                        </SubMenu>
+                        <ContextMenu.Sub>
+                            <ContextMenu.SubTrigger className="ContextMenuSubTrigger">
+                                Cor de Fundo
+                                <div className="RightSlot"><ChevronRightIcon /></div>
+                            </ContextMenu.SubTrigger>
+                            <ContextMenu.Portal>
+                                <ContextMenu.SubContent className="ContextMenuSubContent" sideOffset={2} alignOffset={-5}>
+                                    {colors.map(color => (
+                                        <ContextMenu.Item key={color} className="ContextMenuItem" onSelect={() => handleUpdateStyle({ backgroundColor: color })}>
+                                            <div style={{ width: 12, height: 12, backgroundColor: color, marginRight: 8, border: '1px solid #ccc' }} />
+                                            {color === 'transparent' ? 'Transparente' : color}
+                                        </ContextMenu.Item>
+                                    ))}
+                                </ContextMenu.SubContent>
+                            </ContextMenu.Portal>
+                        </ContextMenu.Sub>
                         
                         {/* Border Radius */}
-                        <SubMenu label="Arredondamento">
-                            {[0, 4, 8, 12, 16, 24, '50%'].map(radius => (
-                                <MenuItem 
-                                    key={radius} 
-                                    onClick={() => handleUpdateStyle({ borderRadius: typeof radius === 'number' ? `${radius}px` : radius })}
-                                >
-                                    {radius === '50%' ? 'Círculo' : `${radius}px`}
-                                </MenuItem>
-                            ))}
-                        </SubMenu>
+                        <ContextMenu.Sub>
+                            <ContextMenu.SubTrigger className="ContextMenuSubTrigger">
+                                Arredondamento
+                                <div className="RightSlot"><ChevronRightIcon /></div>
+                            </ContextMenu.SubTrigger>
+                            <ContextMenu.Portal>
+                                <ContextMenu.SubContent className="ContextMenuSubContent" sideOffset={2} alignOffset={-5}>
+                                    {[0, 4, 8, 12, 16, 24, '50%'].map(radius => (
+                                        <ContextMenu.Item 
+                                            key={radius} 
+                                            className="ContextMenuItem"
+                                            onSelect={() => handleUpdateStyle({ borderRadius: typeof radius === 'number' ? `${radius}px` : radius })}
+                                        >
+                                            {radius === '50%' ? 'Círculo' : `${radius}px`}
+                                        </ContextMenu.Item>
+                                    ))}
+                                </ContextMenu.SubContent>
+                            </ContextMenu.Portal>
+                        </ContextMenu.Sub>
                         
                         {/* Padding */}
-                        <SubMenu label="Espaçamento">
-                            {[0, 4, 8, 12, 16, 24, 32].map(padding => (
-                                <MenuItem key={padding} onClick={() => handleUpdateStyle({ padding: `${padding}px` })}>
-                                    {padding}px
-                                </MenuItem>
-                            ))}
-                        </SubMenu>
-
-                        {/* Border */}
-                        <SubMenu label="Borda">
-                            <SubMenu label="Cor da Borda">
-                                {colors.filter(c => c !== 'transparent').map(color => (
-                                    <MenuItem key={color} onClick={() => handleUpdateStyle({ borderColor: color, borderStyle: 'solid' })}>
-                                        <div style={{ width: 12, height: 12, backgroundColor: color, marginRight: 8, border: '1px solid #ccc' }} />
-                                        {color}
-                                    </MenuItem>
-                                ))}
-                                <MenuItem onClick={() => handleUpdateStyle({ borderStyle: 'none' })}>Sem Borda</MenuItem>
-                            </SubMenu>
-                            <SubMenu label="Espessura">
-                                {[1, 2, 4, 8].map(w => (
-                                    <MenuItem key={w} onClick={() => handleUpdateStyle({ borderWidth: `${w}px`, borderStyle: 'solid' })}>
-                                        {w}px
-                                    </MenuItem>
-                                ))}
-                            </SubMenu>
-                        </SubMenu>
-
-                    </div>
-                </>,
-                document.body
-            )}
+                        <ContextMenu.Sub>
+                            <ContextMenu.SubTrigger className="ContextMenuSubTrigger">
+                                Espaçamento
+                                <div className="RightSlot"><ChevronRightIcon /></div>
+                            </ContextMenu.SubTrigger>
+                            <ContextMenu.Portal>
+                                <ContextMenu.SubContent className="ContextMenuSubContent" sideOffset={2} alignOffset={-5}>
+                                    {[0, 4, 8, 12, 16, 24, 32].map(padding => (
+                                        <ContextMenu.Item key={padding} className="ContextMenuItem" onSelect={() => handleUpdateStyle({ padding: `${padding}px` })}>
+                                            {padding}px
+                                        </ContextMenu.Item>
+                                    ))}
+                                </ContextMenu.SubContent>
+                            </ContextMenu.Portal>
+                        </ContextMenu.Sub>
+                        
+                    </ContextMenu.Content>
+                </ContextMenu.Portal>
+            </ContextMenu.Root>
         </>
     );
 };

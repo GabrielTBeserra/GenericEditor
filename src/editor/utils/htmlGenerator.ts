@@ -1,18 +1,15 @@
 import type { IElement, IListSettings } from '../context';
 
-
-
-
-
 interface RenderOptions {
     isList?: boolean;
     listSettings?: IListSettings;
+    canvasHeight?: number;
 }
 
 export const generateHTML = (elements: IElement[], data: any, options: RenderOptions = {}): string => {
     // We can evaluate the function string to get the result without code duplication
     // This is safe here because we control the code string.
-    
+
     // eslint-disable-next-line no-new-func
     const renderFn = new Function('elements', 'data', 'options', getRendererCode() + '\nreturn renderTemplate(elements, data, options);');
     return renderFn(elements, data, options);
@@ -25,11 +22,11 @@ export const getRendererCode = () => {
  * Render Template
  * @param {Array} elements - The JSON configuration of elements
  * @param {Object|Array} data - The data object to inject (Object for single, Array for list)
- * @param {Object} options - { isList: boolean, listSettings: { sortProp: string, sortOrder: 'asc'|'desc' } }
+ * @param {Object} options - { isList: boolean, listSettings: { sortProp: string, sortOrder: 'asc'|'desc', newestPosition: 'top'|'bottom', scrollDirection: 'up'|'down' }, canvasHeight: number }
  * @returns {string} - The generated HTML string
  */
 function renderTemplate(elements, data, options = {}) {
-    const { isList, listSettings } = options;
+    const { isList, listSettings, canvasHeight } = options;
 
     const camelToKebab = (string) => {
         return string.replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, '$1-$2').toLowerCase();
@@ -87,6 +84,11 @@ function renderTemplate(elements, data, options = {}) {
                 ...element.style
             };
             
+            // Fix: remove padding if it's not explicitly set, or handle it for text
+            if (element.type === 'text' && !baseStyle.padding) {
+                // baseStyle.padding = '8px'; // Removed default padding to respect resize box
+            }
+            
             const styleString = styleObjectToString(baseStyle);
 
             if (element.type === 'text') {
@@ -108,8 +110,7 @@ function renderTemplate(elements, data, options = {}) {
 
     if (isList && Array.isArray(data)) {
         // Calculate item height
-        const maxY = Math.max(...elements.map(el => el.y + el.height));
-        const itemHeight = maxY; // Add some padding if needed, or rely on element positioning
+        const itemHeight = canvasHeight || Math.max(...elements.map(el => el.y + el.height));
 
         // Sort data
         let listData = [...data];
@@ -124,45 +125,50 @@ function renderTemplate(elements, data, options = {}) {
                 return 0;
             });
         }
+        
+        // Handle newest position
+        if (listSettings && listSettings.newestPosition === 'top') {
+             listData.reverse();
+        }
 
         // Generate HTML for all items
         const itemsHtml = listData.map((item, index) => {
-             // We render each item inside a relative container to maintain local positioning
-             // But for the scroll animation, we usually stack them.
-             // Let's stack them vertically.
-             
-             const itemHtml = renderItem(item, index, 0); // Internal offset is 0, we move the container
+             const itemHtml = renderItem(item, index, 0); 
              const itemContainerStyle = styleObjectToString({
                  position: 'relative',
                  height: itemHeight,
                  width: '100%',
-                 marginBottom: 20 // Spacing between items
+                 marginBottom: 0
              });
              
              return \`<div class="list-item" style="\${itemContainerStyle}">\${itemHtml}</div>\`;
         }).join('\\n');
 
-        // Animation Styles
-        // Bottom-anchored list (chat style)
+        // Animation Styles based on settings
+        const scrollDirection = (listSettings && listSettings.scrollDirection) || 'down';
+        
+        const justify = (listSettings && listSettings.newestPosition === 'top') ? 'flex-start' : 'flex-end';
+
         const animationCss = \`
             @keyframes slideIn {
-                from { opacity: 0; transform: translateY(50px); }
+                from { opacity: 0; transform: translateY(20px); }
                 to { opacity: 1; transform: translateY(0); }
             }
             .list-wrapper {
                 display: flex;
                 flex-direction: column;
-                justify-content: flex-end;
+                justify-content: \${justify};
                 height: 100%;
                 width: 100%;
-                overflow: hidden;
-                padding-bottom: 20px;
+                overflow-y: auto;
+                overflow-x: hidden;
                 box-sizing: border-box;
+                padding: 10px;
             }
             .list-item {
                 flex-shrink: 0;
-                animation: slideIn 0.5s ease-out;
-                margin-top: 20px;
+                animation: slideIn 0.3s ease-out;
+                margin-bottom: 10px;
                 width: 100%;
                 position: relative;
             }

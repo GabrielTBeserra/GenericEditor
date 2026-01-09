@@ -14,6 +14,8 @@ export interface IElement {
 export interface IListSettings {
     sortProp?: string;
     sortOrder: 'asc' | 'desc';
+    newestPosition?: 'top' | 'bottom';
+    scrollDirection?: 'up' | 'down';
 }
 export interface IProp {
     name: string;
@@ -26,6 +28,7 @@ interface IEditorState {
     mockData: any[];
     singleMockData: Record<string, any>;
     listSettings: IListSettings;
+    canvasHeight?: number;
     availableProps: IProp[];
     availableFonts: string[];
     theme: 'light' | 'dark';
@@ -39,6 +42,7 @@ interface IEditorContext {
     updateElement: (id: string, updates: Partial<IElement>) => void;
     setMockData: (data: any[], singleData: Record<string, any>) => void;
     updateListSettings: (settings: Partial<IListSettings>) => void;
+    setCanvasHeight: (height: number) => void;
     loadState: (savedState: Partial<IEditorState>) => void;
 }
 export declare const EditorProvider: React.FC<{

@@ -15,6 +15,9 @@ const DraggableResizableElement: React.FC<{ element: IElement; isSelected: boole
     const dragStartPos = useRef({ x: 0, y: 0 });
     const elementStartPos = useRef({ x: 0, y: 0 });
     
+    // Canvas limits
+    const canvasHeight = state.canvasHeight || 150;
+    
     // Rotation refs
     const rotateStartAngle = useRef(0);
     const elementStartRotation = useRef(0);
@@ -104,9 +107,23 @@ const DraggableResizableElement: React.FC<{ element: IElement; isSelected: boole
                 const dx = e.clientX - dragStartPos.current.x;
                 const dy = e.clientY - dragStartPos.current.y;
                 
+                let newX = elementStartPos.current.x + dx;
+                let newY = elementStartPos.current.y + dy;
+
+                // Limit movement if isList is active
+                if (state.isList) {
+                    // Prevent going above top
+                    newY = Math.max(0, newY);
+                    
+                    // Prevent going below bottom (considering element height)
+                    if (newY + element.height > canvasHeight) {
+                        newY = Math.max(0, canvasHeight - element.height);
+                    }
+                }
+
                 updateElement(element.id, {
-                    x: elementStartPos.current.x + dx,
-                    y: elementStartPos.current.y + dy
+                    x: newX,
+                    y: newY
                 });
             }
 
@@ -146,7 +163,7 @@ const DraggableResizableElement: React.FC<{ element: IElement; isSelected: boole
         top: 0,
         width: '100%',
         height: '100%',
-        padding: element.type === 'image' ? 0 : '8px',
+        padding: (element.type === 'image' || element.type === 'text') ? 0 : '8px',
         border: isSelected ? '2px solid var(--accent-9)' : '1px dashed transparent',
         outline: isSelected ? 'none' : '1px solid transparent', // Prevent double border
         cursor: isDragging ? 'grabbing' : 'grab',
@@ -160,6 +177,7 @@ const DraggableResizableElement: React.FC<{ element: IElement; isSelected: boole
         <Resizable
             className="resizable-element"
             size={{ width: element.width, height: element.height }}
+            maxHeight={state.isList ? Math.max(10, canvasHeight - element.y) : undefined}
             onResizeStop={(_e, _direction, _ref, d) => {
                 updateElement(element.id, {
                     width: element.width + d.width,
@@ -253,6 +271,8 @@ export const Canvas: React.FC<CanvasProps> = () => {
         selectElement(null);
     };
 
+    const canvasHeight = state.canvasHeight || 150;
+
     return (
         <Box 
             onClick={handleBackgroundClick}
@@ -266,6 +286,33 @@ export const Canvas: React.FC<CanvasProps> = () => {
                 backgroundSize: '20px 20px'
             }}
         >
+            {state.isList && (
+                <div 
+                    style={{
+                        position: 'absolute',
+                        top: canvasHeight,
+                        left: 0,
+                        right: 0,
+                        borderBottom: '2px dashed var(--accent-9)',
+                        pointerEvents: 'none',
+                        zIndex: 10
+                    }}
+                >
+                    <div style={{
+                        position: 'absolute',
+                        right: 10,
+                        bottom: 2,
+                        backgroundColor: 'var(--accent-9)',
+                        color: 'white',
+                        fontSize: '10px',
+                        padding: '2px 4px',
+                        borderRadius: '2px'
+                    }}>
+                        Fim do Item ({canvasHeight}px)
+                    </div>
+                </div>
+            )}
+
             {state.elements.length === 0 && (
                 <Flex 
                     align="center" 
