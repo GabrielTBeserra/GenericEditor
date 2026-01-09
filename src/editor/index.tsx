@@ -70,15 +70,15 @@ const EditorContent: React.FC<EditorProps> = ({ layout, initialState, onSave, th
                             height: '100%'
                         }}
                     >
-                        <ScrollArea type="auto" scrollbars="vertical" style={{ flex: 1 }}>
-                            <Flex direction="column" gap="4" p="4">
-                                {/* Ações */}
+                        {/* Fixed Controls Header */}
+                        <Box p="4" style={{ borderBottom: '1px solid var(--gray-5)', backgroundColor: 'var(--gray-2)' }}>
+                            <Flex direction="column" gap="3">
                                 <Box>
-                                    <Text size="2" weight="bold" mb="2" as="div">Elementos</Text>
+                                    <Text size="2" weight="bold" mb="2" as="div">Editor</Text>
                                     
                                     <DropdownMenu.Root>
                                         <DropdownMenu.Trigger>
-                                            <Button variant="solid" color="green" size="3" style={{ width: '100%', cursor: 'pointer', justifyContent: 'center' }}>
+                                            <Button variant="solid" color="green" size="3" style={{ width: '100%', cursor: 'pointer', justifyContent: 'center', marginBottom: '8px' }}>
                                                 Adicionar Novo +
                                             </Button>
                                         </DropdownMenu.Trigger>
@@ -88,8 +88,21 @@ const EditorContent: React.FC<EditorProps> = ({ layout, initialState, onSave, th
                                             <DropdownMenu.Item onSelect={() => handleAddElement('box')}>Caixa (Container)</DropdownMenu.Item>
                                         </DropdownMenu.Content>
                                     </DropdownMenu.Root>
-                                </Box>
 
+                                    <Button 
+                                        variant="soft" 
+                                        color="blue" 
+                                        style={{ width: '100%', justifyContent: 'center', cursor: 'pointer' }}
+                                        onClick={handleSave}
+                                    >
+                                        <Share1Icon /> Salvar Alterações
+                                    </Button>
+                                </Box>
+                            </Flex>
+                        </Box>
+
+                        <ScrollArea type="auto" scrollbars="vertical" style={{ flex: 1 }}>
+                            <Flex direction="column" gap="4" p="4">
                                 {/* Variáveis */}
                                 <Box>
                                     <Text size="2" weight="bold" mb="2" as="div">Variáveis Disponíveis</Text>
@@ -110,25 +123,6 @@ const EditorContent: React.FC<EditorProps> = ({ layout, initialState, onSave, th
                                 </Box>
                             </Flex>
                         </ScrollArea>
-
-                        {/* Footer Actions */}
-                        <Box p="4" pb="6" style={{ borderTop: '1px solid var(--gray-5)', backgroundColor: 'var(--color-background)' }}>
-                            <Flex direction="column" gap="3">
-                                <Box>
-                                    <Text size="2" weight="bold" mb="2" as="div">Ações</Text>
-                                    <Flex gap="3" direction="column">
-                                        <Button 
-                                            variant="soft" 
-                                            color="blue" 
-                                            style={{ width: '100%', justifyContent: 'center', cursor: 'pointer', marginBottom: '12px' }}
-                                            onClick={handleSave}
-                                        >
-                                            <Share1Icon /> Salvar Alterações
-                                        </Button>
-                                    </Flex>
-                                </Box>
-                            </Flex>
-                        </Box>
                     </Flex>
                 )}
 

@@ -13222,47 +13222,84 @@ var EditorContent = ({ layout: s, initialState: C, onSave: w, theme: k = "light"
 					flexShrink: 0,
 					height: "100%"
 				},
-				children: [/* @__PURE__ */ jsx(c, {
+				children: [/* @__PURE__ */ jsx(p$1, {
+					p: "4",
+					style: {
+						borderBottom: "1px solid var(--gray-5)",
+						backgroundColor: "var(--gray-2)"
+					},
+					children: /* @__PURE__ */ jsx(p, {
+						direction: "column",
+						gap: "3",
+						children: /* @__PURE__ */ jsxs(p$1, { children: [
+							/* @__PURE__ */ jsx(p$2, {
+								size: "2",
+								weight: "bold",
+								mb: "2",
+								as: "div",
+								children: "Editor"
+							}),
+							/* @__PURE__ */ jsxs(I$1, { children: [/* @__PURE__ */ jsx(h, { children: /* @__PURE__ */ jsx(o, {
+								variant: "solid",
+								color: "green",
+								size: "3",
+								style: {
+									width: "100%",
+									cursor: "pointer",
+									justifyContent: "center",
+									marginBottom: "8px"
+								},
+								children: "Adicionar Novo +"
+							}) }), /* @__PURE__ */ jsxs(g, {
+								style: { width: "240px" },
+								children: [
+									/* @__PURE__ */ jsx(v$1, {
+										onSelect: () => X("text"),
+										children: "Texto"
+									}),
+									/* @__PURE__ */ jsx(v$1, {
+										onSelect: () => X("image"),
+										children: "Imagem"
+									}),
+									/* @__PURE__ */ jsx(v$1, {
+										onSelect: () => X("box"),
+										children: "Caixa (Container)"
+									})
+								]
+							})] }),
+							/* @__PURE__ */ jsxs(o, {
+								variant: "soft",
+								color: "blue",
+								style: {
+									width: "100%",
+									justifyContent: "center",
+									cursor: "pointer"
+								},
+								onClick: () => {
+									if (w) {
+										let s = {
+											elements: J.elements,
+											isList: J.isList,
+											mockData: J.mockData,
+											singleMockData: J.singleMockData,
+											listSettings: J.listSettings
+										};
+										w(JSON.stringify(s, null, 2));
+									}
+								},
+								children: [/* @__PURE__ */ jsx(Share1Icon, {}), " Salvar Alterações"]
+							})
+						] })
+					})
+				}), /* @__PURE__ */ jsx(c, {
 					type: "auto",
 					scrollbars: "vertical",
 					style: { flex: 1 },
-					children: /* @__PURE__ */ jsxs(p, {
+					children: /* @__PURE__ */ jsx(p, {
 						direction: "column",
 						gap: "4",
 						p: "4",
-						children: [/* @__PURE__ */ jsxs(p$1, { children: [/* @__PURE__ */ jsx(p$2, {
-							size: "2",
-							weight: "bold",
-							mb: "2",
-							as: "div",
-							children: "Elementos"
-						}), /* @__PURE__ */ jsxs(I$1, { children: [/* @__PURE__ */ jsx(h, { children: /* @__PURE__ */ jsx(o, {
-							variant: "solid",
-							color: "green",
-							size: "3",
-							style: {
-								width: "100%",
-								cursor: "pointer",
-								justifyContent: "center"
-							},
-							children: "Adicionar Novo +"
-						}) }), /* @__PURE__ */ jsxs(g, {
-							style: { width: "240px" },
-							children: [
-								/* @__PURE__ */ jsx(v$1, {
-									onSelect: () => X("text"),
-									children: "Texto"
-								}),
-								/* @__PURE__ */ jsx(v$1, {
-									onSelect: () => X("image"),
-									children: "Imagem"
-								}),
-								/* @__PURE__ */ jsx(v$1, {
-									onSelect: () => X("box"),
-									children: "Caixa (Container)"
-								})
-							]
-						})] })] }), /* @__PURE__ */ jsxs(p$1, { children: [
+						children: /* @__PURE__ */ jsxs(p$1, { children: [
 							/* @__PURE__ */ jsx(p$2, {
 								size: "2",
 								weight: "bold",
@@ -13304,51 +13341,7 @@ var EditorContent = ({ layout: s, initialState: C, onSave: w, theme: k = "light"
 									children: "Nenhuma variável configurada."
 								})]
 							})
-						] })]
-					})
-				}), /* @__PURE__ */ jsx(p$1, {
-					p: "4",
-					pb: "6",
-					style: {
-						borderTop: "1px solid var(--gray-5)",
-						backgroundColor: "var(--color-background)"
-					},
-					children: /* @__PURE__ */ jsx(p, {
-						direction: "column",
-						gap: "3",
-						children: /* @__PURE__ */ jsxs(p$1, { children: [/* @__PURE__ */ jsx(p$2, {
-							size: "2",
-							weight: "bold",
-							mb: "2",
-							as: "div",
-							children: "Ações"
-						}), /* @__PURE__ */ jsx(p, {
-							gap: "3",
-							direction: "column",
-							children: /* @__PURE__ */ jsxs(o, {
-								variant: "soft",
-								color: "blue",
-								style: {
-									width: "100%",
-									justifyContent: "center",
-									cursor: "pointer",
-									marginBottom: "12px"
-								},
-								onClick: () => {
-									if (w) {
-										let s = {
-											elements: J.elements,
-											isList: J.isList,
-											mockData: J.mockData,
-											singleMockData: J.singleMockData,
-											listSettings: J.listSettings
-										};
-										w(JSON.stringify(s, null, 2));
-									}
-								},
-								children: [/* @__PURE__ */ jsx(Share1Icon, {}), " Salvar Alterações"]
-							})
-						})] })
+						] })
 					})
 				})]
 			}), /* @__PURE__ */ jsxs(p$1, {
