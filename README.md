@@ -42,9 +42,10 @@ npm install @radix-ui/themes @radix-ui/react-icons react-resizable-panels re-res
 
 ### 3. Importe os Estilos
 
-No arquivo de entrada da sua aplicação (ex: `main.tsx`, `App.tsx` ou `layout.tsx` no Next.js), importe o CSS do Radix UI:
+No arquivo de entrada da sua aplicação (ex: `main.tsx`, `App.tsx` ou `layout.tsx` no Next.js), importe o CSS do editor (obrigatório para o menu de contexto) e do Radix UI:
 
 ```tsx
+import "@1urso/generic-editor/dist/generic-editor.css"; // Essencial para o funcionamento do editor
 import "@radix-ui/themes/styles.css";
 ```
 
