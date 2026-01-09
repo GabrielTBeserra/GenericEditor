@@ -18,6 +18,7 @@ export interface IListSettings {
     sortOrder: 'asc' | 'desc';
     newestPosition?: 'top' | 'bottom';
     scrollDirection?: 'up' | 'down';
+    containerHeight?: number;
 }
 
 export interface IProp {

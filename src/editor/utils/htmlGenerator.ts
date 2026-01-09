@@ -22,7 +22,7 @@ export const getRendererCode = () => {
  * Render Template
  * @param {Array} elements - The JSON configuration of elements
  * @param {Object|Array} data - The data object to inject (Object for single, Array for list)
- * @param {Object} options - { isList: boolean, listSettings: { sortProp: string, sortOrder: 'asc'|'desc', newestPosition: 'top'|'bottom', scrollDirection: 'up'|'down' }, canvasHeight: number }
+ * @param {Object} options - { isList: boolean, listSettings: { sortProp: string, sortOrder: 'asc'|'desc', newestPosition: 'top'|'bottom', scrollDirection: 'up'|'down', containerHeight: number }, canvasHeight: number }
  * @returns {string} - The generated HTML string
  */
 function renderTemplate(elements, data, options = {}) {
@@ -146,6 +146,7 @@ function renderTemplate(elements, data, options = {}) {
 
         // Animation Styles based on settings
         const scrollDirection = (listSettings && listSettings.scrollDirection) || 'down';
+        const containerHeight = (listSettings && listSettings.containerHeight) ? listSettings.containerHeight + 'px' : '100%';
         
         const justify = (listSettings && listSettings.newestPosition === 'top') ? 'flex-start' : 'flex-end';
 
@@ -158,7 +159,7 @@ function renderTemplate(elements, data, options = {}) {
                 display: flex;
                 flex-direction: column;
                 justify-content: \${justify};
-                height: 100%;
+                height: \${containerHeight};
                 width: 100%;
                 overflow-y: auto;
                 overflow-x: hidden;
@@ -173,12 +174,22 @@ function renderTemplate(elements, data, options = {}) {
                 position: relative;
             }
         \`;
+        
+        const scrollScript = scrollDirection === 'up' 
+            ? \`<script>
+                document.addEventListener('DOMContentLoaded', () => {
+                    const wrapper = document.querySelector('.list-wrapper');
+                    if(wrapper) wrapper.scrollTop = wrapper.scrollHeight;
+                });
+               </script>\`
+            : '';
 
         return \`
             <style>\${animationCss}</style>
             <div class="list-wrapper">
                 \${itemsHtml}
             </div>
+            \${scrollScript}
         \`;
     }
 

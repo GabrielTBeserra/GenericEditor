@@ -90,6 +90,7 @@ At the top of the left sidebar, the **Settings** button (gear icon) allows you t
   - _Order_: Ascending or Descending.
   - _Newest Position_: Defines where the newest item appears ('top' or 'bottom').
   - _Scroll Behavior_: Defines the scroll direction ('down' - default, or 'up' - chat-like).
+  - _Container Height_: Defines the fixed height of the list container in pixels. If the content exceeds this height, a vertical scrollbar will appear automatically.
 
 ### Working with Text and Fonts
 
@@ -210,7 +211,8 @@ The output of `onSave` is a JSON ready to be stored.
     "sortProp": "nome",
     "sortOrder": "asc",
     "newestPosition": "bottom",
-    "scrollDirection": "down"
+    "scrollDirection": "down",
+    "containerHeight": 400 // Optional: Limits the list height (scrollable)
   }
 }
 ```

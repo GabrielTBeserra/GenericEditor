@@ -1,33 +1,57 @@
 import React, { useState, useEffect } from 'react';
-import { Dialog, Button, Flex, Text, TextField, Select, Box } from '@radix-ui/themes';
+import { Dialog, Button, Flex, Text, TextField, Box } from '@radix-ui/themes';
 import { GearIcon } from '@radix-ui/react-icons';
 import { useEditor } from '../context';
 
 export const EditorSettings: React.FC = () => {
     const { state, updateListSettings, setCanvasHeight } = useEditor();
+    const [open, setOpen] = useState(false);
     const [localSortProp, setLocalSortProp] = useState('');
+    const [localSortOrder, setLocalSortOrder] = useState<'asc' | 'desc'>('asc');
+    const [localNewestPosition, setLocalNewestPosition] = useState<'top' | 'bottom'>('bottom');
+    const [localScrollDirection, setLocalScrollDirection] = useState<'up' | 'down'>('down');
     const [localCanvasHeight, setLocalCanvasHeight] = useState('150');
+    const [localContainerHeight, setLocalContainerHeight] = useState('');
 
     // Sync local state with context when opening
     useEffect(() => {
-        setLocalSortProp(state.listSettings.sortProp || '__none__');
-        setLocalCanvasHeight(String(state.canvasHeight || 150));
-    }, [state.listSettings.sortProp, state.canvasHeight]);
+        if (open) {
+            setLocalSortProp(state.listSettings.sortProp || '__none__');
+            setLocalSortOrder(state.listSettings.sortOrder || 'asc');
+            setLocalNewestPosition(state.listSettings.newestPosition || 'bottom');
+            setLocalScrollDirection(state.listSettings.scrollDirection || 'down');
+            setLocalContainerHeight(state.listSettings.containerHeight ? String(state.listSettings.containerHeight) : '');
+            setLocalCanvasHeight(String(state.canvasHeight || 150));
+        }
+    }, [open]);
 
-    // Update canvas height when changed
+    // Update canvas height when changed (Live preview for item height)
     useEffect(() => {
+        if (!open) return; // Only update if dialog is open (prevent initial mount effect if not open)
+        
         const height = parseInt(localCanvasHeight, 10);
         if (!isNaN(height) && height > 0) {
-            setCanvasHeight(height);
+            // Only update if different to avoid loop (though React handles strict equality)
+            if (state.canvasHeight !== height) {
+                setCanvasHeight(height);
+            }
         }
-    }, [localCanvasHeight, setCanvasHeight]);
+    }, [localCanvasHeight, open, setCanvasHeight, state.canvasHeight]);
 
     const handleSave = () => {
-        updateListSettings({ sortProp: localSortProp === '__none__' ? '' : localSortProp });
+        const containerHeight = parseInt(localContainerHeight, 10);
+        updateListSettings({ 
+            sortProp: localSortProp === '__none__' ? '' : localSortProp,
+            sortOrder: localSortOrder,
+            newestPosition: localNewestPosition,
+            scrollDirection: localScrollDirection,
+            containerHeight: !isNaN(containerHeight) && containerHeight > 0 ? containerHeight : undefined
+        });
+        setOpen(false);
     };
 
     return (
-        <Dialog.Root>
+        <Dialog.Root open={open} onOpenChange={setOpen}>
             <Dialog.Trigger>
                 <Button variant="soft" color="gray" style={{ width: '100%', justifyContent: 'center', cursor: 'pointer' }}>
                     <GearIcon /> Configurações
@@ -46,77 +70,122 @@ export const EditorSettings: React.FC = () => {
                         <Flex gap="3" align="center">
                             <Box flexGrow="1">
                                 <Text size="1" mb="1" as="div">Propriedade para Ordenar (ex: data, id)</Text>
-                                <Select.Root 
+                                <select 
                                     value={localSortProp}
-                                    onValueChange={(val) => setLocalSortProp(val)}
+                                    onChange={(e) => setLocalSortProp(e.target.value)}
+                                    style={{
+                                        width: '100%',
+                                        padding: '8px',
+                                        borderRadius: '4px',
+                                        border: '1px solid var(--gray-6)',
+                                        backgroundColor: 'var(--gray-2)',
+                                        color: 'var(--gray-12)',
+                                        fontSize: '14px',
+                                        outline: 'none'
+                                    }}
                                 >
-                                    <Select.Trigger style={{ width: '100%' }} placeholder="Selecione..." />
-                                    <Select.Content>
-                                        <Select.Item value="__none__">(Nenhum)</Select.Item>
-                                        {state.availableProps.map(prop => (
-                                            <Select.Item key={prop.dataName} value={prop.dataName}>
-                                                {prop.name}
-                                            </Select.Item>
-                                        ))}
-                                    </Select.Content>
-                                </Select.Root>
+                                    <option value="__none__">(Nenhum)</option>
+                                    {state.availableProps.map(prop => (
+                                        <option key={prop.dataName} value={prop.dataName}>
+                                            {prop.name}
+                                        </option>
+                                    ))}
+                                </select>
                             </Box>
                             <Box>
                                 <Text size="1" mb="1" as="div">Direção</Text>
-                                <Select.Root 
-                                    value={state.listSettings.sortOrder} 
-                                    onValueChange={(val) => updateListSettings({ sortOrder: val as 'asc' | 'desc' })}
+                                <select 
+                                    value={localSortOrder} 
+                                    onChange={(e) => setLocalSortOrder(e.target.value as 'asc' | 'desc')}
+                                    style={{
+                                        width: '150px',
+                                        padding: '8px',
+                                        borderRadius: '4px',
+                                        border: '1px solid var(--gray-6)',
+                                        backgroundColor: 'var(--gray-2)',
+                                        color: 'var(--gray-12)',
+                                        fontSize: '14px',
+                                        outline: 'none'
+                                    }}
                                 >
-                                    <Select.Trigger />
-                                    <Select.Content>
-                                        <Select.Item value="asc">Crescente (A-Z)</Select.Item>
-                                        <Select.Item value="desc">Decrescente (Z-A)</Select.Item>
-                                    </Select.Content>
-                                </Select.Root>
+                                    <option value="asc">Crescente (A-Z)</option>
+                                    <option value="desc">Decrescente (Z-A)</option>
+                                </select>
                             </Box>
                         </Flex>
 
                         <Flex gap="3" align="center">
                             <Box flexGrow="1">
                                 <Text size="1" mb="1" as="div">Posição do Recente</Text>
-                                <Select.Root 
-                                    value={state.listSettings.newestPosition || 'bottom'} 
-                                    onValueChange={(val) => updateListSettings({ newestPosition: val as 'top' | 'bottom' })}
+                                <select 
+                                    value={localNewestPosition} 
+                                    onChange={(e) => setLocalNewestPosition(e.target.value as 'top' | 'bottom')}
+                                    style={{
+                                        width: '100%',
+                                        padding: '8px',
+                                        borderRadius: '4px',
+                                        border: '1px solid var(--gray-6)',
+                                        backgroundColor: 'var(--gray-2)',
+                                        color: 'var(--gray-12)',
+                                        fontSize: '14px',
+                                        outline: 'none'
+                                    }}
                                 >
-                                    <Select.Trigger style={{ width: '100%' }} />
-                                    <Select.Content>
-                                        <Select.Item value="top">Topo (Início)</Select.Item>
-                                        <Select.Item value="bottom">Base (Final)</Select.Item>
-                                    </Select.Content>
-                                </Select.Root>
+                                    <option value="top">Topo (Início)</option>
+                                    <option value="bottom">Base (Final)</option>
+                                </select>
                             </Box>
                             <Box flexGrow="1">
                                 <Text size="1" mb="1" as="div">Comportamento de Rolagem</Text>
-                                <Select.Root 
-                                    value={state.listSettings.scrollDirection || 'down'} 
-                                    onValueChange={(val) => updateListSettings({ scrollDirection: val as 'up' | 'down' })}
+                                <select 
+                                    value={localScrollDirection} 
+                                    onChange={(e) => setLocalScrollDirection(e.target.value as 'up' | 'down')}
+                                    style={{
+                                        width: '100%',
+                                        padding: '8px',
+                                        borderRadius: '4px',
+                                        border: '1px solid var(--gray-6)',
+                                        backgroundColor: 'var(--gray-2)',
+                                        color: 'var(--gray-12)',
+                                        fontSize: '14px',
+                                        outline: 'none'
+                                    }}
                                 >
-                                    <Select.Trigger style={{ width: '100%' }} />
-                                    <Select.Content>
-                                        <Select.Item value="down">Descer (Padrão)</Select.Item>
-                                        <Select.Item value="up">Subir (Chat)</Select.Item>
-                                    </Select.Content>
-                                </Select.Root>
+                                    <option value="down">Descer (Padrão)</option>
+                                    <option value="up">Subir (Chat)</option>
+                                </select>
                             </Box>
                         </Flex>
 
-                        <Box>
-                            <Text size="1" mb="1" as="div">Altura do Item da Lista (px)</Text>
-                            <TextField.Root 
-                                type="number"
-                                min="10"
-                                value={localCanvasHeight}
-                                onChange={(e) => setLocalCanvasHeight(e.target.value)}
-                            />
-                            <Text size="1" color="gray">
-                                Define a altura visual de cada item na lista para referência.
-                            </Text>
-                        </Box>
+                        <Text size="2" weight="bold" mt="2">Dimensões</Text>
+                        <Flex gap="3" align="center">
+                            <Box flexGrow="1">
+                                <Text size="1" mb="1" as="div">Altura do Item (Template) (px)</Text>
+                                <TextField.Root 
+                                    type="number"
+                                    min="10"
+                                    value={localCanvasHeight}
+                                    onChange={(e) => setLocalCanvasHeight(e.target.value)}
+                                />
+                                <Text size="1" color="gray">
+                                    Altura de cada item individual na lista.
+                                </Text>
+                            </Box>
+                            <Box flexGrow="1">
+                                <Text size="1" mb="1" as="div">Altura da Lista (Container) (px)</Text>
+                                <TextField.Root 
+                                    type="number"
+                                    min="0"
+                                    placeholder="Auto (100%)"
+                                    value={localContainerHeight}
+                                    onChange={(e) => setLocalContainerHeight(e.target.value)}
+                                />
+                                <Text size="1" color="gray">
+                                    Altura total da lista. Se exceder, rola. Vazio = 100%.
+                                </Text>
+                            </Box>
+                        </Flex>
+
 
                         <Text size="1" color="gray">
                             Essa propriedade será usada para ordenar os itens no modo lista.
