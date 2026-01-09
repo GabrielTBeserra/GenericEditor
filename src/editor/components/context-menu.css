@@ -1,15 +1,28 @@
-.ContextMenuContent, .ContextMenuSubContent {
+/* Custom Context Menu CSS */
+.custom-context-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2147483646; /* Um a menos que o menu */
+  background: transparent;
+}
+
+.custom-context-menu {
+  position: fixed;
   min-width: 220px;
-  background-color: var(--gray-3); /* Usando gray-3 para garantir fundo sólido em dark/light */
+  background-color: var(--gray-3);
   border-radius: 12px;
-  overflow: hidden;
   padding: 8px;
   box-shadow: 0 10px 38px -10px rgba(22, 23, 24, 0.35), 0 10px 20px -15px rgba(22, 23, 24, 0.2);
   border: 1px solid var(--gray-6);
-  z-index: 2147483647; /* Max Safe Integer to ensure it's always on top */
+  z-index: 2147483647;
+  display: flex;
+  flex-direction: column;
 }
 
-.ContextMenuItem, .ContextMenuCheckboxItem, .ContextMenuRadioItem, .ContextMenuSubTrigger {
+.custom-menu-item {
   font-size: 13px;
   line-height: 1;
   color: var(--gray-12);
@@ -20,45 +33,57 @@
   padding: 0 10px;
   position: relative;
   user-select: none;
-  outline: none;
   cursor: default;
   margin-bottom: 2px;
+  text-decoration: none;
 }
 
-.ContextMenuSubTrigger[data-state='open'] {
-  background-color: var(--gray-4);
-  color: var(--gray-12);
-}
-
-.ContextMenuItem[data-highlighted],
-.ContextMenuCheckboxItem[data-highlighted],
-.ContextMenuRadioItem[data-highlighted],
-.ContextMenuSubTrigger[data-highlighted] {
+.custom-menu-item:hover {
   background-color: var(--gray-5);
   color: var(--gray-12);
 }
 
-.ContextMenuSeparator {
+.custom-menu-separator {
   height: 1px;
   background-color: var(--gray-6);
   margin: 5px;
 }
 
-.ContextMenuItemIndicator {
-  position: absolute;
-  left: 0;
-  width: 25px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.RightSlot {
+.custom-menu-right-slot {
   margin-left: auto;
   padding-left: 20px;
   color: var(--gray-9);
+  display: flex;
+  align-items: center;
 }
 
-[data-highlighted] > .RightSlot {
+.custom-menu-item:hover .custom-menu-right-slot {
   color: var(--gray-12);
+}
+
+/* Submenu Logic */
+.custom-submenu {
+  display: none;
+  position: absolute;
+  left: 100%;
+  top: -4px; /* Ajuste fino para alinhar com o item pai */
+  min-width: 220px;
+  background-color: var(--gray-3);
+  border-radius: 12px;
+  padding: 8px;
+  box-shadow: 0 10px 38px -10px rgba(22, 23, 24, 0.35), 0 10px 20px -15px rgba(22, 23, 24, 0.2);
+  border: 1px solid var(--gray-6);
+  margin-left: 2px; /* Espacinho entre menu pai e filho */
+}
+
+/* Show submenu on hover */
+.custom-menu-item:hover > .custom-submenu {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Scrollable submenu for fonts */
+.custom-submenu.scrollable {
+  max-height: 300px;
+  overflow-y: auto;
 }

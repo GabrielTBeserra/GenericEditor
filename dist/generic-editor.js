@@ -1,7 +1,7 @@
 import * as React$1 from "react";
 import React, { Component, Fragment, PureComponent, createContext, createElement, forwardRef, memo, useCallback, useContext, useEffect, useId, useImperativeHandle, useInsertionEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import * as ReactDOM$1 from "react-dom";
-import ReactDOM, { flushSync } from "react-dom";
+import ReactDOM, { createPortal, flushSync } from "react-dom";
 import { Fragment as Fragment$1, jsx, jsxs } from "react/jsx-runtime";
 var __create = Object.create, __defProp = Object.defineProperty, __getOwnPropDesc = Object.getOwnPropertyDescriptor, __getOwnPropNames = Object.getOwnPropertyNames, __getProtoOf = Object.getPrototypeOf, __hasOwnProp = Object.prototype.hasOwnProperty, __esmMin = (s, d) => () => (s && (d = s(s = 0)), d), __commonJSMin = (s, d) => () => (d || s((d = { exports: {} }).exports, d), d.exports), __export = (s) => {
 	let d = {};
@@ -253,7 +253,7 @@ function createCollection(s) {
 		});
 	});
 	q.displayName = U;
-	let J = s + "CollectionItemSlot", X = "data-radix-collection-item", $ = /* @__PURE__ */ createSlot(J), CO = React.forwardRef((s, C) => {
+	let J = s + "CollectionItemSlot", X = "data-radix-collection-item", $ = /* @__PURE__ */ createSlot(J), PD = React.forwardRef((s, C) => {
 		let { scope: w, children: k, ...F } = s, V = React.useRef(null), U = useComposedRefs(C, V), K = L(J, w);
 		return React.useEffect(() => (K.itemMap.set(V, {
 			ref: V,
@@ -264,8 +264,8 @@ function createCollection(s) {
 			children: k
 		});
 	});
-	CO.displayName = J;
-	function wO(C) {
+	PD.displayName = J;
+	function FD(C) {
 		let w = L(s + "CollectionConsumer", C);
 		return React.useCallback(() => {
 			let s = w.collectionRef.current;
@@ -278,9 +278,9 @@ function createCollection(s) {
 		{
 			Provider: V,
 			Slot: q,
-			ItemSlot: CO
+			ItemSlot: PD
 		},
-		wO,
+		FD,
 		k
 	];
 }
@@ -433,15 +433,15 @@ var DISMISSABLE_LAYER_NAME = "DismissableLayer", CONTEXT_UPDATE = "dismissableLa
 	layersWithOutsidePointerEventsDisabled: /* @__PURE__ */ new Set(),
 	branches: /* @__PURE__ */ new Set()
 }), DismissableLayer = React$1.forwardRef((d, C) => {
-	let { disableOutsidePointerEvents: w = !1, onEscapeKeyDown: k, onPointerDownOutside: F, onFocusOutside: L, onInteractOutside: V, onDismiss: U, ...K } = d, q = React$1.useContext(DismissableLayerContext), [J, X] = React$1.useState(null), $ = J?.ownerDocument ?? globalThis?.document, [, CO] = React$1.useState({}), wO = useComposedRefs(C, (s) => X(s)), TO = Array.from(q.layers), [EO] = [...q.layersWithOutsidePointerEventsDisabled].slice(-1), DO = TO.indexOf(EO), OO = J ? TO.indexOf(J) : -1, kO = q.layersWithOutsidePointerEventsDisabled.size > 0, AO = OO >= DO, jO = usePointerDownOutside((s) => {
+	let { disableOutsidePointerEvents: w = !1, onEscapeKeyDown: k, onPointerDownOutside: F, onFocusOutside: L, onInteractOutside: V, onDismiss: U, ...K } = d, q = React$1.useContext(DismissableLayerContext), [J, X] = React$1.useState(null), $ = J?.ownerDocument ?? globalThis?.document, [, PD] = React$1.useState({}), FD = useComposedRefs(C, (s) => X(s)), ID = Array.from(q.layers), [LD] = [...q.layersWithOutsidePointerEventsDisabled].slice(-1), RD = ID.indexOf(LD), zD = J ? ID.indexOf(J) : -1, BD = q.layersWithOutsidePointerEventsDisabled.size > 0, VD = zD >= RD, HD = usePointerDownOutside((s) => {
 		let d = s.target, C = [...q.branches].some((s) => s.contains(d));
-		!AO || C || (F?.(s), V?.(s), s.defaultPrevented || U?.());
-	}, $), NO = useFocusOutside((s) => {
+		!VD || C || (F?.(s), V?.(s), s.defaultPrevented || U?.());
+	}, $), UD = useFocusOutside((s) => {
 		let d = s.target;
 		[...q.branches].some((s) => s.contains(d)) || (L?.(s), V?.(s), s.defaultPrevented || U?.());
 	}, $);
 	return useEscapeKeydown((s) => {
-		OO === q.layers.size - 1 && (k?.(s), !s.defaultPrevented && U && (s.preventDefault(), U()));
+		zD === q.layers.size - 1 && (k?.(s), !s.defaultPrevented && U && (s.preventDefault(), U()));
 	}, $), React$1.useEffect(() => {
 		if (J) return w && (q.layersWithOutsidePointerEventsDisabled.size === 0 && (originalBodyPointerEvents = $.body.style.pointerEvents, $.body.style.pointerEvents = "none"), q.layersWithOutsidePointerEventsDisabled.add(J)), q.layers.add(J), dispatchUpdate(), () => {
 			w && q.layersWithOutsidePointerEventsDisabled.size === 1 && ($.body.style.pointerEvents = originalBodyPointerEvents);
@@ -454,18 +454,18 @@ var DISMISSABLE_LAYER_NAME = "DismissableLayer", CONTEXT_UPDATE = "dismissableLa
 	]), React$1.useEffect(() => () => {
 		J && (q.layers.delete(J), q.layersWithOutsidePointerEventsDisabled.delete(J), dispatchUpdate());
 	}, [J, q]), React$1.useEffect(() => {
-		let s = () => CO({});
+		let s = () => PD({});
 		return document.addEventListener(CONTEXT_UPDATE, s), () => document.removeEventListener(CONTEXT_UPDATE, s);
 	}, []), /* @__PURE__ */ jsx(Primitive.div, {
 		...K,
-		ref: wO,
+		ref: FD,
 		style: {
-			pointerEvents: kO ? AO ? "auto" : "none" : void 0,
+			pointerEvents: BD ? VD ? "auto" : "none" : void 0,
 			...d.style
 		},
-		onFocusCapture: composeEventHandlers(d.onFocusCapture, NO.onFocusCapture),
-		onBlurCapture: composeEventHandlers(d.onBlurCapture, NO.onBlurCapture),
-		onPointerDownCapture: composeEventHandlers(d.onPointerDownCapture, jO.onPointerDownCapture)
+		onFocusCapture: composeEventHandlers(d.onFocusCapture, UD.onFocusCapture),
+		onBlurCapture: composeEventHandlers(d.onBlurCapture, UD.onBlurCapture),
+		onPointerDownCapture: composeEventHandlers(d.onPointerDownCapture, HD.onPointerDownCapture)
 	});
 });
 DismissableLayer.displayName = DISMISSABLE_LAYER_NAME;
@@ -529,7 +529,7 @@ var AUTOFOCUS_ON_MOUNT = "focusScope.autoFocusOnMount", AUTOFOCUS_ON_UNMOUNT = "
 	bubbles: !1,
 	cancelable: !0
 }, FOCUS_SCOPE_NAME = "FocusScope", FocusScope = React$1.forwardRef((d, C) => {
-	let { loop: w = !1, trapped: k = !1, onMountAutoFocus: F, onUnmountAutoFocus: L, ...V } = d, [U, K] = React$1.useState(null), q = useCallbackRef(F), J = useCallbackRef(L), X = React$1.useRef(null), $ = useComposedRefs(C, (s) => K(s)), CO = React$1.useRef({
+	let { loop: w = !1, trapped: k = !1, onMountAutoFocus: F, onUnmountAutoFocus: L, ...V } = d, [U, K] = React$1.useState(null), q = useCallbackRef(F), J = useCallbackRef(L), X = React$1.useRef(null), $ = useComposedRefs(C, (s) => K(s)), PD = React$1.useRef({
 		paused: !1,
 		pause() {
 			this.paused = !0;
@@ -541,11 +541,11 @@ var AUTOFOCUS_ON_MOUNT = "focusScope.autoFocusOnMount", AUTOFOCUS_ON_UNMOUNT = "
 	React$1.useEffect(() => {
 		if (k) {
 			let s = function(s) {
-				if (CO.paused || !U) return;
+				if (PD.paused || !U) return;
 				let d = s.target;
 				U.contains(d) ? X.current = d : focus(X.current, { select: !0 });
 			}, d = function(s) {
-				if (CO.paused || !U) return;
+				if (PD.paused || !U) return;
 				let d = s.relatedTarget;
 				d !== null && (U.contains(d) || focus(X.current, { select: !0 }));
 			}, C = function(s) {
@@ -563,10 +563,10 @@ var AUTOFOCUS_ON_MOUNT = "focusScope.autoFocusOnMount", AUTOFOCUS_ON_UNMOUNT = "
 	}, [
 		k,
 		U,
-		CO.paused
+		PD.paused
 	]), React$1.useEffect(() => {
 		if (U) {
-			focusScopesStack.add(CO);
+			focusScopesStack.add(PD);
 			let s = document.activeElement;
 			if (!U.contains(s)) {
 				let d = new CustomEvent(AUTOFOCUS_ON_MOUNT, EVENT_OPTIONS$1);
@@ -575,7 +575,7 @@ var AUTOFOCUS_ON_MOUNT = "focusScope.autoFocusOnMount", AUTOFOCUS_ON_UNMOUNT = "
 			return () => {
 				U.removeEventListener(AUTOFOCUS_ON_MOUNT, q), setTimeout(() => {
 					let d = new CustomEvent(AUTOFOCUS_ON_UNMOUNT, EVENT_OPTIONS$1);
-					U.addEventListener(AUTOFOCUS_ON_UNMOUNT, J), U.dispatchEvent(d), d.defaultPrevented || focus(s ?? document.body, { select: !0 }), U.removeEventListener(AUTOFOCUS_ON_UNMOUNT, J), focusScopesStack.remove(CO);
+					U.addEventListener(AUTOFOCUS_ON_UNMOUNT, J), U.dispatchEvent(d), d.defaultPrevented || focus(s ?? document.body, { select: !0 }), U.removeEventListener(AUTOFOCUS_ON_UNMOUNT, J), focusScopesStack.remove(PD);
 				}, 0);
 			};
 		}
@@ -583,10 +583,10 @@ var AUTOFOCUS_ON_MOUNT = "focusScope.autoFocusOnMount", AUTOFOCUS_ON_UNMOUNT = "
 		U,
 		q,
 		J,
-		CO
+		PD
 	]);
-	let wO = React$1.useCallback((s) => {
-		if (!w && !k || CO.paused) return;
+	let FD = React$1.useCallback((s) => {
+		if (!w && !k || PD.paused) return;
 		let d = s.key === "Tab" && !s.altKey && !s.ctrlKey && !s.metaKey, C = document.activeElement;
 		if (d && C) {
 			let d = s.currentTarget, [k, F] = getTabbableEdges(d);
@@ -595,13 +595,13 @@ var AUTOFOCUS_ON_MOUNT = "focusScope.autoFocusOnMount", AUTOFOCUS_ON_UNMOUNT = "
 	}, [
 		w,
 		k,
-		CO.paused
+		PD.paused
 	]);
 	return /* @__PURE__ */ jsx(Primitive.div, {
 		tabIndex: -1,
 		...V,
 		ref: $,
-		onKeyDown: wO
+		onKeyDown: FD
 	});
 });
 FocusScope.displayName = FOCUS_SCOPE_NAME;
@@ -662,7 +662,7 @@ function arrayRemove(s, d) {
 function removeLinks(s) {
 	return s.filter((s) => s.tagName !== "A");
 }
-var PORTAL_NAME$5 = "Portal", Portal = React$1.forwardRef((d, C) => {
+var PORTAL_NAME$4 = "Portal", Portal = React$1.forwardRef((d, C) => {
 	let { container: w, ...k } = d, [F, L] = React$1.useState(!1);
 	useLayoutEffect2(() => L(!0), []);
 	let V = w || F && globalThis?.document?.body;
@@ -671,7 +671,7 @@ var PORTAL_NAME$5 = "Portal", Portal = React$1.forwardRef((d, C) => {
 		ref: C
 	}), V) : null;
 });
-Portal.displayName = PORTAL_NAME$5;
+Portal.displayName = PORTAL_NAME$4;
 var count = 0;
 function useFocusGuards() {
 	React$1.useEffect(() => {
@@ -824,7 +824,7 @@ var effectCar = createSidecarMedium(), nothing = function() {}, RemoveScroll = R
 		onScrollCapture: nothing,
 		onWheelCapture: nothing,
 		onTouchMoveCapture: nothing
-	}), F = k[0], L = k[1], V = d.forwardProps, U = d.children, K = d.className, q = d.removeScrollBar, J = d.enabled, X = d.shards, $ = d.sideCar, CO = d.noRelative, wO = d.noIsolation, TO = d.inert, EO = d.allowPinchZoom, DO = d.as, OO = DO === void 0 ? "div" : DO, kO = d.gapMode, AO = __rest(d, [
+	}), F = k[0], L = k[1], V = d.forwardProps, U = d.children, K = d.className, q = d.removeScrollBar, J = d.enabled, X = d.shards, $ = d.sideCar, PD = d.noRelative, FD = d.noIsolation, ID = d.inert, LD = d.allowPinchZoom, RD = d.as, zD = RD === void 0 ? "div" : RD, BD = d.gapMode, VD = __rest(d, [
 		"forwardProps",
 		"children",
 		"className",
@@ -838,21 +838,21 @@ var effectCar = createSidecarMedium(), nothing = function() {}, RemoveScroll = R
 		"allowPinchZoom",
 		"as",
 		"gapMode"
-	]), jO = $, MO = useMergeRefs([w, C]), NO = __assign$2(__assign$2({}, AO), F);
-	return React$1.createElement(React$1.Fragment, null, J && React$1.createElement(jO, {
+	]), HD = $, UD = useMergeRefs([w, C]), WD = __assign$2(__assign$2({}, VD), F);
+	return React$1.createElement(React$1.Fragment, null, J && React$1.createElement(HD, {
 		sideCar: effectCar,
 		removeScrollBar: q,
 		shards: X,
-		noRelative: CO,
-		noIsolation: wO,
-		inert: TO,
+		noRelative: PD,
+		noIsolation: FD,
+		inert: ID,
 		setCallbacks: L,
-		allowPinchZoom: !!EO,
+		allowPinchZoom: !!LD,
 		lockRef: w,
-		gapMode: kO
-	}), V ? React$1.cloneElement(React$1.Children.only(U), __assign$2(__assign$2({}, NO), { ref: MO })) : React$1.createElement(OO, __assign$2({}, NO, {
+		gapMode: BD
+	}), V ? React$1.cloneElement(React$1.Children.only(U), __assign$2(__assign$2({}, WD), { ref: UD })) : React$1.createElement(zD, __assign$2({}, WD, {
 		className: K,
-		ref: MO
+		ref: UD
 	}), U));
 });
 RemoveScroll.defaultProps = {
@@ -1040,10 +1040,10 @@ var nonPassive = passiveSupported ? { passive: !1 } : !1, alwaysContainsScroll =
 	var F = getDirectionFactor(s, window.getComputedStyle(d).direction), L = F * w, V = C.target, U = d.contains(V), K = !1, q = L > 0, J = 0, X = 0;
 	do {
 		if (!V) break;
-		var $ = getScrollVariables(s, V), CO = $[0], wO = $[1] - $[2] - F * CO;
-		(CO || wO) && elementCouldBeScrolled(s, V) && (J += wO, X += CO);
-		var TO = V.parentNode;
-		V = TO && TO.nodeType === Node.DOCUMENT_FRAGMENT_NODE ? TO.host : TO;
+		var $ = getScrollVariables(s, V), PD = $[0], FD = $[1] - $[2] - F * PD;
+		(PD || FD) && elementCouldBeScrolled(s, V) && (J += FD, X += PD);
+		var ID = V.parentNode;
+		V = ID && ID.nodeType === Node.DOCUMENT_FRAGMENT_NODE ? ID.host : ID;
 	} while (!U && V !== document.body || U && (d.contains(V) || d === V));
 	return (q && (k && Math.abs(J) < 1 || !k && L > J) || !q && (k && Math.abs(X) < 1 || !k && -L > X)) && (K = !0), K;
 }, getTouchXY = function(s) {
@@ -1087,12 +1087,12 @@ function RemoveScrollSideCar(d) {
 		if ("touches" in s && J === "h" && q.type === "range") return !1;
 		var X = window.getSelection(), $ = X && X.anchorNode;
 		if ($ && ($ === q || $.contains(q))) return !1;
-		var CO = locationCouldBeScrolled(J, q);
-		if (!CO) return !0;
-		if (CO ? K = J : (K = J === "v" ? "h" : "v", CO = locationCouldBeScrolled(J, q)), !CO) return !1;
+		var PD = locationCouldBeScrolled(J, q);
+		if (!PD) return !0;
+		if (PD ? K = J : (K = J === "v" ? "h" : "v", PD = locationCouldBeScrolled(J, q)), !PD) return !1;
 		if (!k.current && "changedTouches" in s && (L || U) && (k.current = K), !K) return !0;
-		var wO = k.current || K;
-		return handleScroll(wO, d, s, wO === "h" ? L : U, !0);
+		var FD = k.current || K;
+		return handleScroll(FD, d, s, FD === "h" ? L : U, !0);
 	}, []), K = React$1.useCallback(function(s) {
 		var d = s;
 		if (!(!lockStack.length || lockStack[lockStack.length - 1] !== L)) {
@@ -1141,8 +1141,8 @@ function RemoveScrollSideCar(d) {
 			}), document.removeEventListener("wheel", K, nonPassive), document.removeEventListener("touchmove", K, nonPassive), document.removeEventListener("touchstart", J, nonPassive);
 		};
 	}, []);
-	var CO = d.removeScrollBar, wO = d.inert;
-	return React$1.createElement(React$1.Fragment, null, wO ? React$1.createElement(L, { styles: generateStyle(F) }) : null, CO ? React$1.createElement(RemoveScrollBar, {
+	var PD = d.removeScrollBar, FD = d.inert;
+	return React$1.createElement(React$1.Fragment, null, FD ? React$1.createElement(L, { styles: generateStyle(F) }) : null, PD ? React$1.createElement(RemoveScrollBar, {
 		noRelative: d.noRelative,
 		gapMode: d.gapMode
 	}) : null);
@@ -1222,8 +1222,8 @@ var Combination_default = ReactRemoveScroll, getDefaultParent = function(s) {
 	});
 };
 Dialog.displayName = DIALOG_NAME;
-var TRIGGER_NAME$3 = "DialogTrigger", DialogTrigger = React$1.forwardRef((s, d) => {
-	let { __scopeDialog: C, ...w } = s, k = useDialogContext(TRIGGER_NAME$3, C), F = useComposedRefs(d, k.triggerRef);
+var TRIGGER_NAME$2 = "DialogTrigger", DialogTrigger = React$1.forwardRef((s, d) => {
+	let { __scopeDialog: C, ...w } = s, k = useDialogContext(TRIGGER_NAME$2, C), F = useComposedRefs(d, k.triggerRef);
 	return /* @__PURE__ */ jsx(Primitive.button, {
 		type: "button",
 		"aria-haspopup": "dialog",
@@ -1235,9 +1235,9 @@ var TRIGGER_NAME$3 = "DialogTrigger", DialogTrigger = React$1.forwardRef((s, d) 
 		onClick: composeEventHandlers(s.onClick, k.onOpenToggle)
 	});
 });
-DialogTrigger.displayName = TRIGGER_NAME$3;
-var PORTAL_NAME$4 = "DialogPortal", [PortalProvider$2, usePortalContext$2] = createDialogContext(PORTAL_NAME$4, { forceMount: void 0 }), DialogPortal = (d) => {
-	let { __scopeDialog: C, forceMount: w, children: k, container: F } = d, L = useDialogContext(PORTAL_NAME$4, C);
+DialogTrigger.displayName = TRIGGER_NAME$2;
+var PORTAL_NAME$3 = "DialogPortal", [PortalProvider$2, usePortalContext$2] = createDialogContext(PORTAL_NAME$3, { forceMount: void 0 }), DialogPortal = (d) => {
+	let { __scopeDialog: C, forceMount: w, children: k, container: F } = d, L = useDialogContext(PORTAL_NAME$3, C);
 	return /* @__PURE__ */ jsx(PortalProvider$2, {
 		scope: C,
 		forceMount: w,
@@ -1251,7 +1251,7 @@ var PORTAL_NAME$4 = "DialogPortal", [PortalProvider$2, usePortalContext$2] = cre
 		}))
 	});
 };
-DialogPortal.displayName = PORTAL_NAME$4;
+DialogPortal.displayName = PORTAL_NAME$3;
 var OVERLAY_NAME = "DialogOverlay", DialogOverlay = React$1.forwardRef((s, d) => {
 	let C = usePortalContext$2(OVERLAY_NAME, s.__scopeDialog), { forceMount: w = C.forceMount, ...k } = s, F = useDialogContext(OVERLAY_NAME, s.__scopeDialog);
 	return F.modal ? /* @__PURE__ */ jsx(Presence, {
@@ -1279,8 +1279,8 @@ var Slot$1 = /* @__PURE__ */ createSlot("DialogOverlay.RemoveScroll"), DialogOve
 			}
 		})
 	});
-}), CONTENT_NAME$5 = "DialogContent", DialogContent = React$1.forwardRef((s, d) => {
-	let C = usePortalContext$2(CONTENT_NAME$5, s.__scopeDialog), { forceMount: w = C.forceMount, ...k } = s, F = useDialogContext(CONTENT_NAME$5, s.__scopeDialog);
+}), CONTENT_NAME$4 = "DialogContent", DialogContent = React$1.forwardRef((s, d) => {
+	let C = usePortalContext$2(CONTENT_NAME$4, s.__scopeDialog), { forceMount: w = C.forceMount, ...k } = s, F = useDialogContext(CONTENT_NAME$4, s.__scopeDialog);
 	return /* @__PURE__ */ jsx(Presence, {
 		present: w || F.open,
 		children: F.modal ? /* @__PURE__ */ jsx(DialogContentModal, {
@@ -1292,9 +1292,9 @@ var Slot$1 = /* @__PURE__ */ createSlot("DialogOverlay.RemoveScroll"), DialogOve
 		})
 	});
 });
-DialogContent.displayName = CONTENT_NAME$5;
+DialogContent.displayName = CONTENT_NAME$4;
 var DialogContentModal = React$1.forwardRef((d, C) => {
-	let w = useDialogContext(CONTENT_NAME$5, d.__scopeDialog), k = React$1.useRef(null), F = useComposedRefs(C, w.contentRef, k);
+	let w = useDialogContext(CONTENT_NAME$4, d.__scopeDialog), k = React$1.useRef(null), F = useComposedRefs(C, w.contentRef, k);
 	return React$1.useEffect(() => {
 		let s = k.current;
 		if (s) return hideOthers(s);
@@ -1313,7 +1313,7 @@ var DialogContentModal = React$1.forwardRef((d, C) => {
 		onFocusOutside: composeEventHandlers(d.onFocusOutside, (s) => s.preventDefault())
 	});
 }), DialogContentNonModal = React$1.forwardRef((d, C) => {
-	let w = useDialogContext(CONTENT_NAME$5, d.__scopeDialog), k = React$1.useRef(!1), F = React$1.useRef(!1);
+	let w = useDialogContext(CONTENT_NAME$4, d.__scopeDialog), k = React$1.useRef(!1), F = React$1.useRef(!1);
 	return /* @__PURE__ */ jsx(DialogContentImpl, {
 		...d,
 		ref: C,
@@ -1329,7 +1329,7 @@ var DialogContentModal = React$1.forwardRef((d, C) => {
 		}
 	});
 }), DialogContentImpl = React$1.forwardRef((d, C) => {
-	let { __scopeDialog: w, trapFocus: k, onOpenAutoFocus: F, onCloseAutoFocus: L, ...V } = d, U = useDialogContext(CONTENT_NAME$5, w), K = React$1.useRef(null), q = useComposedRefs(C, K);
+	let { __scopeDialog: w, trapFocus: k, onOpenAutoFocus: F, onCloseAutoFocus: L, ...V } = d, U = useDialogContext(CONTENT_NAME$4, w), K = React$1.useRef(null), q = useComposedRefs(C, K);
 	return useFocusGuards(), /* @__PURE__ */ jsxs(Fragment$1, { children: [/* @__PURE__ */ jsx(FocusScope, {
 		asChild: !0,
 		loop: !0,
@@ -1382,7 +1382,7 @@ function getState(s) {
 	return s ? "open" : "closed";
 }
 var TITLE_WARNING_NAME = "DialogTitleWarning", [WarningProvider, useWarningContext] = createContext2(TITLE_WARNING_NAME, {
-	contentName: CONTENT_NAME$5,
+	contentName: CONTENT_NAME$4,
 	titleName: TITLE_NAME,
 	docsSlug: "dialog"
 }), TitleWarning = ({ titleId: d }) => {
@@ -1404,7 +1404,7 @@ For more information, see https://radix-ui.com/primitives/docs/components/${C.do
 		d,
 		C
 	]), null;
-}, Root$3 = Dialog, Trigger$2 = DialogTrigger, Portal$2 = DialogPortal, Overlay = DialogOverlay, Content$1 = DialogContent, Title = DialogTitle, Description = DialogDescription, Close = DialogClose;
+}, Root$3 = Dialog, Trigger$1 = DialogTrigger, Portal$2 = DialogPortal, Overlay = DialogOverlay, Content$1 = DialogContent, Title = DialogTitle, Description = DialogDescription, Close = DialogClose;
 function useSize(d) {
 	let [C, w] = React$1.useState(void 0);
 	return useLayoutEffect2(() => {
@@ -1581,9 +1581,9 @@ var computePosition$1 = async (s, d, C) => {
 		reference: s,
 		floating: d,
 		strategy: k
-	}), { x: q, y: J } = computeCoordsFromPlacement(K, w, U), X = w, $ = {}, CO = 0;
+	}), { x: q, y: J } = computeCoordsFromPlacement(K, w, U), X = w, $ = {}, PD = 0;
 	for (let C = 0; C < V.length; C++) {
-		let { name: F, fn: wO } = V[C], { x: TO, y: EO, data: DO, reset: OO } = await wO({
+		let { name: F, fn: FD } = V[C], { x: ID, y: LD, data: RD, reset: zD } = await FD({
 			x: q,
 			y: J,
 			initialPlacement: w,
@@ -1597,17 +1597,17 @@ var computePosition$1 = async (s, d, C) => {
 				floating: d
 			}
 		});
-		q = TO ?? q, J = EO ?? J, $ = {
+		q = ID ?? q, J = LD ?? J, $ = {
 			...$,
 			[F]: {
 				...$[F],
-				...DO
+				...RD
 			}
-		}, OO && CO <= 50 && (CO++, typeof OO == "object" && (OO.placement && (X = OO.placement), OO.rects && (K = OO.rects === !0 ? await L.getElementRects({
+		}, zD && PD <= 50 && (PD++, typeof zD == "object" && (zD.placement && (X = zD.placement), zD.rects && (K = zD.rects === !0 ? await L.getElementRects({
 			reference: s,
 			floating: d,
 			strategy: k
-		}) : OO.rects), {x: q, y: J} = computeCoordsFromPlacement(K, X, U)), C = -1);
+		}) : zD.rects), {x: q, y: J} = computeCoordsFromPlacement(K, X, U)), C = -1);
 	}
 	return {
 		x: q,
@@ -1619,30 +1619,30 @@ var computePosition$1 = async (s, d, C) => {
 };
 async function detectOverflow$1(s, d) {
 	d === void 0 && (d = {});
-	let { x: C, y: w, platform: k, rects: F, elements: L, strategy: V } = s, { boundary: U = "clippingAncestors", rootBoundary: K = "viewport", elementContext: q = "floating", altBoundary: J = !1, padding: X = 0 } = evaluate(d, s), $ = getPaddingObject(X), CO = L[J ? q === "floating" ? "reference" : "floating" : q], wO = rectToClientRect(await k.getClippingRect({
-		element: await (k.isElement == null ? void 0 : k.isElement(CO)) ?? !0 ? CO : CO.contextElement || await (k.getDocumentElement == null ? void 0 : k.getDocumentElement(L.floating)),
+	let { x: C, y: w, platform: k, rects: F, elements: L, strategy: V } = s, { boundary: U = "clippingAncestors", rootBoundary: K = "viewport", elementContext: q = "floating", altBoundary: J = !1, padding: X = 0 } = evaluate(d, s), $ = getPaddingObject(X), PD = L[J ? q === "floating" ? "reference" : "floating" : q], FD = rectToClientRect(await k.getClippingRect({
+		element: await (k.isElement == null ? void 0 : k.isElement(PD)) ?? !0 ? PD : PD.contextElement || await (k.getDocumentElement == null ? void 0 : k.getDocumentElement(L.floating)),
 		boundary: U,
 		rootBoundary: K,
 		strategy: V
-	})), TO = q === "floating" ? {
+	})), ID = q === "floating" ? {
 		x: C,
 		y: w,
 		width: F.floating.width,
 		height: F.floating.height
-	} : F.reference, EO = await (k.getOffsetParent == null ? void 0 : k.getOffsetParent(L.floating)), DO = await (k.isElement == null ? void 0 : k.isElement(EO)) && await (k.getScale == null ? void 0 : k.getScale(EO)) || {
+	} : F.reference, LD = await (k.getOffsetParent == null ? void 0 : k.getOffsetParent(L.floating)), RD = await (k.isElement == null ? void 0 : k.isElement(LD)) && await (k.getScale == null ? void 0 : k.getScale(LD)) || {
 		x: 1,
 		y: 1
-	}, OO = rectToClientRect(k.convertOffsetParentRelativeRectToViewportRelativeRect ? await k.convertOffsetParentRelativeRectToViewportRelativeRect({
+	}, zD = rectToClientRect(k.convertOffsetParentRelativeRectToViewportRelativeRect ? await k.convertOffsetParentRelativeRectToViewportRelativeRect({
 		elements: L,
-		rect: TO,
-		offsetParent: EO,
+		rect: ID,
+		offsetParent: LD,
 		strategy: V
-	}) : TO);
+	}) : ID);
 	return {
-		top: (wO.top - OO.top + $.top) / DO.y,
-		bottom: (OO.bottom - wO.bottom + $.bottom) / DO.y,
-		left: (wO.left - OO.left + $.left) / DO.x,
-		right: (OO.right - wO.right + $.right) / DO.x
+		top: (FD.top - zD.top + $.top) / RD.y,
+		bottom: (zD.bottom - FD.bottom + $.bottom) / RD.y,
+		left: (FD.left - zD.left + $.left) / RD.x,
+		right: (zD.right - FD.right + $.right) / RD.x
 	};
 }
 var arrow$2 = (s) => ({
@@ -1654,17 +1654,17 @@ var arrow$2 = (s) => ({
 		let J = getPaddingObject(q), X = {
 			x: C,
 			y: w
-		}, $ = getAlignmentAxis(k), CO = getAxisLength($), wO = await L.getDimensions(K), TO = $ === "y", EO = TO ? "top" : "left", DO = TO ? "bottom" : "right", OO = TO ? "clientHeight" : "clientWidth", kO = F.reference[CO] + F.reference[$] - X[$] - F.floating[CO], AO = X[$] - F.reference[$], jO = await (L.getOffsetParent == null ? void 0 : L.getOffsetParent(K)), MO = jO ? jO[OO] : 0;
-		(!MO || !await (L.isElement == null ? void 0 : L.isElement(jO))) && (MO = V.floating[OO] || F.floating[CO]);
-		let NO = kO / 2 - AO / 2, PO = MO / 2 - wO[CO] / 2 - 1, FO = min(J[EO], PO), IO = min(J[DO], PO), LO = FO, RO = MO - wO[CO] - IO, zO = MO / 2 - wO[CO] / 2 + NO, BO = clamp$3(LO, zO, RO), VO = !U.arrow && getAlignment(k) != null && zO !== BO && F.reference[CO] / 2 - (zO < LO ? FO : IO) - wO[CO] / 2 < 0, HO = VO ? zO < LO ? zO - LO : zO - RO : 0;
+		}, $ = getAlignmentAxis(k), PD = getAxisLength($), FD = await L.getDimensions(K), ID = $ === "y", LD = ID ? "top" : "left", RD = ID ? "bottom" : "right", zD = ID ? "clientHeight" : "clientWidth", BD = F.reference[PD] + F.reference[$] - X[$] - F.floating[PD], VD = X[$] - F.reference[$], HD = await (L.getOffsetParent == null ? void 0 : L.getOffsetParent(K)), UD = HD ? HD[zD] : 0;
+		(!UD || !await (L.isElement == null ? void 0 : L.isElement(HD))) && (UD = V.floating[zD] || F.floating[PD]);
+		let WD = BD / 2 - VD / 2, GD = UD / 2 - FD[PD] / 2 - 1, KD = min(J[LD], GD), qD = min(J[RD], GD), JD = KD, YD = UD - FD[PD] - qD, XD = UD / 2 - FD[PD] / 2 + WD, ZD = clamp$3(JD, XD, YD), QD = !U.arrow && getAlignment(k) != null && XD !== ZD && F.reference[PD] / 2 - (XD < JD ? KD : qD) - FD[PD] / 2 < 0, $D = QD ? XD < JD ? XD - JD : XD - YD : 0;
 		return {
-			[$]: X[$] + HO,
+			[$]: X[$] + $D,
 			data: {
-				[$]: BO,
-				centerOffset: zO - BO - HO,
-				...VO && { alignmentOffset: HO }
+				[$]: ZD,
+				centerOffset: XD - ZD - $D,
+				...QD && { alignmentOffset: $D }
 			},
-			reset: VO
+			reset: QD
 		};
 	}
 }), flip$2 = function(s) {
@@ -1673,34 +1673,34 @@ var arrow$2 = (s) => ({
 		options: s,
 		async fn(d) {
 			var C;
-			let { placement: w, middlewareData: k, rects: F, initialPlacement: L, platform: V, elements: U } = d, { mainAxis: K = !0, crossAxis: q = !0, fallbackPlacements: J, fallbackStrategy: X = "bestFit", fallbackAxisSideDirection: $ = "none", flipAlignment: CO = !0, ...wO } = evaluate(s, d);
+			let { placement: w, middlewareData: k, rects: F, initialPlacement: L, platform: V, elements: U } = d, { mainAxis: K = !0, crossAxis: q = !0, fallbackPlacements: J, fallbackStrategy: X = "bestFit", fallbackAxisSideDirection: $ = "none", flipAlignment: PD = !0, ...FD } = evaluate(s, d);
 			if ((C = k.arrow) != null && C.alignmentOffset) return {};
-			let TO = getSide(w), EO = getSideAxis(L), DO = getSide(L) === L, OO = await (V.isRTL == null ? void 0 : V.isRTL(U.floating)), kO = J || (DO || !CO ? [getOppositePlacement(L)] : getExpandedPlacements(L)), AO = $ !== "none";
-			!J && AO && kO.push(...getOppositeAxisPlacements(L, CO, $, OO));
-			let jO = [L, ...kO], MO = await detectOverflow$1(d, wO), NO = [], PO = k.flip?.overflows || [];
-			if (K && NO.push(MO[TO]), q) {
-				let s = getAlignmentSides(w, F, OO);
-				NO.push(MO[s[0]], MO[s[1]]);
+			let ID = getSide(w), LD = getSideAxis(L), RD = getSide(L) === L, zD = await (V.isRTL == null ? void 0 : V.isRTL(U.floating)), BD = J || (RD || !PD ? [getOppositePlacement(L)] : getExpandedPlacements(L)), VD = $ !== "none";
+			!J && VD && BD.push(...getOppositeAxisPlacements(L, PD, $, zD));
+			let HD = [L, ...BD], UD = await detectOverflow$1(d, FD), WD = [], GD = k.flip?.overflows || [];
+			if (K && WD.push(UD[ID]), q) {
+				let s = getAlignmentSides(w, F, zD);
+				WD.push(UD[s[0]], UD[s[1]]);
 			}
-			if (PO = [...PO, {
+			if (GD = [...GD, {
 				placement: w,
-				overflows: NO
-			}], !NO.every((s) => s <= 0)) {
-				let s = (k.flip?.index || 0) + 1, d = jO[s];
-				if (d && (!(q === "alignment" && EO !== getSideAxis(d)) || PO.every((s) => getSideAxis(s.placement) === EO ? s.overflows[0] > 0 : !0))) return {
+				overflows: WD
+			}], !WD.every((s) => s <= 0)) {
+				let s = (k.flip?.index || 0) + 1, d = HD[s];
+				if (d && (!(q === "alignment" && LD !== getSideAxis(d)) || GD.every((s) => getSideAxis(s.placement) === LD ? s.overflows[0] > 0 : !0))) return {
 					data: {
 						index: s,
-						overflows: PO
+						overflows: GD
 					},
 					reset: { placement: d }
 				};
-				let C = PO.filter((s) => s.overflows[0] <= 0).sort((s, d) => s.overflows[1] - d.overflows[1])[0]?.placement;
+				let C = GD.filter((s) => s.overflows[0] <= 0).sort((s, d) => s.overflows[1] - d.overflows[1])[0]?.placement;
 				if (!C) switch (X) {
 					case "bestFit": {
-						let s = PO.filter((s) => {
-							if (AO) {
+						let s = GD.filter((s) => {
+							if (VD) {
 								let d = getSideAxis(s.placement);
-								return d === EO || d === "y";
+								return d === LD || d === "y";
 							}
 							return !0;
 						}).map((s) => [s.placement, s.overflows.filter((s) => s > 0).reduce((s, d) => s + d, 0)]).sort((s, d) => s[1] - d[1])[0]?.[0];
@@ -1761,7 +1761,7 @@ var hide$2 = function(s) {
 	};
 }, originSides = /* @__PURE__ */ new Set(["left", "top"]);
 async function convertValueToCoords(s, d) {
-	let { placement: C, platform: w, elements: k } = s, F = await (w.isRTL == null ? void 0 : w.isRTL(k.floating)), L = getSide(C), V = getAlignment(C), U = getSideAxis(C) === "y", K = originSides.has(L) ? -1 : 1, q = F && U ? -1 : 1, J = evaluate(d, s), { mainAxis: X, crossAxis: $, alignmentAxis: CO } = typeof J == "number" ? {
+	let { placement: C, platform: w, elements: k } = s, F = await (w.isRTL == null ? void 0 : w.isRTL(k.floating)), L = getSide(C), V = getAlignment(C), U = getSideAxis(C) === "y", K = originSides.has(L) ? -1 : 1, q = F && U ? -1 : 1, J = evaluate(d, s), { mainAxis: X, crossAxis: $, alignmentAxis: PD } = typeof J == "number" ? {
 		mainAxis: J,
 		crossAxis: 0,
 		alignmentAxis: null
@@ -1770,7 +1770,7 @@ async function convertValueToCoords(s, d) {
 		crossAxis: J.crossAxis || 0,
 		alignmentAxis: J.alignmentAxis
 	};
-	return V && typeof CO == "number" && ($ = V === "end" ? CO * -1 : CO), U ? {
+	return V && typeof PD == "number" && ($ = V === "end" ? PD * -1 : PD), U ? {
 		x: $ * q,
 		y: X * K
 	} : {
@@ -1809,25 +1809,25 @@ var offset$2 = function(s) {
 			} }, ...U } = evaluate(s, d), K = {
 				x: C,
 				y: w
-			}, q = await detectOverflow$1(d, U), J = getSideAxis(getSide(k)), X = getOppositeAxis(J), $ = K[X], CO = K[J];
+			}, q = await detectOverflow$1(d, U), J = getSideAxis(getSide(k)), X = getOppositeAxis(J), $ = K[X], PD = K[J];
 			if (F) {
 				let s = X === "y" ? "top" : "left", d = X === "y" ? "bottom" : "right", C = $ + q[s], w = $ - q[d];
 				$ = clamp$3(C, $, w);
 			}
 			if (L) {
-				let s = J === "y" ? "top" : "left", d = J === "y" ? "bottom" : "right", C = CO + q[s], w = CO - q[d];
-				CO = clamp$3(C, CO, w);
+				let s = J === "y" ? "top" : "left", d = J === "y" ? "bottom" : "right", C = PD + q[s], w = PD - q[d];
+				PD = clamp$3(C, PD, w);
 			}
-			let wO = V.fn({
+			let FD = V.fn({
 				...d,
 				[X]: $,
-				[J]: CO
+				[J]: PD
 			});
 			return {
-				...wO,
+				...FD,
 				data: {
-					x: wO.x - C,
-					y: wO.y - w,
+					x: FD.x - C,
+					y: FD.y - w,
 					enabled: {
 						[X]: F,
 						[J]: L
@@ -1843,25 +1843,25 @@ var offset$2 = function(s) {
 			let { x: C, y: w, placement: k, rects: F, middlewareData: L } = d, { offset: V = 0, mainAxis: U = !0, crossAxis: K = !0 } = evaluate(s, d), q = {
 				x: C,
 				y: w
-			}, J = getSideAxis(k), X = getOppositeAxis(J), $ = q[X], CO = q[J], wO = evaluate(V, d), TO = typeof wO == "number" ? {
-				mainAxis: wO,
+			}, J = getSideAxis(k), X = getOppositeAxis(J), $ = q[X], PD = q[J], FD = evaluate(V, d), ID = typeof FD == "number" ? {
+				mainAxis: FD,
 				crossAxis: 0
 			} : {
 				mainAxis: 0,
 				crossAxis: 0,
-				...wO
+				...FD
 			};
 			if (U) {
-				let s = X === "y" ? "height" : "width", d = F.reference[X] - F.floating[s] + TO.mainAxis, C = F.reference[X] + F.reference[s] - TO.mainAxis;
+				let s = X === "y" ? "height" : "width", d = F.reference[X] - F.floating[s] + ID.mainAxis, C = F.reference[X] + F.reference[s] - ID.mainAxis;
 				$ < d ? $ = d : $ > C && ($ = C);
 			}
 			if (K) {
-				let s = X === "y" ? "width" : "height", d = originSides.has(getSide(k)), C = F.reference[J] - F.floating[s] + (d && L.offset?.[J] || 0) + (d ? 0 : TO.crossAxis), w = F.reference[J] + F.reference[s] + (d ? 0 : L.offset?.[J] || 0) - (d ? TO.crossAxis : 0);
-				CO < C ? CO = C : CO > w && (CO = w);
+				let s = X === "y" ? "width" : "height", d = originSides.has(getSide(k)), C = F.reference[J] - F.floating[s] + (d && L.offset?.[J] || 0) + (d ? 0 : ID.crossAxis), w = F.reference[J] + F.reference[s] + (d ? 0 : L.offset?.[J] || 0) - (d ? ID.crossAxis : 0);
+				PD < C ? PD = C : PD > w && (PD = w);
 			}
 			return {
 				[X]: $,
-				[J]: CO
+				[J]: PD
 			};
 		}
 	};
@@ -1871,20 +1871,20 @@ var offset$2 = function(s) {
 		options: s,
 		async fn(d) {
 			var C, w;
-			let { placement: k, rects: F, platform: L, elements: V } = d, { apply: U = () => {}, ...K } = evaluate(s, d), q = await detectOverflow$1(d, K), J = getSide(k), X = getAlignment(k), $ = getSideAxis(k) === "y", { width: CO, height: wO } = F.floating, TO, EO;
-			J === "top" || J === "bottom" ? (TO = J, EO = X === (await (L.isRTL == null ? void 0 : L.isRTL(V.floating)) ? "start" : "end") ? "left" : "right") : (EO = J, TO = X === "end" ? "top" : "bottom");
-			let DO = wO - q.top - q.bottom, OO = CO - q.left - q.right, kO = min(wO - q[TO], DO), AO = min(CO - q[EO], OO), jO = !d.middlewareData.shift, MO = kO, NO = AO;
-			if ((C = d.middlewareData.shift) != null && C.enabled.x && (NO = OO), (w = d.middlewareData.shift) != null && w.enabled.y && (MO = DO), jO && !X) {
+			let { placement: k, rects: F, platform: L, elements: V } = d, { apply: U = () => {}, ...K } = evaluate(s, d), q = await detectOverflow$1(d, K), J = getSide(k), X = getAlignment(k), $ = getSideAxis(k) === "y", { width: PD, height: FD } = F.floating, ID, LD;
+			J === "top" || J === "bottom" ? (ID = J, LD = X === (await (L.isRTL == null ? void 0 : L.isRTL(V.floating)) ? "start" : "end") ? "left" : "right") : (LD = J, ID = X === "end" ? "top" : "bottom");
+			let RD = FD - q.top - q.bottom, zD = PD - q.left - q.right, BD = min(FD - q[ID], RD), VD = min(PD - q[LD], zD), HD = !d.middlewareData.shift, UD = BD, WD = VD;
+			if ((C = d.middlewareData.shift) != null && C.enabled.x && (WD = zD), (w = d.middlewareData.shift) != null && w.enabled.y && (UD = RD), HD && !X) {
 				let s = max(q.left, 0), d = max(q.right, 0), C = max(q.top, 0), w = max(q.bottom, 0);
-				$ ? NO = CO - 2 * (s !== 0 || d !== 0 ? s + d : max(q.left, q.right)) : MO = wO - 2 * (C !== 0 || w !== 0 ? C + w : max(q.top, q.bottom));
+				$ ? WD = PD - 2 * (s !== 0 || d !== 0 ? s + d : max(q.left, q.right)) : UD = FD - 2 * (C !== 0 || w !== 0 ? C + w : max(q.top, q.bottom));
 			}
 			await U({
 				...d,
-				availableWidth: NO,
-				availableHeight: MO
+				availableWidth: WD,
+				availableHeight: UD
 			});
-			let PO = await L.getDimensions(V.floating);
-			return CO !== PO.width || wO !== PO.height ? { reset: { rects: !0 } } : {};
+			let GD = await L.getDimensions(V.floating);
+			return PD !== GD.width || FD !== GD.height ? { reset: { rects: !0 } } : {};
 		}
 	};
 };
@@ -2268,27 +2268,27 @@ function observeMove(s, d) {
 		V === void 0 && (V = !1), U === void 0 && (U = 1), F();
 		let K = s.getBoundingClientRect(), { left: q, top: J, width: X, height: $ } = K;
 		if (V || d(), !X || !$) return;
-		let CO = floor(J), wO = floor(k.clientWidth - (q + X)), TO = floor(k.clientHeight - (J + $)), EO = floor(q), DO = {
-			rootMargin: -CO + "px " + -wO + "px " + -TO + "px " + -EO + "px",
+		let PD = floor(J), FD = floor(k.clientWidth - (q + X)), ID = floor(k.clientHeight - (J + $)), LD = floor(q), RD = {
+			rootMargin: -PD + "px " + -FD + "px " + -ID + "px " + -LD + "px",
 			threshold: max(0, min(1, U)) || 1
-		}, OO = !0;
-		function kO(d) {
+		}, zD = !0;
+		function BD(d) {
 			let C = d[0].intersectionRatio;
 			if (C !== U) {
-				if (!OO) return L();
+				if (!zD) return L();
 				C ? L(!1, C) : w = setTimeout(() => {
 					L(!1, 1e-7);
 				}, 1e3);
 			}
-			C === 1 && !rectsAreEqual(K, s.getBoundingClientRect()) && L(), OO = !1;
+			C === 1 && !rectsAreEqual(K, s.getBoundingClientRect()) && L(), zD = !1;
 		}
 		try {
-			C = new IntersectionObserver(kO, {
-				...DO,
+			C = new IntersectionObserver(BD, {
+				...RD,
 				root: k.ownerDocument
 			});
 		} catch {
-			C = new IntersectionObserver(kO, DO);
+			C = new IntersectionObserver(BD, RD);
 		}
 		C.observe(s);
 	}
@@ -2308,17 +2308,17 @@ function autoUpdate(s, d, C, w) {
 			(s = $) == null || s.observe(d);
 		})), C();
 	}), K && !U && $.observe(K), $.observe(d));
-	let CO, wO = U ? getBoundingClientRect(s) : null;
-	U && TO();
-	function TO() {
+	let PD, FD = U ? getBoundingClientRect(s) : null;
+	U && ID();
+	function ID() {
 		let d = getBoundingClientRect(s);
-		wO && !rectsAreEqual(wO, d) && C(), wO = d, CO = requestAnimationFrame(TO);
+		FD && !rectsAreEqual(FD, d) && C(), FD = d, PD = requestAnimationFrame(ID);
 	}
 	return C(), () => {
 		var s;
 		q.forEach((s) => {
 			k && s.removeEventListener("scroll", C), F && s.removeEventListener("resize", C);
-		}), J?.(), (s = $) == null || s.disconnect(), $ = null, U && cancelAnimationFrame(CO);
+		}), J?.(), (s = $) == null || s.disconnect(), $ = null, U && cancelAnimationFrame(PD);
 	};
 }
 var offset$1 = offset$2, shift$1 = shift$2, flip$1 = flip$2, size$1 = size$2, hide$1 = hide$2, arrow$1 = arrow$2, limitShift$1 = limitShift$2, computePosition = (s, d, C) => {
@@ -2377,25 +2377,25 @@ function useFloating(d) {
 		placement: C,
 		middlewareData: {},
 		isPositioned: !1
-	}), [$, CO] = React$1.useState(k);
-	deepEqual($, k) || CO(k);
-	let [wO, TO] = React$1.useState(null), [EO, DO] = React$1.useState(null), kO = React$1.useCallback((s) => {
-		s !== NO.current && (NO.current = s, TO(s));
-	}, []), AO = React$1.useCallback((s) => {
-		s !== PO.current && (PO.current = s, DO(s));
-	}, []), jO = L || wO, MO = V || EO, NO = React$1.useRef(null), PO = React$1.useRef(null), FO = React$1.useRef(J), IO = K != null, LO = useLatestRef(K), RO = useLatestRef(F), zO = useLatestRef(q), BO = React$1.useCallback(() => {
-		if (!NO.current || !PO.current) return;
+	}), [$, PD] = React$1.useState(k);
+	deepEqual($, k) || PD(k);
+	let [FD, ID] = React$1.useState(null), [LD, RD] = React$1.useState(null), BD = React$1.useCallback((s) => {
+		s !== WD.current && (WD.current = s, ID(s));
+	}, []), VD = React$1.useCallback((s) => {
+		s !== GD.current && (GD.current = s, RD(s));
+	}, []), HD = L || FD, UD = V || LD, WD = React$1.useRef(null), GD = React$1.useRef(null), KD = React$1.useRef(J), qD = K != null, JD = useLatestRef(K), YD = useLatestRef(F), XD = useLatestRef(q), ZD = React$1.useCallback(() => {
+		if (!WD.current || !GD.current) return;
 		let s = {
 			placement: C,
 			strategy: w,
 			middleware: $
 		};
-		RO.current && (s.platform = RO.current), computePosition(NO.current, PO.current, s).then((s) => {
+		YD.current && (s.platform = YD.current), computePosition(WD.current, GD.current, s).then((s) => {
 			let d = {
 				...s,
-				isPositioned: zO.current !== !1
+				isPositioned: XD.current !== !1
 			};
-			VO.current && !deepEqual(FO.current, d) && (FO.current = d, ReactDOM$1.flushSync(() => {
+			QD.current && !deepEqual(KD.current, d) && (KD.current = d, ReactDOM$1.flushSync(() => {
 				X(d);
 			}));
 		});
@@ -2403,50 +2403,50 @@ function useFloating(d) {
 		$,
 		C,
 		w,
-		RO,
-		zO
+		YD,
+		XD
 	]);
 	index(() => {
-		q === !1 && FO.current.isPositioned && (FO.current.isPositioned = !1, X((s) => ({
+		q === !1 && KD.current.isPositioned && (KD.current.isPositioned = !1, X((s) => ({
 			...s,
 			isPositioned: !1
 		})));
 	}, [q]);
-	let VO = React$1.useRef(!1);
-	index(() => (VO.current = !0, () => {
-		VO.current = !1;
+	let QD = React$1.useRef(!1);
+	index(() => (QD.current = !0, () => {
+		QD.current = !1;
 	}), []), index(() => {
-		if (jO && (NO.current = jO), MO && (PO.current = MO), jO && MO) {
-			if (LO.current) return LO.current(jO, MO, BO);
-			BO();
+		if (HD && (WD.current = HD), UD && (GD.current = UD), HD && UD) {
+			if (JD.current) return JD.current(HD, UD, ZD);
+			ZD();
 		}
 	}, [
-		jO,
-		MO,
-		BO,
-		LO,
-		IO
+		HD,
+		UD,
+		ZD,
+		JD,
+		qD
 	]);
-	let HO = React$1.useMemo(() => ({
-		reference: NO,
-		floating: PO,
-		setReference: kO,
-		setFloating: AO
-	}), [kO, AO]), UO = React$1.useMemo(() => ({
-		reference: jO,
-		floating: MO
-	}), [jO, MO]), WO = React$1.useMemo(() => {
+	let $D = React$1.useMemo(() => ({
+		reference: WD,
+		floating: GD,
+		setReference: BD,
+		setFloating: VD
+	}), [BD, VD]), eO = React$1.useMemo(() => ({
+		reference: HD,
+		floating: UD
+	}), [HD, UD]), tO = React$1.useMemo(() => {
 		let s = {
 			position: w,
 			left: 0,
 			top: 0
 		};
-		if (!UO.floating) return s;
-		let d = roundByDPR(UO.floating, J.x), C = roundByDPR(UO.floating, J.y);
+		if (!eO.floating) return s;
+		let d = roundByDPR(eO.floating, J.x), C = roundByDPR(eO.floating, J.y);
 		return U ? {
 			...s,
 			transform: "translate(" + d + "px, " + C + "px)",
-			...getDPR(UO.floating) >= 1.5 && { willChange: "transform" }
+			...getDPR(eO.floating) >= 1.5 && { willChange: "transform" }
 		} : {
 			position: w,
 			left: d,
@@ -2455,22 +2455,22 @@ function useFloating(d) {
 	}, [
 		w,
 		U,
-		UO.floating,
+		eO.floating,
 		J.x,
 		J.y
 	]);
 	return React$1.useMemo(() => ({
 		...J,
-		update: BO,
-		refs: HO,
-		elements: UO,
-		floatingStyles: WO
+		update: ZD,
+		refs: $D,
+		elements: eO,
+		floatingStyles: tO
 	}), [
 		J,
-		BO,
-		HO,
-		UO,
-		WO
+		ZD,
+		$D,
+		eO,
+		tO
 	]);
 }
 var arrow$1$1 = (s) => {
@@ -2546,71 +2546,71 @@ var ANCHOR_NAME$1 = "PopperAnchor", PopperAnchor = React$1.forwardRef((d, C) => 
 	});
 });
 PopperAnchor.displayName = ANCHOR_NAME$1;
-var CONTENT_NAME$4 = "PopperContent", [PopperContentProvider, useContentContext] = createPopperContext(CONTENT_NAME$4), PopperContent = React$1.forwardRef((d, C) => {
-	let { __scopePopper: w, side: k = "bottom", sideOffset: F = 0, align: L = "center", alignOffset: V = 0, arrowPadding: U = 0, avoidCollisions: K = !0, collisionBoundary: q = [], collisionPadding: J = 0, sticky: X = "partial", hideWhenDetached: $ = !1, updatePositionStrategy: CO = "optimized", onPlaced: wO, ...TO } = d, EO = usePopperContext(CONTENT_NAME$4, w), [DO, OO] = React$1.useState(null), kO = useComposedRefs(C, (s) => OO(s)), [AO, jO] = React$1.useState(null), NO = useSize(AO), PO = NO?.width ?? 0, FO = NO?.height ?? 0, IO = k + (L === "center" ? "" : "-" + L), LO = typeof J == "number" ? J : {
+var CONTENT_NAME$3 = "PopperContent", [PopperContentProvider, useContentContext] = createPopperContext(CONTENT_NAME$3), PopperContent = React$1.forwardRef((d, C) => {
+	let { __scopePopper: w, side: k = "bottom", sideOffset: F = 0, align: L = "center", alignOffset: V = 0, arrowPadding: U = 0, avoidCollisions: K = !0, collisionBoundary: q = [], collisionPadding: J = 0, sticky: X = "partial", hideWhenDetached: $ = !1, updatePositionStrategy: PD = "optimized", onPlaced: FD, ...ID } = d, LD = usePopperContext(CONTENT_NAME$3, w), [RD, zD] = React$1.useState(null), BD = useComposedRefs(C, (s) => zD(s)), [VD, HD] = React$1.useState(null), UD = useSize(VD), GD = UD?.width ?? 0, KD = UD?.height ?? 0, qD = k + (L === "center" ? "" : "-" + L), JD = typeof J == "number" ? J : {
 		top: 0,
 		right: 0,
 		bottom: 0,
 		left: 0,
 		...J
-	}, RO = Array.isArray(q) ? q : [q], zO = RO.length > 0, BO = {
-		padding: LO,
-		boundary: RO.filter(isNotNull$2),
-		altBoundary: zO
-	}, { refs: VO, floatingStyles: HO, placement: UO, isPositioned: WO, middlewareData: GO } = useFloating({
+	}, YD = Array.isArray(q) ? q : [q], XD = YD.length > 0, ZD = {
+		padding: JD,
+		boundary: YD.filter(isNotNull$2),
+		altBoundary: XD
+	}, { refs: QD, floatingStyles: $D, placement: eO, isPositioned: tO, middlewareData: nO } = useFloating({
 		strategy: "fixed",
-		placement: IO,
-		whileElementsMounted: (...s) => autoUpdate(...s, { animationFrame: CO === "always" }),
-		elements: { reference: EO.anchor },
+		placement: qD,
+		whileElementsMounted: (...s) => autoUpdate(...s, { animationFrame: PD === "always" }),
+		elements: { reference: LD.anchor },
 		middleware: [
 			offset({
-				mainAxis: F + FO,
+				mainAxis: F + KD,
 				alignmentAxis: V
 			}),
 			K && shift({
 				mainAxis: !0,
 				crossAxis: !1,
 				limiter: X === "partial" ? limitShift() : void 0,
-				...BO
+				...ZD
 			}),
-			K && flip({ ...BO }),
+			K && flip({ ...ZD }),
 			size({
-				...BO,
+				...ZD,
 				apply: ({ elements: s, rects: d, availableWidth: C, availableHeight: w }) => {
 					let { width: k, height: F } = d.reference, L = s.floating.style;
 					L.setProperty("--radix-popper-available-width", `${C}px`), L.setProperty("--radix-popper-available-height", `${w}px`), L.setProperty("--radix-popper-anchor-width", `${k}px`), L.setProperty("--radix-popper-anchor-height", `${F}px`);
 				}
 			}),
-			AO && arrow({
-				element: AO,
+			VD && arrow({
+				element: VD,
 				padding: U
 			}),
 			transformOrigin({
-				arrowWidth: PO,
-				arrowHeight: FO
+				arrowWidth: GD,
+				arrowHeight: KD
 			}),
 			$ && hide({
 				strategy: "referenceHidden",
-				...BO
+				...ZD
 			})
 		]
-	}), [KO, qO] = getSideAndAlignFromPlacement(UO), JO = useCallbackRef(wO);
+	}), [rO, iO] = getSideAndAlignFromPlacement(eO), aO = useCallbackRef(FD);
 	useLayoutEffect2(() => {
-		WO && JO?.();
-	}, [WO, JO]);
-	let YO = GO.arrow?.x, XO = GO.arrow?.y, ZO = GO.arrow?.centerOffset !== 0, [QO, $O] = React$1.useState();
+		tO && aO?.();
+	}, [tO, aO]);
+	let oO = nO.arrow?.x, sO = nO.arrow?.y, cO = nO.arrow?.centerOffset !== 0, [lO, uO] = React$1.useState();
 	return useLayoutEffect2(() => {
-		DO && $O(window.getComputedStyle(DO).zIndex);
-	}, [DO]), /* @__PURE__ */ jsx("div", {
-		ref: VO.setFloating,
+		RD && uO(window.getComputedStyle(RD).zIndex);
+	}, [RD]), /* @__PURE__ */ jsx("div", {
+		ref: QD.setFloating,
 		"data-radix-popper-content-wrapper": "",
 		style: {
-			...HO,
-			transform: WO ? HO.transform : "translate(0, -200%)",
+			...$D,
+			transform: tO ? $D.transform : "translate(0, -200%)",
 			minWidth: "max-content",
-			zIndex: QO,
-			"--radix-popper-transform-origin": [GO.transformOrigin?.x, GO.transformOrigin?.y].join(" "),
-			...GO.hide?.referenceHidden && {
+			zIndex: lO,
+			"--radix-popper-transform-origin": [nO.transformOrigin?.x, nO.transformOrigin?.y].join(" "),
+			...nO.hide?.referenceHidden && {
 				visibility: "hidden",
 				pointerEvents: "none"
 			}
@@ -2618,32 +2618,32 @@ var CONTENT_NAME$4 = "PopperContent", [PopperContentProvider, useContentContext]
 		dir: d.dir,
 		children: /* @__PURE__ */ jsx(PopperContentProvider, {
 			scope: w,
-			placedSide: KO,
-			onArrowChange: jO,
-			arrowX: YO,
-			arrowY: XO,
-			shouldHideArrow: ZO,
+			placedSide: rO,
+			onArrowChange: HD,
+			arrowX: oO,
+			arrowY: sO,
+			shouldHideArrow: cO,
 			children: /* @__PURE__ */ jsx(Primitive.div, {
-				"data-side": KO,
-				"data-align": qO,
-				...TO,
-				ref: kO,
+				"data-side": rO,
+				"data-align": iO,
+				...ID,
+				ref: BD,
 				style: {
-					...TO.style,
-					animation: WO ? void 0 : "none"
+					...ID.style,
+					animation: tO ? void 0 : "none"
 				}
 			})
 		})
 	});
 });
-PopperContent.displayName = CONTENT_NAME$4;
-var ARROW_NAME$4 = "PopperArrow", OPPOSITE_SIDE = {
+PopperContent.displayName = CONTENT_NAME$3;
+var ARROW_NAME$3 = "PopperArrow", OPPOSITE_SIDE = {
 	top: "bottom",
 	right: "left",
 	bottom: "top",
 	left: "right"
 }, PopperArrow = React$1.forwardRef(function(s, d) {
-	let { __scopePopper: C, ...w } = s, k = useContentContext(ARROW_NAME$4, C), F = OPPOSITE_SIDE[k.placedSide];
+	let { __scopePopper: C, ...w } = s, k = useContentContext(ARROW_NAME$3, C), F = OPPOSITE_SIDE[k.placedSide];
 	return /* @__PURE__ */ jsx("span", {
 		ref: k.onArrowChange,
 		style: {
@@ -2675,7 +2675,7 @@ var ARROW_NAME$4 = "PopperArrow", OPPOSITE_SIDE = {
 		})
 	});
 });
-PopperArrow.displayName = ARROW_NAME$4;
+PopperArrow.displayName = ARROW_NAME$3;
 function isNotNull$2(s) {
 	return s !== null;
 }
@@ -2687,10 +2687,10 @@ var transformOrigin = (s) => ({
 			start: "0%",
 			center: "50%",
 			end: "100%"
-		}[K], J = (k.arrow?.x ?? 0) + L / 2, X = (k.arrow?.y ?? 0) + V / 2, $ = "", CO = "";
-		return U === "bottom" ? ($ = F ? q : `${J}px`, CO = `${-V}px`) : U === "top" ? ($ = F ? q : `${J}px`, CO = `${w.floating.height + V}px`) : U === "right" ? ($ = `${-V}px`, CO = F ? q : `${X}px`) : U === "left" && ($ = `${w.floating.width + V}px`, CO = F ? q : `${X}px`), { data: {
+		}[K], J = (k.arrow?.x ?? 0) + L / 2, X = (k.arrow?.y ?? 0) + V / 2, $ = "", PD = "";
+		return U === "bottom" ? ($ = F ? q : `${J}px`, PD = `${-V}px`) : U === "top" ? ($ = F ? q : `${J}px`, PD = `${w.floating.height + V}px`) : U === "right" ? ($ = `${-V}px`, PD = F ? q : `${X}px`) : U === "left" && ($ = `${w.floating.width + V}px`, PD = F ? q : `${X}px`), { data: {
 			x: $,
-			y: CO
+			y: PD
 		} };
 	}
 });
@@ -2698,10 +2698,10 @@ function getSideAndAlignFromPlacement(s) {
 	let [d, C = "center"] = s.split("-");
 	return [d, C];
 }
-var Root2$2 = Popper, Anchor = PopperAnchor, Content = PopperContent, Arrow = PopperArrow, ENTRY_FOCUS = "rovingFocusGroup.onEntryFocus", EVENT_OPTIONS = {
+var Root2$1 = Popper, Anchor = PopperAnchor, Content = PopperContent, Arrow = PopperArrow, ENTRY_FOCUS = "rovingFocusGroup.onEntryFocus", EVENT_OPTIONS = {
 	bubbles: !1,
 	cancelable: !0
-}, GROUP_NAME$3 = "RovingFocusGroup", [Collection$1, useCollection$1, createCollectionScope$1] = createCollection(GROUP_NAME$3), [createRovingFocusGroupContext, createRovingFocusGroupScope] = createContextScope(GROUP_NAME$3, [createCollectionScope$1]), [RovingFocusProvider, useRovingFocusContext] = createRovingFocusGroupContext(GROUP_NAME$3), RovingFocusGroup = React$1.forwardRef((s, d) => /* @__PURE__ */ jsx(Collection$1.Provider, {
+}, GROUP_NAME$2 = "RovingFocusGroup", [Collection$1, useCollection$1, createCollectionScope$1] = createCollection(GROUP_NAME$2), [createRovingFocusGroupContext, createRovingFocusGroupScope] = createContextScope(GROUP_NAME$2, [createCollectionScope$1]), [RovingFocusProvider, useRovingFocusContext] = createRovingFocusGroupContext(GROUP_NAME$2), RovingFocusGroup = React$1.forwardRef((s, d) => /* @__PURE__ */ jsx(Collection$1.Provider, {
 	scope: s.__scopeRovingFocusGroup,
 	children: /* @__PURE__ */ jsx(Collection$1.Slot, {
 		scope: s.__scopeRovingFocusGroup,
@@ -2711,65 +2711,65 @@ var Root2$2 = Popper, Anchor = PopperAnchor, Content = PopperContent, Arrow = Po
 		})
 	})
 }));
-RovingFocusGroup.displayName = GROUP_NAME$3;
+RovingFocusGroup.displayName = GROUP_NAME$2;
 var RovingFocusGroupImpl = React$1.forwardRef((d, C) => {
-	let { __scopeRovingFocusGroup: w, orientation: k, loop: F = !1, dir: L, currentTabStopId: V, defaultCurrentTabStopId: U, onCurrentTabStopIdChange: K, onEntryFocus: q, preventScrollOnEntryFocus: J = !1, ...X } = d, $ = React$1.useRef(null), CO = useComposedRefs(C, $), wO = useDirection(L), [TO, EO] = useControllableState({
+	let { __scopeRovingFocusGroup: w, orientation: k, loop: F = !1, dir: L, currentTabStopId: V, defaultCurrentTabStopId: U, onCurrentTabStopIdChange: K, onEntryFocus: q, preventScrollOnEntryFocus: J = !1, ...X } = d, $ = React$1.useRef(null), PD = useComposedRefs(C, $), FD = useDirection(L), [ID, LD] = useControllableState({
 		prop: V,
 		defaultProp: U ?? null,
 		onChange: K,
-		caller: GROUP_NAME$3
-	}), [DO, OO] = React$1.useState(!1), kO = useCallbackRef(q), AO = useCollection$1(w), jO = React$1.useRef(!1), [NO, PO] = React$1.useState(0);
+		caller: GROUP_NAME$2
+	}), [RD, zD] = React$1.useState(!1), BD = useCallbackRef(q), VD = useCollection$1(w), HD = React$1.useRef(!1), [UD, GD] = React$1.useState(0);
 	return React$1.useEffect(() => {
 		let s = $.current;
-		if (s) return s.addEventListener(ENTRY_FOCUS, kO), () => s.removeEventListener(ENTRY_FOCUS, kO);
-	}, [kO]), /* @__PURE__ */ jsx(RovingFocusProvider, {
+		if (s) return s.addEventListener(ENTRY_FOCUS, BD), () => s.removeEventListener(ENTRY_FOCUS, BD);
+	}, [BD]), /* @__PURE__ */ jsx(RovingFocusProvider, {
 		scope: w,
 		orientation: k,
-		dir: wO,
+		dir: FD,
 		loop: F,
-		currentTabStopId: TO,
-		onItemFocus: React$1.useCallback((s) => EO(s), [EO]),
-		onItemShiftTab: React$1.useCallback(() => OO(!0), []),
-		onFocusableItemAdd: React$1.useCallback(() => PO((s) => s + 1), []),
-		onFocusableItemRemove: React$1.useCallback(() => PO((s) => s - 1), []),
+		currentTabStopId: ID,
+		onItemFocus: React$1.useCallback((s) => LD(s), [LD]),
+		onItemShiftTab: React$1.useCallback(() => zD(!0), []),
+		onFocusableItemAdd: React$1.useCallback(() => GD((s) => s + 1), []),
+		onFocusableItemRemove: React$1.useCallback(() => GD((s) => s - 1), []),
 		children: /* @__PURE__ */ jsx(Primitive.div, {
-			tabIndex: DO || NO === 0 ? -1 : 0,
+			tabIndex: RD || UD === 0 ? -1 : 0,
 			"data-orientation": k,
 			...X,
-			ref: CO,
+			ref: PD,
 			style: {
 				outline: "none",
 				...d.style
 			},
 			onMouseDown: composeEventHandlers(d.onMouseDown, () => {
-				jO.current = !0;
+				HD.current = !0;
 			}),
 			onFocus: composeEventHandlers(d.onFocus, (s) => {
-				let d = !jO.current;
-				if (s.target === s.currentTarget && d && !DO) {
+				let d = !HD.current;
+				if (s.target === s.currentTarget && d && !RD) {
 					let d = new CustomEvent(ENTRY_FOCUS, EVENT_OPTIONS);
 					if (s.currentTarget.dispatchEvent(d), !d.defaultPrevented) {
-						let s = AO().filter((s) => s.focusable);
+						let s = VD().filter((s) => s.focusable);
 						focusFirst$1([
 							s.find((s) => s.active),
-							s.find((s) => s.id === TO),
+							s.find((s) => s.id === ID),
 							...s
 						].filter(Boolean).map((s) => s.ref.current), J);
 					}
 				}
-				jO.current = !1;
+				HD.current = !1;
 			}),
-			onBlur: composeEventHandlers(d.onBlur, () => OO(!1))
+			onBlur: composeEventHandlers(d.onBlur, () => zD(!1))
 		})
 	});
-}), ITEM_NAME$3 = "RovingFocusGroupItem", RovingFocusGroupItem = React$1.forwardRef((d, C) => {
-	let { __scopeRovingFocusGroup: w, focusable: k = !0, active: F = !1, tabStopId: L, children: V, ...U } = d, K = useId$1(), q = L || K, J = useRovingFocusContext(ITEM_NAME$3, w), X = J.currentTabStopId === q, $ = useCollection$1(w), { onFocusableItemAdd: CO, onFocusableItemRemove: wO, currentTabStopId: TO } = J;
+}), ITEM_NAME$2 = "RovingFocusGroupItem", RovingFocusGroupItem = React$1.forwardRef((d, C) => {
+	let { __scopeRovingFocusGroup: w, focusable: k = !0, active: F = !1, tabStopId: L, children: V, ...U } = d, K = useId$1(), q = L || K, J = useRovingFocusContext(ITEM_NAME$2, w), X = J.currentTabStopId === q, $ = useCollection$1(w), { onFocusableItemAdd: PD, onFocusableItemRemove: FD, currentTabStopId: ID } = J;
 	return React$1.useEffect(() => {
-		if (k) return CO(), () => wO();
+		if (k) return PD(), () => FD();
 	}, [
 		k,
-		CO,
-		wO
+		PD,
+		FD
 	]), /* @__PURE__ */ jsx(Collection$1.ItemSlot, {
 		scope: w,
 		id: q,
@@ -2806,12 +2806,12 @@ var RovingFocusGroupImpl = React$1.forwardRef((d, C) => {
 			}),
 			children: typeof V == "function" ? V({
 				isCurrentTabStop: X,
-				hasTabStop: TO != null
+				hasTabStop: ID != null
 			}) : V
 		})
 	});
 });
-RovingFocusGroupItem.displayName = ITEM_NAME$3;
+RovingFocusGroupItem.displayName = ITEM_NAME$2;
 var MAP_KEY_TO_FOCUS_INTENT = {
 	ArrowLeft: "prev",
 	ArrowUp: "prev",
@@ -2869,7 +2869,7 @@ var Root$1 = RovingFocusGroup, Item = RovingFocusGroupItem, SELECTION_KEYS = ["E
 		return document.addEventListener("keydown", s, { capture: !0 }), () => {
 			document.removeEventListener("keydown", s, { capture: !0 }), document.removeEventListener("pointerdown", d, { capture: !0 }), document.removeEventListener("pointermove", d, { capture: !0 });
 		};
-	}, []), /* @__PURE__ */ jsx(Root2$2, {
+	}, []), /* @__PURE__ */ jsx(Root2$1, {
 		...U,
 		children: /* @__PURE__ */ jsx(MenuProvider, {
 			scope: C,
@@ -2898,8 +2898,8 @@ var ANCHOR_NAME = "MenuAnchor", MenuAnchor = React$1.forwardRef((s, d) => {
 	});
 });
 MenuAnchor.displayName = ANCHOR_NAME;
-var PORTAL_NAME$3 = "MenuPortal", [PortalProvider$1, usePortalContext$1] = createMenuContext(PORTAL_NAME$3, { forceMount: void 0 }), MenuPortal = (s) => {
-	let { __scopeMenu: d, forceMount: C, children: w, container: k } = s, F = useMenuContext(PORTAL_NAME$3, d);
+var PORTAL_NAME$2 = "MenuPortal", [PortalProvider$1, usePortalContext$1] = createMenuContext(PORTAL_NAME$2, { forceMount: void 0 }), MenuPortal = (s) => {
+	let { __scopeMenu: d, forceMount: C, children: w, container: k } = s, F = useMenuContext(PORTAL_NAME$2, d);
 	return /* @__PURE__ */ jsx(PortalProvider$1, {
 		scope: d,
 		forceMount: C,
@@ -2913,9 +2913,9 @@ var PORTAL_NAME$3 = "MenuPortal", [PortalProvider$1, usePortalContext$1] = creat
 		})
 	});
 };
-MenuPortal.displayName = PORTAL_NAME$3;
-var CONTENT_NAME$3 = "MenuContent", [MenuContentProvider, useMenuContentContext] = createMenuContext(CONTENT_NAME$3), MenuContent = React$1.forwardRef((s, d) => {
-	let C = usePortalContext$1(CONTENT_NAME$3, s.__scopeMenu), { forceMount: w = C.forceMount, ...k } = s, F = useMenuContext(CONTENT_NAME$3, s.__scopeMenu), L = useMenuRootContext(CONTENT_NAME$3, s.__scopeMenu);
+MenuPortal.displayName = PORTAL_NAME$2;
+var CONTENT_NAME$2 = "MenuContent", [MenuContentProvider, useMenuContentContext] = createMenuContext(CONTENT_NAME$2), MenuContent = React$1.forwardRef((s, d) => {
+	let C = usePortalContext$1(CONTENT_NAME$2, s.__scopeMenu), { forceMount: w = C.forceMount, ...k } = s, F = useMenuContext(CONTENT_NAME$2, s.__scopeMenu), L = useMenuRootContext(CONTENT_NAME$2, s.__scopeMenu);
 	return /* @__PURE__ */ jsx(Collection.Provider, {
 		scope: s.__scopeMenu,
 		children: /* @__PURE__ */ jsx(Presence, {
@@ -2933,7 +2933,7 @@ var CONTENT_NAME$3 = "MenuContent", [MenuContentProvider, useMenuContentContext]
 		})
 	});
 }), MenuRootContentModal = React$1.forwardRef((d, C) => {
-	let w = useMenuContext(CONTENT_NAME$3, d.__scopeMenu), k = React$1.useRef(null), F = useComposedRefs(C, k);
+	let w = useMenuContext(CONTENT_NAME$2, d.__scopeMenu), k = React$1.useRef(null), F = useComposedRefs(C, k);
 	return React$1.useEffect(() => {
 		let s = k.current;
 		if (s) return hideOthers(s);
@@ -2947,7 +2947,7 @@ var CONTENT_NAME$3 = "MenuContent", [MenuContentProvider, useMenuContentContext]
 		onDismiss: () => w.onOpenChange(!1)
 	});
 }), MenuRootContentNonModal = React$1.forwardRef((s, d) => {
-	let C = useMenuContext(CONTENT_NAME$3, s.__scopeMenu);
+	let C = useMenuContext(CONTENT_NAME$2, s.__scopeMenu);
 	return /* @__PURE__ */ jsx(MenuContentImpl, {
 		...s,
 		ref: d,
@@ -2957,40 +2957,40 @@ var CONTENT_NAME$3 = "MenuContent", [MenuContentProvider, useMenuContentContext]
 		onDismiss: () => C.onOpenChange(!1)
 	});
 }), Slot = /* @__PURE__ */ createSlot("MenuContent.ScrollLock"), MenuContentImpl = React$1.forwardRef((d, C) => {
-	let { __scopeMenu: w, loop: k = !1, trapFocus: F, onOpenAutoFocus: L, onCloseAutoFocus: V, disableOutsidePointerEvents: U, onEntryFocus: K, onEscapeKeyDown: q, onPointerDownOutside: J, onFocusOutside: X, onInteractOutside: $, onDismiss: CO, disableOutsideScroll: wO, ...TO } = d, EO = useMenuContext(CONTENT_NAME$3, w), DO = useMenuRootContext(CONTENT_NAME$3, w), OO = usePopperScope$1(w), kO = useRovingFocusGroupScope(w), AO = useCollection(w), [jO, NO] = React$1.useState(null), PO = React$1.useRef(null), FO = useComposedRefs(C, PO, EO.onContentChange), IO = React$1.useRef(0), LO = React$1.useRef(""), RO = React$1.useRef(0), zO = React$1.useRef(null), BO = React$1.useRef("right"), VO = React$1.useRef(0), HO = wO ? Combination_default : React$1.Fragment, UO = wO ? {
+	let { __scopeMenu: w, loop: k = !1, trapFocus: F, onOpenAutoFocus: L, onCloseAutoFocus: V, disableOutsidePointerEvents: U, onEntryFocus: K, onEscapeKeyDown: q, onPointerDownOutside: J, onFocusOutside: X, onInteractOutside: $, onDismiss: PD, disableOutsideScroll: FD, ...ID } = d, LD = useMenuContext(CONTENT_NAME$2, w), RD = useMenuRootContext(CONTENT_NAME$2, w), zD = usePopperScope$1(w), BD = useRovingFocusGroupScope(w), VD = useCollection(w), [HD, UD] = React$1.useState(null), GD = React$1.useRef(null), KD = useComposedRefs(C, GD, LD.onContentChange), qD = React$1.useRef(0), JD = React$1.useRef(""), YD = React$1.useRef(0), XD = React$1.useRef(null), ZD = React$1.useRef("right"), QD = React$1.useRef(0), $D = FD ? Combination_default : React$1.Fragment, eO = FD ? {
 		as: Slot,
 		allowPinchZoom: !0
-	} : void 0, WO = (s) => {
-		let d = LO.current + s, C = AO().filter((s) => !s.disabled), w = document.activeElement, k = C.find((s) => s.ref.current === w)?.textValue, F = getNextMatch(C.map((s) => s.textValue), d, k), L = C.find((s) => s.textValue === F)?.ref.current;
+	} : void 0, tO = (s) => {
+		let d = JD.current + s, C = VD().filter((s) => !s.disabled), w = document.activeElement, k = C.find((s) => s.ref.current === w)?.textValue, F = getNextMatch(C.map((s) => s.textValue), d, k), L = C.find((s) => s.textValue === F)?.ref.current;
 		(function s(d) {
-			LO.current = d, window.clearTimeout(IO.current), d !== "" && (IO.current = window.setTimeout(() => s(""), 1e3));
+			JD.current = d, window.clearTimeout(qD.current), d !== "" && (qD.current = window.setTimeout(() => s(""), 1e3));
 		})(d), L && setTimeout(() => L.focus());
 	};
-	React$1.useEffect(() => () => window.clearTimeout(IO.current), []), useFocusGuards();
-	let GO = React$1.useCallback((s) => BO.current === zO.current?.side && isPointerInGraceArea(s, zO.current?.area), []);
+	React$1.useEffect(() => () => window.clearTimeout(qD.current), []), useFocusGuards();
+	let nO = React$1.useCallback((s) => ZD.current === XD.current?.side && isPointerInGraceArea(s, XD.current?.area), []);
 	return /* @__PURE__ */ jsx(MenuContentProvider, {
 		scope: w,
-		searchRef: LO,
+		searchRef: JD,
 		onItemEnter: React$1.useCallback((s) => {
-			GO(s) && s.preventDefault();
-		}, [GO]),
+			nO(s) && s.preventDefault();
+		}, [nO]),
 		onItemLeave: React$1.useCallback((s) => {
-			GO(s) || (PO.current?.focus(), NO(null));
-		}, [GO]),
+			nO(s) || (GD.current?.focus(), UD(null));
+		}, [nO]),
 		onTriggerLeave: React$1.useCallback((s) => {
-			GO(s) && s.preventDefault();
-		}, [GO]),
-		pointerGraceTimerRef: RO,
+			nO(s) && s.preventDefault();
+		}, [nO]),
+		pointerGraceTimerRef: YD,
 		onPointerGraceIntentChange: React$1.useCallback((s) => {
-			zO.current = s;
+			XD.current = s;
 		}, []),
-		children: /* @__PURE__ */ jsx(HO, {
-			...UO,
+		children: /* @__PURE__ */ jsx($D, {
+			...eO,
 			children: /* @__PURE__ */ jsx(FocusScope, {
 				asChild: !0,
 				trapped: F,
 				onMountAutoFocus: composeEventHandlers(L, (s) => {
-					s.preventDefault(), PO.current?.focus({ preventScroll: !0 });
+					s.preventDefault(), GD.current?.focus({ preventScroll: !0 });
 				}),
 				onUnmountAutoFocus: V,
 				children: /* @__PURE__ */ jsx(DismissableLayer, {
@@ -3000,47 +3000,47 @@ var CONTENT_NAME$3 = "MenuContent", [MenuContentProvider, useMenuContentContext]
 					onPointerDownOutside: J,
 					onFocusOutside: X,
 					onInteractOutside: $,
-					onDismiss: CO,
+					onDismiss: PD,
 					children: /* @__PURE__ */ jsx(Root$1, {
 						asChild: !0,
-						...kO,
-						dir: DO.dir,
+						...BD,
+						dir: RD.dir,
 						orientation: "vertical",
 						loop: k,
-						currentTabStopId: jO,
-						onCurrentTabStopIdChange: NO,
+						currentTabStopId: HD,
+						onCurrentTabStopIdChange: UD,
 						onEntryFocus: composeEventHandlers(K, (s) => {
-							DO.isUsingKeyboardRef.current || s.preventDefault();
+							RD.isUsingKeyboardRef.current || s.preventDefault();
 						}),
 						preventScrollOnEntryFocus: !0,
 						children: /* @__PURE__ */ jsx(Content, {
 							role: "menu",
 							"aria-orientation": "vertical",
-							"data-state": getOpenState(EO.open),
+							"data-state": getOpenState(LD.open),
 							"data-radix-menu-content": "",
-							dir: DO.dir,
-							...OO,
-							...TO,
-							ref: FO,
+							dir: RD.dir,
+							...zD,
+							...ID,
+							ref: KD,
 							style: {
 								outline: "none",
-								...TO.style
+								...ID.style
 							},
-							onKeyDown: composeEventHandlers(TO.onKeyDown, (s) => {
+							onKeyDown: composeEventHandlers(ID.onKeyDown, (s) => {
 								let d = s.target.closest("[data-radix-menu-content]") === s.currentTarget, C = s.ctrlKey || s.altKey || s.metaKey, w = s.key.length === 1;
-								d && (s.key === "Tab" && s.preventDefault(), !C && w && WO(s.key));
-								let k = PO.current;
+								d && (s.key === "Tab" && s.preventDefault(), !C && w && tO(s.key));
+								let k = GD.current;
 								if (s.target !== k || !FIRST_LAST_KEYS.includes(s.key)) return;
 								s.preventDefault();
-								let F = AO().filter((s) => !s.disabled).map((s) => s.ref.current);
+								let F = VD().filter((s) => !s.disabled).map((s) => s.ref.current);
 								LAST_KEYS.includes(s.key) && F.reverse(), focusFirst(F);
 							}),
 							onBlur: composeEventHandlers(d.onBlur, (s) => {
-								s.currentTarget.contains(s.target) || (window.clearTimeout(IO.current), LO.current = "");
+								s.currentTarget.contains(s.target) || (window.clearTimeout(qD.current), JD.current = "");
 							}),
 							onPointerMove: composeEventHandlers(d.onPointerMove, whenMouse((s) => {
-								let d = s.target, C = VO.current !== s.clientX;
-								s.currentTarget.contains(d) && C && (BO.current = s.clientX > VO.current ? "right" : "left", VO.current = s.clientX);
+								let d = s.target, C = QD.current !== s.clientX;
+								s.currentTarget.contains(d) && C && (ZD.current = s.clientX > QD.current ? "right" : "left", QD.current = s.clientX);
 							}))
 						})
 					})
@@ -3049,8 +3049,8 @@ var CONTENT_NAME$3 = "MenuContent", [MenuContentProvider, useMenuContentContext]
 		})
 	});
 });
-MenuContent.displayName = CONTENT_NAME$3;
-var GROUP_NAME$2 = "MenuGroup", MenuGroup = React$1.forwardRef((s, d) => {
+MenuContent.displayName = CONTENT_NAME$2;
+var GROUP_NAME$1 = "MenuGroup", MenuGroup = React$1.forwardRef((s, d) => {
 	let { __scopeMenu: C, ...w } = s;
 	return /* @__PURE__ */ jsx(Primitive.div, {
 		role: "group",
@@ -3058,17 +3058,17 @@ var GROUP_NAME$2 = "MenuGroup", MenuGroup = React$1.forwardRef((s, d) => {
 		ref: d
 	});
 });
-MenuGroup.displayName = GROUP_NAME$2;
-var LABEL_NAME$2 = "MenuLabel", MenuLabel = React$1.forwardRef((s, d) => {
+MenuGroup.displayName = GROUP_NAME$1;
+var LABEL_NAME$1 = "MenuLabel", MenuLabel = React$1.forwardRef((s, d) => {
 	let { __scopeMenu: C, ...w } = s;
 	return /* @__PURE__ */ jsx(Primitive.div, {
 		...w,
 		ref: d
 	});
 });
-MenuLabel.displayName = LABEL_NAME$2;
-var ITEM_NAME$2 = "MenuItem", ITEM_SELECT = "menu.itemSelect", MenuItem = React$1.forwardRef((d, C) => {
-	let { disabled: w = !1, onSelect: k, ...F } = d, L = React$1.useRef(null), V = useMenuRootContext(ITEM_NAME$2, d.__scopeMenu), U = useMenuContentContext(ITEM_NAME$2, d.__scopeMenu), K = useComposedRefs(C, L), q = React$1.useRef(!1), J = () => {
+MenuLabel.displayName = LABEL_NAME$1;
+var ITEM_NAME$1 = "MenuItem", ITEM_SELECT = "menu.itemSelect", MenuItem$1 = React$1.forwardRef((d, C) => {
+	let { disabled: w = !1, onSelect: k, ...F } = d, L = React$1.useRef(null), V = useMenuRootContext(ITEM_NAME$1, d.__scopeMenu), U = useMenuContentContext(ITEM_NAME$1, d.__scopeMenu), K = useComposedRefs(C, L), q = React$1.useRef(!1), J = () => {
 		let s = L.current;
 		if (!w && s) {
 			let d = new CustomEvent(ITEM_SELECT, {
@@ -3095,12 +3095,12 @@ var ITEM_NAME$2 = "MenuItem", ITEM_SELECT = "menu.itemSelect", MenuItem = React$
 		})
 	});
 });
-MenuItem.displayName = ITEM_NAME$2;
+MenuItem$1.displayName = ITEM_NAME$1;
 var MenuItemImpl = React$1.forwardRef((d, C) => {
-	let { __scopeMenu: w, disabled: k = !1, textValue: F, ...L } = d, V = useMenuContentContext(ITEM_NAME$2, w), U = useRovingFocusGroupScope(w), K = React$1.useRef(null), q = useComposedRefs(C, K), [J, X] = React$1.useState(!1), [$, CO] = React$1.useState("");
+	let { __scopeMenu: w, disabled: k = !1, textValue: F, ...L } = d, V = useMenuContentContext(ITEM_NAME$1, w), U = useRovingFocusGroupScope(w), K = React$1.useRef(null), q = useComposedRefs(C, K), [J, X] = React$1.useState(!1), [$, PD] = React$1.useState("");
 	return React$1.useEffect(() => {
 		let s = K.current;
-		s && CO((s.textContent ?? "").trim());
+		s && PD((s.textContent ?? "").trim());
 	}, [L.children]), /* @__PURE__ */ jsx(Collection.ItemSlot, {
 		scope: w,
 		disabled: k,
@@ -3125,12 +3125,12 @@ var MenuItemImpl = React$1.forwardRef((d, C) => {
 			})
 		})
 	});
-}), CHECKBOX_ITEM_NAME$2 = "MenuCheckboxItem", MenuCheckboxItem = React$1.forwardRef((s, d) => {
+}), CHECKBOX_ITEM_NAME$1 = "MenuCheckboxItem", MenuCheckboxItem = React$1.forwardRef((s, d) => {
 	let { checked: C = !1, onCheckedChange: w, ...k } = s;
 	return /* @__PURE__ */ jsx(ItemIndicatorProvider, {
 		scope: s.__scopeMenu,
 		checked: C,
-		children: /* @__PURE__ */ jsx(MenuItem, {
+		children: /* @__PURE__ */ jsx(MenuItem$1, {
 			role: "menuitemcheckbox",
 			"aria-checked": isIndeterminate(C) ? "mixed" : C,
 			...k,
@@ -3140,8 +3140,8 @@ var MenuItemImpl = React$1.forwardRef((d, C) => {
 		})
 	});
 });
-MenuCheckboxItem.displayName = CHECKBOX_ITEM_NAME$2;
-var RADIO_GROUP_NAME$2 = "MenuRadioGroup", [RadioGroupProvider, useRadioGroupContext] = createMenuContext(RADIO_GROUP_NAME$2, {
+MenuCheckboxItem.displayName = CHECKBOX_ITEM_NAME$1;
+var RADIO_GROUP_NAME$1 = "MenuRadioGroup", [RadioGroupProvider, useRadioGroupContext] = createMenuContext(RADIO_GROUP_NAME$1, {
 	value: void 0,
 	onValueChange: () => {}
 }), MenuRadioGroup = React$1.forwardRef((s, d) => {
@@ -3156,13 +3156,13 @@ var RADIO_GROUP_NAME$2 = "MenuRadioGroup", [RadioGroupProvider, useRadioGroupCon
 		})
 	});
 });
-MenuRadioGroup.displayName = RADIO_GROUP_NAME$2;
-var RADIO_ITEM_NAME$2 = "MenuRadioItem", MenuRadioItem = React$1.forwardRef((s, d) => {
-	let { value: C, ...w } = s, k = useRadioGroupContext(RADIO_ITEM_NAME$2, s.__scopeMenu), F = C === k.value;
+MenuRadioGroup.displayName = RADIO_GROUP_NAME$1;
+var RADIO_ITEM_NAME$1 = "MenuRadioItem", MenuRadioItem = React$1.forwardRef((s, d) => {
+	let { value: C, ...w } = s, k = useRadioGroupContext(RADIO_ITEM_NAME$1, s.__scopeMenu), F = C === k.value;
 	return /* @__PURE__ */ jsx(ItemIndicatorProvider, {
 		scope: s.__scopeMenu,
 		checked: F,
-		children: /* @__PURE__ */ jsx(MenuItem, {
+		children: /* @__PURE__ */ jsx(MenuItem$1, {
 			role: "menuitemradio",
 			"aria-checked": F,
 			...w,
@@ -3172,7 +3172,7 @@ var RADIO_ITEM_NAME$2 = "MenuRadioItem", MenuRadioItem = React$1.forwardRef((s, 
 		})
 	});
 });
-MenuRadioItem.displayName = RADIO_ITEM_NAME$2;
+MenuRadioItem.displayName = RADIO_ITEM_NAME$1;
 var ITEM_INDICATOR_NAME = "MenuItemIndicator", [ItemIndicatorProvider, useItemIndicatorContext] = createMenuContext(ITEM_INDICATOR_NAME, { checked: !1 }), MenuItemIndicator = React$1.forwardRef((s, d) => {
 	let { __scopeMenu: C, forceMount: w, ...k } = s, F = useItemIndicatorContext(ITEM_INDICATOR_NAME, C);
 	return /* @__PURE__ */ jsx(Presence, {
@@ -3185,7 +3185,7 @@ var ITEM_INDICATOR_NAME = "MenuItemIndicator", [ItemIndicatorProvider, useItemIn
 	});
 });
 MenuItemIndicator.displayName = ITEM_INDICATOR_NAME;
-var SEPARATOR_NAME$2 = "MenuSeparator", MenuSeparator = React$1.forwardRef((s, d) => {
+var SEPARATOR_NAME$1 = "MenuSeparator", MenuSeparator$1 = React$1.forwardRef((s, d) => {
 	let { __scopeMenu: C, ...w } = s;
 	return /* @__PURE__ */ jsx(Primitive.div, {
 		role: "separator",
@@ -3194,8 +3194,8 @@ var SEPARATOR_NAME$2 = "MenuSeparator", MenuSeparator = React$1.forwardRef((s, d
 		ref: d
 	});
 });
-MenuSeparator.displayName = SEPARATOR_NAME$2;
-var ARROW_NAME$3 = "MenuArrow", MenuArrow = React$1.forwardRef((s, d) => {
+MenuSeparator$1.displayName = SEPARATOR_NAME$1;
+var ARROW_NAME$2 = "MenuArrow", MenuArrow = React$1.forwardRef((s, d) => {
 	let { __scopeMenu: C, ...w } = s;
 	return /* @__PURE__ */ jsx(Arrow, {
 		...usePopperScope$1(C),
@@ -3203,10 +3203,10 @@ var ARROW_NAME$3 = "MenuArrow", MenuArrow = React$1.forwardRef((s, d) => {
 		ref: d
 	});
 });
-MenuArrow.displayName = ARROW_NAME$3;
-var SUB_NAME$1 = "MenuSub", [MenuSubProvider, useMenuSubContext] = createMenuContext(SUB_NAME$1), MenuSub = (d) => {
-	let { __scopeMenu: C, children: w, open: k = !1, onOpenChange: F } = d, L = useMenuContext(SUB_NAME$1, C), V = usePopperScope$1(C), [U, K] = React$1.useState(null), [q, J] = React$1.useState(null), X = useCallbackRef(F);
-	return React$1.useEffect(() => (L.open === !1 && X(!1), () => X(!1)), [L.open, X]), /* @__PURE__ */ jsx(Root2$2, {
+MenuArrow.displayName = ARROW_NAME$2;
+var SUB_NAME = "MenuSub", [MenuSubProvider, useMenuSubContext] = createMenuContext(SUB_NAME), MenuSub = (d) => {
+	let { __scopeMenu: C, children: w, open: k = !1, onOpenChange: F } = d, L = useMenuContext(SUB_NAME, C), V = usePopperScope$1(C), [U, K] = React$1.useState(null), [q, J] = React$1.useState(null), X = useCallbackRef(F);
+	return React$1.useEffect(() => (L.open === !1 && X(!1), () => X(!1)), [L.open, X]), /* @__PURE__ */ jsx(Root2$1, {
 		...V,
 		children: /* @__PURE__ */ jsx(MenuProvider, {
 			scope: C,
@@ -3225,9 +3225,9 @@ var SUB_NAME$1 = "MenuSub", [MenuSubProvider, useMenuSubContext] = createMenuCon
 		})
 	});
 };
-MenuSub.displayName = SUB_NAME$1;
-var SUB_TRIGGER_NAME$2 = "MenuSubTrigger", MenuSubTrigger = React$1.forwardRef((d, C) => {
-	let w = useMenuContext(SUB_TRIGGER_NAME$2, d.__scopeMenu), k = useMenuRootContext(SUB_TRIGGER_NAME$2, d.__scopeMenu), F = useMenuSubContext(SUB_TRIGGER_NAME$2, d.__scopeMenu), L = useMenuContentContext(SUB_TRIGGER_NAME$2, d.__scopeMenu), V = React$1.useRef(null), { pointerGraceTimerRef: U, onPointerGraceIntentChange: K } = L, q = { __scopeMenu: d.__scopeMenu }, J = React$1.useCallback(() => {
+MenuSub.displayName = SUB_NAME;
+var SUB_TRIGGER_NAME$1 = "MenuSubTrigger", MenuSubTrigger = React$1.forwardRef((d, C) => {
+	let w = useMenuContext(SUB_TRIGGER_NAME$1, d.__scopeMenu), k = useMenuRootContext(SUB_TRIGGER_NAME$1, d.__scopeMenu), F = useMenuSubContext(SUB_TRIGGER_NAME$1, d.__scopeMenu), L = useMenuContentContext(SUB_TRIGGER_NAME$1, d.__scopeMenu), V = React$1.useRef(null), { pointerGraceTimerRef: U, onPointerGraceIntentChange: K } = L, q = { __scopeMenu: d.__scopeMenu }, J = React$1.useCallback(() => {
 		V.current && window.clearTimeout(V.current), V.current = null;
 	}, []);
 	return React$1.useEffect(() => J, [J]), React$1.useEffect(() => {
@@ -3296,9 +3296,9 @@ var SUB_TRIGGER_NAME$2 = "MenuSubTrigger", MenuSubTrigger = React$1.forwardRef((
 		})
 	});
 });
-MenuSubTrigger.displayName = SUB_TRIGGER_NAME$2;
-var SUB_CONTENT_NAME$2 = "MenuSubContent", MenuSubContent = React$1.forwardRef((d, C) => {
-	let w = usePortalContext$1(CONTENT_NAME$3, d.__scopeMenu), { forceMount: k = w.forceMount, ...F } = d, L = useMenuContext(CONTENT_NAME$3, d.__scopeMenu), V = useMenuRootContext(CONTENT_NAME$3, d.__scopeMenu), U = useMenuSubContext(SUB_CONTENT_NAME$2, d.__scopeMenu), K = React$1.useRef(null), q = useComposedRefs(C, K);
+MenuSubTrigger.displayName = SUB_TRIGGER_NAME$1;
+var SUB_CONTENT_NAME$1 = "MenuSubContent", MenuSubContent = React$1.forwardRef((d, C) => {
+	let w = usePortalContext$1(CONTENT_NAME$2, d.__scopeMenu), { forceMount: k = w.forceMount, ...F } = d, L = useMenuContext(CONTENT_NAME$2, d.__scopeMenu), V = useMenuRootContext(CONTENT_NAME$2, d.__scopeMenu), U = useMenuSubContext(SUB_CONTENT_NAME$1, d.__scopeMenu), K = React$1.useRef(null), q = useComposedRefs(C, K);
 	return /* @__PURE__ */ jsx(Collection.Provider, {
 		scope: d.__scopeMenu,
 		children: /* @__PURE__ */ jsx(Presence, {
@@ -3334,7 +3334,7 @@ var SUB_CONTENT_NAME$2 = "MenuSubContent", MenuSubContent = React$1.forwardRef((
 		})
 	});
 });
-MenuSubContent.displayName = SUB_CONTENT_NAME$2;
+MenuSubContent.displayName = SUB_CONTENT_NAME$1;
 function getOpenState(s) {
 	return s ? "open" : "closed";
 }
@@ -3374,224 +3374,7 @@ function isPointerInGraceArea(s, d) {
 function whenMouse(s) {
 	return (d) => d.pointerType === "mouse" ? s(d) : void 0;
 }
-var Root3 = Menu, Anchor2 = MenuAnchor, Portal$1 = MenuPortal, Content2$2 = MenuContent, Group = MenuGroup, Label = MenuLabel, Item2$2 = MenuItem, CheckboxItem = MenuCheckboxItem, RadioGroup = MenuRadioGroup, RadioItem = MenuRadioItem, ItemIndicator = MenuItemIndicator, Separator = MenuSeparator, Arrow2 = MenuArrow, Sub = MenuSub, SubTrigger = MenuSubTrigger, SubContent = MenuSubContent, CONTEXT_MENU_NAME = "ContextMenu", [createContextMenuContext, createContextMenuScope] = createContextScope(CONTEXT_MENU_NAME, [createMenuScope]), useMenuScope$1 = createMenuScope(), [ContextMenuProvider, useContextMenuContext] = createContextMenuContext(CONTEXT_MENU_NAME), ContextMenu = (d) => {
-	let { __scopeContextMenu: C, children: w, onOpenChange: k, dir: F, modal: L = !0 } = d, [V, U] = React$1.useState(!1), K = useMenuScope$1(C), q = useCallbackRef(k), J = React$1.useCallback((s) => {
-		U(s), q(s);
-	}, [q]);
-	return /* @__PURE__ */ jsx(ContextMenuProvider, {
-		scope: C,
-		open: V,
-		onOpenChange: J,
-		modal: L,
-		children: /* @__PURE__ */ jsx(Root3, {
-			...K,
-			dir: F,
-			open: V,
-			onOpenChange: J,
-			modal: L,
-			children: w
-		})
-	});
-};
-ContextMenu.displayName = CONTEXT_MENU_NAME;
-var TRIGGER_NAME$2 = "ContextMenuTrigger", ContextMenuTrigger = React$1.forwardRef((d, C) => {
-	let { __scopeContextMenu: w, disabled: k = !1, ...F } = d, L = useContextMenuContext(TRIGGER_NAME$2, w), V = useMenuScope$1(w), U = React$1.useRef({
-		x: 0,
-		y: 0
-	}), K = React$1.useRef({ getBoundingClientRect: () => DOMRect.fromRect({
-		width: 0,
-		height: 0,
-		...U.current
-	}) }), q = React$1.useRef(0), J = React$1.useCallback(() => window.clearTimeout(q.current), []), X = (s) => {
-		U.current = {
-			x: s.clientX,
-			y: s.clientY
-		}, L.onOpenChange(!0);
-	};
-	return React$1.useEffect(() => J, [J]), React$1.useEffect(() => void (k && J()), [k, J]), /* @__PURE__ */ jsxs(Fragment$1, { children: [/* @__PURE__ */ jsx(Anchor2, {
-		...V,
-		virtualRef: K
-	}), /* @__PURE__ */ jsx(Primitive.span, {
-		"data-state": L.open ? "open" : "closed",
-		"data-disabled": k ? "" : void 0,
-		...F,
-		ref: C,
-		style: {
-			WebkitTouchCallout: "none",
-			...d.style
-		},
-		onContextMenu: k ? d.onContextMenu : composeEventHandlers(d.onContextMenu, (s) => {
-			J(), X(s), s.preventDefault();
-		}),
-		onPointerDown: k ? d.onPointerDown : composeEventHandlers(d.onPointerDown, whenTouchOrPen((s) => {
-			J(), q.current = window.setTimeout(() => X(s), 700);
-		})),
-		onPointerMove: k ? d.onPointerMove : composeEventHandlers(d.onPointerMove, whenTouchOrPen(J)),
-		onPointerCancel: k ? d.onPointerCancel : composeEventHandlers(d.onPointerCancel, whenTouchOrPen(J)),
-		onPointerUp: k ? d.onPointerUp : composeEventHandlers(d.onPointerUp, whenTouchOrPen(J))
-	})] });
-});
-ContextMenuTrigger.displayName = TRIGGER_NAME$2;
-var PORTAL_NAME$2 = "ContextMenuPortal", ContextMenuPortal = (s) => {
-	let { __scopeContextMenu: d, ...C } = s;
-	return /* @__PURE__ */ jsx(Portal$1, {
-		...useMenuScope$1(d),
-		...C
-	});
-};
-ContextMenuPortal.displayName = PORTAL_NAME$2;
-var CONTENT_NAME$2 = "ContextMenuContent", ContextMenuContent = React$1.forwardRef((d, C) => {
-	let { __scopeContextMenu: w, ...k } = d, F = useContextMenuContext(CONTENT_NAME$2, w), L = useMenuScope$1(w), V = React$1.useRef(!1);
-	return /* @__PURE__ */ jsx(Content2$2, {
-		...L,
-		...k,
-		ref: C,
-		side: "right",
-		sideOffset: 2,
-		align: "start",
-		onCloseAutoFocus: (s) => {
-			d.onCloseAutoFocus?.(s), !s.defaultPrevented && V.current && s.preventDefault(), V.current = !1;
-		},
-		onInteractOutside: (s) => {
-			d.onInteractOutside?.(s), !s.defaultPrevented && !F.modal && (V.current = !0);
-		},
-		style: {
-			...d.style,
-			"--radix-context-menu-content-transform-origin": "var(--radix-popper-transform-origin)",
-			"--radix-context-menu-content-available-width": "var(--radix-popper-available-width)",
-			"--radix-context-menu-content-available-height": "var(--radix-popper-available-height)",
-			"--radix-context-menu-trigger-width": "var(--radix-popper-anchor-width)",
-			"--radix-context-menu-trigger-height": "var(--radix-popper-anchor-height)"
-		}
-	});
-});
-ContextMenuContent.displayName = CONTENT_NAME$2;
-var GROUP_NAME$1 = "ContextMenuGroup", ContextMenuGroup = React$1.forwardRef((s, d) => {
-	let { __scopeContextMenu: C, ...w } = s;
-	return /* @__PURE__ */ jsx(Group, {
-		...useMenuScope$1(C),
-		...w,
-		ref: d
-	});
-});
-ContextMenuGroup.displayName = GROUP_NAME$1;
-var LABEL_NAME$1 = "ContextMenuLabel", ContextMenuLabel = React$1.forwardRef((s, d) => {
-	let { __scopeContextMenu: C, ...w } = s;
-	return /* @__PURE__ */ jsx(Label, {
-		...useMenuScope$1(C),
-		...w,
-		ref: d
-	});
-});
-ContextMenuLabel.displayName = LABEL_NAME$1;
-var ITEM_NAME$1 = "ContextMenuItem", ContextMenuItem = React$1.forwardRef((s, d) => {
-	let { __scopeContextMenu: C, ...w } = s;
-	return /* @__PURE__ */ jsx(Item2$2, {
-		...useMenuScope$1(C),
-		...w,
-		ref: d
-	});
-});
-ContextMenuItem.displayName = ITEM_NAME$1;
-var CHECKBOX_ITEM_NAME$1 = "ContextMenuCheckboxItem", ContextMenuCheckboxItem = React$1.forwardRef((s, d) => {
-	let { __scopeContextMenu: C, ...w } = s;
-	return /* @__PURE__ */ jsx(CheckboxItem, {
-		...useMenuScope$1(C),
-		...w,
-		ref: d
-	});
-});
-ContextMenuCheckboxItem.displayName = CHECKBOX_ITEM_NAME$1;
-var RADIO_GROUP_NAME$1 = "ContextMenuRadioGroup", ContextMenuRadioGroup = React$1.forwardRef((s, d) => {
-	let { __scopeContextMenu: C, ...w } = s;
-	return /* @__PURE__ */ jsx(RadioGroup, {
-		...useMenuScope$1(C),
-		...w,
-		ref: d
-	});
-});
-ContextMenuRadioGroup.displayName = RADIO_GROUP_NAME$1;
-var RADIO_ITEM_NAME$1 = "ContextMenuRadioItem", ContextMenuRadioItem = React$1.forwardRef((s, d) => {
-	let { __scopeContextMenu: C, ...w } = s;
-	return /* @__PURE__ */ jsx(RadioItem, {
-		...useMenuScope$1(C),
-		...w,
-		ref: d
-	});
-});
-ContextMenuRadioItem.displayName = RADIO_ITEM_NAME$1;
-var INDICATOR_NAME$1 = "ContextMenuItemIndicator", ContextMenuItemIndicator = React$1.forwardRef((s, d) => {
-	let { __scopeContextMenu: C, ...w } = s;
-	return /* @__PURE__ */ jsx(ItemIndicator, {
-		...useMenuScope$1(C),
-		...w,
-		ref: d
-	});
-});
-ContextMenuItemIndicator.displayName = INDICATOR_NAME$1;
-var SEPARATOR_NAME$1 = "ContextMenuSeparator", ContextMenuSeparator = React$1.forwardRef((s, d) => {
-	let { __scopeContextMenu: C, ...w } = s;
-	return /* @__PURE__ */ jsx(Separator, {
-		...useMenuScope$1(C),
-		...w,
-		ref: d
-	});
-});
-ContextMenuSeparator.displayName = SEPARATOR_NAME$1;
-var ARROW_NAME$2 = "ContextMenuArrow", ContextMenuArrow = React$1.forwardRef((s, d) => {
-	let { __scopeContextMenu: C, ...w } = s;
-	return /* @__PURE__ */ jsx(Arrow2, {
-		...useMenuScope$1(C),
-		...w,
-		ref: d
-	});
-});
-ContextMenuArrow.displayName = ARROW_NAME$2;
-var SUB_NAME = "ContextMenuSub", ContextMenuSub = (s) => {
-	let { __scopeContextMenu: d, children: C, onOpenChange: w, open: k, defaultOpen: F } = s, L = useMenuScope$1(d), [V, U] = useControllableState({
-		prop: k,
-		defaultProp: F ?? !1,
-		onChange: w,
-		caller: SUB_NAME
-	});
-	return /* @__PURE__ */ jsx(Sub, {
-		...L,
-		open: V,
-		onOpenChange: U,
-		children: C
-	});
-};
-ContextMenuSub.displayName = SUB_NAME;
-var SUB_TRIGGER_NAME$1 = "ContextMenuSubTrigger", ContextMenuSubTrigger = React$1.forwardRef((s, d) => {
-	let { __scopeContextMenu: C, ...w } = s;
-	return /* @__PURE__ */ jsx(SubTrigger, {
-		...useMenuScope$1(C),
-		...w,
-		ref: d
-	});
-});
-ContextMenuSubTrigger.displayName = SUB_TRIGGER_NAME$1;
-var SUB_CONTENT_NAME$1 = "ContextMenuSubContent", ContextMenuSubContent = React$1.forwardRef((s, d) => {
-	let { __scopeContextMenu: C, ...w } = s;
-	return /* @__PURE__ */ jsx(SubContent, {
-		...useMenuScope$1(C),
-		...w,
-		ref: d,
-		style: {
-			...s.style,
-			"--radix-context-menu-content-transform-origin": "var(--radix-popper-transform-origin)",
-			"--radix-context-menu-content-available-width": "var(--radix-popper-available-width)",
-			"--radix-context-menu-content-available-height": "var(--radix-popper-available-height)",
-			"--radix-context-menu-trigger-width": "var(--radix-popper-anchor-width)",
-			"--radix-context-menu-trigger-height": "var(--radix-popper-anchor-height)"
-		}
-	});
-});
-ContextMenuSubContent.displayName = SUB_CONTENT_NAME$1;
-function whenTouchOrPen(s) {
-	return (d) => d.pointerType === "mouse" ? void 0 : s(d);
-}
-var Root2$1 = ContextMenu, Trigger$1 = ContextMenuTrigger, Portal2$1 = ContextMenuPortal, Content2$1 = ContextMenuContent, Item2$1 = ContextMenuItem, Separator2$1 = ContextMenuSeparator, Sub2$1 = ContextMenuSub, SubTrigger2$1 = ContextMenuSubTrigger, SubContent2$1 = ContextMenuSubContent, DROPDOWN_MENU_NAME = "DropdownMenu", [createDropdownMenuContext, createDropdownMenuScope] = createContextScope(DROPDOWN_MENU_NAME, [createMenuScope]), useMenuScope = createMenuScope(), [DropdownMenuProvider, useDropdownMenuContext] = createDropdownMenuContext(DROPDOWN_MENU_NAME), DropdownMenu = (d) => {
+var Root3 = Menu, Anchor2 = MenuAnchor, Portal$1 = MenuPortal, Content2$1 = MenuContent, Group = MenuGroup, Label = MenuLabel, Item2$1 = MenuItem$1, CheckboxItem = MenuCheckboxItem, RadioGroup = MenuRadioGroup, RadioItem = MenuRadioItem, ItemIndicator = MenuItemIndicator, Separator = MenuSeparator$1, Arrow2 = MenuArrow, Sub = MenuSub, SubTrigger = MenuSubTrigger, SubContent = MenuSubContent, DROPDOWN_MENU_NAME = "DropdownMenu", [createDropdownMenuContext, createDropdownMenuScope] = createContextScope(DROPDOWN_MENU_NAME, [createMenuScope]), useMenuScope = createMenuScope(), [DropdownMenuProvider, useDropdownMenuContext] = createDropdownMenuContext(DROPDOWN_MENU_NAME), DropdownMenu = (d) => {
 	let { __scopeDropdownMenu: C, children: w, dir: k, open: F, defaultOpen: L, onOpenChange: V, modal: U = !0 } = d, K = useMenuScope(C), q = React$1.useRef(null), [J, X] = useControllableState({
 		prop: F,
 		defaultProp: L ?? !1,
@@ -3658,7 +3441,7 @@ var PORTAL_NAME$1 = "DropdownMenuPortal", DropdownMenuPortal = (s) => {
 DropdownMenuPortal.displayName = PORTAL_NAME$1;
 var CONTENT_NAME$1 = "DropdownMenuContent", DropdownMenuContent = React$1.forwardRef((d, C) => {
 	let { __scopeDropdownMenu: w, ...k } = d, F = useDropdownMenuContext(CONTENT_NAME$1, w), L = useMenuScope(w), V = React$1.useRef(!1);
-	return /* @__PURE__ */ jsx(Content2$2, {
+	return /* @__PURE__ */ jsx(Content2$1, {
 		id: F.contentId,
 		"aria-labelledby": F.triggerId,
 		...L,
@@ -3702,7 +3485,7 @@ var LABEL_NAME = "DropdownMenuLabel", DropdownMenuLabel = React$1.forwardRef((s,
 DropdownMenuLabel.displayName = LABEL_NAME;
 var ITEM_NAME = "DropdownMenuItem", DropdownMenuItem = React$1.forwardRef((s, d) => {
 	let { __scopeDropdownMenu: C, ...w } = s;
-	return /* @__PURE__ */ jsx(Item2$2, {
+	return /* @__PURE__ */ jsx(Item2$1, {
 		...useMenuScope(C),
 		...w,
 		ref: d
@@ -3810,35 +3593,35 @@ function useStateMachine(d, C) {
 	return React$1.useReducer((s, d) => C[s][d] ?? s, d);
 }
 var SCROLL_AREA_NAME = "ScrollArea", [createScrollAreaContext, createScrollAreaScope] = createContextScope(SCROLL_AREA_NAME), [ScrollAreaProvider, useScrollAreaContext] = createScrollAreaContext(SCROLL_AREA_NAME), ScrollArea = React$1.forwardRef((d, C) => {
-	let { __scopeScrollArea: w, type: k = "hover", dir: F, scrollHideDelay: L = 600, ...V } = d, [U, K] = React$1.useState(null), [q, J] = React$1.useState(null), [X, $] = React$1.useState(null), [CO, wO] = React$1.useState(null), [TO, EO] = React$1.useState(null), [DO, OO] = React$1.useState(0), [kO, AO] = React$1.useState(0), [jO, NO] = React$1.useState(!1), [PO, FO] = React$1.useState(!1), IO = useComposedRefs(C, (s) => K(s)), LO = useDirection(F);
+	let { __scopeScrollArea: w, type: k = "hover", dir: F, scrollHideDelay: L = 600, ...V } = d, [U, K] = React$1.useState(null), [q, J] = React$1.useState(null), [X, $] = React$1.useState(null), [PD, FD] = React$1.useState(null), [ID, LD] = React$1.useState(null), [RD, zD] = React$1.useState(0), [BD, VD] = React$1.useState(0), [HD, UD] = React$1.useState(!1), [GD, KD] = React$1.useState(!1), qD = useComposedRefs(C, (s) => K(s)), JD = useDirection(F);
 	return /* @__PURE__ */ jsx(ScrollAreaProvider, {
 		scope: w,
 		type: k,
-		dir: LO,
+		dir: JD,
 		scrollHideDelay: L,
 		scrollArea: U,
 		viewport: q,
 		onViewportChange: J,
 		content: X,
 		onContentChange: $,
-		scrollbarX: CO,
-		onScrollbarXChange: wO,
-		scrollbarXEnabled: jO,
-		onScrollbarXEnabledChange: NO,
-		scrollbarY: TO,
-		onScrollbarYChange: EO,
-		scrollbarYEnabled: PO,
-		onScrollbarYEnabledChange: FO,
-		onCornerWidthChange: OO,
-		onCornerHeightChange: AO,
+		scrollbarX: PD,
+		onScrollbarXChange: FD,
+		scrollbarXEnabled: HD,
+		onScrollbarXEnabledChange: UD,
+		scrollbarY: ID,
+		onScrollbarYChange: LD,
+		scrollbarYEnabled: GD,
+		onScrollbarYEnabledChange: KD,
+		onCornerWidthChange: zD,
+		onCornerHeightChange: VD,
 		children: /* @__PURE__ */ jsx(Primitive.div, {
-			dir: LO,
+			dir: JD,
 			...V,
-			ref: IO,
+			ref: qD,
 			style: {
 				position: "relative",
-				"--radix-scroll-area-corner-width": DO + "px",
-				"--radix-scroll-area-corner-height": kO + "px",
+				"--radix-scroll-area-corner-width": RD + "px",
+				"--radix-scroll-area-corner-height": BD + "px",
 				...d.style
 			}
 		})
@@ -4109,46 +3892,46 @@ var ScrollAreaScrollbarHover = React$1.forwardRef((d, C) => {
 		}
 	});
 }), [ScrollbarProvider, useScrollbarContext] = createScrollAreaContext(SCROLLBAR_NAME), ScrollAreaScrollbarImpl = React$1.forwardRef((d, C) => {
-	let { __scopeScrollArea: w, sizes: k, hasThumb: F, onThumbChange: L, onThumbPointerUp: V, onThumbPointerDown: U, onThumbPositionChange: K, onDragScroll: q, onWheelScroll: J, onResize: X, ...$ } = d, CO = useScrollAreaContext(SCROLLBAR_NAME, w), [wO, TO] = React$1.useState(null), EO = useComposedRefs(C, (s) => TO(s)), DO = React$1.useRef(null), OO = React$1.useRef(""), kO = CO.viewport, AO = k.content - k.viewport, jO = useCallbackRef(J), NO = useCallbackRef(K), PO = useDebounceCallback(X, 10);
-	function FO(s) {
-		DO.current && q({
-			x: s.clientX - DO.current.left,
-			y: s.clientY - DO.current.top
+	let { __scopeScrollArea: w, sizes: k, hasThumb: F, onThumbChange: L, onThumbPointerUp: V, onThumbPointerDown: U, onThumbPositionChange: K, onDragScroll: q, onWheelScroll: J, onResize: X, ...$ } = d, PD = useScrollAreaContext(SCROLLBAR_NAME, w), [FD, ID] = React$1.useState(null), LD = useComposedRefs(C, (s) => ID(s)), RD = React$1.useRef(null), zD = React$1.useRef(""), BD = PD.viewport, VD = k.content - k.viewport, HD = useCallbackRef(J), UD = useCallbackRef(K), GD = useDebounceCallback(X, 10);
+	function KD(s) {
+		RD.current && q({
+			x: s.clientX - RD.current.left,
+			y: s.clientY - RD.current.top
 		});
 	}
 	return React$1.useEffect(() => {
 		let s = (s) => {
 			let d = s.target;
-			wO?.contains(d) && jO(s, AO);
+			FD?.contains(d) && HD(s, VD);
 		};
 		return document.addEventListener("wheel", s, { passive: !1 }), () => document.removeEventListener("wheel", s, { passive: !1 });
 	}, [
-		kO,
-		wO,
-		AO,
-		jO
-	]), React$1.useEffect(NO, [k, NO]), useResizeObserver(wO, PO), useResizeObserver(CO.content, PO), /* @__PURE__ */ jsx(ScrollbarProvider, {
+		BD,
+		FD,
+		VD,
+		HD
+	]), React$1.useEffect(UD, [k, UD]), useResizeObserver(FD, GD), useResizeObserver(PD.content, GD), /* @__PURE__ */ jsx(ScrollbarProvider, {
 		scope: w,
-		scrollbar: wO,
+		scrollbar: FD,
 		hasThumb: F,
 		onThumbChange: useCallbackRef(L),
 		onThumbPointerUp: useCallbackRef(V),
-		onThumbPositionChange: NO,
+		onThumbPositionChange: UD,
 		onThumbPointerDown: useCallbackRef(U),
 		children: /* @__PURE__ */ jsx(Primitive.div, {
 			...$,
-			ref: EO,
+			ref: LD,
 			style: {
 				position: "absolute",
 				...$.style
 			},
 			onPointerDown: composeEventHandlers(d.onPointerDown, (s) => {
-				s.button === 0 && (s.target.setPointerCapture(s.pointerId), DO.current = wO.getBoundingClientRect(), OO.current = document.body.style.webkitUserSelect, document.body.style.webkitUserSelect = "none", CO.viewport && (CO.viewport.style.scrollBehavior = "auto"), FO(s));
+				s.button === 0 && (s.target.setPointerCapture(s.pointerId), RD.current = FD.getBoundingClientRect(), zD.current = document.body.style.webkitUserSelect, document.body.style.webkitUserSelect = "none", PD.viewport && (PD.viewport.style.scrollBehavior = "auto"), KD(s));
 			}),
-			onPointerMove: composeEventHandlers(d.onPointerMove, FO),
+			onPointerMove: composeEventHandlers(d.onPointerMove, KD),
 			onPointerUp: composeEventHandlers(d.onPointerUp, (s) => {
 				let d = s.target;
-				d.hasPointerCapture(s.pointerId) && d.releasePointerCapture(s.pointerId), document.body.style.webkitUserSelect = OO.current, CO.viewport && (CO.viewport.style.scrollBehavior = ""), DO.current = null;
+				d.hasPointerCapture(s.pointerId) && d.releasePointerCapture(s.pointerId), document.body.style.webkitUserSelect = zD.current, PD.viewport && (PD.viewport.style.scrollBehavior = ""), RD.current = null;
 			})
 		})
 	});
@@ -4314,46 +4097,46 @@ var Root = ScrollArea, Viewport = ScrollAreaViewport, Scrollbar = ScrollAreaScro
 };
 TooltipProvider.displayName = PROVIDER_NAME;
 var TOOLTIP_NAME = "Tooltip", [TooltipContextProvider, useTooltipContext] = createTooltipContext(TOOLTIP_NAME), Tooltip = (d) => {
-	let { __scopeTooltip: C, children: w, open: k, defaultOpen: F, onOpenChange: L, disableHoverableContent: V, delayDuration: U } = d, K = useTooltipProviderContext(TOOLTIP_NAME, d.__scopeTooltip), q = usePopperScope(C), [J, X] = React$1.useState(null), $ = useId$1(), CO = React$1.useRef(0), wO = V ?? K.disableHoverableContent, TO = U ?? K.delayDuration, EO = React$1.useRef(!1), [DO, OO] = useControllableState({
+	let { __scopeTooltip: C, children: w, open: k, defaultOpen: F, onOpenChange: L, disableHoverableContent: V, delayDuration: U } = d, K = useTooltipProviderContext(TOOLTIP_NAME, d.__scopeTooltip), q = usePopperScope(C), [J, X] = React$1.useState(null), $ = useId$1(), PD = React$1.useRef(0), FD = V ?? K.disableHoverableContent, ID = U ?? K.delayDuration, LD = React$1.useRef(!1), [RD, zD] = useControllableState({
 		prop: k,
 		defaultProp: F ?? !1,
 		onChange: (s) => {
 			s ? (K.onOpen(), document.dispatchEvent(new CustomEvent(TOOLTIP_OPEN))) : K.onClose(), L?.(s);
 		},
 		caller: TOOLTIP_NAME
-	}), kO = React$1.useMemo(() => DO ? EO.current ? "delayed-open" : "instant-open" : "closed", [DO]), AO = React$1.useCallback(() => {
-		window.clearTimeout(CO.current), CO.current = 0, EO.current = !1, OO(!0);
-	}, [OO]), jO = React$1.useCallback(() => {
-		window.clearTimeout(CO.current), CO.current = 0, OO(!1);
-	}, [OO]), NO = React$1.useCallback(() => {
-		window.clearTimeout(CO.current), CO.current = window.setTimeout(() => {
-			EO.current = !0, OO(!0), CO.current = 0;
-		}, TO);
-	}, [TO, OO]);
+	}), BD = React$1.useMemo(() => RD ? LD.current ? "delayed-open" : "instant-open" : "closed", [RD]), VD = React$1.useCallback(() => {
+		window.clearTimeout(PD.current), PD.current = 0, LD.current = !1, zD(!0);
+	}, [zD]), HD = React$1.useCallback(() => {
+		window.clearTimeout(PD.current), PD.current = 0, zD(!1);
+	}, [zD]), UD = React$1.useCallback(() => {
+		window.clearTimeout(PD.current), PD.current = window.setTimeout(() => {
+			LD.current = !0, zD(!0), PD.current = 0;
+		}, ID);
+	}, [ID, zD]);
 	return React$1.useEffect(() => () => {
-		CO.current &&= (window.clearTimeout(CO.current), 0);
-	}, []), /* @__PURE__ */ jsx(Root2$2, {
+		PD.current &&= (window.clearTimeout(PD.current), 0);
+	}, []), /* @__PURE__ */ jsx(Root2$1, {
 		...q,
 		children: /* @__PURE__ */ jsx(TooltipContextProvider, {
 			scope: C,
 			contentId: $,
-			open: DO,
-			stateAttribute: kO,
+			open: RD,
+			stateAttribute: BD,
 			trigger: J,
 			onTriggerChange: X,
 			onTriggerEnter: React$1.useCallback(() => {
-				K.isOpenDelayedRef.current ? NO() : AO();
+				K.isOpenDelayedRef.current ? UD() : VD();
 			}, [
 				K.isOpenDelayedRef,
-				NO,
-				AO
+				UD,
+				VD
 			]),
 			onTriggerLeave: React$1.useCallback(() => {
-				wO ? jO() : (window.clearTimeout(CO.current), CO.current = 0);
-			}, [jO, wO]),
-			onOpen: AO,
-			onClose: jO,
-			disableHoverableContent: wO,
+				FD ? HD() : (window.clearTimeout(PD.current), PD.current = 0);
+			}, [HD, FD]),
+			onOpen: VD,
+			onClose: HD,
+			disableHoverableContent: FD,
 			children: w
 		})
 	});
@@ -4420,7 +4203,7 @@ var CONTENT_NAME = "TooltipContent", TooltipContent = React$1.forwardRef((s, d) 
 }), TooltipContentHoverable = React$1.forwardRef((d, C) => {
 	let w = useTooltipContext(CONTENT_NAME, d.__scopeTooltip), k = useTooltipProviderContext(CONTENT_NAME, d.__scopeTooltip), F = React$1.useRef(null), L = useComposedRefs(C, F), [V, U] = React$1.useState(null), { trigger: K, onClose: q } = w, J = F.current, { onPointerInTransitChange: X } = k, $ = React$1.useCallback(() => {
 		U(null), X(!1);
-	}, [X]), CO = React$1.useCallback((s, d) => {
+	}, [X]), PD = React$1.useCallback((s, d) => {
 		let C = s.currentTarget, w = {
 			x: s.clientX,
 			y: s.clientY
@@ -4429,7 +4212,7 @@ var CONTENT_NAME = "TooltipContent", TooltipContent = React$1.forwardRef((s, d) 
 	}, [X]);
 	return React$1.useEffect(() => () => $(), [$]), React$1.useEffect(() => {
 		if (K && J) {
-			let s = (s) => CO(s, J), d = (s) => CO(s, K);
+			let s = (s) => PD(s, J), d = (s) => PD(s, K);
 			return K.addEventListener("pointerleave", s), J.addEventListener("pointerleave", d), () => {
 				K.removeEventListener("pointerleave", s), J.removeEventListener("pointerleave", d);
 			};
@@ -4437,7 +4220,7 @@ var CONTENT_NAME = "TooltipContent", TooltipContent = React$1.forwardRef((s, d) 
 	}, [
 		K,
 		J,
-		CO,
+		PD,
 		$
 	]), React$1.useEffect(() => {
 		if (V) {
@@ -5163,79 +4946,79 @@ R.displayName = "Theme";
 var I$2 = React$1.forwardRef((d, C) => {
 	let { appearance: w = s$10.appearance.default, accentColor: k = s$10.accentColor.default, grayColor: F = s$10.grayColor.default, panelBackground: L = s$10.panelBackground.default, radius: V = s$10.radius.default, scaling: U = s$10.scaling.default, hasBackground: K = s$10.hasBackground.default, ...q } = d, [J, X] = React$1.useState(w);
 	React$1.useEffect(() => X(w), [w]);
-	let [$, CO] = React$1.useState(k);
-	React$1.useEffect(() => CO(k), [k]);
-	let [wO, TO] = React$1.useState(F);
-	React$1.useEffect(() => TO(F), [F]);
-	let [EO, DO] = React$1.useState(L);
-	React$1.useEffect(() => DO(L), [L]);
-	let [OO, kO] = React$1.useState(V);
-	React$1.useEffect(() => kO(V), [V]);
-	let [AO, jO] = React$1.useState(U);
-	return React$1.useEffect(() => jO(U), [U]), React$1.createElement(A$1, {
+	let [$, PD] = React$1.useState(k);
+	React$1.useEffect(() => PD(k), [k]);
+	let [FD, ID] = React$1.useState(F);
+	React$1.useEffect(() => ID(F), [F]);
+	let [LD, RD] = React$1.useState(L);
+	React$1.useEffect(() => RD(L), [L]);
+	let [zD, BD] = React$1.useState(V);
+	React$1.useEffect(() => BD(V), [V]);
+	let [VD, HD] = React$1.useState(U);
+	return React$1.useEffect(() => HD(U), [U]), React$1.createElement(A$1, {
 		...q,
 		ref: C,
 		isRoot: !0,
 		hasBackground: K,
 		appearance: J,
 		accentColor: $,
-		grayColor: wO,
-		panelBackground: EO,
-		radius: OO,
-		scaling: AO,
+		grayColor: FD,
+		panelBackground: LD,
+		radius: zD,
+		scaling: VD,
 		onAppearanceChange: X,
-		onAccentColorChange: CO,
-		onGrayColorChange: TO,
-		onPanelBackgroundChange: DO,
-		onRadiusChange: kO,
-		onScalingChange: jO
+		onAccentColorChange: PD,
+		onGrayColorChange: ID,
+		onPanelBackgroundChange: RD,
+		onRadiusChange: BD,
+		onScalingChange: HD
 	});
 });
 I$2.displayName = "ThemeRoot";
 var A$1 = React$1.forwardRef((d, C) => {
-	let w = React$1.useContext(P), { asChild: k, isRoot: F, hasBackground: L, appearance: V = w?.appearance ?? s$10.appearance.default, accentColor: U = w?.accentColor ?? s$10.accentColor.default, grayColor: K = w?.resolvedGrayColor ?? s$10.grayColor.default, panelBackground: q = w?.panelBackground ?? s$10.panelBackground.default, radius: J = w?.radius ?? s$10.radius.default, scaling: X = w?.scaling ?? s$10.scaling.default, onAppearanceChange: $ = d$4, onAccentColorChange: CO = d$4, onGrayColorChange: wO = d$4, onPanelBackgroundChange: TO = d$4, onRadiusChange: EO = d$4, onScalingChange: DO = d$4, ...OO } = d, kO = k ? Slot$2 : "div", AO = K === "auto" ? a$8(U) : K, jO = d.appearance === "light" || d.appearance === "dark", MO = L === void 0 ? F || jO : L;
+	let w = React$1.useContext(P), { asChild: k, isRoot: F, hasBackground: L, appearance: V = w?.appearance ?? s$10.appearance.default, accentColor: U = w?.accentColor ?? s$10.accentColor.default, grayColor: K = w?.resolvedGrayColor ?? s$10.grayColor.default, panelBackground: q = w?.panelBackground ?? s$10.panelBackground.default, radius: J = w?.radius ?? s$10.radius.default, scaling: X = w?.scaling ?? s$10.scaling.default, onAppearanceChange: $ = d$4, onAccentColorChange: PD = d$4, onGrayColorChange: FD = d$4, onPanelBackgroundChange: ID = d$4, onRadiusChange: LD = d$4, onScalingChange: RD = d$4, ...zD } = d, BD = k ? Slot$2 : "div", VD = K === "auto" ? a$8(U) : K, HD = d.appearance === "light" || d.appearance === "dark", UD = L === void 0 ? F || HD : L;
 	return React$1.createElement(P.Provider, { value: React$1.useMemo(() => ({
 		appearance: V,
 		accentColor: U,
 		grayColor: K,
-		resolvedGrayColor: AO,
+		resolvedGrayColor: VD,
 		panelBackground: q,
 		radius: J,
 		scaling: X,
 		onAppearanceChange: $,
-		onAccentColorChange: CO,
-		onGrayColorChange: wO,
-		onPanelBackgroundChange: TO,
-		onRadiusChange: EO,
-		onScalingChange: DO
+		onAccentColorChange: PD,
+		onGrayColorChange: FD,
+		onPanelBackgroundChange: ID,
+		onRadiusChange: LD,
+		onScalingChange: RD
 	}), [
 		V,
 		U,
 		K,
-		AO,
+		VD,
 		q,
 		J,
 		X,
 		$,
-		CO,
-		wO,
-		TO,
-		EO,
-		DO
-	]) }, React$1.createElement(kO, {
+		PD,
+		FD,
+		ID,
+		LD,
+		RD
+	]) }, React$1.createElement(BD, {
 		"data-is-root-theme": F ? "true" : "false",
 		"data-accent-color": U,
-		"data-gray-color": AO,
-		"data-has-background": MO ? "true" : "false",
+		"data-gray-color": VD,
+		"data-has-background": UD ? "true" : "false",
 		"data-panel-background": q,
 		"data-radius": J,
 		"data-scaling": X,
 		ref: C,
-		...OO,
+		...zD,
 		className: (0, import_classnames$13.default)("radix-themes", {
 			light: V === "light",
 			dark: V === "dark"
-		}, OO.className)
+		}, zD.className)
 	}));
 });
 A$1.displayName = "ThemeImpl";
@@ -5886,16 +5669,16 @@ function S$1(s) {
 		customProperties: ["--margin-bottom"],
 		propValues: r$5,
 		value: s.mb
-	}), [$, CO] = R$3({
+	}), [$, PD] = R$3({
 		className: "rt-r-ml",
 		customProperties: ["--margin-left"],
 		propValues: r$5,
 		value: s.ml
 	});
-	return [(0, import_classnames$6.default)(d, w, F, V, K, J, $), l$1(C, k, L, U, q, X, CO)];
+	return [(0, import_classnames$6.default)(d, w, F, V, K, J, $), l$1(C, k, L, U, q, X, PD)];
 }
 var import_classnames$5 = /* @__PURE__ */ __toESM(require_classnames()), c = React$1.forwardRef((d, C) => {
-	let { rest: w, ...k } = a$3(d), [F, L] = S$1(k), { asChild: V, children: U, className: K, style: q, type: J, scrollHideDelay: X = J === "scroll" ? void 0 : 0, dir: $, size: CO = t$1.size.default, radius: wO = t$1.radius.default, scrollbars: TO = t$1.scrollbars.default, ...EO } = w;
+	let { rest: w, ...k } = a$3(d), [F, L] = S$1(k), { asChild: V, children: U, className: K, style: q, type: J, scrollHideDelay: X = J === "scroll" ? void 0 : 0, dir: $, size: PD = t$1.size.default, radius: FD = t$1.radius.default, scrollbars: ID = t$1.scrollbars.default, ...LD } = w;
 	return React$1.createElement(Root, {
 		type: J,
 		scrollHideDelay: X,
@@ -5906,26 +5689,26 @@ var import_classnames$5 = /* @__PURE__ */ __toESM(require_classnames()), c = Rea
 		asChild: V,
 		children: U
 	}, (d) => React$1.createElement(React$1.Fragment, null, React$1.createElement(Viewport, {
-		...EO,
+		...LD,
 		ref: C,
 		className: "rt-ScrollAreaViewport"
-	}, d), React$1.createElement("div", { className: "rt-ScrollAreaViewportFocusRing" }), TO === "vertical" ? null : React$1.createElement(Scrollbar, {
-		"data-radius": wO,
+	}, d), React$1.createElement("div", { className: "rt-ScrollAreaViewportFocusRing" }), ID === "vertical" ? null : React$1.createElement(Scrollbar, {
+		"data-radius": FD,
 		orientation: "horizontal",
 		className: (0, import_classnames$5.default)("rt-ScrollAreaScrollbar", g$2({
 			className: "rt-r-size",
-			value: CO,
+			value: PD,
 			propValues: t$1.size.values
 		}))
-	}, React$1.createElement(Thumb, { className: "rt-ScrollAreaThumb" })), TO === "horizontal" ? null : React$1.createElement(Scrollbar, {
-		"data-radius": wO,
+	}, React$1.createElement(Thumb, { className: "rt-ScrollAreaThumb" })), ID === "horizontal" ? null : React$1.createElement(Scrollbar, {
+		"data-radius": FD,
 		orientation: "vertical",
 		className: (0, import_classnames$5.default)("rt-ScrollAreaScrollbar", g$2({
 			className: "rt-r-size",
-			value: CO,
+			value: PD,
 			propValues: t$1.size.values
 		}))
-	}, React$1.createElement(Thumb, { className: "rt-ScrollAreaThumb" })), TO === "both" ? React$1.createElement(Corner, { className: "rt-ScrollAreaCorner" }) : null)));
+	}, React$1.createElement(Thumb, { className: "rt-ScrollAreaThumb" })), ID === "both" ? React$1.createElement(Corner, { className: "rt-ScrollAreaCorner" }) : null)));
 });
 c.displayName = "ScrollArea";
 var n$1 = {
@@ -5956,7 +5739,7 @@ var n$1 = {
 	modal: !0
 });
 s$2.displayName = "Dialog.Root";
-var n$2 = React$1.forwardRef(({ children: d, ...C }, w) => React$1.createElement(Trigger$2, {
+var n$2 = React$1.forwardRef(({ children: d, ...C }, w) => React$1.createElement(Trigger$1, {
 	...C,
 	ref: w,
 	asChild: !0
@@ -6928,17 +6711,17 @@ function $e({ document: s, event: d, hitRegions: C, initialLayoutMap: w, mounted
 	C.forEach((s) => {
 		let { group: C, groupSize: U } = s, { disableCursor: K, orientation: q, panels: J } = C, X = 0;
 		X = F ? q === "horizontal" ? (d.clientX - F.x) / U * 100 : (d.clientY - F.y) / U * 100 : q === "horizontal" ? d.clientX < 0 ? -100 : 100 : d.clientY < 0 ? -100 : 100;
-		let $ = w.get(C), { defaultLayoutDeferred: CO, derivedPanelConstraints: wO, layout: TO, separatorToPanels: EO } = k.get(C) ?? { defaultLayoutDeferred: !1 };
-		if (wO && $ && TO && EO) {
+		let $ = w.get(C), { defaultLayoutDeferred: PD, derivedPanelConstraints: FD, layout: ID, separatorToPanels: LD } = k.get(C) ?? { defaultLayoutDeferred: !1 };
+		if (FD && $ && ID && LD) {
 			let d = Z({
 				delta: X,
 				initialLayout: $,
-				panelConstraints: wO,
+				panelConstraints: FD,
 				pivotIndices: s.panels.map((s) => J.indexOf(s)),
-				prevLayout: TO,
+				prevLayout: ID,
 				trigger: "mouse-or-touch"
 			});
-			if (B(d, TO)) {
+			if (B(d, ID)) {
 				if (X !== 0 && !K) switch (q) {
 					case "horizontal":
 						L |= X < 0 ? De : Oe;
@@ -6949,10 +6732,10 @@ function $e({ document: s, event: d, hitRegions: C, initialLayoutMap: w, mounted
 				}
 			} else {
 				V.set(s.group, {
-					defaultLayoutDeferred: CO,
-					derivedPanelConstraints: wO,
+					defaultLayoutDeferred: PD,
+					derivedPanelConstraints: FD,
 					layout: d,
-					separatorToPanels: EO
+					separatorToPanels: LD
 				});
 				let C = s.group.panels.map(({ id: s }) => s).join(",");
 				s.group.inMemoryLayouts[C] = d;
@@ -7162,66 +6945,66 @@ function Pt(s, d) {
 	});
 }
 function Rt({ children: s, className: d, defaultLayout: C, disableCursor: w, disabled: k, elementRef: F, groupRef: L, id: V, onLayoutChange: U, orientation: K = "horizontal", style: q, ...X }) {
-	let $ = useRef({}), CO = le((s) => {
+	let $ = useRef({}), PD = le((s) => {
 		B($.current, s) || ($.current = s, U?.(s));
-	}), wO = ae(V), OO = useRef(null), [kO, AO] = useState(!1), [jO, NO] = useState(C ?? {}), [PO, FO] = wt(), IO = useRef({
+	}), FD = ae(V), zD = useRef(null), [BD, VD] = useState(!1), [HD, UD] = useState(C ?? {}), [GD, KD] = wt(), qD = useRef({
 		lastExpandedPanelSizes: {},
 		layouts: {},
 		panels: [],
 		separators: []
-	}), LO = ue(OO, F);
-	Pt(wO, L);
-	let RO = useMemo(() => ({
-		id: wO,
+	}), JD = ue(zD, F);
+	Pt(FD, L);
+	let YD = useMemo(() => ({
+		id: FD,
 		orientation: K,
 		registerPanel: (s) => {
-			let d = IO.current;
-			return d.panels = ie(K, [...d.panels, s]), FO(), () => {
-				d.panels = d.panels.filter((d) => d !== s), FO();
+			let d = qD.current;
+			return d.panels = ie(K, [...d.panels, s]), KD(), () => {
+				d.panels = d.panels.filter((d) => d !== s), KD();
 			};
 		},
 		registerSeparator: (s) => {
-			let d = IO.current;
-			return d.separators = ie(K, [...d.separators, s]), FO(), () => {
-				d.separators = d.separators.filter((d) => d !== s), FO();
+			let d = qD.current;
+			return d.separators = ie(K, [...d.separators, s]), KD(), () => {
+				d.separators = d.separators.filter((d) => d !== s), KD();
 			};
 		}
 	}), [
-		wO,
-		FO,
+		FD,
+		KD,
 		K
-	]), zO = Lt({
+	]), XD = Lt({
 		defaultLayout: C,
 		disableCursor: w
-	}), BO = useRef(null);
+	}), ZD = useRef(null);
 	A(() => {
-		let s = OO.current;
+		let s = zD.current;
 		if (s === null) return;
-		let d = IO.current, C = {
-			defaultLayout: zO.defaultLayout,
-			disableCursor: !!zO.disableCursor,
+		let d = qD.current, C = {
+			defaultLayout: XD.defaultLayout,
+			disableCursor: !!XD.disableCursor,
 			disabled: !!k,
 			element: s,
-			id: wO,
-			inMemoryLastExpandedPanelSizes: IO.current.lastExpandedPanelSizes,
-			inMemoryLayouts: IO.current.layouts,
+			id: FD,
+			inMemoryLastExpandedPanelSizes: qD.current.lastExpandedPanelSizes,
+			inMemoryLayouts: qD.current.layouts,
 			orientation: K,
 			panels: d.panels,
 			separators: d.separators
 		};
-		BO.current = C;
+		ZD.current = C;
 		let w = bt(C), F = D().mountedGroups.get(C);
 		if (F) {
 			let { defaultLayoutDeferred: s, derivedPanelConstraints: d, layout: C } = F;
-			!s && d.length > 0 && (NO(C), CO?.(C));
+			!s && d.length > 0 && (UD(C), PD?.(C));
 		}
 		let L = T.addListener("interactionStateChange", (s) => {
 			switch (s.state) {
 				case "active":
-					AO(s.hitRegions.some((s) => s.group === C));
+					VD(s.hitRegions.some((s) => s.group === C));
 					break;
 				default:
-					AO(!1);
+					VD(!1);
 					break;
 			}
 		}), V = T.addListener("mountedGroupsChange", (s) => {
@@ -7229,44 +7012,44 @@ function Rt({ children: s, className: d, defaultLayout: C, disableCursor: w, dis
 			if (d) {
 				let { defaultLayoutDeferred: s, derivedPanelConstraints: C, layout: w } = d;
 				if (s || C.length === 0) return;
-				NO(w), CO?.(w);
+				UD(w), PD?.(w);
 			}
 		});
 		return () => {
-			BO.current = null, w(), L(), V();
+			ZD.current = null, w(), L(), V();
 		};
 	}, [
 		k,
-		wO,
-		CO,
+		FD,
+		PD,
 		K,
-		PO,
-		zO
+		GD,
+		XD
 	]), useEffect(() => {
-		let s = BO.current;
+		let s = ZD.current;
 		s && (s.defaultLayout = C, s.disableCursor = !!w);
 	});
-	let VO = { [Fe]: kO ? "none" : void 0 };
-	for (let s in jO) {
-		let d = Ve(wO, s);
-		VO[d] = jO[s];
+	let QD = { [Fe]: BD ? "none" : void 0 };
+	for (let s in HD) {
+		let d = Ve(FD, s);
+		QD[d] = HD[s];
 	}
 	return /* @__PURE__ */ jsx(je.Provider, {
-		value: RO,
+		value: YD,
 		children: /* @__PURE__ */ jsx("div", {
 			...X,
 			"aria-orientation": K,
 			className: d,
 			"data-group": !0,
-			"data-testid": wO,
-			id: wO,
-			ref: LO,
+			"data-testid": FD,
+			id: FD,
+			ref: JD,
 			style: {
 				height: "100%",
 				width: "100%",
 				overflow: "hidden",
 				...q,
-				...VO,
+				...QD,
 				display: "flex",
 				flexDirection: K === "horizontal" ? "row" : "column",
 				flexWrap: "nowrap"
@@ -7384,20 +7167,20 @@ function It(s, d) {
 	});
 }
 function kt({ children: s, className: d, collapsedSize: C = "0%", collapsible: w = !1, defaultSize: k, elementRef: F, id: L, maxSize: V = "100%", minSize: U = "0%", onResize: K, panelRef: q, style: J, ...X }) {
-	let $ = !!L, CO = ae(L), wO = useRef(null), TO = ue(wO, F), { id: DO, registerPanel: OO } = ce(), kO = K !== null, AO = le((s, d, C) => {
+	let $ = !!L, PD = ae(L), FD = useRef(null), ID = ue(FD, F), { id: RD, registerPanel: zD } = ce(), BD = K !== null, VD = le((s, d, C) => {
 		K?.(s, L, C);
 	});
 	A(() => {
-		let s = wO.current;
-		if (s !== null) return OO({
+		let s = FD.current;
+		if (s !== null) return zD({
 			element: s,
-			id: CO,
+			id: PD,
 			idIsStable: $,
 			mutableValues: {
 				expandToSize: void 0,
 				prevSize: void 0
 			},
-			onResize: kO ? AO : void 0,
+			onResize: BD ? VD : void 0,
 			panelConstraints: {
 				collapsedSize: C,
 				collapsible: w,
@@ -7410,25 +7193,25 @@ function kt({ children: s, className: d, collapsedSize: C = "0%", collapsible: w
 		C,
 		w,
 		k,
-		kO,
-		CO,
+		BD,
+		PD,
 		$,
 		V,
 		U,
-		AO,
-		OO
-	]), It(CO, q);
-	let jO = Ve(DO, CO);
+		VD,
+		zD
+	]), It(PD, q);
+	let HD = Ve(RD, PD);
 	return /* @__PURE__ */ jsx("div", {
 		...X,
 		"data-panel": !0,
-		"data-testid": CO,
-		id: CO,
-		ref: TO,
+		"data-testid": PD,
+		id: PD,
+		ref: ID,
 		style: {
 			...Gt,
 			flexBasis: 0,
-			flexGrow: `var(${jO}, 1)`,
+			flexGrow: `var(${HD}, 1)`,
 			flexShrink: 1,
 			overflow: "hidden",
 			pointerEvents: `var(${Fe})`
@@ -7491,14 +7274,14 @@ function Dt({ layout: s, panelConstraints: d, panelId: C, panelIndex: w }) {
 	};
 }
 function Ot({ children: s, className: d, elementRef: C, id: w, style: k, ...F }) {
-	let L = ae(w), [V, U] = useState({}), [K, q] = useState("inactive"), J = useRef(null), X = ue(J, C), { id: $, orientation: CO, registerSeparator: wO } = ce(), TO = CO === "horizontal" ? "vertical" : "horizontal";
+	let L = ae(w), [V, U] = useState({}), [K, q] = useState("inactive"), J = useRef(null), X = ue(J, C), { id: $, orientation: PD, registerSeparator: FD } = ce(), ID = PD === "horizontal" ? "vertical" : "horizontal";
 	return A(() => {
 		let s = J.current;
 		if (s !== null) {
 			let d = {
 				element: s,
 				id: L
-			}, C = wO(d), w = T.addListener("interactionStateChange", (s) => {
+			}, C = FD(d), w = T.addListener("interactionStateChange", (s) => {
 				q(s.state !== "inactive" && s.hitRegions.some((s) => s.separator === d) ? s.state : "inactive");
 			}), k = T.addListener("mountedGroupsChange", (s) => {
 				s.forEach(({ derivedPanelConstraints: s, layout: C, separatorToPanels: w }, k) => {
@@ -7523,11 +7306,11 @@ function Ot({ children: s, className: d, elementRef: C, id: w, style: k, ...F })
 	}, [
 		$,
 		L,
-		wO
+		FD
 	]), /* @__PURE__ */ jsx("div", {
 		...F,
 		"aria-controls": V.valueControls,
-		"aria-orientation": TO,
+		"aria-orientation": ID,
 		"aria-valuemax": V.valueMax,
 		"aria-valuemin": V.valueMin,
 		"aria-valuenow": V.valueNow,
@@ -7753,7 +7536,7 @@ const EditorProvider = ({ children: s, isList: C = !1, availableProps: w = [], t
 			mockData: s,
 			singleMockData: d
 		}));
-	}, []), CO = React.useCallback((s) => {
+	}, []), PD = React.useCallback((s) => {
 		L((d) => ({
 			...d,
 			listSettings: {
@@ -7761,7 +7544,7 @@ const EditorProvider = ({ children: s, isList: C = !1, availableProps: w = [], t
 				...s
 			}
 		}));
-	}, []), wO = React.useMemo(() => ({
+	}, []), FD = React.useMemo(() => ({
 		state: F,
 		addElement: U,
 		removeElement: K,
@@ -7769,7 +7552,7 @@ const EditorProvider = ({ children: s, isList: C = !1, availableProps: w = [], t
 		moveElement: J,
 		updateElement: X,
 		setMockData: $,
-		updateListSettings: CO,
+		updateListSettings: PD,
 		loadState: V
 	}), [
 		F,
@@ -7779,11 +7562,11 @@ const EditorProvider = ({ children: s, isList: C = !1, availableProps: w = [], t
 		J,
 		X,
 		$,
-		CO,
+		PD,
 		V
 	]);
 	return /* @__PURE__ */ jsx(EditorContext.Provider, {
-		value: wO,
+		value: FD,
 		children: s
 	});
 }, useEditor = () => {
@@ -8076,16 +7859,16 @@ var __assign$1 = function() {
 			maxHeight: d
 		};
 	}, d.prototype.calculateNewSizeFromDirection = function(s, d) {
-		var C = this.props.scale || 1, w = normalizeToPair(this.props.resizeRatio || 1), k = w[0], F = w[1], L = this.state, V = L.direction, U = L.original, K = this.props, q = K.lockAspectRatio, J = K.lockAspectRatioExtraHeight, X = K.lockAspectRatioExtraWidth, $ = U.width, CO = U.height, wO = J || 0, TO = X || 0;
-		return hasDirection("right", V) && ($ = U.width + (s - U.x) * k / C, q && (CO = ($ - TO) / this.ratio + wO)), hasDirection("left", V) && ($ = U.width - (s - U.x) * k / C, q && (CO = ($ - TO) / this.ratio + wO)), hasDirection("bottom", V) && (CO = U.height + (d - U.y) * F / C, q && ($ = (CO - wO) * this.ratio + TO)), hasDirection("top", V) && (CO = U.height - (d - U.y) * F / C, q && ($ = (CO - wO) * this.ratio + TO)), {
+		var C = this.props.scale || 1, w = normalizeToPair(this.props.resizeRatio || 1), k = w[0], F = w[1], L = this.state, V = L.direction, U = L.original, K = this.props, q = K.lockAspectRatio, J = K.lockAspectRatioExtraHeight, X = K.lockAspectRatioExtraWidth, $ = U.width, PD = U.height, FD = J || 0, ID = X || 0;
+		return hasDirection("right", V) && ($ = U.width + (s - U.x) * k / C, q && (PD = ($ - ID) / this.ratio + FD)), hasDirection("left", V) && ($ = U.width - (s - U.x) * k / C, q && (PD = ($ - ID) / this.ratio + FD)), hasDirection("bottom", V) && (PD = U.height + (d - U.y) * F / C, q && ($ = (PD - FD) * this.ratio + ID)), hasDirection("top", V) && (PD = U.height - (d - U.y) * F / C, q && ($ = (PD - FD) * this.ratio + ID)), {
 			newWidth: $,
-			newHeight: CO
+			newHeight: PD
 		};
 	}, d.prototype.calculateNewSizeFromAspectRatio = function(s, d, C, w) {
 		var k = this.props, F = k.lockAspectRatio, L = k.lockAspectRatioExtraHeight, V = k.lockAspectRatioExtraWidth, U = w.width === void 0 ? 10 : w.width, K = C.width === void 0 || C.width < 0 ? s : C.width, q = w.height === void 0 ? 10 : w.height, J = C.height === void 0 || C.height < 0 ? d : C.height, X = L || 0, $ = V || 0;
 		if (F) {
-			var CO = (q - X) * this.ratio + $, wO = (J - X) * this.ratio + $, TO = (U - $) / this.ratio + X, EO = (K - $) / this.ratio + X, DO = Math.max(U, CO), OO = Math.min(K, wO), kO = Math.max(q, TO), AO = Math.min(J, EO);
-			s = clamp$1(s, DO, OO), d = clamp$1(d, kO, AO);
+			var PD = (q - X) * this.ratio + $, FD = (J - X) * this.ratio + $, ID = (U - $) / this.ratio + X, LD = (K - $) / this.ratio + X, RD = Math.max(U, PD), zD = Math.min(K, FD), BD = Math.max(q, ID), VD = Math.min(J, LD);
+			s = clamp$1(s, RD, zD), d = clamp$1(d, BD, VD);
 		} else s = clamp$1(s, U, K), d = clamp$1(d, q, J);
 		return {
 			newWidth: s,
@@ -8140,58 +7923,58 @@ var __assign$1 = function() {
 			if (this.window.TouchEvent && isTouchEvent(s)) try {
 				s.preventDefault(), s.stopPropagation();
 			} catch {}
-			var C = this.props, w = C.maxWidth, k = C.maxHeight, F = C.minWidth, L = C.minHeight, V = isTouchEvent(s) ? s.touches[0].clientX : s.clientX, U = isTouchEvent(s) ? s.touches[0].clientY : s.clientY, K = this.state, q = K.direction, J = K.original, X = K.width, $ = K.height, CO = this.getParentSize(), wO = calculateNewMax(CO, this.window.innerWidth, this.window.innerHeight, w, k, F, L);
-			w = wO.maxWidth, k = wO.maxHeight, F = wO.minWidth, L = wO.minHeight;
-			var TO = this.calculateNewSizeFromDirection(V, U), EO = TO.newHeight, DO = TO.newWidth, OO = this.calculateNewMaxFromBoundary(w, k);
-			this.props.snap && this.props.snap.x && (DO = findClosestSnap(DO, this.props.snap.x, this.props.snapGap)), this.props.snap && this.props.snap.y && (EO = findClosestSnap(EO, this.props.snap.y, this.props.snapGap));
-			var kO = this.calculateNewSizeFromAspectRatio(DO, EO, {
-				width: OO.maxWidth,
-				height: OO.maxHeight
+			var C = this.props, w = C.maxWidth, k = C.maxHeight, F = C.minWidth, L = C.minHeight, V = isTouchEvent(s) ? s.touches[0].clientX : s.clientX, U = isTouchEvent(s) ? s.touches[0].clientY : s.clientY, K = this.state, q = K.direction, J = K.original, X = K.width, $ = K.height, PD = this.getParentSize(), FD = calculateNewMax(PD, this.window.innerWidth, this.window.innerHeight, w, k, F, L);
+			w = FD.maxWidth, k = FD.maxHeight, F = FD.minWidth, L = FD.minHeight;
+			var ID = this.calculateNewSizeFromDirection(V, U), LD = ID.newHeight, RD = ID.newWidth, zD = this.calculateNewMaxFromBoundary(w, k);
+			this.props.snap && this.props.snap.x && (RD = findClosestSnap(RD, this.props.snap.x, this.props.snapGap)), this.props.snap && this.props.snap.y && (LD = findClosestSnap(LD, this.props.snap.y, this.props.snapGap));
+			var BD = this.calculateNewSizeFromAspectRatio(RD, LD, {
+				width: zD.maxWidth,
+				height: zD.maxHeight
 			}, {
 				width: F,
 				height: L
 			});
-			if (DO = kO.newWidth, EO = kO.newHeight, this.props.grid) {
-				var jO = snap(DO, this.props.grid[0], this.props.gridGap ? this.props.gridGap[0] : 0), MO = snap(EO, this.props.grid[1], this.props.gridGap ? this.props.gridGap[1] : 0), NO = this.props.snapGap || 0, PO = NO === 0 || Math.abs(jO - DO) <= NO ? jO : DO, FO = NO === 0 || Math.abs(MO - EO) <= NO ? MO : EO;
-				DO = PO, EO = FO;
+			if (RD = BD.newWidth, LD = BD.newHeight, this.props.grid) {
+				var VD = snap(RD, this.props.grid[0], this.props.gridGap ? this.props.gridGap[0] : 0), UD = snap(LD, this.props.grid[1], this.props.gridGap ? this.props.gridGap[1] : 0), WD = this.props.snapGap || 0, GD = WD === 0 || Math.abs(VD - RD) <= WD ? VD : RD, KD = WD === 0 || Math.abs(UD - LD) <= WD ? UD : LD;
+				RD = GD, LD = KD;
 			}
-			var IO = {
-				width: DO - J.width,
-				height: EO - J.height
+			var qD = {
+				width: RD - J.width,
+				height: LD - J.height
 			};
-			if (this.delta = IO, X && typeof X == "string") {
+			if (this.delta = qD, X && typeof X == "string") {
 				if (X.endsWith("%")) {
-					var LO = DO / CO.width * 100;
-					DO = `${LO}%`;
+					var JD = RD / PD.width * 100;
+					RD = `${JD}%`;
 				} else if (X.endsWith("vw")) {
-					var RO = DO / this.window.innerWidth * 100;
-					DO = `${RO}vw`;
+					var YD = RD / this.window.innerWidth * 100;
+					RD = `${YD}vw`;
 				} else if (X.endsWith("vh")) {
-					var zO = DO / this.window.innerHeight * 100;
-					DO = `${zO}vh`;
+					var XD = RD / this.window.innerHeight * 100;
+					RD = `${XD}vh`;
 				}
 			}
 			if ($ && typeof $ == "string") {
 				if ($.endsWith("%")) {
-					var LO = EO / CO.height * 100;
-					EO = `${LO}%`;
+					var JD = LD / PD.height * 100;
+					LD = `${JD}%`;
 				} else if ($.endsWith("vw")) {
-					var RO = EO / this.window.innerWidth * 100;
-					EO = `${RO}vw`;
+					var YD = LD / this.window.innerWidth * 100;
+					LD = `${YD}vw`;
 				} else if ($.endsWith("vh")) {
-					var zO = EO / this.window.innerHeight * 100;
-					EO = `${zO}vh`;
+					var XD = LD / this.window.innerHeight * 100;
+					LD = `${XD}vh`;
 				}
 			}
-			var BO = {
-				width: this.createSizeForCssProperty(DO, "width"),
-				height: this.createSizeForCssProperty(EO, "height")
+			var ZD = {
+				width: this.createSizeForCssProperty(RD, "width"),
+				height: this.createSizeForCssProperty(LD, "height")
 			};
-			this.flexDir === "row" ? BO.flexBasis = BO.width : this.flexDir === "column" && (BO.flexBasis = BO.height);
-			var VO = this.state.width !== BO.width, HO = this.state.height !== BO.height, UO = this.state.flexBasis !== BO.flexBasis, WO = VO || HO || UO;
-			WO && flushSync(function() {
-				d.setState(BO);
-			}), this.props.onResize && WO && this.props.onResize(s, q, this.resizable, IO);
+			this.flexDir === "row" ? ZD.flexBasis = ZD.width : this.flexDir === "column" && (ZD.flexBasis = ZD.height);
+			var QD = this.state.width !== ZD.width, $D = this.state.height !== ZD.height, eO = this.state.flexBasis !== ZD.flexBasis, tO = QD || $D || eO;
+			tO && flushSync(function() {
+				d.setState(ZD);
+			}), this.props.onResize && tO && this.props.onResize(s, q, this.resizable, qD);
 		}
 	}, d.prototype.onMouseUp = function(s) {
 		var d = this.state, C = d.isResizing, w = d.direction;
@@ -8274,40 +8057,75 @@ var __assign$1 = function() {
 		resizeRatio: 1,
 		snapGap: 0
 	}, d;
-}(PureComponent);
-const ElementContextMenu = ({ children: s, element: C }) => {
-	let { updateElement: w, removeElement: k, addElement: F, moveElement: L, state: V } = useEditor(), [U, K] = useState(!1), [q, J] = useState(!1), [X, $] = useState(C.content), [CO, wO] = useState(C.dataBinding || ""), TO = useRef(null), OO = (s) => {
-		let d = TO.current;
+}(PureComponent), MenuItem = ({ children: s, onClick: d, rightSlot: C, style: w, className: k }) => /* @__PURE__ */ jsxs("div", {
+	className: `custom-menu-item ${k || ""}`,
+	onClick: (s) => {
+		s.stopPropagation(), d && d();
+	},
+	style: w,
+	children: [s, C && /* @__PURE__ */ jsx("div", {
+		className: "custom-menu-right-slot",
+		children: C
+	})]
+}), MenuSeparator = () => /* @__PURE__ */ jsx("div", { className: "custom-menu-separator" }), SubMenu = ({ label: s, children: d, scrollable: C }) => /* @__PURE__ */ jsxs("div", {
+	className: "custom-menu-item",
+	children: [
+		s,
+		/* @__PURE__ */ jsx("div", {
+			className: "custom-menu-right-slot",
+			children: /* @__PURE__ */ jsx(ChevronRightIcon, {})
+		}),
+		/* @__PURE__ */ jsx("div", {
+			className: `custom-submenu ${C ? "scrollable" : ""}`,
+			children: d
+		})
+	]
+});
+const ElementContextMenu = ({ children: s, element: d }) => {
+	let { updateElement: C, removeElement: w, addElement: k, moveElement: F, state: L } = useEditor(), [V, U] = useState(null), [K, q] = useState(!1), [X, $] = useState(!1), [PD, FD] = useState(d.content), [ID, zD] = useState(d.dataBinding || ""), BD = useRef(null), HD = useRef(null);
+	useEffect(() => {
+		let s = () => U(null);
+		return window.addEventListener("scroll", s, !0), window.addEventListener("resize", s), () => {
+			window.removeEventListener("scroll", s, !0), window.removeEventListener("resize", s);
+		};
+	}, []);
+	let KD = (s) => {
+		s.preventDefault(), s.stopPropagation(), U({
+			x: s.clientX,
+			y: s.clientY
+		});
+	}, qD = () => U(null), JD = (s) => {
+		let d = BD.current;
 		if (d) {
-			let C = d.selectionStart, w = d.selectionEnd, k = X;
-			$(k.substring(0, C) + `{{${s}}}` + k.substring(w)), setTimeout(() => {
+			let C = d.selectionStart, w = d.selectionEnd, k = PD;
+			FD(k.substring(0, C) + `{{${s}}}` + k.substring(w)), setTimeout(() => {
 				d.focus();
 				let w = C + s.length + 4;
 				d.setSelectionRange(w, w);
 			}, 0);
-		} else $((d) => d + `{{${s}}}`);
-	}, kO = (s) => {
-		w(C.id, { style: {
-			...C.style,
+		} else FD((d) => d + `{{${s}}}`);
+	}, YD = (s) => {
+		C(d.id, { style: {
+			...d.style,
 			...s
-		} });
-	}, AO = () => {
-		let s = V.elements.findIndex((s) => s.id === C.id);
-		s < V.elements.length - 1 && L(s, V.elements.length - 1);
-	}, PO = () => {
-		let s = V.elements.findIndex((s) => s.id === C.id);
-		s > 0 && L(s, 0);
-	}, FO = () => {
-		F({
-			type: C.type,
-			content: C.content,
-			x: C.x + 20,
-			y: C.y + 20,
-			width: C.width,
-			height: C.height,
-			style: C.style
-		});
-	}, IO = [
+		} }), qD();
+	}, XD = () => {
+		let s = L.elements.findIndex((s) => s.id === d.id);
+		s < L.elements.length - 1 && F(s, L.elements.length - 1), qD();
+	}, ZD = () => {
+		let s = L.elements.findIndex((s) => s.id === d.id);
+		s > 0 && F(s, 0), qD();
+	}, QD = () => {
+		k({
+			type: d.type,
+			content: d.content,
+			x: d.x + 20,
+			y: d.y + 20,
+			width: d.width,
+			height: d.height,
+			style: d.style
+		}), qD();
+	}, $D = [
 		"#000000",
 		"#FFFFFF",
 		"#FF0000",
@@ -8317,11 +8135,16 @@ const ElementContextMenu = ({ children: s, element: C }) => {
 		"#808080",
 		"#800080",
 		"transparent"
-	], LO = React.useRef(null);
+	];
 	return /* @__PURE__ */ jsxs(Fragment$1, { children: [
+		/* @__PURE__ */ jsx("div", {
+			onContextMenu: KD,
+			style: { display: "contents" },
+			children: s
+		}),
 		/* @__PURE__ */ jsx(s$2, {
-			open: U,
-			onOpenChange: K,
+			open: K,
+			onOpenChange: q,
 			children: /* @__PURE__ */ jsxs(p$5, {
 				style: { maxWidth: 450 },
 				children: [/* @__PURE__ */ jsx(g$1, { children: "Editar Texto" }), /* @__PURE__ */ jsxs(p, {
@@ -8329,13 +8152,13 @@ const ElementContextMenu = ({ children: s, element: C }) => {
 					gap: "3",
 					children: [
 						/* @__PURE__ */ jsx(r, {
-							ref: TO,
-							value: X,
-							onChange: (s) => $(s.target.value),
+							ref: BD,
+							value: PD,
+							onChange: (s) => FD(s.target.value),
 							placeholder: "Digite o novo texto...",
 							style: { height: 100 }
 						}),
-						V.availableProps && V.availableProps.length > 0 && /* @__PURE__ */ jsxs(p, {
+						L.availableProps && L.availableProps.length > 0 && /* @__PURE__ */ jsxs(p, {
 							direction: "column",
 							gap: "2",
 							children: [/* @__PURE__ */ jsx(p$2, {
@@ -8345,11 +8168,11 @@ const ElementContextMenu = ({ children: s, element: C }) => {
 							}), /* @__PURE__ */ jsx(p, {
 								gap: "2",
 								wrap: "wrap",
-								children: V.availableProps.map((s) => /* @__PURE__ */ jsx(e, {
+								children: L.availableProps.map((s) => /* @__PURE__ */ jsx(e, {
 									color: "blue",
 									variant: "surface",
 									style: { cursor: "pointer" },
-									onClick: () => OO(s.dataName),
+									onClick: () => JD(s.dataName),
 									children: s.name
 								}, s.dataName))
 							})]
@@ -8363,7 +8186,7 @@ const ElementContextMenu = ({ children: s, element: C }) => {
 								children: "Cancelar"
 							}) }), /* @__PURE__ */ jsx(o, {
 								onClick: () => {
-									w(C.id, { content: X }), K(!1);
+									C(d.id, { content: PD }), q(!1);
 								},
 								children: "Salvar"
 							})]
@@ -8373,8 +8196,8 @@ const ElementContextMenu = ({ children: s, element: C }) => {
 			})
 		}),
 		/* @__PURE__ */ jsx(s$2, {
-			open: q,
-			onOpenChange: J,
+			open: X,
+			onOpenChange: $,
 			children: /* @__PURE__ */ jsxs(p$5, {
 				style: { maxWidth: 450 },
 				children: [/* @__PURE__ */ jsx(g$1, { children: "Vincular Dados Manualmente" }), /* @__PURE__ */ jsxs(p, {
@@ -8386,8 +8209,8 @@ const ElementContextMenu = ({ children: s, element: C }) => {
 							children: "Nome da propriedade (ex: titulo, preco, imagem):"
 						}),
 						/* @__PURE__ */ jsx(u, {
-							value: CO,
-							onChange: (s) => wO(s.target.value),
+							value: ID,
+							onChange: (s) => zD(s.target.value),
 							placeholder: "propriedade"
 						}),
 						/* @__PURE__ */ jsxs(p, {
@@ -8399,8 +8222,8 @@ const ElementContextMenu = ({ children: s, element: C }) => {
 								children: "Cancelar"
 							}) }), /* @__PURE__ */ jsx(o, {
 								onClick: () => {
-									let s = CO, d = { dataBinding: s };
-									C.type === "text" && (d.content = `{{${s}}}`), w(C.id, d), J(!1);
+									let s = ID, w = { dataBinding: s };
+									d.type === "text" && (w.content = `{{${s}}}`), C(d.id, w), $(!1);
 								},
 								children: "Vincular"
 							})]
@@ -8411,454 +8234,288 @@ const ElementContextMenu = ({ children: s, element: C }) => {
 		}),
 		/* @__PURE__ */ jsx("input", {
 			type: "file",
-			ref: LO,
+			ref: HD,
 			style: { display: "none" },
 			accept: "image/*",
 			onChange: (s) => {
-				let d = s.target.files?.[0];
-				if (d) {
+				let w = s.target.files?.[0];
+				if (w) {
 					let s = new FileReader();
 					s.onload = (s) => {
-						s.target?.result && w(C.id, { content: s.target.result });
-					}, s.readAsDataURL(d);
+						s.target?.result && C(d.id, { content: s.target.result });
+					}, s.readAsDataURL(w);
 				}
+				qD();
 			}
 		}),
-		/* @__PURE__ */ jsxs(Root2$1, { children: [/* @__PURE__ */ jsx(Trigger$1, {
-			asChild: !0,
-			children: s
-		}), /* @__PURE__ */ jsx(Portal2$1, { children: /* @__PURE__ */ jsx(R, {
-			appearance: V.theme,
-			style: { display: "contents" },
-			children: /* @__PURE__ */ jsxs(Content2$1, {
-				className: "ContextMenuContent",
-				children: [
-					/* @__PURE__ */ jsxs(Sub2$1, { children: [/* @__PURE__ */ jsxs(SubTrigger2$1, {
-						className: "ContextMenuSubTrigger",
+		V && createPortal(/* @__PURE__ */ jsxs(Fragment$1, { children: [/* @__PURE__ */ jsx("div", {
+			className: "custom-context-menu-overlay",
+			onClick: qD,
+			onContextMenu: (s) => {
+				s.preventDefault(), qD();
+			}
+		}), /* @__PURE__ */ jsxs("div", {
+			className: "custom-context-menu",
+			style: {
+				top: Math.min(V.y, window.innerHeight - 300),
+				left: Math.min(V.x, window.innerWidth - 250)
+			},
+			children: [
+				/* @__PURE__ */ jsxs(SubMenu, {
+					label: /* @__PURE__ */ jsxs(Fragment$1, { children: ["Vincular Dados ", d.dataBinding && /* @__PURE__ */ jsxs("span", {
+						style: {
+							fontSize: 10,
+							marginLeft: 4,
+							opacity: .7
+						},
 						children: [
-							"Vincular Dados ",
-							C.dataBinding && `(${C.dataBinding})`,
-							/* @__PURE__ */ jsx("div", {
-								className: "RightSlot",
-								children: /* @__PURE__ */ jsx(ChevronRightIcon, {})
+							"(",
+							d.dataBinding,
+							")"
+						]
+					})] }),
+					children: [
+						L.availableProps && L.availableProps.length > 0 && /* @__PURE__ */ jsxs(Fragment$1, { children: [L.availableProps.map((s) => /* @__PURE__ */ jsx(MenuItem, {
+							onClick: () => {
+								let w = { dataBinding: s.dataName };
+								d.type === "text" && (w.content = `{{${s.dataName}}}`), C(d.id, w), qD();
+							},
+							rightSlot: /* @__PURE__ */ jsx("span", {
+								style: { fontSize: 10 },
+								children: s.dataName
+							}),
+							children: s.name
+						}, s.dataName)), /* @__PURE__ */ jsx(MenuSeparator, {})] }),
+						/* @__PURE__ */ jsx(MenuItem, {
+							onClick: () => {
+								zD(d.dataBinding || ""), $(!0), qD();
+							},
+							children: "Outro / Manual..."
+						}),
+						d.dataBinding && /* @__PURE__ */ jsxs(Fragment$1, { children: [/* @__PURE__ */ jsx(MenuSeparator, {}), /* @__PURE__ */ jsx(MenuItem, {
+							onClick: () => {
+								C(d.id, { dataBinding: void 0 }), qD();
+							},
+							style: { color: "var(--red-9)" },
+							children: "Remover Vínculo"
+						})] })
+					]
+				}),
+				/* @__PURE__ */ jsx(MenuSeparator, {}),
+				d.type === "text" && /* @__PURE__ */ jsxs(Fragment$1, { children: [/* @__PURE__ */ jsx(MenuItem, {
+					onClick: () => {
+						FD(d.content), q(!0), qD();
+					},
+					children: "Editar Texto..."
+				}), /* @__PURE__ */ jsx(MenuSeparator, {})] }),
+				/* @__PURE__ */ jsx(MenuItem, {
+					onClick: QD,
+					children: "Duplicar"
+				}),
+				/* @__PURE__ */ jsx(MenuItem, {
+					onClick: () => {
+						w(d.id), qD();
+					},
+					children: "Excluir"
+				}),
+				/* @__PURE__ */ jsx(MenuSeparator, {}),
+				d.type === "image" && /* @__PURE__ */ jsxs(Fragment$1, { children: [
+					/* @__PURE__ */ jsxs(SubMenu, {
+						label: "Alterar Imagem",
+						children: [/* @__PURE__ */ jsx(MenuItem, {
+							onClick: () => {
+								HD.current?.click(), qD();
+							},
+							children: "Carregar do Computador"
+						}), /* @__PURE__ */ jsx(MenuItem, {
+							onClick: () => {
+								qD(), setTimeout(() => {
+									let s = window.prompt("Insira a URL da imagem:", d.content);
+									s !== null && C(d.id, { content: s });
+								}, 10);
+							},
+							children: "Inserir URL"
+						})]
+					}),
+					/* @__PURE__ */ jsxs(SubMenu, {
+						label: "Ajuste da Imagem",
+						children: [
+							/* @__PURE__ */ jsx(MenuItem, {
+								onClick: () => YD({ objectFit: "cover" }),
+								children: "Preencher (Cover)"
+							}),
+							/* @__PURE__ */ jsx(MenuItem, {
+								onClick: () => YD({ objectFit: "contain" }),
+								children: "Ajustar (Contain)"
+							}),
+							/* @__PURE__ */ jsx(MenuItem, {
+								onClick: () => YD({ objectFit: "fill" }),
+								children: "Esticar (Fill)"
 							})
 						]
-					}), /* @__PURE__ */ jsx(Portal2$1, { children: /* @__PURE__ */ jsx(R, {
-						appearance: V.theme,
-						style: { display: "contents" },
-						children: /* @__PURE__ */ jsxs(SubContent2$1, {
-							className: "ContextMenuSubContent",
-							children: [
-								V.availableProps && V.availableProps.length > 0 && /* @__PURE__ */ jsxs(Fragment$1, { children: [V.availableProps.map((s) => /* @__PURE__ */ jsxs(Item2$1, {
-									className: "ContextMenuItem",
-									onSelect: () => {
-										let d = { dataBinding: s.dataName };
-										C.type === "text" && (d.content = `{{${s.dataName}}}`), w(C.id, d);
-									},
-									children: [s.name, /* @__PURE__ */ jsx("div", {
-										className: "RightSlot",
-										style: {
-											color: "var(--gray-10)",
-											fontSize: 10
-										},
-										children: s.dataName
-									})]
-								}, s.dataName)), /* @__PURE__ */ jsx(Separator2$1, { className: "ContextMenuSeparator" })] }),
-								/* @__PURE__ */ jsx(Item2$1, {
-									className: "ContextMenuItem",
-									onSelect: () => {
-										wO(C.dataBinding || ""), J(!0);
-									},
-									children: "Outro / Manual..."
-								}),
-								C.dataBinding && /* @__PURE__ */ jsxs(Fragment$1, { children: [/* @__PURE__ */ jsx(Separator2$1, { className: "ContextMenuSeparator" }), /* @__PURE__ */ jsx(Item2$1, {
-									className: "ContextMenuItem",
-									style: { color: "var(--red-9)" },
-									onSelect: () => w(C.id, { dataBinding: void 0 }),
-									children: "Remover Vínculo"
-								})] })
-							]
-						})
-					}) })] }),
-					/* @__PURE__ */ jsx(Separator2$1, { className: "ContextMenuSeparator" }),
-					C.type === "text" && /* @__PURE__ */ jsxs(Fragment$1, { children: [/* @__PURE__ */ jsx(Item2$1, {
-						className: "ContextMenuItem",
-						onSelect: () => {
-							$(C.content), K(!0);
-						},
-						children: "Editar Texto..."
-					}), /* @__PURE__ */ jsx(Separator2$1, { className: "ContextMenuSeparator" })] }),
-					/* @__PURE__ */ jsx(Item2$1, {
-						className: "ContextMenuItem",
-						onSelect: FO,
-						children: "Duplicar"
 					}),
-					/* @__PURE__ */ jsx(Item2$1, {
-						className: "ContextMenuItem",
-						onSelect: () => k(C.id),
-						children: "Excluir"
+					/* @__PURE__ */ jsx(MenuSeparator, {})
+				] }),
+				/* @__PURE__ */ jsxs(SubMenu, {
+					label: "Camadas",
+					children: [/* @__PURE__ */ jsx(MenuItem, {
+						onClick: XD,
+						children: "Trazer para frente"
+					}), /* @__PURE__ */ jsx(MenuItem, {
+						onClick: ZD,
+						children: "Enviar para trás"
+					})]
+				}),
+				/* @__PURE__ */ jsx(MenuSeparator, {}),
+				d.type === "text" && /* @__PURE__ */ jsxs(Fragment$1, { children: [
+					/* @__PURE__ */ jsx(SubMenu, {
+						label: "Fonte",
+						scrollable: !0,
+						children: L.availableFonts && L.availableFonts.map((s) => /* @__PURE__ */ jsx(MenuItem, {
+							onClick: () => YD({ fontFamily: s }),
+							style: { fontFamily: s },
+							rightSlot: d.style?.fontFamily === s ? "✓" : void 0,
+							children: s
+						}, s))
 					}),
-					/* @__PURE__ */ jsx(Separator2$1, { className: "ContextMenuSeparator" }),
-					C.type === "image" && /* @__PURE__ */ jsxs(Fragment$1, { children: [
-						/* @__PURE__ */ jsxs(Sub2$1, { children: [/* @__PURE__ */ jsxs(SubTrigger2$1, {
-							className: "ContextMenuSubTrigger",
-							children: ["Alterar Imagem", /* @__PURE__ */ jsx("div", {
-								className: "RightSlot",
-								children: /* @__PURE__ */ jsx(ChevronRightIcon, {})
-							})]
-						}), /* @__PURE__ */ jsx(Portal2$1, { children: /* @__PURE__ */ jsx(R, {
-							appearance: V.theme,
-							style: { display: "contents" },
-							children: /* @__PURE__ */ jsxs(SubContent2$1, {
-								className: "ContextMenuSubContent",
-								children: [/* @__PURE__ */ jsx(Item2$1, {
-									className: "ContextMenuItem",
-									onSelect: () => LO.current?.click(),
-									children: "Carregar do Computador"
-								}), /* @__PURE__ */ jsx(Item2$1, {
-									className: "ContextMenuItem",
-									onSelect: () => {
-										let s = window.prompt("Insira a URL da imagem:", C.content);
-										s !== null && w(C.id, { content: s });
-									},
-									children: "Inserir URL"
-								})]
-							})
-						}) })] }),
-						/* @__PURE__ */ jsxs(Sub2$1, { children: [/* @__PURE__ */ jsxs(SubTrigger2$1, {
-							className: "ContextMenuSubTrigger",
-							children: ["Ajuste da Imagem", /* @__PURE__ */ jsx("div", {
-								className: "RightSlot",
-								children: /* @__PURE__ */ jsx(ChevronRightIcon, {})
-							})]
-						}), /* @__PURE__ */ jsx(Portal2$1, { children: /* @__PURE__ */ jsx(R, {
-							appearance: V.theme,
-							style: { display: "contents" },
-							children: /* @__PURE__ */ jsxs(SubContent2$1, {
-								className: "ContextMenuSubContent",
-								children: [
-									/* @__PURE__ */ jsx(Item2$1, {
-										className: "ContextMenuItem",
-										onSelect: () => kO({ objectFit: "cover" }),
-										children: "Preencher (Cover)"
-									}),
-									/* @__PURE__ */ jsx(Item2$1, {
-										className: "ContextMenuItem",
-										onSelect: () => kO({ objectFit: "contain" }),
-										children: "Ajustar (Contain)"
-									}),
-									/* @__PURE__ */ jsx(Item2$1, {
-										className: "ContextMenuItem",
-										onSelect: () => kO({ objectFit: "fill" }),
-										children: "Esticar (Fill)"
-									})
-								]
-							})
-						}) })] }),
-						/* @__PURE__ */ jsx(Separator2$1, { className: "ContextMenuSeparator" })
-					] }),
-					/* @__PURE__ */ jsxs(Sub2$1, { children: [/* @__PURE__ */ jsxs(SubTrigger2$1, {
-						className: "ContextMenuSubTrigger",
-						children: ["Camadas", /* @__PURE__ */ jsx("div", {
-							className: "RightSlot",
-							children: /* @__PURE__ */ jsx(ChevronRightIcon, {})
+					/* @__PURE__ */ jsx(SubMenu, {
+						label: "Tamanho da Fonte",
+						children: [
+							12,
+							14,
+							16,
+							20,
+							24,
+							32,
+							48,
+							64
+						].map((s) => /* @__PURE__ */ jsxs(MenuItem, {
+							onClick: () => YD({ fontSize: `${s}px` }),
+							children: [s, "px"]
+						}, s))
+					}),
+					/* @__PURE__ */ jsx(SubMenu, {
+						label: "Cor do Texto",
+						children: $D.filter((s) => s !== "transparent").map((s) => /* @__PURE__ */ jsxs(MenuItem, {
+							onClick: () => YD({ color: s }),
+							children: [/* @__PURE__ */ jsx("div", { style: {
+								width: 12,
+								height: 12,
+								backgroundColor: s,
+								marginRight: 8,
+								border: "1px solid #ccc"
+							} }), s]
+						}, s))
+					}),
+					/* @__PURE__ */ jsxs(SubMenu, {
+						label: "Peso da Fonte",
+						children: [/* @__PURE__ */ jsx(MenuItem, {
+							onClick: () => YD({ fontWeight: "normal" }),
+							children: "Normal"
+						}), /* @__PURE__ */ jsx(MenuItem, {
+							onClick: () => YD({ fontWeight: "bold" }),
+							children: "Negrito"
 						})]
-					}), /* @__PURE__ */ jsx(Portal2$1, { children: /* @__PURE__ */ jsx(R, {
-						appearance: V.theme,
-						style: { display: "contents" },
-						children: /* @__PURE__ */ jsxs(SubContent2$1, {
-							className: "ContextMenuSubContent",
-							children: [/* @__PURE__ */ jsx(Item2$1, {
-								className: "ContextMenuItem",
-								onSelect: AO,
-								children: "Trazer para frente"
-							}), /* @__PURE__ */ jsx(Item2$1, {
-								className: "ContextMenuItem",
-								onSelect: PO,
-								children: "Enviar para trás"
-							})]
-						})
-					}) })] }),
-					/* @__PURE__ */ jsx(Separator2$1, { className: "ContextMenuSeparator" }),
-					C.type === "text" && /* @__PURE__ */ jsxs(Fragment$1, { children: [
-						/* @__PURE__ */ jsxs(Sub2$1, { children: [/* @__PURE__ */ jsxs(SubTrigger2$1, {
-							className: "ContextMenuSubTrigger",
-							children: ["Fonte", /* @__PURE__ */ jsx("div", {
-								className: "RightSlot",
-								children: /* @__PURE__ */ jsx(ChevronRightIcon, {})
-							})]
-						}), /* @__PURE__ */ jsx(Portal2$1, { children: /* @__PURE__ */ jsx(R, {
-							appearance: V.theme,
-							style: { display: "contents" },
-							children: /* @__PURE__ */ jsx(SubContent2$1, {
-								className: "ContextMenuSubContent",
-								style: {
-									maxHeight: "300px",
-									overflowY: "auto"
-								},
-								children: V.availableFonts && V.availableFonts.map((s) => /* @__PURE__ */ jsxs(Item2$1, {
-									className: "ContextMenuItem",
-									onSelect: () => kO({ fontFamily: s }),
-									style: { fontFamily: s },
-									children: [s, C.style?.fontFamily === s && /* @__PURE__ */ jsx("div", {
-										className: "RightSlot",
-										children: "✓"
-									})]
-								}, s))
+					}),
+					/* @__PURE__ */ jsxs(SubMenu, {
+						label: "Alinhamento",
+						children: [
+							/* @__PURE__ */ jsx(MenuItem, {
+								onClick: () => YD({ textAlign: "left" }),
+								children: "Esquerda"
+							}),
+							/* @__PURE__ */ jsx(MenuItem, {
+								onClick: () => YD({ textAlign: "center" }),
+								children: "Centro"
+							}),
+							/* @__PURE__ */ jsx(MenuItem, {
+								onClick: () => YD({ textAlign: "right" }),
+								children: "Direita"
 							})
-						}) })] }),
-						/* @__PURE__ */ jsxs(Sub2$1, { children: [/* @__PURE__ */ jsxs(SubTrigger2$1, {
-							className: "ContextMenuSubTrigger",
-							children: ["Tamanho da Fonte", /* @__PURE__ */ jsx("div", {
-								className: "RightSlot",
-								children: /* @__PURE__ */ jsx(ChevronRightIcon, {})
-							})]
-						}), /* @__PURE__ */ jsx(Portal2$1, { children: /* @__PURE__ */ jsx(R, {
-							appearance: V.theme,
-							style: { display: "contents" },
-							children: /* @__PURE__ */ jsx(SubContent2$1, {
-								className: "ContextMenuSubContent",
-								children: [
-									12,
-									14,
-									16,
-									20,
-									24,
-									32,
-									48,
-									64
-								].map((s) => /* @__PURE__ */ jsxs(Item2$1, {
-									className: "ContextMenuItem",
-									onSelect: () => kO({ fontSize: `${s}px` }),
-									children: [s, "px"]
-								}, s))
-							})
-						}) })] }),
-						/* @__PURE__ */ jsxs(Sub2$1, { children: [/* @__PURE__ */ jsxs(SubTrigger2$1, {
-							className: "ContextMenuSubTrigger",
-							children: ["Cor do Texto", /* @__PURE__ */ jsx("div", {
-								className: "RightSlot",
-								children: /* @__PURE__ */ jsx(ChevronRightIcon, {})
-							})]
-						}), /* @__PURE__ */ jsx(Portal2$1, { children: /* @__PURE__ */ jsx(R, {
-							appearance: V.theme,
-							style: { display: "contents" },
-							children: /* @__PURE__ */ jsx(SubContent2$1, {
-								className: "ContextMenuSubContent",
-								children: IO.filter((s) => s !== "transparent").map((s) => /* @__PURE__ */ jsxs(Item2$1, {
-									className: "ContextMenuItem",
-									onSelect: () => kO({ color: s }),
-									children: [/* @__PURE__ */ jsx("div", { style: {
-										width: 12,
-										height: 12,
-										backgroundColor: s,
-										marginRight: 8,
-										border: "1px solid #ccc"
-									} }), s]
-								}, s))
-							})
-						}) })] }),
-						/* @__PURE__ */ jsxs(Sub2$1, { children: [/* @__PURE__ */ jsxs(SubTrigger2$1, {
-							className: "ContextMenuSubTrigger",
-							children: ["Peso da Fonte", /* @__PURE__ */ jsx("div", {
-								className: "RightSlot",
-								children: /* @__PURE__ */ jsx(ChevronRightIcon, {})
-							})]
-						}), /* @__PURE__ */ jsx(Portal2$1, { children: /* @__PURE__ */ jsx(R, {
-							appearance: V.theme,
-							style: { display: "contents" },
-							children: /* @__PURE__ */ jsxs(SubContent2$1, {
-								className: "ContextMenuSubContent",
-								children: [/* @__PURE__ */ jsx(Item2$1, {
-									className: "ContextMenuItem",
-									onSelect: () => kO({ fontWeight: "normal" }),
-									children: "Normal"
-								}), /* @__PURE__ */ jsx(Item2$1, {
-									className: "ContextMenuItem",
-									onSelect: () => kO({ fontWeight: "bold" }),
-									children: "Negrito"
-								})]
-							})
-						}) })] }),
-						/* @__PURE__ */ jsxs(Sub2$1, { children: [/* @__PURE__ */ jsxs(SubTrigger2$1, {
-							className: "ContextMenuSubTrigger",
-							children: ["Alinhamento", /* @__PURE__ */ jsx("div", {
-								className: "RightSlot",
-								children: /* @__PURE__ */ jsx(ChevronRightIcon, {})
-							})]
-						}), /* @__PURE__ */ jsx(Portal2$1, { children: /* @__PURE__ */ jsx(R, {
-							appearance: V.theme,
-							style: { display: "contents" },
-							children: /* @__PURE__ */ jsxs(SubContent2$1, {
-								className: "ContextMenuSubContent",
-								children: [
-									/* @__PURE__ */ jsx(Item2$1, {
-										className: "ContextMenuItem",
-										onSelect: () => kO({ textAlign: "left" }),
-										children: "Esquerda"
-									}),
-									/* @__PURE__ */ jsx(Item2$1, {
-										className: "ContextMenuItem",
-										onSelect: () => kO({ textAlign: "center" }),
-										children: "Centro"
-									}),
-									/* @__PURE__ */ jsx(Item2$1, {
-										className: "ContextMenuItem",
-										onSelect: () => kO({ textAlign: "right" }),
-										children: "Direita"
-									})
-								]
-							})
-						}) })] })
-					] }),
-					/* @__PURE__ */ jsxs(Sub2$1, { children: [/* @__PURE__ */ jsxs(SubTrigger2$1, {
-						className: "ContextMenuSubTrigger",
-						children: ["Cor de Fundo", /* @__PURE__ */ jsx("div", {
-							className: "RightSlot",
-							children: /* @__PURE__ */ jsx(ChevronRightIcon, {})
+						]
+					})
+				] }),
+				/* @__PURE__ */ jsx(SubMenu, {
+					label: "Cor de Fundo",
+					children: $D.map((s) => /* @__PURE__ */ jsxs(MenuItem, {
+						onClick: () => YD({ backgroundColor: s }),
+						children: [/* @__PURE__ */ jsx("div", { style: {
+							width: 12,
+							height: 12,
+							backgroundColor: s,
+							marginRight: 8,
+							border: "1px solid #ccc"
+						} }), s === "transparent" ? "Transparente" : s]
+					}, s))
+				}),
+				/* @__PURE__ */ jsx(SubMenu, {
+					label: "Arredondamento",
+					children: [
+						0,
+						4,
+						8,
+						12,
+						16,
+						24,
+						"50%"
+					].map((s) => /* @__PURE__ */ jsx(MenuItem, {
+						onClick: () => YD({ borderRadius: typeof s == "number" ? `${s}px` : s }),
+						children: s === "50%" ? "Círculo" : `${s}px`
+					}, s))
+				}),
+				/* @__PURE__ */ jsx(SubMenu, {
+					label: "Espaçamento",
+					children: [
+						0,
+						4,
+						8,
+						12,
+						16,
+						24,
+						32
+					].map((s) => /* @__PURE__ */ jsxs(MenuItem, {
+						onClick: () => YD({ padding: `${s}px` }),
+						children: [s, "px"]
+					}, s))
+				}),
+				/* @__PURE__ */ jsxs(SubMenu, {
+					label: "Borda",
+					children: [/* @__PURE__ */ jsxs(SubMenu, {
+						label: "Cor da Borda",
+						children: [$D.filter((s) => s !== "transparent").map((s) => /* @__PURE__ */ jsxs(MenuItem, {
+							onClick: () => YD({
+								borderColor: s,
+								borderStyle: "solid"
+							}),
+							children: [/* @__PURE__ */ jsx("div", { style: {
+								width: 12,
+								height: 12,
+								backgroundColor: s,
+								marginRight: 8,
+								border: "1px solid #ccc"
+							} }), s]
+						}, s)), /* @__PURE__ */ jsx(MenuItem, {
+							onClick: () => YD({ borderStyle: "none" }),
+							children: "Sem Borda"
 						})]
-					}), /* @__PURE__ */ jsx(Portal2$1, { children: /* @__PURE__ */ jsx(R, {
-						appearance: V.theme,
-						style: { display: "contents" },
-						children: /* @__PURE__ */ jsx(SubContent2$1, {
-							className: "ContextMenuSubContent",
-							children: IO.map((s) => /* @__PURE__ */ jsxs(Item2$1, {
-								className: "ContextMenuItem",
-								onSelect: () => kO({ backgroundColor: s }),
-								children: [/* @__PURE__ */ jsx("div", { style: {
-									width: 12,
-									height: 12,
-									backgroundColor: s,
-									marginRight: 8,
-									border: "1px solid #ccc"
-								} }), s === "transparent" ? "Transparente" : s]
-							}, s))
-						})
-					}) })] }),
-					/* @__PURE__ */ jsxs(Sub2$1, { children: [/* @__PURE__ */ jsxs(SubTrigger2$1, {
-						className: "ContextMenuSubTrigger",
-						children: ["Arredondamento", /* @__PURE__ */ jsx("div", {
-							className: "RightSlot",
-							children: /* @__PURE__ */ jsx(ChevronRightIcon, {})
-						})]
-					}), /* @__PURE__ */ jsx(Portal2$1, { children: /* @__PURE__ */ jsx(R, {
-						appearance: V.theme,
-						style: { display: "contents" },
-						children: /* @__PURE__ */ jsx(SubContent2$1, {
-							className: "ContextMenuSubContent",
-							children: [
-								0,
-								4,
-								8,
-								12,
-								16,
-								24,
-								"50%"
-							].map((s) => /* @__PURE__ */ jsx(Item2$1, {
-								className: "ContextMenuItem",
-								onSelect: () => kO({ borderRadius: typeof s == "number" ? `${s}px` : s }),
-								children: s === "50%" ? "Círculo" : `${s}px`
-							}, s))
-						})
-					}) })] }),
-					/* @__PURE__ */ jsxs(Sub2$1, { children: [/* @__PURE__ */ jsxs(SubTrigger2$1, {
-						className: "ContextMenuSubTrigger",
-						children: ["Espaçamento", /* @__PURE__ */ jsx("div", {
-							className: "RightSlot",
-							children: /* @__PURE__ */ jsx(ChevronRightIcon, {})
-						})]
-					}), /* @__PURE__ */ jsx(Portal2$1, { children: /* @__PURE__ */ jsx(R, {
-						appearance: V.theme,
-						style: { display: "contents" },
-						children: /* @__PURE__ */ jsx(SubContent2$1, {
-							className: "ContextMenuSubContent",
-							children: [
-								0,
-								4,
-								8,
-								12,
-								16,
-								24,
-								32
-							].map((s) => /* @__PURE__ */ jsxs(Item2$1, {
-								className: "ContextMenuItem",
-								onSelect: () => kO({ padding: `${s}px` }),
-								children: [s, "px"]
-							}, s))
-						})
-					}) })] }),
-					/* @__PURE__ */ jsxs(Sub2$1, { children: [/* @__PURE__ */ jsxs(SubTrigger2$1, {
-						className: "ContextMenuSubTrigger",
-						children: ["Borda", /* @__PURE__ */ jsx("div", {
-							className: "RightSlot",
-							children: /* @__PURE__ */ jsx(ChevronRightIcon, {})
-						})]
-					}), /* @__PURE__ */ jsx(Portal2$1, { children: /* @__PURE__ */ jsx(R, {
-						appearance: V.theme,
-						style: { display: "contents" },
-						children: /* @__PURE__ */ jsxs(SubContent2$1, {
-							className: "ContextMenuSubContent",
-							children: [/* @__PURE__ */ jsxs(Sub2$1, { children: [/* @__PURE__ */ jsxs(SubTrigger2$1, {
-								className: "ContextMenuSubTrigger",
-								children: ["Cor da Borda", /* @__PURE__ */ jsx("div", {
-									className: "RightSlot",
-									children: /* @__PURE__ */ jsx(ChevronRightIcon, {})
-								})]
-							}), /* @__PURE__ */ jsx(Portal2$1, { children: /* @__PURE__ */ jsx(R, {
-								appearance: V.theme,
-								style: { display: "contents" },
-								children: /* @__PURE__ */ jsxs(SubContent2$1, {
-									className: "ContextMenuSubContent",
-									children: [IO.filter((s) => s !== "transparent").map((s) => /* @__PURE__ */ jsxs(Item2$1, {
-										className: "ContextMenuItem",
-										onSelect: () => kO({
-											borderColor: s,
-											borderStyle: "solid"
-										}),
-										children: [/* @__PURE__ */ jsx("div", { style: {
-											width: 12,
-											height: 12,
-											backgroundColor: s,
-											marginRight: 8,
-											border: "1px solid #ccc"
-										} }), s]
-									}, s)), /* @__PURE__ */ jsx(Item2$1, {
-										className: "ContextMenuItem",
-										onSelect: () => kO({ borderStyle: "none" }),
-										children: "Sem Borda"
-									})]
-								})
-							}) })] }), /* @__PURE__ */ jsxs(Sub2$1, { children: [/* @__PURE__ */ jsxs(SubTrigger2$1, {
-								className: "ContextMenuSubTrigger",
-								children: ["Espessura", /* @__PURE__ */ jsx("div", {
-									className: "RightSlot",
-									children: /* @__PURE__ */ jsx(ChevronRightIcon, {})
-								})]
-							}), /* @__PURE__ */ jsx(Portal2$1, { children: /* @__PURE__ */ jsx(R, {
-								appearance: V.theme,
-								style: { display: "contents" },
-								children: /* @__PURE__ */ jsx(SubContent2$1, {
-									className: "ContextMenuSubContent",
-									children: [
-										1,
-										2,
-										4,
-										8
-									].map((s) => /* @__PURE__ */ jsxs(Item2$1, {
-										className: "ContextMenuItem",
-										onSelect: () => kO({
-											borderWidth: `${s}px`,
-											borderStyle: "solid"
-										}),
-										children: [s, "px"]
-									}, s))
-								})
-							}) })] })]
-						})
-					}) })] })
-				]
-			})
-		}) })] })
+					}), /* @__PURE__ */ jsx(SubMenu, {
+						label: "Espessura",
+						children: [
+							1,
+							2,
+							4,
+							8
+						].map((s) => /* @__PURE__ */ jsxs(MenuItem, {
+							onClick: () => YD({
+								borderWidth: `${s}px`,
+								borderStyle: "solid"
+							}),
+							children: [s, "px"]
+						}, s))
+					})]
+				})
+			]
+		})] }), document.body)
 	] });
 };
 var DraggableResizableElement = ({ element: s, isSelected: d }) => {
@@ -8868,26 +8525,26 @@ var DraggableResizableElement = ({ element: s, isSelected: d }) => {
 	}), q = useRef({
 		x: 0,
 		y: 0
-	}), X = useRef(0), $ = useRef(0), CO = useRef({
+	}), X = useRef(0), $ = useRef(0), PD = useRef({
 		x: 0,
 		y: 0
-	}), wO = k.isList ? k.mockData.length > 0 ? k.mockData[0] : null : k.singleMockData, TO = s.content;
-	if (wO) {
-		if (s.type === "text") TO = TO.replace(/\{\{(.*?)\}\}/g, (s, d) => {
-			let C = wO[d.trim()];
+	}), FD = k.isList ? k.mockData.length > 0 ? k.mockData[0] : null : k.singleMockData, ID = s.content;
+	if (FD) {
+		if (s.type === "text") ID = ID.replace(/\{\{(.*?)\}\}/g, (s, d) => {
+			let C = FD[d.trim()];
 			return C == null ? s : String(C);
 		});
 		else if (s.type === "image") if (s.dataBinding) {
-			let d = wO[s.dataBinding];
-			d != null && (TO = String(d));
-		} else TO = TO.replace(/\{\{(.*?)\}\}/g, (s, d) => {
-			let C = wO[d.trim()];
+			let d = FD[s.dataBinding];
+			d != null && (ID = String(d));
+		} else ID = ID.replace(/\{\{(.*?)\}\}/g, (s, d) => {
+			let C = FD[d.trim()];
 			return C == null ? s : String(C);
 		});
 	}
-	let OO = (d) => {
+	let zD = (d) => {
 		d.stopPropagation(), C(s.id);
-	}, kO = (d) => {
+	}, BD = (d) => {
 		d.button === 0 && (d.stopPropagation(), C(s.id), L(!0), K.current = {
 			x: d.clientX,
 			y: d.clientY
@@ -8895,16 +8552,16 @@ var DraggableResizableElement = ({ element: s, isSelected: d }) => {
 			x: s.x,
 			y: s.y
 		});
-	}, AO = (d) => {
+	}, VD = (d) => {
 		d.stopPropagation(), d.preventDefault(), U(!0);
 		let C = d.target.closest(".resizable-element");
 		if (C) {
 			let w = C.getBoundingClientRect();
-			CO.current = {
+			PD.current = {
 				x: w.left + w.width / 2,
 				y: w.top + w.height / 2
 			};
-			let k = d.clientX - CO.current.x, F = d.clientY - CO.current.y;
+			let k = d.clientX - PD.current.x, F = d.clientY - PD.current.y;
 			X.current = Math.atan2(F, k) * (180 / Math.PI), $.current = s.rotation || 0;
 		}
 	};
@@ -8918,7 +8575,7 @@ var DraggableResizableElement = ({ element: s, isSelected: d }) => {
 				});
 			}
 			if (V) {
-				let C = d.clientX - CO.current.x, k = d.clientY - CO.current.y, F = Math.atan2(k, C) * (180 / Math.PI) - X.current;
+				let C = d.clientX - PD.current.x, k = d.clientY - PD.current.y, F = Math.atan2(k, C) * (180 / Math.PI) - X.current;
 				w(s.id, { rotation: ($.current + F) % 360 });
 			}
 		}, C = () => {
@@ -8933,7 +8590,7 @@ var DraggableResizableElement = ({ element: s, isSelected: d }) => {
 		s.id,
 		w
 	]);
-	let jO = {
+	let HD = {
 		position: "absolute",
 		left: 0,
 		top: 0,
@@ -8974,9 +8631,9 @@ var DraggableResizableElement = ({ element: s, isSelected: d }) => {
 					position: "relative"
 				},
 				children: [/* @__PURE__ */ jsxs(p$1, {
-					style: jO,
-					onMouseDown: kO,
-					onClick: OO,
+					style: HD,
+					onMouseDown: BD,
+					onClick: zD,
 					onMouseEnter: (s) => {
 						d || (s.currentTarget.style.borderColor = "var(--gray-6)");
 					},
@@ -8989,10 +8646,10 @@ var DraggableResizableElement = ({ element: s, isSelected: d }) => {
 								width: "100%",
 								height: "100%"
 							},
-							children: TO
+							children: ID
 						}),
-						s.type === "image" && (TO ? /* @__PURE__ */ jsx("img", {
-							src: TO,
+						s.type === "image" && (ID ? /* @__PURE__ */ jsx("img", {
+							src: ID,
 							alt: "Element",
 							style: {
 								width: "100%",
@@ -9034,7 +8691,7 @@ var DraggableResizableElement = ({ element: s, isSelected: d }) => {
 						zIndex: 50,
 						boxShadow: "0 0 0 2px white"
 					},
-					onMouseDown: AO,
+					onMouseDown: VD,
 					children: /* @__PURE__ */ jsx(p$1, { style: {
 						position: "absolute",
 						top: 12,
@@ -9222,16 +8879,16 @@ function createRenderBatcher(s, d) {
 		delta: 0,
 		timestamp: 0,
 		isProcessing: !1
-	}, F = () => C = !0, L = stepsOrder.reduce((s, C) => (s[C] = createRenderStep(F, d ? C : void 0), s), {}), { setup: V, read: U, resolveKeyframes: K, preUpdate: q, update: J, preRender: X, render: $, postRender: CO } = L, wO = () => {
+	}, F = () => C = !0, L = stepsOrder.reduce((s, C) => (s[C] = createRenderStep(F, d ? C : void 0), s), {}), { setup: V, read: U, resolveKeyframes: K, preUpdate: q, update: J, preRender: X, render: $, postRender: PD } = L, FD = () => {
 		let F = MotionGlobalConfig.useManualTiming ? k.timestamp : performance.now();
-		C = !1, MotionGlobalConfig.useManualTiming || (k.delta = w ? 1e3 / 60 : Math.max(Math.min(F - k.timestamp, maxElapsed), 1)), k.timestamp = F, k.isProcessing = !0, V.process(k), U.process(k), K.process(k), q.process(k), J.process(k), X.process(k), $.process(k), CO.process(k), k.isProcessing = !1, C && d && (w = !1, s(wO));
-	}, TO = () => {
-		C = !0, w = !0, k.isProcessing || s(wO);
+		C = !1, MotionGlobalConfig.useManualTiming || (k.delta = w ? 1e3 / 60 : Math.max(Math.min(F - k.timestamp, maxElapsed), 1)), k.timestamp = F, k.isProcessing = !0, V.process(k), U.process(k), K.process(k), q.process(k), J.process(k), X.process(k), $.process(k), PD.process(k), k.isProcessing = !1, C && d && (w = !1, s(FD));
+	}, ID = () => {
+		C = !0, w = !0, k.isProcessing || s(FD);
 	};
 	return {
 		schedule: stepsOrder.reduce((s, d) => {
 			let w = L[d];
-			return s[d] = (s, d = !1, k = !1) => (C || TO(), w.schedule(s, d, k)), s;
+			return s[d] = (s, d = !1, k = !1) => (C || ID(), w.schedule(s, d, k)), s;
 		}, {}),
 		cancel: (s) => {
 			for (let d = 0; d < stepsOrder.length; d++) L[stepsOrder[d]].cancel(s);
@@ -9589,40 +9246,40 @@ function spring(s = springDefaults.visualDuration, d = springDefaults.bounce) {
 	}, { stiffness: U, damping: K, mass: q, duration: J, velocity: X, isResolvedFromDuration: $ } = getSpringOptions({
 		...C,
 		velocity: -/* @__PURE__ */ millisecondsToSeconds(C.velocity || 0)
-	}), CO = X || 0, wO = K / (2 * Math.sqrt(U * q)), TO = L - F, EO = /* @__PURE__ */ millisecondsToSeconds(Math.sqrt(U / q)), DO = Math.abs(TO) < 5;
-	w ||= DO ? springDefaults.restSpeed.granular : springDefaults.restSpeed.default, k ||= DO ? springDefaults.restDelta.granular : springDefaults.restDelta.default;
-	let OO;
-	if (wO < 1) {
-		let s = calcAngularFreq(EO, wO);
-		OO = (d) => L - Math.exp(-wO * EO * d) * ((CO + wO * EO * TO) / s * Math.sin(s * d) + TO * Math.cos(s * d));
-	} else if (wO === 1) OO = (s) => L - Math.exp(-EO * s) * (TO + (CO + EO * TO) * s);
+	}), PD = X || 0, FD = K / (2 * Math.sqrt(U * q)), ID = L - F, LD = /* @__PURE__ */ millisecondsToSeconds(Math.sqrt(U / q)), RD = Math.abs(ID) < 5;
+	w ||= RD ? springDefaults.restSpeed.granular : springDefaults.restSpeed.default, k ||= RD ? springDefaults.restDelta.granular : springDefaults.restDelta.default;
+	let zD;
+	if (FD < 1) {
+		let s = calcAngularFreq(LD, FD);
+		zD = (d) => L - Math.exp(-FD * LD * d) * ((PD + FD * LD * ID) / s * Math.sin(s * d) + ID * Math.cos(s * d));
+	} else if (FD === 1) zD = (s) => L - Math.exp(-LD * s) * (ID + (PD + LD * ID) * s);
 	else {
-		let s = EO * Math.sqrt(wO * wO - 1);
-		OO = (d) => {
-			let C = Math.exp(-wO * EO * d), w = Math.min(s * d, 300);
-			return L - C * ((CO + wO * EO * TO) * Math.sinh(w) + s * TO * Math.cosh(w)) / s;
+		let s = LD * Math.sqrt(FD * FD - 1);
+		zD = (d) => {
+			let C = Math.exp(-FD * LD * d), w = Math.min(s * d, 300);
+			return L - C * ((PD + FD * LD * ID) * Math.sinh(w) + s * ID * Math.cosh(w)) / s;
 		};
 	}
-	let kO = {
+	let BD = {
 		calculatedDuration: $ && J || null,
 		next: (s) => {
-			let d = OO(s);
+			let d = zD(s);
 			if ($) V.done = s >= J;
 			else {
-				let C = s === 0 ? CO : 0;
-				wO < 1 && (C = s === 0 ? /* @__PURE__ */ secondsToMilliseconds(CO) : calcGeneratorVelocity(OO, s, d));
+				let C = s === 0 ? PD : 0;
+				FD < 1 && (C = s === 0 ? /* @__PURE__ */ secondsToMilliseconds(PD) : calcGeneratorVelocity(zD, s, d));
 				let F = Math.abs(C) <= w, U = Math.abs(L - d) <= k;
 				V.done = F && U;
 			}
 			return V.value = V.done ? L : d, V;
 		},
 		toString: () => {
-			let s = Math.min(calcGeneratorDuration(kO), maxGeneratorDuration), d = generateLinearEasing((d) => kO.next(s * d).value, s, 30);
+			let s = Math.min(calcGeneratorDuration(BD), maxGeneratorDuration), d = generateLinearEasing((d) => BD.next(s * d).value, s, 30);
 			return s + "ms " + d;
 		},
 		toTransition: () => {}
 	};
-	return kO;
+	return BD;
 }
 spring.applyToOptions = (s) => {
 	let d = createGeneratorEasing(s, 100, spring);
@@ -9632,26 +9289,26 @@ function inertia({ keyframes: s, velocity: d = 0, power: C = .8, timeConstant: w
 	let J = s[0], X = {
 		done: !1,
 		value: J
-	}, $ = (s) => V !== void 0 && s < V || U !== void 0 && s > U, CO = (s) => V === void 0 ? U : U === void 0 || Math.abs(V - s) < Math.abs(U - s) ? V : U, wO = C * d, TO = J + wO, EO = L === void 0 ? TO : L(TO);
-	EO !== TO && (wO = EO - J);
-	let DO = (s) => -wO * Math.exp(-s / w), OO = (s) => EO + DO(s), kO = (s) => {
-		let d = DO(s), C = OO(s);
-		X.done = Math.abs(d) <= K, X.value = X.done ? EO : C;
-	}, AO, jO, MO = (s) => {
-		$(X.value) && (AO = s, jO = spring({
-			keyframes: [X.value, CO(X.value)],
-			velocity: calcGeneratorVelocity(OO, s, X.value),
+	}, $ = (s) => V !== void 0 && s < V || U !== void 0 && s > U, PD = (s) => V === void 0 ? U : U === void 0 || Math.abs(V - s) < Math.abs(U - s) ? V : U, FD = C * d, ID = J + FD, LD = L === void 0 ? ID : L(ID);
+	LD !== ID && (FD = LD - J);
+	let RD = (s) => -FD * Math.exp(-s / w), zD = (s) => LD + RD(s), BD = (s) => {
+		let d = RD(s), C = zD(s);
+		X.done = Math.abs(d) <= K, X.value = X.done ? LD : C;
+	}, VD, HD, UD = (s) => {
+		$(X.value) && (VD = s, HD = spring({
+			keyframes: [X.value, PD(X.value)],
+			velocity: calcGeneratorVelocity(zD, s, X.value),
 			damping: k,
 			stiffness: F,
 			restDelta: K,
 			restSpeed: q
 		}));
 	};
-	return MO(0), {
+	return UD(0), {
 		calculatedDuration: null,
 		next: (s) => {
 			let d = !1;
-			return !jO && AO === void 0 && (d = !0, kO(s), MO(s)), AO !== void 0 && s >= AO ? jO.next(s - AO) : (!d && kO(s), X);
+			return !HD && VD === void 0 && (d = !0, BD(s), UD(s)), VD !== void 0 && s >= VD ? HD.next(s - VD) : (!d && BD(s), X);
 		}
 	};
 }
@@ -9769,24 +9426,24 @@ var WithPromise = class {
 	tick(s, d = !1) {
 		let { generator: C, totalDuration: w, mixKeyframes: k, mirroredGenerator: F, resolvedDuration: L, calculatedDuration: V } = this;
 		if (this.startTime === null) return C.next(0);
-		let { delay: U = 0, keyframes: K, repeat: q, repeatType: J, repeatDelay: X, type: $, onUpdate: CO, finalKeyframe: wO } = this.options;
+		let { delay: U = 0, keyframes: K, repeat: q, repeatType: J, repeatDelay: X, type: $, onUpdate: PD, finalKeyframe: FD } = this.options;
 		this.speed > 0 ? this.startTime = Math.min(this.startTime, s) : this.speed < 0 && (this.startTime = Math.min(s - w / this.speed, this.startTime)), d ? this.currentTime = s : this.updateTime(s);
-		let TO = this.currentTime - U * (this.playbackSpeed >= 0 ? 1 : -1), EO = this.playbackSpeed >= 0 ? TO < 0 : TO > w;
-		this.currentTime = Math.max(TO, 0), this.state === "finished" && this.holdTime === null && (this.currentTime = w);
-		let DO = this.currentTime, OO = C;
+		let ID = this.currentTime - U * (this.playbackSpeed >= 0 ? 1 : -1), LD = this.playbackSpeed >= 0 ? ID < 0 : ID > w;
+		this.currentTime = Math.max(ID, 0), this.state === "finished" && this.holdTime === null && (this.currentTime = w);
+		let RD = this.currentTime, zD = C;
 		if (q) {
 			let s = Math.min(this.currentTime, w) / L, d = Math.floor(s), C = s % 1;
-			!C && s >= 1 && (C = 1), C === 1 && d--, d = Math.min(d, q + 1), d % 2 && (J === "reverse" ? (C = 1 - C, X && (C -= X / L)) : J === "mirror" && (OO = F)), DO = clamp(0, 1, C) * L;
+			!C && s >= 1 && (C = 1), C === 1 && d--, d = Math.min(d, q + 1), d % 2 && (J === "reverse" ? (C = 1 - C, X && (C -= X / L)) : J === "mirror" && (zD = F)), RD = clamp(0, 1, C) * L;
 		}
-		let kO = EO ? {
+		let BD = LD ? {
 			done: !1,
 			value: K[0]
-		} : OO.next(DO);
-		k && (kO.value = k(kO.value));
-		let { done: AO } = kO;
-		!EO && V !== null && (AO = this.playbackSpeed >= 0 ? this.currentTime >= w : this.currentTime <= 0);
-		let jO = this.holdTime === null && (this.state === "finished" || this.state === "running" && AO);
-		return jO && $ !== inertia && (kO.value = getFinalKeyframe$1(K, this.options, wO, this.speed)), CO && CO(kO.value), jO && this.finish(), kO;
+		} : zD.next(RD);
+		k && (BD.value = k(BD.value));
+		let { done: VD } = BD;
+		!LD && V !== null && (VD = this.playbackSpeed >= 0 ? this.currentTime >= w : this.currentTime <= 0);
+		let HD = this.holdTime === null && (this.state === "finished" || this.state === "running" && VD);
+		return HD && $ !== inertia && (BD.value = getFinalKeyframe$1(K, this.options, FD, this.speed)), PD && PD(BD.value), HD && this.finish(), BD;
 	}
 	then(s, d) {
 		return this.finished.then(s, d);
@@ -11155,18 +10812,18 @@ function useVisualElement(s, d, C, w, k, F) {
 		reducedMotionConfig: K,
 		isSVG: F
 	}));
-	let $ = X.current, wO = useContext(SwitchLayoutGroupContext);
-	$ && !$.projection && k && ($.type === "html" || $.type === "svg") && createProjectionNode$1(X.current, C, k, wO);
-	let TO = useRef(!1);
+	let $ = X.current, FD = useContext(SwitchLayoutGroupContext);
+	$ && !$.projection && k && ($.type === "html" || $.type === "svg") && createProjectionNode$1(X.current, C, k, FD);
+	let ID = useRef(!1);
 	useInsertionEffect(() => {
-		$ && TO.current && $.update(C, U);
+		$ && ID.current && $.update(C, U);
 	});
-	let DO = C[optimizedAppearDataAttribute], OO = useRef(!!DO && !window.MotionHandoffIsComplete?.(DO) && window.MotionHasOptimisedAnimation?.(DO));
+	let RD = C[optimizedAppearDataAttribute], zD = useRef(!!RD && !window.MotionHandoffIsComplete?.(RD) && window.MotionHasOptimisedAnimation?.(RD));
 	return useIsomorphicLayoutEffect(() => {
-		$ && (TO.current = !0, window.MotionIsMounted = !0, $.updateFeatures(), $.scheduleRenderMicrotask(), OO.current && $.animationState && $.animationState.animateChanges());
+		$ && (ID.current = !0, window.MotionIsMounted = !0, $.updateFeatures(), $.scheduleRenderMicrotask(), zD.current && $.animationState && $.animationState.animateChanges());
 	}), useEffect(() => {
-		$ && (!OO.current && $.animationState && $.animationState.animateChanges(), OO.current &&= (queueMicrotask(() => {
-			window.MotionHandoffMarkAsComplete?.(DO);
+		$ && (!zD.current && $.animationState && $.animationState.animateChanges(), zD.current &&= (queueMicrotask(() => {
+			window.MotionHandoffMarkAsComplete?.(RD);
 		}), !1), $.enteringChildren = void 0);
 	}), $;
 }
@@ -11844,34 +11501,34 @@ function createAnimationState(s) {
 	function L(F) {
 		let { props: L } = s, V = getVariantContext(s.parent) || {}, U = [], K = /* @__PURE__ */ new Set(), q = {}, J = Infinity;
 		for (let d = 0; d < numAnimationTypes; d++) {
-			let X = reversePriorityOrder[d], $ = C[X], CO = L[X] === void 0 ? V[X] : L[X], wO = isVariantLabel(CO), TO = X === F ? $.isActive : null;
-			TO === !1 && (J = d);
-			let EO = CO === V[X] && CO !== L[X] && wO;
-			if (EO && w && s.manuallyAnimateOnMount && (EO = !1), $.protectedKeys = { ...q }, !$.isActive && TO === null || !CO && !$.prevProp || isAnimationControls(CO) || typeof CO == "boolean") continue;
-			let DO = checkVariantsDidChange($.prevProp, CO), OO = DO || X === F && $.isActive && !EO && wO || d > J && wO, kO = !1, AO = Array.isArray(CO) ? CO : [CO], jO = AO.reduce(k(X), {});
-			TO === !1 && (jO = {});
-			let { prevResolvedValues: MO = {} } = $, NO = {
-				...MO,
-				...jO
-			}, PO = (d) => {
-				OO = !0, K.has(d) && (kO = !0, K.delete(d)), $.needsAnimating[d] = !0;
+			let X = reversePriorityOrder[d], $ = C[X], PD = L[X] === void 0 ? V[X] : L[X], FD = isVariantLabel(PD), ID = X === F ? $.isActive : null;
+			ID === !1 && (J = d);
+			let LD = PD === V[X] && PD !== L[X] && FD;
+			if (LD && w && s.manuallyAnimateOnMount && (LD = !1), $.protectedKeys = { ...q }, !$.isActive && ID === null || !PD && !$.prevProp || isAnimationControls(PD) || typeof PD == "boolean") continue;
+			let RD = checkVariantsDidChange($.prevProp, PD), zD = RD || X === F && $.isActive && !LD && FD || d > J && FD, BD = !1, VD = Array.isArray(PD) ? PD : [PD], HD = VD.reduce(k(X), {});
+			ID === !1 && (HD = {});
+			let { prevResolvedValues: UD = {} } = $, WD = {
+				...UD,
+				...HD
+			}, GD = (d) => {
+				zD = !0, K.has(d) && (BD = !0, K.delete(d)), $.needsAnimating[d] = !0;
 				let C = s.getValue(d);
 				C && (C.liveStyle = !1);
 			};
-			for (let s in NO) {
-				let d = jO[s], C = MO[s];
+			for (let s in WD) {
+				let d = HD[s], C = UD[s];
 				if (q.hasOwnProperty(s)) continue;
 				let w = !1;
-				w = isKeyframesTarget(d) && isKeyframesTarget(C) ? !shallowCompare(d, C) : d !== C, w ? d == null ? K.add(s) : PO(s) : d !== void 0 && K.has(s) ? PO(s) : $.protectedKeys[s] = !0;
+				w = isKeyframesTarget(d) && isKeyframesTarget(C) ? !shallowCompare(d, C) : d !== C, w ? d == null ? K.add(s) : GD(s) : d !== void 0 && K.has(s) ? GD(s) : $.protectedKeys[s] = !0;
 			}
-			$.prevProp = CO, $.prevResolvedValues = jO, $.isActive && (q = {
+			$.prevProp = PD, $.prevResolvedValues = HD, $.isActive && (q = {
 				...q,
-				...jO
-			}), w && s.blockInitialAnimation && (OO = !1);
-			let FO = EO && DO;
-			OO && (!FO || kO) && U.push(...AO.map((d) => {
+				...HD
+			}), w && s.blockInitialAnimation && (zD = !1);
+			let KD = LD && RD;
+			zD && (!KD || BD) && U.push(...VD.map((d) => {
 				let C = { type: X };
-				if (typeof d == "string" && w && !FO && s.manuallyAnimateOnMount && s.parent) {
+				if (typeof d == "string" && w && !KD && s.manuallyAnimateOnMount && s.parent) {
 					let { parent: w } = s, k = resolveVariant(w, d);
 					if (w.enteringChildren && k) {
 						let { delayChildren: d } = k.transition || {};
