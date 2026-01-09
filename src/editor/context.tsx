@@ -32,6 +32,7 @@ export interface IElement {
     dataBinding?: string;
     formatting?: IElementFormatting;
     conditions?: IElementCondition[];
+    autoGrow?: boolean;
 }
 
 export interface IListSettings {

@@ -241,13 +241,16 @@ const DraggableResizableElement: React.FC<{ element: IElement; isSelected: boole
         left: 0,
         top: 0,
         width: '100%',
-        height: '100%',
+        height: element.autoGrow ? 'auto' : '100%',
+        minHeight: element.autoGrow ? '100%' : undefined,
         padding: (element.type === 'image' || element.type === 'text') ? 0 : '8px',
         border: isSelected ? '2px solid var(--accent-9)' : '1px dashed transparent',
         outline: isSelected ? 'none' : '1px solid transparent', // Prevent double border
         cursor: isDragging ? 'grabbing' : 'grab',
         borderRadius: 'var(--radius-2)',
-        overflow: 'hidden',
+        overflow: element.autoGrow ? 'visible' : 'hidden',
+        whiteSpace: element.autoGrow ? 'pre-wrap' : undefined,
+        wordBreak: element.autoGrow ? 'break-word' : undefined,
         userSelect: 'none',
         ...element.style,
         ...conditionalStyles
@@ -256,7 +259,7 @@ const DraggableResizableElement: React.FC<{ element: IElement; isSelected: boole
     return (
         <Resizable
             className="resizable-element"
-            size={{ width: element.width, height: element.height }}
+            size={{ width: element.width, height: element.autoGrow ? 'auto' : element.height }}
             maxHeight={state.isList ? Math.max(10, canvasHeight - element.y) : undefined}
             onResizeStop={(_e, _direction, _ref, d) => {
                 updateElement(element.id, {
@@ -267,8 +270,12 @@ const DraggableResizableElement: React.FC<{ element: IElement; isSelected: boole
             style={{
                 position: 'absolute',
                 transform: `translate(${element.x}px, ${element.y}px) rotate(${element.rotation || 0}deg)`,
+                height: element.autoGrow ? 'auto' : undefined
             }}
-            enable={isSelected ? undefined : false} // Only resizable when selected
+            enable={isSelected && !element.autoGrow ? undefined : {
+                top: false, right: isSelected, bottom: false, left: isSelected,
+                topRight: false, bottomRight: isSelected, bottomLeft: false, topLeft: false
+            }} // Only resizable when selected, disable vertical if autoGrow
         >
             <ElementContextMenu element={element}>
                 <div style={{ width: '100%', height: '100%', position: 'relative' }}>

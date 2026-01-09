@@ -163,9 +163,11 @@ function renderTemplate(elements, data, options = {}) {
                 left: element.x,
                 top: element.y + offsetY,
                 width: element.width,
-                height: element.height,
+                height: element.autoGrow ? 'auto' : element.height,
                 transform: element.rotation ? \`rotate(\${element.rotation}deg)\` : undefined,
-                overflow: 'hidden',
+                overflow: element.autoGrow ? 'visible' : 'hidden',
+                whiteSpace: element.autoGrow ? 'pre-wrap' : undefined,
+                wordBreak: element.autoGrow ? 'break-word' : undefined,
                 ...element.style,
                 ...conditionalStyles
             };

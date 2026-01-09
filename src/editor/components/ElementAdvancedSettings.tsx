@@ -1,5 +1,5 @@
 import { Cross2Icon, PlusIcon, TrashIcon } from '@radix-ui/react-icons';
-import { Box, Button, Dialog, Flex, Grid, IconButton, Separator, Tabs, Text, TextField } from '@radix-ui/themes';
+import { Box, Button, Dialog, Flex, Grid, IconButton, Separator, Switch, Tabs, Text, TextField } from '@radix-ui/themes';
 import React, { useState } from 'react';
 import { useEditor, type IElement, type IElementCondition, type IElementFormatting } from '../context';
 
@@ -61,6 +61,19 @@ const FormattingSettings: React.FC<{ element: IElement; updateElement: any }> = 
             <Text size="2" color="gray">
                 Configure como os dados serão exibidos quando substituídos.
             </Text>
+
+            {element.type === 'text' && (
+                <Box>
+                    <Flex align="center" gap="2" mb="3">
+                        <Switch
+                            checked={element.autoGrow || false}
+                            onCheckedChange={(checked) => updateElement(element.id, { autoGrow: checked })}
+                        />
+                        <Text size="2">Expandir altura automaticamente (Multilinha)</Text>
+                    </Flex>
+                    <Separator size="4" mb="3" />
+                </Box>
+            )}
 
             <Box>
                 <Text size="1" mb="1" as="div">Tipo de Formatação</Text>
