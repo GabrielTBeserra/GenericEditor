@@ -9176,75 +9176,110 @@ var FormattingSettings = ({ element: n, updateElement: s }) => {
 						})]
 					})]
 				}),
+				/* @__PURE__ */ jsx(p, {
+					gap: "2",
+					children: /* @__PURE__ */ jsxs(p$1, {
+						flexGrow: "1",
+						children: [/* @__PURE__ */ jsx(p$2, {
+							size: "1",
+							mb: "1",
+							as: "div",
+							children: "Ação"
+						}), /* @__PURE__ */ jsxs("select", {
+							value: K.style.display === "none" ? "hide" : "style",
+							onChange: (n) => {
+								n.target.value === "hide" ? U(K.id, { display: "none" }) : U(K.id, { display: void 0 });
+							},
+							style: {
+								width: "100%",
+								padding: "6px",
+								borderRadius: "4px",
+								border: "1px solid var(--gray-6)",
+								backgroundColor: "var(--color-panel-solid)",
+								color: "var(--gray-12)",
+								fontSize: "14px"
+							},
+							children: [/* @__PURE__ */ jsx("option", {
+								value: "style",
+								children: "Aplicar Estilo"
+							}), /* @__PURE__ */ jsx("option", {
+								value: "hide",
+								children: "Ocultar Elemento"
+							})]
+						})]
+					})
+				}),
 				/* @__PURE__ */ jsx(o$3, {
 					size: "4",
 					my: "2"
 				}),
-				/* @__PURE__ */ jsx(p$2, {
-					size: "2",
-					weight: "bold",
-					children: "Aplicar Estilos"
-				}),
-				/* @__PURE__ */ jsxs(o$2, {
-					columns: "2",
-					gap: "3",
-					children: [/* @__PURE__ */ jsxs(p$1, { children: [/* @__PURE__ */ jsx(p$2, {
-						size: "1",
-						mb: "1",
-						as: "div",
-						children: "Cor do Texto"
-					}), /* @__PURE__ */ jsx("input", {
-						type: "color",
-						value: K.style.color || "#000000",
-						onChange: (n) => U(K.id, { color: n.target.value }),
-						style: {
-							width: "100%",
-							height: 32
-						}
-					})] }), /* @__PURE__ */ jsxs(p$1, { children: [/* @__PURE__ */ jsx(p$2, {
-						size: "1",
-						mb: "1",
-						as: "div",
-						children: "Cor de Fundo"
-					}), /* @__PURE__ */ jsxs(p, {
-						gap: "2",
-						children: [/* @__PURE__ */ jsx("input", {
+				K.style.display !== "none" && /* @__PURE__ */ jsxs(Fragment$1, { children: [
+					/* @__PURE__ */ jsx(p$2, {
+						size: "2",
+						weight: "bold",
+						children: "Aplicar Estilos"
+					}),
+					/* @__PURE__ */ jsxs(o$2, {
+						columns: "2",
+						gap: "3",
+						children: [/* @__PURE__ */ jsxs(p$1, { children: [/* @__PURE__ */ jsx(p$2, {
+							size: "1",
+							mb: "1",
+							as: "div",
+							children: "Cor do Texto"
+						}), /* @__PURE__ */ jsx("input", {
 							type: "color",
-							value: K.style.backgroundColor || "#ffffff",
-							onChange: (n) => U(K.id, { backgroundColor: n.target.value }),
+							value: K.style.color || "#000000",
+							onChange: (n) => U(K.id, { color: n.target.value }),
 							style: {
 								width: "100%",
 								height: 32
 							}
-						}), /* @__PURE__ */ jsx(o$1, {
-							variant: "outline",
-							onClick: () => U(K.id, { backgroundColor: void 0 }),
-							title: "Limpar fundo",
-							children: /* @__PURE__ */ jsx(Cross2Icon, {})
-						})]
-					})] })]
-				}),
-				/* @__PURE__ */ jsxs(p, {
-					gap: "3",
-					mt: "2",
-					children: [
-						/* @__PURE__ */ jsx(o, {
-							variant: K.style.fontWeight === "bold" ? "solid" : "outline",
-							onClick: () => U(K.id, { fontWeight: K.style.fontWeight === "bold" ? "normal" : "bold" }),
-							children: "Bold"
-						}),
-						/* @__PURE__ */ jsx(o, {
-							variant: K.style.fontStyle === "italic" ? "solid" : "outline",
-							onClick: () => U(K.id, { fontStyle: K.style.fontStyle === "italic" ? "normal" : "italic" }),
-							children: "Italic"
-						}),
-						/* @__PURE__ */ jsx(o, {
-							variant: K.style.textDecoration === "line-through" ? "solid" : "outline",
-							onClick: () => U(K.id, { textDecoration: K.style.textDecoration === "line-through" ? "none" : "line-through" }),
-							children: "Riscado"
-						})
-					]
-				})
+						})] }), /* @__PURE__ */ jsxs(p$1, { children: [/* @__PURE__ */ jsx(p$2, {
+							size: "1",
+							mb: "1",
+							as: "div",
+							children: "Cor de Fundo"
+						}), /* @__PURE__ */ jsxs(p, {
+							gap: "2",
+							children: [/* @__PURE__ */ jsx("input", {
+								type: "color",
+								value: K.style.backgroundColor || "#ffffff",
+								onChange: (n) => U(K.id, { backgroundColor: n.target.value }),
+								style: {
+									width: "100%",
+									height: 32
+								}
+							}), /* @__PURE__ */ jsx(o$1, {
+								variant: "outline",
+								onClick: () => U(K.id, { backgroundColor: void 0 }),
+								title: "Limpar fundo",
+								children: /* @__PURE__ */ jsx(Cross2Icon, {})
+							})]
+						})] })]
+					}),
+					/* @__PURE__ */ jsxs(p, {
+						gap: "3",
+						mt: "2",
+						children: [
+							/* @__PURE__ */ jsx(o, {
+								variant: K.style.fontWeight === "bold" ? "solid" : "outline",
+								onClick: () => U(K.id, { fontWeight: K.style.fontWeight === "bold" ? "normal" : "bold" }),
+								children: "Bold"
+							}),
+							/* @__PURE__ */ jsx(o, {
+								variant: K.style.fontStyle === "italic" ? "solid" : "outline",
+								onClick: () => U(K.id, { fontStyle: K.style.fontStyle === "italic" ? "normal" : "italic" }),
+								children: "Italic"
+							}),
+							/* @__PURE__ */ jsx(o, {
+								variant: K.style.textDecoration === "line-through" ? "solid" : "outline",
+								onClick: () => U(K.id, { textDecoration: K.style.textDecoration === "line-through" ? "none" : "line-through" }),
+								children: "Riscado"
+							})
+						]
+					})
+				] })
 			] })]
 		}) : /* @__PURE__ */ jsxs(Fragment$1, { children: [
 			/* @__PURE__ */ jsx(p$2, {
@@ -9933,9 +9968,14 @@ var formatValue = (n, s) => {
 			});
 		});
 	}
-	let Jk = (s) => {
+	let Jk = qk.display === "none";
+	if (Jk && s) {
+		let { display: n, ...s } = qk;
+		qk = s;
+	}
+	let Yk = (s) => {
 		s.stopPropagation(), d(n.id);
-	}, Yk = (s) => {
+	}, Qk = (s) => {
 		s.button === 0 && (s.stopPropagation(), d(n.id), F(!0), U.current = {
 			x: s.clientX,
 			y: s.clientY
@@ -9943,7 +9983,7 @@ var formatValue = (n, s) => {
 			x: n.x,
 			y: n.y
 		});
-	}, Qk = (s) => {
+	}, $k = (s) => {
 		s.stopPropagation(), s.preventDefault(), V(!0);
 		let d = s.target.closest(".resizable-element");
 		if (d) {
@@ -9981,7 +10021,7 @@ var formatValue = (n, s) => {
 		n.id,
 		C
 	]);
-	let $k = {
+	let eA = {
 		position: "absolute",
 		left: 0,
 		top: 0,
@@ -10016,7 +10056,9 @@ var formatValue = (n, s) => {
 		style: {
 			position: "absolute",
 			transform: `translate(${n.x}px, ${n.y}px) rotate(${n.rotation || 0}deg)`,
-			height: n.autoGrow ? "auto" : void 0
+			height: n.autoGrow ? "auto" : void 0,
+			display: Jk && !s ? "none" : void 0,
+			opacity: Jk && s ? .4 : 1
 		},
 		enable: s && !n.autoGrow ? void 0 : {
 			top: !1,
@@ -10037,9 +10079,9 @@ var formatValue = (n, s) => {
 					position: "relative"
 				},
 				children: [/* @__PURE__ */ jsxs(p$1, {
-					style: $k,
-					onMouseDown: Yk,
-					onClick: Jk,
+					style: eA,
+					onMouseDown: Qk,
+					onClick: Yk,
 					onMouseEnter: (n) => {
 						s || (n.currentTarget.style.borderColor = "var(--gray-6)");
 					},
@@ -10097,7 +10139,7 @@ var formatValue = (n, s) => {
 						zIndex: 50,
 						boxShadow: "0 0 0 2px white"
 					},
-					onMouseDown: Qk,
+					onMouseDown: $k,
 					children: /* @__PURE__ */ jsx(p$1, { style: {
 						position: "absolute",
 						top: 12,

@@ -321,58 +321,91 @@ const ConditionalSettings: React.FC<{ element: IElement; updateElement: any; ava
                                 )}
                             </Flex>
 
-                            <Separator size="4" my="2" />
-                            <Text size="2" weight="bold">Aplicar Estilos</Text>
-
-                            <Grid columns="2" gap="3">
-                                <Box>
-                                    <Text size="1" mb="1" as="div">Cor do Texto</Text>
-                                    <input
-                                        type="color"
-                                        value={editingRule.style.color as string || '#000000'}
-                                        onChange={e => handleUpdateStyle(editingRule.id, { color: e.target.value })}
-                                        style={{ width: '100%', height: 32 }}
-                                    />
+                            <Flex gap="2">
+                                <Box flexGrow="1">
+                                    <Text size="1" mb="1" as="div">Ação</Text>
+                                    <select
+                                        value={editingRule.style.display === 'none' ? 'hide' : 'style'}
+                                        onChange={(e) => {
+                                            if (e.target.value === 'hide') {
+                                                handleUpdateStyle(editingRule.id, { display: 'none' });
+                                            } else {
+                                                handleUpdateStyle(editingRule.id, { display: undefined });
+                                            }
+                                        }}
+                                        style={{
+                                            width: '100%',
+                                            padding: '6px',
+                                            borderRadius: '4px',
+                                            border: '1px solid var(--gray-6)',
+                                            backgroundColor: 'var(--color-panel-solid)',
+                                            color: 'var(--gray-12)',
+                                            fontSize: '14px'
+                                        }}
+                                    >
+                                        <option value="style">Aplicar Estilo</option>
+                                        <option value="hide">Ocultar Elemento</option>
+                                    </select>
                                 </Box>
-                                <Box>
-                                    <Text size="1" mb="1" as="div">Cor de Fundo</Text>
-                                    <Flex gap="2">
-                                        <input
-                                            type="color"
-                                            value={editingRule.style.backgroundColor as string || '#ffffff'}
-                                            onChange={e => handleUpdateStyle(editingRule.id, { backgroundColor: e.target.value })}
-                                            style={{ width: '100%', height: 32 }}
-                                        />
-                                        <IconButton
-                                            variant="outline"
-                                            onClick={() => handleUpdateStyle(editingRule.id, { backgroundColor: undefined })}
-                                            title="Limpar fundo"
-                                        >
-                                            <Cross2Icon />
-                                        </IconButton>
-                                    </Flex>
-                                </Box>
-                            </Grid>
-                            <Flex gap="3" mt="2">
-                                <Button
-                                    variant={editingRule.style.fontWeight === 'bold' ? 'solid' : 'outline'}
-                                    onClick={() => handleUpdateStyle(editingRule.id, { fontWeight: editingRule.style.fontWeight === 'bold' ? 'normal' : 'bold' })}
-                                >
-                                    Bold
-                                </Button>
-                                <Button
-                                    variant={editingRule.style.fontStyle === 'italic' ? 'solid' : 'outline'}
-                                    onClick={() => handleUpdateStyle(editingRule.id, { fontStyle: editingRule.style.fontStyle === 'italic' ? 'normal' : 'italic' })}
-                                >
-                                    Italic
-                                </Button>
-                                <Button
-                                    variant={editingRule.style.textDecoration === 'line-through' ? 'solid' : 'outline'}
-                                    onClick={() => handleUpdateStyle(editingRule.id, { textDecoration: editingRule.style.textDecoration === 'line-through' ? 'none' : 'line-through' })}
-                                >
-                                    Riscado
-                                </Button>
                             </Flex>
+
+                            <Separator size="4" my="2" />
+
+                            {editingRule.style.display !== 'none' && (
+                                <>
+                                    <Text size="2" weight="bold">Aplicar Estilos</Text>
+
+                                    <Grid columns="2" gap="3">
+                                        <Box>
+                                            <Text size="1" mb="1" as="div">Cor do Texto</Text>
+                                            <input
+                                                type="color"
+                                                value={editingRule.style.color as string || '#000000'}
+                                                onChange={e => handleUpdateStyle(editingRule.id, { color: e.target.value })}
+                                                style={{ width: '100%', height: 32 }}
+                                            />
+                                        </Box>
+                                        <Box>
+                                            <Text size="1" mb="1" as="div">Cor de Fundo</Text>
+                                            <Flex gap="2">
+                                                <input
+                                                    type="color"
+                                                    value={editingRule.style.backgroundColor as string || '#ffffff'}
+                                                    onChange={e => handleUpdateStyle(editingRule.id, { backgroundColor: e.target.value })}
+                                                    style={{ width: '100%', height: 32 }}
+                                                />
+                                                <IconButton
+                                                    variant="outline"
+                                                    onClick={() => handleUpdateStyle(editingRule.id, { backgroundColor: undefined })}
+                                                    title="Limpar fundo"
+                                                >
+                                                    <Cross2Icon />
+                                                </IconButton>
+                                            </Flex>
+                                        </Box>
+                                    </Grid>
+                                    <Flex gap="3" mt="2">
+                                        <Button
+                                            variant={editingRule.style.fontWeight === 'bold' ? 'solid' : 'outline'}
+                                            onClick={() => handleUpdateStyle(editingRule.id, { fontWeight: editingRule.style.fontWeight === 'bold' ? 'normal' : 'bold' })}
+                                        >
+                                            Bold
+                                        </Button>
+                                        <Button
+                                            variant={editingRule.style.fontStyle === 'italic' ? 'solid' : 'outline'}
+                                            onClick={() => handleUpdateStyle(editingRule.id, { fontStyle: editingRule.style.fontStyle === 'italic' ? 'normal' : 'italic' })}
+                                        >
+                                            Italic
+                                        </Button>
+                                        <Button
+                                            variant={editingRule.style.textDecoration === 'line-through' ? 'solid' : 'outline'}
+                                            onClick={() => handleUpdateStyle(editingRule.id, { textDecoration: editingRule.style.textDecoration === 'line-through' ? 'none' : 'line-through' })}
+                                        >
+                                            Riscado
+                                        </Button>
+                                    </Flex>
+                                </>
+                            )}
                         </>
                     )}
                 </Flex>

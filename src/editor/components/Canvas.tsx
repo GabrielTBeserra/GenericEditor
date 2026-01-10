@@ -132,6 +132,18 @@ const DraggableResizableElement: React.FC<{ element: IElement; isSelected: boole
         }
     }
 
+    const isHidden = conditionalStyles.display === 'none';
+
+    // Adjust visibility for editor UX
+    if (isHidden) {
+        if (isSelected) {
+            // If selected but hidden, show as semi-transparent ghost
+            const { display, ...rest } = conditionalStyles;
+            conditionalStyles = rest;
+        }
+        // If not selected, we let display: none propagate or handle it in container
+    }
+
     const handleClick = (e: React.MouseEvent) => {
         e.stopPropagation();
         selectElement(element.id);
@@ -270,7 +282,9 @@ const DraggableResizableElement: React.FC<{ element: IElement; isSelected: boole
             style={{
                 position: 'absolute',
                 transform: `translate(${element.x}px, ${element.y}px) rotate(${element.rotation || 0}deg)`,
-                height: element.autoGrow ? 'auto' : undefined
+                height: element.autoGrow ? 'auto' : undefined,
+                display: (isHidden && !isSelected) ? 'none' : undefined,
+                opacity: (isHidden && isSelected) ? 0.4 : 1
             }}
             enable={isSelected && !element.autoGrow ? undefined : {
                 top: false, right: isSelected, bottom: false, left: isSelected,

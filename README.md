@@ -95,6 +95,7 @@ The editor offers an experience similar to design tools like Canva or Figma:
 - **Conditional Formatting**:
   - Define rules to change the element's style based on data values.
   - _Example_: If `price` is greater than `100`, set text color to `red`.
+  - _Action_: Choose between applying styles (Color, Bold, Background, etc.) or **Hiding the Element** completely.
   - Supports multiple rules with operators like Equals, Not Equals, Contains, Greater Than, Less Than, Truthy, and Falsy.
 
 ### Settings and Test Data
