@@ -1,6 +1,30 @@
+<div align="center">
+  <a href="https://bearry.app">
+    <img src="https://bearry.app/logo.png" alt="Bearry - Streaming Tools" height="100">
+  </a>
+  <br />
+  <br />
+
+  <h1>🐻 Bearry - Streaming Tools</h1>
+
+  <p>
+    <strong>The ultimate toolkit for streamers and content creators.</strong>
+    <br />
+    Create stunning overlays, manage your stream, and engage your audience like never before.
+  </p>
+
+  <p>
+    <a href="https://bearry.app"><strong>🌐 Visit Bearry.app</strong></a>
+  </p>
+</div>
+
+<hr />
+
 # Generic Editor
 
 A powerful, framework-agnostic, and **100% customizable** React library for creating dynamic layouts, template generation, and visual editing. Designed to be the design engine within your application (Web, Electron, Tauri, Next.js, etc.).
+
+**This library is the core engine behind the visual editors found in [Bearry - Streaming Tools](https://bearry.app).**
 
 ---
 
