@@ -129,7 +129,34 @@ Sempre que novos dados chegarem no componente pai, chame `generateHTML` novament
 ### Opção B: Renderer JavaScript Puro (Para HTML estático independente)
 O editor exporta uma função `getRendererCode()` que retorna o código fonte de uma função JS `renderTemplate`. Você pode injetar esse código em um arquivo HTML estático.
 
-Exemplo de estrutura de um arquivo HTML "player":
+### Opção C: Smart Script Injection (Recomendado para Listas)
+
+Ao gerar o HTML com `generateHTML` no modo lista (`isList: true`), o editor injeta automaticamente um script inteligente no final do HTML. Este script expõe a função global `window.addItem(data)`.
+
+Isso permite adicionar novos itens dinamicamente sem precisar regenerar o HTML inteiro e sem perder o estado do scroll ou animações.
+
+**Exemplo de Uso (Cliente/Browser):**
+
+```javascript
+// O HTML já foi carregado na página (via iframe, webview ou innerHTML)
+
+// Quando chegar um novo dado via Socket/Evento:
+const novoItem = {
+    titulo: "Novo Produto Chegou",
+    preco: "R$ 50,00",
+    imagemUrl: "..."
+};
+
+// Basta chamar a função global. 
+// Ela cuida de gerar o HTML, inserir na posição correta e animar.
+if (window.addItem) {
+    window.addItem(novoItem);
+}
+```
+
+Essa abordagem é ideal para **Displays, Overlays de OBS ou Webviews Electron**, pois é extremamente performática e mantém a lógica de renderização encapsulada dentro do próprio HTML gerado.
+
+Exemplo de estrutura de um arquivo HTML "player" (Manual - Opção B):
 
 ```html
 <html>

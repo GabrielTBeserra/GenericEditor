@@ -288,12 +288,62 @@ function renderTemplate(elements, data, options = {}) {
                </script>\`
             : '';
 
+        // Inject Smart Script for Dynamic Updates
+        const injectionScript = \`
+            <script>
+            (function() {
+                try {
+                    const elements = \${JSON.stringify(elements)};
+                    const formatValue = \${formatValue.toString()};
+                    const checkCondition = \${checkCondition.toString()};
+                    const camelToKebab = \${camelToKebab.toString()};
+                    const hex8ToRgba = \${hex8ToRgba.toString()};
+                    const styleObjectToString = \${styleObjectToString.toString()};
+                    const renderItem = \${renderItem.toString()};
+
+                    const itemHeight = \${itemHeight};
+                    const newestPosition = "\${(listSettings && listSettings.newestPosition) || 'bottom'}";
+                    const scrollDirection = "\${(listSettings && listSettings.scrollDirection) || 'down'}";
+
+                    window.addItem = function(data) {
+                        const wrapper = document.querySelector('.list-wrapper');
+                        if (!wrapper) return;
+
+                        const itemHtml = renderItem(data, 0, 0);
+                        const itemContainerStyle = styleObjectToString({
+                            position: 'relative',
+                            height: itemHeight,
+                            width: '100%',
+                            marginBottom: 0
+                        });
+
+                        const div = document.createElement('div');
+                        div.className = 'list-item';
+                        div.setAttribute('style', itemContainerStyle);
+                        div.innerHTML = itemHtml;
+
+                        if (newestPosition === 'top') {
+                            wrapper.insertBefore(div, wrapper.firstChild);
+                        } else {
+                            wrapper.appendChild(div);
+                        }
+                        
+                        if (scrollDirection === 'up') {
+                           wrapper.scrollTop = wrapper.scrollHeight;
+                        }
+                    };
+                } catch(e) { console.error("Smart List Init Error", e); }
+            })();
+            </script>
+        \`;
+
         return \`
             <style>\${animationCss}</style>
             <div class="list-wrapper">
                 \${itemsHtml}
             </div>
             \${scrollScript}
+            \${injectionScript}
         \`;
     }
 

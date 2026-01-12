@@ -1,6 +1,6 @@
 <div align="center">
   <a href="https://bearry.app">
-    <img src="https://bearry.app/logo.png" alt="Bearry - Streaming Tools" height="100">
+    <img src="https://cdn.bearry.app/images/logo_png.png" alt="Bearry - Streaming Tools" height="100">
   </a>
   <br />
   <br />
@@ -295,6 +295,39 @@ const htmlString = generateHTML(layout.elements, dados, {
 // 3. Inject where needed
 document.getElementById("preview").innerHTML = htmlString;
 ```
+
+### Dynamic List Updates (Real-time)
+
+When generating HTML for lists (`isList: true`), the editor automatically injects a smart script that enables real-time updates without regenerating the entire HTML.
+
+This is perfect for **OBS Overlays, Chat Widgets, or Live Feeds**.
+
+#### How to use:
+
+1. Generate the initial HTML using `generateHTML`.
+2. Load the HTML in your view (Browser, WebView, OBS).
+3. Call `window.addItem(data)` whenever you have new data.
+
+```javascript
+// Example: Adding a new item via WebSocket or Event
+const newItem = {
+  name: "New Subscriber",
+  message: "Hello World!",
+  avatar: "https://...",
+};
+
+// This function is automatically available in the generated HTML
+if (window.addItem) {
+  window.addItem(newItem);
+}
+```
+
+The injected script automatically handles:
+
+- **Rendering**: Uses the exact same layout configuration from the JSON.
+- **Animation**: Smooth slide-in animation for new items.
+- **Positioning**: Respects 'Newest on Top' or 'Bottom' settings.
+- **Scrolling**: Auto-scrolls to the newest item if configured.
 
 ---
 

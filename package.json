@@ -1,6 +1,6 @@
 {
   "name": "@1urso/generic-editor",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "publishConfig": {
     "access": "public"
   },
@@ -16,7 +16,8 @@
     "./dist/generic-editor.css": "./dist/generic-editor.css"
   },
   "files": [
-    "dist"
+    "dist",
+    "README.md"
   ],
   "scripts": {
     "dev": "vite",
