@@ -101,6 +101,17 @@ function renderTemplate(elements, data, options = {}) {
         return string.replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, '$1-$2').toLowerCase();
     };
 
+    const hex8ToRgba = (hex) => {
+        const m = /^#([0-9a-fA-F]{8})$/.exec(hex);
+        if (!m) return hex;
+        const h = m[1];
+        const r = parseInt(h.slice(0, 2), 16);
+        const g = parseInt(h.slice(2, 4), 16);
+        const b = parseInt(h.slice(4, 6), 16);
+        const a = parseInt(h.slice(6, 8), 16) / 255;
+        return \`rgba(\${r}, \${g}, \${b}, \${a})\`;
+    };
+
     const styleObjectToString = (style) => {
         if (!style) return '';
         const pxProps = ['width', 'height', 'top', 'left', 'right', 'bottom', 'fontSize', 'borderRadius', 'padding', 'margin', 'borderWidth'];
@@ -109,7 +120,12 @@ function renderTemplate(elements, data, options = {}) {
             .map(([key, value]) => {
                 if (value === undefined || value === null) return '';
                 const cssKey = camelToKebab(key);
-                const cssValue = (typeof value === 'number' && pxProps.includes(key)) ? value + 'px' : value;
+                let cssValue = (typeof value === 'number' && pxProps.includes(key)) ? value + 'px' : value;
+                if (typeof cssValue === 'string') {
+                    if (/^#([0-9a-fA-F]{8})$/.test(cssValue)) {
+                        cssValue = hex8ToRgba(cssValue);
+                    }
+                }
                 return \`\${cssKey}: \${cssValue}\`;
             })
             .filter(Boolean)

@@ -2,6 +2,7 @@ import { Cross2Icon, PlusIcon, TrashIcon } from '@radix-ui/react-icons';
 import { Box, Button, Dialog, Flex, Grid, IconButton, Separator, Switch, Tabs, Text, TextField } from '@radix-ui/themes';
 import React, { useState } from 'react';
 import { useEditor, type IElement, type IElementCondition, type IElementFormatting } from '../context';
+import { ColorInput } from './ColorPicker';
 
 interface ElementAdvancedSettingsProps {
     elementId: string;
@@ -358,22 +359,20 @@ const ConditionalSettings: React.FC<{ element: IElement; updateElement: any; ava
                                     <Grid columns="2" gap="3">
                                         <Box>
                                             <Text size="1" mb="1" as="div">Cor do Texto</Text>
-                                            <input
-                                                type="color"
-                                                value={editingRule.style.color as string || '#000000'}
-                                                onChange={e => handleUpdateStyle(editingRule.id, { color: e.target.value })}
-                                                style={{ width: '100%', height: 32 }}
+                                            <ColorInput
+                                                color={editingRule.style.color as string || '#000000'}
+                                                onChange={val => handleUpdateStyle(editingRule.id, { color: val })}
                                             />
                                         </Box>
                                         <Box>
                                             <Text size="1" mb="1" as="div">Cor de Fundo</Text>
                                             <Flex gap="2">
-                                                <input
-                                                    type="color"
-                                                    value={editingRule.style.backgroundColor as string || '#ffffff'}
-                                                    onChange={e => handleUpdateStyle(editingRule.id, { backgroundColor: e.target.value })}
-                                                    style={{ width: '100%', height: 32 }}
-                                                />
+                                                <Box flexGrow="1">
+                                                    <ColorInput
+                                                        color={editingRule.style.backgroundColor as string || '#ffffff'}
+                                                        onChange={val => handleUpdateStyle(editingRule.id, { backgroundColor: val })}
+                                                    />
+                                                </Box>
                                                 <IconButton
                                                     variant="outline"
                                                     onClick={() => handleUpdateStyle(editingRule.id, { backgroundColor: undefined })}

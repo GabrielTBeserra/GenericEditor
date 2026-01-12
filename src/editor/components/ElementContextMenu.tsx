@@ -4,16 +4,18 @@ import { Dialog, Button, Flex, TextArea, TextField, Text, Badge } from '@radix-u
 import { ChevronRightIcon, CheckIcon } from '@radix-ui/react-icons';
 import { useEditor, type IElement } from '../context';
 import { ElementAdvancedSettings } from './ElementAdvancedSettings';
+import { ColorPickerContent } from './ColorPicker';
 import './context-menu.css';
 
 export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: IElement }> = ({ children, element }) => {
     const { updateElement, removeElement, addElement, moveElement, state } = useEditor();
-    
+
     // Estado dos Modais
     const [isEditContentOpen, setIsEditContentOpen] = useState(false);
     const [isBindDataOpen, setIsBindDataOpen] = useState(false);
     const [isAdvancedSettingsOpen, setIsAdvancedSettingsOpen] = useState(false);
-    
+    const [colorDialog, setColorDialog] = useState<{ open: boolean; prop: string; value: string }>({ open: false, prop: '', value: '' });
+
     // Estado Temporário para Edição
     const [tempContent, setTempContent] = useState(element.content);
     const [tempBinding, setTempBinding] = useState(element.dataBinding || "");
@@ -29,14 +31,14 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
             const text = tempContent;
             const newText = text.substring(0, start) + `{{${variable}}}` + text.substring(end);
             setTempContent(newText);
-            
+
             setTimeout(() => {
                 textarea.focus();
                 const newCursorPos = start + variable.length + 4;
                 textarea.setSelectionRange(newCursorPos, newCursorPos);
             }, 0);
         } else {
-             setTempContent(prev => prev + `{{${variable}}}`);
+            setTempContent(prev => prev + `{{${variable}}}`);
         }
     };
 
@@ -45,34 +47,43 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
             style: { ...element.style, ...style }
         });
     };
-    
+
     const handleBringToFront = () => {
-         const index = state.elements.findIndex(e => e.id === element.id);
-         if (index < state.elements.length - 1) {
-             moveElement(index, state.elements.length - 1);
-         }
+        const index = state.elements.findIndex(e => e.id === element.id);
+        if (index < state.elements.length - 1) {
+            moveElement(index, state.elements.length - 1);
+        }
     };
-    
+
     const handleSendToBack = () => {
-         const index = state.elements.findIndex(e => e.id === element.id);
-         if (index > 0) {
-             moveElement(index, 0);
-         }
+        const index = state.elements.findIndex(e => e.id === element.id);
+        if (index > 0) {
+            moveElement(index, 0);
+        }
     };
 
     const handleDuplicate = () => {
-         addElement({
-             type: element.type,
-             content: element.content,
-             x: element.x + 20,
-             y: element.y + 20,
-             width: element.width,
-             height: element.height,
-             style: element.style
-         });
+        addElement({
+            type: element.type,
+            content: element.content,
+            x: element.x + 20,
+            y: element.y + 20,
+            width: element.width,
+            height: element.height,
+            style: element.style
+        });
     };
 
     const colors = ['#000000', '#FFFFFF', '#FF0000', '#00FF00', '#0000FF', '#FFA500', '#808080', '#800080', 'transparent'];
+
+    const handleOpenColorDialog = (prop: string, currentValue: string) => {
+        setColorDialog({ open: true, prop, value: currentValue });
+    };
+
+    const handleSaveColorDialog = () => {
+        handleUpdateStyle({ [colorDialog.prop]: colorDialog.value });
+        setColorDialog(prev => ({ ...prev, open: false }));
+    };
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
@@ -129,23 +140,23 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                 <Dialog.Content style={{ maxWidth: 450 }}>
                     <Dialog.Title>Editar Texto</Dialog.Title>
                     <Flex direction="column" gap="3">
-                        <TextArea 
+                        <TextArea
                             ref={textAreaRef}
-                            value={tempContent} 
-                            onChange={e => setTempContent(e.target.value)} 
+                            value={tempContent}
+                            onChange={e => setTempContent(e.target.value)}
                             placeholder="Digite o novo texto..."
                             style={{ height: 100 }}
                         />
-                        
+
                         {state.availableProps && state.availableProps.length > 0 && (
                             <Flex direction="column" gap="2">
                                 <Text size="1" color="gray">Inserir variável:</Text>
                                 <Flex gap="2" wrap="wrap">
                                     {state.availableProps.map(prop => (
-                                        <Badge 
-                                            key={prop.dataName} 
-                                            color="blue" 
-                                            variant="surface" 
+                                        <Badge
+                                            key={prop.dataName}
+                                            color="blue"
+                                            variant="surface"
                                             style={{ cursor: 'pointer' }}
                                             onClick={() => handleInsertVariable(prop.dataName)}
                                         >
@@ -170,12 +181,12 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                 <Dialog.Content style={{ maxWidth: 450 }}>
                     <Dialog.Title>Vincular Dados Manualmente</Dialog.Title>
                     <Flex direction="column" gap="3">
-                         <Text size="2">Nome da propriedade (ex: titulo, preco, imagem):</Text>
-                        <TextField.Root 
-                                value={tempBinding} 
-                                onChange={e => setTempBinding(e.target.value)} 
-                                placeholder="propriedade" 
-                            />
+                        <Text size="2">Nome da propriedade (ex: titulo, preco, imagem):</Text>
+                        <TextField.Root
+                            value={tempBinding}
+                            onChange={e => setTempBinding(e.target.value)}
+                            placeholder="propriedade"
+                        />
                         <Flex gap="3" justify="end">
                             <Dialog.Close>
                                 <Button variant="soft" color="gray">Cancelar</Button>
@@ -186,18 +197,34 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                 </Dialog.Content>
             </Dialog.Root>
 
-            <ElementAdvancedSettings 
-                elementId={element.id} 
-                open={isAdvancedSettingsOpen} 
-                onOpenChange={setIsAdvancedSettingsOpen} 
+            <Dialog.Root open={colorDialog.open} onOpenChange={(open) => setColorDialog(prev => ({ ...prev, open }))}>
+                <Dialog.Content style={{ maxWidth: 300 }}>
+                    <Dialog.Title>Selecionar Cor</Dialog.Title>
+                    <ColorPickerContent
+                        color={colorDialog.value}
+                        onChange={(val) => setColorDialog(prev => ({ ...prev, value: val }))}
+                    />
+                    <Flex gap="3" justify="end" mt="4">
+                        <Dialog.Close>
+                            <Button variant="soft" color="gray">Cancelar</Button>
+                        </Dialog.Close>
+                        <Button onClick={handleSaveColorDialog}>Aplicar</Button>
+                    </Flex>
+                </Dialog.Content>
+            </Dialog.Root>
+
+            <ElementAdvancedSettings
+                elementId={element.id}
+                open={isAdvancedSettingsOpen}
+                onOpenChange={setIsAdvancedSettingsOpen}
             />
 
-            <input 
-                type="file" 
-                ref={fileInputRef} 
-                style={{ display: 'none' }} 
-                accept="image/*" 
-                onChange={handleFileChange} 
+            <input
+                type="file"
+                ref={fileInputRef}
+                style={{ display: 'none' }}
+                accept="image/*"
+                onChange={handleFileChange}
             />
 
             {/* Radix Context Menu */}
@@ -207,15 +234,15 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                         {children}
                     </div>
                 </ContextMenu.Trigger>
-                
+
                 <ContextMenu.Portal>
                     <ContextMenu.Content className="ContextMenuContent">
-                        
+
                         {/* Data Binding */}
                         <ContextMenu.Sub>
                             <ContextMenu.SubTrigger className="ContextMenuSubTrigger">
                                 Vincular Dados
-                                {element.dataBinding && <span style={{fontSize: 10, marginLeft: 4, opacity: 0.7}}>({element.dataBinding})</span>}
+                                {element.dataBinding && <span style={{ fontSize: 10, marginLeft: 4, opacity: 0.7 }}>({element.dataBinding})</span>}
                                 <div className="RightSlot">
                                     <ChevronRightIcon />
                                 </div>
@@ -225,8 +252,8 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                                     {state.availableProps && state.availableProps.length > 0 && (
                                         <>
                                             {state.availableProps.map(prop => (
-                                                <ContextMenu.Item 
-                                                    key={prop.dataName} 
+                                                <ContextMenu.Item
+                                                    key={prop.dataName}
                                                     className="ContextMenuItem"
                                                     onSelect={() => {
                                                         const updates: Partial<IElement> = { dataBinding: prop.dataName };
@@ -242,15 +269,15 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                                             <ContextMenu.Separator className="ContextMenuSeparator" />
                                         </>
                                     )}
-                                    
+
                                     <ContextMenu.Item className="ContextMenuItem" onSelect={handleOpenBindData}>
                                         Outro / Manual...
                                     </ContextMenu.Item>
-                                    
+
                                     {element.dataBinding && (
                                         <>
                                             <ContextMenu.Separator className="ContextMenuSeparator" />
-                                            <ContextMenu.Item 
+                                            <ContextMenu.Item
                                                 className="ContextMenuItem"
                                                 onSelect={() => updateElement(element.id, { dataBinding: undefined })}
                                                 style={{ color: 'var(--red-9)' }}
@@ -262,7 +289,7 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                                 </ContextMenu.SubContent>
                             </ContextMenu.Portal>
                         </ContextMenu.Sub>
-                        
+
                         <ContextMenu.Separator className="ContextMenuSeparator" />
 
                         {/* Text Specific Actions */}
@@ -284,7 +311,7 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                         <ContextMenu.Item className="ContextMenuItem" onSelect={handleDuplicate}>Duplicar</ContextMenu.Item>
                         <ContextMenu.Item className="ContextMenuItem" onSelect={() => removeElement(element.id)}>Excluir</ContextMenu.Item>
                         <ContextMenu.Separator className="ContextMenuSeparator" />
-                        
+
                         {/* Image Specific */}
                         {element.type === 'image' && (
                             <>
@@ -304,7 +331,7 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                                         </ContextMenu.SubContent>
                                     </ContextMenu.Portal>
                                 </ContextMenu.Sub>
-                                
+
                                 <ContextMenu.Sub>
                                     <ContextMenu.SubTrigger className="ContextMenuSubTrigger">
                                         Ajuste da Imagem
@@ -322,7 +349,7 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                                 <ContextMenu.Separator className="ContextMenuSeparator" />
                             </>
                         )}
-                        
+
                         {/* Layering */}
                         <ContextMenu.Sub>
                             <ContextMenu.SubTrigger className="ContextMenuSubTrigger">
@@ -336,7 +363,7 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                                 </ContextMenu.SubContent>
                             </ContextMenu.Portal>
                         </ContextMenu.Sub>
-                        
+
                         <ContextMenu.Separator className="ContextMenuSeparator" />
 
                         {/* Text Styling */}
@@ -350,8 +377,8 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                                     <ContextMenu.Portal>
                                         <ContextMenu.SubContent className="ContextMenuSubContent ContextMenuScrollable" sideOffset={2} alignOffset={-5}>
                                             {state.availableFonts && state.availableFonts.map(font => (
-                                                <ContextMenu.Item 
-                                                    key={font} 
+                                                <ContextMenu.Item
+                                                    key={font}
                                                     className="ContextMenuItem"
                                                     onSelect={() => handleUpdateStyle({ fontFamily: font })}
                                                     style={{ fontFamily: font }}
@@ -379,7 +406,7 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                                         </ContextMenu.SubContent>
                                     </ContextMenu.Portal>
                                 </ContextMenu.Sub>
-                                
+
                                 <ContextMenu.Sub>
                                     <ContextMenu.SubTrigger className="ContextMenuSubTrigger">
                                         Cor do Texto
@@ -393,10 +420,17 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                                                     {color}
                                                 </ContextMenu.Item>
                                             ))}
+                                            <ContextMenu.Separator className="ContextMenuSeparator" />
+                                            <ContextMenu.Item
+                                                className="ContextMenuItem"
+                                                onSelect={() => handleOpenColorDialog('color', element.style?.color as string || '#000000')}
+                                            >
+                                                Outra Cor...
+                                            </ContextMenu.Item>
                                         </ContextMenu.SubContent>
                                     </ContextMenu.Portal>
                                 </ContextMenu.Sub>
-                                
+
                                 <ContextMenu.Sub>
                                     <ContextMenu.SubTrigger className="ContextMenuSubTrigger">
                                         Peso da Fonte
@@ -439,7 +473,7 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                                 </ContextMenu.Sub>
                             </>
                         )}
-                        
+
                         {/* Background Color */}
                         <ContextMenu.Sub>
                             <ContextMenu.SubTrigger className="ContextMenuSubTrigger">
@@ -454,10 +488,17 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                                             {color === 'transparent' ? 'Transparente' : color}
                                         </ContextMenu.Item>
                                     ))}
+                                    <ContextMenu.Separator className="ContextMenuSeparator" />
+                                    <ContextMenu.Item
+                                        className="ContextMenuItem"
+                                        onSelect={() => handleOpenColorDialog('backgroundColor', element.style?.backgroundColor as string || 'transparent')}
+                                    >
+                                        Outra Cor...
+                                    </ContextMenu.Item>
                                 </ContextMenu.SubContent>
                             </ContextMenu.Portal>
                         </ContextMenu.Sub>
-                        
+
                         {/* Border Radius */}
                         <ContextMenu.Sub>
                             <ContextMenu.SubTrigger className="ContextMenuSubTrigger">
@@ -467,8 +508,8 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                             <ContextMenu.Portal>
                                 <ContextMenu.SubContent className="ContextMenuSubContent" sideOffset={2} alignOffset={-5}>
                                     {[0, 4, 8, 12, 16, 24, '50%'].map(radius => (
-                                        <ContextMenu.Item 
-                                            key={radius} 
+                                        <ContextMenu.Item
+                                            key={radius}
                                             className="ContextMenuItem"
                                             onSelect={() => handleUpdateStyle({ borderRadius: typeof radius === 'number' ? `${radius}px` : radius })}
                                         >
@@ -478,7 +519,7 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                                 </ContextMenu.SubContent>
                             </ContextMenu.Portal>
                         </ContextMenu.Sub>
-                        
+
                         {/* Padding */}
                         <ContextMenu.Sub>
                             <ContextMenu.SubTrigger className="ContextMenuSubTrigger">
@@ -495,7 +536,7 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                                 </ContextMenu.SubContent>
                             </ContextMenu.Portal>
                         </ContextMenu.Sub>
-                        
+
                     </ContextMenu.Content>
                 </ContextMenu.Portal>
             </ContextMenu.Root>
