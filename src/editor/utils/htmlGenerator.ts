@@ -58,7 +58,6 @@ function renderTemplate(elements, data, options = {}) {
     };
 
     const computeItemHeight = (elements, itemData, fallbackHeight) => {
-        if (fallbackHeight) return fallbackHeight;
         let maxY = 0;
         elements.forEach(el => {
             let height = el.height;
@@ -76,7 +75,7 @@ function renderTemplate(elements, data, options = {}) {
             const bottom = el.y + height;
             if (bottom > maxY) maxY = bottom;
         });
-        return maxY;
+        return fallbackHeight ? Math.max(maxY, fallbackHeight) : maxY;
     };
 
     const formatValue = (value, formatting) => {
@@ -306,6 +305,17 @@ function renderTemplate(elements, data, options = {}) {
                 });
             }
 
+            // Resolve Style Bindings
+            let bindingStyles = {};
+            if (element.styleBindings) {
+                Object.entries(element.styleBindings).forEach(([styleProp, variableName]) => {
+                    const val = itemData[variableName];
+                    if (val !== undefined && val !== null) {
+                        bindingStyles[styleProp] = String(val);
+                    }
+                });
+            }
+
             const baseStyle = {
                 position: 'absolute',
                 left: element.x,
@@ -317,7 +327,8 @@ function renderTemplate(elements, data, options = {}) {
                 whiteSpace: element.autoGrow ? 'pre-wrap' : undefined,
                 wordBreak: element.autoGrow ? 'break-word' : undefined,
                 ...element.style,
-                ...conditionalStyles
+                ...conditionalStyles,
+                ...bindingStyles
             };
             
             // Fix: remove padding if it's not explicitly set, or handle it for text
@@ -372,8 +383,7 @@ function renderTemplate(elements, data, options = {}) {
              const itemContainerStyle = styleObjectToString({
                  position: 'relative',
                  height: itemHeight,
-                 width: '100%',
-                 marginBottom: 0
+                 width: '100%'
              });
              
              return \`<div class="list-item" style="\${itemContainerStyle}">\${itemHtml}</div>\`;
@@ -452,8 +462,7 @@ function renderTemplate(elements, data, options = {}) {
                         const itemContainerStyle = styleObjectToString({
                             position: 'relative',
                             height: itemHeight,
-                            width: '100%',
-                            marginBottom: 0
+                            width: '100%'
                         });
 
                         const div = document.createElement('div');
