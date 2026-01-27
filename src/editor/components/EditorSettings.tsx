@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { Dialog, Button, Flex, Text, TextField, Box } from '@radix-ui/themes';
 import { GearIcon } from '@radix-ui/react-icons';
-import { useEditor } from '../context';
+import { Box, Button, Dialog, Flex, Grid, Text, TextField } from '@radix-ui/themes';
+import React, { useEffect, useState } from 'react';
+import { useEditor, type IElementAnimation } from '../context';
 
 export const EditorSettings: React.FC = () => {
     const { state, updateListSettings, setCanvasHeight } = useEditor();
@@ -13,6 +13,11 @@ export const EditorSettings: React.FC = () => {
     const [localCanvasHeight, setLocalCanvasHeight] = useState('150');
     const [localContainerHeight, setLocalContainerHeight] = useState('');
 
+    // Animation State
+    const [localEntryAnimType, setLocalEntryAnimType] = useState('slideIn'); // Default
+    const [localEntryAnimDuration, setLocalEntryAnimDuration] = useState(0.3);
+    const [localEntryAnimTiming, setLocalEntryAnimTiming] = useState('ease-out');
+
     // Sync local state with context when opening
     useEffect(() => {
         if (open) {
@@ -22,13 +27,19 @@ export const EditorSettings: React.FC = () => {
             setLocalScrollDirection(state.listSettings.scrollDirection || 'down');
             setLocalContainerHeight(state.listSettings.containerHeight ? String(state.listSettings.containerHeight) : '');
             setLocalCanvasHeight(String(state.canvasHeight || 150));
+
+            // Animation defaults
+            const anim = state.listSettings.entryAnimation;
+            setLocalEntryAnimType(anim?.type || 'slideIn');
+            setLocalEntryAnimDuration(anim?.duration || 0.3);
+            setLocalEntryAnimTiming(anim?.timingFunction || 'ease-out');
         }
     }, [open]);
 
     // Update canvas height when changed (Live preview for item height)
     useEffect(() => {
         if (!open) return; // Only update if dialog is open (prevent initial mount effect if not open)
-        
+
         const height = parseInt(localCanvasHeight, 10);
         if (!isNaN(height) && height > 0) {
             // Only update if different to avoid loop (though React handles strict equality)
@@ -40,12 +51,21 @@ export const EditorSettings: React.FC = () => {
 
     const handleSave = () => {
         const containerHeight = parseInt(localContainerHeight, 10);
-        updateListSettings({ 
+
+        const entryAnimation: IElementAnimation = {
+            type: localEntryAnimType as any,
+            duration: Number(localEntryAnimDuration),
+            delay: 0,
+            timingFunction: localEntryAnimTiming as any
+        };
+
+        updateListSettings({
             sortProp: localSortProp === '__none__' ? '' : localSortProp,
             sortOrder: localSortOrder,
             newestPosition: localNewestPosition,
             scrollDirection: localScrollDirection,
-            containerHeight: !isNaN(containerHeight) && containerHeight > 0 ? containerHeight : undefined
+            containerHeight: !isNaN(containerHeight) && containerHeight > 0 ? containerHeight : undefined,
+            entryAnimation
         });
         setOpen(false);
     };
@@ -70,7 +90,7 @@ export const EditorSettings: React.FC = () => {
                         <Flex gap="3" align="center">
                             <Box flexGrow="1">
                                 <Text size="1" mb="1" as="div">Propriedade para Ordenar (ex: data, id)</Text>
-                                <select 
+                                <select
                                     value={localSortProp}
                                     onChange={(e) => setLocalSortProp(e.target.value)}
                                     style={{
@@ -94,8 +114,8 @@ export const EditorSettings: React.FC = () => {
                             </Box>
                             <Box>
                                 <Text size="1" mb="1" as="div">Direção</Text>
-                                <select 
-                                    value={localSortOrder} 
+                                <select
+                                    value={localSortOrder}
                                     onChange={(e) => setLocalSortOrder(e.target.value as 'asc' | 'desc')}
                                     style={{
                                         width: '150px',
@@ -117,8 +137,8 @@ export const EditorSettings: React.FC = () => {
                         <Flex gap="3" align="center">
                             <Box flexGrow="1">
                                 <Text size="1" mb="1" as="div">Posição do Recente</Text>
-                                <select 
-                                    value={localNewestPosition} 
+                                <select
+                                    value={localNewestPosition}
                                     onChange={(e) => setLocalNewestPosition(e.target.value as 'top' | 'bottom')}
                                     style={{
                                         width: '100%',
@@ -137,8 +157,8 @@ export const EditorSettings: React.FC = () => {
                             </Box>
                             <Box flexGrow="1">
                                 <Text size="1" mb="1" as="div">Comportamento de Rolagem</Text>
-                                <select 
-                                    value={localScrollDirection} 
+                                <select
+                                    value={localScrollDirection}
                                     onChange={(e) => setLocalScrollDirection(e.target.value as 'up' | 'down')}
                                     style={{
                                         width: '100%',
@@ -161,7 +181,7 @@ export const EditorSettings: React.FC = () => {
                         <Flex gap="3" align="center">
                             <Box flexGrow="1">
                                 <Text size="1" mb="1" as="div">Altura do Item (Template) (px)</Text>
-                                <TextField.Root 
+                                <TextField.Root
                                     type="number"
                                     min="10"
                                     value={localCanvasHeight}
@@ -173,7 +193,7 @@ export const EditorSettings: React.FC = () => {
                             </Box>
                             <Box flexGrow="1">
                                 <Text size="1" mb="1" as="div">Altura da Lista (Container) (px)</Text>
-                                <TextField.Root 
+                                <TextField.Root
                                     type="number"
                                     min="0"
                                     placeholder="Auto (100%)"
@@ -185,6 +205,65 @@ export const EditorSettings: React.FC = () => {
                                 </Text>
                             </Box>
                         </Flex>
+
+                        <Text size="2" weight="bold" mt="2">Animação de Entrada na Lista</Text>
+                        <Grid columns="3" gap="3">
+                            <Box>
+                                <Text size="1" mb="1" as="div">Efeito</Text>
+                                <select
+                                    value={localEntryAnimType}
+                                    onChange={(e) => setLocalEntryAnimType(e.target.value)}
+                                    style={{
+                                        width: '100%',
+                                        padding: '6px',
+                                        borderRadius: '4px',
+                                        border: '1px solid var(--gray-6)',
+                                        backgroundColor: 'var(--gray-2)',
+                                        color: 'var(--gray-12)',
+                                        fontSize: '14px'
+                                    }}
+                                >
+                                    <option value="none">Nenhum</option>
+                                    <option value="slideIn">Slide (Padrão)</option>
+                                    <option value="fadeIn">Fade In</option>
+                                    <option value="slideInLeft">Slide (Esq)</option>
+                                    <option value="slideInRight">Slide (Dir)</option>
+                                    <option value="zoomIn">Zoom In</option>
+                                    <option value="bounceIn">Bounce</option>
+                                </select>
+                            </Box>
+                            <Box>
+                                <Text size="1" mb="1" as="div">Duração (s)</Text>
+                                <TextField.Root
+                                    type="number"
+                                    step="0.1"
+                                    min="0.1"
+                                    value={localEntryAnimDuration}
+                                    onChange={(e) => setLocalEntryAnimDuration(parseFloat(e.target.value) || 0.3)}
+                                />
+                            </Box>
+                            <Box>
+                                <Text size="1" mb="1" as="div">Curva (Easing)</Text>
+                                <select
+                                    value={localEntryAnimTiming}
+                                    onChange={(e) => setLocalEntryAnimTiming(e.target.value)}
+                                    style={{
+                                        width: '100%',
+                                        padding: '6px',
+                                        borderRadius: '4px',
+                                        border: '1px solid var(--gray-6)',
+                                        backgroundColor: 'var(--gray-2)',
+                                        color: 'var(--gray-12)',
+                                        fontSize: '14px'
+                                    }}
+                                >
+                                    <option value="ease">Ease</option>
+                                    <option value="ease-out">Ease Out</option>
+                                    <option value="linear">Linear</option>
+                                    <option value="bounce">Bounce</option>
+                                </select>
+                            </Box>
+                        </Grid>
 
 
                         <Text size="1" color="gray">

@@ -1,5 +1,5 @@
 import * as React$1 from "react";
-import React, { Component, Fragment, PureComponent, createContext, createElement, forwardRef, memo, useCallback, useContext, useEffect, useId, useImperativeHandle, useInsertionEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import React, { Children, Component, Fragment, PureComponent, createContext, createElement, forwardRef, isValidElement, memo, useCallback, useContext, useEffect, useId, useImperativeHandle, useInsertionEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import * as ReactDOM$1 from "react-dom";
 import ReactDOM, { flushSync } from "react-dom";
 import { Fragment as Fragment$1, jsx, jsxs } from "react/jsx-runtime";
@@ -20,26 +20,257 @@ var __create = Object.create, __defProp = Object.defineProperty, __getOwnPropDes
 	value: n,
 	enumerable: !0
 }) : E, n)), __toCommonJS = (n) => __copyProps(__defProp({}, "__esModule", { value: !0 }), n);
-function setRef(n, _) {
+function _objectWithoutPropertiesLoose(n, _) {
+	if (n == null) return {};
+	var E = {}, O = Object.keys(n), A, j;
+	for (j = 0; j < O.length; j++) A = O[j], !(_.indexOf(A) >= 0) && (E[A] = n[A]);
+	return E;
+}
+var _excluded$F = ["color"], BoxIcon = /* @__PURE__ */ forwardRef(function(n, _) {
+	var E = n.color, O = E === void 0 ? "currentColor" : E, A = _objectWithoutPropertiesLoose(n, _excluded$F);
+	return createElement("svg", Object.assign({
+		width: "15",
+		height: "15",
+		viewBox: "0 0 15 15",
+		fill: "none",
+		xmlns: "http://www.w3.org/2000/svg"
+	}, A, { ref: _ }), createElement("path", {
+		d: "M12.5 2H2.5C2.22386 2 2 2.22386 2 2.5V12.5C2 12.7761 2.22386 13 2.5 13H12.5C12.7761 13 13 12.7761 13 12.5V2.5C13 2.22386 12.7761 2 12.5 2ZM2.5 1C1.67157 1 1 1.67157 1 2.5V12.5C1 13.3284 1.67157 14 2.5 14H12.5C13.3284 14 14 13.3284 14 12.5V2.5C14 1.67157 13.3284 1 12.5 1H2.5Z",
+		fill: O,
+		fillRule: "evenodd",
+		clipRule: "evenodd"
+	}));
+}), _excluded$T = ["color"], CheckIcon = /* @__PURE__ */ forwardRef(function(n, _) {
+	var E = n.color, O = E === void 0 ? "currentColor" : E, A = _objectWithoutPropertiesLoose(n, _excluded$T);
+	return createElement("svg", Object.assign({
+		width: "15",
+		height: "15",
+		viewBox: "0 0 15 15",
+		fill: "none",
+		xmlns: "http://www.w3.org/2000/svg"
+	}, A, { ref: _ }), createElement("path", {
+		d: "M11.4669 3.72684C11.7558 3.91574 11.8369 4.30308 11.648 4.59198L7.39799 11.092C7.29783 11.2452 7.13556 11.3467 6.95402 11.3699C6.77247 11.3931 6.58989 11.3355 6.45446 11.2124L3.70446 8.71241C3.44905 8.48022 3.43023 8.08494 3.66242 7.82953C3.89461 7.57412 4.28989 7.55529 4.5453 7.78749L6.75292 9.79441L10.6018 3.90792C10.7907 3.61902 11.178 3.53795 11.4669 3.72684Z",
+		fill: O,
+		fillRule: "evenodd",
+		clipRule: "evenodd"
+	}));
+}), _excluded$Y = ["color"], ChevronRightIcon = /* @__PURE__ */ forwardRef(function(n, _) {
+	var E = n.color, O = E === void 0 ? "currentColor" : E, A = _objectWithoutPropertiesLoose(n, _excluded$Y);
+	return createElement("svg", Object.assign({
+		width: "15",
+		height: "15",
+		viewBox: "0 0 15 15",
+		fill: "none",
+		xmlns: "http://www.w3.org/2000/svg"
+	}, A, { ref: _ }), createElement("path", {
+		d: "M6.1584 3.13508C6.35985 2.94621 6.67627 2.95642 6.86514 3.15788L10.6151 7.15788C10.7954 7.3502 10.7954 7.64949 10.6151 7.84182L6.86514 11.8418C6.67627 12.0433 6.35985 12.0535 6.1584 11.8646C5.95694 11.6757 5.94673 11.3593 6.1356 11.1579L9.565 7.49985L6.1356 3.84182C5.94673 3.64036 5.95694 3.32394 6.1584 3.13508Z",
+		fill: O,
+		fillRule: "evenodd",
+		clipRule: "evenodd"
+	}));
+}), _excluded$1r = ["color"], Cross2Icon = /* @__PURE__ */ forwardRef(function(n, _) {
+	var E = n.color, O = E === void 0 ? "currentColor" : E, A = _objectWithoutPropertiesLoose(n, _excluded$1r);
+	return createElement("svg", Object.assign({
+		width: "15",
+		height: "15",
+		viewBox: "0 0 15 15",
+		fill: "none",
+		xmlns: "http://www.w3.org/2000/svg"
+	}, A, { ref: _ }), createElement("path", {
+		d: "M11.7816 4.03157C12.0062 3.80702 12.0062 3.44295 11.7816 3.2184C11.5571 2.99385 11.193 2.99385 10.9685 3.2184L7.50005 6.68682L4.03164 3.2184C3.80708 2.99385 3.44301 2.99385 3.21846 3.2184C2.99391 3.44295 2.99391 3.80702 3.21846 4.03157L6.68688 7.49999L3.21846 10.9684C2.99391 11.193 2.99391 11.557 3.21846 11.7816C3.44301 12.0061 3.80708 12.0061 4.03164 11.7816L7.50005 8.31316L10.9685 11.7816C11.193 12.0061 11.5571 12.0061 11.7816 11.7816C12.0062 11.557 12.0062 11.193 11.7816 10.9684L8.31322 7.49999L11.7816 4.03157Z",
+		fill: O,
+		fillRule: "evenodd",
+		clipRule: "evenodd"
+	}));
+}), _excluded$1M = ["color"], DoubleArrowLeftIcon = /* @__PURE__ */ forwardRef(function(n, _) {
+	var E = n.color, O = E === void 0 ? "currentColor" : E, A = _objectWithoutPropertiesLoose(n, _excluded$1M);
+	return createElement("svg", Object.assign({
+		width: "15",
+		height: "15",
+		viewBox: "0 0 15 15",
+		fill: "none",
+		xmlns: "http://www.w3.org/2000/svg"
+	}, A, { ref: _ }), createElement("path", {
+		d: "M6.85355 3.85355C7.04882 3.65829 7.04882 3.34171 6.85355 3.14645C6.65829 2.95118 6.34171 2.95118 6.14645 3.14645L2.14645 7.14645C1.95118 7.34171 1.95118 7.65829 2.14645 7.85355L6.14645 11.8536C6.34171 12.0488 6.65829 12.0488 6.85355 11.8536C7.04882 11.6583 7.04882 11.3417 6.85355 11.1464L3.20711 7.5L6.85355 3.85355ZM12.8536 3.85355C13.0488 3.65829 13.0488 3.34171 12.8536 3.14645C12.6583 2.95118 12.3417 2.95118 12.1464 3.14645L8.14645 7.14645C7.95118 7.34171 7.95118 7.65829 8.14645 7.85355L12.1464 11.8536C12.3417 12.0488 12.6583 12.0488 12.8536 11.8536C13.0488 11.6583 13.0488 11.3417 12.8536 11.1464L9.20711 7.5L12.8536 3.85355Z",
+		fill: O,
+		fillRule: "evenodd",
+		clipRule: "evenodd"
+	}));
+}), _excluded$1N = ["color"], DoubleArrowRightIcon = /* @__PURE__ */ forwardRef(function(n, _) {
+	var E = n.color, O = E === void 0 ? "currentColor" : E, A = _objectWithoutPropertiesLoose(n, _excluded$1N);
+	return createElement("svg", Object.assign({
+		width: "15",
+		height: "15",
+		viewBox: "0 0 15 15",
+		fill: "none",
+		xmlns: "http://www.w3.org/2000/svg"
+	}, A, { ref: _ }), createElement("path", {
+		d: "M2.14645 11.1464C1.95118 11.3417 1.95118 11.6583 2.14645 11.8536C2.34171 12.0488 2.65829 12.0488 2.85355 11.8536L6.85355 7.85355C7.04882 7.65829 7.04882 7.34171 6.85355 7.14645L2.85355 3.14645C2.65829 2.95118 2.34171 2.95118 2.14645 3.14645C1.95118 3.34171 1.95118 3.65829 2.14645 3.85355L5.79289 7.5L2.14645 11.1464ZM8.14645 11.1464C7.95118 11.3417 7.95118 11.6583 8.14645 11.8536C8.34171 12.0488 8.65829 12.0488 8.85355 11.8536L12.8536 7.85355C13.0488 7.65829 13.0488 7.34171 12.8536 7.14645L8.85355 3.14645C8.65829 2.95118 8.34171 2.95118 8.14645 3.14645C7.95118 3.34171 7.95118 3.65829 8.14645 3.85355L11.7929 7.5L8.14645 11.1464Z",
+		fill: O,
+		fillRule: "evenodd",
+		clipRule: "evenodd"
+	}));
+}), _excluded$25 = ["color"], EyeNoneIcon = /* @__PURE__ */ forwardRef(function(n, _) {
+	var E = n.color, O = E === void 0 ? "currentColor" : E, A = _objectWithoutPropertiesLoose(n, _excluded$25);
+	return createElement("svg", Object.assign({
+		width: "15",
+		height: "15",
+		viewBox: "0 0 15 15",
+		fill: "none",
+		xmlns: "http://www.w3.org/2000/svg"
+	}, A, { ref: _ }), createElement("path", {
+		d: "M13.3536 2.35355C13.5488 2.15829 13.5488 1.84171 13.3536 1.64645C13.1583 1.45118 12.8417 1.45118 12.6464 1.64645L10.6828 3.61012C9.70652 3.21671 8.63759 3 7.5 3C4.30786 3 1.65639 4.70638 0.0760002 7.23501C-0.0253338 7.39715 -0.0253334 7.60288 0.0760014 7.76501C0.902945 9.08812 2.02314 10.1861 3.36061 10.9323L1.64645 12.6464C1.45118 12.8417 1.45118 13.1583 1.64645 13.3536C1.84171 13.5488 2.15829 13.5488 2.35355 13.3536L4.31723 11.3899C5.29348 11.7833 6.36241 12 7.5 12C10.6921 12 13.3436 10.2936 14.924 7.76501C15.0253 7.60288 15.0253 7.39715 14.924 7.23501C14.0971 5.9119 12.9769 4.81391 11.6394 4.06771L13.3536 2.35355ZM9.90428 4.38861C9.15332 4.1361 8.34759 4 7.5 4C4.80285 4 2.52952 5.37816 1.09622 7.50001C1.87284 8.6497 2.89609 9.58106 4.09974 10.1931L9.90428 4.38861ZM5.09572 10.6114L10.9003 4.80685C12.1039 5.41894 13.1272 6.35031 13.9038 7.50001C12.4705 9.62183 10.1971 11 7.5 11C6.65241 11 5.84668 10.8639 5.09572 10.6114Z",
+		fill: O,
+		fillRule: "evenodd",
+		clipRule: "evenodd"
+	}));
+}), _excluded$26 = ["color"], EyeOpenIcon = /* @__PURE__ */ forwardRef(function(n, _) {
+	var E = n.color, O = E === void 0 ? "currentColor" : E, A = _objectWithoutPropertiesLoose(n, _excluded$26);
+	return createElement("svg", Object.assign({
+		width: "15",
+		height: "15",
+		viewBox: "0 0 15 15",
+		fill: "none",
+		xmlns: "http://www.w3.org/2000/svg"
+	}, A, { ref: _ }), createElement("path", {
+		d: "M7.5 11C4.80285 11 2.52952 9.62184 1.09622 7.50001C2.52952 5.37816 4.80285 4 7.5 4C10.1971 4 12.4705 5.37816 13.9038 7.50001C12.4705 9.62183 10.1971 11 7.5 11ZM7.5 3C4.30786 3 1.65639 4.70638 0.0760002 7.23501C-0.0253338 7.39715 -0.0253334 7.60288 0.0760014 7.76501C1.65639 10.2936 4.30786 12 7.5 12C10.6921 12 13.3436 10.2936 14.924 7.76501C15.0253 7.60288 15.0253 7.39715 14.924 7.23501C13.3436 4.70638 10.6921 3 7.5 3ZM7.5 9.5C8.60457 9.5 9.5 8.60457 9.5 7.5C9.5 6.39543 8.60457 5.5 7.5 5.5C6.39543 5.5 5.5 6.39543 5.5 7.5C5.5 8.60457 6.39543 9.5 7.5 9.5Z",
+		fill: O,
+		fillRule: "evenodd",
+		clipRule: "evenodd"
+	}));
+}), _excluded$2l = ["color"], GearIcon = /* @__PURE__ */ forwardRef(function(n, _) {
+	var E = n.color, O = E === void 0 ? "currentColor" : E, A = _objectWithoutPropertiesLoose(n, _excluded$2l);
+	return createElement("svg", Object.assign({
+		width: "15",
+		height: "15",
+		viewBox: "0 0 15 15",
+		fill: "none",
+		xmlns: "http://www.w3.org/2000/svg"
+	}, A, { ref: _ }), createElement("path", {
+		d: "M7.07095 0.650238C6.67391 0.650238 6.32977 0.925096 6.24198 1.31231L6.0039 2.36247C5.6249 2.47269 5.26335 2.62363 4.92436 2.81013L4.01335 2.23585C3.67748 2.02413 3.23978 2.07312 2.95903 2.35386L2.35294 2.95996C2.0722 3.2407 2.0232 3.6784 2.23493 4.01427L2.80942 4.92561C2.62307 5.2645 2.47227 5.62594 2.36216 6.00481L1.31209 6.24287C0.924883 6.33065 0.650024 6.6748 0.650024 7.07183V7.92897C0.650024 8.32601 0.924883 8.67015 1.31209 8.75794L2.36228 8.99603C2.47246 9.375 2.62335 9.73652 2.80979 10.0755L2.2354 10.9867C2.02367 11.3225 2.07267 11.7602 2.35341 12.041L2.95951 12.6471C3.24025 12.9278 3.67795 12.9768 4.01382 12.7651L4.92506 12.1907C5.26384 12.377 5.62516 12.5278 6.0039 12.6379L6.24198 13.6881C6.32977 14.0753 6.67391 14.3502 7.07095 14.3502H7.92809C8.32512 14.3502 8.66927 14.0753 8.75705 13.6881L8.99505 12.6383C9.37411 12.5282 9.73573 12.3773 10.0748 12.1909L10.986 12.7653C11.3218 12.977 11.7595 12.928 12.0403 12.6473L12.6464 12.0412C12.9271 11.7604 12.9761 11.3227 12.7644 10.9869L12.1902 10.076C12.3768 9.73688 12.5278 9.37515 12.638 8.99596L13.6879 8.75794C14.0751 8.67015 14.35 8.32601 14.35 7.92897V7.07183C14.35 6.6748 14.0751 6.33065 13.6879 6.24287L12.6381 6.00488C12.528 5.62578 12.3771 5.26414 12.1906 4.92507L12.7648 4.01407C12.9766 3.6782 12.9276 3.2405 12.6468 2.95975L12.0407 2.35366C11.76 2.07292 11.3223 2.02392 10.9864 2.23565L10.0755 2.80989C9.73622 2.62328 9.37437 2.47229 8.99505 2.36209L8.75705 1.31231C8.66927 0.925096 8.32512 0.650238 7.92809 0.650238H7.07095ZM4.92053 3.81251C5.44724 3.44339 6.05665 3.18424 6.71543 3.06839L7.07095 1.50024H7.92809L8.28355 3.06816C8.94267 3.18387 9.5524 3.44302 10.0794 3.81224L11.4397 2.9547L12.0458 3.56079L11.1882 4.92117C11.5573 5.44798 11.8164 6.0575 11.9321 6.71638L13.5 7.07183V7.92897L11.932 8.28444C11.8162 8.94342 11.557 9.55301 11.1878 10.0798L12.0453 11.4402L11.4392 12.0462L10.0787 11.1886C9.55192 11.5576 8.94241 11.8166 8.28355 11.9323L7.92809 13.5002H7.07095L6.71543 11.932C6.0569 11.8162 5.44772 11.5572 4.92116 11.1883L3.56055 12.046L2.95445 11.4399L3.81213 10.0794C3.4431 9.55266 3.18403 8.94326 3.06825 8.2845L1.50002 7.92897V7.07183L3.06818 6.71632C3.18388 6.05765 3.44283 5.44833 3.81171 4.92165L2.95398 3.561L3.56008 2.95491L4.92053 3.81251ZM9.02496 7.50008C9.02496 8.34226 8.34223 9.02499 7.50005 9.02499C6.65786 9.02499 5.97513 8.34226 5.97513 7.50008C5.97513 6.65789 6.65786 5.97516 7.50005 5.97516C8.34223 5.97516 9.02496 6.65789 9.02496 7.50008ZM9.92496 7.50008C9.92496 8.83932 8.83929 9.92499 7.50005 9.92499C6.1608 9.92499 5.07513 8.83932 5.07513 7.50008C5.07513 6.16084 6.1608 5.07516 7.50005 5.07516C8.83929 5.07516 9.92496 6.16084 9.92496 7.50008Z",
+		fill: O,
+		fillRule: "evenodd",
+		clipRule: "evenodd"
+	}));
+}), _excluded$2C = ["color"], ImageIcon = /* @__PURE__ */ forwardRef(function(n, _) {
+	var E = n.color, O = E === void 0 ? "currentColor" : E, A = _objectWithoutPropertiesLoose(n, _excluded$2C);
+	return createElement("svg", Object.assign({
+		width: "15",
+		height: "15",
+		viewBox: "0 0 15 15",
+		fill: "none",
+		xmlns: "http://www.w3.org/2000/svg"
+	}, A, { ref: _ }), createElement("path", {
+		d: "M2.5 1H12.5C13.3284 1 14 1.67157 14 2.5V12.5C14 13.3284 13.3284 14 12.5 14H2.5C1.67157 14 1 13.3284 1 12.5V2.5C1 1.67157 1.67157 1 2.5 1ZM2.5 2C2.22386 2 2 2.22386 2 2.5V8.3636L3.6818 6.6818C3.76809 6.59551 3.88572 6.54797 4.00774 6.55007C4.12975 6.55216 4.24568 6.60372 4.32895 6.69293L7.87355 10.4901L10.6818 7.6818C10.8575 7.50607 11.1425 7.50607 11.3182 7.6818L13 9.3636V2.5C13 2.22386 12.7761 2 12.5 2H2.5ZM2 12.5V9.6364L3.98887 7.64753L7.5311 11.4421L8.94113 13H2.5C2.22386 13 2 12.7761 2 12.5ZM12.5 13H10.155L8.48336 11.153L11 8.6364L13 10.6364V12.5C13 12.7761 12.7761 13 12.5 13ZM6.64922 5.5C6.64922 5.03013 7.03013 4.64922 7.5 4.64922C7.96987 4.64922 8.35078 5.03013 8.35078 5.5C8.35078 5.96987 7.96987 6.35078 7.5 6.35078C7.03013 6.35078 6.64922 5.96987 6.64922 5.5ZM7.5 3.74922C6.53307 3.74922 5.74922 4.53307 5.74922 5.5C5.74922 6.46693 6.53307 7.25078 7.5 7.25078C8.46693 7.25078 9.25078 6.46693 9.25078 5.5C9.25078 4.53307 8.46693 3.74922 7.5 3.74922Z",
+		fill: O,
+		fillRule: "evenodd",
+		clipRule: "evenodd"
+	}));
+}), _excluded$3w = ["color"], PlayIcon = /* @__PURE__ */ forwardRef(function(n, _) {
+	var E = n.color, O = E === void 0 ? "currentColor" : E, A = _objectWithoutPropertiesLoose(n, _excluded$3w);
+	return createElement("svg", Object.assign({
+		width: "15",
+		height: "15",
+		viewBox: "0 0 15 15",
+		fill: "none",
+		xmlns: "http://www.w3.org/2000/svg"
+	}, A, { ref: _ }), createElement("path", {
+		d: "M3.24182 2.32181C3.3919 2.23132 3.5784 2.22601 3.73338 2.30781L12.7334 7.05781C12.8974 7.14436 13 7.31457 13 7.5C13 7.68543 12.8974 7.85564 12.7334 7.94219L3.73338 12.6922C3.5784 12.774 3.3919 12.7687 3.24182 12.6782C3.09175 12.5877 3 12.4252 3 12.25V2.75C3 2.57476 3.09175 2.4123 3.24182 2.32181ZM4 3.57925V11.4207L11.4288 7.5L4 3.57925Z",
+		fill: O,
+		fillRule: "evenodd",
+		clipRule: "evenodd"
+	}));
+}), _excluded$3x = ["color"], PlusIcon = /* @__PURE__ */ forwardRef(function(n, _) {
+	var E = n.color, O = E === void 0 ? "currentColor" : E, A = _objectWithoutPropertiesLoose(n, _excluded$3x);
+	return createElement("svg", Object.assign({
+		width: "15",
+		height: "15",
+		viewBox: "0 0 15 15",
+		fill: "none",
+		xmlns: "http://www.w3.org/2000/svg"
+	}, A, { ref: _ }), createElement("path", {
+		d: "M8 2.75C8 2.47386 7.77614 2.25 7.5 2.25C7.22386 2.25 7 2.47386 7 2.75V7H2.75C2.47386 7 2.25 7.22386 2.25 7.5C2.25 7.77614 2.47386 8 2.75 8H7V12.25C7 12.5261 7.22386 12.75 7.5 12.75C7.77614 12.75 8 12.5261 8 12.25V8H12.25C12.5261 8 12.75 7.77614 12.75 7.5C12.75 7.22386 12.5261 7 12.25 7H8V2.75Z",
+		fill: O,
+		fillRule: "evenodd",
+		clipRule: "evenodd"
+	}));
+}), _excluded$3V = ["color"], Share1Icon = /* @__PURE__ */ forwardRef(function(n, _) {
+	var E = n.color, O = E === void 0 ? "currentColor" : E, A = _objectWithoutPropertiesLoose(n, _excluded$3V);
+	return createElement("svg", Object.assign({
+		width: "15",
+		height: "15",
+		viewBox: "0 0 15 15",
+		fill: "none",
+		xmlns: "http://www.w3.org/2000/svg"
+	}, A, { ref: _ }), createElement("path", {
+		d: "M5 7.50003C5 8.32845 4.32843 9.00003 3.5 9.00003C2.67157 9.00003 2 8.32845 2 7.50003C2 6.6716 2.67157 6.00003 3.5 6.00003C4.32843 6.00003 5 6.6716 5 7.50003ZM5.71313 8.66388C5.29445 9.45838 4.46048 10 3.5 10C2.11929 10 1 8.88074 1 7.50003C1 6.11931 2.11929 5.00003 3.5 5.00003C4.46048 5.00003 5.29445 5.54167 5.71313 6.33616L9.10424 4.21671C9.03643 3.98968 9 3.74911 9 3.50003C9 2.11932 10.1193 1.00003 11.5 1.00003C12.8807 1.00003 14 2.11932 14 3.50003C14 4.88074 12.8807 6.00003 11.5 6.00003C10.6915 6.00003 9.97264 5.61624 9.51566 5.0209L5.9853 7.22738C5.99502 7.31692 6 7.40789 6 7.50003C6 7.59216 5.99502 7.68312 5.9853 7.77267L9.51567 9.97915C9.97265 9.38382 10.6915 9.00003 11.5 9.00003C12.8807 9.00003 14 10.1193 14 11.5C14 12.8807 12.8807 14 11.5 14C10.1193 14 9 12.8807 9 11.5C9 11.2509 9.03643 11.0104 9.10425 10.7833L5.71313 8.66388ZM11.5 5.00003C12.3284 5.00003 13 4.32846 13 3.50003C13 2.6716 12.3284 2.00003 11.5 2.00003C10.6716 2.00003 10 2.6716 10 3.50003C10 4.32846 10.6716 5.00003 11.5 5.00003ZM13 11.5C13 12.3285 12.3284 13 11.5 13C10.6716 13 10 12.3285 10 11.5C10 10.6716 10.6716 10 11.5 10C12.3284 10 13 10.6716 13 11.5Z",
+		fill: O,
+		fillRule: "evenodd",
+		clipRule: "evenodd"
+	}));
+}), _excluded$4d = ["color"], StopIcon = /* @__PURE__ */ forwardRef(function(n, _) {
+	var E = n.color, O = E === void 0 ? "currentColor" : E, A = _objectWithoutPropertiesLoose(n, _excluded$4d);
+	return createElement("svg", Object.assign({
+		width: "15",
+		height: "15",
+		viewBox: "0 0 15 15",
+		fill: "none",
+		xmlns: "http://www.w3.org/2000/svg"
+	}, A, { ref: _ }), createElement("path", {
+		d: "M2 3C2 2.44772 2.44772 2 3 2H12C12.5523 2 13 2.44772 13 3V12C13 12.5523 12.5523 13 12 13H3C2.44772 13 2 12.5523 2 12V3ZM12 3H3V12H12V3Z",
+		fill: O,
+		fillRule: "evenodd",
+		clipRule: "evenodd"
+	}));
+}), _excluded$4n = ["color"], TextIcon = /* @__PURE__ */ forwardRef(function(n, _) {
+	var E = n.color, O = E === void 0 ? "currentColor" : E, A = _objectWithoutPropertiesLoose(n, _excluded$4n);
+	return createElement("svg", Object.assign({
+		width: "15",
+		height: "15",
+		viewBox: "0 0 15 15",
+		fill: "none",
+		xmlns: "http://www.w3.org/2000/svg"
+	}, A, { ref: _ }), createElement("path", {
+		d: "M3.94993 2.95002L3.94993 4.49998C3.94993 4.74851 3.74845 4.94998 3.49993 4.94998C3.2514 4.94998 3.04993 4.74851 3.04993 4.49998V2.50004C3.04993 2.45246 3.05731 2.40661 3.07099 2.36357C3.12878 2.18175 3.29897 2.05002 3.49993 2.05002H11.4999C11.6553 2.05002 11.7922 2.12872 11.8731 2.24842C11.9216 2.32024 11.9499 2.40682 11.9499 2.50002L11.9499 2.50004V4.49998C11.9499 4.74851 11.7485 4.94998 11.4999 4.94998C11.2514 4.94998 11.0499 4.74851 11.0499 4.49998V2.95002H8.04993V12.05H9.25428C9.50281 12.05 9.70428 12.2515 9.70428 12.5C9.70428 12.7486 9.50281 12.95 9.25428 12.95H5.75428C5.50575 12.95 5.30428 12.7486 5.30428 12.5C5.30428 12.2515 5.50575 12.05 5.75428 12.05H6.94993V2.95002H3.94993Z",
+		fill: O,
+		fillRule: "evenodd",
+		clipRule: "evenodd"
+	}));
+}), _excluded$4G = ["color"], TrashIcon = /* @__PURE__ */ forwardRef(function(n, _) {
+	var E = n.color, O = E === void 0 ? "currentColor" : E, A = _objectWithoutPropertiesLoose(n, _excluded$4G);
+	return createElement("svg", Object.assign({
+		width: "15",
+		height: "15",
+		viewBox: "0 0 15 15",
+		fill: "none",
+		xmlns: "http://www.w3.org/2000/svg"
+	}, A, { ref: _ }), createElement("path", {
+		d: "M5.5 1C5.22386 1 5 1.22386 5 1.5C5 1.77614 5.22386 2 5.5 2H9.5C9.77614 2 10 1.77614 10 1.5C10 1.22386 9.77614 1 9.5 1H5.5ZM3 3.5C3 3.22386 3.22386 3 3.5 3H5H10H11.5C11.7761 3 12 3.22386 12 3.5C12 3.77614 11.7761 4 11.5 4H11V12C11 12.5523 10.5523 13 10 13H5C4.44772 13 4 12.5523 4 12V4L3.5 4C3.22386 4 3 3.77614 3 3.5ZM5 4H10V12H5V4Z",
+		fill: O,
+		fillRule: "evenodd",
+		clipRule: "evenodd"
+	}));
+});
+function setRef$1(n, _) {
 	if (typeof n == "function") return n(_);
 	n != null && (n.current = _);
 }
-function composeRefs(...n) {
+function composeRefs$1(...n) {
 	return (_) => {
 		let E = !1, O = n.map((n) => {
-			let O = setRef(n, _);
+			let O = setRef$1(n, _);
 			return !E && typeof O == "function" && (E = !0), O;
 		});
 		if (E) return () => {
 			for (let _ = 0; _ < O.length; _++) {
 				let E = O[_];
-				typeof E == "function" ? E() : setRef(n[_], null);
+				typeof E == "function" ? E() : setRef$1(n[_], null);
 			}
 		};
 	};
 }
-function useComposedRefs(..._) {
-	return React$1.useCallback(composeRefs(..._), _);
+function useComposedRefs$1(..._) {
+	return React$1.useCallback(composeRefs$1(..._), _);
 }
 /* @__NO_SIDE_EFFECTS__ */
 function createSlot(_) {
@@ -68,7 +299,7 @@ function createSlotClone(_) {
 		let { children: O, ...A } = _;
 		if (React$1.isValidElement(O)) {
 			let _ = getElementRef$1(O), j = mergeProps(A, O.props);
-			return O.type !== React$1.Fragment && (j.ref = E ? composeRefs(E, _) : _), React$1.cloneElement(O, j);
+			return O.type !== React$1.Fragment && (j.ref = E ? composeRefs$1(E, _) : _), React$1.cloneElement(O, j);
 		}
 		return React$1.Children.count(O) > 1 ? React$1.Children.only(null) : null;
 	});
@@ -248,13 +479,13 @@ function createCollection(n) {
 	let P = n + "CollectionSlot", z = /* @__PURE__ */ createSlot(P), B = React.forwardRef((n, _) => {
 		let { scope: E, children: O } = n;
 		return /* @__PURE__ */ jsx(z, {
-			ref: useComposedRefs(_, M(P, E).collectionRef),
+			ref: useComposedRefs$1(_, M(P, E).collectionRef),
 			children: O
 		});
 	});
 	B.displayName = P;
 	let H = n + "CollectionItemSlot", U = "data-radix-collection-item", W = /* @__PURE__ */ createSlot(H), G = React.forwardRef((n, E) => {
-		let { scope: O, children: A, ...j } = n, N = React.useRef(null), P = useComposedRefs(E, N), z = M(H, O);
+		let { scope: O, children: A, ...j } = n, N = React.useRef(null), P = useComposedRefs$1(E, N), z = M(H, O);
 		return React.useEffect(() => (z.itemMap.set(N, {
 			ref: N,
 			...j
@@ -338,7 +569,7 @@ function useStateMachine$1(_, E) {
 	return React$1.useReducer((n, _) => E[n][_] ?? n, _);
 }
 var Presence = (_) => {
-	let { present: E, children: O } = _, A = usePresence$1(E), j = typeof O == "function" ? O({ present: A.isPresent }) : React$1.Children.only(O), M = useComposedRefs(A.ref, getElementRef(j));
+	let { present: E, children: O } = _, A = usePresence$1(E), j = typeof O == "function" ? O({ present: A.isPresent }) : React$1.Children.only(O), M = useComposedRefs$1(A.ref, getElementRef(j));
 	return typeof O == "function" || A.isPresent ? React$1.cloneElement(j, { ref: M }) : null;
 };
 Presence.displayName = "Presence";
@@ -433,15 +664,15 @@ var DISMISSABLE_LAYER_NAME = "DismissableLayer", CONTEXT_UPDATE = "dismissableLa
 	layersWithOutsidePointerEventsDisabled: /* @__PURE__ */ new Set(),
 	branches: /* @__PURE__ */ new Set()
 }), DismissableLayer = React$1.forwardRef((_, E) => {
-	let { disableOutsidePointerEvents: O = !1, onEscapeKeyDown: A, onPointerDownOutside: j, onFocusOutside: M, onInteractOutside: N, onDismiss: P, ...z } = _, B = React$1.useContext(DismissableLayerContext), [H, U] = React$1.useState(null), W = H?.ownerDocument ?? globalThis?.document, [, G] = React$1.useState({}), Z = useComposedRefs(E, (n) => U(n)), GA = Array.from(B.layers), [KA] = [...B.layersWithOutsidePointerEventsDisabled].slice(-1), qA = GA.indexOf(KA), JA = H ? GA.indexOf(H) : -1, YA = B.layersWithOutsidePointerEventsDisabled.size > 0, XA = JA >= qA, ZA = usePointerDownOutside((n) => {
+	let { disableOutsidePointerEvents: O = !1, onEscapeKeyDown: A, onPointerDownOutside: j, onFocusOutside: M, onInteractOutside: N, onDismiss: P, ...z } = _, B = React$1.useContext(DismissableLayerContext), [H, U] = React$1.useState(null), W = H?.ownerDocument ?? globalThis?.document, [, G] = React$1.useState({}), Z = useComposedRefs$1(E, (n) => U(n)), hj = Array.from(B.layers), [gj] = [...B.layersWithOutsidePointerEventsDisabled].slice(-1), _j = hj.indexOf(gj), vj = H ? hj.indexOf(H) : -1, yj = B.layersWithOutsidePointerEventsDisabled.size > 0, bj = vj >= _j, xj = usePointerDownOutside((n) => {
 		let _ = n.target, E = [...B.branches].some((n) => n.contains(_));
-		!XA || E || (j?.(n), N?.(n), n.defaultPrevented || P?.());
-	}, W), $A = useFocusOutside((n) => {
+		!bj || E || (j?.(n), N?.(n), n.defaultPrevented || P?.());
+	}, W), Sj = useFocusOutside((n) => {
 		let _ = n.target;
 		[...B.branches].some((n) => n.contains(_)) || (M?.(n), N?.(n), n.defaultPrevented || P?.());
 	}, W);
 	return useEscapeKeydown((n) => {
-		JA === B.layers.size - 1 && (A?.(n), !n.defaultPrevented && P && (n.preventDefault(), P()));
+		vj === B.layers.size - 1 && (A?.(n), !n.defaultPrevented && P && (n.preventDefault(), P()));
 	}, W), React$1.useEffect(() => {
 		if (H) return O && (B.layersWithOutsidePointerEventsDisabled.size === 0 && (originalBodyPointerEvents = W.body.style.pointerEvents, W.body.style.pointerEvents = "none"), B.layersWithOutsidePointerEventsDisabled.add(H)), B.layers.add(H), dispatchUpdate(), () => {
 			O && B.layersWithOutsidePointerEventsDisabled.size === 1 && (W.body.style.pointerEvents = originalBodyPointerEvents);
@@ -460,17 +691,17 @@ var DISMISSABLE_LAYER_NAME = "DismissableLayer", CONTEXT_UPDATE = "dismissableLa
 		...z,
 		ref: Z,
 		style: {
-			pointerEvents: YA ? XA ? "auto" : "none" : void 0,
+			pointerEvents: yj ? bj ? "auto" : "none" : void 0,
 			..._.style
 		},
-		onFocusCapture: composeEventHandlers(_.onFocusCapture, $A.onFocusCapture),
-		onBlurCapture: composeEventHandlers(_.onBlurCapture, $A.onBlurCapture),
-		onPointerDownCapture: composeEventHandlers(_.onPointerDownCapture, ZA.onPointerDownCapture)
+		onFocusCapture: composeEventHandlers(_.onFocusCapture, Sj.onFocusCapture),
+		onBlurCapture: composeEventHandlers(_.onBlurCapture, Sj.onBlurCapture),
+		onPointerDownCapture: composeEventHandlers(_.onPointerDownCapture, xj.onPointerDownCapture)
 	});
 });
 DismissableLayer.displayName = DISMISSABLE_LAYER_NAME;
 var BRANCH_NAME = "DismissableLayerBranch", DismissableLayerBranch = React$1.forwardRef((_, E) => {
-	let O = React$1.useContext(DismissableLayerContext), A = React$1.useRef(null), j = useComposedRefs(E, A);
+	let O = React$1.useContext(DismissableLayerContext), A = React$1.useRef(null), j = useComposedRefs$1(E, A);
 	return React$1.useEffect(() => {
 		let n = A.current;
 		if (n) return O.branches.add(n), () => {
@@ -529,7 +760,7 @@ var AUTOFOCUS_ON_MOUNT = "focusScope.autoFocusOnMount", AUTOFOCUS_ON_UNMOUNT = "
 	bubbles: !1,
 	cancelable: !0
 }, FOCUS_SCOPE_NAME = "FocusScope", FocusScope = React$1.forwardRef((_, E) => {
-	let { loop: O = !1, trapped: A = !1, onMountAutoFocus: j, onUnmountAutoFocus: M, ...N } = _, [P, z] = React$1.useState(null), B = useCallbackRef(j), H = useCallbackRef(M), U = React$1.useRef(null), W = useComposedRefs(E, (n) => z(n)), G = React$1.useRef({
+	let { loop: O = !1, trapped: A = !1, onMountAutoFocus: j, onUnmountAutoFocus: M, ...N } = _, [P, z] = React$1.useState(null), B = useCallbackRef(j), H = useCallbackRef(M), U = React$1.useRef(null), W = useComposedRefs$1(E, (n) => z(n)), G = React$1.useRef({
 		paused: !1,
 		pause() {
 			this.paused = !0;
@@ -824,7 +1055,7 @@ var effectCar = createSidecarMedium(), nothing = function() {}, RemoveScroll = R
 		onScrollCapture: nothing,
 		onWheelCapture: nothing,
 		onTouchMoveCapture: nothing
-	}), j = A[0], M = A[1], N = _.forwardProps, P = _.children, z = _.className, B = _.removeScrollBar, H = _.enabled, U = _.shards, W = _.sideCar, G = _.noRelative, Z = _.noIsolation, GA = _.inert, KA = _.allowPinchZoom, qA = _.as, JA = qA === void 0 ? "div" : qA, YA = _.gapMode, XA = __rest(_, [
+	}), j = A[0], M = A[1], N = _.forwardProps, P = _.children, z = _.className, B = _.removeScrollBar, H = _.enabled, U = _.shards, W = _.sideCar, G = _.noRelative, Z = _.noIsolation, hj = _.inert, gj = _.allowPinchZoom, _j = _.as, vj = _j === void 0 ? "div" : _j, yj = _.gapMode, bj = __rest(_, [
 		"forwardProps",
 		"children",
 		"className",
@@ -838,21 +1069,21 @@ var effectCar = createSidecarMedium(), nothing = function() {}, RemoveScroll = R
 		"allowPinchZoom",
 		"as",
 		"gapMode"
-	]), ZA = W, QA = useMergeRefs([O, E]), $A = __assign$2(__assign$2({}, XA), j);
-	return React$1.createElement(React$1.Fragment, null, H && React$1.createElement(ZA, {
+	]), xj = W, Sj = useMergeRefs([O, E]), Cj = __assign$2(__assign$2({}, bj), j);
+	return React$1.createElement(React$1.Fragment, null, H && React$1.createElement(xj, {
 		sideCar: effectCar,
 		removeScrollBar: B,
 		shards: U,
 		noRelative: G,
 		noIsolation: Z,
-		inert: GA,
+		inert: hj,
 		setCallbacks: M,
-		allowPinchZoom: !!KA,
+		allowPinchZoom: !!gj,
 		lockRef: O,
-		gapMode: YA
-	}), N ? React$1.cloneElement(React$1.Children.only(P), __assign$2(__assign$2({}, $A), { ref: QA })) : React$1.createElement(JA, __assign$2({}, $A, {
+		gapMode: yj
+	}), N ? React$1.cloneElement(React$1.Children.only(P), __assign$2(__assign$2({}, Cj), { ref: Sj })) : React$1.createElement(vj, __assign$2({}, Cj, {
 		className: z,
-		ref: QA
+		ref: Sj
 	}), P));
 });
 RemoveScroll.defaultProps = {
@@ -1042,8 +1273,8 @@ var nonPassive = passiveSupported ? { passive: !1 } : !1, alwaysContainsScroll =
 		if (!N) break;
 		var W = getScrollVariables(n, N), G = W[0], Z = W[1] - W[2] - j * G;
 		(G || Z) && elementCouldBeScrolled(n, N) && (H += Z, U += G);
-		var GA = N.parentNode;
-		N = GA && GA.nodeType === Node.DOCUMENT_FRAGMENT_NODE ? GA.host : GA;
+		var hj = N.parentNode;
+		N = hj && hj.nodeType === Node.DOCUMENT_FRAGMENT_NODE ? hj.host : hj;
 	} while (!P && N !== document.body || P && (_.contains(N) || _ === N));
 	return (B && (A && Math.abs(H) < 1 || !A && M > H) || !B && (A && Math.abs(U) < 1 || !A && -M > U)) && (z = !0), z;
 }, getTouchXY = function(n) {
@@ -1223,7 +1454,7 @@ var Combination_default = ReactRemoveScroll, getDefaultParent = function(n) {
 };
 Dialog.displayName = DIALOG_NAME;
 var TRIGGER_NAME$5 = "DialogTrigger", DialogTrigger = React$1.forwardRef((n, _) => {
-	let { __scopeDialog: E, ...O } = n, A = useDialogContext(TRIGGER_NAME$5, E), j = useComposedRefs(_, A.triggerRef);
+	let { __scopeDialog: E, ...O } = n, A = useDialogContext(TRIGGER_NAME$5, E), j = useComposedRefs$1(_, A.triggerRef);
 	return /* @__PURE__ */ jsx(Primitive.button, {
 		type: "button",
 		"aria-haspopup": "dialog",
@@ -1294,7 +1525,7 @@ var Slot$2 = /* @__PURE__ */ createSlot("DialogOverlay.RemoveScroll"), DialogOve
 });
 DialogContent.displayName = CONTENT_NAME$7;
 var DialogContentModal = React$1.forwardRef((_, E) => {
-	let O = useDialogContext(CONTENT_NAME$7, _.__scopeDialog), A = React$1.useRef(null), j = useComposedRefs(E, O.contentRef, A);
+	let O = useDialogContext(CONTENT_NAME$7, _.__scopeDialog), A = React$1.useRef(null), j = useComposedRefs$1(E, O.contentRef, A);
 	return React$1.useEffect(() => {
 		let n = A.current;
 		if (n) return hideOthers(n);
@@ -1329,7 +1560,7 @@ var DialogContentModal = React$1.forwardRef((_, E) => {
 		}
 	});
 }), DialogContentImpl = React$1.forwardRef((_, E) => {
-	let { __scopeDialog: O, trapFocus: A, onOpenAutoFocus: j, onCloseAutoFocus: M, ...N } = _, P = useDialogContext(CONTENT_NAME$7, O), z = React$1.useRef(null), B = useComposedRefs(E, z);
+	let { __scopeDialog: O, trapFocus: A, onOpenAutoFocus: j, onCloseAutoFocus: M, ...N } = _, P = useDialogContext(CONTENT_NAME$7, O), z = React$1.useRef(null), B = useComposedRefs$1(E, z);
 	return useFocusGuards(), /* @__PURE__ */ jsxs(Fragment$1, { children: [/* @__PURE__ */ jsx(FocusScope, {
 		asChild: !0,
 		loop: !0,
@@ -1590,7 +1821,7 @@ var computePosition$1 = async (n, _, E) => {
 		strategy: A
 	}), { x: B, y: H } = computeCoordsFromPlacement(z, O, P), U = O, W = {}, G = 0;
 	for (let E = 0; E < N.length; E++) {
-		let { name: j, fn: Z } = N[E], { x: GA, y: KA, data: qA, reset: JA } = await Z({
+		let { name: j, fn: Z } = N[E], { x: hj, y: gj, data: _j, reset: vj } = await Z({
 			x: B,
 			y: H,
 			initialPlacement: O,
@@ -1604,17 +1835,17 @@ var computePosition$1 = async (n, _, E) => {
 				floating: _
 			}
 		});
-		B = GA ?? B, H = KA ?? H, W = {
+		B = hj ?? B, H = gj ?? H, W = {
 			...W,
 			[j]: {
 				...W[j],
-				...qA
+				..._j
 			}
-		}, JA && G <= 50 && (G++, typeof JA == "object" && (JA.placement && (U = JA.placement), JA.rects && (z = JA.rects === !0 ? await M.getElementRects({
+		}, vj && G <= 50 && (G++, typeof vj == "object" && (vj.placement && (U = vj.placement), vj.rects && (z = vj.rects === !0 ? await M.getElementRects({
 			reference: n,
 			floating: _,
 			strategy: A
-		}) : JA.rects), {x: B, y: H} = computeCoordsFromPlacement(z, U, P)), E = -1);
+		}) : vj.rects), {x: B, y: H} = computeCoordsFromPlacement(z, U, P)), E = -1);
 	}
 	return {
 		x: B,
@@ -1631,25 +1862,25 @@ async function detectOverflow$1(n, _) {
 		boundary: P,
 		rootBoundary: z,
 		strategy: N
-	})), GA = B === "floating" ? {
+	})), hj = B === "floating" ? {
 		x: E,
 		y: O,
 		width: j.floating.width,
 		height: j.floating.height
-	} : j.reference, KA = await (A.getOffsetParent == null ? void 0 : A.getOffsetParent(M.floating)), qA = await (A.isElement == null ? void 0 : A.isElement(KA)) && await (A.getScale == null ? void 0 : A.getScale(KA)) || {
+	} : j.reference, gj = await (A.getOffsetParent == null ? void 0 : A.getOffsetParent(M.floating)), _j = await (A.isElement == null ? void 0 : A.isElement(gj)) && await (A.getScale == null ? void 0 : A.getScale(gj)) || {
 		x: 1,
 		y: 1
-	}, JA = rectToClientRect(A.convertOffsetParentRelativeRectToViewportRelativeRect ? await A.convertOffsetParentRelativeRectToViewportRelativeRect({
+	}, vj = rectToClientRect(A.convertOffsetParentRelativeRectToViewportRelativeRect ? await A.convertOffsetParentRelativeRectToViewportRelativeRect({
 		elements: M,
-		rect: GA,
-		offsetParent: KA,
+		rect: hj,
+		offsetParent: gj,
 		strategy: N
-	}) : GA);
+	}) : hj);
 	return {
-		top: (Z.top - JA.top + W.top) / qA.y,
-		bottom: (JA.bottom - Z.bottom + W.bottom) / qA.y,
-		left: (Z.left - JA.left + W.left) / qA.x,
-		right: (JA.right - Z.right + W.right) / qA.x
+		top: (Z.top - vj.top + W.top) / _j.y,
+		bottom: (vj.bottom - Z.bottom + W.bottom) / _j.y,
+		left: (Z.left - vj.left + W.left) / _j.x,
+		right: (vj.right - Z.right + W.right) / _j.x
 	};
 }
 var arrow$2 = (n) => ({
@@ -1661,17 +1892,17 @@ var arrow$2 = (n) => ({
 		let H = getPaddingObject(B), U = {
 			x: E,
 			y: O
-		}, W = getAlignmentAxis(A), G = getAxisLength(W), Z = await M.getDimensions(z), GA = W === "y", KA = GA ? "top" : "left", qA = GA ? "bottom" : "right", JA = GA ? "clientHeight" : "clientWidth", YA = j.reference[G] + j.reference[W] - U[W] - j.floating[G], XA = U[W] - j.reference[W], ZA = await (M.getOffsetParent == null ? void 0 : M.getOffsetParent(z)), QA = ZA ? ZA[JA] : 0;
-		(!QA || !await (M.isElement == null ? void 0 : M.isElement(ZA))) && (QA = N.floating[JA] || j.floating[G]);
-		let $A = YA / 2 - XA / 2, ej = QA / 2 - Z[G] / 2 - 1, tj = min(H[KA], ej), nj = min(H[qA], ej), rj = tj, ij = QA - Z[G] - nj, aj = QA / 2 - Z[G] / 2 + $A, oj = clamp$3(rj, aj, ij), sj = !P.arrow && getAlignment(A) != null && aj !== oj && j.reference[G] / 2 - (aj < rj ? tj : nj) - Z[G] / 2 < 0, cj = sj ? aj < rj ? aj - rj : aj - ij : 0;
+		}, W = getAlignmentAxis(A), G = getAxisLength(W), Z = await M.getDimensions(z), hj = W === "y", gj = hj ? "top" : "left", _j = hj ? "bottom" : "right", vj = hj ? "clientHeight" : "clientWidth", yj = j.reference[G] + j.reference[W] - U[W] - j.floating[G], bj = U[W] - j.reference[W], xj = await (M.getOffsetParent == null ? void 0 : M.getOffsetParent(z)), Sj = xj ? xj[vj] : 0;
+		(!Sj || !await (M.isElement == null ? void 0 : M.isElement(xj))) && (Sj = N.floating[vj] || j.floating[G]);
+		let Cj = yj / 2 - bj / 2, wj = Sj / 2 - Z[G] / 2 - 1, Tj = min(H[gj], wj), Ej = min(H[_j], wj), Dj = Tj, Oj = Sj - Z[G] - Ej, kj = Sj / 2 - Z[G] / 2 + Cj, Aj = clamp$3(Dj, kj, Oj), jj = !P.arrow && getAlignment(A) != null && kj !== Aj && j.reference[G] / 2 - (kj < Dj ? Tj : Ej) - Z[G] / 2 < 0, Mj = jj ? kj < Dj ? kj - Dj : kj - Oj : 0;
 		return {
-			[W]: U[W] + cj,
+			[W]: U[W] + Mj,
 			data: {
-				[W]: oj,
-				centerOffset: aj - oj - cj,
-				...sj && { alignmentOffset: cj }
+				[W]: Aj,
+				centerOffset: kj - Aj - Mj,
+				...jj && { alignmentOffset: Mj }
 			},
-			reset: sj
+			reset: jj
 		};
 	}
 }), flip$2 = function(n) {
@@ -1682,32 +1913,32 @@ var arrow$2 = (n) => ({
 			var E;
 			let { placement: O, middlewareData: A, rects: j, initialPlacement: M, platform: N, elements: P } = _, { mainAxis: z = !0, crossAxis: B = !0, fallbackPlacements: H, fallbackStrategy: U = "bestFit", fallbackAxisSideDirection: W = "none", flipAlignment: G = !0, ...Z } = evaluate(n, _);
 			if ((E = A.arrow) != null && E.alignmentOffset) return {};
-			let GA = getSide(O), KA = getSideAxis(M), qA = getSide(M) === M, JA = await (N.isRTL == null ? void 0 : N.isRTL(P.floating)), YA = H || (qA || !G ? [getOppositePlacement(M)] : getExpandedPlacements(M)), XA = W !== "none";
-			!H && XA && YA.push(...getOppositeAxisPlacements(M, G, W, JA));
-			let ZA = [M, ...YA], QA = await detectOverflow$1(_, Z), $A = [], ej = A.flip?.overflows || [];
-			if (z && $A.push(QA[GA]), B) {
-				let n = getAlignmentSides(O, j, JA);
-				$A.push(QA[n[0]], QA[n[1]]);
+			let hj = getSide(O), gj = getSideAxis(M), _j = getSide(M) === M, vj = await (N.isRTL == null ? void 0 : N.isRTL(P.floating)), yj = H || (_j || !G ? [getOppositePlacement(M)] : getExpandedPlacements(M)), bj = W !== "none";
+			!H && bj && yj.push(...getOppositeAxisPlacements(M, G, W, vj));
+			let xj = [M, ...yj], Sj = await detectOverflow$1(_, Z), Cj = [], wj = A.flip?.overflows || [];
+			if (z && Cj.push(Sj[hj]), B) {
+				let n = getAlignmentSides(O, j, vj);
+				Cj.push(Sj[n[0]], Sj[n[1]]);
 			}
-			if (ej = [...ej, {
+			if (wj = [...wj, {
 				placement: O,
-				overflows: $A
-			}], !$A.every((n) => n <= 0)) {
-				let n = (A.flip?.index || 0) + 1, _ = ZA[n];
-				if (_ && (!(B === "alignment" && KA !== getSideAxis(_)) || ej.every((n) => getSideAxis(n.placement) === KA ? n.overflows[0] > 0 : !0))) return {
+				overflows: Cj
+			}], !Cj.every((n) => n <= 0)) {
+				let n = (A.flip?.index || 0) + 1, _ = xj[n];
+				if (_ && (!(B === "alignment" && gj !== getSideAxis(_)) || wj.every((n) => getSideAxis(n.placement) === gj ? n.overflows[0] > 0 : !0))) return {
 					data: {
 						index: n,
-						overflows: ej
+						overflows: wj
 					},
 					reset: { placement: _ }
 				};
-				let E = ej.filter((n) => n.overflows[0] <= 0).sort((n, _) => n.overflows[1] - _.overflows[1])[0]?.placement;
+				let E = wj.filter((n) => n.overflows[0] <= 0).sort((n, _) => n.overflows[1] - _.overflows[1])[0]?.placement;
 				if (!E) switch (U) {
 					case "bestFit": {
-						let n = ej.filter((n) => {
-							if (XA) {
+						let n = wj.filter((n) => {
+							if (bj) {
 								let _ = getSideAxis(n.placement);
-								return _ === KA || _ === "y";
+								return _ === gj || _ === "y";
 							}
 							return !0;
 						}).map((n) => [n.placement, n.overflows.filter((n) => n > 0).reduce((n, _) => n + _, 0)]).sort((n, _) => n[1] - _[1])[0]?.[0];
@@ -1850,7 +2081,7 @@ var offset$2 = function(n) {
 			let { x: E, y: O, placement: A, rects: j, middlewareData: M } = _, { offset: N = 0, mainAxis: P = !0, crossAxis: z = !0 } = evaluate(n, _), B = {
 				x: E,
 				y: O
-			}, H = getSideAxis(A), U = getOppositeAxis(H), W = B[U], G = B[H], Z = evaluate(N, _), GA = typeof Z == "number" ? {
+			}, H = getSideAxis(A), U = getOppositeAxis(H), W = B[U], G = B[H], Z = evaluate(N, _), hj = typeof Z == "number" ? {
 				mainAxis: Z,
 				crossAxis: 0
 			} : {
@@ -1859,11 +2090,11 @@ var offset$2 = function(n) {
 				...Z
 			};
 			if (P) {
-				let n = U === "y" ? "height" : "width", _ = j.reference[U] - j.floating[n] + GA.mainAxis, E = j.reference[U] + j.reference[n] - GA.mainAxis;
+				let n = U === "y" ? "height" : "width", _ = j.reference[U] - j.floating[n] + hj.mainAxis, E = j.reference[U] + j.reference[n] - hj.mainAxis;
 				W < _ ? W = _ : W > E && (W = E);
 			}
 			if (z) {
-				let n = U === "y" ? "width" : "height", _ = originSides.has(getSide(A)), E = j.reference[H] - j.floating[n] + (_ && M.offset?.[H] || 0) + (_ ? 0 : GA.crossAxis), O = j.reference[H] + j.reference[n] + (_ ? 0 : M.offset?.[H] || 0) - (_ ? GA.crossAxis : 0);
+				let n = U === "y" ? "width" : "height", _ = originSides.has(getSide(A)), E = j.reference[H] - j.floating[n] + (_ && M.offset?.[H] || 0) + (_ ? 0 : hj.crossAxis), O = j.reference[H] + j.reference[n] + (_ ? 0 : M.offset?.[H] || 0) - (_ ? hj.crossAxis : 0);
 				G < E ? G = E : G > O && (G = O);
 			}
 			return {
@@ -1878,20 +2109,20 @@ var offset$2 = function(n) {
 		options: n,
 		async fn(_) {
 			var E, O;
-			let { placement: A, rects: j, platform: M, elements: N } = _, { apply: P = () => {}, ...z } = evaluate(n, _), B = await detectOverflow$1(_, z), H = getSide(A), U = getAlignment(A), W = getSideAxis(A) === "y", { width: G, height: Z } = j.floating, GA, KA;
-			H === "top" || H === "bottom" ? (GA = H, KA = U === (await (M.isRTL == null ? void 0 : M.isRTL(N.floating)) ? "start" : "end") ? "left" : "right") : (KA = H, GA = U === "end" ? "top" : "bottom");
-			let qA = Z - B.top - B.bottom, JA = G - B.left - B.right, YA = min(Z - B[GA], qA), XA = min(G - B[KA], JA), ZA = !_.middlewareData.shift, QA = YA, $A = XA;
-			if ((E = _.middlewareData.shift) != null && E.enabled.x && ($A = JA), (O = _.middlewareData.shift) != null && O.enabled.y && (QA = qA), ZA && !U) {
+			let { placement: A, rects: j, platform: M, elements: N } = _, { apply: P = () => {}, ...z } = evaluate(n, _), B = await detectOverflow$1(_, z), H = getSide(A), U = getAlignment(A), W = getSideAxis(A) === "y", { width: G, height: Z } = j.floating, hj, gj;
+			H === "top" || H === "bottom" ? (hj = H, gj = U === (await (M.isRTL == null ? void 0 : M.isRTL(N.floating)) ? "start" : "end") ? "left" : "right") : (gj = H, hj = U === "end" ? "top" : "bottom");
+			let _j = Z - B.top - B.bottom, vj = G - B.left - B.right, yj = min(Z - B[hj], _j), bj = min(G - B[gj], vj), xj = !_.middlewareData.shift, Sj = yj, Cj = bj;
+			if ((E = _.middlewareData.shift) != null && E.enabled.x && (Cj = vj), (O = _.middlewareData.shift) != null && O.enabled.y && (Sj = _j), xj && !U) {
 				let n = max(B.left, 0), _ = max(B.right, 0), E = max(B.top, 0), O = max(B.bottom, 0);
-				W ? $A = G - 2 * (n !== 0 || _ !== 0 ? n + _ : max(B.left, B.right)) : QA = Z - 2 * (E !== 0 || O !== 0 ? E + O : max(B.top, B.bottom));
+				W ? Cj = G - 2 * (n !== 0 || _ !== 0 ? n + _ : max(B.left, B.right)) : Sj = Z - 2 * (E !== 0 || O !== 0 ? E + O : max(B.top, B.bottom));
 			}
 			await P({
 				..._,
-				availableWidth: $A,
-				availableHeight: QA
+				availableWidth: Cj,
+				availableHeight: Sj
 			});
-			let ej = await M.getDimensions(N.floating);
-			return G !== ej.width || Z !== ej.height ? { reset: { rects: !0 } } : {};
+			let wj = await M.getDimensions(N.floating);
+			return G !== wj.width || Z !== wj.height ? { reset: { rects: !0 } } : {};
 		}
 	};
 };
@@ -2275,27 +2506,27 @@ function observeMove(n, _) {
 		N === void 0 && (N = !1), P === void 0 && (P = 1), j();
 		let z = n.getBoundingClientRect(), { left: B, top: H, width: U, height: W } = z;
 		if (N || _(), !U || !W) return;
-		let G = floor(H), Z = floor(A.clientWidth - (B + U)), GA = floor(A.clientHeight - (H + W)), KA = floor(B), qA = {
-			rootMargin: -G + "px " + -Z + "px " + -GA + "px " + -KA + "px",
+		let G = floor(H), Z = floor(A.clientWidth - (B + U)), hj = floor(A.clientHeight - (H + W)), gj = floor(B), _j = {
+			rootMargin: -G + "px " + -Z + "px " + -hj + "px " + -gj + "px",
 			threshold: max(0, min(1, P)) || 1
-		}, JA = !0;
-		function YA(_) {
+		}, vj = !0;
+		function yj(_) {
 			let E = _[0].intersectionRatio;
 			if (E !== P) {
-				if (!JA) return M();
+				if (!vj) return M();
 				E ? M(!1, E) : O = setTimeout(() => {
 					M(!1, 1e-7);
 				}, 1e3);
 			}
-			E === 1 && !rectsAreEqual(z, n.getBoundingClientRect()) && M(), JA = !1;
+			E === 1 && !rectsAreEqual(z, n.getBoundingClientRect()) && M(), vj = !1;
 		}
 		try {
-			E = new IntersectionObserver(YA, {
-				...qA,
+			E = new IntersectionObserver(yj, {
+				..._j,
 				root: A.ownerDocument
 			});
 		} catch {
-			E = new IntersectionObserver(YA, qA);
+			E = new IntersectionObserver(yj, _j);
 		}
 		E.observe(n);
 	}
@@ -2316,10 +2547,10 @@ function autoUpdate(n, _, E, O) {
 		})), E();
 	}), z && !P && W.observe(z), W.observe(_));
 	let G, Z = P ? getBoundingClientRect(n) : null;
-	P && GA();
-	function GA() {
+	P && hj();
+	function hj() {
 		let _ = getBoundingClientRect(n);
-		Z && !rectsAreEqual(Z, _) && E(), Z = _, G = requestAnimationFrame(GA);
+		Z && !rectsAreEqual(Z, _) && E(), Z = _, G = requestAnimationFrame(hj);
 	}
 	return E(), () => {
 		var n;
@@ -2386,23 +2617,23 @@ function useFloating(_) {
 		isPositioned: !1
 	}), [W, G] = React$1.useState(A);
 	deepEqual(W, A) || G(A);
-	let [Z, GA] = React$1.useState(null), [KA, qA] = React$1.useState(null), YA = React$1.useCallback((n) => {
-		n !== $A.current && ($A.current = n, GA(n));
-	}, []), XA = React$1.useCallback((n) => {
-		n !== ej.current && (ej.current = n, qA(n));
-	}, []), ZA = M || Z, QA = N || KA, $A = React$1.useRef(null), ej = React$1.useRef(null), tj = React$1.useRef(H), nj = z != null, rj = useLatestRef(z), ij = useLatestRef(j), aj = useLatestRef(B), oj = React$1.useCallback(() => {
-		if (!$A.current || !ej.current) return;
+	let [Z, hj] = React$1.useState(null), [gj, _j] = React$1.useState(null), vj = React$1.useCallback((n) => {
+		n !== Cj.current && (Cj.current = n, hj(n));
+	}, []), yj = React$1.useCallback((n) => {
+		n !== wj.current && (wj.current = n, _j(n));
+	}, []), xj = M || Z, Sj = N || gj, Cj = React$1.useRef(null), wj = React$1.useRef(null), Tj = React$1.useRef(H), Ej = z != null, Dj = useLatestRef(z), Oj = useLatestRef(j), kj = useLatestRef(B), Aj = React$1.useCallback(() => {
+		if (!Cj.current || !wj.current) return;
 		let n = {
 			placement: E,
 			strategy: O,
 			middleware: W
 		};
-		ij.current && (n.platform = ij.current), computePosition($A.current, ej.current, n).then((n) => {
+		Oj.current && (n.platform = Oj.current), computePosition(Cj.current, wj.current, n).then((n) => {
 			let _ = {
 				...n,
-				isPositioned: aj.current !== !1
+				isPositioned: kj.current !== !1
 			};
-			sj.current && !deepEqual(tj.current, _) && (tj.current = _, ReactDOM$1.flushSync(() => {
+			jj.current && !deepEqual(Tj.current, _) && (Tj.current = _, ReactDOM$1.flushSync(() => {
 				U(_);
 			}));
 		});
@@ -2410,50 +2641,50 @@ function useFloating(_) {
 		W,
 		E,
 		O,
-		ij,
-		aj
+		Oj,
+		kj
 	]);
 	index(() => {
-		B === !1 && tj.current.isPositioned && (tj.current.isPositioned = !1, U((n) => ({
+		B === !1 && Tj.current.isPositioned && (Tj.current.isPositioned = !1, U((n) => ({
 			...n,
 			isPositioned: !1
 		})));
 	}, [B]);
-	let sj = React$1.useRef(!1);
-	index(() => (sj.current = !0, () => {
-		sj.current = !1;
+	let jj = React$1.useRef(!1);
+	index(() => (jj.current = !0, () => {
+		jj.current = !1;
 	}), []), index(() => {
-		if (ZA && ($A.current = ZA), QA && (ej.current = QA), ZA && QA) {
-			if (rj.current) return rj.current(ZA, QA, oj);
-			oj();
+		if (xj && (Cj.current = xj), Sj && (wj.current = Sj), xj && Sj) {
+			if (Dj.current) return Dj.current(xj, Sj, Aj);
+			Aj();
 		}
 	}, [
-		ZA,
-		QA,
-		oj,
-		rj,
-		nj
+		xj,
+		Sj,
+		Aj,
+		Dj,
+		Ej
 	]);
-	let cj = React$1.useMemo(() => ({
-		reference: $A,
-		floating: ej,
-		setReference: YA,
-		setFloating: XA
-	}), [YA, XA]), lj = React$1.useMemo(() => ({
-		reference: ZA,
-		floating: QA
-	}), [ZA, QA]), uj = React$1.useMemo(() => {
+	let Mj = React$1.useMemo(() => ({
+		reference: Cj,
+		floating: wj,
+		setReference: vj,
+		setFloating: yj
+	}), [vj, yj]), Nj = React$1.useMemo(() => ({
+		reference: xj,
+		floating: Sj
+	}), [xj, Sj]), Pj = React$1.useMemo(() => {
 		let n = {
 			position: O,
 			left: 0,
 			top: 0
 		};
-		if (!lj.floating) return n;
-		let _ = roundByDPR(lj.floating, H.x), E = roundByDPR(lj.floating, H.y);
+		if (!Nj.floating) return n;
+		let _ = roundByDPR(Nj.floating, H.x), E = roundByDPR(Nj.floating, H.y);
 		return P ? {
 			...n,
 			transform: "translate(" + _ + "px, " + E + "px)",
-			...getDPR(lj.floating) >= 1.5 && { willChange: "transform" }
+			...getDPR(Nj.floating) >= 1.5 && { willChange: "transform" }
 		} : {
 			position: O,
 			left: _,
@@ -2462,22 +2693,22 @@ function useFloating(_) {
 	}, [
 		O,
 		P,
-		lj.floating,
+		Nj.floating,
 		H.x,
 		H.y
 	]);
 	return React$1.useMemo(() => ({
 		...H,
-		update: oj,
-		refs: cj,
-		elements: lj,
-		floatingStyles: uj
+		update: Aj,
+		refs: Mj,
+		elements: Nj,
+		floatingStyles: Pj
 	}), [
 		H,
-		oj,
-		cj,
-		lj,
-		uj
+		Aj,
+		Mj,
+		Nj,
+		Pj
 	]);
 }
 var arrow$1$1 = (n) => {
@@ -2543,7 +2774,7 @@ var Root$3 = Arrow$1, POPPER_NAME = "Popper", [createPopperContext, createPopper
 };
 Popper.displayName = POPPER_NAME;
 var ANCHOR_NAME$2 = "PopperAnchor", PopperAnchor = React$1.forwardRef((_, E) => {
-	let { __scopePopper: O, virtualRef: A, ...j } = _, M = usePopperContext(ANCHOR_NAME$2, O), N = React$1.useRef(null), P = useComposedRefs(E, N), z = React$1.useRef(null);
+	let { __scopePopper: O, virtualRef: A, ...j } = _, M = usePopperContext(ANCHOR_NAME$2, O), N = React$1.useRef(null), P = useComposedRefs$1(E, N), z = React$1.useRef(null);
 	return React$1.useEffect(() => {
 		let n = z.current;
 		z.current = A?.current || N.current, n !== z.current && M.onAnchorChange(z.current);
@@ -2554,70 +2785,70 @@ var ANCHOR_NAME$2 = "PopperAnchor", PopperAnchor = React$1.forwardRef((_, E) => 
 });
 PopperAnchor.displayName = ANCHOR_NAME$2;
 var CONTENT_NAME$6 = "PopperContent", [PopperContentProvider, useContentContext] = createPopperContext(CONTENT_NAME$6), PopperContent = React$1.forwardRef((_, E) => {
-	let { __scopePopper: O, side: A = "bottom", sideOffset: j = 0, align: M = "center", alignOffset: N = 0, arrowPadding: P = 0, avoidCollisions: z = !0, collisionBoundary: B = [], collisionPadding: H = 0, sticky: U = "partial", hideWhenDetached: W = !1, updatePositionStrategy: G = "optimized", onPlaced: Z, ...GA } = _, KA = usePopperContext(CONTENT_NAME$6, O), [qA, JA] = React$1.useState(null), YA = useComposedRefs(E, (n) => JA(n)), [XA, ZA] = React$1.useState(null), $A = useSize(XA), ej = $A?.width ?? 0, tj = $A?.height ?? 0, nj = A + (M === "center" ? "" : "-" + M), rj = typeof H == "number" ? H : {
+	let { __scopePopper: O, side: A = "bottom", sideOffset: j = 0, align: M = "center", alignOffset: N = 0, arrowPadding: P = 0, avoidCollisions: z = !0, collisionBoundary: B = [], collisionPadding: H = 0, sticky: U = "partial", hideWhenDetached: W = !1, updatePositionStrategy: G = "optimized", onPlaced: Z, ...hj } = _, gj = usePopperContext(CONTENT_NAME$6, O), [_j, vj] = React$1.useState(null), yj = useComposedRefs$1(E, (n) => vj(n)), [bj, xj] = React$1.useState(null), Sj = useSize(bj), Cj = Sj?.width ?? 0, Tj = Sj?.height ?? 0, Ej = A + (M === "center" ? "" : "-" + M), Dj = typeof H == "number" ? H : {
 		top: 0,
 		right: 0,
 		bottom: 0,
 		left: 0,
 		...H
-	}, ij = Array.isArray(B) ? B : [B], aj = ij.length > 0, oj = {
-		padding: rj,
-		boundary: ij.filter(isNotNull$2),
-		altBoundary: aj
-	}, { refs: sj, floatingStyles: cj, placement: lj, isPositioned: uj, middlewareData: dj } = useFloating({
+	}, Oj = Array.isArray(B) ? B : [B], kj = Oj.length > 0, Aj = {
+		padding: Dj,
+		boundary: Oj.filter(isNotNull$2),
+		altBoundary: kj
+	}, { refs: jj, floatingStyles: Mj, placement: Nj, isPositioned: Pj, middlewareData: Fj } = useFloating({
 		strategy: "fixed",
-		placement: nj,
+		placement: Ej,
 		whileElementsMounted: (...n) => autoUpdate(...n, { animationFrame: G === "always" }),
-		elements: { reference: KA.anchor },
+		elements: { reference: gj.anchor },
 		middleware: [
 			offset({
-				mainAxis: j + tj,
+				mainAxis: j + Tj,
 				alignmentAxis: N
 			}),
 			z && shift({
 				mainAxis: !0,
 				crossAxis: !1,
 				limiter: U === "partial" ? limitShift() : void 0,
-				...oj
+				...Aj
 			}),
-			z && flip({ ...oj }),
+			z && flip({ ...Aj }),
 			size({
-				...oj,
+				...Aj,
 				apply: ({ elements: n, rects: _, availableWidth: E, availableHeight: O }) => {
 					let { width: A, height: j } = _.reference, M = n.floating.style;
 					M.setProperty("--radix-popper-available-width", `${E}px`), M.setProperty("--radix-popper-available-height", `${O}px`), M.setProperty("--radix-popper-anchor-width", `${A}px`), M.setProperty("--radix-popper-anchor-height", `${j}px`);
 				}
 			}),
-			XA && arrow({
-				element: XA,
+			bj && arrow({
+				element: bj,
 				padding: P
 			}),
 			transformOrigin({
-				arrowWidth: ej,
-				arrowHeight: tj
+				arrowWidth: Cj,
+				arrowHeight: Tj
 			}),
 			W && hide({
 				strategy: "referenceHidden",
-				...oj
+				...Aj
 			})
 		]
-	}), [fj, pj] = getSideAndAlignFromPlacement(lj), mj = useCallbackRef(Z);
+	}), [Ij, Lj] = getSideAndAlignFromPlacement(Nj), Rj = useCallbackRef(Z);
 	useLayoutEffect2(() => {
-		uj && mj?.();
-	}, [uj, mj]);
-	let hj = dj.arrow?.x, gj = dj.arrow?.y, _j = dj.arrow?.centerOffset !== 0, [vj, yj] = React$1.useState();
+		Pj && Rj?.();
+	}, [Pj, Rj]);
+	let zj = Fj.arrow?.x, Bj = Fj.arrow?.y, Vj = Fj.arrow?.centerOffset !== 0, [Hj, Uj] = React$1.useState();
 	return useLayoutEffect2(() => {
-		qA && yj(window.getComputedStyle(qA).zIndex);
-	}, [qA]), /* @__PURE__ */ jsx("div", {
-		ref: sj.setFloating,
+		_j && Uj(window.getComputedStyle(_j).zIndex);
+	}, [_j]), /* @__PURE__ */ jsx("div", {
+		ref: jj.setFloating,
 		"data-radix-popper-content-wrapper": "",
 		style: {
-			...cj,
-			transform: uj ? cj.transform : "translate(0, -200%)",
+			...Mj,
+			transform: Pj ? Mj.transform : "translate(0, -200%)",
 			minWidth: "max-content",
-			zIndex: vj,
-			"--radix-popper-transform-origin": [dj.transformOrigin?.x, dj.transformOrigin?.y].join(" "),
-			...dj.hide?.referenceHidden && {
+			zIndex: Hj,
+			"--radix-popper-transform-origin": [Fj.transformOrigin?.x, Fj.transformOrigin?.y].join(" "),
+			...Fj.hide?.referenceHidden && {
 				visibility: "hidden",
 				pointerEvents: "none"
 			}
@@ -2625,19 +2856,19 @@ var CONTENT_NAME$6 = "PopperContent", [PopperContentProvider, useContentContext]
 		dir: _.dir,
 		children: /* @__PURE__ */ jsx(PopperContentProvider, {
 			scope: O,
-			placedSide: fj,
-			onArrowChange: ZA,
-			arrowX: hj,
-			arrowY: gj,
-			shouldHideArrow: _j,
+			placedSide: Ij,
+			onArrowChange: xj,
+			arrowX: zj,
+			arrowY: Bj,
+			shouldHideArrow: Vj,
 			children: /* @__PURE__ */ jsx(Primitive.div, {
-				"data-side": fj,
-				"data-align": pj,
-				...GA,
-				ref: YA,
+				"data-side": Ij,
+				"data-align": Lj,
+				...hj,
+				ref: yj,
 				style: {
-					...GA.style,
-					animation: uj ? void 0 : "none"
+					...hj.style,
+					animation: Pj ? void 0 : "none"
 				}
 			})
 		})
@@ -2720,27 +2951,27 @@ var Root2$4 = Popper, Anchor = PopperAnchor, Content$1 = PopperContent, Arrow = 
 }));
 RovingFocusGroup.displayName = GROUP_NAME$3;
 var RovingFocusGroupImpl = React$1.forwardRef((_, E) => {
-	let { __scopeRovingFocusGroup: O, orientation: A, loop: j = !1, dir: M, currentTabStopId: N, defaultCurrentTabStopId: P, onCurrentTabStopIdChange: z, onEntryFocus: B, preventScrollOnEntryFocus: H = !1, ...U } = _, W = React$1.useRef(null), G = useComposedRefs(E, W), Z = useDirection(M), [GA, KA] = useControllableState({
+	let { __scopeRovingFocusGroup: O, orientation: A, loop: j = !1, dir: M, currentTabStopId: N, defaultCurrentTabStopId: P, onCurrentTabStopIdChange: z, onEntryFocus: B, preventScrollOnEntryFocus: H = !1, ...U } = _, W = React$1.useRef(null), G = useComposedRefs$1(E, W), Z = useDirection(M), [hj, gj] = useControllableState({
 		prop: N,
 		defaultProp: P ?? null,
 		onChange: z,
 		caller: GROUP_NAME$3
-	}), [qA, JA] = React$1.useState(!1), YA = useCallbackRef(B), XA = useCollection$1(O), ZA = React$1.useRef(!1), [$A, ej] = React$1.useState(0);
+	}), [_j, vj] = React$1.useState(!1), yj = useCallbackRef(B), bj = useCollection$1(O), xj = React$1.useRef(!1), [Sj, Cj] = React$1.useState(0);
 	return React$1.useEffect(() => {
 		let n = W.current;
-		if (n) return n.addEventListener(ENTRY_FOCUS, YA), () => n.removeEventListener(ENTRY_FOCUS, YA);
-	}, [YA]), /* @__PURE__ */ jsx(RovingFocusProvider, {
+		if (n) return n.addEventListener(ENTRY_FOCUS, yj), () => n.removeEventListener(ENTRY_FOCUS, yj);
+	}, [yj]), /* @__PURE__ */ jsx(RovingFocusProvider, {
 		scope: O,
 		orientation: A,
 		dir: Z,
 		loop: j,
-		currentTabStopId: GA,
-		onItemFocus: React$1.useCallback((n) => KA(n), [KA]),
-		onItemShiftTab: React$1.useCallback(() => JA(!0), []),
-		onFocusableItemAdd: React$1.useCallback(() => ej((n) => n + 1), []),
-		onFocusableItemRemove: React$1.useCallback(() => ej((n) => n - 1), []),
+		currentTabStopId: hj,
+		onItemFocus: React$1.useCallback((n) => gj(n), [gj]),
+		onItemShiftTab: React$1.useCallback(() => vj(!0), []),
+		onFocusableItemAdd: React$1.useCallback(() => Cj((n) => n + 1), []),
+		onFocusableItemRemove: React$1.useCallback(() => Cj((n) => n - 1), []),
 		children: /* @__PURE__ */ jsx(Primitive.div, {
-			tabIndex: qA || $A === 0 ? -1 : 0,
+			tabIndex: _j || Sj === 0 ? -1 : 0,
 			"data-orientation": A,
 			...U,
 			ref: G,
@@ -2749,28 +2980,28 @@ var RovingFocusGroupImpl = React$1.forwardRef((_, E) => {
 				..._.style
 			},
 			onMouseDown: composeEventHandlers(_.onMouseDown, () => {
-				ZA.current = !0;
+				xj.current = !0;
 			}),
 			onFocus: composeEventHandlers(_.onFocus, (n) => {
-				let _ = !ZA.current;
-				if (n.target === n.currentTarget && _ && !qA) {
+				let _ = !xj.current;
+				if (n.target === n.currentTarget && _ && !_j) {
 					let _ = new CustomEvent(ENTRY_FOCUS, EVENT_OPTIONS);
 					if (n.currentTarget.dispatchEvent(_), !_.defaultPrevented) {
-						let n = XA().filter((n) => n.focusable);
+						let n = bj().filter((n) => n.focusable);
 						focusFirst$1([
 							n.find((n) => n.active),
-							n.find((n) => n.id === GA),
+							n.find((n) => n.id === hj),
 							...n
 						].filter(Boolean).map((n) => n.ref.current), H);
 					}
 				}
-				ZA.current = !1;
+				xj.current = !1;
 			}),
-			onBlur: composeEventHandlers(_.onBlur, () => JA(!1))
+			onBlur: composeEventHandlers(_.onBlur, () => vj(!1))
 		})
 	});
 }), ITEM_NAME$3 = "RovingFocusGroupItem", RovingFocusGroupItem = React$1.forwardRef((_, E) => {
-	let { __scopeRovingFocusGroup: O, focusable: A = !0, active: j = !1, tabStopId: M, children: N, ...P } = _, z = useId$1(), B = M || z, H = useRovingFocusContext(ITEM_NAME$3, O), U = H.currentTabStopId === B, W = useCollection$1(O), { onFocusableItemAdd: G, onFocusableItemRemove: Z, currentTabStopId: GA } = H;
+	let { __scopeRovingFocusGroup: O, focusable: A = !0, active: j = !1, tabStopId: M, children: N, ...P } = _, z = useId$1(), B = M || z, H = useRovingFocusContext(ITEM_NAME$3, O), U = H.currentTabStopId === B, W = useCollection$1(O), { onFocusableItemAdd: G, onFocusableItemRemove: Z, currentTabStopId: hj } = H;
 	return React$1.useEffect(() => {
 		if (A) return G(), () => Z();
 	}, [
@@ -2813,7 +3044,7 @@ var RovingFocusGroupImpl = React$1.forwardRef((_, E) => {
 			}),
 			children: typeof N == "function" ? N({
 				isCurrentTabStop: U,
-				hasTabStop: GA != null
+				hasTabStop: hj != null
 			}) : N
 		})
 	});
@@ -2940,7 +3171,7 @@ var CONTENT_NAME$5 = "MenuContent", [MenuContentProvider, useMenuContentContext]
 		})
 	});
 }), MenuRootContentModal = React$1.forwardRef((_, E) => {
-	let O = useMenuContext(CONTENT_NAME$5, _.__scopeMenu), A = React$1.useRef(null), j = useComposedRefs(E, A);
+	let O = useMenuContext(CONTENT_NAME$5, _.__scopeMenu), A = React$1.useRef(null), j = useComposedRefs$1(E, A);
 	return React$1.useEffect(() => {
 		let n = A.current;
 		if (n) return hideOthers(n);
@@ -2964,40 +3195,40 @@ var CONTENT_NAME$5 = "MenuContent", [MenuContentProvider, useMenuContentContext]
 		onDismiss: () => E.onOpenChange(!1)
 	});
 }), Slot$1 = /* @__PURE__ */ createSlot("MenuContent.ScrollLock"), MenuContentImpl = React$1.forwardRef((_, E) => {
-	let { __scopeMenu: O, loop: A = !1, trapFocus: j, onOpenAutoFocus: M, onCloseAutoFocus: N, disableOutsidePointerEvents: P, onEntryFocus: z, onEscapeKeyDown: B, onPointerDownOutside: H, onFocusOutside: U, onInteractOutside: W, onDismiss: G, disableOutsideScroll: Z, ...GA } = _, KA = useMenuContext(CONTENT_NAME$5, O), qA = useMenuRootContext(CONTENT_NAME$5, O), JA = usePopperScope$2(O), YA = useRovingFocusGroupScope$1(O), XA = useCollection(O), [ZA, $A] = React$1.useState(null), ej = React$1.useRef(null), tj = useComposedRefs(E, ej, KA.onContentChange), nj = React$1.useRef(0), rj = React$1.useRef(""), ij = React$1.useRef(0), aj = React$1.useRef(null), oj = React$1.useRef("right"), sj = React$1.useRef(0), cj = Z ? Combination_default : React$1.Fragment, lj = Z ? {
+	let { __scopeMenu: O, loop: A = !1, trapFocus: j, onOpenAutoFocus: M, onCloseAutoFocus: N, disableOutsidePointerEvents: P, onEntryFocus: z, onEscapeKeyDown: B, onPointerDownOutside: H, onFocusOutside: U, onInteractOutside: W, onDismiss: G, disableOutsideScroll: Z, ...hj } = _, gj = useMenuContext(CONTENT_NAME$5, O), _j = useMenuRootContext(CONTENT_NAME$5, O), vj = usePopperScope$2(O), yj = useRovingFocusGroupScope$1(O), bj = useCollection(O), [xj, Sj] = React$1.useState(null), Cj = React$1.useRef(null), Tj = useComposedRefs$1(E, Cj, gj.onContentChange), Ej = React$1.useRef(0), Dj = React$1.useRef(""), Oj = React$1.useRef(0), kj = React$1.useRef(null), Aj = React$1.useRef("right"), jj = React$1.useRef(0), Mj = Z ? Combination_default : React$1.Fragment, Nj = Z ? {
 		as: Slot$1,
 		allowPinchZoom: !0
-	} : void 0, uj = (n) => {
-		let _ = rj.current + n, E = XA().filter((n) => !n.disabled), O = document.activeElement, A = E.find((n) => n.ref.current === O)?.textValue, j = getNextMatch(E.map((n) => n.textValue), _, A), M = E.find((n) => n.textValue === j)?.ref.current;
+	} : void 0, Pj = (n) => {
+		let _ = Dj.current + n, E = bj().filter((n) => !n.disabled), O = document.activeElement, A = E.find((n) => n.ref.current === O)?.textValue, j = getNextMatch(E.map((n) => n.textValue), _, A), M = E.find((n) => n.textValue === j)?.ref.current;
 		(function n(_) {
-			rj.current = _, window.clearTimeout(nj.current), _ !== "" && (nj.current = window.setTimeout(() => n(""), 1e3));
+			Dj.current = _, window.clearTimeout(Ej.current), _ !== "" && (Ej.current = window.setTimeout(() => n(""), 1e3));
 		})(_), M && setTimeout(() => M.focus());
 	};
-	React$1.useEffect(() => () => window.clearTimeout(nj.current), []), useFocusGuards();
-	let dj = React$1.useCallback((n) => oj.current === aj.current?.side && isPointerInGraceArea(n, aj.current?.area), []);
+	React$1.useEffect(() => () => window.clearTimeout(Ej.current), []), useFocusGuards();
+	let Fj = React$1.useCallback((n) => Aj.current === kj.current?.side && isPointerInGraceArea(n, kj.current?.area), []);
 	return /* @__PURE__ */ jsx(MenuContentProvider, {
 		scope: O,
-		searchRef: rj,
+		searchRef: Dj,
 		onItemEnter: React$1.useCallback((n) => {
-			dj(n) && n.preventDefault();
-		}, [dj]),
+			Fj(n) && n.preventDefault();
+		}, [Fj]),
 		onItemLeave: React$1.useCallback((n) => {
-			dj(n) || (ej.current?.focus(), $A(null));
-		}, [dj]),
+			Fj(n) || (Cj.current?.focus(), Sj(null));
+		}, [Fj]),
 		onTriggerLeave: React$1.useCallback((n) => {
-			dj(n) && n.preventDefault();
-		}, [dj]),
-		pointerGraceTimerRef: ij,
+			Fj(n) && n.preventDefault();
+		}, [Fj]),
+		pointerGraceTimerRef: Oj,
 		onPointerGraceIntentChange: React$1.useCallback((n) => {
-			aj.current = n;
+			kj.current = n;
 		}, []),
-		children: /* @__PURE__ */ jsx(cj, {
-			...lj,
+		children: /* @__PURE__ */ jsx(Mj, {
+			...Nj,
 			children: /* @__PURE__ */ jsx(FocusScope, {
 				asChild: !0,
 				trapped: j,
 				onMountAutoFocus: composeEventHandlers(M, (n) => {
-					n.preventDefault(), ej.current?.focus({ preventScroll: !0 });
+					n.preventDefault(), Cj.current?.focus({ preventScroll: !0 });
 				}),
 				onUnmountAutoFocus: N,
 				children: /* @__PURE__ */ jsx(DismissableLayer, {
@@ -3010,44 +3241,44 @@ var CONTENT_NAME$5 = "MenuContent", [MenuContentProvider, useMenuContentContext]
 					onDismiss: G,
 					children: /* @__PURE__ */ jsx(Root$2, {
 						asChild: !0,
-						...YA,
-						dir: qA.dir,
+						...yj,
+						dir: _j.dir,
 						orientation: "vertical",
 						loop: A,
-						currentTabStopId: ZA,
-						onCurrentTabStopIdChange: $A,
+						currentTabStopId: xj,
+						onCurrentTabStopIdChange: Sj,
 						onEntryFocus: composeEventHandlers(z, (n) => {
-							qA.isUsingKeyboardRef.current || n.preventDefault();
+							_j.isUsingKeyboardRef.current || n.preventDefault();
 						}),
 						preventScrollOnEntryFocus: !0,
 						children: /* @__PURE__ */ jsx(Content$1, {
 							role: "menu",
 							"aria-orientation": "vertical",
-							"data-state": getOpenState(KA.open),
+							"data-state": getOpenState(gj.open),
 							"data-radix-menu-content": "",
-							dir: qA.dir,
-							...JA,
-							...GA,
-							ref: tj,
+							dir: _j.dir,
+							...vj,
+							...hj,
+							ref: Tj,
 							style: {
 								outline: "none",
-								...GA.style
+								...hj.style
 							},
-							onKeyDown: composeEventHandlers(GA.onKeyDown, (n) => {
+							onKeyDown: composeEventHandlers(hj.onKeyDown, (n) => {
 								let _ = n.target.closest("[data-radix-menu-content]") === n.currentTarget, E = n.ctrlKey || n.altKey || n.metaKey, O = n.key.length === 1;
-								_ && (n.key === "Tab" && n.preventDefault(), !E && O && uj(n.key));
-								let A = ej.current;
+								_ && (n.key === "Tab" && n.preventDefault(), !E && O && Pj(n.key));
+								let A = Cj.current;
 								if (n.target !== A || !FIRST_LAST_KEYS.includes(n.key)) return;
 								n.preventDefault();
-								let j = XA().filter((n) => !n.disabled).map((n) => n.ref.current);
+								let j = bj().filter((n) => !n.disabled).map((n) => n.ref.current);
 								LAST_KEYS.includes(n.key) && j.reverse(), focusFirst(j);
 							}),
 							onBlur: composeEventHandlers(_.onBlur, (n) => {
-								n.currentTarget.contains(n.target) || (window.clearTimeout(nj.current), rj.current = "");
+								n.currentTarget.contains(n.target) || (window.clearTimeout(Ej.current), Dj.current = "");
 							}),
 							onPointerMove: composeEventHandlers(_.onPointerMove, whenMouse((n) => {
-								let _ = n.target, E = sj.current !== n.clientX;
-								n.currentTarget.contains(_) && E && (oj.current = n.clientX > sj.current ? "right" : "left", sj.current = n.clientX);
+								let _ = n.target, E = jj.current !== n.clientX;
+								n.currentTarget.contains(_) && E && (Aj.current = n.clientX > jj.current ? "right" : "left", jj.current = n.clientX);
 							}))
 						})
 					})
@@ -3075,7 +3306,7 @@ var LABEL_NAME$2 = "MenuLabel", MenuLabel = React$1.forwardRef((n, _) => {
 });
 MenuLabel.displayName = LABEL_NAME$2;
 var ITEM_NAME$2 = "MenuItem", ITEM_SELECT = "menu.itemSelect", MenuItem = React$1.forwardRef((_, E) => {
-	let { disabled: O = !1, onSelect: A, ...j } = _, M = React$1.useRef(null), N = useMenuRootContext(ITEM_NAME$2, _.__scopeMenu), P = useMenuContentContext(ITEM_NAME$2, _.__scopeMenu), z = useComposedRefs(E, M), B = React$1.useRef(!1), H = () => {
+	let { disabled: O = !1, onSelect: A, ...j } = _, M = React$1.useRef(null), N = useMenuRootContext(ITEM_NAME$2, _.__scopeMenu), P = useMenuContentContext(ITEM_NAME$2, _.__scopeMenu), z = useComposedRefs$1(E, M), B = React$1.useRef(!1), H = () => {
 		let n = M.current;
 		if (!O && n) {
 			let _ = new CustomEvent(ITEM_SELECT, {
@@ -3104,7 +3335,7 @@ var ITEM_NAME$2 = "MenuItem", ITEM_SELECT = "menu.itemSelect", MenuItem = React$
 });
 MenuItem.displayName = ITEM_NAME$2;
 var MenuItemImpl = React$1.forwardRef((_, E) => {
-	let { __scopeMenu: O, disabled: A = !1, textValue: j, ...M } = _, N = useMenuContentContext(ITEM_NAME$2, O), P = useRovingFocusGroupScope$1(O), z = React$1.useRef(null), B = useComposedRefs(E, z), [H, U] = React$1.useState(!1), [W, G] = React$1.useState("");
+	let { __scopeMenu: O, disabled: A = !1, textValue: j, ...M } = _, N = useMenuContentContext(ITEM_NAME$2, O), P = useRovingFocusGroupScope$1(O), z = React$1.useRef(null), B = useComposedRefs$1(E, z), [H, U] = React$1.useState(!1), [W, G] = React$1.useState("");
 	return React$1.useEffect(() => {
 		let n = z.current;
 		n && G((n.textContent ?? "").trim());
@@ -3252,7 +3483,7 @@ var SUB_TRIGGER_NAME$2 = "MenuSubTrigger", MenuSubTrigger = React$1.forwardRef((
 			"aria-controls": j.contentId,
 			"data-state": getOpenState(O.open),
 			..._,
-			ref: composeRefs(E, j.onTriggerChange),
+			ref: composeRefs$1(E, j.onTriggerChange),
 			onClick: (n) => {
 				_.onClick?.(n), !(_.disabled || n.defaultPrevented) && (n.currentTarget.focus(), O.open || O.onOpenChange(!0));
 			},
@@ -3305,7 +3536,7 @@ var SUB_TRIGGER_NAME$2 = "MenuSubTrigger", MenuSubTrigger = React$1.forwardRef((
 });
 MenuSubTrigger.displayName = SUB_TRIGGER_NAME$2;
 var SUB_CONTENT_NAME$2 = "MenuSubContent", MenuSubContent = React$1.forwardRef((_, E) => {
-	let O = usePortalContext$2(CONTENT_NAME$5, _.__scopeMenu), { forceMount: A = O.forceMount, ...j } = _, M = useMenuContext(CONTENT_NAME$5, _.__scopeMenu), N = useMenuRootContext(CONTENT_NAME$5, _.__scopeMenu), P = useMenuSubContext(SUB_CONTENT_NAME$2, _.__scopeMenu), z = React$1.useRef(null), B = useComposedRefs(E, z);
+	let O = usePortalContext$2(CONTENT_NAME$5, _.__scopeMenu), { forceMount: A = O.forceMount, ...j } = _, M = useMenuContext(CONTENT_NAME$5, _.__scopeMenu), N = useMenuRootContext(CONTENT_NAME$5, _.__scopeMenu), P = useMenuSubContext(SUB_CONTENT_NAME$2, _.__scopeMenu), z = React$1.useRef(null), B = useComposedRefs$1(E, z);
 	return /* @__PURE__ */ jsx(Collection.Provider, {
 		scope: _.__scopeMenu,
 		children: /* @__PURE__ */ jsx(Presence, {
@@ -3640,7 +3871,7 @@ var TRIGGER_NAME$3 = "DropdownMenuTrigger", DropdownMenuTrigger = React$1.forwar
 			"data-disabled": O ? "" : void 0,
 			disabled: O,
 			...A,
-			ref: composeRefs(_, j.triggerRef),
+			ref: composeRefs$1(_, j.triggerRef),
 			onPointerDown: composeEventHandlers(n.onPointerDown, (n) => {
 				!O && n.button === 0 && n.ctrlKey === !1 && (j.onOpenToggle(), j.open || n.preventDefault());
 			}),
@@ -3848,7 +4079,7 @@ var ANCHOR_NAME = "PopoverAnchor", PopoverAnchor = React$1.forwardRef((_, E) => 
 });
 PopoverAnchor.displayName = ANCHOR_NAME;
 var TRIGGER_NAME$2 = "PopoverTrigger", PopoverTrigger = React$1.forwardRef((n, _) => {
-	let { __scopePopover: E, ...O } = n, A = usePopoverContext(TRIGGER_NAME$2, E), j = usePopperScope$1(E), M = useComposedRefs(_, A.triggerRef), N = /* @__PURE__ */ jsx(Primitive.button, {
+	let { __scopePopover: E, ...O } = n, A = usePopoverContext(TRIGGER_NAME$2, E), j = usePopperScope$1(E), M = useComposedRefs$1(_, A.triggerRef), N = /* @__PURE__ */ jsx(Primitive.button, {
 		type: "button",
 		"aria-haspopup": "dialog",
 		"aria-expanded": A.open,
@@ -3896,7 +4127,7 @@ var CONTENT_NAME$2 = "PopoverContent", PopoverContent = React$1.forwardRef((n, _
 });
 PopoverContent.displayName = CONTENT_NAME$2;
 var Slot = /* @__PURE__ */ createSlot("PopoverContent.RemoveScroll"), PopoverContentModal = React$1.forwardRef((_, E) => {
-	let O = usePopoverContext(CONTENT_NAME$2, _.__scopePopover), A = React$1.useRef(null), j = useComposedRefs(E, A), M = React$1.useRef(!1);
+	let O = usePopoverContext(CONTENT_NAME$2, _.__scopePopover), A = React$1.useRef(null), j = useComposedRefs$1(E, A), M = React$1.useRef(!1);
 	return React$1.useEffect(() => {
 		let n = A.current;
 		if (n) return hideOthers(n);
@@ -3995,11 +4226,11 @@ function useStateMachine(_, E) {
 	return React$1.useReducer((n, _) => E[n][_] ?? n, _);
 }
 var SCROLL_AREA_NAME = "ScrollArea", [createScrollAreaContext, createScrollAreaScope] = createContextScope(SCROLL_AREA_NAME), [ScrollAreaProvider, useScrollAreaContext] = createScrollAreaContext(SCROLL_AREA_NAME), ScrollArea = React$1.forwardRef((_, E) => {
-	let { __scopeScrollArea: O, type: A = "hover", dir: j, scrollHideDelay: M = 600, ...N } = _, [P, z] = React$1.useState(null), [B, H] = React$1.useState(null), [U, W] = React$1.useState(null), [G, Z] = React$1.useState(null), [GA, KA] = React$1.useState(null), [qA, JA] = React$1.useState(0), [YA, XA] = React$1.useState(0), [ZA, $A] = React$1.useState(!1), [ej, tj] = React$1.useState(!1), nj = useComposedRefs(E, (n) => z(n)), rj = useDirection(j);
+	let { __scopeScrollArea: O, type: A = "hover", dir: j, scrollHideDelay: M = 600, ...N } = _, [P, z] = React$1.useState(null), [B, H] = React$1.useState(null), [U, W] = React$1.useState(null), [G, Z] = React$1.useState(null), [hj, gj] = React$1.useState(null), [_j, vj] = React$1.useState(0), [yj, bj] = React$1.useState(0), [xj, Sj] = React$1.useState(!1), [Cj, Tj] = React$1.useState(!1), Ej = useComposedRefs$1(E, (n) => z(n)), Dj = useDirection(j);
 	return /* @__PURE__ */ jsx(ScrollAreaProvider, {
 		scope: O,
 		type: A,
-		dir: rj,
+		dir: Dj,
 		scrollHideDelay: M,
 		scrollArea: P,
 		viewport: B,
@@ -4008,22 +4239,22 @@ var SCROLL_AREA_NAME = "ScrollArea", [createScrollAreaContext, createScrollAreaS
 		onContentChange: W,
 		scrollbarX: G,
 		onScrollbarXChange: Z,
-		scrollbarXEnabled: ZA,
-		onScrollbarXEnabledChange: $A,
-		scrollbarY: GA,
-		onScrollbarYChange: KA,
-		scrollbarYEnabled: ej,
-		onScrollbarYEnabledChange: tj,
-		onCornerWidthChange: JA,
-		onCornerHeightChange: XA,
+		scrollbarXEnabled: xj,
+		onScrollbarXEnabledChange: Sj,
+		scrollbarY: hj,
+		onScrollbarYChange: gj,
+		scrollbarYEnabled: Cj,
+		onScrollbarYEnabledChange: Tj,
+		onCornerWidthChange: vj,
+		onCornerHeightChange: bj,
 		children: /* @__PURE__ */ jsx(Primitive.div, {
-			dir: rj,
+			dir: Dj,
 			...N,
-			ref: nj,
+			ref: Ej,
 			style: {
 				position: "relative",
-				"--radix-scroll-area-corner-width": qA + "px",
-				"--radix-scroll-area-corner-height": YA + "px",
+				"--radix-scroll-area-corner-width": _j + "px",
+				"--radix-scroll-area-corner-height": yj + "px",
 				..._.style
 			}
 		})
@@ -4031,7 +4262,7 @@ var SCROLL_AREA_NAME = "ScrollArea", [createScrollAreaContext, createScrollAreaS
 });
 ScrollArea.displayName = SCROLL_AREA_NAME;
 var VIEWPORT_NAME = "ScrollAreaViewport", ScrollAreaViewport = React$1.forwardRef((_, E) => {
-	let { __scopeScrollArea: O, children: A, nonce: j, ...M } = _, N = useScrollAreaContext(VIEWPORT_NAME, O), P = useComposedRefs(E, React$1.useRef(null), N.onViewportChange);
+	let { __scopeScrollArea: O, children: A, nonce: j, ...M } = _, N = useScrollAreaContext(VIEWPORT_NAME, O), P = useComposedRefs$1(E, React$1.useRef(null), N.onViewportChange);
 	return /* @__PURE__ */ jsxs(Fragment$1, { children: [/* @__PURE__ */ jsx("style", {
 		dangerouslySetInnerHTML: { __html: "[data-radix-scroll-area-viewport]{scrollbar-width:none;-ms-overflow-style:none;-webkit-overflow-scrolling:touch;}[data-radix-scroll-area-viewport]::-webkit-scrollbar{display:none}" },
 		nonce: j
@@ -4221,7 +4452,7 @@ var ScrollAreaScrollbarHover = React$1.forwardRef((_, E) => {
 		}
 	}) : null;
 }), ScrollAreaScrollbarX = React$1.forwardRef((_, E) => {
-	let { sizes: O, onSizesChange: A, ...j } = _, M = useScrollAreaContext(SCROLLBAR_NAME, _.__scopeScrollArea), [N, P] = React$1.useState(), z = React$1.useRef(null), B = useComposedRefs(E, z, M.onScrollbarXChange);
+	let { sizes: O, onSizesChange: A, ...j } = _, M = useScrollAreaContext(SCROLLBAR_NAME, _.__scopeScrollArea), [N, P] = React$1.useState(), z = React$1.useRef(null), B = useComposedRefs$1(E, z, M.onScrollbarXChange);
 	return React$1.useEffect(() => {
 		z.current && P(getComputedStyle(z.current));
 	}, [z]), /* @__PURE__ */ jsx(ScrollAreaScrollbarImpl, {
@@ -4257,7 +4488,7 @@ var ScrollAreaScrollbarHover = React$1.forwardRef((_, E) => {
 		}
 	});
 }), ScrollAreaScrollbarY = React$1.forwardRef((_, E) => {
-	let { sizes: O, onSizesChange: A, ...j } = _, M = useScrollAreaContext(SCROLLBAR_NAME, _.__scopeScrollArea), [N, P] = React$1.useState(), z = React$1.useRef(null), B = useComposedRefs(E, z, M.onScrollbarYChange);
+	let { sizes: O, onSizesChange: A, ...j } = _, M = useScrollAreaContext(SCROLLBAR_NAME, _.__scopeScrollArea), [N, P] = React$1.useState(), z = React$1.useRef(null), B = useComposedRefs$1(E, z, M.onScrollbarYChange);
 	return React$1.useEffect(() => {
 		z.current && P(getComputedStyle(z.current));
 	}, [z]), /* @__PURE__ */ jsx(ScrollAreaScrollbarImpl, {
@@ -4294,46 +4525,46 @@ var ScrollAreaScrollbarHover = React$1.forwardRef((_, E) => {
 		}
 	});
 }), [ScrollbarProvider, useScrollbarContext] = createScrollAreaContext(SCROLLBAR_NAME), ScrollAreaScrollbarImpl = React$1.forwardRef((_, E) => {
-	let { __scopeScrollArea: O, sizes: A, hasThumb: j, onThumbChange: M, onThumbPointerUp: N, onThumbPointerDown: P, onThumbPositionChange: z, onDragScroll: B, onWheelScroll: H, onResize: U, ...W } = _, G = useScrollAreaContext(SCROLLBAR_NAME, O), [Z, GA] = React$1.useState(null), KA = useComposedRefs(E, (n) => GA(n)), qA = React$1.useRef(null), JA = React$1.useRef(""), YA = G.viewport, XA = A.content - A.viewport, ZA = useCallbackRef(H), $A = useCallbackRef(z), ej = useDebounceCallback(U, 10);
-	function tj(n) {
-		qA.current && B({
-			x: n.clientX - qA.current.left,
-			y: n.clientY - qA.current.top
+	let { __scopeScrollArea: O, sizes: A, hasThumb: j, onThumbChange: M, onThumbPointerUp: N, onThumbPointerDown: P, onThumbPositionChange: z, onDragScroll: B, onWheelScroll: H, onResize: U, ...W } = _, G = useScrollAreaContext(SCROLLBAR_NAME, O), [Z, hj] = React$1.useState(null), gj = useComposedRefs$1(E, (n) => hj(n)), _j = React$1.useRef(null), vj = React$1.useRef(""), yj = G.viewport, bj = A.content - A.viewport, xj = useCallbackRef(H), Sj = useCallbackRef(z), Cj = useDebounceCallback(U, 10);
+	function Tj(n) {
+		_j.current && B({
+			x: n.clientX - _j.current.left,
+			y: n.clientY - _j.current.top
 		});
 	}
 	return React$1.useEffect(() => {
 		let n = (n) => {
 			let _ = n.target;
-			Z?.contains(_) && ZA(n, XA);
+			Z?.contains(_) && xj(n, bj);
 		};
 		return document.addEventListener("wheel", n, { passive: !1 }), () => document.removeEventListener("wheel", n, { passive: !1 });
 	}, [
-		YA,
+		yj,
 		Z,
-		XA,
-		ZA
-	]), React$1.useEffect($A, [A, $A]), useResizeObserver(Z, ej), useResizeObserver(G.content, ej), /* @__PURE__ */ jsx(ScrollbarProvider, {
+		bj,
+		xj
+	]), React$1.useEffect(Sj, [A, Sj]), useResizeObserver(Z, Cj), useResizeObserver(G.content, Cj), /* @__PURE__ */ jsx(ScrollbarProvider, {
 		scope: O,
 		scrollbar: Z,
 		hasThumb: j,
 		onThumbChange: useCallbackRef(M),
 		onThumbPointerUp: useCallbackRef(N),
-		onThumbPositionChange: $A,
+		onThumbPositionChange: Sj,
 		onThumbPointerDown: useCallbackRef(P),
 		children: /* @__PURE__ */ jsx(Primitive.div, {
 			...W,
-			ref: KA,
+			ref: gj,
 			style: {
 				position: "absolute",
 				...W.style
 			},
 			onPointerDown: composeEventHandlers(_.onPointerDown, (n) => {
-				n.button === 0 && (n.target.setPointerCapture(n.pointerId), qA.current = Z.getBoundingClientRect(), JA.current = document.body.style.webkitUserSelect, document.body.style.webkitUserSelect = "none", G.viewport && (G.viewport.style.scrollBehavior = "auto"), tj(n));
+				n.button === 0 && (n.target.setPointerCapture(n.pointerId), _j.current = Z.getBoundingClientRect(), vj.current = document.body.style.webkitUserSelect, document.body.style.webkitUserSelect = "none", G.viewport && (G.viewport.style.scrollBehavior = "auto"), Tj(n));
 			}),
-			onPointerMove: composeEventHandlers(_.onPointerMove, tj),
+			onPointerMove: composeEventHandlers(_.onPointerMove, Tj),
 			onPointerUp: composeEventHandlers(_.onPointerUp, (n) => {
 				let _ = n.target;
-				_.hasPointerCapture(n.pointerId) && _.releasePointerCapture(n.pointerId), document.body.style.webkitUserSelect = JA.current, G.viewport && (G.viewport.style.scrollBehavior = ""), qA.current = null;
+				_.hasPointerCapture(n.pointerId) && _.releasePointerCapture(n.pointerId), document.body.style.webkitUserSelect = vj.current, G.viewport && (G.viewport.style.scrollBehavior = ""), _j.current = null;
 			})
 		})
 	});
@@ -4347,7 +4578,7 @@ var ScrollAreaScrollbarHover = React$1.forwardRef((_, E) => {
 		})
 	});
 }), ScrollAreaThumbImpl = React$1.forwardRef((_, E) => {
-	let { __scopeScrollArea: O, style: A, ...j } = _, M = useScrollAreaContext(THUMB_NAME$1, O), N = useScrollbarContext(THUMB_NAME$1, O), { onThumbPositionChange: P } = N, z = useComposedRefs(E, (n) => N.onThumbChange(n)), B = React$1.useRef(void 0), H = useDebounceCallback(() => {
+	let { __scopeScrollArea: O, style: A, ...j } = _, M = useScrollAreaContext(THUMB_NAME$1, O), N = useScrollbarContext(THUMB_NAME$1, O), { onThumbPositionChange: P } = N, z = useComposedRefs$1(E, (n) => N.onThumbChange(n)), B = React$1.useRef(void 0), H = useDebounceCallback(() => {
 		B.current &&= (B.current(), void 0);
 	}, 100);
 	return React$1.useEffect(() => {
@@ -4475,7 +4706,7 @@ function useResizeObserver(n, _) {
 	}, [n, E]);
 }
 var Root$1 = ScrollArea, Viewport = ScrollAreaViewport, Scrollbar = ScrollAreaScrollbar, Thumb$1 = ScrollAreaThumb, Corner = ScrollAreaCorner, SWITCH_NAME = "Switch", [createSwitchContext, createSwitchScope] = createContextScope(SWITCH_NAME), [SwitchProvider, useSwitchContext] = createSwitchContext(SWITCH_NAME), Switch = React$1.forwardRef((_, E) => {
-	let { __scopeSwitch: O, name: A, checked: j, defaultChecked: M, required: N, disabled: P, value: z = "on", onCheckedChange: B, form: H, ...U } = _, [W, G] = React$1.useState(null), Z = useComposedRefs(E, (n) => G(n)), GA = React$1.useRef(!1), KA = W ? H || !!W.closest("form") : !0, [qA, JA] = useControllableState({
+	let { __scopeSwitch: O, name: A, checked: j, defaultChecked: M, required: N, disabled: P, value: z = "on", onCheckedChange: B, form: H, ...U } = _, [W, G] = React$1.useState(null), Z = useComposedRefs$1(E, (n) => G(n)), hj = React$1.useRef(!1), gj = W ? H || !!W.closest("form") : !0, [_j, vj] = useControllableState({
 		prop: j,
 		defaultProp: M ?? !1,
 		onChange: B,
@@ -4483,28 +4714,28 @@ var Root$1 = ScrollArea, Viewport = ScrollAreaViewport, Scrollbar = ScrollAreaSc
 	});
 	return /* @__PURE__ */ jsxs(SwitchProvider, {
 		scope: O,
-		checked: qA,
+		checked: _j,
 		disabled: P,
 		children: [/* @__PURE__ */ jsx(Primitive.button, {
 			type: "button",
 			role: "switch",
-			"aria-checked": qA,
+			"aria-checked": _j,
 			"aria-required": N,
-			"data-state": getState(qA),
+			"data-state": getState(_j),
 			"data-disabled": P ? "" : void 0,
 			disabled: P,
 			value: z,
 			...U,
 			ref: Z,
 			onClick: composeEventHandlers(_.onClick, (n) => {
-				JA((n) => !n), KA && (GA.current = n.isPropagationStopped(), GA.current || n.stopPropagation());
+				vj((n) => !n), gj && (hj.current = n.isPropagationStopped(), hj.current || n.stopPropagation());
 			})
-		}), KA && /* @__PURE__ */ jsx(SwitchBubbleInput, {
+		}), gj && /* @__PURE__ */ jsx(SwitchBubbleInput, {
 			control: W,
-			bubbles: !GA.current,
+			bubbles: !hj.current,
 			name: A,
 			value: z,
-			checked: qA,
+			checked: _j,
 			required: N,
 			disabled: P,
 			form: H,
@@ -4524,7 +4755,7 @@ var THUMB_NAME = "SwitchThumb", SwitchThumb = React$1.forwardRef((n, _) => {
 });
 SwitchThumb.displayName = THUMB_NAME;
 var BUBBLE_INPUT_NAME = "SwitchBubbleInput", SwitchBubbleInput = React$1.forwardRef(({ __scopeSwitch: _, control: E, checked: O, bubbles: A = !0, ...j }, M) => {
-	let N = React$1.useRef(null), P = useComposedRefs(N, M), z = usePrevious(O), B = useSize(E);
+	let N = React$1.useRef(null), P = useComposedRefs$1(N, M), z = usePrevious(O), B = useSize(E);
 	return React$1.useEffect(() => {
 		let n = N.current;
 		if (!n) return;
@@ -4688,22 +4919,22 @@ var Root2 = Tabs, List = TabsList, Trigger = TabsTrigger, Content = TabsContent,
 };
 TooltipProvider.displayName = PROVIDER_NAME;
 var TOOLTIP_NAME = "Tooltip", [TooltipContextProvider, useTooltipContext] = createTooltipContext(TOOLTIP_NAME), Tooltip = (_) => {
-	let { __scopeTooltip: E, children: O, open: A, defaultOpen: j, onOpenChange: M, disableHoverableContent: N, delayDuration: P } = _, z = useTooltipProviderContext(TOOLTIP_NAME, _.__scopeTooltip), B = usePopperScope(E), [H, U] = React$1.useState(null), W = useId$1(), G = React$1.useRef(0), Z = N ?? z.disableHoverableContent, GA = P ?? z.delayDuration, KA = React$1.useRef(!1), [qA, JA] = useControllableState({
+	let { __scopeTooltip: E, children: O, open: A, defaultOpen: j, onOpenChange: M, disableHoverableContent: N, delayDuration: P } = _, z = useTooltipProviderContext(TOOLTIP_NAME, _.__scopeTooltip), B = usePopperScope(E), [H, U] = React$1.useState(null), W = useId$1(), G = React$1.useRef(0), Z = N ?? z.disableHoverableContent, hj = P ?? z.delayDuration, gj = React$1.useRef(!1), [_j, vj] = useControllableState({
 		prop: A,
 		defaultProp: j ?? !1,
 		onChange: (n) => {
 			n ? (z.onOpen(), document.dispatchEvent(new CustomEvent(TOOLTIP_OPEN))) : z.onClose(), M?.(n);
 		},
 		caller: TOOLTIP_NAME
-	}), YA = React$1.useMemo(() => qA ? KA.current ? "delayed-open" : "instant-open" : "closed", [qA]), XA = React$1.useCallback(() => {
-		window.clearTimeout(G.current), G.current = 0, KA.current = !1, JA(!0);
-	}, [JA]), ZA = React$1.useCallback(() => {
-		window.clearTimeout(G.current), G.current = 0, JA(!1);
-	}, [JA]), $A = React$1.useCallback(() => {
+	}), yj = React$1.useMemo(() => _j ? gj.current ? "delayed-open" : "instant-open" : "closed", [_j]), bj = React$1.useCallback(() => {
+		window.clearTimeout(G.current), G.current = 0, gj.current = !1, vj(!0);
+	}, [vj]), xj = React$1.useCallback(() => {
+		window.clearTimeout(G.current), G.current = 0, vj(!1);
+	}, [vj]), Sj = React$1.useCallback(() => {
 		window.clearTimeout(G.current), G.current = window.setTimeout(() => {
-			KA.current = !0, JA(!0), G.current = 0;
-		}, GA);
-	}, [GA, JA]);
+			gj.current = !0, vj(!0), G.current = 0;
+		}, hj);
+	}, [hj, vj]);
 	return React$1.useEffect(() => () => {
 		G.current &&= (window.clearTimeout(G.current), 0);
 	}, []), /* @__PURE__ */ jsx(Root2$4, {
@@ -4711,22 +4942,22 @@ var TOOLTIP_NAME = "Tooltip", [TooltipContextProvider, useTooltipContext] = crea
 		children: /* @__PURE__ */ jsx(TooltipContextProvider, {
 			scope: E,
 			contentId: W,
-			open: qA,
-			stateAttribute: YA,
+			open: _j,
+			stateAttribute: yj,
 			trigger: H,
 			onTriggerChange: U,
 			onTriggerEnter: React$1.useCallback(() => {
-				z.isOpenDelayedRef.current ? $A() : XA();
+				z.isOpenDelayedRef.current ? Sj() : bj();
 			}, [
 				z.isOpenDelayedRef,
-				$A,
-				XA
+				Sj,
+				bj
 			]),
 			onTriggerLeave: React$1.useCallback(() => {
-				Z ? ZA() : (window.clearTimeout(G.current), G.current = 0);
-			}, [ZA, Z]),
-			onOpen: XA,
-			onClose: ZA,
+				Z ? xj() : (window.clearTimeout(G.current), G.current = 0);
+			}, [xj, Z]),
+			onOpen: bj,
+			onClose: xj,
 			disableHoverableContent: Z,
 			children: O
 		})
@@ -4734,7 +4965,7 @@ var TOOLTIP_NAME = "Tooltip", [TooltipContextProvider, useTooltipContext] = crea
 };
 Tooltip.displayName = TOOLTIP_NAME;
 var TRIGGER_NAME = "TooltipTrigger", TooltipTrigger = React$1.forwardRef((_, E) => {
-	let { __scopeTooltip: O, ...A } = _, j = useTooltipContext(TRIGGER_NAME, O), M = useTooltipProviderContext(TRIGGER_NAME, O), N = usePopperScope(O), P = useComposedRefs(E, React$1.useRef(null), j.onTriggerChange), z = React$1.useRef(!1), B = React$1.useRef(!1), H = React$1.useCallback(() => z.current = !1, []);
+	let { __scopeTooltip: O, ...A } = _, j = useTooltipContext(TRIGGER_NAME, O), M = useTooltipProviderContext(TRIGGER_NAME, O), N = usePopperScope(O), P = useComposedRefs$1(E, React$1.useRef(null), j.onTriggerChange), z = React$1.useRef(!1), B = React$1.useRef(!1), H = React$1.useCallback(() => z.current = !1, []);
 	return React$1.useEffect(() => () => document.removeEventListener("pointerup", H), [H]), /* @__PURE__ */ jsx(Anchor, {
 		asChild: !0,
 		...N,
@@ -4792,7 +5023,7 @@ var CONTENT_NAME = "TooltipContent", TooltipContent = React$1.forwardRef((n, _) 
 		})
 	});
 }), TooltipContentHoverable = React$1.forwardRef((_, E) => {
-	let O = useTooltipContext(CONTENT_NAME, _.__scopeTooltip), A = useTooltipProviderContext(CONTENT_NAME, _.__scopeTooltip), j = React$1.useRef(null), M = useComposedRefs(E, j), [N, P] = React$1.useState(null), { trigger: z, onClose: B } = O, H = j.current, { onPointerInTransitChange: U } = A, W = React$1.useCallback(() => {
+	let O = useTooltipContext(CONTENT_NAME, _.__scopeTooltip), A = useTooltipProviderContext(CONTENT_NAME, _.__scopeTooltip), j = React$1.useRef(null), M = useComposedRefs$1(E, j), [N, P] = React$1.useState(null), { trigger: z, onClose: B } = O, H = j.current, { onPointerInTransitChange: U } = A, W = React$1.useCallback(() => {
 		P(null), U(!1);
 	}, [U]), G = React$1.useCallback((n, _) => {
 		let E = n.currentTarget, O = {
@@ -5539,14 +5770,14 @@ var I$3 = React$1.forwardRef((_, E) => {
 	React$1.useEffect(() => U(O), [O]);
 	let [W, G] = React$1.useState(A);
 	React$1.useEffect(() => G(A), [A]);
-	let [Z, GA] = React$1.useState(j);
-	React$1.useEffect(() => GA(j), [j]);
-	let [KA, qA] = React$1.useState(M);
-	React$1.useEffect(() => qA(M), [M]);
-	let [JA, YA] = React$1.useState(N);
-	React$1.useEffect(() => YA(N), [N]);
-	let [XA, ZA] = React$1.useState(P);
-	return React$1.useEffect(() => ZA(P), [P]), React$1.createElement(A$2, {
+	let [Z, hj] = React$1.useState(j);
+	React$1.useEffect(() => hj(j), [j]);
+	let [gj, _j] = React$1.useState(M);
+	React$1.useEffect(() => _j(M), [M]);
+	let [vj, yj] = React$1.useState(N);
+	React$1.useEffect(() => yj(N), [N]);
+	let [bj, xj] = React$1.useState(P);
+	return React$1.useEffect(() => xj(P), [P]), React$1.createElement(A$2, {
 		...B,
 		ref: E,
 		isRoot: !0,
@@ -5554,62 +5785,62 @@ var I$3 = React$1.forwardRef((_, E) => {
 		appearance: H,
 		accentColor: W,
 		grayColor: Z,
-		panelBackground: KA,
-		radius: JA,
-		scaling: XA,
+		panelBackground: gj,
+		radius: vj,
+		scaling: bj,
 		onAppearanceChange: U,
 		onAccentColorChange: G,
-		onGrayColorChange: GA,
-		onPanelBackgroundChange: qA,
-		onRadiusChange: YA,
-		onScalingChange: ZA
+		onGrayColorChange: hj,
+		onPanelBackgroundChange: _j,
+		onRadiusChange: yj,
+		onScalingChange: xj
 	});
 });
 I$3.displayName = "ThemeRoot";
 var A$2 = React$1.forwardRef((_, E) => {
-	let O = React$1.useContext(P$3), { asChild: A, isRoot: j, hasBackground: M, appearance: N = O?.appearance ?? s$13.appearance.default, accentColor: P = O?.accentColor ?? s$13.accentColor.default, grayColor: z = O?.resolvedGrayColor ?? s$13.grayColor.default, panelBackground: B = O?.panelBackground ?? s$13.panelBackground.default, radius: H = O?.radius ?? s$13.radius.default, scaling: U = O?.scaling ?? s$13.scaling.default, onAppearanceChange: W = d$5, onAccentColorChange: G = d$5, onGrayColorChange: Z = d$5, onPanelBackgroundChange: GA = d$5, onRadiusChange: KA = d$5, onScalingChange: qA = d$5, ...JA } = _, YA = A ? Slot$3 : "div", XA = z === "auto" ? a$12(P) : z, ZA = _.appearance === "light" || _.appearance === "dark", QA = M === void 0 ? j || ZA : M;
+	let O = React$1.useContext(P$3), { asChild: A, isRoot: j, hasBackground: M, appearance: N = O?.appearance ?? s$13.appearance.default, accentColor: P = O?.accentColor ?? s$13.accentColor.default, grayColor: z = O?.resolvedGrayColor ?? s$13.grayColor.default, panelBackground: B = O?.panelBackground ?? s$13.panelBackground.default, radius: H = O?.radius ?? s$13.radius.default, scaling: U = O?.scaling ?? s$13.scaling.default, onAppearanceChange: W = d$5, onAccentColorChange: G = d$5, onGrayColorChange: Z = d$5, onPanelBackgroundChange: hj = d$5, onRadiusChange: gj = d$5, onScalingChange: _j = d$5, ...vj } = _, yj = A ? Slot$3 : "div", bj = z === "auto" ? a$12(P) : z, xj = _.appearance === "light" || _.appearance === "dark", Sj = M === void 0 ? j || xj : M;
 	return React$1.createElement(P$3.Provider, { value: React$1.useMemo(() => ({
 		appearance: N,
 		accentColor: P,
 		grayColor: z,
-		resolvedGrayColor: XA,
+		resolvedGrayColor: bj,
 		panelBackground: B,
 		radius: H,
 		scaling: U,
 		onAppearanceChange: W,
 		onAccentColorChange: G,
 		onGrayColorChange: Z,
-		onPanelBackgroundChange: GA,
-		onRadiusChange: KA,
-		onScalingChange: qA
+		onPanelBackgroundChange: hj,
+		onRadiusChange: gj,
+		onScalingChange: _j
 	}), [
 		N,
 		P,
 		z,
-		XA,
+		bj,
 		B,
 		H,
 		U,
 		W,
 		G,
 		Z,
-		GA,
-		KA,
-		qA
-	]) }, React$1.createElement(YA, {
+		hj,
+		gj,
+		_j
+	]) }, React$1.createElement(yj, {
 		"data-is-root-theme": j ? "true" : "false",
 		"data-accent-color": P,
-		"data-gray-color": XA,
-		"data-has-background": QA ? "true" : "false",
+		"data-gray-color": bj,
+		"data-has-background": Sj ? "true" : "false",
 		"data-panel-background": B,
 		"data-radius": H,
 		"data-scaling": U,
 		ref: E,
-		...JA,
+		...vj,
 		className: (0, import_classnames$18.default)("radix-themes", {
 			light: N === "light",
 			dark: N === "dark"
-		}, JA.className)
+		}, vj.className)
 	}));
 });
 A$2.displayName = "ThemeImpl";
@@ -5898,7 +6129,7 @@ var e$2 = Slot$3, s$12 = ["div", "span"], o$8 = [
 		customProperties: ["--grid-row-end"],
 		responsive: !0
 	}
-}, import_classnames$16 = /* @__PURE__ */ __toESM(require_classnames()), p$1 = React$1.forwardRef((_, E) => {
+}, import_classnames$16 = /* @__PURE__ */ __toESM(require_classnames()), p = React$1.forwardRef((_, E) => {
 	let { className: O, asChild: A, as: j = "div", ...M } = v$1(_, p$12, u$3, r$1);
 	return React$1.createElement(A ? e$2 : j, {
 		...M,
@@ -5906,7 +6137,7 @@ var e$2 = Slot$3, s$12 = ["div", "span"], o$8 = [
 		className: (0, import_classnames$16.default)("rt-Box", O)
 	});
 });
-p$1.displayName = "Box";
+p.displayName = "Box";
 var t$5 = [
 	"1",
 	"2",
@@ -6042,7 +6273,7 @@ var t$5 = [
 function f$6(n) {
 	return n === "between" ? "space-between" : n;
 }
-var import_classnames$15 = /* @__PURE__ */ __toESM(require_classnames()), p = React$1.forwardRef((_, E) => {
+var import_classnames$15 = /* @__PURE__ */ __toESM(require_classnames()), p$1 = React$1.forwardRef((_, E) => {
 	let { className: O, asChild: A, as: j = "div", ...M } = v$1(_, u$2, u$3, r$1);
 	return React$1.createElement(A ? e$2 : j, {
 		...M,
@@ -6050,7 +6281,7 @@ var import_classnames$15 = /* @__PURE__ */ __toESM(require_classnames()), p = Re
 		className: (0, import_classnames$15.default)("rt-Flex", O)
 	});
 });
-p.displayName = "Flex";
+p$1.displayName = "Flex";
 var s$10 = {
 	size: {
 		type: "enum",
@@ -6075,7 +6306,7 @@ var s$10 = {
 		ref: E,
 		className: (0, import_classnames$14.default)("rt-Spinner", O)
 	}, React$1.createElement("span", { className: "rt-SpinnerLeaf" }), React$1.createElement("span", { className: "rt-SpinnerLeaf" }), React$1.createElement("span", { className: "rt-SpinnerLeaf" }), React$1.createElement("span", { className: "rt-SpinnerLeaf" }), React$1.createElement("span", { className: "rt-SpinnerLeaf" }), React$1.createElement("span", { className: "rt-SpinnerLeaf" }), React$1.createElement("span", { className: "rt-SpinnerLeaf" }), React$1.createElement("span", { className: "rt-SpinnerLeaf" }));
-	return A === void 0 ? N : React$1.createElement(p, {
+	return A === void 0 ? N : React$1.createElement(p$1, {
 		asChild: !0,
 		position: "relative",
 		align: "center",
@@ -6087,7 +6318,7 @@ var s$10 = {
 			visibility: "hidden"
 		},
 		inert: void 0
-	}, A), React$1.createElement(p, {
+	}, A), React$1.createElement(p$1, {
 		asChild: !0,
 		align: "center",
 		justify: "center",
@@ -6124,7 +6355,7 @@ var import_classnames$13 = /* @__PURE__ */ __toESM(require_classnames()), n$1 = 
 			visibility: "hidden"
 		},
 		"aria-hidden": !0
-	}, j), React$1.createElement(d$4, null, j), React$1.createElement(p, {
+	}, j), React$1.createElement(d$4, null, j), React$1.createElement(p$1, {
 		asChild: !0,
 		align: "center",
 		justify: "center",
@@ -6242,7 +6473,7 @@ function r$10(n) {
 function m$4(n) {
 	return n === "between" ? "space-between" : n;
 }
-var import_classnames$11 = /* @__PURE__ */ __toESM(require_classnames()), o$2 = React$1.forwardRef((_, E) => {
+var import_classnames$11 = /* @__PURE__ */ __toESM(require_classnames()), o$3 = React$1.forwardRef((_, E) => {
 	let { className: O, asChild: A, as: j = "div", ...M } = v$1(_, s$6, u$3, r$1);
 	return React$1.createElement(A ? e$2 : j, {
 		...M,
@@ -6250,7 +6481,7 @@ var import_classnames$11 = /* @__PURE__ */ __toESM(require_classnames()), o$2 = 
 		className: (0, import_classnames$11.default)("rt-Grid", O)
 	});
 });
-o$2.displayName = "Grid";
+o$3.displayName = "Grid";
 var r$9 = React.forwardRef((n, E) => React.createElement("svg", {
 	width: "9",
 	height: "9",
@@ -6381,7 +6612,7 @@ function S$2(n) {
 	return [(0, import_classnames$10.default)(_, O, j, N, z, H, W), l$1(E, A, M, P, B, U, G)];
 }
 var import_classnames$9 = /* @__PURE__ */ __toESM(require_classnames()), c = React$1.forwardRef((_, E) => {
-	let { rest: O, ...A } = a$5(_), [j, M] = S$2(A), { asChild: N, children: P, className: z, style: B, type: H, scrollHideDelay: U = H === "scroll" ? void 0 : 0, dir: W, size: G = t$3.size.default, radius: Z = t$3.radius.default, scrollbars: GA = t$3.scrollbars.default, ...KA } = O;
+	let { rest: O, ...A } = a$5(_), [j, M] = S$2(A), { asChild: N, children: P, className: z, style: B, type: H, scrollHideDelay: U = H === "scroll" ? void 0 : 0, dir: W, size: G = t$3.size.default, radius: Z = t$3.radius.default, scrollbars: hj = t$3.scrollbars.default, ...gj } = O;
 	return React$1.createElement(Root$1, {
 		type: H,
 		scrollHideDelay: U,
@@ -6392,10 +6623,10 @@ var import_classnames$9 = /* @__PURE__ */ __toESM(require_classnames()), c = Rea
 		asChild: N,
 		children: P
 	}, (_) => React$1.createElement(React$1.Fragment, null, React$1.createElement(Viewport, {
-		...KA,
+		...gj,
 		ref: E,
 		className: "rt-ScrollAreaViewport"
-	}, _), React$1.createElement("div", { className: "rt-ScrollAreaViewportFocusRing" }), GA === "vertical" ? null : React$1.createElement(Scrollbar, {
+	}, _), React$1.createElement("div", { className: "rt-ScrollAreaViewportFocusRing" }), hj === "vertical" ? null : React$1.createElement(Scrollbar, {
 		"data-radius": Z,
 		orientation: "horizontal",
 		className: (0, import_classnames$9.default)("rt-ScrollAreaScrollbar", g$3({
@@ -6403,7 +6634,7 @@ var import_classnames$9 = /* @__PURE__ */ __toESM(require_classnames()), c = Rea
 			value: G,
 			propValues: t$3.size.values
 		}))
-	}, React$1.createElement(Thumb$1, { className: "rt-ScrollAreaThumb" })), GA === "horizontal" ? null : React$1.createElement(Scrollbar, {
+	}, React$1.createElement(Thumb$1, { className: "rt-ScrollAreaThumb" })), hj === "horizontal" ? null : React$1.createElement(Scrollbar, {
 		"data-radius": Z,
 		orientation: "vertical",
 		className: (0, import_classnames$9.default)("rt-ScrollAreaScrollbar", g$3({
@@ -6411,7 +6642,7 @@ var import_classnames$9 = /* @__PURE__ */ __toESM(require_classnames()), c = Rea
 			value: G,
 			propValues: t$3.size.values
 		}))
-	}, React$1.createElement(Thumb$1, { className: "rt-ScrollAreaThumb" })), GA === "both" ? React$1.createElement(Corner, { className: "rt-ScrollAreaCorner" }) : null)));
+	}, React$1.createElement(Thumb$1, { className: "rt-ScrollAreaThumb" })), hj === "both" ? React$1.createElement(Corner, { className: "rt-ScrollAreaCorner" }) : null)));
 });
 c.displayName = "ScrollArea";
 var n$2 = {
@@ -6702,7 +6933,7 @@ var t = {
 		type: "boolean",
 		default: !0
 	}
-}, import_classnames$4 = /* @__PURE__ */ __toESM(require_classnames()), o$3 = React$1.forwardRef((_, E) => {
+}, import_classnames$4 = /* @__PURE__ */ __toESM(require_classnames()), o$2 = React$1.forwardRef((_, E) => {
 	let { className: O, color: A, decorative: j, ...M } = v$1(_, t, r$1);
 	return React$1.createElement("span", {
 		"data-accent-color": A,
@@ -6712,7 +6943,7 @@ var t = {
 		className: (0, import_classnames$4.default)("rt-Separator", O)
 	});
 });
-o$3.displayName = "Separator";
+o$2.displayName = "Separator";
 var a$2 = {
 	size: {
 		type: "enum",
@@ -6925,7 +7156,7 @@ var f$1 = {
 	}, React$1.createElement("input", {
 		spellCheck: "false",
 		...z,
-		ref: composeRefs(O, E),
+		ref: composeRefs$1(O, E),
 		className: "rt-reset rt-TextFieldInput"
 	}), A);
 });
@@ -7614,17 +7845,17 @@ function $e({ document: n, event: _, hitRegions: E, initialLayoutMap: O, mounted
 	E.forEach((n) => {
 		let { group: E, groupSize: P } = n, { disableCursor: z, orientation: B, panels: H } = E, U = 0;
 		U = j ? B === "horizontal" ? (_.clientX - j.x) / P * 100 : (_.clientY - j.y) / P * 100 : B === "horizontal" ? _.clientX < 0 ? -100 : 100 : _.clientY < 0 ? -100 : 100;
-		let W = O.get(E), { defaultLayoutDeferred: G, derivedPanelConstraints: Z, layout: GA, separatorToPanels: KA } = A.get(E) ?? { defaultLayoutDeferred: !1 };
-		if (Z && W && GA && KA) {
+		let W = O.get(E), { defaultLayoutDeferred: G, derivedPanelConstraints: Z, layout: hj, separatorToPanels: gj } = A.get(E) ?? { defaultLayoutDeferred: !1 };
+		if (Z && W && hj && gj) {
 			let _ = Z$1({
 				delta: U,
 				initialLayout: W,
 				panelConstraints: Z,
 				pivotIndices: n.panels.map((n) => H.indexOf(n)),
-				prevLayout: GA,
+				prevLayout: hj,
 				trigger: "mouse-or-touch"
 			});
-			if (B$1(_, GA)) {
+			if (B$1(_, hj)) {
 				if (U !== 0 && !z) switch (B) {
 					case "horizontal":
 						M |= U < 0 ? De : Oe$1;
@@ -7638,7 +7869,7 @@ function $e({ document: n, event: _, hitRegions: E, initialLayoutMap: O, mounted
 					defaultLayoutDeferred: G,
 					derivedPanelConstraints: Z,
 					layout: _,
-					separatorToPanels: KA
+					separatorToPanels: gj
 				});
 				let E = n.group.panels.map(({ id: n }) => n).join(",");
 				n.group.inMemoryLayouts[E] = _;
@@ -7847,67 +8078,67 @@ function Pt(n, _) {
 		Object.assign(E.current, ke$1({ groupId: n }));
 	});
 }
-function Rt({ children: n, className: _, defaultLayout: E, disableCursor: O, disabled: A, elementRef: j, groupRef: M, id: N, onLayoutChange: P, orientation: z = "horizontal", style: B, ...U }) {
-	let W = useRef({}), G = le$1((n) => {
-		B$1(W.current, n) || (W.current = n, P?.(n));
-	}), Z = ae$1(N), JA = useRef(null), [YA, XA] = useState(!1), [ZA, $A] = useState(E ?? {}), [ej, tj] = wt(), nj = useRef({
+function Rt({ children: n, className: _, defaultLayout: E, disableCursor: O, disabled: A, elementRef: j, groupRef: M, id: N, onLayoutChange: P, orientation: z = "horizontal", style: B, ...H }) {
+	let U = useRef({}), G = le$1((n) => {
+		B$1(U.current, n) || (U.current = n, P?.(n));
+	}), Z = ae$1(N), hj = useRef(null), [gj, bj] = useState(!1), [xj, Sj] = useState(E ?? {}), [Cj, Tj] = wt(), Ej = useRef({
 		lastExpandedPanelSizes: {},
 		layouts: {},
 		panels: [],
 		separators: []
-	}), rj = ue$1(JA, j);
+	}), Dj = ue$1(hj, j);
 	Pt(Z, M);
-	let ij = useMemo(() => ({
+	let Oj = useMemo(() => ({
 		id: Z,
 		orientation: z,
 		registerPanel: (n) => {
-			let _ = nj.current;
-			return _.panels = ie$1(z, [..._.panels, n]), tj(), () => {
-				_.panels = _.panels.filter((_) => _ !== n), tj();
+			let _ = Ej.current;
+			return _.panels = ie$1(z, [..._.panels, n]), Tj(), () => {
+				_.panels = _.panels.filter((_) => _ !== n), Tj();
 			};
 		},
 		registerSeparator: (n) => {
-			let _ = nj.current;
-			return _.separators = ie$1(z, [..._.separators, n]), tj(), () => {
-				_.separators = _.separators.filter((_) => _ !== n), tj();
+			let _ = Ej.current;
+			return _.separators = ie$1(z, [..._.separators, n]), Tj(), () => {
+				_.separators = _.separators.filter((_) => _ !== n), Tj();
 			};
 		}
 	}), [
 		Z,
-		tj,
+		Tj,
 		z
-	]), aj = Lt({
+	]), kj = Lt({
 		defaultLayout: E,
 		disableCursor: O
-	}), oj = useRef(null);
+	}), Aj = useRef(null);
 	A$1(() => {
-		let n = JA.current;
+		let n = hj.current;
 		if (n === null) return;
-		let _ = nj.current, E = {
-			defaultLayout: aj.defaultLayout,
-			disableCursor: !!aj.disableCursor,
+		let _ = Ej.current, E = {
+			defaultLayout: kj.defaultLayout,
+			disableCursor: !!kj.disableCursor,
 			disabled: !!A,
 			element: n,
 			id: Z,
-			inMemoryLastExpandedPanelSizes: nj.current.lastExpandedPanelSizes,
-			inMemoryLayouts: nj.current.layouts,
+			inMemoryLastExpandedPanelSizes: Ej.current.lastExpandedPanelSizes,
+			inMemoryLayouts: Ej.current.layouts,
 			orientation: z,
 			panels: _.panels,
 			separators: _.separators
 		};
-		oj.current = E;
+		Aj.current = E;
 		let O = bt(E), j = D$1().mountedGroups.get(E);
 		if (j) {
 			let { defaultLayoutDeferred: n, derivedPanelConstraints: _, layout: E } = j;
-			!n && _.length > 0 && ($A(E), G?.(E));
+			!n && _.length > 0 && (Sj(E), G?.(E));
 		}
 		let M = T$1.addListener("interactionStateChange", (n) => {
 			switch (n.state) {
 				case "active":
-					XA(n.hitRegions.some((n) => n.group === E));
+					bj(n.hitRegions.some((n) => n.group === E));
 					break;
 				default:
-					XA(!1);
+					bj(!1);
 					break;
 			}
 		}), N = T$1.addListener("mountedGroupsChange", (n) => {
@@ -7915,44 +8146,44 @@ function Rt({ children: n, className: _, defaultLayout: E, disableCursor: O, dis
 			if (_) {
 				let { defaultLayoutDeferred: n, derivedPanelConstraints: E, layout: O } = _;
 				if (n || E.length === 0) return;
-				$A(O), G?.(O);
+				Sj(O), G?.(O);
 			}
 		});
 		return () => {
-			oj.current = null, O(), M(), N();
+			Aj.current = null, O(), M(), N();
 		};
 	}, [
 		A,
 		Z,
 		G,
 		z,
-		ej,
-		aj
+		Cj,
+		kj
 	]), useEffect(() => {
-		let n = oj.current;
+		let n = Aj.current;
 		n && (n.defaultLayout = E, n.disableCursor = !!O);
 	});
-	let sj = { [Fe]: YA ? "none" : void 0 };
-	for (let n in ZA) {
+	let jj = { [Fe]: gj ? "none" : void 0 };
+	for (let n in xj) {
 		let _ = Ve(Z, n);
-		sj[_] = ZA[n];
+		jj[_] = xj[n];
 	}
 	return /* @__PURE__ */ jsx(je.Provider, {
-		value: ij,
+		value: Oj,
 		children: /* @__PURE__ */ jsx("div", {
-			...U,
+			...H,
 			"aria-orientation": z,
 			className: _,
 			"data-group": !0,
 			"data-testid": Z,
 			id: Z,
-			ref: rj,
+			ref: Dj,
 			style: {
 				height: "100%",
 				width: "100%",
 				overflow: "hidden",
 				...B,
-				...sj,
+				...jj,
 				display: "flex",
 				flexDirection: z === "horizontal" ? "row" : "column",
 				flexWrap: "nowrap"
@@ -8070,12 +8301,12 @@ function It(n, _) {
 	});
 }
 function kt({ children: n, className: _, collapsedSize: E = "0%", collapsible: O = !1, defaultSize: A, elementRef: j, id: M, maxSize: N = "100%", minSize: P = "0%", onResize: z, panelRef: B, style: H, ...U }) {
-	let W = !!M, G = ae$1(M), Z = useRef(null), GA = ue$1(Z, j), { id: qA, registerPanel: JA } = ce$1(), YA = z !== null, XA = le$1((n, _, E) => {
+	let W = !!M, G = ae$1(M), Z = useRef(null), hj = ue$1(Z, j), { id: gj, registerPanel: _j } = ce$1(), yj = z !== null, bj = le$1((n, _, E) => {
 		z?.(n, M, E);
 	});
 	A$1(() => {
 		let n = Z.current;
-		if (n !== null) return JA({
+		if (n !== null) return _j({
 			element: n,
 			id: G,
 			idIsStable: W,
@@ -8083,7 +8314,7 @@ function kt({ children: n, className: _, collapsedSize: E = "0%", collapsible: O
 				expandToSize: void 0,
 				prevSize: void 0
 			},
-			onResize: YA ? XA : void 0,
+			onResize: yj ? bj : void 0,
 			panelConstraints: {
 				collapsedSize: E,
 				collapsible: O,
@@ -8096,25 +8327,25 @@ function kt({ children: n, className: _, collapsedSize: E = "0%", collapsible: O
 		E,
 		O,
 		A,
-		YA,
+		yj,
 		G,
 		W,
 		N,
 		P,
-		XA,
-		JA
+		bj,
+		_j
 	]), It(G, B);
-	let ZA = Ve(qA, G);
+	let xj = Ve(gj, G);
 	return /* @__PURE__ */ jsx("div", {
 		...U,
 		"data-panel": !0,
 		"data-testid": G,
 		id: G,
-		ref: GA,
+		ref: hj,
 		style: {
 			...Gt,
 			flexBasis: 0,
-			flexGrow: `var(${ZA}, 1)`,
+			flexGrow: `var(${xj}, 1)`,
 			flexShrink: 1,
 			overflow: "hidden",
 			pointerEvents: `var(${Fe})`
@@ -8177,7 +8408,7 @@ function Dt({ layout: n, panelConstraints: _, panelId: E, panelIndex: O }) {
 	};
 }
 function Ot({ children: n, className: _, elementRef: E, id: O, style: A, ...j }) {
-	let M = ae$1(O), [N, P] = useState({}), [z, B] = useState("inactive"), H = useRef(null), U = ue$1(H, E), { id: W, orientation: G, registerSeparator: Z } = ce$1(), GA = G === "horizontal" ? "vertical" : "horizontal";
+	let M = ae$1(O), [N, P] = useState({}), [z, B] = useState("inactive"), H = useRef(null), U = ue$1(H, E), { id: W, orientation: G, registerSeparator: Z } = ce$1(), hj = G === "horizontal" ? "vertical" : "horizontal";
 	return A$1(() => {
 		let n = H.current;
 		if (n !== null) {
@@ -8213,7 +8444,7 @@ function Ot({ children: n, className: _, elementRef: E, id: O, style: A, ...j })
 	]), /* @__PURE__ */ jsx("div", {
 		...j,
 		"aria-controls": N.valueControls,
-		"aria-orientation": GA,
+		"aria-orientation": hj,
 		"aria-valuemax": N.valueMax,
 		"aria-valuemin": N.valueMin,
 		"aria-valuenow": N.valueNow,
@@ -8234,167 +8465,7 @@ function Ot({ children: n, className: _, elementRef: E, id: O, style: A, ...j })
 	});
 }
 Ot.displayName = "Separator";
-function _objectWithoutPropertiesLoose(n, _) {
-	if (n == null) return {};
-	var E = {}, O = Object.keys(n), A, j;
-	for (j = 0; j < O.length; j++) A = O[j], !(_.indexOf(A) >= 0) && (E[A] = n[A]);
-	return E;
-}
-var _excluded$T = ["color"], CheckIcon = /* @__PURE__ */ forwardRef(function(n, _) {
-	var E = n.color, O = E === void 0 ? "currentColor" : E, A = _objectWithoutPropertiesLoose(n, _excluded$T);
-	return createElement("svg", Object.assign({
-		width: "15",
-		height: "15",
-		viewBox: "0 0 15 15",
-		fill: "none",
-		xmlns: "http://www.w3.org/2000/svg"
-	}, A, { ref: _ }), createElement("path", {
-		d: "M11.4669 3.72684C11.7558 3.91574 11.8369 4.30308 11.648 4.59198L7.39799 11.092C7.29783 11.2452 7.13556 11.3467 6.95402 11.3699C6.77247 11.3931 6.58989 11.3355 6.45446 11.2124L3.70446 8.71241C3.44905 8.48022 3.43023 8.08494 3.66242 7.82953C3.89461 7.57412 4.28989 7.55529 4.5453 7.78749L6.75292 9.79441L10.6018 3.90792C10.7907 3.61902 11.178 3.53795 11.4669 3.72684Z",
-		fill: O,
-		fillRule: "evenodd",
-		clipRule: "evenodd"
-	}));
-}), _excluded$Y = ["color"], ChevronRightIcon = /* @__PURE__ */ forwardRef(function(n, _) {
-	var E = n.color, O = E === void 0 ? "currentColor" : E, A = _objectWithoutPropertiesLoose(n, _excluded$Y);
-	return createElement("svg", Object.assign({
-		width: "15",
-		height: "15",
-		viewBox: "0 0 15 15",
-		fill: "none",
-		xmlns: "http://www.w3.org/2000/svg"
-	}, A, { ref: _ }), createElement("path", {
-		d: "M6.1584 3.13508C6.35985 2.94621 6.67627 2.95642 6.86514 3.15788L10.6151 7.15788C10.7954 7.3502 10.7954 7.64949 10.6151 7.84182L6.86514 11.8418C6.67627 12.0433 6.35985 12.0535 6.1584 11.8646C5.95694 11.6757 5.94673 11.3593 6.1356 11.1579L9.565 7.49985L6.1356 3.84182C5.94673 3.64036 5.95694 3.32394 6.1584 3.13508Z",
-		fill: O,
-		fillRule: "evenodd",
-		clipRule: "evenodd"
-	}));
-}), _excluded$1r = ["color"], Cross2Icon = /* @__PURE__ */ forwardRef(function(n, _) {
-	var E = n.color, O = E === void 0 ? "currentColor" : E, A = _objectWithoutPropertiesLoose(n, _excluded$1r);
-	return createElement("svg", Object.assign({
-		width: "15",
-		height: "15",
-		viewBox: "0 0 15 15",
-		fill: "none",
-		xmlns: "http://www.w3.org/2000/svg"
-	}, A, { ref: _ }), createElement("path", {
-		d: "M11.7816 4.03157C12.0062 3.80702 12.0062 3.44295 11.7816 3.2184C11.5571 2.99385 11.193 2.99385 10.9685 3.2184L7.50005 6.68682L4.03164 3.2184C3.80708 2.99385 3.44301 2.99385 3.21846 3.2184C2.99391 3.44295 2.99391 3.80702 3.21846 4.03157L6.68688 7.49999L3.21846 10.9684C2.99391 11.193 2.99391 11.557 3.21846 11.7816C3.44301 12.0061 3.80708 12.0061 4.03164 11.7816L7.50005 8.31316L10.9685 11.7816C11.193 12.0061 11.5571 12.0061 11.7816 11.7816C12.0062 11.557 12.0062 11.193 11.7816 10.9684L8.31322 7.49999L11.7816 4.03157Z",
-		fill: O,
-		fillRule: "evenodd",
-		clipRule: "evenodd"
-	}));
-}), _excluded$1M = ["color"], DoubleArrowLeftIcon = /* @__PURE__ */ forwardRef(function(n, _) {
-	var E = n.color, O = E === void 0 ? "currentColor" : E, A = _objectWithoutPropertiesLoose(n, _excluded$1M);
-	return createElement("svg", Object.assign({
-		width: "15",
-		height: "15",
-		viewBox: "0 0 15 15",
-		fill: "none",
-		xmlns: "http://www.w3.org/2000/svg"
-	}, A, { ref: _ }), createElement("path", {
-		d: "M6.85355 3.85355C7.04882 3.65829 7.04882 3.34171 6.85355 3.14645C6.65829 2.95118 6.34171 2.95118 6.14645 3.14645L2.14645 7.14645C1.95118 7.34171 1.95118 7.65829 2.14645 7.85355L6.14645 11.8536C6.34171 12.0488 6.65829 12.0488 6.85355 11.8536C7.04882 11.6583 7.04882 11.3417 6.85355 11.1464L3.20711 7.5L6.85355 3.85355ZM12.8536 3.85355C13.0488 3.65829 13.0488 3.34171 12.8536 3.14645C12.6583 2.95118 12.3417 2.95118 12.1464 3.14645L8.14645 7.14645C7.95118 7.34171 7.95118 7.65829 8.14645 7.85355L12.1464 11.8536C12.3417 12.0488 12.6583 12.0488 12.8536 11.8536C13.0488 11.6583 13.0488 11.3417 12.8536 11.1464L9.20711 7.5L12.8536 3.85355Z",
-		fill: O,
-		fillRule: "evenodd",
-		clipRule: "evenodd"
-	}));
-}), _excluded$1N = ["color"], DoubleArrowRightIcon = /* @__PURE__ */ forwardRef(function(n, _) {
-	var E = n.color, O = E === void 0 ? "currentColor" : E, A = _objectWithoutPropertiesLoose(n, _excluded$1N);
-	return createElement("svg", Object.assign({
-		width: "15",
-		height: "15",
-		viewBox: "0 0 15 15",
-		fill: "none",
-		xmlns: "http://www.w3.org/2000/svg"
-	}, A, { ref: _ }), createElement("path", {
-		d: "M2.14645 11.1464C1.95118 11.3417 1.95118 11.6583 2.14645 11.8536C2.34171 12.0488 2.65829 12.0488 2.85355 11.8536L6.85355 7.85355C7.04882 7.65829 7.04882 7.34171 6.85355 7.14645L2.85355 3.14645C2.65829 2.95118 2.34171 2.95118 2.14645 3.14645C1.95118 3.34171 1.95118 3.65829 2.14645 3.85355L5.79289 7.5L2.14645 11.1464ZM8.14645 11.1464C7.95118 11.3417 7.95118 11.6583 8.14645 11.8536C8.34171 12.0488 8.65829 12.0488 8.85355 11.8536L12.8536 7.85355C13.0488 7.65829 13.0488 7.34171 12.8536 7.14645L8.85355 3.14645C8.65829 2.95118 8.34171 2.95118 8.14645 3.14645C7.95118 3.34171 7.95118 3.65829 8.14645 3.85355L11.7929 7.5L8.14645 11.1464Z",
-		fill: O,
-		fillRule: "evenodd",
-		clipRule: "evenodd"
-	}));
-}), _excluded$25 = ["color"], EyeNoneIcon = /* @__PURE__ */ forwardRef(function(n, _) {
-	var E = n.color, O = E === void 0 ? "currentColor" : E, A = _objectWithoutPropertiesLoose(n, _excluded$25);
-	return createElement("svg", Object.assign({
-		width: "15",
-		height: "15",
-		viewBox: "0 0 15 15",
-		fill: "none",
-		xmlns: "http://www.w3.org/2000/svg"
-	}, A, { ref: _ }), createElement("path", {
-		d: "M13.3536 2.35355C13.5488 2.15829 13.5488 1.84171 13.3536 1.64645C13.1583 1.45118 12.8417 1.45118 12.6464 1.64645L10.6828 3.61012C9.70652 3.21671 8.63759 3 7.5 3C4.30786 3 1.65639 4.70638 0.0760002 7.23501C-0.0253338 7.39715 -0.0253334 7.60288 0.0760014 7.76501C0.902945 9.08812 2.02314 10.1861 3.36061 10.9323L1.64645 12.6464C1.45118 12.8417 1.45118 13.1583 1.64645 13.3536C1.84171 13.5488 2.15829 13.5488 2.35355 13.3536L4.31723 11.3899C5.29348 11.7833 6.36241 12 7.5 12C10.6921 12 13.3436 10.2936 14.924 7.76501C15.0253 7.60288 15.0253 7.39715 14.924 7.23501C14.0971 5.9119 12.9769 4.81391 11.6394 4.06771L13.3536 2.35355ZM9.90428 4.38861C9.15332 4.1361 8.34759 4 7.5 4C4.80285 4 2.52952 5.37816 1.09622 7.50001C1.87284 8.6497 2.89609 9.58106 4.09974 10.1931L9.90428 4.38861ZM5.09572 10.6114L10.9003 4.80685C12.1039 5.41894 13.1272 6.35031 13.9038 7.50001C12.4705 9.62183 10.1971 11 7.5 11C6.65241 11 5.84668 10.8639 5.09572 10.6114Z",
-		fill: O,
-		fillRule: "evenodd",
-		clipRule: "evenodd"
-	}));
-}), _excluded$26 = ["color"], EyeOpenIcon = /* @__PURE__ */ forwardRef(function(n, _) {
-	var E = n.color, O = E === void 0 ? "currentColor" : E, A = _objectWithoutPropertiesLoose(n, _excluded$26);
-	return createElement("svg", Object.assign({
-		width: "15",
-		height: "15",
-		viewBox: "0 0 15 15",
-		fill: "none",
-		xmlns: "http://www.w3.org/2000/svg"
-	}, A, { ref: _ }), createElement("path", {
-		d: "M7.5 11C4.80285 11 2.52952 9.62184 1.09622 7.50001C2.52952 5.37816 4.80285 4 7.5 4C10.1971 4 12.4705 5.37816 13.9038 7.50001C12.4705 9.62183 10.1971 11 7.5 11ZM7.5 3C4.30786 3 1.65639 4.70638 0.0760002 7.23501C-0.0253338 7.39715 -0.0253334 7.60288 0.0760014 7.76501C1.65639 10.2936 4.30786 12 7.5 12C10.6921 12 13.3436 10.2936 14.924 7.76501C15.0253 7.60288 15.0253 7.39715 14.924 7.23501C13.3436 4.70638 10.6921 3 7.5 3ZM7.5 9.5C8.60457 9.5 9.5 8.60457 9.5 7.5C9.5 6.39543 8.60457 5.5 7.5 5.5C6.39543 5.5 5.5 6.39543 5.5 7.5C5.5 8.60457 6.39543 9.5 7.5 9.5Z",
-		fill: O,
-		fillRule: "evenodd",
-		clipRule: "evenodd"
-	}));
-}), _excluded$2l = ["color"], GearIcon = /* @__PURE__ */ forwardRef(function(n, _) {
-	var E = n.color, O = E === void 0 ? "currentColor" : E, A = _objectWithoutPropertiesLoose(n, _excluded$2l);
-	return createElement("svg", Object.assign({
-		width: "15",
-		height: "15",
-		viewBox: "0 0 15 15",
-		fill: "none",
-		xmlns: "http://www.w3.org/2000/svg"
-	}, A, { ref: _ }), createElement("path", {
-		d: "M7.07095 0.650238C6.67391 0.650238 6.32977 0.925096 6.24198 1.31231L6.0039 2.36247C5.6249 2.47269 5.26335 2.62363 4.92436 2.81013L4.01335 2.23585C3.67748 2.02413 3.23978 2.07312 2.95903 2.35386L2.35294 2.95996C2.0722 3.2407 2.0232 3.6784 2.23493 4.01427L2.80942 4.92561C2.62307 5.2645 2.47227 5.62594 2.36216 6.00481L1.31209 6.24287C0.924883 6.33065 0.650024 6.6748 0.650024 7.07183V7.92897C0.650024 8.32601 0.924883 8.67015 1.31209 8.75794L2.36228 8.99603C2.47246 9.375 2.62335 9.73652 2.80979 10.0755L2.2354 10.9867C2.02367 11.3225 2.07267 11.7602 2.35341 12.041L2.95951 12.6471C3.24025 12.9278 3.67795 12.9768 4.01382 12.7651L4.92506 12.1907C5.26384 12.377 5.62516 12.5278 6.0039 12.6379L6.24198 13.6881C6.32977 14.0753 6.67391 14.3502 7.07095 14.3502H7.92809C8.32512 14.3502 8.66927 14.0753 8.75705 13.6881L8.99505 12.6383C9.37411 12.5282 9.73573 12.3773 10.0748 12.1909L10.986 12.7653C11.3218 12.977 11.7595 12.928 12.0403 12.6473L12.6464 12.0412C12.9271 11.7604 12.9761 11.3227 12.7644 10.9869L12.1902 10.076C12.3768 9.73688 12.5278 9.37515 12.638 8.99596L13.6879 8.75794C14.0751 8.67015 14.35 8.32601 14.35 7.92897V7.07183C14.35 6.6748 14.0751 6.33065 13.6879 6.24287L12.6381 6.00488C12.528 5.62578 12.3771 5.26414 12.1906 4.92507L12.7648 4.01407C12.9766 3.6782 12.9276 3.2405 12.6468 2.95975L12.0407 2.35366C11.76 2.07292 11.3223 2.02392 10.9864 2.23565L10.0755 2.80989C9.73622 2.62328 9.37437 2.47229 8.99505 2.36209L8.75705 1.31231C8.66927 0.925096 8.32512 0.650238 7.92809 0.650238H7.07095ZM4.92053 3.81251C5.44724 3.44339 6.05665 3.18424 6.71543 3.06839L7.07095 1.50024H7.92809L8.28355 3.06816C8.94267 3.18387 9.5524 3.44302 10.0794 3.81224L11.4397 2.9547L12.0458 3.56079L11.1882 4.92117C11.5573 5.44798 11.8164 6.0575 11.9321 6.71638L13.5 7.07183V7.92897L11.932 8.28444C11.8162 8.94342 11.557 9.55301 11.1878 10.0798L12.0453 11.4402L11.4392 12.0462L10.0787 11.1886C9.55192 11.5576 8.94241 11.8166 8.28355 11.9323L7.92809 13.5002H7.07095L6.71543 11.932C6.0569 11.8162 5.44772 11.5572 4.92116 11.1883L3.56055 12.046L2.95445 11.4399L3.81213 10.0794C3.4431 9.55266 3.18403 8.94326 3.06825 8.2845L1.50002 7.92897V7.07183L3.06818 6.71632C3.18388 6.05765 3.44283 5.44833 3.81171 4.92165L2.95398 3.561L3.56008 2.95491L4.92053 3.81251ZM9.02496 7.50008C9.02496 8.34226 8.34223 9.02499 7.50005 9.02499C6.65786 9.02499 5.97513 8.34226 5.97513 7.50008C5.97513 6.65789 6.65786 5.97516 7.50005 5.97516C8.34223 5.97516 9.02496 6.65789 9.02496 7.50008ZM9.92496 7.50008C9.92496 8.83932 8.83929 9.92499 7.50005 9.92499C6.1608 9.92499 5.07513 8.83932 5.07513 7.50008C5.07513 6.16084 6.1608 5.07516 7.50005 5.07516C8.83929 5.07516 9.92496 6.16084 9.92496 7.50008Z",
-		fill: O,
-		fillRule: "evenodd",
-		clipRule: "evenodd"
-	}));
-}), _excluded$3x = ["color"], PlusIcon = /* @__PURE__ */ forwardRef(function(n, _) {
-	var E = n.color, O = E === void 0 ? "currentColor" : E, A = _objectWithoutPropertiesLoose(n, _excluded$3x);
-	return createElement("svg", Object.assign({
-		width: "15",
-		height: "15",
-		viewBox: "0 0 15 15",
-		fill: "none",
-		xmlns: "http://www.w3.org/2000/svg"
-	}, A, { ref: _ }), createElement("path", {
-		d: "M8 2.75C8 2.47386 7.77614 2.25 7.5 2.25C7.22386 2.25 7 2.47386 7 2.75V7H2.75C2.47386 7 2.25 7.22386 2.25 7.5C2.25 7.77614 2.47386 8 2.75 8H7V12.25C7 12.5261 7.22386 12.75 7.5 12.75C7.77614 12.75 8 12.5261 8 12.25V8H12.25C12.5261 8 12.75 7.77614 12.75 7.5C12.75 7.22386 12.5261 7 12.25 7H8V2.75Z",
-		fill: O,
-		fillRule: "evenodd",
-		clipRule: "evenodd"
-	}));
-}), _excluded$3V = ["color"], Share1Icon = /* @__PURE__ */ forwardRef(function(n, _) {
-	var E = n.color, O = E === void 0 ? "currentColor" : E, A = _objectWithoutPropertiesLoose(n, _excluded$3V);
-	return createElement("svg", Object.assign({
-		width: "15",
-		height: "15",
-		viewBox: "0 0 15 15",
-		fill: "none",
-		xmlns: "http://www.w3.org/2000/svg"
-	}, A, { ref: _ }), createElement("path", {
-		d: "M5 7.50003C5 8.32845 4.32843 9.00003 3.5 9.00003C2.67157 9.00003 2 8.32845 2 7.50003C2 6.6716 2.67157 6.00003 3.5 6.00003C4.32843 6.00003 5 6.6716 5 7.50003ZM5.71313 8.66388C5.29445 9.45838 4.46048 10 3.5 10C2.11929 10 1 8.88074 1 7.50003C1 6.11931 2.11929 5.00003 3.5 5.00003C4.46048 5.00003 5.29445 5.54167 5.71313 6.33616L9.10424 4.21671C9.03643 3.98968 9 3.74911 9 3.50003C9 2.11932 10.1193 1.00003 11.5 1.00003C12.8807 1.00003 14 2.11932 14 3.50003C14 4.88074 12.8807 6.00003 11.5 6.00003C10.6915 6.00003 9.97264 5.61624 9.51566 5.0209L5.9853 7.22738C5.99502 7.31692 6 7.40789 6 7.50003C6 7.59216 5.99502 7.68312 5.9853 7.77267L9.51567 9.97915C9.97265 9.38382 10.6915 9.00003 11.5 9.00003C12.8807 9.00003 14 10.1193 14 11.5C14 12.8807 12.8807 14 11.5 14C10.1193 14 9 12.8807 9 11.5C9 11.2509 9.03643 11.0104 9.10425 10.7833L5.71313 8.66388ZM11.5 5.00003C12.3284 5.00003 13 4.32846 13 3.50003C13 2.6716 12.3284 2.00003 11.5 2.00003C10.6716 2.00003 10 2.6716 10 3.50003C10 4.32846 10.6716 5.00003 11.5 5.00003ZM13 11.5C13 12.3285 12.3284 13 11.5 13C10.6716 13 10 12.3285 10 11.5C10 10.6716 10.6716 10 11.5 10C12.3284 10 13 10.6716 13 11.5Z",
-		fill: O,
-		fillRule: "evenodd",
-		clipRule: "evenodd"
-	}));
-}), _excluded$4G = ["color"], TrashIcon = /* @__PURE__ */ forwardRef(function(n, _) {
-	var E = n.color, O = E === void 0 ? "currentColor" : E, A = _objectWithoutPropertiesLoose(n, _excluded$4G);
-	return createElement("svg", Object.assign({
-		width: "15",
-		height: "15",
-		viewBox: "0 0 15 15",
-		fill: "none",
-		xmlns: "http://www.w3.org/2000/svg"
-	}, A, { ref: _ }), createElement("path", {
-		d: "M5.5 1C5.22386 1 5 1.22386 5 1.5C5 1.77614 5.22386 2 5.5 2H9.5C9.77614 2 10 1.77614 10 1.5C10 1.22386 9.77614 1 9.5 1H5.5ZM3 3.5C3 3.22386 3.22386 3 3.5 3H5H10H11.5C11.7761 3 12 3.22386 12 3.5C12 3.77614 11.7761 4 11.5 4H11V12C11 12.5523 10.5523 13 10 13H5C4.44772 13 4 12.5523 4 12V4L3.5 4C3.22386 4 3 3.77614 3 3.5ZM5 4H10V12H5V4Z",
-		fill: O,
-		fillRule: "evenodd",
-		clipRule: "evenodd"
-	}));
-}), EditorContext = createContext(void 0), SAFE_FONTS = [
+var EditorContext = createContext(void 0), SAFE_FONTS = [
 	"Arial",
 	"Helvetica",
 	"Times New Roman",
@@ -8412,7 +8483,7 @@ var _excluded$T = ["color"], CheckIcon = /* @__PURE__ */ forwardRef(function(n, 
 const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], theme: A = "light" }) => {
 	let [j, M] = useState({
 		elements: [],
-		selectedElementId: null,
+		selectedElementIds: [],
 		isList: E,
 		mockData: [],
 		singleMockData: {},
@@ -8429,7 +8500,10 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 			"Lato",
 			"Montserrat"
 		],
-		theme: A
+		theme: A,
+		history: [[]],
+		historyIndex: 0,
+		clipboard: []
 	});
 	React.useEffect(() => {
 		j.availableFonts.forEach((n) => {
@@ -8458,15 +8532,77 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 			canvasHeight: n
 		}));
 	}, []), P = React.useCallback((n) => {
-		M((_) => ({
-			..._,
-			...n,
-			isList: n.isList ?? _.isList,
-			availableProps: n.availableProps ?? _.availableProps,
-			availableFonts: n.availableFonts ?? _.availableFonts,
-			selectedElementId: null
-		}));
-	}, []), z = React.useCallback((n) => {
+		M((_) => {
+			let E = n.elements || _.elements;
+			return {
+				..._,
+				...n,
+				isList: n.isList ?? _.isList,
+				availableProps: n.availableProps ?? _.availableProps,
+				availableFonts: n.availableFonts ?? _.availableFonts,
+				selectedElementIds: [],
+				history: [E],
+				historyIndex: 0,
+				clipboard: []
+			};
+		});
+	}, []), z = React.useCallback(() => {
+		M((n) => {
+			if (n.historyIndex > 0) {
+				let _ = n.historyIndex - 1;
+				return {
+					...n,
+					elements: n.history[_],
+					historyIndex: _,
+					selectedElementIds: []
+				};
+			}
+			return n;
+		});
+	}, []), B = React.useCallback(() => {
+		M((n) => {
+			if (n.historyIndex < n.history.length - 1) {
+				let _ = n.historyIndex + 1;
+				return {
+					...n,
+					elements: n.history[_],
+					historyIndex: _,
+					selectedElementIds: []
+				};
+			}
+			return n;
+		});
+	}, []), H = React.useCallback(() => {
+		M((n) => {
+			if (n.selectedElementIds.length > 0) {
+				let _ = n.elements.filter((_) => n.selectedElementIds.includes(_.id));
+				return {
+					...n,
+					clipboard: _
+				};
+			}
+			return n;
+		});
+	}, []), U = React.useCallback(() => {
+		M((n) => {
+			if (n.clipboard.length > 0) {
+				let _ = n.clipboard.map((n) => ({
+					...n,
+					id: crypto.randomUUID(),
+					x: n.x + 20,
+					y: n.y + 20
+				})), E = [...n.elements, ..._], O = n.history.slice(0, n.historyIndex + 1);
+				return O.push(E), {
+					...n,
+					elements: E,
+					history: O,
+					historyIndex: O.length - 1,
+					selectedElementIds: _.map((n) => n.id)
+				};
+			}
+			return n;
+		});
+	}, []), W = React.useCallback((n) => {
 		let _ = {};
 		n.type === "box" && (_.backgroundColor = "var(--gray-4)");
 		let E = {
@@ -8481,44 +8617,106 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				...n.style || {}
 			}
 		};
-		M((n) => ({
-			...n,
-			elements: [...n.elements, E]
-		}));
-	}, []), B = React.useCallback((n) => {
-		M((_) => ({
-			..._,
-			elements: _.elements.filter((_) => _.id !== n),
-			selectedElementId: _.selectedElementId === n ? null : _.selectedElementId
-		}));
-	}, []), H = React.useCallback((n) => {
-		M((_) => ({
-			..._,
-			selectedElementId: n
-		}));
-	}, []), U = React.useCallback((n, _) => {
-		M((E) => {
-			let O = [...E.elements], A = O[n];
-			return O.splice(n, 1), O.splice(_, 0, A), {
-				...E,
-				elements: O
+		M((n) => {
+			let _ = [...n.elements, E], O = n.history.slice(0, n.historyIndex + 1);
+			return O.push(_), {
+				...n,
+				elements: _,
+				history: O,
+				historyIndex: O.length - 1,
+				selectedElementIds: [E.id]
 			};
 		});
-	}, []), W = React.useCallback((n, _) => {
-		M((E) => ({
-			...E,
-			elements: E.elements.map((E) => E.id === n ? {
+	}, []), G = React.useCallback((n) => {
+		M((_) => {
+			let E = _.elements.filter((_) => _.id !== n), O = _.history.slice(0, _.historyIndex + 1);
+			return O.push(E), {
+				..._,
+				elements: E,
+				selectedElementIds: _.selectedElementIds.filter((_) => _ !== n),
+				history: O,
+				historyIndex: O.length - 1
+			};
+		});
+	}, []), Z = React.useCallback(() => {
+		M((n) => {
+			if (n.selectedElementIds.length === 0) return n;
+			let _ = n.elements.filter((_) => !n.selectedElementIds.includes(_.id)), E = n.history.slice(0, n.historyIndex + 1);
+			return E.push(_), {
+				...n,
+				elements: _,
+				selectedElementIds: [],
+				history: E,
+				historyIndex: E.length - 1
+			};
+		});
+	}, []), hj = React.useCallback((n, _ = !1) => {
+		M((E) => {
+			if (n === null) return {
+				...E,
+				selectedElementIds: []
+			};
+			if (_) {
+				let _ = E.selectedElementIds.includes(n), O;
+				return O = _ ? E.selectedElementIds.filter((_) => _ !== n) : [...E.selectedElementIds, n], {
+					...E,
+					selectedElementIds: O
+				};
+			} else return {
+				...E,
+				selectedElementIds: [n]
+			};
+		});
+	}, []), gj = React.useCallback((n, _) => {
+		M((E) => {
+			let O = [...E.elements], A = O[n];
+			O.splice(n, 1), O.splice(_, 0, A);
+			let j = E.history.slice(0, E.historyIndex + 1);
+			return j.push(O), {
+				...E,
+				elements: O,
+				history: j,
+				historyIndex: j.length - 1
+			};
+		});
+	}, []), _j = React.useCallback((n, _, E = !0) => {
+		M((O) => {
+			let A = O.elements.map((E) => E.id === n ? {
 				...E,
 				..._
-			} : E)
-		}));
-	}, []), G = React.useCallback((n, _) => {
+			} : E), j = O.history, M = O.historyIndex;
+			return E && (j = O.history.slice(0, O.historyIndex + 1), j.push(A), M = j.length - 1), {
+				...O,
+				elements: A,
+				history: j,
+				historyIndex: M
+			};
+		});
+	}, []), vj = React.useCallback((n, _ = !0) => {
+		M((E) => {
+			let O = [...E.elements];
+			n.forEach(({ id: n, changes: _ }) => {
+				let E = O.findIndex((_) => _.id === n);
+				E !== -1 && (O[E] = {
+					...O[E],
+					..._
+				});
+			});
+			let A = E.history, j = E.historyIndex;
+			return _ && (A = E.history.slice(0, E.historyIndex + 1), A.push(O), j = A.length - 1), {
+				...E,
+				elements: O,
+				history: A,
+				historyIndex: j
+			};
+		});
+	}, []), bj = React.useCallback((n, _) => {
 		M((E) => ({
 			...E,
 			mockData: n,
 			singleMockData: _
 		}));
-	}, []), Z = React.useCallback((n) => {
+	}, []), xj = React.useCallback((n) => {
 		M((_) => ({
 			..._,
 			listSettings: {
@@ -8526,31 +8724,43 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				...n
 			}
 		}));
-	}, []), GA = React.useMemo(() => ({
+	}, []), Sj = React.useMemo(() => ({
 		state: j,
-		addElement: z,
-		removeElement: B,
-		selectElement: H,
-		moveElement: U,
-		updateElement: W,
-		setMockData: G,
-		updateListSettings: Z,
+		addElement: W,
+		removeElement: G,
+		removeSelected: Z,
+		selectElement: hj,
+		moveElement: gj,
+		updateElement: _j,
+		updateElements: vj,
+		setMockData: bj,
+		updateListSettings: xj,
 		setCanvasHeight: N,
-		loadState: P
+		loadState: P,
+		undo: z,
+		redo: B,
+		copy: H,
+		paste: U
 	}), [
 		j,
-		z,
-		B,
-		H,
-		U,
 		W,
 		G,
 		Z,
+		hj,
+		gj,
+		_j,
+		vj,
+		bj,
+		xj,
 		N,
-		P
+		P,
+		z,
+		B,
+		H,
+		U
 	]);
 	return /* @__PURE__ */ jsx(EditorContext.Provider, {
-		value: GA,
+		value: Sj,
 		children: n
 	});
 }, useEditor = () => {
@@ -8843,16 +9053,16 @@ var __assign$1 = function() {
 			maxHeight: _
 		};
 	}, _.prototype.calculateNewSizeFromDirection = function(n, _) {
-		var E = this.props.scale || 1, O = normalizeToPair(this.props.resizeRatio || 1), A = O[0], j = O[1], M = this.state, N = M.direction, P = M.original, z = this.props, B = z.lockAspectRatio, H = z.lockAspectRatioExtraHeight, U = z.lockAspectRatioExtraWidth, W = P.width, G = P.height, Z = H || 0, GA = U || 0;
-		return hasDirection("right", N) && (W = P.width + (n - P.x) * A / E, B && (G = (W - GA) / this.ratio + Z)), hasDirection("left", N) && (W = P.width - (n - P.x) * A / E, B && (G = (W - GA) / this.ratio + Z)), hasDirection("bottom", N) && (G = P.height + (_ - P.y) * j / E, B && (W = (G - Z) * this.ratio + GA)), hasDirection("top", N) && (G = P.height - (_ - P.y) * j / E, B && (W = (G - Z) * this.ratio + GA)), {
+		var E = this.props.scale || 1, O = normalizeToPair(this.props.resizeRatio || 1), A = O[0], j = O[1], M = this.state, N = M.direction, P = M.original, z = this.props, B = z.lockAspectRatio, H = z.lockAspectRatioExtraHeight, U = z.lockAspectRatioExtraWidth, W = P.width, G = P.height, Z = H || 0, hj = U || 0;
+		return hasDirection("right", N) && (W = P.width + (n - P.x) * A / E, B && (G = (W - hj) / this.ratio + Z)), hasDirection("left", N) && (W = P.width - (n - P.x) * A / E, B && (G = (W - hj) / this.ratio + Z)), hasDirection("bottom", N) && (G = P.height + (_ - P.y) * j / E, B && (W = (G - Z) * this.ratio + hj)), hasDirection("top", N) && (G = P.height - (_ - P.y) * j / E, B && (W = (G - Z) * this.ratio + hj)), {
 			newWidth: W,
 			newHeight: G
 		};
 	}, _.prototype.calculateNewSizeFromAspectRatio = function(n, _, E, O) {
 		var A = this.props, j = A.lockAspectRatio, M = A.lockAspectRatioExtraHeight, N = A.lockAspectRatioExtraWidth, P = O.width === void 0 ? 10 : O.width, z = E.width === void 0 || E.width < 0 ? n : E.width, B = O.height === void 0 ? 10 : O.height, H = E.height === void 0 || E.height < 0 ? _ : E.height, U = M || 0, W = N || 0;
 		if (j) {
-			var G = (B - U) * this.ratio + W, Z = (H - U) * this.ratio + W, GA = (P - W) / this.ratio + U, KA = (z - W) / this.ratio + U, qA = Math.max(P, G), JA = Math.min(z, Z), YA = Math.max(B, GA), XA = Math.min(H, KA);
-			n = clamp$1(n, qA, JA), _ = clamp$1(_, YA, XA);
+			var G = (B - U) * this.ratio + W, Z = (H - U) * this.ratio + W, hj = (P - W) / this.ratio + U, gj = (z - W) / this.ratio + U, _j = Math.max(P, G), vj = Math.min(z, Z), yj = Math.max(B, hj), bj = Math.min(H, gj);
+			n = clamp$1(n, _j, vj), _ = clamp$1(_, yj, bj);
 		} else n = clamp$1(n, P, z), _ = clamp$1(_, B, H);
 		return {
 			newWidth: n,
@@ -8909,56 +9119,56 @@ var __assign$1 = function() {
 			} catch {}
 			var E = this.props, O = E.maxWidth, A = E.maxHeight, j = E.minWidth, M = E.minHeight, N = isTouchEvent(n) ? n.touches[0].clientX : n.clientX, P = isTouchEvent(n) ? n.touches[0].clientY : n.clientY, z = this.state, B = z.direction, H = z.original, U = z.width, W = z.height, G = this.getParentSize(), Z = calculateNewMax(G, this.window.innerWidth, this.window.innerHeight, O, A, j, M);
 			O = Z.maxWidth, A = Z.maxHeight, j = Z.minWidth, M = Z.minHeight;
-			var GA = this.calculateNewSizeFromDirection(N, P), KA = GA.newHeight, qA = GA.newWidth, JA = this.calculateNewMaxFromBoundary(O, A);
-			this.props.snap && this.props.snap.x && (qA = findClosestSnap(qA, this.props.snap.x, this.props.snapGap)), this.props.snap && this.props.snap.y && (KA = findClosestSnap(KA, this.props.snap.y, this.props.snapGap));
-			var YA = this.calculateNewSizeFromAspectRatio(qA, KA, {
-				width: JA.maxWidth,
-				height: JA.maxHeight
+			var hj = this.calculateNewSizeFromDirection(N, P), gj = hj.newHeight, _j = hj.newWidth, vj = this.calculateNewMaxFromBoundary(O, A);
+			this.props.snap && this.props.snap.x && (_j = findClosestSnap(_j, this.props.snap.x, this.props.snapGap)), this.props.snap && this.props.snap.y && (gj = findClosestSnap(gj, this.props.snap.y, this.props.snapGap));
+			var yj = this.calculateNewSizeFromAspectRatio(_j, gj, {
+				width: vj.maxWidth,
+				height: vj.maxHeight
 			}, {
 				width: j,
 				height: M
 			});
-			if (qA = YA.newWidth, KA = YA.newHeight, this.props.grid) {
-				var ZA = snap(qA, this.props.grid[0], this.props.gridGap ? this.props.gridGap[0] : 0), QA = snap(KA, this.props.grid[1], this.props.gridGap ? this.props.gridGap[1] : 0), $A = this.props.snapGap || 0, ej = $A === 0 || Math.abs(ZA - qA) <= $A ? ZA : qA, tj = $A === 0 || Math.abs(QA - KA) <= $A ? QA : KA;
-				qA = ej, KA = tj;
+			if (_j = yj.newWidth, gj = yj.newHeight, this.props.grid) {
+				var bj = snap(_j, this.props.grid[0], this.props.gridGap ? this.props.gridGap[0] : 0), xj = snap(gj, this.props.grid[1], this.props.gridGap ? this.props.gridGap[1] : 0), Cj = this.props.snapGap || 0, wj = Cj === 0 || Math.abs(bj - _j) <= Cj ? bj : _j, Tj = Cj === 0 || Math.abs(xj - gj) <= Cj ? xj : gj;
+				_j = wj, gj = Tj;
 			}
-			var nj = {
-				width: qA - H.width,
-				height: KA - H.height
+			var Ej = {
+				width: _j - H.width,
+				height: gj - H.height
 			};
-			if (this.delta = nj, U && typeof U == "string") {
+			if (this.delta = Ej, U && typeof U == "string") {
 				if (U.endsWith("%")) {
-					var rj = qA / G.width * 100;
-					qA = `${rj}%`;
+					var Dj = _j / G.width * 100;
+					_j = `${Dj}%`;
 				} else if (U.endsWith("vw")) {
-					var ij = qA / this.window.innerWidth * 100;
-					qA = `${ij}vw`;
+					var Oj = _j / this.window.innerWidth * 100;
+					_j = `${Oj}vw`;
 				} else if (U.endsWith("vh")) {
-					var aj = qA / this.window.innerHeight * 100;
-					qA = `${aj}vh`;
+					var kj = _j / this.window.innerHeight * 100;
+					_j = `${kj}vh`;
 				}
 			}
 			if (W && typeof W == "string") {
 				if (W.endsWith("%")) {
-					var rj = KA / G.height * 100;
-					KA = `${rj}%`;
+					var Dj = gj / G.height * 100;
+					gj = `${Dj}%`;
 				} else if (W.endsWith("vw")) {
-					var ij = KA / this.window.innerWidth * 100;
-					KA = `${ij}vw`;
+					var Oj = gj / this.window.innerWidth * 100;
+					gj = `${Oj}vw`;
 				} else if (W.endsWith("vh")) {
-					var aj = KA / this.window.innerHeight * 100;
-					KA = `${aj}vh`;
+					var kj = gj / this.window.innerHeight * 100;
+					gj = `${kj}vh`;
 				}
 			}
-			var oj = {
-				width: this.createSizeForCssProperty(qA, "width"),
-				height: this.createSizeForCssProperty(KA, "height")
+			var Aj = {
+				width: this.createSizeForCssProperty(_j, "width"),
+				height: this.createSizeForCssProperty(gj, "height")
 			};
-			this.flexDir === "row" ? oj.flexBasis = oj.width : this.flexDir === "column" && (oj.flexBasis = oj.height);
-			var sj = this.state.width !== oj.width, cj = this.state.height !== oj.height, lj = this.state.flexBasis !== oj.flexBasis, uj = sj || cj || lj;
-			uj && flushSync(function() {
-				_.setState(oj);
-			}), this.props.onResize && uj && this.props.onResize(n, B, this.resizable, nj);
+			this.flexDir === "row" ? Aj.flexBasis = Aj.width : this.flexDir === "column" && (Aj.flexBasis = Aj.height);
+			var jj = this.state.width !== Aj.width, Mj = this.state.height !== Aj.height, Nj = this.state.flexBasis !== Aj.flexBasis, Pj = jj || Mj || Nj;
+			Pj && flushSync(function() {
+				_.setState(Aj);
+			}), this.props.onResize && Pj && this.props.onResize(n, B, this.resizable, Ej);
 		}
 	}, _.prototype.onMouseUp = function(n) {
 		var _ = this.state, E = _.isResizing, O = _.direction;
@@ -9042,6 +9252,38 @@ var __assign$1 = function() {
 		snapGap: 0
 	}, _;
 }(PureComponent);
+const formatValue = (n, _) => {
+	if (n == null) return "";
+	if (_.type === "boolean") return String(n) === "true" || n === !0 || typeof n == "number" && n > 0 ? _.trueLabel || "Sim" : _.falseLabel || "Não";
+	if (_.type === "date") try {
+		let E = new Date(n);
+		if (isNaN(E.getTime())) return String(n);
+		if (_.dateFormat) {
+			let n = E.getDate().toString().padStart(2, "0"), O = (E.getMonth() + 1).toString().padStart(2, "0"), A = E.getFullYear(), j = E.getHours().toString().padStart(2, "0"), M = E.getMinutes().toString().padStart(2, "0"), N = E.getSeconds().toString().padStart(2, "0");
+			return _.dateFormat.replace("DD", n).replace("MM", O).replace("YYYY", String(A)).replace("HH", j).replace("mm", M).replace("ss", N);
+		}
+		return E.toLocaleDateString();
+	} catch {
+		return String(n);
+	}
+	if (_.type === "number") {
+		let E = parseFloat(n);
+		return isNaN(E) ? String(n) : _.numberFormat === "currency" ? (_.currencySymbol || "R$") + " " + E.toFixed(_.decimalPlaces || 2) : _.numberFormat === "percent" ? E.toFixed(_.decimalPlaces || 0) + "%" : E.toFixed(_.decimalPlaces || 0);
+	}
+	return String(n);
+}, checkCondition = (n, _, E) => {
+	let O = String(n).toLowerCase(), A = String(E).toLowerCase();
+	switch (_) {
+		case "equals": return O === A;
+		case "notEquals": return O !== A;
+		case "contains": return O.includes(A);
+		case "greaterThan": return parseFloat(O) > parseFloat(A);
+		case "lessThan": return parseFloat(O) < parseFloat(A);
+		case "truthy": return !!n;
+		case "falsy": return !n;
+		default: return !1;
+	}
+};
 function u() {
 	return (u = Object.assign || function(n) {
 		for (var _ = 1; _ < arguments.length; _++) {
@@ -9114,15 +9356,15 @@ var s = function(n, _, E) {
 			},
 			E
 		];
-	}, [N, M]), U = B[0], W = B[1], G = B[2];
+	}, [N, M]), H = B[0], U = B[1], G = B[2];
 	return useEffect(function() {
 		return G;
 	}, [G]), React.createElement("div", u({}, A, {
-		onTouchStart: U,
-		onMouseDown: U,
+		onTouchStart: H,
+		onMouseDown: H,
 		className: "react-colorful__interactive",
 		ref: j,
-		onKeyDown: W,
+		onKeyDown: U,
 		tabIndex: 0,
 		role: "slider"
 	}));
@@ -9378,7 +9620,7 @@ var R$1, V = typeof window < "u" ? useLayoutEffect : useEffect, $ = function() {
 };
 const ColorPickerContent = ({ color: n, onChange: _ }) => {
 	let E = n === "transparent" ? "#00000000" : n || "#000000";
-	return /* @__PURE__ */ jsxs(p, {
+	return /* @__PURE__ */ jsxs(p$1, {
 		direction: "column",
 		gap: "3",
 		style: { width: "100%" },
@@ -9386,10 +9628,10 @@ const ColorPickerContent = ({ color: n, onChange: _ }) => {
 			color: E,
 			onChange: _,
 			style: { width: "100%" }
-		}), /* @__PURE__ */ jsxs(p, {
+		}), /* @__PURE__ */ jsxs(p$1, {
 			gap: "2",
 			align: "center",
-			children: [/* @__PURE__ */ jsx(p$1, { style: {
+			children: [/* @__PURE__ */ jsx(p, { style: {
 				width: 32,
 				height: 32,
 				backgroundColor: E,
@@ -9413,7 +9655,7 @@ const ColorPickerContent = ({ color: n, onChange: _ }) => {
 		padding: "0 8px",
 		height: 32
 	},
-	children: [/* @__PURE__ */ jsx(p$1, { style: {
+	children: [/* @__PURE__ */ jsx(p, { style: {
 		width: 18,
 		height: 18,
 		backgroundColor: n || "transparent",
@@ -9451,31 +9693,48 @@ const ColorPickerContent = ({ color: n, onChange: _ }) => {
 				/* @__PURE__ */ jsx(g$2, { children: "Configurações Avançadas" }),
 				/* @__PURE__ */ jsxs(m$1, {
 					defaultValue: "formatting",
-					children: [/* @__PURE__ */ jsxs(b$1, { children: [/* @__PURE__ */ jsx(P$1, {
-						value: "formatting",
-						children: "Formatação de Dados"
-					}), /* @__PURE__ */ jsx(P$1, {
-						value: "conditional",
-						children: "Formatação Condicional"
-					})] }), /* @__PURE__ */ jsxs(p$1, {
-						pt: "3",
-						children: [/* @__PURE__ */ jsx(f$2, {
+					children: [/* @__PURE__ */ jsxs(b$1, { children: [
+						/* @__PURE__ */ jsx(P$1, {
 							value: "formatting",
-							children: /* @__PURE__ */ jsx(FormattingSettings, {
-								element: j,
-								updateElement: A
-							})
-						}), /* @__PURE__ */ jsx(f$2, {
+							children: "Formatação"
+						}),
+						/* @__PURE__ */ jsx(P$1, {
 							value: "conditional",
-							children: /* @__PURE__ */ jsx(ConditionalSettings, {
-								element: j,
-								updateElement: A,
-								availableProps: O.availableProps
+							children: "Condicional"
+						}),
+						/* @__PURE__ */ jsx(P$1, {
+							value: "animation",
+							children: "Animação"
+						})
+					] }), /* @__PURE__ */ jsxs(p, {
+						pt: "3",
+						children: [
+							/* @__PURE__ */ jsx(f$2, {
+								value: "formatting",
+								children: /* @__PURE__ */ jsx(FormattingSettings, {
+									element: j,
+									updateElement: A
+								})
+							}),
+							/* @__PURE__ */ jsx(f$2, {
+								value: "conditional",
+								children: /* @__PURE__ */ jsx(ConditionalSettings, {
+									element: j,
+									updateElement: A,
+									availableProps: O.availableProps
+								})
+							}),
+							/* @__PURE__ */ jsx(f$2, {
+								value: "animation",
+								children: /* @__PURE__ */ jsx(AnimationSettings, {
+									element: j,
+									updateElement: A
+								})
 							})
-						})]
+						]
 					})]
 				}),
-				/* @__PURE__ */ jsx(p, {
+				/* @__PURE__ */ jsx(p$1, {
 					justify: "end",
 					mt: "4",
 					children: /* @__PURE__ */ jsx(D$2, { children: /* @__PURE__ */ jsx(o, {
@@ -9488,14 +9747,185 @@ const ColorPickerContent = ({ color: n, onChange: _ }) => {
 		})
 	}) : null;
 };
-var FormattingSettings = ({ element: n, updateElement: _ }) => {
+var AnimationSettings = ({ element: n, updateElement: _ }) => {
+	let E = n.animation || {
+		type: "none",
+		duration: 1,
+		delay: 0
+	}, O = (O) => {
+		_(n.id, { animation: {
+			...E,
+			...O
+		} });
+	};
+	return /* @__PURE__ */ jsxs(p$1, {
+		direction: "column",
+		gap: "3",
+		children: [
+			/* @__PURE__ */ jsx(p$2, {
+				size: "2",
+				color: "gray",
+				children: "Configure animações de entrada para este elemento."
+			}),
+			/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
+				size: "1",
+				mb: "1",
+				as: "div",
+				children: "Tipo de Animação"
+			}), /* @__PURE__ */ jsxs("select", {
+				value: E.type,
+				onChange: (n) => O({ type: n.target.value }),
+				style: {
+					width: "100%",
+					padding: "6px",
+					borderRadius: "4px",
+					border: "1px solid var(--gray-6)",
+					backgroundColor: "var(--color-panel-solid)",
+					color: "var(--gray-12)",
+					fontSize: "14px"
+				},
+				children: [
+					/* @__PURE__ */ jsx("option", {
+						value: "none",
+						children: "Nenhuma"
+					}),
+					/* @__PURE__ */ jsx("option", {
+						value: "fadeIn",
+						children: "Fade In"
+					}),
+					/* @__PURE__ */ jsx("option", {
+						value: "slideInLeft",
+						children: "Slide In (Esquerda)"
+					}),
+					/* @__PURE__ */ jsx("option", {
+						value: "slideInRight",
+						children: "Slide In (Direita)"
+					}),
+					/* @__PURE__ */ jsx("option", {
+						value: "slideInUp",
+						children: "Slide In (Cima)"
+					}),
+					/* @__PURE__ */ jsx("option", {
+						value: "slideInDown",
+						children: "Slide In (Baixo)"
+					}),
+					/* @__PURE__ */ jsx("option", {
+						value: "zoomIn",
+						children: "Zoom In"
+					}),
+					/* @__PURE__ */ jsx("option", {
+						value: "bounceIn",
+						children: "Bounce In"
+					}),
+					/* @__PURE__ */ jsx("option", {
+						value: "pulse",
+						children: "Pulse (Atenção)"
+					}),
+					/* @__PURE__ */ jsx("option", {
+						value: "shake",
+						children: "Shake (Atenção)"
+					}),
+					/* @__PURE__ */ jsx("option", {
+						value: "spin",
+						children: "Spin (Loop)"
+					})
+				]
+			})] }),
+			E.type !== "none" && /* @__PURE__ */ jsxs(Fragment$1, { children: [
+				/* @__PURE__ */ jsxs(o$3, {
+					columns: "2",
+					gap: "3",
+					children: [/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
+						size: "1",
+						mb: "1",
+						as: "div",
+						children: "Duração (s)"
+					}), /* @__PURE__ */ jsx(u$1, {
+						type: "number",
+						step: "0.1",
+						min: "0.1",
+						value: E.duration,
+						onChange: (n) => O({ duration: parseFloat(n.target.value) || .5 })
+					})] }), /* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
+						size: "1",
+						mb: "1",
+						as: "div",
+						children: "Atraso (s)"
+					}), /* @__PURE__ */ jsx(u$1, {
+						type: "number",
+						step: "0.1",
+						min: "0",
+						value: E.delay,
+						onChange: (n) => O({ delay: parseFloat(n.target.value) || 0 })
+					})] })]
+				}),
+				/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
+					size: "1",
+					mb: "1",
+					as: "div",
+					children: "Curva de Tempo (Easing)"
+				}), /* @__PURE__ */ jsxs("select", {
+					value: E.timingFunction || "ease",
+					onChange: (n) => O({ timingFunction: n.target.value }),
+					style: {
+						width: "100%",
+						padding: "6px",
+						borderRadius: "4px",
+						border: "1px solid var(--gray-6)",
+						backgroundColor: "var(--color-panel-solid)",
+						color: "var(--gray-12)",
+						fontSize: "14px"
+					},
+					children: [
+						/* @__PURE__ */ jsx("option", {
+							value: "linear",
+							children: "Linear"
+						}),
+						/* @__PURE__ */ jsx("option", {
+							value: "ease",
+							children: "Ease"
+						}),
+						/* @__PURE__ */ jsx("option", {
+							value: "ease-in",
+							children: "Ease In"
+						}),
+						/* @__PURE__ */ jsx("option", {
+							value: "ease-out",
+							children: "Ease Out"
+						}),
+						/* @__PURE__ */ jsx("option", {
+							value: "ease-in-out",
+							children: "Ease In Out"
+						})
+					]
+				})] }),
+				[
+					"pulse",
+					"shake",
+					"spin"
+				].includes(E.type) && /* @__PURE__ */ jsx(p, { children: /* @__PURE__ */ jsxs(p$1, {
+					align: "center",
+					gap: "2",
+					mt: "2",
+					children: [/* @__PURE__ */ jsx(i, {
+						checked: E.iterationCount === "infinite",
+						onCheckedChange: (n) => O({ iterationCount: n ? "infinite" : 1 })
+					}), /* @__PURE__ */ jsx(p$2, {
+						size: "2",
+						children: "Repetir Infinitamente"
+					})]
+				}) })
+			] })
+		]
+	});
+}, FormattingSettings = ({ element: n, updateElement: _ }) => {
 	let E = n.formatting || { type: "text" }, O = (O) => {
 		_(n.id, { formatting: {
 			...E,
 			...O
 		} });
 	};
-	return /* @__PURE__ */ jsxs(p, {
+	return /* @__PURE__ */ jsxs(p$1, {
 		direction: "column",
 		gap: "3",
 		children: [
@@ -9504,7 +9934,7 @@ var FormattingSettings = ({ element: n, updateElement: _ }) => {
 				color: "gray",
 				children: "Configure como os dados serão exibidos quando substituídos."
 			}),
-			n.type === "text" && /* @__PURE__ */ jsxs(p$1, { children: [/* @__PURE__ */ jsxs(p, {
+			n.type === "text" && /* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsxs(p$1, {
 				align: "center",
 				gap: "2",
 				mb: "3",
@@ -9515,11 +9945,11 @@ var FormattingSettings = ({ element: n, updateElement: _ }) => {
 					size: "2",
 					children: "Expandir altura automaticamente (Multilinha)"
 				})]
-			}), /* @__PURE__ */ jsx(o$3, {
+			}), /* @__PURE__ */ jsx(o$2, {
 				size: "4",
 				mb: "3"
 			})] }),
-			/* @__PURE__ */ jsxs(p$1, { children: [/* @__PURE__ */ jsx(p$2, {
+			/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
 				size: "1",
 				mb: "1",
 				as: "div",
@@ -9555,10 +9985,10 @@ var FormattingSettings = ({ element: n, updateElement: _ }) => {
 					})
 				]
 			})] }),
-			E.type === "boolean" && /* @__PURE__ */ jsxs(o$2, {
+			E.type === "boolean" && /* @__PURE__ */ jsxs(o$3, {
 				columns: "2",
 				gap: "3",
-				children: [/* @__PURE__ */ jsxs(p$1, { children: [/* @__PURE__ */ jsx(p$2, {
+				children: [/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
 					size: "1",
 					mb: "1",
 					as: "div",
@@ -9567,7 +9997,7 @@ var FormattingSettings = ({ element: n, updateElement: _ }) => {
 					placeholder: "Ex: Sim",
 					value: E.trueLabel || "",
 					onChange: (n) => O({ trueLabel: n.target.value })
-				})] }), /* @__PURE__ */ jsxs(p$1, { children: [/* @__PURE__ */ jsx(p$2, {
+				})] }), /* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
 					size: "1",
 					mb: "1",
 					as: "div",
@@ -9578,7 +10008,7 @@ var FormattingSettings = ({ element: n, updateElement: _ }) => {
 					onChange: (n) => O({ falseLabel: n.target.value })
 				})] })]
 			}),
-			E.type === "date" && /* @__PURE__ */ jsxs(p$1, { children: [
+			E.type === "date" && /* @__PURE__ */ jsxs(p, { children: [
 				/* @__PURE__ */ jsx(p$2, {
 					size: "1",
 					mb: "1",
@@ -9597,11 +10027,11 @@ var FormattingSettings = ({ element: n, updateElement: _ }) => {
 					children: "Use DD, MM, YYYY, HH, mm, ss."
 				})
 			] }),
-			E.type === "number" && /* @__PURE__ */ jsxs(p, {
+			E.type === "number" && /* @__PURE__ */ jsxs(p$1, {
 				direction: "column",
 				gap: "3",
 				children: [
-					/* @__PURE__ */ jsxs(p$1, { children: [/* @__PURE__ */ jsx(p$2, {
+					/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
 						size: "1",
 						mb: "1",
 						as: "div",
@@ -9633,7 +10063,7 @@ var FormattingSettings = ({ element: n, updateElement: _ }) => {
 							})
 						]
 					})] }),
-					E.numberFormat === "currency" && /* @__PURE__ */ jsxs(p$1, { children: [/* @__PURE__ */ jsx(p$2, {
+					E.numberFormat === "currency" && /* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
 						size: "1",
 						mb: "1",
 						as: "div",
@@ -9643,7 +10073,7 @@ var FormattingSettings = ({ element: n, updateElement: _ }) => {
 						value: E.currencySymbol || "",
 						onChange: (n) => O({ currencySymbol: n.target.value })
 					})] }),
-					/* @__PURE__ */ jsxs(p$1, { children: [/* @__PURE__ */ jsx(p$2, {
+					/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
 						size: "1",
 						mb: "1",
 						as: "div",
@@ -9682,13 +10112,13 @@ var FormattingSettings = ({ element: n, updateElement: _ }) => {
 			..._
 		} });
 	}, B = O.find((n) => n.id === A);
-	return /* @__PURE__ */ jsx(p, {
+	return /* @__PURE__ */ jsx(p$1, {
 		direction: "column",
 		gap: "3",
-		children: A ? /* @__PURE__ */ jsxs(p, {
+		children: A ? /* @__PURE__ */ jsxs(p$1, {
 			direction: "column",
 			gap: "3",
-			children: [/* @__PURE__ */ jsxs(p, {
+			children: [/* @__PURE__ */ jsxs(p$1, {
 				justify: "between",
 				align: "center",
 				children: [/* @__PURE__ */ jsx(p$2, {
@@ -9700,7 +10130,7 @@ var FormattingSettings = ({ element: n, updateElement: _ }) => {
 					children: "Voltar"
 				})]
 			}), B && /* @__PURE__ */ jsxs(Fragment$1, { children: [
-				/* @__PURE__ */ jsxs(p$1, { children: [
+				/* @__PURE__ */ jsxs(p, { children: [
 					/* @__PURE__ */ jsx(p$2, {
 						size: "1",
 						mb: "1",
@@ -9733,9 +10163,9 @@ var FormattingSettings = ({ element: n, updateElement: _ }) => {
 						onChange: (n) => P(B.id, { property: n.target.value })
 					})
 				] }),
-				/* @__PURE__ */ jsxs(p, {
+				/* @__PURE__ */ jsxs(p$1, {
 					gap: "2",
-					children: [/* @__PURE__ */ jsxs(p$1, {
+					children: [/* @__PURE__ */ jsxs(p, {
 						flexGrow: "1",
 						children: [/* @__PURE__ */ jsx(p$2, {
 							size: "1",
@@ -9791,7 +10221,7 @@ var FormattingSettings = ({ element: n, updateElement: _ }) => {
 						"contains",
 						"greaterThan",
 						"lessThan"
-					].includes(B.operator) && /* @__PURE__ */ jsxs(p$1, {
+					].includes(B.operator) && /* @__PURE__ */ jsxs(p, {
 						flexGrow: "1",
 						children: [/* @__PURE__ */ jsx(p$2, {
 							size: "1",
@@ -9804,9 +10234,9 @@ var FormattingSettings = ({ element: n, updateElement: _ }) => {
 						})]
 					})]
 				}),
-				/* @__PURE__ */ jsx(p, {
+				/* @__PURE__ */ jsx(p$1, {
 					gap: "2",
-					children: /* @__PURE__ */ jsxs(p$1, {
+					children: /* @__PURE__ */ jsxs(p, {
 						flexGrow: "1",
 						children: [/* @__PURE__ */ jsx(p$2, {
 							size: "1",
@@ -9837,7 +10267,7 @@ var FormattingSettings = ({ element: n, updateElement: _ }) => {
 						})]
 					})
 				}),
-				/* @__PURE__ */ jsx(o$3, {
+				/* @__PURE__ */ jsx(o$2, {
 					size: "4",
 					my: "2"
 				}),
@@ -9847,10 +10277,10 @@ var FormattingSettings = ({ element: n, updateElement: _ }) => {
 						weight: "bold",
 						children: "Aplicar Estilos"
 					}),
-					/* @__PURE__ */ jsxs(o$2, {
+					/* @__PURE__ */ jsxs(o$3, {
 						columns: "2",
 						gap: "3",
-						children: [/* @__PURE__ */ jsxs(p$1, { children: [/* @__PURE__ */ jsx(p$2, {
+						children: [/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
 							size: "1",
 							mb: "1",
 							as: "div",
@@ -9858,14 +10288,14 @@ var FormattingSettings = ({ element: n, updateElement: _ }) => {
 						}), /* @__PURE__ */ jsx(ColorInput, {
 							color: B.style.color || "#000000",
 							onChange: (n) => z(B.id, { color: n })
-						})] }), /* @__PURE__ */ jsxs(p$1, { children: [/* @__PURE__ */ jsx(p$2, {
+						})] }), /* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
 							size: "1",
 							mb: "1",
 							as: "div",
 							children: "Cor de Fundo"
-						}), /* @__PURE__ */ jsxs(p, {
+						}), /* @__PURE__ */ jsxs(p$1, {
 							gap: "2",
-							children: [/* @__PURE__ */ jsx(p$1, {
+							children: [/* @__PURE__ */ jsx(p, {
 								flexGrow: "1",
 								children: /* @__PURE__ */ jsx(ColorInput, {
 									color: B.style.backgroundColor || "#ffffff",
@@ -9879,7 +10309,7 @@ var FormattingSettings = ({ element: n, updateElement: _ }) => {
 							})]
 						})] })]
 					}),
-					/* @__PURE__ */ jsxs(p, {
+					/* @__PURE__ */ jsxs(p$1, {
 						gap: "3",
 						mt: "2",
 						children: [
@@ -9908,14 +10338,14 @@ var FormattingSettings = ({ element: n, updateElement: _ }) => {
 				color: "gray",
 				children: "Adicione regras para alterar o estilo baseada no valor dos dados."
 			}),
-			/* @__PURE__ */ jsxs(p$1, {
+			/* @__PURE__ */ jsxs(p, {
 				style: {
 					maxHeight: 200,
 					overflowY: "auto",
 					border: "1px solid var(--gray-5)",
 					borderRadius: 4
 				},
-				children: [O.length === 0 && /* @__PURE__ */ jsx(p, {
+				children: [O.length === 0 && /* @__PURE__ */ jsx(p$1, {
 					align: "center",
 					justify: "center",
 					p: "4",
@@ -9923,12 +10353,12 @@ var FormattingSettings = ({ element: n, updateElement: _ }) => {
 						color: "gray",
 						children: "Nenhuma regra definida."
 					})
-				}), O.map((n) => /* @__PURE__ */ jsxs(p, {
+				}), O.map((n) => /* @__PURE__ */ jsxs(p$1, {
 					align: "center",
 					justify: "between",
 					p: "2",
 					style: { borderBottom: "1px solid var(--gray-4)" },
-					children: [/* @__PURE__ */ jsxs(p$1, {
+					children: [/* @__PURE__ */ jsxs(p, {
 						onClick: () => j(n.id),
 						style: {
 							cursor: "pointer",
@@ -9945,7 +10375,7 @@ var FormattingSettings = ({ element: n, updateElement: _ }) => {
 								" ",
 								n.value
 							]
-						}), /* @__PURE__ */ jsxs(p, {
+						}), /* @__PURE__ */ jsxs(p$1, {
 							gap: "2",
 							mt: "1",
 							children: [n.style.color && /* @__PURE__ */ jsx("div", { style: {
@@ -9976,33 +10406,33 @@ var FormattingSettings = ({ element: n, updateElement: _ }) => {
 	});
 };
 const ElementContextMenu = ({ children: n, element: _ }) => {
-	let { updateElement: E, removeElement: O, addElement: A, moveElement: j, state: M } = useEditor(), [N, P] = useState(!1), [z, B] = useState(!1), [H, U] = useState(!1), [W, G] = useState({
+	let { updateElement: E, removeElement: O, removeSelected: A, addElement: j, moveElement: M, copy: N, paste: P, state: z } = useEditor(), [B, H] = useState(!1), [U, W] = useState(!1), [G, Z] = useState(!1), [hj, gj] = useState({
 		open: !1,
 		prop: "",
 		value: ""
-	}), [Z, GA] = useState(_.content), [JA, YA] = useState(_.dataBinding || ""), XA = useRef(null), ej = useRef(null), tj = (n) => {
-		let _ = XA.current;
+	}), [_j, bj] = useState(_.content), [xj, Sj] = useState(_.dataBinding || ""), Ej = useRef(null), Dj = useRef(null), Oj = (n) => {
+		let _ = Ej.current;
 		if (_) {
-			let E = _.selectionStart, O = _.selectionEnd, A = Z;
-			GA(A.substring(0, E) + `{{${n}}}` + A.substring(O)), setTimeout(() => {
+			let E = _.selectionStart, O = _.selectionEnd, A = _j;
+			bj(A.substring(0, E) + `{{${n}}}` + A.substring(O)), setTimeout(() => {
 				_.focus();
 				let O = E + n.length + 4;
 				_.setSelectionRange(O, O);
 			}, 0);
-		} else GA((_) => _ + `{{${n}}}`);
-	}, nj = (n) => {
+		} else bj((_) => _ + `{{${n}}}`);
+	}, kj = (n) => {
 		E(_.id, { style: {
 			..._.style,
 			...n
 		} });
-	}, rj = () => {
-		let n = M.elements.findIndex((n) => n.id === _.id);
-		n < M.elements.length - 1 && j(n, M.elements.length - 1);
-	}, ij = () => {
-		let n = M.elements.findIndex((n) => n.id === _.id);
-		n > 0 && j(n, 0);
-	}, aj = () => {
-		A({
+	}, Aj = () => {
+		let n = z.elements.findIndex((n) => n.id === _.id);
+		n < z.elements.length - 1 && M(n, z.elements.length - 1);
+	}, jj = () => {
+		let n = z.elements.findIndex((n) => n.id === _.id);
+		n > 0 && M(n, 0);
+	}, Mj = () => {
+		z.selectedElementIds.includes(_.id) && z.selectedElementIds.length > 1 ? (N(), P()) : j({
 			type: _.type,
 			content: _.content,
 			x: _.x + 20,
@@ -10011,7 +10441,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 			height: _.height,
 			style: _.style
 		});
-	}, oj = [
+	}, Nj = [
 		"#000000",
 		"#FFFFFF",
 		"#FF0000",
@@ -10021,8 +10451,8 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 		"#808080",
 		"#800080",
 		"transparent"
-	], sj = (n, _) => {
-		G({
+	], Pj = (n, _) => {
+		gj({
 			open: !0,
 			prop: n,
 			value: _
@@ -10030,41 +10460,41 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 	};
 	return /* @__PURE__ */ jsxs(Fragment$1, { children: [
 		/* @__PURE__ */ jsx(s$4, {
-			open: N,
-			onOpenChange: P,
+			open: B,
+			onOpenChange: H,
 			children: /* @__PURE__ */ jsxs(p$8, {
 				style: { maxWidth: 450 },
-				children: [/* @__PURE__ */ jsx(g$2, { children: "Editar Texto" }), /* @__PURE__ */ jsxs(p, {
+				children: [/* @__PURE__ */ jsx(g$2, { children: "Editar Texto" }), /* @__PURE__ */ jsxs(p$1, {
 					direction: "column",
 					gap: "3",
 					children: [
 						/* @__PURE__ */ jsx(r, {
-							ref: XA,
-							value: Z,
-							onChange: (n) => GA(n.target.value),
+							ref: Ej,
+							value: _j,
+							onChange: (n) => bj(n.target.value),
 							placeholder: "Digite o novo texto...",
 							style: { height: 100 }
 						}),
-						M.availableProps && M.availableProps.length > 0 && /* @__PURE__ */ jsxs(p, {
+						z.availableProps && z.availableProps.length > 0 && /* @__PURE__ */ jsxs(p$1, {
 							direction: "column",
 							gap: "2",
 							children: [/* @__PURE__ */ jsx(p$2, {
 								size: "1",
 								color: "gray",
 								children: "Inserir variável:"
-							}), /* @__PURE__ */ jsx(p, {
+							}), /* @__PURE__ */ jsx(p$1, {
 								gap: "2",
 								wrap: "wrap",
-								children: M.availableProps.map((n) => /* @__PURE__ */ jsx(e, {
+								children: z.availableProps.map((n) => /* @__PURE__ */ jsx(e, {
 									color: "blue",
 									variant: "surface",
 									style: { cursor: "pointer" },
-									onClick: () => tj(n.dataName),
+									onClick: () => Oj(n.dataName),
 									children: n.name
 								}, n.dataName))
 							})]
 						}),
-						/* @__PURE__ */ jsxs(p, {
+						/* @__PURE__ */ jsxs(p$1, {
 							gap: "3",
 							justify: "end",
 							children: [/* @__PURE__ */ jsx(D$2, { children: /* @__PURE__ */ jsx(o, {
@@ -10073,7 +10503,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 								children: "Cancelar"
 							}) }), /* @__PURE__ */ jsx(o, {
 								onClick: () => {
-									E(_.id, { content: Z }), P(!1);
+									E(_.id, { content: _j }), H(!1);
 								},
 								children: "Salvar"
 							})]
@@ -10083,11 +10513,11 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 			})
 		}),
 		/* @__PURE__ */ jsx(s$4, {
-			open: z,
-			onOpenChange: B,
+			open: U,
+			onOpenChange: W,
 			children: /* @__PURE__ */ jsxs(p$8, {
 				style: { maxWidth: 450 },
-				children: [/* @__PURE__ */ jsx(g$2, { children: "Vincular Dados Manualmente" }), /* @__PURE__ */ jsxs(p, {
+				children: [/* @__PURE__ */ jsx(g$2, { children: "Vincular Dados Manualmente" }), /* @__PURE__ */ jsxs(p$1, {
 					direction: "column",
 					gap: "3",
 					children: [
@@ -10096,11 +10526,11 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 							children: "Nome da propriedade (ex: titulo, preco, imagem):"
 						}),
 						/* @__PURE__ */ jsx(u$1, {
-							value: JA,
-							onChange: (n) => YA(n.target.value),
+							value: xj,
+							onChange: (n) => Sj(n.target.value),
 							placeholder: "propriedade"
 						}),
-						/* @__PURE__ */ jsxs(p, {
+						/* @__PURE__ */ jsxs(p$1, {
 							gap: "3",
 							justify: "end",
 							children: [/* @__PURE__ */ jsx(D$2, { children: /* @__PURE__ */ jsx(o, {
@@ -10109,8 +10539,8 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 								children: "Cancelar"
 							}) }), /* @__PURE__ */ jsx(o, {
 								onClick: () => {
-									let n = JA, O = { dataBinding: n };
-									_.type === "text" && (O.content = `{{${n}}}`), E(_.id, O), B(!1);
+									let n = xj, O = { dataBinding: n };
+									_.type === "text" && (O.content = `{{${n}}}`), E(_.id, O), W(!1);
 								},
 								children: "Vincular"
 							})]
@@ -10120,8 +10550,8 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 			})
 		}),
 		/* @__PURE__ */ jsx(s$4, {
-			open: W.open,
-			onOpenChange: (n) => G((_) => ({
+			open: hj.open,
+			onOpenChange: (n) => gj((_) => ({
 				..._,
 				open: n
 			})),
@@ -10130,13 +10560,13 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 				children: [
 					/* @__PURE__ */ jsx(g$2, { children: "Selecionar Cor" }),
 					/* @__PURE__ */ jsx(ColorPickerContent, {
-						color: W.value,
-						onChange: (n) => G((_) => ({
+						color: hj.value,
+						onChange: (n) => gj((_) => ({
 							..._,
 							value: n
 						}))
 					}),
-					/* @__PURE__ */ jsxs(p, {
+					/* @__PURE__ */ jsxs(p$1, {
 						gap: "3",
 						justify: "end",
 						mt: "4",
@@ -10146,7 +10576,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 							children: "Cancelar"
 						}) }), /* @__PURE__ */ jsx(o, {
 							onClick: () => {
-								nj({ [W.prop]: W.value }), G((n) => ({
+								kj({ [hj.prop]: hj.value }), gj((n) => ({
 									...n,
 									open: !1
 								}));
@@ -10159,12 +10589,12 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 		}),
 		/* @__PURE__ */ jsx(ElementAdvancedSettings, {
 			elementId: _.id,
-			open: H,
-			onOpenChange: U
+			open: G,
+			onOpenChange: Z
 		}),
 		/* @__PURE__ */ jsx("input", {
 			type: "file",
-			ref: ej,
+			ref: Dj,
 			style: { display: "none" },
 			accept: "image/*",
 			onChange: (n) => {
@@ -10212,7 +10642,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 					sideOffset: 2,
 					alignOffset: -5,
 					children: [
-						M.availableProps && M.availableProps.length > 0 && /* @__PURE__ */ jsxs(Fragment$1, { children: [M.availableProps.map((n) => /* @__PURE__ */ jsxs(Item2$1, {
+						z.availableProps && z.availableProps.length > 0 && /* @__PURE__ */ jsxs(Fragment$1, { children: [z.availableProps.map((n) => /* @__PURE__ */ jsxs(Item2$1, {
 							className: "ContextMenuItem",
 							onSelect: () => {
 								let O = { dataBinding: n.dataName };
@@ -10230,7 +10660,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 						/* @__PURE__ */ jsx(Item2$1, {
 							className: "ContextMenuItem",
 							onSelect: () => {
-								YA(_.dataBinding || ""), B(!0);
+								Sj(_.dataBinding || ""), W(!0);
 							},
 							children: "Outro / Manual..."
 						}),
@@ -10246,25 +10676,27 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 				_.type === "text" && /* @__PURE__ */ jsxs(Fragment$1, { children: [/* @__PURE__ */ jsx(Item2$1, {
 					className: "ContextMenuItem",
 					onSelect: () => {
-						GA(_.content), P(!0);
+						bj(_.content), H(!0);
 					},
 					children: "Editar Texto..."
 				}), /* @__PURE__ */ jsx(Separator2$1, { className: "ContextMenuSeparator" })] }),
 				/* @__PURE__ */ jsx(Item2$1, {
 					className: "ContextMenuItem",
-					onSelect: () => U(!0),
+					onSelect: () => Z(!0),
 					children: "Configurações Avançadas..."
 				}),
 				/* @__PURE__ */ jsx(Separator2$1, { className: "ContextMenuSeparator" }),
 				/* @__PURE__ */ jsx(Item2$1, {
 					className: "ContextMenuItem",
-					onSelect: aj,
-					children: "Duplicar"
+					onSelect: Mj,
+					children: z.selectedElementIds.includes(_.id) && z.selectedElementIds.length > 1 ? `Duplicar Selecionados (${z.selectedElementIds.length})` : "Duplicar"
 				}),
 				/* @__PURE__ */ jsx(Item2$1, {
 					className: "ContextMenuItem",
-					onSelect: () => O(_.id),
-					children: "Excluir"
+					onSelect: () => {
+						z.selectedElementIds.includes(_.id) && z.selectedElementIds.length > 1 ? A() : O(_.id);
+					},
+					children: z.selectedElementIds.includes(_.id) && z.selectedElementIds.length > 1 ? `Excluir Selecionados (${z.selectedElementIds.length})` : "Excluir"
 				}),
 				/* @__PURE__ */ jsx(Separator2$1, { className: "ContextMenuSeparator" }),
 				_.type === "image" && /* @__PURE__ */ jsxs(Fragment$1, { children: [
@@ -10280,7 +10712,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 						alignOffset: -5,
 						children: [/* @__PURE__ */ jsx(Item2$1, {
 							className: "ContextMenuItem",
-							onSelect: () => ej.current?.click(),
+							onSelect: () => Dj.current?.click(),
 							children: "Carregar do Computador"
 						}), /* @__PURE__ */ jsx(Item2$1, {
 							className: "ContextMenuItem",
@@ -10306,17 +10738,17 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 						children: [
 							/* @__PURE__ */ jsx(Item2$1, {
 								className: "ContextMenuItem",
-								onSelect: () => nj({ objectFit: "cover" }),
+								onSelect: () => kj({ objectFit: "cover" }),
 								children: "Preencher (Cover)"
 							}),
 							/* @__PURE__ */ jsx(Item2$1, {
 								className: "ContextMenuItem",
-								onSelect: () => nj({ objectFit: "contain" }),
+								onSelect: () => kj({ objectFit: "contain" }),
 								children: "Ajustar (Contain)"
 							}),
 							/* @__PURE__ */ jsx(Item2$1, {
 								className: "ContextMenuItem",
-								onSelect: () => nj({ objectFit: "fill" }),
+								onSelect: () => kj({ objectFit: "fill" }),
 								children: "Esticar (Fill)"
 							})
 						]
@@ -10335,11 +10767,11 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 					alignOffset: -5,
 					children: [/* @__PURE__ */ jsx(Item2$1, {
 						className: "ContextMenuItem",
-						onSelect: rj,
+						onSelect: Aj,
 						children: "Trazer para frente"
 					}), /* @__PURE__ */ jsx(Item2$1, {
 						className: "ContextMenuItem",
-						onSelect: ij,
+						onSelect: jj,
 						children: "Enviar para trás"
 					})]
 				}) })] }),
@@ -10355,9 +10787,9 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 						className: "ContextMenuSubContent ContextMenuScrollable",
 						sideOffset: 2,
 						alignOffset: -5,
-						children: M.availableFonts && M.availableFonts.map((n) => /* @__PURE__ */ jsxs(Item2$1, {
+						children: z.availableFonts && z.availableFonts.map((n) => /* @__PURE__ */ jsxs(Item2$1, {
 							className: "ContextMenuItem",
-							onSelect: () => nj({ fontFamily: n }),
+							onSelect: () => kj({ fontFamily: n }),
 							style: { fontFamily: n },
 							children: [n, _.style?.fontFamily === n && /* @__PURE__ */ jsx("div", {
 								className: "RightSlot",
@@ -10386,7 +10818,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 							64
 						].map((n) => /* @__PURE__ */ jsxs(Item2$1, {
 							className: "ContextMenuItem",
-							onSelect: () => nj({ fontSize: `${n}px` }),
+							onSelect: () => kj({ fontSize: `${n}px` }),
 							children: [n, "px"]
 						}, n))
 					}) })] }),
@@ -10401,9 +10833,9 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 						sideOffset: 2,
 						alignOffset: -5,
 						children: [
-							oj.filter((n) => n !== "transparent").map((n) => /* @__PURE__ */ jsxs(Item2$1, {
+							Nj.filter((n) => n !== "transparent").map((n) => /* @__PURE__ */ jsxs(Item2$1, {
 								className: "ContextMenuItem",
-								onSelect: () => nj({ color: n }),
+								onSelect: () => kj({ color: n }),
 								children: [/* @__PURE__ */ jsx("div", { style: {
 									width: 12,
 									height: 12,
@@ -10415,7 +10847,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 							/* @__PURE__ */ jsx(Separator2$1, { className: "ContextMenuSeparator" }),
 							/* @__PURE__ */ jsx(Item2$1, {
 								className: "ContextMenuItem",
-								onSelect: () => sj("color", _.style?.color || "#000000"),
+								onSelect: () => Pj("color", _.style?.color || "#000000"),
 								children: "Outra Cor..."
 							})
 						]
@@ -10432,11 +10864,11 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 						alignOffset: -5,
 						children: [/* @__PURE__ */ jsx(Item2$1, {
 							className: "ContextMenuItem",
-							onSelect: () => nj({ fontWeight: "normal" }),
+							onSelect: () => kj({ fontWeight: "normal" }),
 							children: "Normal"
 						}), /* @__PURE__ */ jsx(Item2$1, {
 							className: "ContextMenuItem",
-							onSelect: () => nj({ fontWeight: "bold" }),
+							onSelect: () => kj({ fontWeight: "bold" }),
 							children: "Negrito"
 						})]
 					}) })] }),
@@ -10453,17 +10885,17 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 						children: [
 							/* @__PURE__ */ jsx(Item2$1, {
 								className: "ContextMenuItem",
-								onSelect: () => nj({ textAlign: "left" }),
+								onSelect: () => kj({ textAlign: "left" }),
 								children: "Esquerda"
 							}),
 							/* @__PURE__ */ jsx(Item2$1, {
 								className: "ContextMenuItem",
-								onSelect: () => nj({ textAlign: "center" }),
+								onSelect: () => kj({ textAlign: "center" }),
 								children: "Centro"
 							}),
 							/* @__PURE__ */ jsx(Item2$1, {
 								className: "ContextMenuItem",
-								onSelect: () => nj({ textAlign: "right" }),
+								onSelect: () => kj({ textAlign: "right" }),
 								children: "Direita"
 							})
 						]
@@ -10481,7 +10913,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 						children: [
 							/* @__PURE__ */ jsx(Item2$1, {
 								className: "ContextMenuItem",
-								onSelect: () => nj({
+								onSelect: () => kj({
 									display: "flex",
 									flexDirection: "column",
 									justifyContent: "flex-start"
@@ -10490,7 +10922,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 							}),
 							/* @__PURE__ */ jsx(Item2$1, {
 								className: "ContextMenuItem",
-								onSelect: () => nj({
+								onSelect: () => kj({
 									display: "flex",
 									flexDirection: "column",
 									justifyContent: "center"
@@ -10499,7 +10931,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 							}),
 							/* @__PURE__ */ jsx(Item2$1, {
 								className: "ContextMenuItem",
-								onSelect: () => nj({
+								onSelect: () => kj({
 									display: "flex",
 									flexDirection: "column",
 									justifyContent: "flex-end"
@@ -10520,9 +10952,9 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 					sideOffset: 2,
 					alignOffset: -5,
 					children: [
-						oj.map((n) => /* @__PURE__ */ jsxs(Item2$1, {
+						Nj.map((n) => /* @__PURE__ */ jsxs(Item2$1, {
 							className: "ContextMenuItem",
-							onSelect: () => nj({ backgroundColor: n }),
+							onSelect: () => kj({ backgroundColor: n }),
 							children: [/* @__PURE__ */ jsx("div", { style: {
 								width: 12,
 								height: 12,
@@ -10534,7 +10966,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 						/* @__PURE__ */ jsx(Separator2$1, { className: "ContextMenuSeparator" }),
 						/* @__PURE__ */ jsx(Item2$1, {
 							className: "ContextMenuItem",
-							onSelect: () => sj("backgroundColor", _.style?.backgroundColor || "transparent"),
+							onSelect: () => Pj("backgroundColor", _.style?.backgroundColor || "transparent"),
 							children: "Outra Cor..."
 						})
 					]
@@ -10559,7 +10991,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 						"50%"
 					].map((n) => /* @__PURE__ */ jsx(Item2$1, {
 						className: "ContextMenuItem",
-						onSelect: () => nj({ borderRadius: typeof n == "number" ? `${n}px` : n }),
+						onSelect: () => kj({ borderRadius: typeof n == "number" ? `${n}px` : n }),
 						children: n === "50%" ? "Círculo" : `${n}px`
 					}, n))
 				}) })] }),
@@ -10583,162 +11015,113 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 						32
 					].map((n) => /* @__PURE__ */ jsxs(Item2$1, {
 						className: "ContextMenuItem",
-						onSelect: () => nj({ padding: `${n}px` }),
+						onSelect: () => kj({ padding: `${n}px` }),
 						children: [n, "px"]
 					}, n))
 				}) })] })
 			]
 		}) })] })
 	] });
-}, formatValue = (n, _) => {
-	if (n == null) return "";
-	if (_.type === "boolean") return String(n) === "true" || n === !0 || typeof n == "number" && n > 0 ? _.trueLabel || "Sim" : _.falseLabel || "Não";
-	if (_.type === "date") try {
-		let E = new Date(n);
-		if (isNaN(E.getTime())) return String(n);
-		if (_.dateFormat) {
-			let n = E.getDate().toString().padStart(2, "0"), O = (E.getMonth() + 1).toString().padStart(2, "0"), A = E.getFullYear(), j = E.getHours().toString().padStart(2, "0"), M = E.getMinutes().toString().padStart(2, "0"), N = E.getSeconds().toString().padStart(2, "0");
-			return _.dateFormat.replace("DD", n).replace("MM", O).replace("YYYY", String(A)).replace("HH", j).replace("mm", M).replace("ss", N);
-		}
-		return E.toLocaleDateString();
-	} catch {
-		return String(n);
-	}
-	if (_.type === "number") {
-		let E = parseFloat(n);
-		return isNaN(E) ? String(n) : _.numberFormat === "currency" ? (_.currencySymbol || "R$") + " " + E.toFixed(_.decimalPlaces || 2) : _.numberFormat === "percent" ? E.toFixed(_.decimalPlaces || 0) + "%" : E.toFixed(_.decimalPlaces || 0);
-	}
-	return String(n);
-}, checkCondition = (n, _, E) => {
-	let O = String(n).toLowerCase(), A = String(E).toLowerCase();
-	switch (_) {
-		case "equals": return O === A;
-		case "notEquals": return O !== A;
-		case "contains": return O.includes(A);
-		case "greaterThan": return parseFloat(O) > parseFloat(A);
-		case "lessThan": return parseFloat(O) < parseFloat(A);
-		case "truthy": return !!n;
-		case "falsy": return !n;
-		default: return !1;
-	}
 }, DraggableElement = React.memo(({ element: n, isSelected: _ }) => {
-	let { selectElement: E, updateElement: O, state: A } = useEditor(), [j, M] = useState(!1), [N, P] = useState(!1), [z, B] = useState({
-		x: n.x,
-		y: n.y
-	}), [U, W] = useState(n.rotation || 0), [G, Z] = useState({
-		width: n.width,
-		height: n.height
-	});
-	useEffect(() => {
-		j || B({
-			x: n.x,
-			y: n.y
-		});
-	}, [
-		n.x,
-		n.y,
-		j
-	]), useEffect(() => {
-		N || W(n.rotation || 0);
-	}, [n.rotation, N]), useEffect(() => {
-		Z({
-			width: n.width,
-			height: n.height
-		});
-	}, [n.width, n.height]);
-	let GA = useRef({
+	let { selectElement: E, updateElement: O, updateElements: A, state: j } = useEditor(), [M, N] = useState(!1), [P, z] = useState(!1), B = useRef({
 		x: 0,
 		y: 0
-	}), JA = useRef({
+	}), H = useRef({}), U = useRef(!1), G = useRef(!1), Z = useRef(0), hj = useRef(0), gj = useRef({
 		x: 0,
 		y: 0
-	}), YA = useRef(0), XA = useRef(0), ZA = useRef({
-		x: 0,
-		y: 0
-	}), ej = A.canvasHeight || 150, tj = A.isList ? A.mockData.length > 0 ? A.mockData[0] : null : A.singleMockData, nj = n.content, rj = {};
-	if (tj) {
-		if (n.type === "text") nj = nj.replace(/\{\{(.*?)\}\}/g, (_, E) => {
-			let O = tj[E.trim()];
+	}), _j = j.canvasHeight || 150, bj = j.isList ? j.mockData.length > 0 ? j.mockData[0] : null : j.singleMockData, xj = n.content, Sj = {};
+	if (bj) {
+		if (n.type === "text") xj = xj.replace(/\{\{(.*?)\}\}/g, (_, E) => {
+			let O = bj[E.trim()];
 			return O == null ? _ : n.formatting ? formatValue(O, n.formatting) : String(O);
 		});
 		else if (n.type === "image") if (n.dataBinding) {
-			let _ = tj[n.dataBinding];
-			_ != null && (nj = String(_));
-		} else nj = nj.replace(/\{\{(.*?)\}\}/g, (n, _) => {
-			let E = tj[_.trim()];
+			let _ = bj[n.dataBinding];
+			_ != null && (xj = String(_));
+		} else xj = xj.replace(/\{\{(.*?)\}\}/g, (n, _) => {
+			let E = bj[_.trim()];
 			return E == null ? n : String(E);
 		});
 		n.conditions && n.conditions.forEach((n) => {
-			let _ = tj[n.property];
-			checkCondition(_, n.operator, n.value) && (rj = {
-				...rj,
+			let _ = bj[n.property];
+			checkCondition(_, n.operator, n.value) && (Sj = {
+				...Sj,
 				...n.style
 			});
 		});
 	}
-	let ij = rj.display === "none";
-	if (ij && _) {
-		let { display: n, ..._ } = rj;
-		rj = _;
+	let Cj = Sj.display === "none";
+	if (Cj && _) {
+		let { display: n, ..._ } = Sj;
+		Sj = _;
 	}
-	let aj = (_) => {
-		_.stopPropagation(), E(n.id);
-	}, oj = (_) => {
-		_.button === 0 && (_.stopPropagation(), E(n.id), M(!0), GA.current = {
-			x: _.clientX,
-			y: _.clientY
-		}, JA.current = {
-			x: z.x,
-			y: z.y
-		});
-	}, sj = (n) => {
-		n.stopPropagation(), n.preventDefault(), P(!0);
-		let _ = n.target.closest(".resizable-element");
-		if (_) {
-			let E = _.getBoundingClientRect();
-			ZA.current = {
-				x: E.left + E.width / 2,
-				y: E.top + E.height / 2
+	let Ej = (_) => {
+		_.stopPropagation(), !U.current && !G.current && !M && (_.shiftKey ? E(n.id, !0) : E(n.id, !1));
+	}, Dj = (O) => {
+		if (O.button !== 0) return;
+		O.stopPropagation();
+		let A = O.shiftKey;
+		U.current = !1, G.current = !1, _ || (E(n.id, A), G.current = !0), N(!0), B.current = {
+			x: O.clientX,
+			y: O.clientY
+		};
+		let M = new Set(j.selectedElementIds);
+		_ || (A || M.clear(), M.add(n.id));
+		let P = {};
+		j.elements.forEach((n) => {
+			M.has(n.id) && (P[n.id] = {
+				x: n.x,
+				y: n.y
+			});
+		}), H.current = P;
+	}, Oj = (_) => {
+		_.stopPropagation(), _.preventDefault(), z(!0);
+		let E = _.target.closest(".resizable-element");
+		if (E) {
+			let O = E.getBoundingClientRect();
+			gj.current = {
+				x: O.left + O.width / 2,
+				y: O.top + O.height / 2
 			};
-			let O = n.clientX - ZA.current.x, A = n.clientY - ZA.current.y;
-			YA.current = Math.atan2(A, O) * (180 / Math.PI), XA.current = U;
+			let A = _.clientX - gj.current.x, j = _.clientY - gj.current.y;
+			Z.current = Math.atan2(j, A) * (180 / Math.PI), hj.current = n.rotation || 0;
 		}
 	};
 	useEffect(() => {
-		let _ = (n) => {
-			if (j) {
-				let _ = n.clientX - GA.current.x, E = n.clientY - GA.current.y, O = JA.current.x + _, j = JA.current.y + E;
-				A.isList && (j = Math.max(0, j), j + G.height > ej && (j = Math.max(0, ej - G.height))), B({
-					x: O,
-					y: j
-				});
+		let _ = (_) => {
+			if (M) {
+				let n = _.clientX - B.current.x, E = _.clientY - B.current.y;
+				(Math.abs(n) > 2 || Math.abs(E) > 2) && (U.current = !0), A(Object.entries(H.current).map(([_, O]) => {
+					let A = O.x + n, M = O.y + E;
+					return j.isList && (M = Math.max(0, M)), {
+						id: _,
+						changes: {
+							x: A,
+							y: M
+						}
+					};
+				}), !1);
 			}
-			if (N) {
-				let _ = n.clientX - ZA.current.x, E = n.clientY - ZA.current.y, O = Math.atan2(E, _) * (180 / Math.PI) - YA.current;
-				W((XA.current + O) % 360);
+			if (P) {
+				let E = _.clientX - gj.current.x, A = _.clientY - gj.current.y, j = Math.atan2(A, E) * (180 / Math.PI) - Z.current, M = (hj.current + j) % 360;
+				O(n.id, { rotation: M }, !1);
 			}
 		}, E = () => {
-			j && (M(!1), O(n.id, {
-				x: z.x,
-				y: z.y
-			})), N && (P(!1), O(n.id, { rotation: U }));
+			M && (N(!1), A([], !0)), P && (z(!1), O(n.id, { rotation: n.rotation }, !0));
 		};
-		return (j || N) && (window.addEventListener("mousemove", _), window.addEventListener("mouseup", E)), () => {
+		return (M || P) && (window.addEventListener("mousemove", _), window.addEventListener("mouseup", E)), () => {
 			window.removeEventListener("mousemove", _), window.removeEventListener("mouseup", E);
 		};
 	}, [
-		j,
-		N,
+		M,
+		P,
 		n.id,
 		O,
-		A.isList,
-		ej,
-		G.height,
-		z.x,
-		z.y,
-		U
+		A,
+		j.isList,
+		j.selectedElementIds
 	]);
-	let cj = {
+	let kj = {
 		position: "absolute",
 		left: 0,
 		top: 0,
@@ -10748,38 +11131,35 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 		padding: n.type === "image" || n.type === "text" ? 0 : "8px",
 		border: _ ? "2px solid var(--accent-9)" : "1px dashed transparent",
 		outline: _ ? "none" : "1px solid transparent",
-		cursor: j ? "grabbing" : "grab",
+		cursor: M ? "grabbing" : "grab",
 		borderRadius: "var(--radius-2)",
 		overflow: n.autoGrow ? "visible" : "hidden",
 		whiteSpace: n.autoGrow ? "pre-wrap" : void 0,
 		wordBreak: n.autoGrow ? "break-word" : void 0,
 		userSelect: "none",
 		...n.style,
-		...rj
+		...Sj
 	};
 	return /* @__PURE__ */ jsx(Resizable, {
 		className: "resizable-element",
 		size: {
-			width: G.width,
-			height: n.autoGrow ? "auto" : G.height
+			width: n.width ?? 100,
+			height: n.autoGrow ? "auto" : n.height ?? 100
 		},
-		maxHeight: A.isList ? Math.max(10, ej - z.y) : void 0,
+		maxHeight: j.isList ? Math.max(10, _j - n.y) : void 0,
 		onResizeStop: (_, E, A, j) => {
-			let M = G.width + j.width, N = G.height + j.height;
-			Z({
-				width: M,
-				height: N
-			}), O(n.id, {
+			let M = (n.width ?? 100) + j.width, N = (n.height ?? 100) + j.height;
+			O(n.id, {
 				width: M,
 				height: N
 			});
 		},
 		style: {
 			position: "absolute",
-			transform: `translate(${z.x}px, ${z.y}px) rotate(${U}deg)`,
+			transform: `translate(${n.x ?? 0}px, ${n.y ?? 0}px) rotate(${n.rotation || 0}deg)`,
 			height: n.autoGrow ? "auto" : void 0,
-			display: ij && !_ ? "none" : void 0,
-			opacity: ij && _ ? .4 : 1
+			display: Cj && !_ ? "none" : void 0,
+			opacity: Cj && _ ? .4 : 1
 		},
 		enable: _ && !n.autoGrow ? void 0 : {
 			top: !1,
@@ -10799,10 +11179,10 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 					height: "100%",
 					position: "relative"
 				},
-				children: [/* @__PURE__ */ jsxs(p$1, {
-					style: cj,
-					onMouseDown: oj,
-					onClick: aj,
+				children: [/* @__PURE__ */ jsxs(p, {
+					style: kj,
+					onMouseDown: Dj,
+					onClick: Ej,
 					onMouseEnter: (n) => {
 						_ || (n.currentTarget.style.borderColor = "var(--gray-6)");
 					},
@@ -10815,10 +11195,10 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 								width: "100%",
 								height: "100%"
 							},
-							children: nj
+							children: xj
 						}),
-						n.type === "image" && (nj ? /* @__PURE__ */ jsx("img", {
-							src: nj,
+						n.type === "image" && (xj ? /* @__PURE__ */ jsx("img", {
+							src: xj,
 							alt: "Element",
 							style: {
 								width: "100%",
@@ -10827,7 +11207,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 								display: "block",
 								pointerEvents: "none"
 							}
-						}) : /* @__PURE__ */ jsx(p$1, {
+						}) : /* @__PURE__ */ jsx(p, {
 							style: {
 								width: "100%",
 								height: "100%",
@@ -10841,12 +11221,12 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 								children: "Imagem Placeholder"
 							})
 						})),
-						n.type === "box" && /* @__PURE__ */ jsx(p$1, { style: {
+						n.type === "box" && /* @__PURE__ */ jsx(p, { style: {
 							width: "100%",
 							height: "100%"
 						} })
 					]
-				}), _ && /* @__PURE__ */ jsx(p$1, {
+				}), _ && /* @__PURE__ */ jsx(p, {
 					style: {
 						position: "absolute",
 						top: -30,
@@ -10860,8 +11240,8 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 						zIndex: 50,
 						boxShadow: "0 0 0 2px white"
 					},
-					onMouseDown: sj,
-					children: /* @__PURE__ */ jsx(p$1, { style: {
+					onMouseDown: Oj,
+					children: /* @__PURE__ */ jsx(p, { style: {
 						position: "absolute",
 						top: 12,
 						left: "50%",
@@ -10875,11 +11255,30 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 		})
 	});
 }), Canvas = () => {
-	let { state: n, selectElement: _ } = useEditor(), E = () => {
+	let { state: n, selectElement: _, addElement: E } = useEditor(), O = () => {
 		_(null);
-	}, O = n.canvasHeight || 150;
-	return /* @__PURE__ */ jsxs(p$1, {
-		onClick: E,
+	}, A = (n) => {
+		n.preventDefault(), n.dataTransfer.dropEffect = "copy";
+	}, j = (n) => {
+		n.preventDefault();
+		let _ = n.dataTransfer.getData("application/x-editor-prop");
+		if (_) {
+			let O = n.currentTarget.getBoundingClientRect(), A = n.clientX - O.left, j = n.clientY - O.top;
+			E({
+				type: "text",
+				content: `{{${_}}}`,
+				x: A,
+				y: j,
+				width: 150,
+				height: 30,
+				dataBinding: _
+			});
+		}
+	}, M = n.canvasHeight || 150;
+	return /* @__PURE__ */ jsxs(p, {
+		onClick: O,
+		onDragOver: A,
+		onDrop: j,
 		style: {
 			width: "100%",
 			height: "100%",
@@ -10893,7 +11292,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 			n.isList && /* @__PURE__ */ jsx("div", {
 				style: {
 					position: "absolute",
-					top: O,
+					top: M,
 					left: 0,
 					right: 0,
 					borderBottom: "2px dashed var(--accent-9)",
@@ -10913,12 +11312,12 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 					},
 					children: [
 						"Fim do Item (",
-						O,
+						M,
 						"px)"
 					]
 				})
 			}),
-			n.elements.length === 0 && /* @__PURE__ */ jsx(p, {
+			n.elements.length === 0 && /* @__PURE__ */ jsx(p$1, {
 				align: "center",
 				justify: "center",
 				style: {
@@ -10930,9 +11329,378 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 			}),
 			n.elements.map((_) => /* @__PURE__ */ jsx(DraggableElement, {
 				element: _,
-				isSelected: n.selectedElementId === _.id
+				isSelected: n.selectedElementIds.includes(_.id)
 			}, _.id))
 		]
+	});
+}, EditorSettings = () => {
+	let { state: n, updateListSettings: _, setCanvasHeight: E } = useEditor(), [O, A] = useState(!1), [j, M] = useState(""), [N, P] = useState("asc"), [z, B] = useState("bottom"), [H, U] = useState("down"), [G, Z] = useState("150"), [hj, gj] = useState(""), [_j, vj] = useState("slideIn"), [bj, xj] = useState(.3), [Sj, Cj] = useState("ease-out");
+	return useEffect(() => {
+		if (O) {
+			M(n.listSettings.sortProp || "__none__"), P(n.listSettings.sortOrder || "asc"), B(n.listSettings.newestPosition || "bottom"), U(n.listSettings.scrollDirection || "down"), gj(n.listSettings.containerHeight ? String(n.listSettings.containerHeight) : ""), Z(String(n.canvasHeight || 150));
+			let _ = n.listSettings.entryAnimation;
+			vj(_?.type || "slideIn"), xj(_?.duration || .3), Cj(_?.timingFunction || "ease-out");
+		}
+	}, [O]), useEffect(() => {
+		if (!O) return;
+		let _ = parseInt(G, 10);
+		!isNaN(_) && _ > 0 && n.canvasHeight !== _ && E(_);
+	}, [
+		G,
+		O,
+		E,
+		n.canvasHeight
+	]), /* @__PURE__ */ jsxs(s$4, {
+		open: O,
+		onOpenChange: A,
+		children: [/* @__PURE__ */ jsx(n$3, { children: /* @__PURE__ */ jsxs(o, {
+			variant: "soft",
+			color: "gray",
+			style: {
+				width: "100%",
+				justifyContent: "center",
+				cursor: "pointer"
+			},
+			children: [/* @__PURE__ */ jsx(GearIcon, {}), " Configurações"]
+		}) }), /* @__PURE__ */ jsxs(p$8, {
+			style: { maxWidth: 600 },
+			children: [
+				/* @__PURE__ */ jsx(g$2, { children: "Configurações do Editor" }),
+				/* @__PURE__ */ jsx(m$3, {
+					size: "2",
+					mb: "4",
+					children: "Configure o comportamento da lista."
+				}),
+				/* @__PURE__ */ jsx(p, {
+					pt: "3",
+					children: /* @__PURE__ */ jsxs(p$1, {
+						direction: "column",
+						gap: "3",
+						children: [
+							/* @__PURE__ */ jsx(p$2, {
+								size: "2",
+								weight: "bold",
+								children: "Ordenação"
+							}),
+							/* @__PURE__ */ jsxs(p$1, {
+								gap: "3",
+								align: "center",
+								children: [/* @__PURE__ */ jsxs(p, {
+									flexGrow: "1",
+									children: [/* @__PURE__ */ jsx(p$2, {
+										size: "1",
+										mb: "1",
+										as: "div",
+										children: "Propriedade para Ordenar (ex: data, id)"
+									}), /* @__PURE__ */ jsxs("select", {
+										value: j,
+										onChange: (n) => M(n.target.value),
+										style: {
+											width: "100%",
+											padding: "8px",
+											borderRadius: "4px",
+											border: "1px solid var(--gray-6)",
+											backgroundColor: "var(--gray-2)",
+											color: "var(--gray-12)",
+											fontSize: "14px",
+											outline: "none"
+										},
+										children: [/* @__PURE__ */ jsx("option", {
+											value: "__none__",
+											children: "(Nenhum)"
+										}), n.availableProps.map((n) => /* @__PURE__ */ jsx("option", {
+											value: n.dataName,
+											children: n.name
+										}, n.dataName))]
+									})]
+								}), /* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
+									size: "1",
+									mb: "1",
+									as: "div",
+									children: "Direção"
+								}), /* @__PURE__ */ jsxs("select", {
+									value: N,
+									onChange: (n) => P(n.target.value),
+									style: {
+										width: "150px",
+										padding: "8px",
+										borderRadius: "4px",
+										border: "1px solid var(--gray-6)",
+										backgroundColor: "var(--gray-2)",
+										color: "var(--gray-12)",
+										fontSize: "14px",
+										outline: "none"
+									},
+									children: [/* @__PURE__ */ jsx("option", {
+										value: "asc",
+										children: "Crescente (A-Z)"
+									}), /* @__PURE__ */ jsx("option", {
+										value: "desc",
+										children: "Decrescente (Z-A)"
+									})]
+								})] })]
+							}),
+							/* @__PURE__ */ jsxs(p$1, {
+								gap: "3",
+								align: "center",
+								children: [/* @__PURE__ */ jsxs(p, {
+									flexGrow: "1",
+									children: [/* @__PURE__ */ jsx(p$2, {
+										size: "1",
+										mb: "1",
+										as: "div",
+										children: "Posição do Recente"
+									}), /* @__PURE__ */ jsxs("select", {
+										value: z,
+										onChange: (n) => B(n.target.value),
+										style: {
+											width: "100%",
+											padding: "8px",
+											borderRadius: "4px",
+											border: "1px solid var(--gray-6)",
+											backgroundColor: "var(--gray-2)",
+											color: "var(--gray-12)",
+											fontSize: "14px",
+											outline: "none"
+										},
+										children: [/* @__PURE__ */ jsx("option", {
+											value: "top",
+											children: "Topo (Início)"
+										}), /* @__PURE__ */ jsx("option", {
+											value: "bottom",
+											children: "Base (Final)"
+										})]
+									})]
+								}), /* @__PURE__ */ jsxs(p, {
+									flexGrow: "1",
+									children: [/* @__PURE__ */ jsx(p$2, {
+										size: "1",
+										mb: "1",
+										as: "div",
+										children: "Comportamento de Rolagem"
+									}), /* @__PURE__ */ jsxs("select", {
+										value: H,
+										onChange: (n) => U(n.target.value),
+										style: {
+											width: "100%",
+											padding: "8px",
+											borderRadius: "4px",
+											border: "1px solid var(--gray-6)",
+											backgroundColor: "var(--gray-2)",
+											color: "var(--gray-12)",
+											fontSize: "14px",
+											outline: "none"
+										},
+										children: [/* @__PURE__ */ jsx("option", {
+											value: "down",
+											children: "Descer (Padrão)"
+										}), /* @__PURE__ */ jsx("option", {
+											value: "up",
+											children: "Subir (Chat)"
+										})]
+									})]
+								})]
+							}),
+							/* @__PURE__ */ jsx(p$2, {
+								size: "2",
+								weight: "bold",
+								mt: "2",
+								children: "Dimensões"
+							}),
+							/* @__PURE__ */ jsxs(p$1, {
+								gap: "3",
+								align: "center",
+								children: [/* @__PURE__ */ jsxs(p, {
+									flexGrow: "1",
+									children: [
+										/* @__PURE__ */ jsx(p$2, {
+											size: "1",
+											mb: "1",
+											as: "div",
+											children: "Altura do Item (Template) (px)"
+										}),
+										/* @__PURE__ */ jsx(u$1, {
+											type: "number",
+											min: "10",
+											value: G,
+											onChange: (n) => Z(n.target.value)
+										}),
+										/* @__PURE__ */ jsx(p$2, {
+											size: "1",
+											color: "gray",
+											children: "Altura de cada item individual na lista."
+										})
+									]
+								}), /* @__PURE__ */ jsxs(p, {
+									flexGrow: "1",
+									children: [
+										/* @__PURE__ */ jsx(p$2, {
+											size: "1",
+											mb: "1",
+											as: "div",
+											children: "Altura da Lista (Container) (px)"
+										}),
+										/* @__PURE__ */ jsx(u$1, {
+											type: "number",
+											min: "0",
+											placeholder: "Auto (100%)",
+											value: hj,
+											onChange: (n) => gj(n.target.value)
+										}),
+										/* @__PURE__ */ jsx(p$2, {
+											size: "1",
+											color: "gray",
+											children: "Altura total da lista. Se exceder, rola. Vazio = 100%."
+										})
+									]
+								})]
+							}),
+							/* @__PURE__ */ jsx(p$2, {
+								size: "2",
+								weight: "bold",
+								mt: "2",
+								children: "Animação de Entrada na Lista"
+							}),
+							/* @__PURE__ */ jsxs(o$3, {
+								columns: "3",
+								gap: "3",
+								children: [
+									/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
+										size: "1",
+										mb: "1",
+										as: "div",
+										children: "Efeito"
+									}), /* @__PURE__ */ jsxs("select", {
+										value: _j,
+										onChange: (n) => vj(n.target.value),
+										style: {
+											width: "100%",
+											padding: "6px",
+											borderRadius: "4px",
+											border: "1px solid var(--gray-6)",
+											backgroundColor: "var(--gray-2)",
+											color: "var(--gray-12)",
+											fontSize: "14px"
+										},
+										children: [
+											/* @__PURE__ */ jsx("option", {
+												value: "none",
+												children: "Nenhum"
+											}),
+											/* @__PURE__ */ jsx("option", {
+												value: "slideIn",
+												children: "Slide (Padrão)"
+											}),
+											/* @__PURE__ */ jsx("option", {
+												value: "fadeIn",
+												children: "Fade In"
+											}),
+											/* @__PURE__ */ jsx("option", {
+												value: "slideInLeft",
+												children: "Slide (Esq)"
+											}),
+											/* @__PURE__ */ jsx("option", {
+												value: "slideInRight",
+												children: "Slide (Dir)"
+											}),
+											/* @__PURE__ */ jsx("option", {
+												value: "zoomIn",
+												children: "Zoom In"
+											}),
+											/* @__PURE__ */ jsx("option", {
+												value: "bounceIn",
+												children: "Bounce"
+											})
+										]
+									})] }),
+									/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
+										size: "1",
+										mb: "1",
+										as: "div",
+										children: "Duração (s)"
+									}), /* @__PURE__ */ jsx(u$1, {
+										type: "number",
+										step: "0.1",
+										min: "0.1",
+										value: bj,
+										onChange: (n) => xj(parseFloat(n.target.value) || .3)
+									})] }),
+									/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
+										size: "1",
+										mb: "1",
+										as: "div",
+										children: "Curva (Easing)"
+									}), /* @__PURE__ */ jsxs("select", {
+										value: Sj,
+										onChange: (n) => Cj(n.target.value),
+										style: {
+											width: "100%",
+											padding: "6px",
+											borderRadius: "4px",
+											border: "1px solid var(--gray-6)",
+											backgroundColor: "var(--gray-2)",
+											color: "var(--gray-12)",
+											fontSize: "14px"
+										},
+										children: [
+											/* @__PURE__ */ jsx("option", {
+												value: "ease",
+												children: "Ease"
+											}),
+											/* @__PURE__ */ jsx("option", {
+												value: "ease-out",
+												children: "Ease Out"
+											}),
+											/* @__PURE__ */ jsx("option", {
+												value: "linear",
+												children: "Linear"
+											}),
+											/* @__PURE__ */ jsx("option", {
+												value: "bounce",
+												children: "Bounce"
+											})
+										]
+									})] })
+								]
+							}),
+							/* @__PURE__ */ jsx(p$2, {
+								size: "1",
+								color: "gray",
+								children: "Essa propriedade será usada para ordenar os itens no modo lista."
+							})
+						]
+					})
+				}),
+				/* @__PURE__ */ jsxs(p$1, {
+					gap: "3",
+					mt: "4",
+					justify: "end",
+					children: [/* @__PURE__ */ jsx(D$2, { children: /* @__PURE__ */ jsx(o, {
+						variant: "soft",
+						color: "gray",
+						children: "Cancelar"
+					}) }), /* @__PURE__ */ jsx(D$2, { children: /* @__PURE__ */ jsx(o, {
+						onClick: () => {
+							let n = parseInt(hj, 10), E = {
+								type: _j,
+								duration: Number(bj),
+								delay: 0,
+								timingFunction: Sj
+							};
+							_({
+								sortProp: j === "__none__" ? "" : j,
+								sortOrder: N,
+								newestPosition: z,
+								scrollDirection: H,
+								containerHeight: !isNaN(n) && n > 0 ? n : void 0,
+								entryAnimation: E
+							}), A(!1);
+						},
+						children: "Salvar Alterações"
+					}) })]
+				})
+			]
+		})]
 	});
 };
 var LayoutGroupContext = createContext({});
@@ -11081,13 +11849,13 @@ function createRenderBatcher(n, _) {
 	}, j = () => E = !0, M = stepsOrder.reduce((n, E) => (n[E] = createRenderStep(j, _ ? E : void 0), n), {}), { setup: N, read: P, resolveKeyframes: z, preUpdate: B, update: H, preRender: U, render: W, postRender: G } = M, Z = () => {
 		let j = MotionGlobalConfig.useManualTiming ? A.timestamp : performance.now();
 		E = !1, MotionGlobalConfig.useManualTiming || (A.delta = O ? 1e3 / 60 : Math.max(Math.min(j - A.timestamp, maxElapsed), 1)), A.timestamp = j, A.isProcessing = !0, N.process(A), P.process(A), z.process(A), B.process(A), H.process(A), U.process(A), W.process(A), G.process(A), A.isProcessing = !1, E && _ && (O = !1, n(Z));
-	}, GA = () => {
+	}, hj = () => {
 		E = !0, O = !0, A.isProcessing || n(Z);
 	};
 	return {
 		schedule: stepsOrder.reduce((n, _) => {
 			let O = M[_];
-			return n[_] = (n, _ = !1, A = !1) => (E || GA(), O.schedule(n, _, A)), n;
+			return n[_] = (n, _ = !1, A = !1) => (E || hj(), O.schedule(n, _, A)), n;
 		}, {}),
 		cancel: (n) => {
 			for (let _ = 0; _ < stepsOrder.length; _++) M[stepsOrder[_]].cancel(n);
@@ -11445,40 +12213,40 @@ function spring(n = springDefaults.visualDuration, _ = springDefaults.bounce) {
 	}, { stiffness: P, damping: z, mass: B, duration: H, velocity: U, isResolvedFromDuration: W } = getSpringOptions({
 		...E,
 		velocity: -/* @__PURE__ */ millisecondsToSeconds(E.velocity || 0)
-	}), G = U || 0, Z = z / (2 * Math.sqrt(P * B)), GA = M - j, KA = /* @__PURE__ */ millisecondsToSeconds(Math.sqrt(P / B)), qA = Math.abs(GA) < 5;
-	O ||= qA ? springDefaults.restSpeed.granular : springDefaults.restSpeed.default, A ||= qA ? springDefaults.restDelta.granular : springDefaults.restDelta.default;
-	let JA;
+	}), G = U || 0, Z = z / (2 * Math.sqrt(P * B)), hj = M - j, gj = /* @__PURE__ */ millisecondsToSeconds(Math.sqrt(P / B)), _j = Math.abs(hj) < 5;
+	O ||= _j ? springDefaults.restSpeed.granular : springDefaults.restSpeed.default, A ||= _j ? springDefaults.restDelta.granular : springDefaults.restDelta.default;
+	let vj;
 	if (Z < 1) {
-		let n = calcAngularFreq(KA, Z);
-		JA = (_) => M - Math.exp(-Z * KA * _) * ((G + Z * KA * GA) / n * Math.sin(n * _) + GA * Math.cos(n * _));
-	} else if (Z === 1) JA = (n) => M - Math.exp(-KA * n) * (GA + (G + KA * GA) * n);
+		let n = calcAngularFreq(gj, Z);
+		vj = (_) => M - Math.exp(-Z * gj * _) * ((G + Z * gj * hj) / n * Math.sin(n * _) + hj * Math.cos(n * _));
+	} else if (Z === 1) vj = (n) => M - Math.exp(-gj * n) * (hj + (G + gj * hj) * n);
 	else {
-		let n = KA * Math.sqrt(Z * Z - 1);
-		JA = (_) => {
-			let E = Math.exp(-Z * KA * _), O = Math.min(n * _, 300);
-			return M - E * ((G + Z * KA * GA) * Math.sinh(O) + n * GA * Math.cosh(O)) / n;
+		let n = gj * Math.sqrt(Z * Z - 1);
+		vj = (_) => {
+			let E = Math.exp(-Z * gj * _), O = Math.min(n * _, 300);
+			return M - E * ((G + Z * gj * hj) * Math.sinh(O) + n * hj * Math.cosh(O)) / n;
 		};
 	}
-	let YA = {
+	let yj = {
 		calculatedDuration: W && H || null,
 		next: (n) => {
-			let _ = JA(n);
+			let _ = vj(n);
 			if (W) N.done = n >= H;
 			else {
 				let E = n === 0 ? G : 0;
-				Z < 1 && (E = n === 0 ? /* @__PURE__ */ secondsToMilliseconds(G) : calcGeneratorVelocity(JA, n, _));
+				Z < 1 && (E = n === 0 ? /* @__PURE__ */ secondsToMilliseconds(G) : calcGeneratorVelocity(vj, n, _));
 				let j = Math.abs(E) <= O, P = Math.abs(M - _) <= A;
 				N.done = j && P;
 			}
 			return N.value = N.done ? M : _, N;
 		},
 		toString: () => {
-			let n = Math.min(calcGeneratorDuration(YA), maxGeneratorDuration), _ = generateLinearEasing((_) => YA.next(n * _).value, n, 30);
+			let n = Math.min(calcGeneratorDuration(yj), maxGeneratorDuration), _ = generateLinearEasing((_) => yj.next(n * _).value, n, 30);
 			return n + "ms " + _;
 		},
 		toTransition: () => {}
 	};
-	return YA;
+	return yj;
 }
 spring.applyToOptions = (n) => {
 	let _ = createGeneratorEasing(n, 100, spring);
@@ -11488,26 +12256,26 @@ function inertia({ keyframes: n, velocity: _ = 0, power: E = .8, timeConstant: O
 	let H = n[0], U = {
 		done: !1,
 		value: H
-	}, W = (n) => N !== void 0 && n < N || P !== void 0 && n > P, G = (n) => N === void 0 ? P : P === void 0 || Math.abs(N - n) < Math.abs(P - n) ? N : P, Z = E * _, GA = H + Z, KA = M === void 0 ? GA : M(GA);
-	KA !== GA && (Z = KA - H);
-	let qA = (n) => -Z * Math.exp(-n / O), JA = (n) => KA + qA(n), YA = (n) => {
-		let _ = qA(n), E = JA(n);
-		U.done = Math.abs(_) <= z, U.value = U.done ? KA : E;
-	}, XA, ZA, QA = (n) => {
-		W(U.value) && (XA = n, ZA = spring({
+	}, W = (n) => N !== void 0 && n < N || P !== void 0 && n > P, G = (n) => N === void 0 ? P : P === void 0 || Math.abs(N - n) < Math.abs(P - n) ? N : P, Z = E * _, hj = H + Z, gj = M === void 0 ? hj : M(hj);
+	gj !== hj && (Z = gj - H);
+	let _j = (n) => -Z * Math.exp(-n / O), vj = (n) => gj + _j(n), yj = (n) => {
+		let _ = _j(n), E = vj(n);
+		U.done = Math.abs(_) <= z, U.value = U.done ? gj : E;
+	}, bj, xj, Sj = (n) => {
+		W(U.value) && (bj = n, xj = spring({
 			keyframes: [U.value, G(U.value)],
-			velocity: calcGeneratorVelocity(JA, n, U.value),
+			velocity: calcGeneratorVelocity(vj, n, U.value),
 			damping: A,
 			stiffness: j,
 			restDelta: z,
 			restSpeed: B
 		}));
 	};
-	return QA(0), {
+	return Sj(0), {
 		calculatedDuration: null,
 		next: (n) => {
 			let _ = !1;
-			return !ZA && XA === void 0 && (_ = !0, YA(n), QA(n)), XA !== void 0 && n >= XA ? ZA.next(n - XA) : (!_ && YA(n), U);
+			return !xj && bj === void 0 && (_ = !0, yj(n), Sj(n)), bj !== void 0 && n >= bj ? xj.next(n - bj) : (!_ && yj(n), U);
 		}
 	};
 }
@@ -11627,22 +12395,22 @@ var WithPromise = class {
 		if (this.startTime === null) return E.next(0);
 		let { delay: P = 0, keyframes: z, repeat: B, repeatType: H, repeatDelay: U, type: W, onUpdate: G, finalKeyframe: Z } = this.options;
 		this.speed > 0 ? this.startTime = Math.min(this.startTime, n) : this.speed < 0 && (this.startTime = Math.min(n - O / this.speed, this.startTime)), _ ? this.currentTime = n : this.updateTime(n);
-		let GA = this.currentTime - P * (this.playbackSpeed >= 0 ? 1 : -1), KA = this.playbackSpeed >= 0 ? GA < 0 : GA > O;
-		this.currentTime = Math.max(GA, 0), this.state === "finished" && this.holdTime === null && (this.currentTime = O);
-		let qA = this.currentTime, JA = E;
+		let hj = this.currentTime - P * (this.playbackSpeed >= 0 ? 1 : -1), gj = this.playbackSpeed >= 0 ? hj < 0 : hj > O;
+		this.currentTime = Math.max(hj, 0), this.state === "finished" && this.holdTime === null && (this.currentTime = O);
+		let _j = this.currentTime, vj = E;
 		if (B) {
 			let n = Math.min(this.currentTime, O) / M, _ = Math.floor(n), E = n % 1;
-			!E && n >= 1 && (E = 1), E === 1 && _--, _ = Math.min(_, B + 1), _ % 2 && (H === "reverse" ? (E = 1 - E, U && (E -= U / M)) : H === "mirror" && (JA = j)), qA = clamp(0, 1, E) * M;
+			!E && n >= 1 && (E = 1), E === 1 && _--, _ = Math.min(_, B + 1), _ % 2 && (H === "reverse" ? (E = 1 - E, U && (E -= U / M)) : H === "mirror" && (vj = j)), _j = clamp(0, 1, E) * M;
 		}
-		let YA = KA ? {
+		let yj = gj ? {
 			done: !1,
 			value: z[0]
-		} : JA.next(qA);
-		A && (YA.value = A(YA.value));
-		let { done: XA } = YA;
-		!KA && N !== null && (XA = this.playbackSpeed >= 0 ? this.currentTime >= O : this.currentTime <= 0);
-		let ZA = this.holdTime === null && (this.state === "finished" || this.state === "running" && XA);
-		return ZA && W !== inertia && (YA.value = getFinalKeyframe$1(z, this.options, Z, this.speed)), G && G(YA.value), ZA && this.finish(), YA;
+		} : vj.next(_j);
+		A && (yj.value = A(yj.value));
+		let { done: bj } = yj;
+		!gj && N !== null && (bj = this.playbackSpeed >= 0 ? this.currentTime >= O : this.currentTime <= 0);
+		let xj = this.holdTime === null && (this.state === "finished" || this.state === "running" && bj);
+		return xj && W !== inertia && (yj.value = getFinalKeyframe$1(z, this.options, Z, this.speed)), G && G(yj.value), xj && this.finish(), yj;
 	}
 	then(n, _) {
 		return this.finished.then(n, _);
@@ -12580,6 +13348,109 @@ var isMotionValue = (n) => !!(n && n.getVelocity), valueTypes = [
 	isStatic: !1,
 	reducedMotion: "never"
 });
+function setRef(n, _) {
+	if (typeof n == "function") return n(_);
+	n != null && (n.current = _);
+}
+function composeRefs(...n) {
+	return (_) => {
+		let E = !1, O = n.map((n) => {
+			let O = setRef(n, _);
+			return !E && typeof O == "function" && (E = !0), O;
+		});
+		if (E) return () => {
+			for (let _ = 0; _ < O.length; _++) {
+				let E = O[_];
+				typeof E == "function" ? E() : setRef(n[_], null);
+			}
+		};
+	};
+}
+function useComposedRefs(..._) {
+	return React$1.useCallback(composeRefs(..._), _);
+}
+var PopChildMeasure = class extends React$1.Component {
+	getSnapshotBeforeUpdate(n) {
+		let _ = this.props.childRef.current;
+		if (_ && n.isPresent && !this.props.isPresent) {
+			let n = _.offsetParent, E = isHTMLElement(n) && n.offsetWidth || 0, O = this.props.sizeRef.current;
+			O.height = _.offsetHeight || 0, O.width = _.offsetWidth || 0, O.top = _.offsetTop, O.left = _.offsetLeft, O.right = E - O.width - O.left;
+		}
+		return null;
+	}
+	componentDidUpdate() {}
+	render() {
+		return this.props.children;
+	}
+};
+function PopChild({ children: _, isPresent: E, anchorX: O, root: A }) {
+	let j = useId(), M = useRef(null), N = useRef({
+		width: 0,
+		height: 0,
+		top: 0,
+		left: 0,
+		right: 0
+	}), { nonce: P } = useContext(MotionConfigContext), z = useComposedRefs(M, _.props?.ref ?? _?.ref);
+	return useInsertionEffect(() => {
+		let { width: n, height: _, top: z, left: B, right: H } = N.current;
+		if (E || !M.current || !n || !_) return;
+		let U = O === "left" ? `left: ${B}` : `right: ${H}`;
+		M.current.dataset.motionPopId = j;
+		let W = document.createElement("style");
+		P && (W.nonce = P);
+		let G = A ?? document.head;
+		return G.appendChild(W), W.sheet && W.sheet.insertRule(`
+          [data-motion-pop-id="${j}"] {
+            position: absolute !important;
+            width: ${n}px !important;
+            height: ${_}px !important;
+            ${U}px !important;
+            top: ${z}px !important;
+          }
+        `), () => {
+			G.contains(W) && G.removeChild(W);
+		};
+	}, [E]), jsx(PopChildMeasure, {
+		isPresent: E,
+		childRef: M,
+		sizeRef: N,
+		children: React$1.cloneElement(_, { ref: z })
+	});
+}
+var PresenceChild = ({ children: _, initial: E, isPresent: O, onExitComplete: A, custom: j, presenceAffectsLayout: M, mode: N, anchorX: P, root: z }) => {
+	let B = useConstant(newChildrenMap), H = useId(), U = !0, W = useMemo(() => (U = !1, {
+		id: H,
+		initial: E,
+		isPresent: O,
+		custom: j,
+		onExitComplete: (n) => {
+			B.set(n, !0);
+			for (let n of B.values()) if (!n) return;
+			A && A();
+		},
+		register: (n) => (B.set(n, !1), () => B.delete(n))
+	}), [
+		O,
+		B,
+		A
+	]);
+	return M && U && (W = { ...W }), useMemo(() => {
+		B.forEach((n, _) => B.set(_, !1));
+	}, [O]), React$1.useEffect(() => {
+		!O && !B.size && A && A();
+	}, [O]), N === "popLayout" && (_ = jsx(PopChild, {
+		isPresent: O,
+		anchorX: P,
+		root: z,
+		children: _
+	})), jsx(PresenceContext.Provider, {
+		value: W,
+		children: _
+	});
+};
+function newChildrenMap() {
+	return /* @__PURE__ */ new Map();
+}
 function usePresence(n = !0) {
 	let _ = useContext(PresenceContext);
 	if (_ === null) return [!0, null];
@@ -12594,7 +13465,60 @@ function usePresence(n = !0) {
 	]);
 	return !E && O ? [!1, M] : [!0];
 }
-var LazyContext = createContext({ strict: !1 }), featureProps = {
+var getChildKey = (n) => n.key || "";
+function onlyElements(n) {
+	let _ = [];
+	return Children.forEach(n, (n) => {
+		isValidElement(n) && _.push(n);
+	}), _;
+}
+var AnimatePresence = ({ children: n, custom: _, initial: E = !0, onExitComplete: O, presenceAffectsLayout: A = !0, mode: j = "sync", propagate: M = !1, anchorX: N = "left", root: P }) => {
+	let [z, B] = usePresence(M), H = useMemo(() => onlyElements(n), [n]), W = M && !z ? [] : H.map(getChildKey), G = useRef(!0), Z = useRef(H), hj = useConstant(() => /* @__PURE__ */ new Map()), gj = useRef(/* @__PURE__ */ new Set()), [bj, xj] = useState(H), [Sj, Tj] = useState(H);
+	useIsomorphicLayoutEffect(() => {
+		G.current = !1, Z.current = H;
+		for (let n = 0; n < Sj.length; n++) {
+			let _ = getChildKey(Sj[n]);
+			W.includes(_) ? (hj.delete(_), gj.current.delete(_)) : hj.get(_) !== !0 && hj.set(_, !1);
+		}
+	}, [
+		Sj,
+		W.length,
+		W.join("-")
+	]);
+	let Ej = [];
+	if (H !== bj) {
+		let n = [...H];
+		for (let _ = 0; _ < Sj.length; _++) {
+			let E = Sj[_], O = getChildKey(E);
+			W.includes(O) || (n.splice(_, 0, E), Ej.push(E));
+		}
+		return j === "wait" && Ej.length && (n = Ej), Tj(onlyElements(n)), xj(H), null;
+	}
+	process.env.NODE_ENV !== "production" && j === "wait" && Sj.length > 1 && console.warn("You're attempting to animate multiple children within AnimatePresence, but its mode is set to \"wait\". This will lead to odd visual behaviour.");
+	let { forceRender: Dj } = useContext(LayoutGroupContext);
+	return jsx(Fragment$1, { children: Sj.map((n) => {
+		let U = getChildKey(n), _j = M && !z ? !1 : H === Sj || W.includes(U);
+		return jsx(PresenceChild, {
+			isPresent: _j,
+			initial: !G.current || E ? void 0 : !1,
+			custom: _,
+			presenceAffectsLayout: A,
+			mode: j,
+			root: P,
+			onExitComplete: _j ? void 0 : () => {
+				if (gj.current.has(U)) return;
+				if (gj.current.add(U), hj.has(U)) hj.set(U, !0);
+				else return;
+				let n = !0;
+				hj.forEach((_) => {
+					_ || (n = !1);
+				}), n && (Dj?.(), Tj(Z.current), M && B?.(), O && O());
+			},
+			anchorX: N,
+			children: n
+		}, U);
+	}) });
+}, LazyContext = createContext({ strict: !1 }), featureProps = {
 	animation: [
 		"animate",
 		"variants",
@@ -12890,8 +13814,8 @@ var lowercaseSVGElements = [
 function isSVGComponent(n) {
 	return typeof n != "string" || n.includes("-") ? !1 : !!(lowercaseSVGElements.indexOf(n) > -1 || /[A-Z]/u.test(n));
 }
-function useRender(n, _, E, { latestValues: A }, j, N = !1, P) {
-	let z = (P ?? isSVGComponent(n) ? useSVGProps : useHTMLProps)(_, A, j, n), B = filterProps(_, typeof n == "string", N), H = n === Fragment ? {} : {
+function useRender(n, _, E, { latestValues: O }, j, M = !1, P) {
+	let z = (P ?? isSVGComponent(n) ? useSVGProps : useHTMLProps)(_, O, j, n), B = filterProps(_, typeof n == "string", M), H = n === Fragment ? {} : {
 		...B,
 		...z,
 		ref: E
@@ -13001,8 +13925,8 @@ function isRefObject(n) {
 	return n && typeof n == "object" && Object.prototype.hasOwnProperty.call(n, "current");
 }
 function useVisualElement(n, _, E, O, A, j) {
-	let { visualElement: M } = useContext(MotionContext), N = useContext(LazyContext), P = useContext(PresenceContext), z = useContext(MotionConfigContext).reducedMotion, U = useRef(null);
-	O ||= N.renderer, !U.current && O && (U.current = O(n, {
+	let { visualElement: M } = useContext(MotionContext), N = useContext(LazyContext), P = useContext(PresenceContext), z = useContext(MotionConfigContext).reducedMotion, B = useRef(null);
+	O ||= N.renderer, !B.current && O && (B.current = O(n, {
 		visualState: _,
 		parent: M,
 		props: E,
@@ -13011,20 +13935,20 @@ function useVisualElement(n, _, E, O, A, j) {
 		reducedMotionConfig: z,
 		isSVG: j
 	}));
-	let W = U.current, Z = useContext(SwitchLayoutGroupContext);
-	W && !W.projection && A && (W.type === "html" || W.type === "svg") && createProjectionNode$1(U.current, E, A, Z);
-	let GA = useRef(!1);
+	let H = B.current, G = useContext(SwitchLayoutGroupContext);
+	H && !H.projection && A && (H.type === "html" || H.type === "svg") && createProjectionNode$1(B.current, E, A, G);
+	let Z = useRef(!1);
 	useInsertionEffect(() => {
-		W && GA.current && W.update(E, P);
+		H && Z.current && H.update(E, P);
 	});
-	let qA = E[optimizedAppearDataAttribute], JA = useRef(!!qA && !window.MotionHandoffIsComplete?.(qA) && window.MotionHasOptimisedAnimation?.(qA));
+	let gj = E[optimizedAppearDataAttribute], _j = useRef(!!gj && !window.MotionHandoffIsComplete?.(gj) && window.MotionHasOptimisedAnimation?.(gj));
 	return useIsomorphicLayoutEffect(() => {
-		W && (GA.current = !0, window.MotionIsMounted = !0, W.updateFeatures(), W.scheduleRenderMicrotask(), JA.current && W.animationState && W.animationState.animateChanges());
+		H && (Z.current = !0, window.MotionIsMounted = !0, H.updateFeatures(), H.scheduleRenderMicrotask(), _j.current && H.animationState && H.animationState.animateChanges());
 	}), useEffect(() => {
-		W && (!JA.current && W.animationState && W.animationState.animateChanges(), JA.current &&= (queueMicrotask(() => {
-			window.MotionHandoffMarkAsComplete?.(qA);
-		}), !1), W.enteringChildren = void 0);
-	}), W;
+		H && (!_j.current && H.animationState && H.animationState.animateChanges(), _j.current &&= (queueMicrotask(() => {
+			window.MotionHandoffMarkAsComplete?.(gj);
+		}), !1), H.enteringChildren = void 0);
+	}), H;
 }
 function createProjectionNode$1(n, _, E, O) {
 	let { layoutId: A, layout: j, drag: M, dragConstraints: N, layoutScroll: P, layoutRoot: z, layoutCrossfade: B } = _;
@@ -13046,27 +13970,27 @@ function getClosestProjectingNode(n) {
 function createMotionComponent(n, { forwardMotionProps: _ = !1, type: E } = {}, O, A) {
 	O && loadFeatures(O);
 	let j = E ? E === "svg" : isSVGComponent(n), M = j ? useSVGVisualState : useHTMLVisualState;
-	function P(E, N) {
+	function N(E, N) {
 		let P, z = {
 			...useContext(MotionConfigContext),
 			...E,
 			layoutId: useLayoutId(E)
-		}, { isStatic: H } = z, U = useCreateMotionContext(E), W = M(E, H);
-		if (!H && isBrowser) {
+		}, { isStatic: B } = z, H = useCreateMotionContext(E), W = M(E, B);
+		if (!B && isBrowser) {
 			useStrictMode(z, O);
 			let _ = getProjectionFunctionality(z);
-			P = _.MeasureLayout, U.visualElement = useVisualElement(n, W, z, A, _.ProjectionNode, j);
+			P = _.MeasureLayout, H.visualElement = useVisualElement(n, W, z, A, _.ProjectionNode, j);
 		}
 		return jsxs(MotionContext.Provider, {
-			value: U,
-			children: [P && U.visualElement ? jsx(P, {
-				visualElement: U.visualElement,
+			value: H,
+			children: [P && H.visualElement ? jsx(P, {
+				visualElement: H.visualElement,
 				...z
-			}) : null, useRender(n, E, useMotionRef(W, U.visualElement, N), W, H, _, j)]
+			}) : null, useRender(n, E, useMotionRef(W, H.visualElement, N), W, B, _, j)]
 		});
 	}
-	P.displayName = `motion.${typeof n == "string" ? n : `create(${n.displayName ?? n.name ?? ""})`}`;
-	let z = forwardRef(P);
+	N.displayName = `motion.${typeof n == "string" ? n : `create(${n.displayName ?? n.name ?? ""})`}`;
+	let z = forwardRef(N);
 	return z[motionComponentSymbol] = n, z;
 }
 function useLayoutId({ layoutId: n }) {
@@ -13700,34 +14624,34 @@ function createAnimationState(n) {
 	function M(j) {
 		let { props: M } = n, N = getVariantContext(n.parent) || {}, P = [], z = /* @__PURE__ */ new Set(), B = {}, H = Infinity;
 		for (let _ = 0; _ < numAnimationTypes; _++) {
-			let U = reversePriorityOrder[_], W = E[U], G = M[U] === void 0 ? N[U] : M[U], Z = isVariantLabel(G), GA = U === j ? W.isActive : null;
-			GA === !1 && (H = _);
-			let KA = G === N[U] && G !== M[U] && Z;
-			if (KA && O && n.manuallyAnimateOnMount && (KA = !1), W.protectedKeys = { ...B }, !W.isActive && GA === null || !G && !W.prevProp || isAnimationControls(G) || typeof G == "boolean") continue;
-			let qA = checkVariantsDidChange(W.prevProp, G), JA = qA || U === j && W.isActive && !KA && Z || _ > H && Z, YA = !1, XA = Array.isArray(G) ? G : [G], ZA = XA.reduce(A(U), {});
-			GA === !1 && (ZA = {});
-			let { prevResolvedValues: QA = {} } = W, $A = {
-				...QA,
-				...ZA
-			}, ej = (_) => {
-				JA = !0, z.has(_) && (YA = !0, z.delete(_)), W.needsAnimating[_] = !0;
+			let U = reversePriorityOrder[_], W = E[U], G = M[U] === void 0 ? N[U] : M[U], Z = isVariantLabel(G), hj = U === j ? W.isActive : null;
+			hj === !1 && (H = _);
+			let gj = G === N[U] && G !== M[U] && Z;
+			if (gj && O && n.manuallyAnimateOnMount && (gj = !1), W.protectedKeys = { ...B }, !W.isActive && hj === null || !G && !W.prevProp || isAnimationControls(G) || typeof G == "boolean") continue;
+			let _j = checkVariantsDidChange(W.prevProp, G), vj = _j || U === j && W.isActive && !gj && Z || _ > H && Z, yj = !1, bj = Array.isArray(G) ? G : [G], xj = bj.reduce(A(U), {});
+			hj === !1 && (xj = {});
+			let { prevResolvedValues: Sj = {} } = W, Cj = {
+				...Sj,
+				...xj
+			}, wj = (_) => {
+				vj = !0, z.has(_) && (yj = !0, z.delete(_)), W.needsAnimating[_] = !0;
 				let E = n.getValue(_);
 				E && (E.liveStyle = !1);
 			};
-			for (let n in $A) {
-				let _ = ZA[n], E = QA[n];
+			for (let n in Cj) {
+				let _ = xj[n], E = Sj[n];
 				if (B.hasOwnProperty(n)) continue;
 				let O = !1;
-				O = isKeyframesTarget(_) && isKeyframesTarget(E) ? !shallowCompare(_, E) : _ !== E, O ? _ == null ? z.add(n) : ej(n) : _ !== void 0 && z.has(n) ? ej(n) : W.protectedKeys[n] = !0;
+				O = isKeyframesTarget(_) && isKeyframesTarget(E) ? !shallowCompare(_, E) : _ !== E, O ? _ == null ? z.add(n) : wj(n) : _ !== void 0 && z.has(n) ? wj(n) : W.protectedKeys[n] = !0;
 			}
-			W.prevProp = G, W.prevResolvedValues = ZA, W.isActive && (B = {
+			W.prevProp = G, W.prevResolvedValues = xj, W.isActive && (B = {
 				...B,
-				...ZA
-			}), O && n.blockInitialAnimation && (JA = !1);
-			let tj = KA && qA;
-			JA && (!tj || YA) && P.push(...XA.map((_) => {
+				...xj
+			}), O && n.blockInitialAnimation && (vj = !1);
+			let Tj = gj && _j;
+			vj && (!Tj || yj) && P.push(...bj.map((_) => {
 				let E = { type: U };
-				if (typeof _ == "string" && O && !tj && n.manuallyAnimateOnMount && n.parent) {
+				if (typeof _ == "string" && O && !Tj && n.manuallyAnimateOnMount && n.parent) {
 					let { parent: O } = n, A = resolveVariant(O, _);
 					if (O.enteringChildren && A) {
 						let { delayChildren: _ } = A.transition || {};
@@ -15225,7 +16149,105 @@ var gestureAnimations = {
 	...gestureAnimations,
 	...drag,
 	...layout
-}, createDomVisualElement), PreviewElementRenderer = ({ element: n, offsetY: _ = 0, dataContext: E }) => {
+}, createDomVisualElement), getAnimationVariants = (n) => {
+	if (!n || n.type === "none") return {
+		initial: {
+			opacity: 0,
+			y: 20,
+			scale: .95
+		},
+		animate: {
+			opacity: 1,
+			y: 0,
+			scale: 1
+		}
+	};
+	let _ = {
+		initial: {},
+		animate: {}
+	};
+	switch (n.type) {
+		case "fadeIn":
+			_.initial = { opacity: 0 }, _.animate = { opacity: 1 };
+			break;
+		case "slideInLeft":
+			_.initial = {
+				opacity: 0,
+				x: -100
+			}, _.animate = {
+				opacity: 1,
+				x: 0
+			};
+			break;
+		case "slideInRight":
+			_.initial = {
+				opacity: 0,
+				x: 100
+			}, _.animate = {
+				opacity: 1,
+				x: 0
+			};
+			break;
+		case "slideInUp":
+			_.initial = {
+				opacity: 0,
+				y: 100
+			}, _.animate = {
+				opacity: 1,
+				y: 0
+			};
+			break;
+		case "slideInDown":
+			_.initial = {
+				opacity: 0,
+				y: -100
+			}, _.animate = {
+				opacity: 1,
+				y: 0
+			};
+			break;
+		case "zoomIn":
+			_.initial = {
+				opacity: 0,
+				scale: .5
+			}, _.animate = {
+				opacity: 1,
+				scale: 1
+			};
+			break;
+		case "bounceIn":
+			_.initial = {
+				opacity: 0,
+				scale: .3
+			}, _.animate = {
+				opacity: 1,
+				scale: 1,
+				transition: {
+					type: "spring",
+					bounce: .6
+				}
+			};
+			break;
+		case "pulse":
+			_.animate = {
+				scale: [
+					1,
+					1.05,
+					1
+				],
+				transition: { repeat: Infinity }
+			};
+			break;
+		default: _.initial = {
+			opacity: 0,
+			y: 20
+		}, _.animate = {
+			opacity: 1,
+			y: 0
+		};
+	}
+	return _;
+}, PreviewElementRenderer = ({ element: n, offsetY: _ = 0, dataContext: E }) => {
 	let O = n.content;
 	if (E) {
 		if (n.type === "text") O = O.replace(/\{\{(.*?)\}\}/g, (n, _) => {
@@ -15240,7 +16262,7 @@ var gestureAnimations = {
 			return O == null ? n : String(O);
 		});
 	}
-	return /* @__PURE__ */ jsxs(p$1, {
+	return /* @__PURE__ */ jsxs(p, {
 		style: {
 			position: "absolute",
 			left: 0,
@@ -15263,7 +16285,7 @@ var gestureAnimations = {
 					objectFit: n.style?.objectFit || "cover",
 					display: "block"
 				}
-			}) : /* @__PURE__ */ jsx(p$1, {
+			}) : /* @__PURE__ */ jsx(p, {
 				style: {
 					width: "100%",
 					height: "100%",
@@ -15277,44 +16299,64 @@ var gestureAnimations = {
 					children: "Imagem"
 				})
 			})),
-			n.type === "box" && /* @__PURE__ */ jsx(p$1, { style: {
+			n.type === "box" && /* @__PURE__ */ jsx(p, { style: {
 				width: "100%",
 				height: "100%"
 			} })
 		]
 	});
-}, ListItem = ({ children: n, index: _, height: E }) => /* @__PURE__ */ jsx(motion.div, {
-	initial: {
-		opacity: 0,
-		y: 20,
-		scale: .95
-	},
-	animate: {
-		opacity: 1,
-		y: 0,
-		scale: 1
-	},
-	transition: {
-		duration: .4,
-		delay: _ * .05,
-		ease: "easeOut"
-	},
-	whileHover: {
-		scale: 1.02,
-		transition: { duration: .2 }
-	},
-	style: {
-		position: "relative",
-		height: E,
-		width: "100%",
-		marginBottom: "20px",
-		transformOrigin: "center center"
-	},
-	children: n
-});
+}, ListItem = ({ children: n, height: E, animation: O }) => {
+	let A = React.useMemo(() => getAnimationVariants(O), [O]);
+	return /* @__PURE__ */ jsx(motion.div, {
+		layout: !0,
+		initial: A.initial,
+		animate: A.animate,
+		exit: {
+			opacity: 0,
+			scale: .9
+		},
+		transition: {
+			duration: O?.duration || .4,
+			ease: O?.timingFunction || "easeOut"
+		},
+		whileHover: {
+			scale: 1.02,
+			transition: { duration: .2 }
+		},
+		style: {
+			position: "relative",
+			height: E,
+			width: "100%",
+			marginBottom: "20px",
+			transformOrigin: "center center"
+		},
+		children: n
+	});
+};
 const Preview = () => {
-	let { state: n } = useEditor(), E = React.useMemo(() => n.canvasHeight ? n.canvasHeight : n.elements.length === 0 ? 0 : Math.max(...n.elements.map((n) => n.y + n.height)), [n.elements, n.canvasHeight]);
-	return /* @__PURE__ */ jsx(p$1, {
+	let { state: n } = useEditor(), [E, O] = React.useState(!1), [A, j] = React.useState([]);
+	React.useEffect(() => {
+		let _;
+		return E && n.isList ? (A.length === 0 && j([{
+			id: Date.now(),
+			...n.mockData[0] || {}
+		}]), _ = setInterval(() => {
+			j((_) => {
+				let E = _.length % (n.mockData.length || 1), O = {
+					...n.mockData.length > 0 ? n.mockData[E] : { id: _.length },
+					id: `${Date.now()}-${_.length}`
+				};
+				return n.listSettings.newestPosition === "top" ? [O, ..._].slice(0, 20) : [..._, O].slice(-20);
+			});
+		}, 1500)) : j([]), () => clearInterval(_);
+	}, [
+		E,
+		n.isList,
+		n.listSettings.newestPosition,
+		n.mockData
+	]);
+	let M = React.useMemo(() => n.canvasHeight ? n.canvasHeight : n.elements.length === 0 ? 0 : Math.max(...n.elements.map((n) => n.y + n.height)), [n.elements, n.canvasHeight]);
+	return /* @__PURE__ */ jsxs(p, {
 		style: {
 			width: "100%",
 			height: "100%",
@@ -15322,21 +16364,39 @@ const Preview = () => {
 			overflow: "hidden",
 			backgroundColor: "var(--color-panel-solid)"
 		},
-		children: /* @__PURE__ */ jsx(c, {
+		children: [n.isList && /* @__PURE__ */ jsx(p, {
+			style: {
+				position: "absolute",
+				top: 10,
+				right: 10,
+				zIndex: 100,
+				backgroundColor: "var(--color-surface)",
+				padding: "4px",
+				borderRadius: "var(--radius-3)",
+				boxShadow: "0 2px 10px rgba(0,0,0,0.1)"
+			},
+			children: /* @__PURE__ */ jsxs(o, {
+				size: "1",
+				variant: E ? "soft" : "solid",
+				color: E ? "red" : "green",
+				onClick: () => O(!E),
+				children: [jsx(E ? StopIcon : PlayIcon, {}), E ? "Parar Simulação" : "Simular Entrada"]
+			})
+		}), /* @__PURE__ */ jsx(c, {
 			type: "auto",
 			scrollbars: "vertical",
 			style: {
 				height: "100%",
 				width: "100%"
 			},
-			children: /* @__PURE__ */ jsx(p$1, {
+			children: /* @__PURE__ */ jsx(p, {
 				style: {
 					position: "relative",
 					minHeight: "100%",
 					width: "100%"
 				},
 				children: (() => {
-					if (n.elements.length === 0) return /* @__PURE__ */ jsx(p, {
+					if (n.elements.length === 0) return /* @__PURE__ */ jsx(p$1, {
 						align: "center",
 						justify: "center",
 						style: { height: "100%" },
@@ -15346,15 +16406,19 @@ const Preview = () => {
 						})
 					});
 					if (n.isList) {
-						let _ = n.mockData.length > 0 ? n.mockData : Array.from({ length: 10 }).map((n, _) => ({ id: _ }));
-						if (n.listSettings.sortProp) {
-							let E = n.listSettings.sortProp, O = n.listSettings.sortOrder === "asc" ? 1 : -1;
-							_ = [..._].sort((n, _) => {
-								let A = n[E], j = _[E];
-								return A < j ? -1 * O : A > j ? 1 * O : 0;
-							});
+						let _ = [];
+						if (E) _ = A;
+						else {
+							if (_ = n.mockData.length > 0 ? n.mockData : Array.from({ length: 10 }).map((n, _) => ({ id: _ })), n.listSettings.sortProp) {
+								let E = n.listSettings.sortProp, O = n.listSettings.sortOrder === "asc" ? 1 : -1;
+								_ = [..._].sort((n, _) => {
+									let A = n[E], j = _[E];
+									return A < j ? -1 * O : A > j ? 1 * O : 0;
+								});
+							}
+							n.listSettings.newestPosition === "top" && (_ = [..._].reverse());
 						}
-						return n.listSettings.newestPosition === "top" && (_ = [..._].reverse()), /* @__PURE__ */ jsx(p, {
+						return /* @__PURE__ */ jsx(p$1, {
 							direction: "column",
 							justify: n.listSettings.newestPosition === "top" ? "start" : "end",
 							p: "4",
@@ -15362,15 +16426,19 @@ const Preview = () => {
 								width: "100%",
 								minHeight: "100%"
 							},
-							children: _.map((_, O) => /* @__PURE__ */ jsx(ListItem, {
-								index: O,
-								height: E,
-								children: n.elements.map((n) => /* @__PURE__ */ jsx(PreviewElementRenderer, {
-									element: n,
-									offsetY: 0,
-									dataContext: _
-								}, `${n.id}-${O}`))
-							}, O))
+							children: /* @__PURE__ */ jsx(AnimatePresence, {
+								mode: "popLayout",
+								initial: !1,
+								children: _.map((_, E) => /* @__PURE__ */ jsx(ListItem, {
+									height: M,
+									animation: n.listSettings.entryAnimation,
+									children: n.elements.map((n) => /* @__PURE__ */ jsx(PreviewElementRenderer, {
+										element: n,
+										offsetY: 0,
+										dataContext: _
+									}, `${n.id}-${E}`))
+								}, _.id || E))
+							})
 						});
 					}
 					return n.elements.map((_) => /* @__PURE__ */ jsx(PreviewElementRenderer, {
@@ -15379,283 +16447,95 @@ const Preview = () => {
 					}, _.id));
 				})()
 			})
-		})
-	});
-}, EditorSettings = () => {
-	let { state: n, updateListSettings: _, setCanvasHeight: E } = useEditor(), [O, A] = useState(!1), [j, M] = useState(""), [N, P] = useState("asc"), [z, B] = useState("bottom"), [U, W] = useState("down"), [G, Z] = useState("150"), [GA, KA] = useState("");
-	return useEffect(() => {
-		O && (M(n.listSettings.sortProp || "__none__"), P(n.listSettings.sortOrder || "asc"), B(n.listSettings.newestPosition || "bottom"), W(n.listSettings.scrollDirection || "down"), KA(n.listSettings.containerHeight ? String(n.listSettings.containerHeight) : ""), Z(String(n.canvasHeight || 150)));
-	}, [O]), useEffect(() => {
-		if (!O) return;
-		let _ = parseInt(G, 10);
-		!isNaN(_) && _ > 0 && n.canvasHeight !== _ && E(_);
-	}, [
-		G,
-		O,
-		E,
-		n.canvasHeight
-	]), /* @__PURE__ */ jsxs(s$4, {
-		open: O,
-		onOpenChange: A,
-		children: [/* @__PURE__ */ jsx(n$3, { children: /* @__PURE__ */ jsxs(o, {
-			variant: "soft",
-			color: "gray",
-			style: {
-				width: "100%",
-				justifyContent: "center",
-				cursor: "pointer"
-			},
-			children: [/* @__PURE__ */ jsx(GearIcon, {}), " Configurações"]
-		}) }), /* @__PURE__ */ jsxs(p$8, {
-			style: { maxWidth: 600 },
-			children: [
-				/* @__PURE__ */ jsx(g$2, { children: "Configurações do Editor" }),
-				/* @__PURE__ */ jsx(m$3, {
-					size: "2",
-					mb: "4",
-					children: "Configure o comportamento da lista."
-				}),
-				/* @__PURE__ */ jsx(p$1, {
-					pt: "3",
-					children: /* @__PURE__ */ jsxs(p, {
-						direction: "column",
-						gap: "3",
-						children: [
-							/* @__PURE__ */ jsx(p$2, {
-								size: "2",
-								weight: "bold",
-								children: "Ordenação"
-							}),
-							/* @__PURE__ */ jsxs(p, {
-								gap: "3",
-								align: "center",
-								children: [/* @__PURE__ */ jsxs(p$1, {
-									flexGrow: "1",
-									children: [/* @__PURE__ */ jsx(p$2, {
-										size: "1",
-										mb: "1",
-										as: "div",
-										children: "Propriedade para Ordenar (ex: data, id)"
-									}), /* @__PURE__ */ jsxs("select", {
-										value: j,
-										onChange: (n) => M(n.target.value),
-										style: {
-											width: "100%",
-											padding: "8px",
-											borderRadius: "4px",
-											border: "1px solid var(--gray-6)",
-											backgroundColor: "var(--gray-2)",
-											color: "var(--gray-12)",
-											fontSize: "14px",
-											outline: "none"
-										},
-										children: [/* @__PURE__ */ jsx("option", {
-											value: "__none__",
-											children: "(Nenhum)"
-										}), n.availableProps.map((n) => /* @__PURE__ */ jsx("option", {
-											value: n.dataName,
-											children: n.name
-										}, n.dataName))]
-									})]
-								}), /* @__PURE__ */ jsxs(p$1, { children: [/* @__PURE__ */ jsx(p$2, {
-									size: "1",
-									mb: "1",
-									as: "div",
-									children: "Direção"
-								}), /* @__PURE__ */ jsxs("select", {
-									value: N,
-									onChange: (n) => P(n.target.value),
-									style: {
-										width: "150px",
-										padding: "8px",
-										borderRadius: "4px",
-										border: "1px solid var(--gray-6)",
-										backgroundColor: "var(--gray-2)",
-										color: "var(--gray-12)",
-										fontSize: "14px",
-										outline: "none"
-									},
-									children: [/* @__PURE__ */ jsx("option", {
-										value: "asc",
-										children: "Crescente (A-Z)"
-									}), /* @__PURE__ */ jsx("option", {
-										value: "desc",
-										children: "Decrescente (Z-A)"
-									})]
-								})] })]
-							}),
-							/* @__PURE__ */ jsxs(p, {
-								gap: "3",
-								align: "center",
-								children: [/* @__PURE__ */ jsxs(p$1, {
-									flexGrow: "1",
-									children: [/* @__PURE__ */ jsx(p$2, {
-										size: "1",
-										mb: "1",
-										as: "div",
-										children: "Posição do Recente"
-									}), /* @__PURE__ */ jsxs("select", {
-										value: z,
-										onChange: (n) => B(n.target.value),
-										style: {
-											width: "100%",
-											padding: "8px",
-											borderRadius: "4px",
-											border: "1px solid var(--gray-6)",
-											backgroundColor: "var(--gray-2)",
-											color: "var(--gray-12)",
-											fontSize: "14px",
-											outline: "none"
-										},
-										children: [/* @__PURE__ */ jsx("option", {
-											value: "top",
-											children: "Topo (Início)"
-										}), /* @__PURE__ */ jsx("option", {
-											value: "bottom",
-											children: "Base (Final)"
-										})]
-									})]
-								}), /* @__PURE__ */ jsxs(p$1, {
-									flexGrow: "1",
-									children: [/* @__PURE__ */ jsx(p$2, {
-										size: "1",
-										mb: "1",
-										as: "div",
-										children: "Comportamento de Rolagem"
-									}), /* @__PURE__ */ jsxs("select", {
-										value: U,
-										onChange: (n) => W(n.target.value),
-										style: {
-											width: "100%",
-											padding: "8px",
-											borderRadius: "4px",
-											border: "1px solid var(--gray-6)",
-											backgroundColor: "var(--gray-2)",
-											color: "var(--gray-12)",
-											fontSize: "14px",
-											outline: "none"
-										},
-										children: [/* @__PURE__ */ jsx("option", {
-											value: "down",
-											children: "Descer (Padrão)"
-										}), /* @__PURE__ */ jsx("option", {
-											value: "up",
-											children: "Subir (Chat)"
-										})]
-									})]
-								})]
-							}),
-							/* @__PURE__ */ jsx(p$2, {
-								size: "2",
-								weight: "bold",
-								mt: "2",
-								children: "Dimensões"
-							}),
-							/* @__PURE__ */ jsxs(p, {
-								gap: "3",
-								align: "center",
-								children: [/* @__PURE__ */ jsxs(p$1, {
-									flexGrow: "1",
-									children: [
-										/* @__PURE__ */ jsx(p$2, {
-											size: "1",
-											mb: "1",
-											as: "div",
-											children: "Altura do Item (Template) (px)"
-										}),
-										/* @__PURE__ */ jsx(u$1, {
-											type: "number",
-											min: "10",
-											value: G,
-											onChange: (n) => Z(n.target.value)
-										}),
-										/* @__PURE__ */ jsx(p$2, {
-											size: "1",
-											color: "gray",
-											children: "Altura de cada item individual na lista."
-										})
-									]
-								}), /* @__PURE__ */ jsxs(p$1, {
-									flexGrow: "1",
-									children: [
-										/* @__PURE__ */ jsx(p$2, {
-											size: "1",
-											mb: "1",
-											as: "div",
-											children: "Altura da Lista (Container) (px)"
-										}),
-										/* @__PURE__ */ jsx(u$1, {
-											type: "number",
-											min: "0",
-											placeholder: "Auto (100%)",
-											value: GA,
-											onChange: (n) => KA(n.target.value)
-										}),
-										/* @__PURE__ */ jsx(p$2, {
-											size: "1",
-											color: "gray",
-											children: "Altura total da lista. Se exceder, rola. Vazio = 100%."
-										})
-									]
-								})]
-							}),
-							/* @__PURE__ */ jsx(p$2, {
-								size: "1",
-								color: "gray",
-								children: "Essa propriedade será usada para ordenar os itens no modo lista."
-							})
-						]
-					})
-				}),
-				/* @__PURE__ */ jsxs(p, {
-					gap: "3",
-					mt: "4",
-					justify: "end",
-					children: [/* @__PURE__ */ jsx(D$2, { children: /* @__PURE__ */ jsx(o, {
-						variant: "soft",
-						color: "gray",
-						children: "Cancelar"
-					}) }), /* @__PURE__ */ jsx(D$2, { children: /* @__PURE__ */ jsx(o, {
-						onClick: () => {
-							let n = parseInt(GA, 10);
-							_({
-								sortProp: j === "__none__" ? "" : j,
-								sortOrder: N,
-								newestPosition: z,
-								scrollDirection: U,
-								containerHeight: !isNaN(n) && n > 0 ? n : void 0
-							}), A(!1);
-						},
-						children: "Salvar Alterações"
-					}) })]
-				})
-			]
 		})]
 	});
 };
 var EditorContent = ({ layout: n, initialState: E, onSave: O, theme: A = "light" }) => {
-	let [j, M] = useState(!0), [N, P] = useState(!0), { addElement: z, loadState: B, state: H } = useEditor();
+	let [j, M] = useState(!0), [N, P] = useState(!0), [z, B] = useState(null), [H, U] = useState(!1), { addElement: W, loadState: G, state: Z, undo: hj, redo: gj, copy: _j, paste: vj, removeSelected: bj, updateElements: xj, selectElement: Sj } = useEditor();
 	React.useEffect(() => {
+		let n = (n) => {
+			if (document.activeElement?.tagName === "INPUT" || document.activeElement?.tagName === "TEXTAREA" || document.activeElement?.isContentEditable) return;
+			let _ = n.clipboardData?.items;
+			if (_) {
+				for (let E = 0; E < _.length; E++) if (_[E].type.indexOf("image") !== -1) {
+					n.preventDefault();
+					let O = _[E].getAsFile();
+					if (O) {
+						let n = new FileReader();
+						n.onload = (n) => {
+							let _ = n.target?.result;
+							W({
+								type: "image",
+								content: _,
+								width: 200,
+								height: 200
+							});
+						}, n.readAsDataURL(O);
+					}
+				}
+			}
+		};
+		return window.addEventListener("paste", n), () => window.removeEventListener("paste", n);
+	}, [W]), React.useEffect(() => {
+		let n = (n) => {
+			if (!(document.activeElement?.tagName === "INPUT" || document.activeElement?.tagName === "TEXTAREA" || document.activeElement?.isContentEditable)) {
+				if ((n.ctrlKey || n.metaKey) && n.key === "z") n.shiftKey ? (n.preventDefault(), gj()) : (n.preventDefault(), hj());
+				else if ((n.ctrlKey || n.metaKey) && n.key === "y") n.preventDefault(), gj();
+				else if ((n.ctrlKey || n.metaKey) && n.key === "c") n.preventDefault(), _j();
+				else if ((n.ctrlKey || n.metaKey) && n.key === "v") n.preventDefault(), vj();
+				else if (n.key === "Delete" || n.key === "Backspace") Z.selectedElementIds.length > 0 && (n.preventDefault(), bj());
+				else if ([
+					"ArrowUp",
+					"ArrowDown",
+					"ArrowLeft",
+					"ArrowRight"
+				].includes(n.key) && Z.selectedElementIds.length > 0) {
+					n.preventDefault();
+					let _ = n.shiftKey ? 10 : 1, E = [];
+					Z.selectedElementIds.forEach((O) => {
+						let A = Z.elements.find((n) => n.id === O);
+						if (A) {
+							let j = {};
+							n.key === "ArrowUp" && (j.y = A.y - _), n.key === "ArrowDown" && (j.y = A.y + _), n.key === "ArrowLeft" && (j.x = A.x - _), n.key === "ArrowRight" && (j.x = A.x + _), E.push({
+								id: O,
+								changes: j
+							});
+						}
+					}), E.length > 0 && xj(E);
+				}
+			}
+		};
+		return window.addEventListener("keydown", n), () => window.removeEventListener("keydown", n);
+	}, [
+		hj,
+		gj,
+		_j,
+		vj,
+		bj,
+		Z.selectedElementIds,
+		Z.elements,
+		xj
+	]), React.useEffect(() => {
 		if (E) try {
 			let n = typeof E == "string" ? JSON.parse(E) : E;
-			Array.isArray(n) ? B({ elements: n }) : n.elements && B(n);
+			Array.isArray(n) ? G({ elements: n }) : n.elements && G(n);
 		} catch (n) {
 			console.error("Failed to load initial state", n);
 		}
-	}, [E, B]);
-	let U = (n) => {
-		console.log(`Adding element of type: ${n}`), z({
+	}, [E, G]);
+	let Cj = (n) => {
+		console.log(`Adding element of type: ${n}`), W({
 			type: n,
 			content: `New ${n}`
 		});
 	};
-	return /* @__PURE__ */ jsx(R, {
+	return /* @__PURE__ */ jsxs(R, {
 		appearance: A,
 		accentColor: "blue",
 		grayColor: "slate",
 		radius: "medium",
 		scaling: "100%",
-		children: /* @__PURE__ */ jsxs(p, {
+		children: [/* @__PURE__ */ jsxs(p$1, {
 			direction: "row",
 			style: {
 				height: "100vh",
@@ -15663,7 +16543,7 @@ var EditorContent = ({ layout: n, initialState: E, onSave: O, theme: A = "light"
 				overflow: "hidden",
 				backgroundColor: "var(--color-background)"
 			},
-			children: [N && /* @__PURE__ */ jsxs(p, {
+			children: [N && /* @__PURE__ */ jsxs(p$1, {
 				direction: "column",
 				width: "280px",
 				style: {
@@ -15672,16 +16552,16 @@ var EditorContent = ({ layout: n, initialState: E, onSave: O, theme: A = "light"
 					flexShrink: 0,
 					height: "100%"
 				},
-				children: [/* @__PURE__ */ jsx(p$1, {
+				children: [/* @__PURE__ */ jsx(p, {
 					p: "4",
 					style: {
 						borderBottom: "1px solid var(--gray-5)",
 						backgroundColor: "var(--gray-2)"
 					},
-					children: /* @__PURE__ */ jsx(p, {
+					children: /* @__PURE__ */ jsx(p$1, {
 						direction: "column",
 						gap: "3",
-						children: /* @__PURE__ */ jsxs(p$1, { children: [
+						children: /* @__PURE__ */ jsxs(p, { children: [
 							/* @__PURE__ */ jsx(p$2, {
 								size: "2",
 								weight: "bold",
@@ -15704,15 +16584,15 @@ var EditorContent = ({ layout: n, initialState: E, onSave: O, theme: A = "light"
 								style: { width: "240px" },
 								children: [
 									/* @__PURE__ */ jsx(v$3, {
-										onSelect: () => U("text"),
+										onSelect: () => Cj("text"),
 										children: "Texto"
 									}),
 									/* @__PURE__ */ jsx(v$3, {
-										onSelect: () => U("image"),
+										onSelect: () => Cj("image"),
 										children: "Imagem"
 									}),
 									/* @__PURE__ */ jsx(v$3, {
-										onSelect: () => U("box"),
+										onSelect: () => Cj("box"),
 										children: "Caixa (Container)"
 									})
 								]
@@ -15728,19 +16608,19 @@ var EditorContent = ({ layout: n, initialState: E, onSave: O, theme: A = "light"
 								onClick: () => {
 									if (O) {
 										let n = {
-											elements: H.elements,
-											isList: H.isList,
-											mockData: H.mockData,
-											singleMockData: H.singleMockData,
-											listSettings: H.listSettings,
-											canvasHeight: H.canvasHeight
+											elements: Z.elements,
+											isList: Z.isList,
+											mockData: Z.mockData,
+											singleMockData: Z.singleMockData,
+											listSettings: Z.listSettings,
+											canvasHeight: Z.canvasHeight
 										};
 										O(JSON.stringify(n, null, 2));
 									}
 								},
 								children: [/* @__PURE__ */ jsx(Share1Icon, {}), " Salvar Alterações"]
 							}),
-							/* @__PURE__ */ jsx(p$1, {
+							/* @__PURE__ */ jsx(p, {
 								mt: "2",
 								children: /* @__PURE__ */ jsx(EditorSettings, {})
 							})
@@ -15750,63 +16630,124 @@ var EditorContent = ({ layout: n, initialState: E, onSave: O, theme: A = "light"
 					type: "auto",
 					scrollbars: "vertical",
 					style: { flex: 1 },
-					children: /* @__PURE__ */ jsx(p, {
+					children: /* @__PURE__ */ jsxs(p$1, {
 						direction: "column",
 						gap: "4",
 						p: "4",
-						children: /* @__PURE__ */ jsxs(p$1, { children: [
-							/* @__PURE__ */ jsx(p$2, {
+						children: [
+							/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
 								size: "2",
 								weight: "bold",
 								mb: "2",
 								as: "div",
-								children: "Variáveis Disponíveis"
-							}),
-							/* @__PURE__ */ jsx(p$2, {
-								size: "1",
-								color: "gray",
-								mb: "2",
-								as: "div",
-								children: "Clique para copiar ou arraste (futuramente)"
-							}),
-							/* @__PURE__ */ jsxs(p, {
+								children: "Elementos"
+							}), /* @__PURE__ */ jsxs(p$1, {
 								direction: "column",
 								gap: "2",
-								children: [n.props.map((n, _) => /* @__PURE__ */ jsxs(e, {
-									color: "blue",
-									variant: "soft",
+								children: [Z.elements.map((n) => /* @__PURE__ */ jsx(o, {
+									variant: Z.selectedElementIds.includes(n.id) ? "solid" : "soft",
+									color: "gray",
 									size: "2",
 									style: {
-										padding: "8px",
-										justifyContent: "flex-start"
+										justifyContent: "flex-start",
+										cursor: "pointer",
+										overflow: "hidden"
 									},
-									title: n.dataName,
-									children: [n.name, /* @__PURE__ */ jsx(p$2, {
-										color: "gray",
+									onClick: (_) => {
+										Sj(n.id, _.shiftKey), B(n.id), U(!0);
+									},
+									children: /* @__PURE__ */ jsxs(p$1, {
+										gap: "2",
+										align: "center",
 										style: {
-											marginLeft: "auto",
-											fontSize: "10px"
+											width: "100%",
+											overflow: "hidden"
 										},
-										children: `{{${n.dataName}}}`
-									})]
-								}, _)), n.props.length === 0 && /* @__PURE__ */ jsx(p$2, {
+										children: [
+											n.type === "text" && /* @__PURE__ */ jsx(TextIcon, {}),
+											n.type === "image" && /* @__PURE__ */ jsx(ImageIcon, {}),
+											n.type === "box" && /* @__PURE__ */ jsx(BoxIcon, {}),
+											/* @__PURE__ */ jsx(p$2, {
+												truncate: !0,
+												style: {
+													flex: 1,
+													textAlign: "left"
+												},
+												children: n.type === "text" ? n.content.length > 20 ? n.content.substring(0, 20) + "..." : n.content : n.type === "image" ? "Imagem" : "Container"
+											})
+										]
+									})
+								}, n.id)), Z.elements.length === 0 && /* @__PURE__ */ jsx(p$2, {
 									size: "1",
 									color: "gray",
 									style: { fontStyle: "italic" },
-									children: "Nenhuma variável configurada."
+									children: "Nenhum elemento adicionado."
 								})]
-							})
-						] })
+							})] }),
+							/* @__PURE__ */ jsx(o$2, { size: "4" }),
+							/* @__PURE__ */ jsxs(p, { children: [
+								/* @__PURE__ */ jsx(p$2, {
+									size: "2",
+									weight: "bold",
+									mb: "2",
+									as: "div",
+									children: "Variáveis Disponíveis"
+								}),
+								/* @__PURE__ */ jsx(p$2, {
+									size: "1",
+									color: "gray",
+									mb: "2",
+									as: "div",
+									children: "Clique para copiar ou arraste"
+								}),
+								/* @__PURE__ */ jsxs(p$1, {
+									direction: "column",
+									gap: "2",
+									children: [n.props.map((n, _) => /* @__PURE__ */ jsxs(e, {
+										color: "blue",
+										variant: "soft",
+										size: "2",
+										style: {
+											padding: "8px",
+											justifyContent: "flex-start",
+											cursor: "grab"
+										},
+										title: `Clique para copiar {{${n.dataName}}}`,
+										draggable: !0,
+										onDragStart: (_) => {
+											_.dataTransfer.setData("application/x-editor-prop", n.dataName), _.dataTransfer.effectAllowed = "copy";
+										},
+										onClick: () => {
+											let _ = `{{${n.dataName}}}`;
+											navigator.clipboard.writeText(_);
+										},
+										children: [n.name, /* @__PURE__ */ jsx(p$2, {
+											color: "gray",
+											style: {
+												marginLeft: "auto",
+												fontSize: "10px"
+											},
+											children: `{{${n.dataName}}}`
+										})]
+									}, _)), n.props.length === 0 && /* @__PURE__ */ jsx(p$2, {
+										size: "1",
+										color: "gray",
+										style: { fontStyle: "italic" },
+										children: "Nenhuma variável configurada."
+									})]
+								})
+							] })
+						]
 					})
 				})]
-			}), /* @__PURE__ */ jsxs(p$1, {
+			}), /* @__PURE__ */ jsxs(p, {
 				style: {
 					flex: 1,
 					position: "relative",
 					height: "100%"
 				},
 				children: [
-					/* @__PURE__ */ jsx(p$1, {
+					/* @__PURE__ */ jsx(p, {
 						style: {
 							position: "absolute",
 							top: 10,
@@ -15822,7 +16763,7 @@ var EditorContent = ({ layout: n, initialState: E, onSave: O, theme: A = "light"
 							children: jsx(N ? DoubleArrowLeftIcon : DoubleArrowRightIcon, {})
 						})
 					}),
-					/* @__PURE__ */ jsx(p, {
+					/* @__PURE__ */ jsx(p$1, {
 						style: {
 							position: "absolute",
 							top: 10,
@@ -15849,7 +16790,7 @@ var EditorContent = ({ layout: n, initialState: E, onSave: O, theme: A = "light"
 							/* @__PURE__ */ jsx(kt, {
 								defaultSize: 50,
 								minSize: 20,
-								children: /* @__PURE__ */ jsx(p$1, {
+								children: /* @__PURE__ */ jsx(p, {
 									style: {
 										height: "100%",
 										width: "100%",
@@ -15867,7 +16808,7 @@ var EditorContent = ({ layout: n, initialState: E, onSave: O, theme: A = "light"
 							j && /* @__PURE__ */ jsx(kt, {
 								defaultSize: 50,
 								minSize: 20,
-								children: /* @__PURE__ */ jsx(p$1, {
+								children: /* @__PURE__ */ jsx(p, {
 									style: {
 										height: "100%",
 										width: "100%",
@@ -15881,7 +16822,11 @@ var EditorContent = ({ layout: n, initialState: E, onSave: O, theme: A = "light"
 					})
 				]
 			})]
-		})
+		}), z && /* @__PURE__ */ jsx(ElementAdvancedSettings, {
+			elementId: z,
+			open: H,
+			onOpenChange: U
+		})]
 	});
 };
 const GenericEditor = (n) => /* @__PURE__ */ jsx(EditorProvider, {
@@ -15889,5 +16834,5 @@ const GenericEditor = (n) => /* @__PURE__ */ jsx(EditorProvider, {
 	availableProps: n.layout.props,
 	theme: n.theme,
 	children: /* @__PURE__ */ jsx(EditorContent, { ...n })
-}), generateHTML = (n, _, E = {}) => Function("elements", "data", "options", getRendererCode() + "\nreturn renderTemplate(elements, data, options);")(n, _, E), getRendererCode = () => "\n/**\n * Render Template\n * @param {Array} elements - The JSON configuration of elements\n * @param {Object|Array} data - The data object to inject (Object for single, Array for list)\n * @param {Object} options - { isList: boolean, listSettings: { sortProp: string, sortOrder: 'asc'|'desc', newestPosition: 'top'|'bottom', scrollDirection: 'up'|'down', containerHeight: number }, canvasHeight: number }\n * @returns {string} - The generated HTML string\n */\nfunction renderTemplate(elements, data, options = {}) {\n    const { isList, listSettings, canvasHeight } = options;\n\n    const formatValue = (value, formatting) => {\n        if (!formatting || formatting.type === 'text') return value !== undefined && value !== null ? String(value) : '';\n        if (value === undefined || value === null) return '';\n\n        if (formatting.type === 'boolean') {\n             const isTrue = String(value) === 'true' || value === true || (typeof value === 'number' && value > 0);\n             return isTrue ? (formatting.trueLabel || 'Sim') : (formatting.falseLabel || 'Não');\n        }\n\n        if (formatting.type === 'date') {\n            try {\n                const date = new Date(value);\n                if (isNaN(date.getTime())) return String(value);\n                \n                if (formatting.dateFormat) {\n                     const d = date.getDate().toString().padStart(2, '0');\n                     const m = (date.getMonth() + 1).toString().padStart(2, '0');\n                     const y = date.getFullYear();\n                     const H = date.getHours().toString().padStart(2, '0');\n                     const M = date.getMinutes().toString().padStart(2, '0');\n                     const S = date.getSeconds().toString().padStart(2, '0');\n                     \n                     return formatting.dateFormat\n                        .replace('DD', d)\n                        .replace('MM', m)\n                        .replace('YYYY', String(y))\n                        .replace('HH', H)\n                        .replace('mm', M)\n                        .replace('ss', S);\n                }\n                return date.toLocaleDateString();\n            } catch (e) { return String(value); }\n        }\n\n        if (formatting.type === 'number') {\n             const num = parseFloat(value);\n             if (isNaN(num)) return String(value);\n             \n             if (formatting.numberFormat === 'currency') {\n                 return (formatting.currencySymbol || 'R$') + ' ' + num.toFixed(formatting.decimalPlaces || 2);\n             }\n             if (formatting.numberFormat === 'percent') {\n                 return num.toFixed(formatting.decimalPlaces || 0) + '%';\n             }\n             if (formatting.decimalPlaces !== undefined) {\n                 return num.toFixed(formatting.decimalPlaces);\n             }\n             return num.toFixed(formatting.decimalPlaces || 0);\n        }\n        \n        return String(value);\n    };\n\n    const checkCondition = (propValue, operator, ruleValue) => {\n        const val = String(propValue).toLowerCase();\n        const target = String(ruleValue).toLowerCase();\n        \n        switch (operator) {\n            case 'equals': return val === target;\n            case 'notEquals': return val !== target;\n            case 'contains': return val.includes(target);\n            case 'greaterThan': return parseFloat(val) > parseFloat(target);\n            case 'lessThan': return parseFloat(val) < parseFloat(target);\n            case 'truthy': return !!propValue;\n            case 'falsy': return !propValue;\n            default: return false;\n        }\n    };\n\n    const camelToKebab = (string) => {\n        return string.replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, '$1-$2').toLowerCase();\n    };\n\n    const hex8ToRgba = (hex) => {\n        const m = /^#([0-9a-fA-F]{8})$/.exec(hex);\n        if (!m) return hex;\n        const h = m[1];\n        const r = parseInt(h.slice(0, 2), 16);\n        const g = parseInt(h.slice(2, 4), 16);\n        const b = parseInt(h.slice(4, 6), 16);\n        const a = parseInt(h.slice(6, 8), 16) / 255;\n        return `rgba(${r}, ${g}, ${b}, ${a})`;\n    };\n\n    const styleObjectToString = (style) => {\n        if (!style) return '';\n        const pxProps = ['width', 'height', 'top', 'left', 'right', 'bottom', 'fontSize', 'borderRadius', 'padding', 'margin', 'borderWidth'];\n        \n        return Object.entries(style)\n            .map(([key, value]) => {\n                if (value === undefined || value === null) return '';\n                const cssKey = camelToKebab(key);\n                let cssValue = (typeof value === 'number' && pxProps.includes(key)) ? value + 'px' : value;\n                if (typeof cssValue === 'string') {\n                    if (/^#([0-9a-fA-F]{8})$/.test(cssValue)) {\n                        cssValue = hex8ToRgba(cssValue);\n                    }\n                }\n                return `${cssKey}: ${cssValue}`;\n            })\n            .filter(Boolean)\n            .join('; ');\n    };\n\n    const renderItem = (itemData, index = 0, offsetY = 0) => {\n        return elements.map(element => {\n            let content = element.content;\n            let imgSrc = '';\n\n            // Resolve Content & Formatting\n            if (element.type === 'text') {\n                content = content.replace(/\\{\\{(.*?)\\}\\}/g, (match, key) => {\n                    const val = itemData[key.trim()];\n                    if (val === undefined || val === null) return match;\n                    if (element.formatting) {\n                        return formatValue(val, element.formatting);\n                    }\n                    return String(val);\n                });\n            } else if (element.type === 'image') {\n                 if (element.dataBinding) {\n                    const val = itemData[element.dataBinding];\n                    if (val !== undefined && val !== null) {\n                        imgSrc = String(val);\n                    } else {\n                        imgSrc = content;\n                    }\n                 } else {\n                     imgSrc = content.replace(/\\{\\{(.*?)\\}\\}/g, (match, key) => {\n                        const val = itemData[key.trim()];\n                        return val !== undefined && val !== null ? String(val) : match;\n                    });\n                 }\n            }\n\n            // Resolve Conditional Styles\n            let conditionalStyles = {};\n            if (element.conditions) {\n                element.conditions.forEach(rule => {\n                    const propVal = itemData[rule.property];\n                    if (checkCondition(propVal, rule.operator, rule.value)) {\n                         conditionalStyles = { ...conditionalStyles, ...rule.style };\n                    }\n                });\n            }\n\n            const baseStyle = {\n                position: 'absolute',\n                left: element.x,\n                top: element.y + offsetY,\n                width: element.width,\n                height: element.autoGrow ? 'auto' : element.height,\n                transform: element.rotation ? `rotate(${element.rotation}deg)` : undefined,\n                overflow: element.autoGrow ? 'visible' : 'hidden',\n                whiteSpace: element.autoGrow ? 'pre-wrap' : undefined,\n                wordBreak: element.autoGrow ? 'break-word' : undefined,\n                ...element.style,\n                ...conditionalStyles\n            };\n            \n            // Fix: remove padding if it's not explicitly set, or handle it for text\n            if (element.type === 'text' && !baseStyle.padding) {\n                // baseStyle.padding = '8px'; // Removed default padding to respect resize box\n            }\n            \n            const styleString = styleObjectToString(baseStyle);\n\n            if (element.type === 'text') {\n                return `<div style=\"${styleString}\">${content}</div>`;\n            } else if (element.type === 'image') {\n                const imgStyle = styleObjectToString({\n                    width: '100%',\n                    height: '100%',\n                    objectFit: element.style?.objectFit || 'cover',\n                    display: 'block'\n                });\n                return `<div style=\"${styleString}\"><img src=\"${imgSrc}\" alt=\"Element\" style=\"${imgStyle}\" /></div>`;\n            } else if (element.type === 'box') {\n                 return `<div style=\"${styleString}\"></div>`;\n            }\n            return '';\n        }).join('\\n');\n    };\n\n    if (isList && Array.isArray(data)) {\n        // Calculate item height\n        const itemHeight = canvasHeight || Math.max(...elements.map(el => el.y + el.height));\n\n        // Sort data\n        let listData = [...data];\n        if (listSettings && listSettings.sortProp) {\n            const prop = listSettings.sortProp;\n            const order = listSettings.sortOrder === 'asc' ? 1 : -1;\n            listData.sort((a, b) => {\n                const valA = a[prop];\n                const valB = b[prop];\n                if (valA < valB) return -1 * order;\n                if (valA > valB) return 1 * order;\n                return 0;\n            });\n        }\n        \n        // Handle newest position\n        if (listSettings && listSettings.newestPosition === 'top') {\n             listData.reverse();\n        }\n\n        // Generate HTML for all items\n        const itemsHtml = listData.map((item, index) => {\n             const itemHtml = renderItem(item, index, 0); \n             const itemContainerStyle = styleObjectToString({\n                 position: 'relative',\n                 height: itemHeight,\n                 width: '100%',\n                 marginBottom: 0\n             });\n             \n             return `<div class=\"list-item\" style=\"${itemContainerStyle}\">${itemHtml}</div>`;\n        }).join('\\n');\n\n        // Animation Styles based on settings\n        const scrollDirection = (listSettings && listSettings.scrollDirection) || 'down';\n        const containerHeight = (listSettings && listSettings.containerHeight) ? listSettings.containerHeight + 'px' : '100%';\n        \n        const justify = (listSettings && listSettings.newestPosition === 'top') ? 'flex-start' : 'flex-end';\n\n        const animationCss = `\n            @keyframes slideIn {\n                from { opacity: 0; transform: translateY(20px); }\n                to { opacity: 1; transform: translateY(0); }\n            }\n            .list-wrapper {\n                display: flex;\n                flex-direction: column;\n                justify-content: ${justify};\n                height: ${containerHeight};\n                width: 100%;\n                overflow-y: auto;\n                overflow-x: hidden;\n                box-sizing: border-box;\n                padding: 10px;\n            }\n            .list-item {\n                flex-shrink: 0;\n                animation: slideIn 0.3s ease-out;\n                margin-bottom: 10px;\n                width: 100%;\n                position: relative;\n            }\n        `;\n        \n        const scrollScript = scrollDirection === 'up' \n            ? `<script>\n                document.addEventListener('DOMContentLoaded', () => {\n                    const wrapper = document.querySelector('.list-wrapper');\n                    if(wrapper) wrapper.scrollTop = wrapper.scrollHeight;\n                });\n               <\/script>`\n            : '';\n\n        // Inject Smart Script for Dynamic Updates\n        const injectionScript = `\n            <script>\n            (function() {\n                try {\n                    const elements = ${JSON.stringify(elements)};\n                    const formatValue = ${formatValue.toString()};\n                    const checkCondition = ${checkCondition.toString()};\n                    const camelToKebab = ${camelToKebab.toString()};\n                    const hex8ToRgba = ${hex8ToRgba.toString()};\n                    const styleObjectToString = ${styleObjectToString.toString()};\n                    const renderItem = ${renderItem.toString()};\n\n                    const itemHeight = ${itemHeight};\n                    const newestPosition = \"${(listSettings && listSettings.newestPosition) || 'bottom'}\";\n                    const scrollDirection = \"${(listSettings && listSettings.scrollDirection) || 'down'}\";\n\n                    window.addItem = function(data) {\n                        const wrapper = document.querySelector('.list-wrapper');\n                        if (!wrapper) return;\n\n                        const itemHtml = renderItem(data, 0, 0);\n                        const itemContainerStyle = styleObjectToString({\n                            position: 'relative',\n                            height: itemHeight,\n                            width: '100%',\n                            marginBottom: 0\n                        });\n\n                        const div = document.createElement('div');\n                        div.className = 'list-item';\n                        div.setAttribute('style', itemContainerStyle);\n                        div.innerHTML = itemHtml;\n\n                        if (newestPosition === 'top') {\n                            wrapper.insertBefore(div, wrapper.firstChild);\n                        } else {\n                            wrapper.appendChild(div);\n                        }\n                        \n                        if (scrollDirection === 'up') {\n                           wrapper.scrollTop = wrapper.scrollHeight;\n                        }\n                    };\n                } catch(e) { console.error(\"Smart List Init Error\", e); }\n            })();\n            <\/script>\n        `;\n\n        return `\n            <style>${animationCss}</style>\n            <div class=\"list-wrapper\">\n                ${itemsHtml}\n            </div>\n            ${scrollScript}\n            ${injectionScript}\n        `;\n    }\n\n    // Single Item\n    const contentHtml = renderItem(data);\n    return `<div style=\"position: relative; width: 100%; height: 100%; overflow: hidden;\">${contentHtml}</div>`;\n}\n";
+}), generateHTML = (n, _, E = {}) => Function("elements", "data", "options", getRendererCode() + "\nreturn renderTemplate(elements, data, options);")(n, _, E), getRendererCode = () => "\n/**\n * Render Template\n * @param {Array} elements - The JSON configuration of elements\n * @param {Object|Array} data - The data object to inject (Object for single, Array for list)\n * @param {Object} options - { isList: boolean, listSettings: { sortProp: string, sortOrder: 'asc'|'desc', newestPosition: 'top'|'bottom', scrollDirection: 'up'|'down', containerHeight: number }, canvasHeight: number }\n * @returns {string} - The generated HTML string\n */\nfunction renderTemplate(elements, data, options = {}) {\n    const { isList, listSettings, canvasHeight } = options;\n\n    const formatValue = (value, formatting) => {\n        if (!formatting || formatting.type === 'text') return value !== undefined && value !== null ? String(value) : '';\n        if (value === undefined || value === null) return '';\n\n        if (formatting.type === 'boolean') {\n             const isTrue = String(value) === 'true' || value === true || (typeof value === 'number' && value > 0);\n             return isTrue ? (formatting.trueLabel || 'Sim') : (formatting.falseLabel || 'Não');\n        }\n\n        if (formatting.type === 'date') {\n            try {\n                const date = new Date(value);\n                if (isNaN(date.getTime())) return String(value);\n                \n                if (formatting.dateFormat) {\n                     const d = date.getDate().toString().padStart(2, '0');\n                     const m = (date.getMonth() + 1).toString().padStart(2, '0');\n                     const y = date.getFullYear();\n                     const H = date.getHours().toString().padStart(2, '0');\n                     const M = date.getMinutes().toString().padStart(2, '0');\n                     const S = date.getSeconds().toString().padStart(2, '0');\n                     \n                     return formatting.dateFormat\n                        .replace('DD', d)\n                        .replace('MM', m)\n                        .replace('YYYY', String(y))\n                        .replace('HH', H)\n                        .replace('mm', M)\n                        .replace('ss', S);\n                }\n                return date.toLocaleDateString();\n            } catch (e) { return String(value); }\n        }\n\n        if (formatting.type === 'number') {\n             const num = parseFloat(value);\n             if (isNaN(num)) return String(value);\n             \n             if (formatting.numberFormat === 'currency') {\n                 return (formatting.currencySymbol || 'R$') + ' ' + num.toFixed(formatting.decimalPlaces || 2);\n             }\n             if (formatting.numberFormat === 'percent') {\n                 return num.toFixed(formatting.decimalPlaces || 0) + '%';\n             }\n             if (formatting.decimalPlaces !== undefined) {\n                 return num.toFixed(formatting.decimalPlaces);\n             }\n             return num.toFixed(formatting.decimalPlaces || 0);\n        }\n        \n        return String(value);\n    };\n\n    const checkCondition = (propValue, operator, ruleValue) => {\n        const val = String(propValue).toLowerCase();\n        const target = String(ruleValue).toLowerCase();\n        \n        switch (operator) {\n            case 'equals': return val === target;\n            case 'notEquals': return val !== target;\n            case 'contains': return val.includes(target);\n            case 'greaterThan': return parseFloat(val) > parseFloat(target);\n            case 'lessThan': return parseFloat(val) < parseFloat(target);\n            case 'truthy': return !!propValue;\n            case 'falsy': return !propValue;\n            default: return false;\n        }\n    };\n\n    const camelToKebab = (string) => {\n        return string.replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, '$1-$2').toLowerCase();\n    };\n\n    const hex8ToRgba = (hex) => {\n        const m = /^#([0-9a-fA-F]{8})$/.exec(hex);\n        if (!m) return hex;\n        const h = m[1];\n        const r = parseInt(h.slice(0, 2), 16);\n        const g = parseInt(h.slice(2, 4), 16);\n        const b = parseInt(h.slice(4, 6), 16);\n        const a = parseInt(h.slice(6, 8), 16) / 255;\n        return `rgba(${r}, ${g}, ${b}, ${a})`;\n    };\n\n    const styleObjectToString = (style) => {\n        if (!style) return '';\n        const pxProps = ['width', 'height', 'top', 'left', 'right', 'bottom', 'fontSize', 'borderRadius', 'padding', 'margin', 'borderWidth'];\n        \n        return Object.entries(style)\n            .map(([key, value]) => {\n                if (value === undefined || value === null) return '';\n                const cssKey = camelToKebab(key);\n                let cssValue = (typeof value === 'number' && pxProps.includes(key)) ? value + 'px' : value;\n                if (typeof cssValue === 'string') {\n                    if (/^#([0-9a-fA-F]{8})$/.test(cssValue)) {\n                        cssValue = hex8ToRgba(cssValue);\n                    }\n                }\n                return `${cssKey}: ${cssValue}`;\n            })\n            .filter(Boolean)\n            .join('; ');\n    };\n\n    const getAnimationStyles = (anim) => {\n        if (!anim || anim.type === 'none') return {};\n        return {\n            animationName: anim.type,\n            animationDuration: (anim.duration || 1) + 's',\n            animationDelay: (anim.delay || 0) + 's',\n            animationIterationCount: anim.iterationCount || 1,\n            animationTimingFunction: anim.timingFunction || 'ease',\n            animationFillMode: 'both'\n        };\n    };\n\n    const keyframesCss = `\n    @keyframes slideIn {\n                from { opacity: 0; transform: translateY(20px); }\n                to { opacity: 1; transform: translateY(0); }\n    }\n    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }\n    @keyframes slideInLeft { from { opacity: 0; transform: translateX(-50px); } to { opacity: 1; transform: translateX(0); } }\n    @keyframes slideInRight { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }\n    @keyframes slideInUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }\n    @keyframes slideInDown { from { opacity: 0; transform: translateY(-50px); } to { opacity: 1; transform: translateY(0); } }\n    @keyframes zoomIn { from { opacity: 0; transform: scale(0.5); } to { opacity: 1; transform: scale(1); } }\n    @keyframes bounceIn {\n        0% { opacity: 0; transform: scale(0.3); }\n        50% { opacity: 1; transform: scale(1.05); }\n        70% { transform: scale(0.9); }\n        100% { transform: scale(1); }\n    }\n    @keyframes pulse {\n        0% { transform: scale(1); }\n        50% { transform: scale(1.05); }\n        100% { transform: scale(1); }\n    }\n    @keyframes shake {\n        0%, 100% { transform: translateX(0); }\n        10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }\n        20%, 40%, 60%, 80% { transform: translateX(5px); }\n    }\n    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }\n    `;\n\n    const renderItem = (itemData, index = 0, offsetY = 0) => {\n        return elements.map(element => {\n            let content = element.content;\n            let imgSrc = '';\n\n            // Resolve Content & Formatting\n            if (element.type === 'text') {\n                content = content.replace(/\\{\\{(.*?)\\}\\}/g, (match, key) => {\n                    const val = itemData[key.trim()];\n                    if (val === undefined || val === null) return match;\n                    if (element.formatting) {\n                        return formatValue(val, element.formatting);\n                    }\n                    return String(val);\n                });\n            } else if (element.type === 'image') {\n                 if (element.dataBinding) {\n                    const val = itemData[element.dataBinding];\n                    if (val !== undefined && val !== null) {\n                        imgSrc = String(val);\n                    } else {\n                        imgSrc = content;\n                    }\n                 } else {\n                     imgSrc = content.replace(/\\{\\{(.*?)\\}\\}/g, (match, key) => {\n                        const val = itemData[key.trim()];\n                        return val !== undefined && val !== null ? String(val) : match;\n                    });\n                 }\n            }\n\n            // Resolve Conditional Styles\n            let conditionalStyles = {};\n            if (element.conditions) {\n                element.conditions.forEach(rule => {\n                    const propVal = itemData[rule.property];\n                    if (checkCondition(propVal, rule.operator, rule.value)) {\n                         conditionalStyles = { ...conditionalStyles, ...rule.style };\n                    }\n                });\n            }\n\n            const baseStyle = {\n                position: 'absolute',\n                left: element.x,\n                top: element.y + offsetY,\n                width: element.width,\n                height: element.autoGrow ? 'auto' : element.height,\n                transform: element.rotation ? `rotate(${element.rotation}deg)` : undefined,\n                overflow: element.autoGrow ? 'visible' : 'hidden',\n                whiteSpace: element.autoGrow ? 'pre-wrap' : undefined,\n                wordBreak: element.autoGrow ? 'break-word' : undefined,\n                ...element.style,\n                ...conditionalStyles\n            };\n            \n            // Fix: remove padding if it's not explicitly set, or handle it for text\n            if (element.type === 'text' && !baseStyle.padding) {\n                // baseStyle.padding = '8px'; // Removed default padding to respect resize box\n            }\n            \n            const styleString = styleObjectToString(baseStyle);\n\n            if (element.type === 'text') {\n                return `<div style=\"${styleString}\">${content}</div>`;\n            } else if (element.type === 'image') {\n                const imgStyle = styleObjectToString({\n                    width: '100%',\n                    height: '100%',\n                    objectFit: element.style?.objectFit || 'cover',\n                    display: 'block'\n                });\n                return `<div style=\"${styleString}\"><img src=\"${imgSrc}\" alt=\"Element\" style=\"${imgStyle}\" /></div>`;\n            } else if (element.type === 'box') {\n                 return `<div style=\"${styleString}\"></div>`;\n            }\n            return '';\n        }).join('\\n');\n    };\n\n    if (isList && Array.isArray(data)) {\n        // Calculate item height\n        const itemHeight = canvasHeight || Math.max(...elements.map(el => el.y + el.height));\n\n        // Sort data\n        let listData = [...data];\n        if (listSettings && listSettings.sortProp) {\n            const prop = listSettings.sortProp;\n            const order = listSettings.sortOrder === 'asc' ? 1 : -1;\n            listData.sort((a, b) => {\n                const valA = a[prop];\n                const valB = b[prop];\n                if (valA < valB) return -1 * order;\n                if (valA > valB) return 1 * order;\n                return 0;\n            });\n        }\n        \n        // Handle newest position\n        if (listSettings && listSettings.newestPosition === 'top') {\n             listData.reverse();\n        }\n\n        // Generate HTML for all items\n        const itemsHtml = listData.map((item, index) => {\n             const itemHtml = renderItem(item, index, 0); \n             const itemContainerStyle = styleObjectToString({\n                 position: 'relative',\n                 height: itemHeight,\n                 width: '100%',\n                 marginBottom: 0\n             });\n             \n             return `<div class=\"list-item\" style=\"${itemContainerStyle}\">${itemHtml}</div>`;\n        }).join('\\n');\n\n        // Animation Styles based on settings\n        const scrollDirection = (listSettings && listSettings.scrollDirection) || 'down';\n        const containerHeight = (listSettings && listSettings.containerHeight) ? listSettings.containerHeight + 'px' : '100%';\n        \n        const justify = (listSettings && listSettings.newestPosition === 'top') ? 'flex-start' : 'flex-end';\n\n        // Entry Animation from settings\n        const entryAnim = listSettings && listSettings.entryAnimation ? listSettings.entryAnimation : { type: 'slideIn', duration: 0.3, timingFunction: 'ease-out' };\n        const entryAnimName = entryAnim.type === 'none' ? 'none' : entryAnim.type;\n        const entryAnimDuration = entryAnim.duration + 's';\n        const entryAnimTiming = entryAnim.timingFunction || 'ease-out';\n\n        const animationCss = `\n            ${keyframesCss}\n\n            .list-wrapper {\n                display: flex;\n                flex-direction: column;\n                justify-content: ${justify};\n                height: ${containerHeight};\n                width: 100%;\n                overflow-y: auto;\n                overflow-x: hidden;\n                box-sizing: border-box;\n                padding: 10px;\n            }\n            .list-item {\n                flex-shrink: 0;\n                animation: ${entryAnimName} ${entryAnimDuration} ${entryAnimTiming};\n                margin-bottom: 10px;\n                width: 100%;\n                position: relative;\n            }\n        `;\n        \n        const scrollScript = scrollDirection === 'up' \n            ? `<script>\n                document.addEventListener('DOMContentLoaded', () => {\n                    const wrapper = document.querySelector('.list-wrapper');\n                    if(wrapper) wrapper.scrollTop = wrapper.scrollHeight;\n                });\n               <\/script>`\n            : '';\n\n        // Inject Smart Script for Dynamic Updates\n        const injectionScript = `\n            <script>\n            (function() {\n                try {\n                    const elements = ${JSON.stringify(elements)};\n                    const formatValue = ${formatValue.toString()};\n                    const checkCondition = ${checkCondition.toString()};\n                    const camelToKebab = ${camelToKebab.toString()};\n                    const hex8ToRgba = ${hex8ToRgba.toString()};\n                    const styleObjectToString = ${styleObjectToString.toString()};\n                    const getAnimationStyles = ${getAnimationStyles.toString()};\n                    const renderItem = ${renderItem.toString()};\n\n                    const itemHeight = ${itemHeight};\n                    const newestPosition = \"${(listSettings && listSettings.newestPosition) || 'bottom'}\";\n                    const scrollDirection = \"${(listSettings && listSettings.scrollDirection) || 'down'}\";\n\n                    window.addItem = function(data) {\n                        const wrapper = document.querySelector('.list-wrapper');\n                        if (!wrapper) return;\n\n                        const itemHtml = renderItem(data, 0, 0);\n                        const itemContainerStyle = styleObjectToString({\n                            position: 'relative',\n                            height: itemHeight,\n                            width: '100%',\n                            marginBottom: 0\n                        });\n\n                        const div = document.createElement('div');\n                        div.className = 'list-item';\n                        div.setAttribute('style', itemContainerStyle);\n                        div.innerHTML = itemHtml;\n\n                        if (newestPosition === 'top') {\n                            wrapper.insertBefore(div, wrapper.firstChild);\n                        } else {\n                            wrapper.appendChild(div);\n                        }\n                        \n                        if (scrollDirection === 'up') {\n                           wrapper.scrollTop = wrapper.scrollHeight;\n                        }\n                    };\n                } catch(e) { console.error(\"Smart List Init Error\", e); }\n            })();\n            <\/script>\n        `;\n\n        return `\n            <style>${animationCss}</style>\n            <div class=\"list-wrapper\">\n                ${itemsHtml}\n            </div>\n            ${scrollScript}\n            ${injectionScript}\n        `;\n    }\n\n    // Single Item\n    const contentHtml = renderItem(data);\n    return `<div style=\"position: relative; width: 100%; height: 100%; overflow: hidden;\">${contentHtml}</div>`;\n}\n";
 export { GenericEditor as EditorContent, generateHTML };

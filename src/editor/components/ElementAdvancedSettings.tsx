@@ -1,7 +1,7 @@
 import { Cross2Icon, PlusIcon, TrashIcon } from '@radix-ui/react-icons';
 import { Box, Button, Dialog, Flex, Grid, IconButton, Separator, Switch, Tabs, Text, TextField } from '@radix-ui/themes';
 import React, { useState } from 'react';
-import { useEditor, type IElement, type IElementCondition, type IElementFormatting } from '../context';
+import { useEditor, type IElement, type IElementAnimation, type IElementCondition, type IElementFormatting } from '../context';
 import { ColorInput } from './ColorPicker';
 
 interface ElementAdvancedSettingsProps {
@@ -23,8 +23,9 @@ export const ElementAdvancedSettings: React.FC<ElementAdvancedSettingsProps> = (
 
                 <Tabs.Root defaultValue="formatting">
                     <Tabs.List>
-                        <Tabs.Trigger value="formatting">Formatação de Dados</Tabs.Trigger>
-                        <Tabs.Trigger value="conditional">Formatação Condicional</Tabs.Trigger>
+                        <Tabs.Trigger value="formatting">Formatação</Tabs.Trigger>
+                        <Tabs.Trigger value="conditional">Condicional</Tabs.Trigger>
+                        <Tabs.Trigger value="animation">Animação</Tabs.Trigger>
                     </Tabs.List>
 
                     <Box pt="3">
@@ -34,6 +35,10 @@ export const ElementAdvancedSettings: React.FC<ElementAdvancedSettingsProps> = (
 
                         <Tabs.Content value="conditional">
                             <ConditionalSettings element={element} updateElement={updateElement} availableProps={state.availableProps} />
+                        </Tabs.Content>
+
+                        <Tabs.Content value="animation">
+                            <AnimationSettings element={element} updateElement={updateElement} />
                         </Tabs.Content>
                     </Box>
                 </Tabs.Root>
@@ -45,6 +50,115 @@ export const ElementAdvancedSettings: React.FC<ElementAdvancedSettingsProps> = (
                 </Flex>
             </Dialog.Content>
         </Dialog.Root>
+    );
+};
+
+const AnimationSettings: React.FC<{ element: IElement; updateElement: any }> = ({ element, updateElement }) => {
+    const animation = element.animation || { type: 'none', duration: 1, delay: 0 };
+
+    const handleUpdate = (updates: Partial<IElementAnimation>) => {
+        updateElement(element.id, {
+            animation: { ...animation, ...updates }
+        });
+    };
+
+    return (
+        <Flex direction="column" gap="3">
+            <Text size="2" color="gray">
+                Configure animações de entrada para este elemento.
+            </Text>
+
+            <Box>
+                <Text size="1" mb="1" as="div">Tipo de Animação</Text>
+                <select
+                    value={animation.type}
+                    onChange={(e) => handleUpdate({ type: e.target.value as any })}
+                    style={{
+                        width: '100%',
+                        padding: '6px',
+                        borderRadius: '4px',
+                        border: '1px solid var(--gray-6)',
+                        backgroundColor: 'var(--color-panel-solid)',
+                        color: 'var(--gray-12)',
+                        fontSize: '14px'
+                    }}
+                >
+                    <option value="none">Nenhuma</option>
+                    <option value="fadeIn">Fade In</option>
+                    <option value="slideInLeft">Slide In (Esquerda)</option>
+                    <option value="slideInRight">Slide In (Direita)</option>
+                    <option value="slideInUp">Slide In (Cima)</option>
+                    <option value="slideInDown">Slide In (Baixo)</option>
+                    <option value="zoomIn">Zoom In</option>
+                    <option value="bounceIn">Bounce In</option>
+                    <option value="pulse">Pulse (Atenção)</option>
+                    <option value="shake">Shake (Atenção)</option>
+                    <option value="spin">Spin (Loop)</option>
+                </select>
+            </Box>
+
+            {animation.type !== 'none' && (
+                <>
+                    <Grid columns="2" gap="3">
+                        <Box>
+                            <Text size="1" mb="1" as="div">Duração (s)</Text>
+                            <TextField.Root
+                                type="number"
+                                step="0.1"
+                                min="0.1"
+                                value={animation.duration}
+                                onChange={e => handleUpdate({ duration: parseFloat(e.target.value) || 0.5 })}
+                            />
+                        </Box>
+                        <Box>
+                            <Text size="1" mb="1" as="div">Atraso (s)</Text>
+                            <TextField.Root
+                                type="number"
+                                step="0.1"
+                                min="0"
+                                value={animation.delay}
+                                onChange={e => handleUpdate({ delay: parseFloat(e.target.value) || 0 })}
+                            />
+                        </Box>
+                    </Grid>
+
+                    <Box>
+                        <Text size="1" mb="1" as="div">Curva de Tempo (Easing)</Text>
+                        <select
+                            value={animation.timingFunction || 'ease'}
+                            onChange={(e) => handleUpdate({ timingFunction: e.target.value as any })}
+                            style={{
+                                width: '100%',
+                                padding: '6px',
+                                borderRadius: '4px',
+                                border: '1px solid var(--gray-6)',
+                                backgroundColor: 'var(--color-panel-solid)',
+                                color: 'var(--gray-12)',
+                                fontSize: '14px'
+                            }}
+                        >
+                            <option value="linear">Linear</option>
+                            <option value="ease">Ease</option>
+                            <option value="ease-in">Ease In</option>
+                            <option value="ease-out">Ease Out</option>
+                            <option value="ease-in-out">Ease In Out</option>
+                        </select>
+                    </Box>
+
+                    {['pulse', 'shake', 'spin'].includes(animation.type) && (
+                        <Box>
+                            <Flex align="center" gap="2" mt="2">
+                                <Switch
+                                    checked={animation.iterationCount === 'infinite'}
+                                    onCheckedChange={(checked) => handleUpdate({ iterationCount: checked ? 'infinite' : 1 })}
+                                />
+                                <Text size="2">Repetir Infinitamente</Text>
+                            </Flex>
+                        </Box>
+                    )}
+                </>
+            )}
+        </Flex>
     );
 };
 

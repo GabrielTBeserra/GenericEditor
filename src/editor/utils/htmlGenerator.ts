@@ -132,6 +132,48 @@ function renderTemplate(elements, data, options = {}) {
             .join('; ');
     };
 
+    const getAnimationStyles = (anim) => {
+        if (!anim || anim.type === 'none') return {};
+        return {
+            animationName: anim.type,
+            animationDuration: (anim.duration || 1) + 's',
+            animationDelay: (anim.delay || 0) + 's',
+            animationIterationCount: anim.iterationCount || 1,
+            animationTimingFunction: anim.timingFunction || 'ease',
+            animationFillMode: 'both'
+        };
+    };
+
+    const keyframesCss = \`
+    @keyframes slideIn {
+                from { opacity: 0; transform: translateY(20px); }
+                to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes slideInLeft { from { opacity: 0; transform: translateX(-50px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes slideInRight { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes slideInUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes slideInDown { from { opacity: 0; transform: translateY(-50px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes zoomIn { from { opacity: 0; transform: scale(0.5); } to { opacity: 1; transform: scale(1); } }
+    @keyframes bounceIn {
+        0% { opacity: 0; transform: scale(0.3); }
+        50% { opacity: 1; transform: scale(1.05); }
+        70% { transform: scale(0.9); }
+        100% { transform: scale(1); }
+    }
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
+    @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+        20%, 40%, 60%, 80% { transform: translateX(5px); }
+    }
+    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    \`;
+
     const renderItem = (itemData, index = 0, offsetY = 0) => {
         return elements.map(element => {
             let content = element.content;
@@ -254,11 +296,15 @@ function renderTemplate(elements, data, options = {}) {
         
         const justify = (listSettings && listSettings.newestPosition === 'top') ? 'flex-start' : 'flex-end';
 
+        // Entry Animation from settings
+        const entryAnim = listSettings && listSettings.entryAnimation ? listSettings.entryAnimation : { type: 'slideIn', duration: 0.3, timingFunction: 'ease-out' };
+        const entryAnimName = entryAnim.type === 'none' ? 'none' : entryAnim.type;
+        const entryAnimDuration = entryAnim.duration + 's';
+        const entryAnimTiming = entryAnim.timingFunction || 'ease-out';
+
         const animationCss = \`
-            @keyframes slideIn {
-                from { opacity: 0; transform: translateY(20px); }
-                to { opacity: 1; transform: translateY(0); }
-            }
+            \${keyframesCss}
+
             .list-wrapper {
                 display: flex;
                 flex-direction: column;
@@ -272,7 +318,7 @@ function renderTemplate(elements, data, options = {}) {
             }
             .list-item {
                 flex-shrink: 0;
-                animation: slideIn 0.3s ease-out;
+                animation: \${entryAnimName} \${entryAnimDuration} \${entryAnimTiming};
                 margin-bottom: 10px;
                 width: 100%;
                 position: relative;
@@ -299,6 +345,7 @@ function renderTemplate(elements, data, options = {}) {
                     const camelToKebab = \${camelToKebab.toString()};
                     const hex8ToRgba = \${hex8ToRgba.toString()};
                     const styleObjectToString = \${styleObjectToString.toString()};
+                    const getAnimationStyles = \${getAnimationStyles.toString()};
                     const renderItem = \${renderItem.toString()};
 
                     const itemHeight = \${itemHeight};

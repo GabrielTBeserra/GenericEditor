@@ -1,14 +1,14 @@
-import React, { useState, useRef } from 'react';
 import * as ContextMenu from '@radix-ui/react-context-menu';
-import { Dialog, Button, Flex, TextArea, TextField, Text, Badge } from '@radix-ui/themes';
-import { ChevronRightIcon, CheckIcon } from '@radix-ui/react-icons';
+import { CheckIcon, ChevronRightIcon } from '@radix-ui/react-icons';
+import { Badge, Button, Dialog, Flex, Text, TextArea, TextField } from '@radix-ui/themes';
+import React, { useRef, useState } from 'react';
 import { useEditor, type IElement } from '../context';
-import { ElementAdvancedSettings } from './ElementAdvancedSettings';
 import { ColorPickerContent } from './ColorPicker';
 import './context-menu.css';
+import { ElementAdvancedSettings } from './ElementAdvancedSettings';
 
 export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: IElement }> = ({ children, element }) => {
-    const { updateElement, removeElement, addElement, moveElement, state } = useEditor();
+    const { updateElement, removeElement, removeSelected, addElement, moveElement, copy, paste, state } = useEditor();
 
     // Estado dos Modais
     const [isEditContentOpen, setIsEditContentOpen] = useState(false);
@@ -63,15 +63,20 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
     };
 
     const handleDuplicate = () => {
-        addElement({
-            type: element.type,
-            content: element.content,
-            x: element.x + 20,
-            y: element.y + 20,
-            width: element.width,
-            height: element.height,
-            style: element.style
-        });
+        if (state.selectedElementIds.includes(element.id) && state.selectedElementIds.length > 1) {
+            copy();
+            paste();
+        } else {
+            addElement({
+                type: element.type,
+                content: element.content,
+                x: element.x + 20,
+                y: element.y + 20,
+                width: element.width,
+                height: element.height,
+                style: element.style
+            });
+        }
     };
 
     const colors = ['#000000', '#FFFFFF', '#FF0000', '#00FF00', '#0000FF', '#FFA500', '#808080', '#800080', 'transparent'];
@@ -308,8 +313,22 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                         </ContextMenu.Item>
                         <ContextMenu.Separator className="ContextMenuSeparator" />
 
-                        <ContextMenu.Item className="ContextMenuItem" onSelect={handleDuplicate}>Duplicar</ContextMenu.Item>
-                        <ContextMenu.Item className="ContextMenuItem" onSelect={() => removeElement(element.id)}>Excluir</ContextMenu.Item>
+                        <ContextMenu.Item className="ContextMenuItem" onSelect={handleDuplicate}>
+                            {state.selectedElementIds.includes(element.id) && state.selectedElementIds.length > 1
+                                ? `Duplicar Selecionados (${state.selectedElementIds.length})`
+                                : 'Duplicar'}
+                        </ContextMenu.Item>
+                        <ContextMenu.Item className="ContextMenuItem" onSelect={() => {
+                            if (state.selectedElementIds.includes(element.id) && state.selectedElementIds.length > 1) {
+                                removeSelected();
+                            } else {
+                                removeElement(element.id);
+                            }
+                        }}>
+                            {state.selectedElementIds.includes(element.id) && state.selectedElementIds.length > 1
+                                ? `Excluir Selecionados (${state.selectedElementIds.length})`
+                                : 'Excluir'}
+                        </ContextMenu.Item>
                         <ContextMenu.Separator className="ContextMenuSeparator" />
 
                         {/* Image Specific */}

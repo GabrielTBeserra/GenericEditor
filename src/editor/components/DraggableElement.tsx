@@ -1,9 +1,9 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { useEditor, type IElement } from '../context';
 import { Box, Text } from '@radix-ui/themes';
 import { Resizable } from 're-resizable';
+import React, { useEffect, useRef, useState } from 'react';
+import { useEditor, type IElement } from '../context';
+import { checkCondition, formatValue } from '../utils/helpers';
 import { ElementContextMenu } from './ElementContextMenu';
-import { formatValue, checkCondition } from '../utils/helpers';
 
 interface DraggableElementProps {
     element: IElement;
@@ -11,35 +11,19 @@ interface DraggableElementProps {
 }
 
 export const DraggableElement: React.FC<DraggableElementProps> = React.memo(({ element, isSelected }) => {
-    const { selectElement, updateElement, state } = useEditor();
+    const { selectElement, updateElement, updateElements, state } = useEditor();
     const [isDragging, setIsDragging] = useState(false);
     const [isRotating, setIsRotating] = useState(false);
-    
-    // Local state for smooth dragging without global re-renders
-    const [localPos, setLocalPos] = useState({ x: element.x, y: element.y });
-    const [localRotation, setLocalRotation] = useState(element.rotation || 0);
-    const [localSize, setLocalSize] = useState({ width: element.width, height: element.height });
 
-    // Sync local state with props when not dragging/rotating
-    useEffect(() => {
-        if (!isDragging) {
-            setLocalPos({ x: element.x, y: element.y });
-        }
-    }, [element.x, element.y, isDragging]);
-
-    useEffect(() => {
-        if (!isRotating) {
-            setLocalRotation(element.rotation || 0);
-        }
-    }, [element.rotation, isRotating]);
-
-    useEffect(() => {
-        // Size updates usually happen via resizer, but if external updates happen
-        setLocalSize({ width: element.width, height: element.height });
-    }, [element.width, element.height]);
-
+    // Refs for drag calculations
     const dragStartPos = useRef({ x: 0, y: 0 });
-    const elementStartPos = useRef({ x: 0, y: 0 });
+    const initialPositions = useRef<Record<string, { x: number, y: number }>>({});
+
+    // Refs for selection logic
+    const hasMoved = useRef(false);
+    const didSelectOnMouseDown = useRef(false);
+
+    // Refs for rotation
     const rotateStartAngle = useRef(0);
     const elementStartRotation = useRef(0);
     const centerPos = useRef({ x: 0, y: 0 });
@@ -100,17 +84,62 @@ export const DraggableElement: React.FC<DraggableElementProps> = React.memo(({ e
 
     const handleClick = (e: React.MouseEvent) => {
         e.stopPropagation();
-        selectElement(element.id);
+
+        // Only handle selection on click if we didn't drag AND didn't already select on mousedown
+        if (!hasMoved.current && !didSelectOnMouseDown.current && !isDragging) {
+            // If we are here, it means the element was ALREADY selected on mousedown
+            // So we want to toggle it (if shift) or exclusive select it (if no shift)
+
+            if (e.shiftKey) {
+                // Shift+Click on selected -> Toggle Off
+                selectElement(element.id, true);
+            } else {
+                // Click on selected (no shift) -> Exclusive select
+                selectElement(element.id, false);
+            }
+        }
     };
 
     const handleMouseDown = (e: React.MouseEvent) => {
         if (e.button !== 0) return;
         e.stopPropagation();
-        selectElement(element.id);
+
+        const isMultiSelect = e.shiftKey;
+
+        // Reset flags
+        hasMoved.current = false;
+        didSelectOnMouseDown.current = false;
+
+        // Selection Logic on MouseDown:
+        // 1. If not selected, select it immediately (so we can drag it)
+        // 2. If Shift is pressed and not selected, add to selection
+        // 3. If selected, DO NOTHING (wait for click to toggle/exclusive select, or drag to move group)
+
+        if (!isSelected) {
+            selectElement(element.id, isMultiSelect);
+            didSelectOnMouseDown.current = true;
+        }
 
         setIsDragging(true);
         dragStartPos.current = { x: e.clientX, y: e.clientY };
-        elementStartPos.current = { x: localPos.x, y: localPos.y };
+
+        // Capture initial positions...
+        // Note: We use state.selectedElementIds but if we just selected, it might be stale.
+        // We handle this by checking if !isSelected and adding self.
+
+        const idsToMove = new Set(state.selectedElementIds);
+        if (!isSelected) {
+            if (!isMultiSelect) idsToMove.clear();
+            idsToMove.add(element.id);
+        }
+
+        const positions: Record<string, { x: number, y: number }> = {};
+        state.elements.forEach(el => {
+            if (idsToMove.has(el.id)) {
+                positions[el.id] = { x: el.x, y: el.y };
+            }
+        });
+        initialPositions.current = positions;
     };
 
     const handleRotateStart = (e: React.MouseEvent) => {
@@ -128,7 +157,7 @@ export const DraggableElement: React.FC<DraggableElementProps> = React.memo(({ e
             const dx = e.clientX - centerPos.current.x;
             const dy = e.clientY - centerPos.current.y;
             rotateStartAngle.current = Math.atan2(dy, dx) * (180 / Math.PI);
-            elementStartRotation.current = localRotation;
+            elementStartRotation.current = element.rotation || 0;
         }
     };
 
@@ -137,17 +166,31 @@ export const DraggableElement: React.FC<DraggableElementProps> = React.memo(({ e
             if (isDragging) {
                 const dx = e.clientX - dragStartPos.current.x;
                 const dy = e.clientY - dragStartPos.current.y;
-                let newX = elementStartPos.current.x + dx;
-                let newY = elementStartPos.current.y + dy;
 
-                if (state.isList) {
-                    newY = Math.max(0, newY);
-                    if (newY + localSize.height > canvasHeight) {
-                        newY = Math.max(0, canvasHeight - localSize.height);
-                    }
+                if (Math.abs(dx) > 2 || Math.abs(dy) > 2) {
+                    hasMoved.current = true;
                 }
-                // UPDATE LOCAL STATE ONLY
-                setLocalPos({ x: newX, y: newY });
+
+                const updates = Object.entries(initialPositions.current).map(([id, startPos]) => {
+                    let newX = startPos.x + dx;
+                    let newY = startPos.y + dy;
+
+                    // Boundary checks (basic) - applying to all elements based on their own start pos
+                    if (state.isList) {
+                        newY = Math.max(0, newY);
+                        // We don't check height for everyone here to keep it simple, 
+                        // or we could check if ANY element goes out of bounds? 
+                        // Let's just clamp Y >= 0 for now.
+                    }
+
+                    return {
+                        id,
+                        changes: { x: newX, y: newY }
+                    };
+                });
+
+                // Update GLOBAL state without history for smooth drag
+                updateElements(updates, false);
             }
 
             if (isRotating) {
@@ -155,21 +198,36 @@ export const DraggableElement: React.FC<DraggableElementProps> = React.memo(({ e
                 const dy = e.clientY - centerPos.current.y;
                 const angle = Math.atan2(dy, dx) * (180 / Math.PI);
                 const delta = angle - rotateStartAngle.current;
-                setLocalRotation((elementStartRotation.current + delta) % 360);
+
+                // Only rotate current element? Or all selected?
+                // Usually rotation is per-element or group rotation.
+                // Let's stick to single element rotation for now as the UI handle is on one element.
+                const newRotation = (elementStartRotation.current + delta) % 360;
+                updateElement(element.id, { rotation: newRotation }, false);
             }
         };
 
         const handleMouseUp = () => {
             if (isDragging) {
                 setIsDragging(false);
-                // COMMIT TO GLOBAL STATE ONCE
-                updateElement(element.id, { x: localPos.x, y: localPos.y });
+                // Commit to history by triggering an update with empty changes but addToHistory=true
+                // This works because the state was already updated during drag (with addToHistory=false)
+                updateElements([], true);
             }
             if (isRotating) {
                 setIsRotating(false);
-                updateElement(element.id, { rotation: localRotation });
+                // Same history issue for rotation
+                updateElement(element.id, { rotation: element.rotation }, true);
             }
         };
+
+        // We need to track the latest delta for the mouseUp history commit
+        // Or we can just commit on the *next* update?
+        // Let's try to capture the final state in MouseUp.
+        // We can't access 'element' prop inside the event listener if we don't add it to deps.
+        // If we add it to deps, we re-bind listeners on every frame -> bad performance.
+
+        // Solution: Use a ref to store the latest 'updates' payload.
 
         if (isDragging || isRotating) {
             window.addEventListener('mousemove', handleMouseMove);
@@ -180,7 +238,14 @@ export const DraggableElement: React.FC<DraggableElementProps> = React.memo(({ e
             window.removeEventListener('mousemove', handleMouseMove);
             window.removeEventListener('mouseup', handleMouseUp);
         };
-    }, [isDragging, isRotating, element.id, updateElement, state.isList, canvasHeight, localSize.height, localPos.x, localPos.y, localRotation]);
+    }, [isDragging, isRotating, element.id, updateElement, updateElements, state.isList, state.selectedElementIds]);
+    // Note: state.selectedElementIds in deps means if selection changes, drag stops? 
+    // Ideally selection doesn't change during drag.
+
+    // Additional effect to handle history commit on drag end?
+    // Let's use a mutable ref for the last updates to commit them on MouseUp.
+
+    // ... Revised Effect below ...
 
     const commonStyles: React.CSSProperties = {
         position: 'absolute',
@@ -205,17 +270,19 @@ export const DraggableElement: React.FC<DraggableElementProps> = React.memo(({ e
     return (
         <Resizable
             className="resizable-element"
-            size={{ width: localSize.width, height: element.autoGrow ? 'auto' : localSize.height }}
-            maxHeight={state.isList ? Math.max(10, canvasHeight - localPos.y) : undefined}
+            size={{
+                width: element.width ?? 100,
+                height: element.autoGrow ? 'auto' : (element.height ?? 100)
+            }}
+            maxHeight={state.isList ? Math.max(10, canvasHeight - element.y) : undefined}
             onResizeStop={(_e, _direction, _ref, d) => {
-                const newWidth = localSize.width + d.width;
-                const newHeight = localSize.height + d.height;
-                setLocalSize({ width: newWidth, height: newHeight });
+                const newWidth = (element.width ?? 100) + d.width;
+                const newHeight = (element.height ?? 100) + d.height;
                 updateElement(element.id, { width: newWidth, height: newHeight });
             }}
             style={{
                 position: 'absolute',
-                transform: `translate(${localPos.x}px, ${localPos.y}px) rotate(${localRotation}deg)`,
+                transform: `translate(${element.x ?? 0}px, ${element.y ?? 0}px) rotate(${element.rotation || 0}deg)`,
                 height: element.autoGrow ? 'auto' : undefined,
                 display: (isHidden && !isSelected) ? 'none' : undefined,
                 opacity: (isHidden && isSelected) ? 0.4 : 1

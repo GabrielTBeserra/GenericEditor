@@ -16,6 +16,13 @@ export interface IElementFormatting {
     falseLabel?: string;
     mapping?: Record<string, string>;
 }
+export interface IElementAnimation {
+    type: 'none' | 'fadeIn' | 'slideInLeft' | 'slideInRight' | 'slideInUp' | 'slideInDown' | 'zoomIn' | 'bounceIn' | 'pulse' | 'shake' | 'spin';
+    duration: number;
+    delay: number;
+    iterationCount?: number | 'infinite';
+    timingFunction?: 'linear' | 'ease' | 'ease-in' | 'ease-out' | 'ease-in-out';
+}
 export interface IElement {
     id: string;
     type: 'text' | 'image' | 'box';
@@ -30,6 +37,7 @@ export interface IElement {
     formatting?: IElementFormatting;
     conditions?: IElementCondition[];
     autoGrow?: boolean;
+    animation?: IElementAnimation;
 }
 export interface IListSettings {
     sortProp?: string;
@@ -37,6 +45,7 @@ export interface IListSettings {
     newestPosition?: 'top' | 'bottom';
     scrollDirection?: 'up' | 'down';
     containerHeight?: number;
+    entryAnimation?: IElementAnimation;
 }
 export interface IProp {
     name: string;
@@ -44,7 +53,7 @@ export interface IProp {
 }
 interface IEditorState {
     elements: IElement[];
-    selectedElementId: string | null;
+    selectedElementIds: string[];
     isList: boolean;
     mockData: any[];
     singleMockData: Record<string, any>;
@@ -53,18 +62,30 @@ interface IEditorState {
     availableProps: IProp[];
     availableFonts: string[];
     theme: 'light' | 'dark';
+    history: IElement[][];
+    historyIndex: number;
+    clipboard: IElement[];
 }
 interface IEditorContext {
     state: IEditorState;
     addElement: (element: Omit<IElement, 'id' | 'x' | 'y' | 'width' | 'height'> & Partial<Pick<IElement, 'x' | 'y' | 'width' | 'height'>>) => void;
     removeElement: (id: string) => void;
-    selectElement: (id: string | null) => void;
+    removeSelected: () => void;
+    selectElement: (id: string | null, multi?: boolean) => void;
     moveElement: (dragIndex: number, hoverIndex: number) => void;
-    updateElement: (id: string, updates: Partial<IElement>) => void;
+    updateElement: (id: string, updates: Partial<IElement>, addToHistory?: boolean) => void;
+    updateElements: (updates: {
+        id: string;
+        changes: Partial<IElement>;
+    }[], addToHistory?: boolean) => void;
     setMockData: (data: any[], singleData: Record<string, any>) => void;
     updateListSettings: (settings: Partial<IListSettings>) => void;
     setCanvasHeight: (height: number) => void;
     loadState: (savedState: Partial<IEditorState>) => void;
+    undo: () => void;
+    redo: () => void;
+    copy: () => void;
+    paste: () => void;
 }
 export declare const EditorProvider: React.FC<{
     children: ReactNode;

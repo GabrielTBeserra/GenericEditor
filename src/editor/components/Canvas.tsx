@@ -8,10 +8,35 @@ interface CanvasProps {
 }
 
 export const Canvas: React.FC<CanvasProps> = () => {
-    const { state, selectElement } = useEditor();
+    const { state, selectElement, addElement } = useEditor();
 
     const handleBackgroundClick = () => {
         selectElement(null);
+    };
+
+    const handleDragOver = (e: React.DragEvent) => {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'copy';
+    };
+
+    const handleDrop = (e: React.DragEvent) => {
+        e.preventDefault();
+        const propName = e.dataTransfer.getData('application/x-editor-prop');
+        if (propName) {
+            const rect = e.currentTarget.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            addElement({
+                type: 'text',
+                content: `{{${propName}}}`,
+                x: x,
+                y: y,
+                width: 150,
+                height: 30,
+                dataBinding: propName
+            });
+        }
     };
 
     const canvasHeight = state.canvasHeight || 150;
@@ -19,6 +44,8 @@ export const Canvas: React.FC<CanvasProps> = () => {
     return (
         <Box
             onClick={handleBackgroundClick}
+            onDragOver={handleDragOver}
+            onDrop={handleDrop}
             style={{
                 width: '100%',
                 height: '100%',
@@ -74,7 +101,7 @@ export const Canvas: React.FC<CanvasProps> = () => {
                 <DraggableElement
                     key={el.id}
                     element={el}
-                    isSelected={state.selectedElementId === el.id}
+                    isSelected={state.selectedElementIds.includes(el.id)}
                 />
             ))}
         </Box>
