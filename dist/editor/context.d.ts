@@ -65,13 +65,16 @@ interface IEditorState {
     history: IElement[][];
     historyIndex: number;
     clipboard: IElement[];
+    gridSize: number;
 }
 interface IEditorContext {
     state: IEditorState;
+    setGridSize: (size: number) => void;
     addElement: (element: Omit<IElement, 'id' | 'x' | 'y' | 'width' | 'height'> & Partial<Pick<IElement, 'x' | 'y' | 'width' | 'height'>>) => void;
     removeElement: (id: string) => void;
     removeSelected: () => void;
     selectElement: (id: string | null, multi?: boolean) => void;
+    setSelectedElements: (ids: string[]) => void;
     moveElement: (dragIndex: number, hoverIndex: number) => void;
     updateElement: (id: string, updates: Partial<IElement>, addToHistory?: boolean) => void;
     updateElements: (updates: {

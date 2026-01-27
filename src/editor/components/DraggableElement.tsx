@@ -175,12 +175,15 @@ export const DraggableElement: React.FC<DraggableElementProps> = React.memo(({ e
                     let newX = startPos.x + dx;
                     let newY = startPos.y + dy;
 
+                    // Apply Grid Snapping
+                    if (state.gridSize > 0) {
+                        newX = Math.round(newX / state.gridSize) * state.gridSize;
+                        newY = Math.round(newY / state.gridSize) * state.gridSize;
+                    }
+
                     // Boundary checks (basic) - applying to all elements based on their own start pos
                     if (state.isList) {
                         newY = Math.max(0, newY);
-                        // We don't check height for everyone here to keep it simple, 
-                        // or we could check if ANY element goes out of bounds? 
-                        // Let's just clamp Y >= 0 for now.
                     }
 
                     return {
@@ -291,6 +294,7 @@ export const DraggableElement: React.FC<DraggableElementProps> = React.memo(({ e
                 top: false, right: isSelected, bottom: false, left: isSelected,
                 topRight: false, bottomRight: isSelected, bottomLeft: false, topLeft: false
             }}
+            grid={state.gridSize > 0 ? [state.gridSize, state.gridSize] : undefined}
         >
             <ElementContextMenu element={element}>
                 <div style={{ width: '100%', height: '100%', position: 'relative' }}>

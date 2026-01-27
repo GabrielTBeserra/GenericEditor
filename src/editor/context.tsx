@@ -72,14 +72,17 @@ interface IEditorState {
     history: IElement[][];
     historyIndex: number;
     clipboard: IElement[];
+    gridSize: number; // 0 to disable
 }
 
 interface IEditorContext {
     state: IEditorState;
+    setGridSize: (size: number) => void;
     addElement: (element: Omit<IElement, 'id' | 'x' | 'y' | 'width' | 'height'> & Partial<Pick<IElement, 'x' | 'y' | 'width' | 'height'>>) => void;
     removeElement: (id: string) => void;
     removeSelected: () => void;
     selectElement: (id: string | null, multi?: boolean) => void;
+    setSelectedElements: (ids: string[]) => void;
     moveElement: (dragIndex: number, hoverIndex: number) => void;
     updateElement: (id: string, updates: Partial<IElement>, addToHistory?: boolean) => void;
     updateElements: (updates: { id: string, changes: Partial<IElement> }[], addToHistory?: boolean) => void;
@@ -123,7 +126,8 @@ export const EditorProvider: React.FC<{ children: ReactNode; isList?: boolean; a
         theme,
         history: [[]],
         historyIndex: 0,
-        clipboard: []
+        clipboard: [],
+        gridSize: 0
     });
 
     // Load fonts
@@ -149,6 +153,10 @@ export const EditorProvider: React.FC<{ children: ReactNode; isList?: boolean; a
 
     const setCanvasHeight = React.useCallback((height: number) => {
         setState(prev => ({ ...prev, canvasHeight: height }));
+    }, []);
+
+    const setGridSize = React.useCallback((size: number) => {
+        setState(prev => ({ ...prev, gridSize: size }));
     }, []);
 
     const loadState = React.useCallback((savedState: Partial<IEditorState>) => {
@@ -323,6 +331,13 @@ export const EditorProvider: React.FC<{ children: ReactNode; isList?: boolean; a
         });
     }, []);
 
+    const setSelectedElements = React.useCallback((ids: string[]) => {
+        setState(prev => ({
+            ...prev,
+            selectedElementIds: ids
+        }));
+    }, []);
+
     const moveElement = React.useCallback((dragIndex: number, hoverIndex: number) => {
         setState(prev => {
             const newElements = [...prev.elements];
@@ -414,6 +429,7 @@ export const EditorProvider: React.FC<{ children: ReactNode; isList?: boolean; a
         removeElement,
         removeSelected,
         selectElement,
+        setSelectedElements,
         moveElement,
         updateElement,
         updateElements,
@@ -424,8 +440,9 @@ export const EditorProvider: React.FC<{ children: ReactNode; isList?: boolean; a
         undo,
         redo,
         copy,
-        paste
-    }), [state, addElement, removeElement, removeSelected, selectElement, moveElement, updateElement, updateElements, setMockData, updateListSettings, setCanvasHeight, loadState, undo, redo, copy, paste]);
+        paste,
+        setGridSize
+    }), [state, addElement, removeElement, removeSelected, selectElement, setSelectedElements, moveElement, updateElement, updateElements, setMockData, updateListSettings, setCanvasHeight, loadState, undo, redo, copy, paste, setGridSize]);
 
     return (
         <EditorContext.Provider value={contextValue}>

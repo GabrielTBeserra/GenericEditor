@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useEditor, type IElementAnimation } from '../context';
 
 export const EditorSettings: React.FC = () => {
-    const { state, updateListSettings, setCanvasHeight } = useEditor();
+    const { state, updateListSettings, setCanvasHeight, setGridSize } = useEditor();
     const [open, setOpen] = useState(false);
     const [localSortProp, setLocalSortProp] = useState('');
     const [localSortOrder, setLocalSortOrder] = useState<'asc' | 'desc'>('asc');
@@ -12,6 +12,7 @@ export const EditorSettings: React.FC = () => {
     const [localScrollDirection, setLocalScrollDirection] = useState<'up' | 'down'>('down');
     const [localCanvasHeight, setLocalCanvasHeight] = useState('150');
     const [localContainerHeight, setLocalContainerHeight] = useState('');
+    const [localGridSize, setLocalGridSize] = useState('0');
 
     // Animation State
     const [localEntryAnimType, setLocalEntryAnimType] = useState('slideIn'); // Default
@@ -27,6 +28,7 @@ export const EditorSettings: React.FC = () => {
             setLocalScrollDirection(state.listSettings.scrollDirection || 'down');
             setLocalContainerHeight(state.listSettings.containerHeight ? String(state.listSettings.containerHeight) : '');
             setLocalCanvasHeight(String(state.canvasHeight || 150));
+            setLocalGridSize(String(state.gridSize || 0));
 
             // Animation defaults
             const anim = state.listSettings.entryAnimation;
@@ -47,7 +49,14 @@ export const EditorSettings: React.FC = () => {
                 setCanvasHeight(height);
             }
         }
-    }, [localCanvasHeight, open, setCanvasHeight, state.canvasHeight]);
+
+        const grid = parseInt(localGridSize, 10);
+        if (!isNaN(grid) && grid >= 0) {
+            if (state.gridSize !== grid) {
+                setGridSize(grid);
+            }
+        }
+    }, [localCanvasHeight, localGridSize, open, setCanvasHeight, setGridSize, state.canvasHeight, state.gridSize]);
 
     const handleSave = () => {
         const containerHeight = parseInt(localContainerHeight, 10);
@@ -269,6 +278,21 @@ export const EditorSettings: React.FC = () => {
                         <Text size="1" color="gray">
                             Essa propriedade será usada para ordenar os itens no modo lista.
                         </Text>
+
+                        <Box mt="2">
+                            <Text size="2" weight="bold">Grid Snapping (Travar)</Text>
+                            <Flex gap="3" align="center" mt="2">
+                                <Box flexGrow="1">
+                                    <Text size="1" mb="1" as="div">Tamanho do Grid (px) - 0 para desativar</Text>
+                                    <TextField.Root
+                                        type="number"
+                                        value={localGridSize}
+                                        onChange={(e) => setLocalGridSize(e.target.value)}
+                                        placeholder="0"
+                                    />
+                                </Box>
+                            </Flex>
+                        </Box>
                     </Flex>
                 </Box>
 

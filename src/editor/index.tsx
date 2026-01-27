@@ -3,6 +3,7 @@ import { Badge, Box, Button, DropdownMenu, Flex, IconButton, Separator as RadixS
 import '@radix-ui/themes/styles.css';
 import React, { useState } from 'react';
 import { Group, Panel, Separator } from 'react-resizable-panels';
+import { AlignmentToolbar } from './components/AlignmentToolbar';
 import { Canvas } from './components/Canvas';
 import { EditorSettings } from './components/EditorSettings';
 import { ElementAdvancedSettings } from './components/ElementAdvancedSettings';
@@ -318,7 +319,16 @@ const EditorContent: React.FC<EditorProps> = ({ layout, initialState, onSave, th
                     <Group orientation="horizontal" style={{ height: '100%', width: '100%' }}>
                         {/* Editor Canvas Area */}
                         <Panel defaultSize={50} minSize={20}>
-                            <Box style={{ height: '100%', width: '100%', backgroundColor: 'var(--color-background)' }}>
+                            <Box style={{ height: '100%', width: '100%', backgroundColor: 'var(--color-background)', position: 'relative' }}>
+                                <Box style={{
+                                    position: 'absolute',
+                                    top: 16,
+                                    left: '50%',
+                                    transform: 'translateX(-50%)',
+                                    zIndex: 20
+                                }}>
+                                    <AlignmentToolbar />
+                                </Box>
                                 <Canvas />
                             </Box>
                         </Panel>
