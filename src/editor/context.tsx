@@ -20,7 +20,7 @@ export interface IElementFormatting {
 }
 
 export interface IElementAnimation {
-    type: 'none' | 'fadeIn' | 'slideInLeft' | 'slideInRight' | 'slideInUp' | 'slideInDown' | 'zoomIn' | 'bounceIn' | 'pulse' | 'shake' | 'spin';
+    type: 'none' | 'fadeIn' | 'slideInLeft' | 'slideInRight' | 'slideInUp' | 'slideInDown' | 'zoomIn' | 'bounceIn' | 'pulse' | 'shake' | 'spin' | 'smoothSlideUp' | 'popIn' | 'blurIn';
     duration: number; // in seconds
     delay: number; // in seconds
     iterationCount?: number | 'infinite';
@@ -29,7 +29,9 @@ export interface IElementAnimation {
 
 export interface IElement {
     id: string;
-    type: 'text' | 'image' | 'box';
+    type: 'text' | 'image' | 'box' | 'group';
+    name?: string;
+    groupId?: string;
     content: string;
     x: number;
     y: number;
@@ -42,6 +44,7 @@ export interface IElement {
     conditions?: IElementCondition[];
     autoGrow?: boolean;
     animation?: IElementAnimation;
+    styleBindings?: Record<string, string>; // propName -> variableName
 }
 
 export interface IListSettings {
@@ -86,6 +89,12 @@ interface IEditorContext {
     moveElement: (dragIndex: number, hoverIndex: number) => void;
     updateElement: (id: string, updates: Partial<IElement>, addToHistory?: boolean) => void;
     updateElements: (updates: { id: string, changes: Partial<IElement> }[], addToHistory?: boolean) => void;
+    groupElements: (ids: string[]) => void;
+    ungroupElements: (groupId: string) => void;
+    renameElement: (id: string, name: string) => void;
+    addToGroup: (elementId: string, groupId: string) => void;
+    removeFromGroup: (elementId: string) => void;
+    resizeGroup: (groupId: string, newWidth: number, newHeight: number) => void;
     setMockData: (data: any[], singleData: Record<string, any>) => void;
     updateListSettings: (settings: Partial<IListSettings>) => void;
     setCanvasHeight: (height: number) => void;
@@ -383,7 +392,67 @@ export const EditorProvider: React.FC<{ children: ReactNode; isList?: boolean; a
         setState(prev => {
             const newElements = [...prev.elements];
 
+            // Step 1: Normalize updates (Redirect Child -> Group)
+            const normalizedUpdates: { id: string, changes: Partial<IElement> }[] = [];
+            const processedGroupIds = new Set<string>();
+
             updates.forEach(({ id, changes }) => {
+                const element = prev.elements.find(el => el.id === id);
+                if (!element) return;
+
+                // If moving a child of a group, redirect to group
+                if (element.groupId && (changes.x !== undefined || changes.y !== undefined)) {
+                    const group = prev.elements.find(el => el.id === element.groupId);
+                    if (group && !processedGroupIds.has(group.id)) {
+                        const dx = (changes.x ?? element.x) - element.x;
+                        const dy = (changes.y ?? element.y) - element.y;
+
+                        normalizedUpdates.push({
+                            id: group.id,
+                            changes: {
+                                x: group.x + dx,
+                                y: group.y + dy
+                            }
+                        });
+                        processedGroupIds.add(group.id);
+                    }
+                    // Skip adding the child update directly, it will be handled by group expansion
+                } else {
+                    normalizedUpdates.push({ id, changes });
+                }
+            });
+
+            // Step 2: Expand updates (Group -> Children)
+            const finalUpdates = [...normalizedUpdates];
+
+            normalizedUpdates.forEach(({ id, changes }) => {
+                if (changes.x !== undefined || changes.y !== undefined) {
+                    const element = prev.elements.find(el => el.id === id);
+                    // If we are updating a group (either directly or via redirection), move its children
+                    if (element && element.type === 'group') {
+                        const dx = (changes.x ?? element.x) - element.x;
+                        const dy = (changes.y ?? element.y) - element.y;
+
+                        // Find children
+                        prev.elements.forEach(child => {
+                            if (child.groupId === id) {
+                                // Add child update if not already in finalUpdates
+                                if (!finalUpdates.some(u => u.id === child.id)) {
+                                    finalUpdates.push({
+                                        id: child.id,
+                                        changes: {
+                                            x: child.x + dx,
+                                            y: child.y + dy
+                                        }
+                                    });
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+
+            finalUpdates.forEach(({ id, changes }) => {
                 const index = newElements.findIndex(el => el.id === id);
                 if (index !== -1) {
                     newElements[index] = { ...newElements[index], ...changes };
@@ -404,6 +473,181 @@ export const EditorProvider: React.FC<{ children: ReactNode; isList?: boolean; a
                 elements: newElements,
                 history: newHistory,
                 historyIndex: historyIndex
+            };
+        });
+    }, []);
+
+    const groupElements = React.useCallback((ids: string[]) => {
+        setState(prev => {
+            const elementsToGroup = prev.elements.filter(el => ids.includes(el.id));
+            if (elementsToGroup.length === 0) return prev;
+
+            // Calculate bounding box
+            const minX = Math.min(...elementsToGroup.map(el => el.x));
+            const minY = Math.min(...elementsToGroup.map(el => el.y));
+            const maxX = Math.max(...elementsToGroup.map(el => el.x + el.width));
+            const maxY = Math.max(...elementsToGroup.map(el => el.y + el.height));
+
+            const groupElement: IElement = {
+                id: crypto.randomUUID(),
+                type: 'group',
+                name: 'Novo Grupo',
+                content: '',
+                x: minX,
+                y: minY,
+                width: maxX - minX,
+                height: maxY - minY,
+                style: { zIndex: 0 } // Groups usually sit behind or are transparent
+            };
+
+            const newElements = prev.elements.map(el => {
+                if (ids.includes(el.id)) {
+                    return { ...el, groupId: groupElement.id };
+                }
+                return el;
+            });
+
+            // Add group element
+            newElements.push(groupElement);
+
+            const newHistory = prev.history.slice(0, prev.historyIndex + 1);
+            newHistory.push(newElements);
+
+            return {
+                ...prev,
+                elements: newElements,
+                selectedElementIds: [groupElement.id],
+                history: newHistory,
+                historyIndex: newHistory.length - 1
+            };
+        });
+    }, []);
+
+    const ungroupElements = React.useCallback((groupId: string) => {
+        setState(prev => {
+            const groupElement = prev.elements.find(el => el.id === groupId);
+            if (!groupElement || groupElement.type !== 'group') return prev;
+
+            const childrenIds: string[] = [];
+            const newElements = prev.elements.filter(el => el.id !== groupId).map(el => {
+                if (el.groupId === groupId) {
+                    childrenIds.push(el.id);
+                    return { ...el, groupId: undefined };
+                }
+                return el;
+            });
+
+            const newHistory = prev.history.slice(0, prev.historyIndex + 1);
+            newHistory.push(newElements);
+
+            return {
+                ...prev,
+                elements: newElements,
+                selectedElementIds: childrenIds,
+                history: newHistory,
+                historyIndex: newHistory.length - 1
+            };
+        });
+    }, []);
+
+    const renameElement = React.useCallback((id: string, name: string) => {
+        setState(prev => {
+            const newElements = prev.elements.map(el => el.id === id ? { ...el, name } : el);
+            // Renaming might not need history push every keystroke, but for simplicity:
+            return { ...prev, elements: newElements };
+        });
+    }, []);
+
+    const recalcGroupBounds = React.useCallback((elements: IElement[], groupId: string): IElement[] => {
+        const group = elements.find(el => el.id === groupId && el.type === 'group');
+        if (!group) return elements;
+        const children = elements.filter(el => el.groupId === groupId);
+        if (children.length === 0) {
+            return elements;
+        }
+        const minX = Math.min(...children.map(el => el.x));
+        const minY = Math.min(...children.map(el => el.y));
+        const maxX = Math.max(...children.map(el => el.x + el.width));
+        const maxY = Math.max(...children.map(el => el.y + el.height));
+        return elements.map(el => el.id === groupId ? {
+            ...el,
+            x: minX,
+            y: minY,
+            width: maxX - minX,
+            height: maxY - minY
+        } : el);
+    }, []);
+
+    const addToGroup = React.useCallback((elementId: string, groupId: string) => {
+        setState(prev => {
+            const element = prev.elements.find(el => el.id === elementId);
+            const group = prev.elements.find(el => el.id === groupId && el.type === 'group');
+            if (!element || !group) return prev;
+            let newElements = prev.elements.map(el => el.id === elementId ? { ...el, groupId } : el);
+            newElements = recalcGroupBounds(newElements, groupId);
+            const newHistory = prev.history.slice(0, prev.historyIndex + 1);
+            newHistory.push(newElements);
+            return {
+                ...prev,
+                elements: newElements,
+                history: newHistory,
+                historyIndex: newHistory.length - 1
+            };
+        });
+    }, [recalcGroupBounds]);
+
+    const removeFromGroup = React.useCallback((elementId: string) => {
+        setState(prev => {
+            const element = prev.elements.find(el => el.id === elementId);
+            if (!element || !element.groupId) return prev;
+            const oldGroupId = element.groupId;
+            let newElements = prev.elements.map(el => el.id === elementId ? { ...el, groupId: undefined } : el);
+            newElements = recalcGroupBounds(newElements, oldGroupId);
+            const newHistory = prev.history.slice(0, prev.historyIndex + 1);
+            newHistory.push(newElements);
+            return {
+                ...prev,
+                elements: newElements,
+                history: newHistory,
+                historyIndex: newHistory.length - 1
+            };
+        });
+    }, [recalcGroupBounds]);
+
+    const resizeGroup = React.useCallback((groupId: string, newWidth: number, newHeight: number) => {
+        setState(prev => {
+            const group = prev.elements.find(el => el.id === groupId && el.type === 'group');
+            if (!group) return prev;
+            const scaleX = newWidth / group.width;
+            const scaleY = newHeight / group.height;
+            const originX = group.x;
+            const originY = group.y;
+            const newElements = prev.elements.map(el => {
+                if (el.id === groupId) {
+                    return { ...el, width: newWidth, height: newHeight };
+                }
+                if (el.groupId === groupId) {
+                    const relX = el.x - originX;
+                    const relY = el.y - originY;
+                    const scaledX = originX + relX * scaleX;
+                    const scaledY = originY + relY * scaleY;
+                    return {
+                        ...el,
+                        x: scaledX,
+                        y: scaledY,
+                        width: Math.max(1, el.width * scaleX),
+                        height: Math.max(1, el.height * scaleY)
+                    };
+                }
+                return el;
+            });
+            const newHistory = prev.history.slice(0, prev.historyIndex + 1);
+            newHistory.push(newElements);
+            return {
+                ...prev,
+                elements: newElements,
+                history: newHistory,
+                historyIndex: newHistory.length - 1
             };
         });
     }, []);
@@ -433,6 +677,12 @@ export const EditorProvider: React.FC<{ children: ReactNode; isList?: boolean; a
         moveElement,
         updateElement,
         updateElements,
+        groupElements,
+        ungroupElements,
+        renameElement,
+        addToGroup,
+        removeFromGroup,
+        resizeGroup,
         setMockData,
         updateListSettings,
         setCanvasHeight,
@@ -442,7 +692,7 @@ export const EditorProvider: React.FC<{ children: ReactNode; isList?: boolean; a
         copy,
         paste,
         setGridSize
-    }), [state, addElement, removeElement, removeSelected, selectElement, setSelectedElements, moveElement, updateElement, updateElements, setMockData, updateListSettings, setCanvasHeight, loadState, undo, redo, copy, paste, setGridSize]);
+    }), [state, addElement, removeElement, removeSelected, selectElement, setSelectedElements, moveElement, updateElement, updateElements, groupElements, ungroupElements, renameElement, addToGroup, removeFromGroup, resizeGroup, setMockData, updateListSettings, setCanvasHeight, loadState, undo, redo, copy, paste, setGridSize]);
 
     return (
         <EditorContext.Provider value={contextValue}>

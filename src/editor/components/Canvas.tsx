@@ -95,6 +95,44 @@ export const Canvas: React.FC<CanvasProps> = () => {
         };
     }, [handleWindowMouseMove, handleWindowMouseUp]);
 
+    // Canvas Resize Logic
+    const isResizingCanvas = useRef(false);
+    const { setCanvasHeight } = useEditor();
+
+    const handleCanvasResizeStart = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        e.preventDefault();
+        isResizingCanvas.current = true;
+
+        window.addEventListener('mousemove', handleCanvasResizeMove);
+        window.addEventListener('mouseup', handleCanvasResizeEnd);
+    };
+
+    const handleCanvasResizeMove = useCallback((e: MouseEvent) => {
+        if (!isResizingCanvas.current || !canvasRef.current) return;
+
+        const rect = canvasRef.current.getBoundingClientRect();
+        const newHeight = e.clientY - rect.top;
+
+        // Minimum height 50px, Max height 2000px (or reasonable limit)
+        const constrainedHeight = Math.max(50, Math.min(newHeight, 2000));
+
+        setCanvasHeight(Math.round(constrainedHeight));
+    }, [setCanvasHeight]);
+
+    const handleCanvasResizeEnd = useCallback(() => {
+        isResizingCanvas.current = false;
+        window.removeEventListener('mousemove', handleCanvasResizeMove);
+        window.removeEventListener('mouseup', handleCanvasResizeEnd);
+    }, [handleCanvasResizeMove]);
+
+    useEffect(() => {
+        return () => {
+            window.removeEventListener('mousemove', handleCanvasResizeMove);
+            window.removeEventListener('mouseup', handleCanvasResizeEnd);
+        };
+    }, [handleCanvasResizeMove, handleCanvasResizeEnd]);
+
     const handleDragOver = (e: React.DragEvent) => {
         e.preventDefault();
         e.dataTransfer.dropEffect = 'copy';
@@ -160,22 +198,41 @@ export const Canvas: React.FC<CanvasProps> = () => {
                         top: canvasHeight,
                         left: 0,
                         right: 0,
-                        borderBottom: '2px dashed var(--accent-9)',
-                        pointerEvents: 'none',
-                        zIndex: 10
-                    }}
+                        height: '10px', // Invisible hit area
+                        marginTop: '-5px', // Center the hit area on the line
+                        cursor: 'ns-resize',
+                        zIndex: 100,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        group: 'resize-handle'
+                    } as any}
+                    onMouseDown={handleCanvasResizeStart}
                 >
+                    {/* Visual Line */}
+                    <div style={{
+                        width: '100%',
+                        height: '2px',
+                        backgroundColor: 'var(--accent-9)',
+                        borderBottom: 'none',
+                        opacity: 0.8,
+                        boxShadow: '0 1px 4px rgba(0,0,0,0.2)'
+                    }} />
+
                     <div style={{
                         position: 'absolute',
                         right: 10,
-                        bottom: 2,
+                        top: -20,
                         backgroundColor: 'var(--accent-9)',
                         color: 'white',
-                        fontSize: '10px',
-                        padding: '2px 4px',
-                        borderRadius: '2px'
+                        fontSize: '11px',
+                        padding: '2px 6px',
+                        borderRadius: '4px',
+                        fontWeight: 500,
+                        pointerEvents: 'none',
+                        boxShadow: '0 2px 5px rgba(0,0,0,0.1)'
                     }}>
-                        Fim do Item ({canvasHeight}px)
+                        Altura do Item: {canvasHeight}px
                     </div>
                 </div>
             )}

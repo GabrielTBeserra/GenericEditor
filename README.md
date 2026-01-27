@@ -79,6 +79,46 @@ import "@radix-ui/themes/styles.css";
 
 This section describes the features available to the **end user** who will use the editor on your platform.
 
+### Grouping and Layers Panel
+
+- **Group Elements**:
+  - Select multiple elements and use the context menu option **Agrupar Seleção**.
+  - Groups act as a bounding box; moving the group moves all children.
+  - Clicking a child selects its parent group for consistent interactions.
+- **Rename Layers**:
+  - Right-click any element or group and choose **Renomear...**.
+- **Layers Panel (Left Sidebar)**:
+  - Shows a tree of Groups and their children.
+  - Drag any element in the list onto a Group to add it.
+  - Drop an element onto the “Soltar aqui para remover do grupo” area to ungroup it.
+  - Collapse/expand groups to focus on what matters.
+
+### Vínculos de Estilo (Cores por Variável)
+
+- **O que é**: vincule propriedades de estilo (cor do texto, cor de fundo, cor da borda) diretamente a variáveis de dados, sem precisar de regras condicionais.
+- **Como usar**:
+  - Abra **Configurações Avançadas** do elemento.
+  - Na seção **Vínculos de Estilo (Data Binding)**, escolha uma variável para cada propriedade desejada.
+  - Propriedades suportadas: `color`, `backgroundColor`, `borderColor`.
+- **Formato dos valores**:
+  - Aceita cores CSS válidas: `#RRGGBB`, `#RRGGBBAA` (convertido para `rgba`), nomes CSS (`red`, `blue`), `rgb()`, `rgba()`.
+- **Exemplo (JSON)**:
+  ```json
+  {
+    "type": "text",
+    "content": "Preço: {{price}}",
+    "x": 50,
+    "y": 50,
+    "width": 200,
+    "height": 40,
+    "styleBindings": {
+      "color": "priceColor",
+      "backgroundColor": "tagBg"
+    }
+  }
+  ```
+  Se `data = { "price": 10, "priceColor": "#FF0000", "tagBg": "rgba(0,0,0,0.1)" }`, o texto será renderizado com `color: #FF0000` e `backgroundColor: rgba(0,0,0,0.1)`.
+
 ### Basic Manipulation
 
 The editor offers an experience similar to design tools like Canva or Figma:
@@ -110,7 +150,6 @@ The editor offers an experience similar to design tools like Canva or Figma:
 **Right-click** and select **Advanced Settings** to access powerful data formatting and conditional styling options.
 
 - **Data Formatting**:
-
   - _Type_: Choose between Text (Default), Boolean (True/False), Date, or Number/Currency.
   - _Boolean_: Define custom labels for true/false values (e.g., "Active" / "Inactive").
   - _Date_: Custom date patterns (e.g., "DD/MM/YYYY HH:mm").
@@ -157,6 +196,18 @@ When right-clicking on an **Image** element:
   - _Fit (Contain)_: The entire image is shown inside the box, maintaining proportions (may leave white space).
   - _Stretch (Fill)_: The image fills the entire box, potentially being cropped or distorted depending on the aspect ratio.
 - **Bind Data**: Connects the image to a dynamic variable (e.g., Product Photo).
+
+### Export and Import
+
+- **Export**: Saves the full layout (elements, list settings, mock data, canvas height).
+- **Import**: Loads a previously exported JSON to restore the editor state.
+- Images are serialized as **Base64** inside the layout to avoid external dependencies.
+
+### Preview and Simulation
+
+- **Preview Panel**: See a live rendering of your layout.
+- **Simulation Mode (Lists)**: Visualize entry animations and list behavior for incoming items.
+- **Animations**: Configure entry animations (fade, slide, zoom, etc.) for list items.
 
 ---
 

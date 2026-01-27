@@ -234,7 +234,10 @@ export const EditorSettings: React.FC = () => {
                                 >
                                     <option value="none">Nenhum</option>
                                     <option value="slideIn">Slide (Padrão)</option>
+                                    <option value="smoothSlideUp">Slide Suave (Up)</option>
                                     <option value="fadeIn">Fade In</option>
+                                    <option value="popIn">Pop In</option>
+                                    <option value="blurIn">Blur In</option>
                                     <option value="slideInLeft">Slide (Esq)</option>
                                     <option value="slideInRight">Slide (Dir)</option>
                                     <option value="zoomIn">Zoom In</option>

@@ -114,7 +114,14 @@ const PreviewElementRenderer: React.FC<{ element: IElement; offsetY?: number; da
     );
 };
 
-const ListItem: React.FC<{ children: React.ReactNode; height: number; animation?: IElementAnimation }> = ({ children, height, animation }) => {
+import { processLayout } from '../utils/layoutEngine';
+
+const ListItem: React.FC<{ item: any; elements: IElement[]; animation?: IElementAnimation }> = ({ item, elements, animation }) => {
+    // Calculate layout for this specific item
+    const { elements: processedElements, totalHeight } = React.useMemo(() => {
+        return processLayout(elements, item);
+    }, [elements, item]);
+
     const variants = React.useMemo(() => getAnimationVariants(animation), [animation]);
 
     return (
@@ -133,13 +140,20 @@ const ListItem: React.FC<{ children: React.ReactNode; height: number; animation?
             }}
             style={{
                 position: 'relative',
-                height: height,
+                height: totalHeight,
                 width: '100%',
                 marginBottom: '20px',
                 transformOrigin: 'center center'
             }}
         >
-            {children}
+            {processedElements.map((el) => (
+                <PreviewElementRenderer
+                    key={el.id}
+                    element={el}
+                    offsetY={0}
+                    dataContext={item}
+                />
+            ))}
         </motion.div>
     )
 };
@@ -178,13 +192,7 @@ export const Preview: React.FC = () => {
         return () => clearInterval(interval);
     }, [isSimulating, state.isList, state.listSettings.newestPosition, state.mockData]);
 
-    // Calculate item height for list mode
-    const itemHeight = React.useMemo(() => {
-        if (state.canvasHeight) return state.canvasHeight;
-        if (state.elements.length === 0) return 0;
-        const maxY = Math.max(...state.elements.map(el => el.y + el.height));
-        return maxY;
-    }, [state.elements, state.canvasHeight]);
+
 
     const renderContent = () => {
         if (state.elements.length === 0) {
@@ -235,18 +243,10 @@ export const Preview: React.FC = () => {
                         {listData.map((item, index) => (
                             <ListItem
                                 key={item.id || index}
-                                height={itemHeight}
+                                item={item}
+                                elements={state.elements}
                                 animation={state.listSettings.entryAnimation}
-                            >
-                                {state.elements.map((el) => (
-                                    <PreviewElementRenderer
-                                        key={`${el.id}-${index}`}
-                                        element={el}
-                                        offsetY={0}
-                                        dataContext={item}
-                                    />
-                                ))}
-                            </ListItem>
+                            />
                         ))}
                     </AnimatePresence>
                 </Flex>
@@ -276,7 +276,7 @@ export const Preview: React.FC = () => {
             {state.isList && (
                 <Box style={{
                     position: 'absolute',
-                    top: 10,
+                    bottom: 10,
                     right: 10,
                     zIndex: 100,
                     backgroundColor: 'var(--color-surface)',

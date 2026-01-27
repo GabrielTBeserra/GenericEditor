@@ -8,15 +8,20 @@ import './context-menu.css';
 import { ElementAdvancedSettings } from './ElementAdvancedSettings';
 
 export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: IElement }> = ({ children, element }) => {
-    const { updateElement, removeElement, removeSelected, addElement, moveElement, copy, paste, state } = useEditor();
+    const { updateElement, removeElement, removeSelected, addElement, moveElement, copy, paste, state, renameElement, groupElements, ungroupElements } = useEditor();
 
     // Estado dos Modais
+    const [isRenameOpen, setIsRenameOpen] = useState(false);
     const [isEditContentOpen, setIsEditContentOpen] = useState(false);
     const [isBindDataOpen, setIsBindDataOpen] = useState(false);
     const [isAdvancedSettingsOpen, setIsAdvancedSettingsOpen] = useState(false);
+    const [settingsTab, setSettingsTab] = useState("formatting");
     const [colorDialog, setColorDialog] = useState<{ open: boolean; prop: string; value: string }>({ open: false, prop: '', value: '' });
+    const [isImageUrlOpen, setIsImageUrlOpen] = useState(false);
+    const [tempImageUrl, setTempImageUrl] = useState('');
 
     // Estado Temporário para Edição
+    const [tempName, setTempName] = useState("");
     const [tempContent, setTempContent] = useState(element.content);
     const [tempBinding, setTempBinding] = useState(element.dataBinding || "");
     const textAreaRef = useRef<HTMLTextAreaElement>(null);
@@ -103,14 +108,13 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
         }
     };
 
-    const handleUrlInput = () => {
-        // Pequeno timeout para garantir que o menu feche antes do prompt
-        setTimeout(() => {
-            const url = window.prompt("Insira a URL da imagem:", element.content);
-            if (url !== null) {
-                updateElement(element.id, { content: url });
-            }
-        }, 10);
+    const handleOpenImageUrl = () => {
+        setTempImageUrl(typeof element.content === 'string' ? element.content : '');
+        setIsImageUrlOpen(true);
+    };
+    const handleSaveImageUrl = () => {
+        updateElement(element.id, { content: tempImageUrl });
+        setIsImageUrlOpen(false);
     };
 
     const handleOpenBindData = () => {
@@ -138,9 +142,38 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
         setIsEditContentOpen(false);
     };
 
+    const handleOpenRename = () => {
+        setTempName(element.name || (element.type === 'group' ? 'Grupo' : 'Elemento'));
+        setIsRenameOpen(true);
+    };
+
+    const handleSaveRename = () => {
+        renameElement(element.id, tempName);
+        setIsRenameOpen(false);
+    };
+
     return (
         <>
             {/* Modais de Edição */}
+            <Dialog.Root open={isRenameOpen} onOpenChange={setIsRenameOpen}>
+                <Dialog.Content style={{ maxWidth: 450 }}>
+                    <Dialog.Title>Renomear Camada</Dialog.Title>
+                    <Flex direction="column" gap="3">
+                        <TextField.Root
+                            value={tempName}
+                            onChange={e => setTempName(e.target.value)}
+                            placeholder="Nome da camada..."
+                        />
+                        <Flex gap="3" justify="end">
+                            <Dialog.Close>
+                                <Button variant="soft" color="gray">Cancelar</Button>
+                            </Dialog.Close>
+                            <Button onClick={handleSaveRename}>Salvar</Button>
+                        </Flex>
+                    </Flex>
+                </Dialog.Content>
+            </Dialog.Root>
+
             <Dialog.Root open={isEditContentOpen} onOpenChange={setIsEditContentOpen}>
                 <Dialog.Content style={{ maxWidth: 450 }}>
                     <Dialog.Title>Editar Texto</Dialog.Title>
@@ -222,7 +255,27 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                 elementId={element.id}
                 open={isAdvancedSettingsOpen}
                 onOpenChange={setIsAdvancedSettingsOpen}
+                initialTab={settingsTab}
             />
+
+            <Dialog.Root open={isImageUrlOpen} onOpenChange={setIsImageUrlOpen}>
+                <Dialog.Content style={{ maxWidth: 450 }}>
+                    <Dialog.Title>Inserir URL da Imagem</Dialog.Title>
+                    <Flex direction="column" gap="3">
+                        <TextField.Root
+                            value={tempImageUrl}
+                            onChange={e => setTempImageUrl(e.target.value)}
+                            placeholder="https://exemplo.com/imagem.png"
+                        />
+                        <Flex gap="3" justify="end">
+                            <Dialog.Close>
+                                <Button variant="soft" color="gray">Cancelar</Button>
+                            </Dialog.Close>
+                            <Button onClick={handleSaveImageUrl}>Aplicar</Button>
+                        </Flex>
+                    </Flex>
+                </Dialog.Content>
+            </Dialog.Root>
 
             <input
                 type="file"
@@ -307,6 +360,27 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                             </>
                         )}
 
+                        {/* Grouping Actions */}
+                        <ContextMenu.Item className="ContextMenuItem" onSelect={handleOpenRename}>
+                            Renomear...
+                        </ContextMenu.Item>
+
+                        {/* Show Group option if selected items >= 1 and current element (or its parent) is part of selection */}
+                        {(state.selectedElementIds.length >= 1 && (state.selectedElementIds.includes(element.id) || (element.groupId && state.selectedElementIds.includes(element.groupId)))) && (
+                            <ContextMenu.Item className="ContextMenuItem" onSelect={() => groupElements(state.selectedElementIds)}>
+                                {state.selectedElementIds.length > 1 ? 'Agrupar Seleção' : 'Agrupar (Criar Pasta)'}
+                            </ContextMenu.Item>
+                        )}
+
+                        {/* Show Ungroup if it is a group OR if its parent group is selected */}
+                        {(element.type === 'group' || (element.groupId && state.selectedElementIds.includes(element.groupId))) && (
+                            <ContextMenu.Item className="ContextMenuItem" onSelect={() => ungroupElements(element.type === 'group' ? element.id : element.groupId!)}>
+                                {element.type === 'group' ? 'Desagrupar' : 'Desagrupar Pai'}
+                            </ContextMenu.Item>
+                        )}
+
+                        <ContextMenu.Separator className="ContextMenuSeparator" />
+
                         {/* Common Actions */}
                         <ContextMenu.Item className="ContextMenuItem" onSelect={() => setIsAdvancedSettingsOpen(true)}>
                             Configurações Avançadas...
@@ -344,7 +418,7 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                                             <ContextMenu.Item className="ContextMenuItem" onSelect={() => fileInputRef.current?.click()}>
                                                 Carregar do Computador
                                             </ContextMenu.Item>
-                                            <ContextMenu.Item className="ContextMenuItem" onSelect={handleUrlInput}>
+                                            <ContextMenu.Item className="ContextMenuItem" onSelect={handleOpenImageUrl}>
                                                 Inserir URL
                                             </ContextMenu.Item>
                                         </ContextMenu.SubContent>
@@ -535,6 +609,16 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                                             {radius === '50%' ? 'Círculo' : `${radius}px`}
                                         </ContextMenu.Item>
                                     ))}
+                                    <ContextMenu.Separator className="ContextMenuSeparator" />
+                                    <ContextMenu.Item
+                                        className="ContextMenuItem"
+                                        onSelect={() => {
+                                            setSettingsTab("style");
+                                            setIsAdvancedSettingsOpen(true);
+                                        }}
+                                    >
+                                        Personalizar...
+                                    </ContextMenu.Item>
                                 </ContextMenu.SubContent>
                             </ContextMenu.Portal>
                         </ContextMenu.Sub>
@@ -552,6 +636,16 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                                             {padding}px
                                         </ContextMenu.Item>
                                     ))}
+                                    <ContextMenu.Separator className="ContextMenuSeparator" />
+                                    <ContextMenu.Item
+                                        className="ContextMenuItem"
+                                        onSelect={() => {
+                                            setSettingsTab("style");
+                                            setIsAdvancedSettingsOpen(true);
+                                        }}
+                                    >
+                                        Personalizar...
+                                    </ContextMenu.Item>
                                 </ContextMenu.SubContent>
                             </ContextMenu.Portal>
                         </ContextMenu.Sub>

@@ -1,5 +1,5 @@
-import { BoxIcon, DoubleArrowLeftIcon, DoubleArrowRightIcon, EyeNoneIcon, EyeOpenIcon, ImageIcon, Share1Icon, TextIcon } from '@radix-ui/react-icons';
-import { Badge, Box, Button, DropdownMenu, Flex, IconButton, Separator as RadixSeparator, ScrollArea, Text, Theme } from '@radix-ui/themes';
+import { BoxIcon, DoubleArrowLeftIcon, DoubleArrowRightIcon, DownloadIcon, EyeNoneIcon, EyeOpenIcon, ImageIcon, Share1Icon, TextIcon, UploadIcon } from '@radix-ui/react-icons';
+import { Badge, Box, Button, Dialog, DropdownMenu, Flex, IconButton, Separator as RadixSeparator, ScrollArea, Text, TextField, Theme } from '@radix-ui/themes';
 import '@radix-ui/themes/styles.css';
 import React, { useState } from 'react';
 import { Group, Panel, Separator } from 'react-resizable-panels';
@@ -13,17 +13,235 @@ import type { ILayout } from './types';
 
 interface EditorProps {
     layout: ILayout;
-    initialState?: any; // To load saved state
+    initialState?: unknown; // To load saved state
     onSave?: (json: string) => void; // Callback for saving
     theme?: 'light' | 'dark'; // Theme configuration
 }
+
+const LayersPanel: React.FC<{ onOpenSettings?: (id: string) => void }> = ({ onOpenSettings }) => {
+    const { state, selectElement, renameElement, addToGroup, removeFromGroup, groupElements } = useEditor();
+    const [collapsed, setCollapsed] = useState<Record<string, boolean>>({});
+    const [renameOpen, setRenameOpen] = useState(false);
+    const [renameTargetId, setRenameTargetId] = useState<string | null>(null);
+    const [tempName, setTempName] = useState('');
+
+    const groups = state.elements.filter(el => el.type === 'group');
+    const childrenByGroup = new Map<string, IElement[]>();
+    groups.forEach(g => {
+        childrenByGroup.set(g.id, state.elements.filter(el => el.groupId === g.id));
+    });
+    const ungrouped = state.elements.filter(el => el.type !== 'group' && !el.groupId);
+
+    const toggle = (groupId: string) => {
+        setCollapsed(prev => ({ ...prev, [groupId]: !prev[groupId] }));
+    };
+
+    const renderElementButton = (element: IElement, indent: number = 0) => (
+        <Box
+            key={element.id}
+            style={{
+                borderRadius: 6,
+                backgroundColor: state.selectedElementIds.includes(element.id) ? 'var(--gray-5)' : 'var(--gray-3)',
+                border: state.selectedElementIds.includes(element.id) ? '1px solid var(--gray-8)' : '1px solid var(--gray-5)',
+                cursor: 'pointer',
+                overflow: 'hidden',
+                padding: '6px 8px',
+                paddingLeft: `${8 + indent * 16}px`
+            }}
+            draggable
+            onDragStart={(e) => {
+                e.dataTransfer.setData('application/x-editor-element', element.id);
+                e.dataTransfer.effectAllowed = 'move';
+            }}
+            onDragOver={(e) => { e.preventDefault(); }}
+            onDrop={(e) => {
+                const sourceId = e.dataTransfer.getData('application/x-editor-element');
+                if (!sourceId || sourceId === element.id) return;
+                if (element.type === 'group') {
+                    addToGroup(sourceId, element.id);
+                } else {
+                    const sourceEl = state.elements.find(el => el.id === sourceId);
+                    if (!sourceEl) return;
+                    const targetEl = element;
+                    if (!sourceEl.groupId && !targetEl.groupId) {
+                        groupElements([sourceId, targetEl.id]);
+                    } else if (!targetEl.groupId && sourceEl.groupId) {
+                        addToGroup(targetEl.id, sourceEl.groupId);
+                    } else if (!sourceEl.groupId && targetEl.groupId) {
+                        addToGroup(sourceId, targetEl.groupId);
+                    }
+                }
+            }}
+            onClick={(e) => {
+                selectElement(element.id, e.shiftKey);
+                if (onOpenSettings) onOpenSettings(element.id);
+            }}
+        >
+            <Flex gap="2" align="center" style={{ width: '100%', overflow: 'hidden' }}>
+                {element.type === 'text' && <TextIcon />}
+                {element.type === 'image' && <ImageIcon />}
+                {element.type === 'box' && <BoxIcon />}
+                <Text truncate style={{ flex: 1, textAlign: 'left' }}>
+                    {element.name || (element.type === 'text' ? (element.content.length > 20 ? element.content.substring(0, 20) + '...' : element.content) :
+                        element.type === 'image' ? 'Imagem' : 'Container')}
+                </Text>
+                {element.type === 'group' && (
+                    <Button
+                        variant="ghost"
+                        color="gray"
+                        size="1"
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            setRenameTargetId(element.id);
+                            setTempName(element.name || 'Grupo');
+                            setRenameOpen(true);
+                        }}
+                    >
+                        Renomear
+                    </Button>
+                )}
+            </Flex>
+        </Box>
+    );
+
+    return (
+        <Flex direction="column" gap="2">
+            {ungrouped.map(el => renderElementButton(el, 0))}
+            {groups.map(group => {
+                const isCollapsed = collapsed[group.id] === true;
+                const children = childrenByGroup.get(group.id) || [];
+                return (
+                    <Box key={group.id} style={{ border: '1px dashed var(--gray-6)', borderRadius: 6, backgroundColor: 'var(--gray-3)' }}>
+                        <Flex
+                            align="center"
+                            justify="between"
+                            style={{ padding: '6px 8px', cursor: 'pointer' }}
+                            onClick={() => {
+                                selectElement(group.id);
+                                if (onOpenSettings) onOpenSettings(group.id);
+                            }}
+                            onDoubleClick={() => toggle(group.id)}
+                            onDragOver={(e) => { e.preventDefault(); }}
+                            onDrop={(e) => {
+                                const id = e.dataTransfer.getData('application/x-editor-element');
+                                if (id && id !== group.id) {
+                                    addToGroup(id, group.id);
+                                }
+                            }}
+                        >
+                            <Flex align="center" gap="2">
+                                <BoxIcon />
+                                <Text style={{ fontWeight: 600 }}>{group.name || 'Grupo'}</Text>
+                                <Badge variant="soft" color="blue" size="1">{children.length}</Badge>
+                            </Flex>
+                        </Flex>
+                        {!isCollapsed && (
+                            <Flex direction="column" gap="2" style={{ padding: '6px 8px' }}>
+                                {children.map(child => renderElementButton(child, 1))}
+                                {children.length === 0 && (
+                                    <Text size="1" color="gray">Solte elementos aqui para agrupar</Text>
+                                )}
+                            </Flex>
+                        )}
+                    </Box>
+                );
+            })}
+            <Box
+                style={{ marginTop: 8, padding: '6px 8px', border: '1px dashed var(--gray-6)', borderRadius: 6 }}
+                onDragOver={(e) => { e.preventDefault(); }}
+                onDrop={(e) => {
+                    const id = e.dataTransfer.getData('application/x-editor-element');
+                    if (id) {
+                        removeFromGroup(id);
+                    }
+                }}
+            >
+                <Text size="1" color="gray">Soltar aqui para remover do grupo</Text>
+            </Box>
+
+            <Dialog.Root open={renameOpen} onOpenChange={setRenameOpen}>
+                <Dialog.Content style={{ maxWidth: 420 }}>
+                    <Dialog.Title>Renomear Grupo</Dialog.Title>
+                    <Flex direction="column" gap="3">
+                        <TextField.Root
+                            value={tempName}
+                            onChange={(e) => setTempName(e.target.value)}
+                            placeholder="Nome do grupo..."
+                        />
+                        <Flex gap="3" justify="end">
+                            <Dialog.Close>
+                                <Button variant="soft" color="gray">Cancelar</Button>
+                            </Dialog.Close>
+                            <Button
+                                onClick={() => {
+                                    if (renameTargetId) {
+                                        renameElement(renameTargetId, tempName);
+                                    }
+                                    setRenameOpen(false);
+                                }}
+                            >
+                                Salvar
+                            </Button>
+                        </Flex>
+                    </Flex>
+                </Dialog.Content>
+            </Dialog.Root>
+        </Flex>
+    );
+};
 
 const EditorContent: React.FC<EditorProps> = ({ layout, initialState, onSave, theme = 'light' }) => {
     const [isPreviewVisible, setIsPreviewVisible] = useState(true);
     const [isSidebarVisible, setIsSidebarVisible] = useState(true);
     const [settingsElementId, setSettingsElementId] = useState<string | null>(null);
     const [isSettingsOpen, setIsSettingsOpen] = useState(false);
-    const { addElement, loadState, state, undo, redo, copy, paste, removeSelected, updateElements, selectElement } = useEditor();
+    const { addElement, loadState, state, undo, redo, copy, paste, removeSelected, updateElements } = useEditor();
+    const fileInputRef = React.useRef<HTMLInputElement>(null);
+
+    const handleExport = () => {
+        const stateToSave = {
+            elements: state.elements,
+            isList: state.isList,
+            mockData: state.mockData,
+            singleMockData: state.singleMockData,
+            listSettings: state.listSettings,
+            canvasHeight: state.canvasHeight,
+            gridSize: state.gridSize
+        };
+        const json = JSON.stringify(stateToSave, null, 2);
+        const blob = new Blob([json], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `layout-${new Date().toISOString().slice(0, 10)}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    };
+
+    const handleImportClick = () => {
+        fileInputRef.current?.click();
+    };
+
+    const handleImportFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            try {
+                const json = event.target?.result as string;
+                const parsedState = JSON.parse(json);
+                loadState(parsedState);
+            } catch (error) {
+                console.error("Failed to import layout", error);
+                alert("Erro ao importar layout. Arquivo inválido.");
+            }
+        };
+        reader.readAsText(file);
+        e.target.value = '';
+    };
 
     // Global Paste Handler for Images
     React.useEffect(() => {
@@ -200,6 +418,32 @@ const EditorContent: React.FC<EditorProps> = ({ layout, initialState, onSave, th
                                         <Share1Icon /> Salvar Alterações
                                     </Button>
 
+                                    <Flex gap="2" mt="2">
+                                        <Button
+                                            variant="soft"
+                                            color="gray"
+                                            style={{ flex: 1, cursor: 'pointer', justifyContent: 'center' }}
+                                            onClick={handleExport}
+                                        >
+                                            <DownloadIcon /> Exportar
+                                        </Button>
+                                        <Button
+                                            variant="soft"
+                                            color="gray"
+                                            style={{ flex: 1, cursor: 'pointer', justifyContent: 'center' }}
+                                            onClick={handleImportClick}
+                                        >
+                                            <UploadIcon /> Importar
+                                        </Button>
+                                    </Flex>
+                                    <input
+                                        type="file"
+                                        ref={fileInputRef}
+                                        style={{ display: 'none' }}
+                                        accept=".json"
+                                        onChange={handleImportFile}
+                                    />
+
                                     <Box mt="2">
                                         <EditorSettings />
                                     </Box>
@@ -212,37 +456,7 @@ const EditorContent: React.FC<EditorProps> = ({ layout, initialState, onSave, th
                                 {/* Elementos */}
                                 <Box>
                                     <Text size="2" weight="bold" mb="2" as="div">Elementos</Text>
-                                    <Flex direction="column" gap="2">
-                                        {state.elements.map((element) => (
-                                            <Button
-                                                key={element.id}
-                                                variant={state.selectedElementIds.includes(element.id) ? "solid" : "soft"}
-                                                color="gray"
-                                                size="2"
-                                                style={{ justifyContent: 'flex-start', cursor: 'pointer', overflow: 'hidden' }}
-                                                onClick={(e) => {
-                                                    selectElement(element.id, e.shiftKey);
-                                                    setSettingsElementId(element.id);
-                                                    setIsSettingsOpen(true);
-                                                }}
-                                            >
-                                                <Flex gap="2" align="center" style={{ width: '100%', overflow: 'hidden' }}>
-                                                    {element.type === 'text' && <TextIcon />}
-                                                    {element.type === 'image' && <ImageIcon />}
-                                                    {element.type === 'box' && <BoxIcon />}
-                                                    <Text truncate style={{ flex: 1, textAlign: 'left' }}>
-                                                        {element.type === 'text' ? (element.content.length > 20 ? element.content.substring(0, 20) + '...' : element.content) :
-                                                            element.type === 'image' ? 'Imagem' : 'Container'}
-                                                    </Text>
-                                                </Flex>
-                                            </Button>
-                                        ))}
-                                        {state.elements.length === 0 && (
-                                            <Text size="1" color="gray" style={{ fontStyle: 'italic' }}>
-                                                Nenhum elemento adicionado.
-                                            </Text>
-                                        )}
-                                    </Flex>
+                                    <LayersPanel onOpenSettings={(id) => { setSettingsElementId(id); setIsSettingsOpen(true); }} />
                                 </Box>
 
                                 <RadixSeparator size="4" />

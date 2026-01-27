@@ -2,7 +2,7 @@ import { default as React } from 'react';
 import { ILayout } from './types';
 interface EditorProps {
     layout: ILayout;
-    initialState?: any;
+    initialState?: unknown;
     onSave?: (json: string) => void;
     theme?: 'light' | 'dark';
 }

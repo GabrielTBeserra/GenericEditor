@@ -28,6 +28,57 @@ export const getRendererCode = () => {
 function renderTemplate(elements, data, options = {}) {
     const { isList, listSettings, canvasHeight } = options;
 
+    const measureTextHeight = (text, width, fontFamily, fontSize, lineHeightMultiplier = 1.2) => {
+        if (!text) return 0;
+        try {
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+            if (!context) return 0;
+            context.font = \`\${fontSize}px \${fontFamily}\`;
+            const words = String(text).split(' ');
+            let line = '';
+            let lineCount = 1;
+            for (let i = 0; i < words.length; i++) {
+                const testLine = line + words[i] + ' ';
+                const metrics = context.measureText(testLine);
+                const testWidth = metrics.width;
+                if (testWidth > width && i > 0) {
+                    line = words[i] + ' ';
+                    lineCount++;
+                } else {
+                    line = testLine;
+                }
+            }
+            const explicitLines = String(text).split('\\n').length - 1;
+            lineCount += explicitLines;
+            return Math.ceil(lineCount * fontSize * lineHeightMultiplier);
+        } catch (_) {
+            return 0;
+        }
+    };
+
+    const computeItemHeight = (elements, itemData, fallbackHeight) => {
+        if (fallbackHeight) return fallbackHeight;
+        let maxY = 0;
+        elements.forEach(el => {
+            let height = el.height;
+            if (el.type === 'text' && el.autoGrow) {
+                let content = el.content;
+                content = content.replace(/\\{\\{(.*?)\\}\\}/g, (match, key) => {
+                    const val = itemData[key.trim()];
+                    return val !== undefined && val !== null ? String(val) : match;
+                });
+                const fontSize = parseInt(String((el.style && el.style.fontSize) || 16));
+                const fontFamily = String((el.style && el.style.fontFamily) || 'Arial');
+                const measured = measureTextHeight(content, el.width, fontFamily, fontSize);
+                height = Math.max(height, measured);
+            }
+            const bottom = el.y + height;
+            if (bottom > maxY) maxY = bottom;
+        });
+        return maxY;
+    };
+
     const formatValue = (value, formatting) => {
         if (!formatting || formatting.type === 'text') return value !== undefined && value !== null ? String(value) : '';
         if (value === undefined || value === null) return '';
@@ -114,7 +165,11 @@ function renderTemplate(elements, data, options = {}) {
 
     const styleObjectToString = (style) => {
         if (!style) return '';
-        const pxProps = ['width', 'height', 'top', 'left', 'right', 'bottom', 'fontSize', 'borderRadius', 'padding', 'margin', 'borderWidth'];
+        const pxProps = [
+            'width', 'height', 'top', 'left', 'right', 'bottom', 
+            'fontSize', 'borderRadius', 'padding', 'margin', 'borderWidth',
+            'borderTopLeftRadius', 'borderTopRightRadius', 'borderBottomRightRadius', 'borderBottomLeftRadius'
+        ];
         
         return Object.entries(style)
             .map(([key, value]) => {
@@ -149,12 +204,30 @@ function renderTemplate(elements, data, options = {}) {
                 from { opacity: 0; transform: translateY(20px); }
                 to { opacity: 1; transform: translateY(0); }
     }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    @keyframes slideInLeft { from { opacity: 0; transform: translateX(-50px); } to { opacity: 1; transform: translateX(0); } }
-    @keyframes slideInRight { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
-    @keyframes slideInUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes slideInDown { from { opacity: 0; transform: translateY(-50px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes zoomIn { from { opacity: 0; transform: scale(0.5); } to { opacity: 1; transform: scale(1); } }
+    @keyframes fadeIn { 
+        from { opacity: 0; } 
+        to { opacity: 1; } 
+    }
+    @keyframes slideInLeft { 
+        from { opacity: 0; transform: translateX(-50px); } 
+        to { opacity: 1; transform: translateX(0); } 
+    }
+    @keyframes slideInRight { 
+        from { opacity: 0; transform: translateX(50px); } 
+        to { opacity: 1; transform: translateX(0); } 
+    }
+    @keyframes slideInUp { 
+        from { opacity: 0; transform: translateY(50px); } 
+        to { opacity: 1; transform: translateY(0); } 
+    }
+    @keyframes slideInDown { 
+        from { opacity: 0; transform: translateY(-50px); } 
+        to { opacity: 1; transform: translateY(0); } 
+    }
+    @keyframes zoomIn { 
+        from { opacity: 0; transform: scale(0.5); } 
+        to { opacity: 1; transform: scale(1); } 
+    }
     @keyframes bounceIn {
         0% { opacity: 0; transform: scale(0.3); }
         50% { opacity: 1; transform: scale(1.05); }
@@ -171,7 +244,24 @@ function renderTemplate(elements, data, options = {}) {
         10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
         20%, 40%, 60%, 80% { transform: translateX(5px); }
     }
-    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @keyframes spin { 
+        from { transform: rotate(0deg); } 
+        to { transform: rotate(360deg); } 
+    }
+    
+    /* Improved / Smoother Animations */
+    @keyframes smoothSlideUp {
+        0% { opacity: 0; transform: translateY(30px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes popIn {
+        0% { opacity: 0; transform: scale(0.8) translateY(10px); }
+        100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    @keyframes blurIn {
+        0% { opacity: 0; filter: blur(10px); }
+        100% { opacity: 1; filter: blur(0); }
+    }
     \`;
 
     const renderItem = (itemData, index = 0, offsetY = 0) => {
@@ -255,9 +345,7 @@ function renderTemplate(elements, data, options = {}) {
     };
 
     if (isList && Array.isArray(data)) {
-        // Calculate item height
-        const itemHeight = canvasHeight || Math.max(...elements.map(el => el.y + el.height));
-
+        // Calculate per-item height respecting autoGrow
         // Sort data
         let listData = [...data];
         if (listSettings && listSettings.sortProp) {
@@ -280,6 +368,7 @@ function renderTemplate(elements, data, options = {}) {
         // Generate HTML for all items
         const itemsHtml = listData.map((item, index) => {
              const itemHtml = renderItem(item, index, 0); 
+             const itemHeight = computeItemHeight(elements, item, canvasHeight);
              const itemContainerStyle = styleObjectToString({
                  position: 'relative',
                  height: itemHeight,
@@ -348,7 +437,9 @@ function renderTemplate(elements, data, options = {}) {
                     const getAnimationStyles = \${getAnimationStyles.toString()};
                     const renderItem = \${renderItem.toString()};
 
-                    const itemHeight = \${itemHeight};
+                    const measureTextHeight = \${measureTextHeight.toString()};
+                    const computeItemHeight = \${computeItemHeight.toString()};
+                    const itemHeightFallback = \${canvasHeight || 0};
                     const newestPosition = "\${(listSettings && listSettings.newestPosition) || 'bottom'}";
                     const scrollDirection = "\${(listSettings && listSettings.scrollDirection) || 'down'}";
 
@@ -357,6 +448,7 @@ function renderTemplate(elements, data, options = {}) {
                         if (!wrapper) return;
 
                         const itemHtml = renderItem(data, 0, 0);
+                        const itemHeight = computeItemHeight(elements, data, itemHeightFallback);
                         const itemContainerStyle = styleObjectToString({
                             position: 'relative',
                             height: itemHeight,

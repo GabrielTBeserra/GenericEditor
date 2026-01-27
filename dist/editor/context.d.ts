@@ -17,7 +17,7 @@ export interface IElementFormatting {
     mapping?: Record<string, string>;
 }
 export interface IElementAnimation {
-    type: 'none' | 'fadeIn' | 'slideInLeft' | 'slideInRight' | 'slideInUp' | 'slideInDown' | 'zoomIn' | 'bounceIn' | 'pulse' | 'shake' | 'spin';
+    type: 'none' | 'fadeIn' | 'slideInLeft' | 'slideInRight' | 'slideInUp' | 'slideInDown' | 'zoomIn' | 'bounceIn' | 'pulse' | 'shake' | 'spin' | 'smoothSlideUp' | 'popIn' | 'blurIn';
     duration: number;
     delay: number;
     iterationCount?: number | 'infinite';
@@ -25,7 +25,9 @@ export interface IElementAnimation {
 }
 export interface IElement {
     id: string;
-    type: 'text' | 'image' | 'box';
+    type: 'text' | 'image' | 'box' | 'group';
+    name?: string;
+    groupId?: string;
     content: string;
     x: number;
     y: number;
@@ -38,6 +40,7 @@ export interface IElement {
     conditions?: IElementCondition[];
     autoGrow?: boolean;
     animation?: IElementAnimation;
+    styleBindings?: Record<string, string>;
 }
 export interface IListSettings {
     sortProp?: string;
@@ -81,6 +84,12 @@ interface IEditorContext {
         id: string;
         changes: Partial<IElement>;
     }[], addToHistory?: boolean) => void;
+    groupElements: (ids: string[]) => void;
+    ungroupElements: (groupId: string) => void;
+    renameElement: (id: string, name: string) => void;
+    addToGroup: (elementId: string, groupId: string) => void;
+    removeFromGroup: (elementId: string) => void;
+    resizeGroup: (groupId: string, newWidth: number, newHeight: number) => void;
     setMockData: (data: any[], singleData: Record<string, any>) => void;
     updateListSettings: (settings: Partial<IListSettings>) => void;
     setCanvasHeight: (height: number) => void;

@@ -11,7 +11,7 @@ interface DraggableElementProps {
 }
 
 export const DraggableElement: React.FC<DraggableElementProps> = React.memo(({ element, isSelected }) => {
-    const { selectElement, updateElement, updateElements, state } = useEditor();
+    const { selectElement, updateElement, updateElements, state, resizeGroup } = useEditor();
     const [isDragging, setIsDragging] = useState(false);
     const [isRotating, setIsRotating] = useState(false);
 
@@ -27,6 +27,7 @@ export const DraggableElement: React.FC<DraggableElementProps> = React.memo(({ e
     const rotateStartAngle = useRef(0);
     const elementStartRotation = useRef(0);
     const centerPos = useRef({ x: 0, y: 0 });
+    const keepAspectRef = useRef<boolean>(false);
 
     const canvasHeight = state.canvasHeight || 150;
 
@@ -62,6 +63,15 @@ export const DraggableElement: React.FC<DraggableElementProps> = React.memo(({ e
                     return val !== undefined && val !== null ? String(val) : match;
                 });
             }
+        }
+
+        if (element.styleBindings) {
+            Object.entries(element.styleBindings).forEach(([styleProp, variableName]) => {
+                const val = dataContext[variableName];
+                if (val !== undefined && val !== null) {
+                    conditionalStyles = { ...conditionalStyles, [styleProp]: String(val) };
+                }
+            });
         }
 
         if (element.conditions) {
@@ -109,6 +119,18 @@ export const DraggableElement: React.FC<DraggableElementProps> = React.memo(({ e
         // Reset flags
         hasMoved.current = false;
         didSelectOnMouseDown.current = false;
+
+        // GROUP LOGIC: If element belongs to a group, select the group instead
+        // Unless we are already selecting the group (e.g. by clicking the group border directly)
+        // or if the group is already selected (allow selecting child with modifier?)
+        // For simplicity: Always select group if exists, unless the group itself is passed as prop
+
+        if (element.groupId && !isSelected) {
+            // Check if group is already selected? 
+            // If we click a child, we want to select the group.
+            selectElement(element.groupId, isMultiSelect);
+            return; // Stop processing for this child
+        }
 
         // Selection Logic on MouseDown:
         // 1. If not selected, select it immediately (so we can drag it)
@@ -278,10 +300,17 @@ export const DraggableElement: React.FC<DraggableElementProps> = React.memo(({ e
                 height: element.autoGrow ? 'auto' : (element.height ?? 100)
             }}
             maxHeight={state.isList ? Math.max(10, canvasHeight - element.y) : undefined}
+            onResizeStart={(e) => {
+                keepAspectRef.current = !!(e as any).shiftKey;
+            }}
             onResizeStop={(_e, _direction, _ref, d) => {
                 const newWidth = (element.width ?? 100) + d.width;
                 const newHeight = (element.height ?? 100) + d.height;
-                updateElement(element.id, { width: newWidth, height: newHeight });
+                if (element.type === 'group') {
+                    resizeGroup(element.id, newWidth, newHeight);
+                } else {
+                    updateElement(element.id, { width: newWidth, height: newHeight });
+                }
             }}
             style={{
                 position: 'absolute',
@@ -294,6 +323,7 @@ export const DraggableElement: React.FC<DraggableElementProps> = React.memo(({ e
                 top: false, right: isSelected, bottom: false, left: isSelected,
                 topRight: false, bottomRight: isSelected, bottomLeft: false, topLeft: false
             }}
+            lockAspectRatio={(keepAspectRef as any).current === true}
             grid={state.gridSize > 0 ? [state.gridSize, state.gridSize] : undefined}
         >
             <ElementContextMenu element={element}>
@@ -302,6 +332,7 @@ export const DraggableElement: React.FC<DraggableElementProps> = React.memo(({ e
                         style={commonStyles}
                         onMouseDown={handleMouseDown}
                         onClick={handleClick}
+                        title={element.name}
                         onMouseEnter={(e) => {
                             if (!isSelected) e.currentTarget.style.borderColor = 'var(--gray-6)';
                         }}
@@ -327,6 +358,31 @@ export const DraggableElement: React.FC<DraggableElementProps> = React.memo(({ e
                         )}
                         {element.type === 'box' && (
                             <Box style={{ width: '100%', height: '100%' }} />
+                        )}
+                        {element.type === 'group' && (
+                            <Box style={{
+                                width: '100%',
+                                height: '100%',
+                                border: isSelected ? '1px dashed var(--accent-9)' : '1px dashed var(--gray-6)',
+                                opacity: 0.5,
+                                pointerEvents: 'none'
+                            }}>
+                                <Text
+                                    size="1"
+                                    style={{
+                                        position: 'absolute',
+                                        top: 0,
+                                        left: 0,
+                                        backgroundColor: 'var(--accent-3)',
+                                        color: 'var(--accent-11)',
+                                        padding: '2px 6px',
+                                        fontSize: '10px',
+                                        borderBottomRightRadius: '4px'
+                                    }}
+                                >
+                                    {element.name || 'Grupo'}
+                                </Text>
+                            </Box>
                         )}
                     </Box>
 

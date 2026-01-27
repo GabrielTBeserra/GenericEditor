@@ -8,9 +8,10 @@ interface ElementAdvancedSettingsProps {
     elementId: string;
     open: boolean;
     onOpenChange: (open: boolean) => void;
+    initialTab?: string;
 }
 
-export const ElementAdvancedSettings: React.FC<ElementAdvancedSettingsProps> = ({ elementId, open, onOpenChange }) => {
+export const ElementAdvancedSettings: React.FC<ElementAdvancedSettingsProps> = ({ elementId, open, onOpenChange, initialTab = "formatting" }) => {
     const { state, updateElement } = useEditor();
     const element = state.elements.find(el => el.id === elementId);
 
@@ -21,9 +22,10 @@ export const ElementAdvancedSettings: React.FC<ElementAdvancedSettingsProps> = (
             <Dialog.Content style={{ maxWidth: 600, minHeight: 400 }}>
                 <Dialog.Title>Configurações Avançadas</Dialog.Title>
 
-                <Tabs.Root defaultValue="formatting">
+                <Tabs.Root defaultValue={initialTab}>
                     <Tabs.List>
                         <Tabs.Trigger value="formatting">Formatação</Tabs.Trigger>
+                        <Tabs.Trigger value="style">Estilo</Tabs.Trigger>
                         <Tabs.Trigger value="conditional">Condicional</Tabs.Trigger>
                         <Tabs.Trigger value="animation">Animação</Tabs.Trigger>
                     </Tabs.List>
@@ -31,6 +33,10 @@ export const ElementAdvancedSettings: React.FC<ElementAdvancedSettingsProps> = (
                     <Box pt="3">
                         <Tabs.Content value="formatting">
                             <FormattingSettings element={element} updateElement={updateElement} />
+                        </Tabs.Content>
+
+                        <Tabs.Content value="style">
+                            <StyleSettings element={element} updateElement={updateElement} />
                         </Tabs.Content>
 
                         <Tabs.Content value="conditional">
@@ -85,6 +91,9 @@ const AnimationSettings: React.FC<{ element: IElement; updateElement: any }> = (
                 >
                     <option value="none">Nenhuma</option>
                     <option value="fadeIn">Fade In</option>
+                    <option value="smoothSlideUp">Slide Suave (Up)</option>
+                    <option value="popIn">Pop In</option>
+                    <option value="blurIn">Blur In</option>
                     <option value="slideInLeft">Slide In (Esquerda)</option>
                     <option value="slideInRight">Slide In (Direita)</option>
                     <option value="slideInUp">Slide In (Cima)</option>
@@ -294,9 +303,160 @@ const FormattingSettings: React.FC<{ element: IElement; updateElement: any }> = 
     );
 };
 
+const StyleSettings: React.FC<{ element: IElement; updateElement: any }> = ({ element, updateElement }) => {
+    const style = element.style || {};
+    const [isIndividual, setIsIndividual] = useState(
+        style.borderTopLeftRadius !== undefined ||
+        style.borderTopRightRadius !== undefined ||
+        style.borderBottomRightRadius !== undefined ||
+        style.borderBottomLeftRadius !== undefined
+    );
+
+    const handleUpdate = (updates: React.CSSProperties) => {
+        updateElement(element.id, {
+            style: { ...style, ...updates }
+        });
+    };
+
+    const handleRadiusChange = (val: number | string, prop: string) => {
+        const value = typeof val === 'number' ? val : parseInt(val as string) || 0;
+        handleUpdate({ [prop]: value });
+    };
+
+    return (
+        <Flex direction="column" gap="3">
+            <Text size="2" color="gray">
+                Personalize a aparência do elemento.
+            </Text>
+
+            <Box>
+                <Flex align="center" justify="between" mb="2">
+                    <Text size="2" weight="bold">Arredondamento (Border Radius)</Text>
+                    <Flex align="center" gap="2">
+                        <Text size="1">Individual</Text>
+                        <Switch
+                            checked={isIndividual}
+                            onCheckedChange={(checked) => {
+                                setIsIndividual(checked);
+                                if (!checked) {
+                                    // Reset specific to generic if switching to uniform
+                                    // We might want to take one value as the common one, or just keep as is until changed
+                                    const common = style.borderTopLeftRadius || style.borderRadius || 0;
+                                    handleUpdate({
+                                        borderRadius: common,
+                                        borderTopLeftRadius: undefined,
+                                        borderTopRightRadius: undefined,
+                                        borderBottomRightRadius: undefined,
+                                        borderBottomLeftRadius: undefined
+                                    });
+                                } else {
+                                    // Split generic to specific
+                                    const common = style.borderRadius || 0;
+                                    handleUpdate({
+                                        borderRadius: undefined,
+                                        borderTopLeftRadius: common,
+                                        borderTopRightRadius: common,
+                                        borderBottomRightRadius: common,
+                                        borderBottomLeftRadius: common
+                                    });
+                                }
+                            }}
+                        />
+                    </Flex>
+                </Flex>
+
+                {!isIndividual ? (
+                    <Box>
+                        <Text size="1" mb="1" as="div">Raio (Todos os cantos)</Text>
+                        <TextField.Root
+                            type="number"
+                            min="0"
+                            value={parseInt(style.borderRadius as string) || 0}
+                            onChange={e => handleUpdate({ borderRadius: parseInt(e.target.value) || 0 })}
+                        />
+                    </Box>
+                ) : (
+                    <Grid columns="2" gap="3">
+                        <Box>
+                            <Text size="1" mb="1" as="div">Superior Esq.</Text>
+                            <TextField.Root
+                                type="number"
+                                min="0"
+                                value={parseInt(style.borderTopLeftRadius as string) || 0}
+                                onChange={e => handleRadiusChange(e.target.value, 'borderTopLeftRadius')}
+                            />
+                        </Box>
+                        <Box>
+                            <Text size="1" mb="1" as="div">Superior Dir.</Text>
+                            <TextField.Root
+                                type="number"
+                                min="0"
+                                value={parseInt(style.borderTopRightRadius as string) || 0}
+                                onChange={e => handleRadiusChange(e.target.value, 'borderTopRightRadius')}
+                            />
+                        </Box>
+                        <Box>
+                            <Text size="1" mb="1" as="div">Inferior Esq.</Text>
+                            <TextField.Root
+                                type="number"
+                                min="0"
+                                value={parseInt(style.borderBottomLeftRadius as string) || 0}
+                                onChange={e => handleRadiusChange(e.target.value, 'borderBottomLeftRadius')}
+                            />
+                        </Box>
+                        <Box>
+                            <Text size="1" mb="1" as="div">Inferior Dir.</Text>
+                            <TextField.Root
+                                type="number"
+                                min="0"
+                                value={parseInt(style.borderBottomRightRadius as string) || 0}
+                                onChange={e => handleRadiusChange(e.target.value, 'borderBottomRightRadius')}
+                            />
+                        </Box>
+                    </Grid>
+                )}
+            </Box>
+
+            <Separator size="4" my="2" />
+
+            <Box>
+                <Text size="2" weight="bold" mb="2">Espaçamento (Padding)</Text>
+                <Grid columns="2" gap="3">
+                    <Box>
+                        <Text size="1" mb="1" as="div">Tamanho (px)</Text>
+                        <TextField.Root
+                            type="number"
+                            min="0"
+                            value={parseInt(style.padding as string) || 0}
+                            onChange={e => handleUpdate({ padding: parseInt(e.target.value) || 0 })}
+                        />
+                    </Box>
+                </Grid>
+            </Box>
+        </Flex>
+    );
+};
+
 const ConditionalSettings: React.FC<{ element: IElement; updateElement: any; availableProps: any[] }> = ({ element, updateElement, availableProps }) => {
     const conditions = element.conditions || [];
+    const styleBindings = element.styleBindings || {};
     const [editingId, setEditingId] = useState<string | null>(null);
+
+    const bindableProperties = [
+        { label: 'Cor do Texto', value: 'color' },
+        { label: 'Cor de Fundo', value: 'backgroundColor' },
+        { label: 'Cor da Borda', value: 'borderColor' },
+    ];
+
+    const handleUpdateBindings = (prop: string, variable: string | null) => {
+        const newBindings = { ...styleBindings };
+        if (!variable) {
+            delete newBindings[prop];
+        } else {
+            newBindings[prop] = variable;
+        }
+        updateElement(element.id, { styleBindings: newBindings });
+    };
 
     const handleAdd = () => {
         const newRule: IElementCondition = {
@@ -334,6 +494,40 @@ const ConditionalSettings: React.FC<{ element: IElement; updateElement: any; ava
         <Flex direction="column" gap="3">
             {!editingId ? (
                 <>
+                    <Text size="2" weight="bold">Vínculos de Estilo (Data Binding)</Text>
+                    <Text size="2" color="gray">
+                        Vincule propriedades de estilo diretamente a variáveis.
+                    </Text>
+
+                    <Box style={{ border: '1px solid var(--gray-5)', borderRadius: 4, padding: 12 }}>
+                        {bindableProperties.map(prop => (
+                            <Flex key={prop.value} align="center" justify="between" mb="2" style={{ marginBottom: 8 }}>
+                                <Text size="2">{prop.label}</Text>
+                                <select
+                                    value={styleBindings[prop.value] || ''}
+                                    onChange={(e) => handleUpdateBindings(prop.value, e.target.value)}
+                                    style={{
+                                        width: '200px',
+                                        padding: '6px',
+                                        borderRadius: '4px',
+                                        border: '1px solid var(--gray-6)',
+                                        backgroundColor: 'var(--color-panel-solid)',
+                                        color: 'var(--gray-12)',
+                                        fontSize: '13px'
+                                    }}
+                                >
+                                    <option value="">(Nenhum)</option>
+                                    {availableProps.map(p => (
+                                        <option key={p.dataName} value={p.dataName}>{p.name}</option>
+                                    ))}
+                                </select>
+                            </Flex>
+                        ))}
+                    </Box>
+
+                    <Separator size="4" my="2" />
+
+                    <Text size="2" weight="bold">Regras Condicionais</Text>
                     <Text size="2" color="gray">
                         Adicione regras para alterar o estilo baseada no valor dos dados.
                     </Text>

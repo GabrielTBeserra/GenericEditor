@@ -7,19 +7,24 @@
   border-radius: 8px; /* Mais moderno */
   overflow: hidden;
   padding: 5px;
-  box-shadow: 0px 10px 38px -10px rgba(22, 23, 24, 0.35), 0px 10px 20px -15px rgba(22, 23, 24, 0.2);
+  box-shadow:
+    0px 10px 38px -10px rgba(22, 23, 24, 0.35),
+    0px 10px 20px -15px rgba(22, 23, 24, 0.2);
   border: 1px solid var(--gray-6);
   z-index: 2147483647; /* Alto z-index para ficar acima de tudo */
   background-color: var(--gray-2); /* Ajuste para o tema escuro/claro */
 }
 
 /* Fallback para background se variáveis não existirem, assumindo tema dark/light do radix */
-:root, .light, .light-theme {
+:root,
+.light,
+.light-theme {
   --context-menu-bg: #ffffff;
   --context-menu-item-hover: #f1f3f5;
   --context-menu-text: #1c2024;
 }
-.dark, .dark-theme {
+.dark,
+.dark-theme {
   --context-menu-bg: #1e1e1e;
   --context-menu-item-hover: #2e2e2e;
   --context-menu-text: #ededed;
@@ -27,7 +32,7 @@
 
 .ContextMenuContent,
 .ContextMenuSubContent {
-    background-color: var(--gray-2);
+  background-color: var(--gray-2);
 }
 
 .ContextMenuItem,
@@ -45,10 +50,10 @@
   position: relative;
   user-select: none;
   outline: none;
-  cursor: default;
+  cursor: pointer;
 }
 
-.ContextMenuSubTrigger[data-state='open'] {
+.ContextMenuSubTrigger[data-state="open"] {
   background-color: var(--accent-4);
   color: var(--accent-11);
 }
@@ -65,15 +70,14 @@
 .ContextMenuCheckboxItem[data-highlighted],
 .ContextMenuRadioItem[data-highlighted],
 .ContextMenuSubTrigger[data-highlighted] {
-  background-color: var(--accent-9);
-  color: white;
+  background-color: var(--accent-3);
+  color: var(--gray-12);
 }
-/* Quando destacado, o ícone da direita também deve ficar branco */
+/* Quando destacado, o ícone da direita deve manter a cor normal */
 .ContextMenuItem[data-highlighted] .RightSlot,
 .ContextMenuSubTrigger[data-highlighted] .RightSlot {
-    color: white;
+  color: var(--gray-11);
 }
-
 
 .ContextMenuSeparator {
   height: 1px;
@@ -108,7 +112,7 @@
 
 /* Scrollable area for fonts */
 .ContextMenuScrollable {
-    max-height: 300px;
-    overflow-y: auto;
-    overflow-x: hidden;
+  max-height: 300px;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
