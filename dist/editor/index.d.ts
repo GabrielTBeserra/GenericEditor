@@ -1,10 +1,9 @@
 import { default as React } from 'react';
 import { ILayout } from './types';
-interface EditorProps {
+export interface EditorProps {
     layout: ILayout;
     initialState?: unknown;
     onSave?: (json: string) => void;
     theme?: 'light' | 'dark';
 }
 export declare const GenericEditor: React.FC<EditorProps>;
-export {};

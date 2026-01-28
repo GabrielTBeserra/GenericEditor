@@ -76,15 +76,25 @@ interface IEditorState {
     availableFonts: string[];
     theme: 'light' | 'dark';
     history: IElement[][];
+    historyDescriptions: string[];
     historyIndex: number;
     clipboard: IElement[];
     gridSize: number; // 0 to disable
     zoom: number;
     pan: { x: number, y: number };
     snapLines: { orientation: 'horizontal' | 'vertical', position: number }[];
+    assets: IAsset[];
 }
 
-interface IEditorContext {
+export interface IAsset {
+    id: string;
+    name: string;
+    url: string;
+    width: number;
+    height: number;
+}
+
+export interface IEditorContext {
     state: IEditorState;
     setGridSize: (size: number) => void;
     setZoom: (zoom: number) => void;
@@ -110,11 +120,19 @@ interface IEditorContext {
     loadState: (savedState: Partial<IEditorState>) => void;
     undo: () => void;
     redo: () => void;
+    jumpToHistory: (index: number) => void;
     copy: () => void;
     paste: () => void;
+    addAsset: (asset: IAsset) => void;
+    removeAsset: (id: string) => void;
 }
 
-const EditorContext = createContext<IEditorContext | undefined>(undefined);
+export interface ISnapGuide {
+    type: 'horizontal' | 'vertical';
+    position: number;
+}
+
+export const EditorContext = createContext<IEditorContext | undefined>(undefined);
 
 const SAFE_FONTS = [
     'Arial', 'Helvetica', 'Times New Roman', 'Courier New', 'Verdana', 'Georgia',
@@ -143,12 +161,14 @@ export const EditorProvider: React.FC<{ children: ReactNode; isList?: boolean; a
         ],
         theme,
         history: [[]],
+        historyDescriptions: [],
         historyIndex: 0,
         clipboard: [],
         gridSize: 0,
         zoom: 1,
         pan: { x: 0, y: 0 },
-        snapLines: []
+        snapLines: [],
+        assets: []
     });
 
     // Load fonts
@@ -195,7 +215,7 @@ export const EditorProvider: React.FC<{ children: ReactNode; isList?: boolean; a
     const loadState = React.useCallback((savedState: Partial<IEditorState>) => {
         setState(prev => {
             const rawElements = savedState.elements || prev.elements;
-            
+
             // Sanitize elements to prevent ID collisions and missing props
             const validElements: IElement[] = [];
             const seenIds = new Set<string>();
@@ -263,6 +283,20 @@ export const EditorProvider: React.FC<{ children: ReactNode; isList?: boolean; a
                     ...prev,
                     elements: prev.history[newIndex],
                     historyIndex: newIndex,
+                    selectedElementIds: []
+                };
+            }
+            return prev;
+        });
+    }, []);
+
+    const jumpToHistory = React.useCallback((index: number) => {
+        setState(prev => {
+            if (index >= 0 && index < prev.history.length) {
+                return {
+                    ...prev,
+                    elements: prev.history[index],
+                    historyIndex: index,
                     selectedElementIds: []
                 };
             }
@@ -351,11 +385,16 @@ export const EditorProvider: React.FC<{ children: ReactNode; isList?: boolean; a
             const newElements = prev.elements.filter(el => el.id !== id);
             const newHistory = prev.history.slice(0, prev.historyIndex + 1);
             newHistory.push(newElements);
+
+            const newDescriptions = prev.historyDescriptions.slice(0, prev.historyIndex + 1);
+            newDescriptions.push(`Remover Elemento`);
+
             return {
                 ...prev,
                 elements: newElements,
                 selectedElementIds: prev.selectedElementIds.filter(selId => selId !== id),
                 history: newHistory,
+                historyDescriptions: newDescriptions,
                 historyIndex: newHistory.length - 1
             };
         });
@@ -369,11 +408,15 @@ export const EditorProvider: React.FC<{ children: ReactNode; isList?: boolean; a
             const newHistory = prev.history.slice(0, prev.historyIndex + 1);
             newHistory.push(newElements);
 
+            const newDescriptions = prev.historyDescriptions.slice(0, prev.historyIndex + 1);
+            newDescriptions.push(`Remover Itens Selecionados`);
+
             return {
                 ...prev,
                 elements: newElements,
                 selectedElementIds: [],
                 history: newHistory,
+                historyDescriptions: newDescriptions,
                 historyIndex: newHistory.length - 1
             };
         });
@@ -573,11 +616,15 @@ export const EditorProvider: React.FC<{ children: ReactNode; isList?: boolean; a
             const newHistory = prev.history.slice(0, prev.historyIndex + 1);
             newHistory.push(newElements);
 
+            const newDescriptions = prev.historyDescriptions.slice(0, prev.historyIndex + 1);
+            newDescriptions.push(`Agrupar Elementos`);
+
             return {
                 ...prev,
                 elements: newElements,
                 selectedElementIds: [groupElement.id],
                 history: newHistory,
+                historyDescriptions: newDescriptions,
                 historyIndex: newHistory.length - 1
             };
         });
@@ -600,11 +647,15 @@ export const EditorProvider: React.FC<{ children: ReactNode; isList?: boolean; a
             const newHistory = prev.history.slice(0, prev.historyIndex + 1);
             newHistory.push(newElements);
 
+            const newDescriptions = prev.historyDescriptions.slice(0, prev.historyIndex + 1);
+            newDescriptions.push(`Desagrupar Elementos`);
+
             return {
                 ...prev,
                 elements: newElements,
                 selectedElementIds: childrenIds,
                 history: newHistory,
+                historyDescriptions: newDescriptions,
                 historyIndex: newHistory.length - 1
             };
         });
@@ -647,10 +698,15 @@ export const EditorProvider: React.FC<{ children: ReactNode; isList?: boolean; a
             newElements = recalcGroupBounds(newElements, groupId);
             const newHistory = prev.history.slice(0, prev.historyIndex + 1);
             newHistory.push(newElements);
+
+            const newDescriptions = prev.historyDescriptions.slice(0, prev.historyIndex + 1);
+            newDescriptions.push(`Adicionar ao Grupo`);
+
             return {
                 ...prev,
                 elements: newElements,
                 history: newHistory,
+                historyDescriptions: newDescriptions,
                 historyIndex: newHistory.length - 1
             };
         });
@@ -665,10 +721,15 @@ export const EditorProvider: React.FC<{ children: ReactNode; isList?: boolean; a
             newElements = recalcGroupBounds(newElements, oldGroupId);
             const newHistory = prev.history.slice(0, prev.historyIndex + 1);
             newHistory.push(newElements);
+
+            const newDescriptions = prev.historyDescriptions.slice(0, prev.historyIndex + 1);
+            newDescriptions.push(`Remover do Grupo`);
+
             return {
                 ...prev,
                 elements: newElements,
                 history: newHistory,
+                historyDescriptions: newDescriptions,
                 historyIndex: newHistory.length - 1
             };
         });
@@ -703,10 +764,15 @@ export const EditorProvider: React.FC<{ children: ReactNode; isList?: boolean; a
             });
             const newHistory = prev.history.slice(0, prev.historyIndex + 1);
             newHistory.push(newElements);
+
+            const newDescriptions = prev.historyDescriptions.slice(0, prev.historyIndex + 1);
+            newDescriptions.push(`Redimensionar Grupo`);
+
             return {
                 ...prev,
                 elements: newElements,
                 history: newHistory,
+                historyDescriptions: newDescriptions,
                 historyIndex: newHistory.length - 1
             };
         });
@@ -724,6 +790,20 @@ export const EditorProvider: React.FC<{ children: ReactNode; isList?: boolean; a
         setState(prev => ({
             ...prev,
             listSettings: { ...prev.listSettings, ...settings }
+        }));
+    }, []);
+
+    const addAsset = React.useCallback((asset: IAsset) => {
+        setState(prev => ({
+            ...prev,
+            assets: [...prev.assets, asset]
+        }));
+    }, []);
+
+    const removeAsset = React.useCallback((id: string) => {
+        setState(prev => ({
+            ...prev,
+            assets: prev.assets.filter(a => a.id !== id)
         }));
     }, []);
 
@@ -749,13 +829,16 @@ export const EditorProvider: React.FC<{ children: ReactNode; isList?: boolean; a
         loadState,
         undo,
         redo,
+        jumpToHistory,
         copy,
         paste,
         setGridSize,
         setZoom,
         setPan,
-        setSnapLines
-    }), [state, addElement, removeElement, removeSelected, selectElement, setSelectedElements, moveElement, updateElement, updateElements, groupElements, ungroupElements, renameElement, addToGroup, removeFromGroup, resizeGroup, setMockData, updateListSettings, setCanvasHeight, loadState, undo, redo, copy, paste, setGridSize, setZoom, setPan, setSnapLines]);
+        setSnapLines,
+        addAsset,
+        removeAsset
+    }), [state, addElement, removeElement, removeSelected, selectElement, setSelectedElements, moveElement, updateElement, updateElements, groupElements, ungroupElements, renameElement, addToGroup, removeFromGroup, resizeGroup, setMockData, updateListSettings, setCanvasHeight, loadState, undo, redo, jumpToHistory, copy, paste, setGridSize, setZoom, setPan, setSnapLines, addAsset, removeAsset]);
 
     return (
         <EditorContext.Provider value={contextValue}>

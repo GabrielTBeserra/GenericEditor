@@ -1,5 +1,5 @@
 import { DoubleArrowLeftIcon, DoubleArrowRightIcon, DownloadIcon, EyeNoneIcon, EyeOpenIcon, Share1Icon, UploadIcon } from '@radix-ui/react-icons';
-import { Badge, Box, Button, DropdownMenu, Flex, Grid, IconButton, Separator as RadixSeparator, ScrollArea, Text, Theme } from '@radix-ui/themes';
+import { Badge, Box, Button, DropdownMenu, Flex, Grid, IconButton, ScrollArea, Tabs, Text, Theme } from '@radix-ui/themes';
 import '@radix-ui/themes/styles.css';
 import React, { useState } from 'react';
 import { Group, Panel, Separator } from 'react-resizable-panels';
@@ -7,15 +7,15 @@ import { AlignmentToolbar } from './components/AlignmentToolbar';
 import { Canvas } from './components/Canvas';
 import { EditorSettings } from './components/EditorSettings';
 import { ElementAdvancedSettings } from './components/ElementAdvancedSettings';
-import { Preview } from './components/Preview';
-import { ShortcutsDialog } from './components/ShortcutsDialog';
-import { EditorProvider, useEditor, type IElement } from './context';
-import type { ILayout } from './types';
-
+import { HistoryPanel } from './components/HistoryPanel';
 import { LayersPanel } from './components/LayersPanel';
 import { Minimap } from './components/Minimap';
+import { Preview } from './components/Preview';
 import { Ruler } from './components/Ruler';
-
+import { ShortcutsDialog } from './components/ShortcutsDialog';
+import { ViewToolbar } from './components/ViewToolbar';
+import { EditorProvider, useEditor, type IElement } from './context';
+import type { ILayout } from './types';
 export interface EditorProps {
     layout: ILayout;
     initialState?: unknown; // To load saved state
@@ -286,51 +286,61 @@ const EditorContent: React.FC<EditorProps> = ({ layout, initialState, onSave, th
                         </Box>
 
                         <ScrollArea type="auto" scrollbars="vertical" style={{ flex: 1 }}>
-                            <Flex direction="column" gap="4" p="4">
-                                {/* Elementos */}
-                                <Box>
-                                    <Text size="2" weight="bold" mb="2" as="div">Elementos</Text>
-                                    <LayersPanel onOpenSettings={(id) => { setSettingsElementId(id); setIsSettingsOpen(true); }} />
-                                </Box>
+                            <Box p="4">
+                                <Tabs.Root defaultValue="layers">
+                                    <Tabs.List>
+                                        <Tabs.Trigger value="layers">Camadas</Tabs.Trigger>
+                                        <Tabs.Trigger value="history">Histórico</Tabs.Trigger>
+                                        <Tabs.Trigger value="vars">Variáveis</Tabs.Trigger>
+                                    </Tabs.List>
 
-                                <RadixSeparator size="4" />
+                                    <Box pt="3">
+                                        <Tabs.Content value="layers">
+                                            <LayersPanel onOpenSettings={(id) => { setSettingsElementId(id); setIsSettingsOpen(true); }} />
+                                        </Tabs.Content>
 
-                                {/* Variáveis */}
-                                <Box>
-                                    <Text size="2" weight="bold" mb="2" as="div">Variáveis Disponíveis</Text>
-                                    <Text size="1" color="gray" mb="2" as="div">Clique para copiar ou arraste</Text>
-                                    <Flex direction="column" gap="2">
-                                        {layout.props.map((prop, index) => (
-                                            <Badge
-                                                key={index}
-                                                color="blue"
-                                                variant="soft"
-                                                size="2"
-                                                style={{ padding: '8px', justifyContent: 'flex-start', cursor: 'grab' }}
-                                                title={`Clique para copiar {{${prop.dataName}}}`}
-                                                draggable
-                                                onDragStart={(e) => {
-                                                    e.dataTransfer.setData('application/x-editor-prop', prop.dataName);
-                                                    e.dataTransfer.effectAllowed = 'copy';
-                                                }}
-                                                onClick={() => {
-                                                    const text = `{{${prop.dataName}}}`;
-                                                    navigator.clipboard.writeText(text);
-                                                    // Visual feedback could be added here
-                                                }}
-                                            >
-                                                {prop.name}
-                                                <Text color="gray" style={{ marginLeft: 'auto', fontSize: '10px' }}>{`{{${prop.dataName}}}`}</Text>
-                                            </Badge>
-                                        ))}
-                                        {layout.props.length === 0 && (
-                                            <Text size="1" color="gray" style={{ fontStyle: 'italic' }}>
-                                                Nenhuma variável configurada.
-                                            </Text>
-                                        )}
-                                    </Flex>
-                                </Box>
-                            </Flex>
+                                        <Tabs.Content value="history">
+                                            <HistoryPanel />
+                                        </Tabs.Content>
+
+                                        <Tabs.Content value="vars">
+                                            <Box>
+                                                <Text size="2" weight="bold" mb="2" as="div">Variáveis Disponíveis</Text>
+                                                <Text size="1" color="gray" mb="2" as="div">Clique para copiar ou arraste</Text>
+                                                <Flex direction="column" gap="2">
+                                                    {layout.props.map((prop, index) => (
+                                                        <Badge
+                                                            key={index}
+                                                            color="blue"
+                                                            variant="soft"
+                                                            size="2"
+                                                            style={{ padding: '8px', justifyContent: 'flex-start', cursor: 'grab' }}
+                                                            title={`Clique para copiar {{${prop.dataName}}}`}
+                                                            draggable
+                                                            onDragStart={(e) => {
+                                                                e.dataTransfer.setData('application/x-editor-prop', prop.dataName);
+                                                                e.dataTransfer.effectAllowed = 'copy';
+                                                            }}
+                                                            onClick={() => {
+                                                                const text = `{{${prop.dataName}}}`;
+                                                                navigator.clipboard.writeText(text);
+                                                            }}
+                                                        >
+                                                            {prop.name}
+                                                            <Text color="gray" style={{ marginLeft: 'auto', fontSize: '10px' }}>{`{{${prop.dataName}}}`}</Text>
+                                                        </Badge>
+                                                    ))}
+                                                    {layout.props.length === 0 && (
+                                                        <Text size="1" color="gray" style={{ fontStyle: 'italic' }}>
+                                                            Nenhuma variável configurada.
+                                                        </Text>
+                                                    )}
+                                                </Flex>
+                                            </Box>
+                                        </Tabs.Content>
+                                    </Box>
+                                </Tabs.Root>
+                            </Box>
                         </ScrollArea>
                     </Flex>
                 )}
@@ -401,6 +411,14 @@ const EditorContent: React.FC<EditorProps> = ({ layout, initialState, onSave, th
                                         zIndex: 20
                                     }}>
                                         <AlignmentToolbar />
+                                    </Box>
+                                    <Box style={{
+                                        position: 'absolute',
+                                        bottom: 16,
+                                        right: 16,
+                                        zIndex: 20
+                                    }}>
+                                        <ViewToolbar />
                                     </Box>
                                     <Canvas />
                                     <Minimap />

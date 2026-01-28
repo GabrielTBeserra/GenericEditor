@@ -8,16 +8,24 @@ import './App.css'
  */
 
 const editorLayout = { 
-    isList: true,
-    name: 'Cartão de Produto', 
-    props: [
-        { name: 'ID', dataName: 'id' },
-        { name: 'Título do Produto', dataName: 'titulo' },
-        { name: 'Descrição Curta', dataName: 'descricao' },
-        { name: 'Preço Atual', dataName: 'preco' },
-        { name: 'URL da Imagem', dataName: 'imagemUrl' },
-    ] 
-};
+   name: "Editor de Chat", 
+   isList: true, // Chat é uma lista de mensagens 
+   props: [ 
+     { name: "Nome de Usuário (Login)", dataName: "username" }, 
+     { name: "Nome de Exibição", dataName: "displayName" }, 
+     { name: "Mensagem", dataName: "message" }, 
+     { name: "Cor do Usuário", dataName: "color" }, 
+     { name: "Avatar", dataName: "profilePicture" }, 
+     { name: "Horário", dataName: "timestamp" }, 
+     { name: "É Moderador", dataName: "isMod" }, 
+     { name: "É Inscrito", dataName: "isSubscriber" }, 
+     { name: "É Streamer", dataName: "isBroadcaster" }, 
+     { name: "É VIP", dataName: "isVip" }, 
+     { name: "Emblemas", dataName: "badges" }, 
+     { name: "Emotes", dataName: "emotes" }, 
+     { name: "Fonte", dataName: "source" }, 
+   ], 
+ };
 
 function App() {
   const [layoutState, setLayoutState] = useState<any>(null);

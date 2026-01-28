@@ -42,6 +42,8 @@ export interface IElement {
     containerExpansion?: 'vertical' | 'horizontal';
     animation?: IElementAnimation;
     styleBindings?: Record<string, string>;
+    locked?: boolean;
+    hidden?: boolean;
 }
 export interface IListSettings {
     sortProp?: string;
@@ -67,6 +69,7 @@ interface IEditorState {
     availableFonts: string[];
     theme: 'light' | 'dark';
     history: IElement[][];
+    historyDescriptions: string[];
     historyIndex: number;
     clipboard: IElement[];
     gridSize: number;
@@ -79,8 +82,16 @@ interface IEditorState {
         orientation: 'horizontal' | 'vertical';
         position: number;
     }[];
+    assets: IAsset[];
 }
-interface IEditorContext {
+export interface IAsset {
+    id: string;
+    name: string;
+    url: string;
+    width: number;
+    height: number;
+}
+export interface IEditorContext {
     state: IEditorState;
     setGridSize: (size: number) => void;
     setZoom: (zoom: number) => void;
@@ -115,9 +126,17 @@ interface IEditorContext {
     loadState: (savedState: Partial<IEditorState>) => void;
     undo: () => void;
     redo: () => void;
+    jumpToHistory: (index: number) => void;
     copy: () => void;
     paste: () => void;
+    addAsset: (asset: IAsset) => void;
+    removeAsset: (id: string) => void;
 }
+export interface ISnapGuide {
+    type: 'horizontal' | 'vertical';
+    position: number;
+}
+export declare const EditorContext: React.Context<IEditorContext | undefined>;
 export declare const EditorProvider: React.FC<{
     children: ReactNode;
     isList?: boolean;

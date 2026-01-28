@@ -3,6 +3,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import type { IElement } from '../context';
 import { useEditor } from '../context';
 import { DraggableElement } from './DraggableElement';
+import { SmartGuides } from './SmartGuides';
 
 interface CanvasProps {
     // Props se necessário
@@ -341,12 +342,14 @@ export const Canvas: React.FC<CanvasProps> = () => {
 
     const handleDrop = (e: React.DragEvent) => {
         e.preventDefault();
+
+        const rect = e.currentTarget.getBoundingClientRect();
+        // Calculate world coordinates
+        const x = (e.clientX - rect.left - state.pan.x) / state.zoom;
+        const y = (e.clientY - rect.top - state.pan.y) / state.zoom;
+
         const propName = e.dataTransfer.getData('application/x-editor-prop');
         if (propName) {
-            const rect = e.currentTarget.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-
             addElement({
                 type: 'text',
                 content: `{{${propName}}}`,
@@ -356,6 +359,25 @@ export const Canvas: React.FC<CanvasProps> = () => {
                 height: 30,
                 dataBinding: propName
             });
+            return;
+        }
+
+        const assetJson = e.dataTransfer.getData('application/x-editor-asset');
+        if (assetJson) {
+            try {
+                const asset = JSON.parse(assetJson);
+                addElement({
+                    type: 'image',
+                    name: asset.name,
+                    content: asset.url,
+                    x: x,
+                    y: y,
+                    width: asset.width || 200,
+                    height: asset.height || 200
+                });
+            } catch (err) {
+                console.error("Failed to parse asset", err);
+            }
         }
     };
 
@@ -405,23 +427,6 @@ export const Canvas: React.FC<CanvasProps> = () => {
             >
 
 
-                {/* Snap Lines */}
-                {state.snapLines.map((line, i) => (
-                    <div
-                        key={i}
-                        style={{
-                            position: 'absolute',
-                            left: line.orientation === 'vertical' ? line.position : 0,
-                            top: line.orientation === 'horizontal' ? line.position : 0,
-                            width: line.orientation === 'vertical' ? '1px' : '100%',
-                            height: line.orientation === 'horizontal' ? '1px' : '100%',
-                            backgroundColor: 'red',
-                            zIndex: 9999,
-                            pointerEvents: 'none'
-                        }}
-                    />
-                ))}
-
                 {/* Top Boundary Indicator */}
                 <div style={{
                     position: 'absolute',
@@ -452,6 +457,8 @@ export const Canvas: React.FC<CanvasProps> = () => {
                         />
                     </div>
                 ))}
+
+                <SmartGuides />
 
                 {/* Selection Box - Rendered LAST to be on top */}
                 {selectionBox && (

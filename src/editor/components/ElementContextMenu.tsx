@@ -1,5 +1,5 @@
 import * as ContextMenu from '@radix-ui/react-context-menu';
-import { CheckIcon, ChevronRightIcon } from '@radix-ui/react-icons';
+import { CheckIcon, ChevronRightIcon, EyeNoneIcon, EyeOpenIcon, LockClosedIcon, LockOpen1Icon } from '@radix-ui/react-icons';
 import { Badge, Button, Dialog, Flex, Text, TextArea, TextField } from '@radix-ui/themes';
 import React, { useRef, useState } from 'react';
 import { useEditor, type IElement } from '../context';
@@ -297,6 +297,16 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
 
                 <ContextMenu.Portal>
                     <ContextMenu.Content className="ContextMenuContent">
+
+                        <ContextMenu.Item className="ContextMenuItem" onPointerDown={stopProp} onSelect={() => updateElement(element.id, { locked: !element.locked })}>
+                            {element.locked ? 'Desbloquear' : 'Bloquear'}
+                            <div className="RightSlot">{element.locked ? <LockOpen1Icon /> : <LockClosedIcon />}</div>
+                        </ContextMenu.Item>
+                        <ContextMenu.Item className="ContextMenuItem" onPointerDown={stopProp} onSelect={() => updateElement(element.id, { hidden: !element.hidden })}>
+                            {element.hidden ? 'Mostrar' : 'Ocultar'}
+                            <div className="RightSlot">{element.hidden ? <EyeOpenIcon /> : <EyeNoneIcon />}</div>
+                        </ContextMenu.Item>
+                        <ContextMenu.Separator className="ContextMenuSeparator" />
 
                         {/* Data Binding */}
                         <ContextMenu.Sub>
