@@ -113,6 +113,9 @@ export const DraggableElement: React.FC<DraggableElementProps> = React.memo(({ e
     };
 
     const handlePointerDown = (e: React.PointerEvent) => {
+        // Prevent interaction if locked
+        if (element.locked) return;
+
         if (e.button !== 0) return;
         e.stopPropagation();
 

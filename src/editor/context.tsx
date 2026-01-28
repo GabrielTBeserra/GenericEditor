@@ -46,6 +46,8 @@ export interface IElement {
     containerExpansion?: 'vertical' | 'horizontal';
     animation?: IElementAnimation;
     styleBindings?: Record<string, string>; // propName -> variableName
+    locked?: boolean;
+    hidden?: boolean;
 }
 
 export interface IListSettings {
@@ -192,10 +194,38 @@ export const EditorProvider: React.FC<{ children: ReactNode; isList?: boolean; a
 
     const loadState = React.useCallback((savedState: Partial<IEditorState>) => {
         setState(prev => {
-            const newElements = savedState.elements || prev.elements;
+            const rawElements = savedState.elements || prev.elements;
+            
+            // Sanitize elements to prevent ID collisions and missing props
+            const validElements: IElement[] = [];
+            const seenIds = new Set<string>();
+
+            rawElements.forEach(el => {
+                let id = el.id;
+                // If ID is missing or duplicate, generate a new one
+                if (!id || seenIds.has(id)) {
+                    id = crypto.randomUUID();
+                }
+                seenIds.add(id);
+
+                validElements.push({
+                    ...el,
+                    id,
+                    // Ensure essential numeric props are valid numbers
+                    x: Number.isFinite(el.x) ? el.x : 0,
+                    y: Number.isFinite(el.y) ? el.y : 0,
+                    width: Number.isFinite(el.width) ? el.width : 100,
+                    height: Number.isFinite(el.height) ? el.height : 100,
+                    // Default booleans
+                    locked: !!el.locked,
+                    hidden: !!el.hidden
+                });
+            });
+
             return {
                 ...prev,
                 ...savedState,
+                elements: validElements,
                 // Ensure these are preserved if not present in savedState
                 isList: savedState.isList ?? prev.isList,
                 availableProps: savedState.availableProps ?? prev.availableProps,
@@ -203,7 +233,7 @@ export const EditorProvider: React.FC<{ children: ReactNode; isList?: boolean; a
                 // Reset selection
                 selectedElementIds: [],
                 // Reset history when loading new state
-                history: [newElements],
+                history: [validElements],
                 historyIndex: 0,
                 clipboard: []
             };

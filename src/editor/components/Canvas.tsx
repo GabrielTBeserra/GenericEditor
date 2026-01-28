@@ -444,7 +444,7 @@ export const Canvas: React.FC<CanvasProps> = () => {
                     }}>Início (0px)</span>
                 </div>
 
-                {state.elements.map((el) => (
+                {state.elements.filter(el => !el.hidden).map((el) => (
                     <div key={el.id} style={{ pointerEvents: 'auto' }}>
                         <DraggableElement
                             element={el}
