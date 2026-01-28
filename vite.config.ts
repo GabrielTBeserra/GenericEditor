@@ -20,11 +20,12 @@ export default defineConfig({
       fileName: 'generic-editor',
     },
     rollupOptions: {
-      external: ['react', 'react-dom', 'react/jsx-runtime'],
+      external: ['react', 'react-dom', 'react-dom/server', 'react/jsx-runtime'],
       output: {
         globals: {
           react: 'React',
           'react-dom': 'ReactDOM',
+          'react-dom/server': 'ReactDOMServer',
           'react/jsx-runtime': 'jsxRuntime',
         },
       },

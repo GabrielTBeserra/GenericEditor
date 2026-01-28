@@ -3,6 +3,7 @@ import React, { Children, Component, Fragment, PureComponent, createContext, cre
 import * as ReactDOM$1 from "react-dom";
 import ReactDOM, { flushSync } from "react-dom";
 import { Fragment as Fragment$1, jsx, jsxs } from "react/jsx-runtime";
+import { renderToStaticMarkup } from "react-dom/server";
 var __create = Object.create, __defProp = Object.defineProperty, __getOwnPropDesc = Object.getOwnPropertyDescriptor, __getOwnPropNames = Object.getOwnPropertyNames, __getProtoOf = Object.getPrototypeOf, __hasOwnProp = Object.prototype.hasOwnProperty, __esmMin = (n, _) => () => (n && (_ = n(n = 0)), _), __commonJSMin = (n, _) => () => (_ || n((_ = { exports: {} }).exports, _), _.exports), __export = (n) => {
 	let _ = {};
 	for (var E in n) __defProp(_, E, {
@@ -804,15 +805,15 @@ var DISMISSABLE_LAYER_NAME = "DismissableLayer", CONTEXT_UPDATE = "dismissableLa
 	layersWithOutsidePointerEventsDisabled: /* @__PURE__ */ new Set(),
 	branches: /* @__PURE__ */ new Set()
 }), DismissableLayer = React$1.forwardRef((_, E) => {
-	let { disableOutsidePointerEvents: O = !1, onEscapeKeyDown: A, onPointerDownOutside: j, onFocusOutside: M, onInteractOutside: N, onDismiss: P, ...z } = _, B = React$1.useContext(DismissableLayerContext), [H, U] = React$1.useState(null), W = H?.ownerDocument ?? globalThis?.document, [, G] = React$1.useState({}), Z = useComposedRefs$1(E, (n) => U(n)), Lj = Array.from(B.layers), [Rj] = [...B.layersWithOutsidePointerEventsDisabled].slice(-1), zj = Lj.indexOf(Rj), Bj = H ? Lj.indexOf(H) : -1, Vj = B.layersWithOutsidePointerEventsDisabled.size > 0, Hj = Bj >= zj, Uj = usePointerDownOutside((n) => {
+	let { disableOutsidePointerEvents: O = !1, onEscapeKeyDown: A, onPointerDownOutside: j, onFocusOutside: M, onInteractOutside: N, onDismiss: P, ...z } = _, B = React$1.useContext(DismissableLayerContext), [H, U] = React$1.useState(null), W = H?.ownerDocument ?? globalThis?.document, [, G] = React$1.useState({}), Z = useComposedRefs$1(E, (n) => U(n)), Yj = Array.from(B.layers), [Xj] = [...B.layersWithOutsidePointerEventsDisabled].slice(-1), Zj = Yj.indexOf(Xj), Qj = H ? Yj.indexOf(H) : -1, $j = B.layersWithOutsidePointerEventsDisabled.size > 0, eM = Qj >= Zj, tM = usePointerDownOutside((n) => {
 		let _ = n.target, E = [...B.branches].some((n) => n.contains(_));
-		!Hj || E || (j?.(n), N?.(n), n.defaultPrevented || P?.());
-	}, W), Wj = useFocusOutside((n) => {
+		!eM || E || (j?.(n), N?.(n), n.defaultPrevented || P?.());
+	}, W), nM = useFocusOutside((n) => {
 		let _ = n.target;
 		[...B.branches].some((n) => n.contains(_)) || (M?.(n), N?.(n), n.defaultPrevented || P?.());
 	}, W);
 	return useEscapeKeydown((n) => {
-		Bj === B.layers.size - 1 && (A?.(n), !n.defaultPrevented && P && (n.preventDefault(), P()));
+		Qj === B.layers.size - 1 && (A?.(n), !n.defaultPrevented && P && (n.preventDefault(), P()));
 	}, W), React$1.useEffect(() => {
 		if (H) return O && (B.layersWithOutsidePointerEventsDisabled.size === 0 && (originalBodyPointerEvents = W.body.style.pointerEvents, W.body.style.pointerEvents = "none"), B.layersWithOutsidePointerEventsDisabled.add(H)), B.layers.add(H), dispatchUpdate(), () => {
 			O && B.layersWithOutsidePointerEventsDisabled.size === 1 && (W.body.style.pointerEvents = originalBodyPointerEvents);
@@ -831,12 +832,12 @@ var DISMISSABLE_LAYER_NAME = "DismissableLayer", CONTEXT_UPDATE = "dismissableLa
 		...z,
 		ref: Z,
 		style: {
-			pointerEvents: Vj ? Hj ? "auto" : "none" : void 0,
+			pointerEvents: $j ? eM ? "auto" : "none" : void 0,
 			..._.style
 		},
-		onFocusCapture: composeEventHandlers(_.onFocusCapture, Wj.onFocusCapture),
-		onBlurCapture: composeEventHandlers(_.onBlurCapture, Wj.onBlurCapture),
-		onPointerDownCapture: composeEventHandlers(_.onPointerDownCapture, Uj.onPointerDownCapture)
+		onFocusCapture: composeEventHandlers(_.onFocusCapture, nM.onFocusCapture),
+		onBlurCapture: composeEventHandlers(_.onBlurCapture, nM.onBlurCapture),
+		onPointerDownCapture: composeEventHandlers(_.onPointerDownCapture, tM.onPointerDownCapture)
 	});
 });
 DismissableLayer.displayName = DISMISSABLE_LAYER_NAME;
@@ -1195,7 +1196,7 @@ var effectCar = createSidecarMedium(), nothing = function() {}, RemoveScroll = R
 		onScrollCapture: nothing,
 		onWheelCapture: nothing,
 		onTouchMoveCapture: nothing
-	}), j = A[0], M = A[1], N = _.forwardProps, P = _.children, z = _.className, B = _.removeScrollBar, H = _.enabled, U = _.shards, W = _.sideCar, G = _.noRelative, Z = _.noIsolation, Lj = _.inert, Rj = _.allowPinchZoom, zj = _.as, Bj = zj === void 0 ? "div" : zj, Vj = _.gapMode, Hj = __rest(_, [
+	}), j = A[0], M = A[1], N = _.forwardProps, P = _.children, z = _.className, B = _.removeScrollBar, H = _.enabled, U = _.shards, W = _.sideCar, G = _.noRelative, Z = _.noIsolation, Yj = _.inert, Xj = _.allowPinchZoom, Zj = _.as, Qj = Zj === void 0 ? "div" : Zj, $j = _.gapMode, eM = __rest(_, [
 		"forwardProps",
 		"children",
 		"className",
@@ -1209,21 +1210,21 @@ var effectCar = createSidecarMedium(), nothing = function() {}, RemoveScroll = R
 		"allowPinchZoom",
 		"as",
 		"gapMode"
-	]), Uj = W, Wj = useMergeRefs([O, E]), Gj = __assign$2(__assign$2({}, Hj), j);
-	return React$1.createElement(React$1.Fragment, null, H && React$1.createElement(Uj, {
+	]), tM = W, nM = useMergeRefs([O, E]), rM = __assign$2(__assign$2({}, eM), j);
+	return React$1.createElement(React$1.Fragment, null, H && React$1.createElement(tM, {
 		sideCar: effectCar,
 		removeScrollBar: B,
 		shards: U,
 		noRelative: G,
 		noIsolation: Z,
-		inert: Lj,
+		inert: Yj,
 		setCallbacks: M,
-		allowPinchZoom: !!Rj,
+		allowPinchZoom: !!Xj,
 		lockRef: O,
-		gapMode: Vj
-	}), N ? React$1.cloneElement(React$1.Children.only(P), __assign$2(__assign$2({}, Gj), { ref: Wj })) : React$1.createElement(Bj, __assign$2({}, Gj, {
+		gapMode: $j
+	}), N ? React$1.cloneElement(React$1.Children.only(P), __assign$2(__assign$2({}, rM), { ref: nM })) : React$1.createElement(Qj, __assign$2({}, rM, {
 		className: z,
-		ref: Wj
+		ref: nM
 	}), P));
 });
 RemoveScroll.defaultProps = {
@@ -1413,8 +1414,8 @@ var nonPassive = passiveSupported ? { passive: !1 } : !1, alwaysContainsScroll =
 		if (!N) break;
 		var W = getScrollVariables(n, N), G = W[0], Z = W[1] - W[2] - j * G;
 		(G || Z) && elementCouldBeScrolled(n, N) && (H += Z, U += G);
-		var Lj = N.parentNode;
-		N = Lj && Lj.nodeType === Node.DOCUMENT_FRAGMENT_NODE ? Lj.host : Lj;
+		var Yj = N.parentNode;
+		N = Yj && Yj.nodeType === Node.DOCUMENT_FRAGMENT_NODE ? Yj.host : Yj;
 	} while (!P && N !== document.body || P && (_.contains(N) || _ === N));
 	return (B && (A && Math.abs(H) < 1 || !A && M > H) || !B && (A && Math.abs(U) < 1 || !A && -M > U)) && (z = !0), z;
 }, getTouchXY = function(n) {
@@ -1961,7 +1962,7 @@ var computePosition$1 = async (n, _, E) => {
 		strategy: A
 	}), { x: B, y: H } = computeCoordsFromPlacement(z, O, P), U = O, W = {}, G = 0;
 	for (let E = 0; E < N.length; E++) {
-		let { name: j, fn: Z } = N[E], { x: Lj, y: Rj, data: zj, reset: Bj } = await Z({
+		let { name: j, fn: Z } = N[E], { x: Yj, y: Xj, data: Zj, reset: Qj } = await Z({
 			x: B,
 			y: H,
 			initialPlacement: O,
@@ -1975,17 +1976,17 @@ var computePosition$1 = async (n, _, E) => {
 				floating: _
 			}
 		});
-		B = Lj ?? B, H = Rj ?? H, W = {
+		B = Yj ?? B, H = Xj ?? H, W = {
 			...W,
 			[j]: {
 				...W[j],
-				...zj
+				...Zj
 			}
-		}, Bj && G <= 50 && (G++, typeof Bj == "object" && (Bj.placement && (U = Bj.placement), Bj.rects && (z = Bj.rects === !0 ? await M.getElementRects({
+		}, Qj && G <= 50 && (G++, typeof Qj == "object" && (Qj.placement && (U = Qj.placement), Qj.rects && (z = Qj.rects === !0 ? await M.getElementRects({
 			reference: n,
 			floating: _,
 			strategy: A
-		}) : Bj.rects), {x: B, y: H} = computeCoordsFromPlacement(z, U, P)), E = -1);
+		}) : Qj.rects), {x: B, y: H} = computeCoordsFromPlacement(z, U, P)), E = -1);
 	}
 	return {
 		x: B,
@@ -2002,25 +2003,25 @@ async function detectOverflow$1(n, _) {
 		boundary: P,
 		rootBoundary: z,
 		strategy: N
-	})), Lj = B === "floating" ? {
+	})), Yj = B === "floating" ? {
 		x: E,
 		y: O,
 		width: j.floating.width,
 		height: j.floating.height
-	} : j.reference, Rj = await (A.getOffsetParent == null ? void 0 : A.getOffsetParent(M.floating)), zj = await (A.isElement == null ? void 0 : A.isElement(Rj)) && await (A.getScale == null ? void 0 : A.getScale(Rj)) || {
+	} : j.reference, Xj = await (A.getOffsetParent == null ? void 0 : A.getOffsetParent(M.floating)), Zj = await (A.isElement == null ? void 0 : A.isElement(Xj)) && await (A.getScale == null ? void 0 : A.getScale(Xj)) || {
 		x: 1,
 		y: 1
-	}, Bj = rectToClientRect(A.convertOffsetParentRelativeRectToViewportRelativeRect ? await A.convertOffsetParentRelativeRectToViewportRelativeRect({
+	}, Qj = rectToClientRect(A.convertOffsetParentRelativeRectToViewportRelativeRect ? await A.convertOffsetParentRelativeRectToViewportRelativeRect({
 		elements: M,
-		rect: Lj,
-		offsetParent: Rj,
+		rect: Yj,
+		offsetParent: Xj,
 		strategy: N
-	}) : Lj);
+	}) : Yj);
 	return {
-		top: (Z.top - Bj.top + W.top) / zj.y,
-		bottom: (Bj.bottom - Z.bottom + W.bottom) / zj.y,
-		left: (Z.left - Bj.left + W.left) / zj.x,
-		right: (Bj.right - Z.right + W.right) / zj.x
+		top: (Z.top - Qj.top + W.top) / Zj.y,
+		bottom: (Qj.bottom - Z.bottom + W.bottom) / Zj.y,
+		left: (Z.left - Qj.left + W.left) / Zj.x,
+		right: (Qj.right - Z.right + W.right) / Zj.x
 	};
 }
 var arrow$2 = (n) => ({
@@ -2032,17 +2033,17 @@ var arrow$2 = (n) => ({
 		let H = getPaddingObject(B), U = {
 			x: E,
 			y: O
-		}, W = getAlignmentAxis(A), G = getAxisLength(W), Z = await M.getDimensions(z), Lj = W === "y", Rj = Lj ? "top" : "left", zj = Lj ? "bottom" : "right", Bj = Lj ? "clientHeight" : "clientWidth", Vj = j.reference[G] + j.reference[W] - U[W] - j.floating[G], Hj = U[W] - j.reference[W], Uj = await (M.getOffsetParent == null ? void 0 : M.getOffsetParent(z)), Wj = Uj ? Uj[Bj] : 0;
-		(!Wj || !await (M.isElement == null ? void 0 : M.isElement(Uj))) && (Wj = N.floating[Bj] || j.floating[G]);
-		let Gj = Vj / 2 - Hj / 2, Kj = Wj / 2 - Z[G] / 2 - 1, qj = min(H[Rj], Kj), Jj = min(H[zj], Kj), Yj = qj, Xj = Wj - Z[G] - Jj, Zj = Wj / 2 - Z[G] / 2 + Gj, Qj = clamp$3(Yj, Zj, Xj), $j = !P.arrow && getAlignment(A) != null && Zj !== Qj && j.reference[G] / 2 - (Zj < Yj ? qj : Jj) - Z[G] / 2 < 0, eM = $j ? Zj < Yj ? Zj - Yj : Zj - Xj : 0;
+		}, W = getAlignmentAxis(A), G = getAxisLength(W), Z = await M.getDimensions(z), Yj = W === "y", Xj = Yj ? "top" : "left", Zj = Yj ? "bottom" : "right", Qj = Yj ? "clientHeight" : "clientWidth", $j = j.reference[G] + j.reference[W] - U[W] - j.floating[G], eM = U[W] - j.reference[W], tM = await (M.getOffsetParent == null ? void 0 : M.getOffsetParent(z)), nM = tM ? tM[Qj] : 0;
+		(!nM || !await (M.isElement == null ? void 0 : M.isElement(tM))) && (nM = N.floating[Qj] || j.floating[G]);
+		let rM = $j / 2 - eM / 2, iM = nM / 2 - Z[G] / 2 - 1, aM = min(H[Xj], iM), oM = min(H[Zj], iM), sM = aM, cM = nM - Z[G] - oM, lM = nM / 2 - Z[G] / 2 + rM, uM = clamp$3(sM, lM, cM), dM = !P.arrow && getAlignment(A) != null && lM !== uM && j.reference[G] / 2 - (lM < sM ? aM : oM) - Z[G] / 2 < 0, fM = dM ? lM < sM ? lM - sM : lM - cM : 0;
 		return {
-			[W]: U[W] + eM,
+			[W]: U[W] + fM,
 			data: {
-				[W]: Qj,
-				centerOffset: Zj - Qj - eM,
-				...$j && { alignmentOffset: eM }
+				[W]: uM,
+				centerOffset: lM - uM - fM,
+				...dM && { alignmentOffset: fM }
 			},
-			reset: $j
+			reset: dM
 		};
 	}
 }), flip$2 = function(n) {
@@ -2053,32 +2054,32 @@ var arrow$2 = (n) => ({
 			var E;
 			let { placement: O, middlewareData: A, rects: j, initialPlacement: M, platform: N, elements: P } = _, { mainAxis: z = !0, crossAxis: B = !0, fallbackPlacements: H, fallbackStrategy: U = "bestFit", fallbackAxisSideDirection: W = "none", flipAlignment: G = !0, ...Z } = evaluate(n, _);
 			if ((E = A.arrow) != null && E.alignmentOffset) return {};
-			let Lj = getSide(O), Rj = getSideAxis(M), zj = getSide(M) === M, Bj = await (N.isRTL == null ? void 0 : N.isRTL(P.floating)), Vj = H || (zj || !G ? [getOppositePlacement(M)] : getExpandedPlacements(M)), Hj = W !== "none";
-			!H && Hj && Vj.push(...getOppositeAxisPlacements(M, G, W, Bj));
-			let Uj = [M, ...Vj], Wj = await detectOverflow$1(_, Z), Gj = [], Kj = A.flip?.overflows || [];
-			if (z && Gj.push(Wj[Lj]), B) {
-				let n = getAlignmentSides(O, j, Bj);
-				Gj.push(Wj[n[0]], Wj[n[1]]);
+			let Yj = getSide(O), Xj = getSideAxis(M), Zj = getSide(M) === M, Qj = await (N.isRTL == null ? void 0 : N.isRTL(P.floating)), $j = H || (Zj || !G ? [getOppositePlacement(M)] : getExpandedPlacements(M)), eM = W !== "none";
+			!H && eM && $j.push(...getOppositeAxisPlacements(M, G, W, Qj));
+			let tM = [M, ...$j], nM = await detectOverflow$1(_, Z), rM = [], iM = A.flip?.overflows || [];
+			if (z && rM.push(nM[Yj]), B) {
+				let n = getAlignmentSides(O, j, Qj);
+				rM.push(nM[n[0]], nM[n[1]]);
 			}
-			if (Kj = [...Kj, {
+			if (iM = [...iM, {
 				placement: O,
-				overflows: Gj
-			}], !Gj.every((n) => n <= 0)) {
-				let n = (A.flip?.index || 0) + 1, _ = Uj[n];
-				if (_ && (!(B === "alignment" && Rj !== getSideAxis(_)) || Kj.every((n) => getSideAxis(n.placement) === Rj ? n.overflows[0] > 0 : !0))) return {
+				overflows: rM
+			}], !rM.every((n) => n <= 0)) {
+				let n = (A.flip?.index || 0) + 1, _ = tM[n];
+				if (_ && (!(B === "alignment" && Xj !== getSideAxis(_)) || iM.every((n) => getSideAxis(n.placement) === Xj ? n.overflows[0] > 0 : !0))) return {
 					data: {
 						index: n,
-						overflows: Kj
+						overflows: iM
 					},
 					reset: { placement: _ }
 				};
-				let E = Kj.filter((n) => n.overflows[0] <= 0).sort((n, _) => n.overflows[1] - _.overflows[1])[0]?.placement;
+				let E = iM.filter((n) => n.overflows[0] <= 0).sort((n, _) => n.overflows[1] - _.overflows[1])[0]?.placement;
 				if (!E) switch (U) {
 					case "bestFit": {
-						let n = Kj.filter((n) => {
-							if (Hj) {
+						let n = iM.filter((n) => {
+							if (eM) {
 								let _ = getSideAxis(n.placement);
-								return _ === Rj || _ === "y";
+								return _ === Xj || _ === "y";
 							}
 							return !0;
 						}).map((n) => [n.placement, n.overflows.filter((n) => n > 0).reduce((n, _) => n + _, 0)]).sort((n, _) => n[1] - _[1])[0]?.[0];
@@ -2221,7 +2222,7 @@ var offset$2 = function(n) {
 			let { x: E, y: O, placement: A, rects: j, middlewareData: M } = _, { offset: N = 0, mainAxis: P = !0, crossAxis: z = !0 } = evaluate(n, _), B = {
 				x: E,
 				y: O
-			}, H = getSideAxis(A), U = getOppositeAxis(H), W = B[U], G = B[H], Z = evaluate(N, _), Lj = typeof Z == "number" ? {
+			}, H = getSideAxis(A), U = getOppositeAxis(H), W = B[U], G = B[H], Z = evaluate(N, _), Yj = typeof Z == "number" ? {
 				mainAxis: Z,
 				crossAxis: 0
 			} : {
@@ -2230,11 +2231,11 @@ var offset$2 = function(n) {
 				...Z
 			};
 			if (P) {
-				let n = U === "y" ? "height" : "width", _ = j.reference[U] - j.floating[n] + Lj.mainAxis, E = j.reference[U] + j.reference[n] - Lj.mainAxis;
+				let n = U === "y" ? "height" : "width", _ = j.reference[U] - j.floating[n] + Yj.mainAxis, E = j.reference[U] + j.reference[n] - Yj.mainAxis;
 				W < _ ? W = _ : W > E && (W = E);
 			}
 			if (z) {
-				let n = U === "y" ? "width" : "height", _ = originSides.has(getSide(A)), E = j.reference[H] - j.floating[n] + (_ && M.offset?.[H] || 0) + (_ ? 0 : Lj.crossAxis), O = j.reference[H] + j.reference[n] + (_ ? 0 : M.offset?.[H] || 0) - (_ ? Lj.crossAxis : 0);
+				let n = U === "y" ? "width" : "height", _ = originSides.has(getSide(A)), E = j.reference[H] - j.floating[n] + (_ && M.offset?.[H] || 0) + (_ ? 0 : Yj.crossAxis), O = j.reference[H] + j.reference[n] + (_ ? 0 : M.offset?.[H] || 0) - (_ ? Yj.crossAxis : 0);
 				G < E ? G = E : G > O && (G = O);
 			}
 			return {
@@ -2249,20 +2250,20 @@ var offset$2 = function(n) {
 		options: n,
 		async fn(_) {
 			var E, O;
-			let { placement: A, rects: j, platform: M, elements: N } = _, { apply: P = () => {}, ...z } = evaluate(n, _), B = await detectOverflow$1(_, z), H = getSide(A), U = getAlignment(A), W = getSideAxis(A) === "y", { width: G, height: Z } = j.floating, Lj, Rj;
-			H === "top" || H === "bottom" ? (Lj = H, Rj = U === (await (M.isRTL == null ? void 0 : M.isRTL(N.floating)) ? "start" : "end") ? "left" : "right") : (Rj = H, Lj = U === "end" ? "top" : "bottom");
-			let zj = Z - B.top - B.bottom, Bj = G - B.left - B.right, Vj = min(Z - B[Lj], zj), Hj = min(G - B[Rj], Bj), Uj = !_.middlewareData.shift, Wj = Vj, Gj = Hj;
-			if ((E = _.middlewareData.shift) != null && E.enabled.x && (Gj = Bj), (O = _.middlewareData.shift) != null && O.enabled.y && (Wj = zj), Uj && !U) {
+			let { placement: A, rects: j, platform: M, elements: N } = _, { apply: P = () => {}, ...z } = evaluate(n, _), B = await detectOverflow$1(_, z), H = getSide(A), U = getAlignment(A), W = getSideAxis(A) === "y", { width: G, height: Z } = j.floating, Yj, Xj;
+			H === "top" || H === "bottom" ? (Yj = H, Xj = U === (await (M.isRTL == null ? void 0 : M.isRTL(N.floating)) ? "start" : "end") ? "left" : "right") : (Xj = H, Yj = U === "end" ? "top" : "bottom");
+			let Zj = Z - B.top - B.bottom, Qj = G - B.left - B.right, $j = min(Z - B[Yj], Zj), eM = min(G - B[Xj], Qj), tM = !_.middlewareData.shift, nM = $j, rM = eM;
+			if ((E = _.middlewareData.shift) != null && E.enabled.x && (rM = Qj), (O = _.middlewareData.shift) != null && O.enabled.y && (nM = Zj), tM && !U) {
 				let n = max(B.left, 0), _ = max(B.right, 0), E = max(B.top, 0), O = max(B.bottom, 0);
-				W ? Gj = G - 2 * (n !== 0 || _ !== 0 ? n + _ : max(B.left, B.right)) : Wj = Z - 2 * (E !== 0 || O !== 0 ? E + O : max(B.top, B.bottom));
+				W ? rM = G - 2 * (n !== 0 || _ !== 0 ? n + _ : max(B.left, B.right)) : nM = Z - 2 * (E !== 0 || O !== 0 ? E + O : max(B.top, B.bottom));
 			}
 			await P({
 				..._,
-				availableWidth: Gj,
-				availableHeight: Wj
+				availableWidth: rM,
+				availableHeight: nM
 			});
-			let Kj = await M.getDimensions(N.floating);
-			return G !== Kj.width || Z !== Kj.height ? { reset: { rects: !0 } } : {};
+			let iM = await M.getDimensions(N.floating);
+			return G !== iM.width || Z !== iM.height ? { reset: { rects: !0 } } : {};
 		}
 	};
 };
@@ -2646,27 +2647,27 @@ function observeMove(n, _) {
 		N === void 0 && (N = !1), P === void 0 && (P = 1), j();
 		let z = n.getBoundingClientRect(), { left: B, top: H, width: U, height: W } = z;
 		if (N || _(), !U || !W) return;
-		let G = floor(H), Z = floor(A.clientWidth - (B + U)), Lj = floor(A.clientHeight - (H + W)), Rj = floor(B), zj = {
-			rootMargin: -G + "px " + -Z + "px " + -Lj + "px " + -Rj + "px",
+		let G = floor(H), Z = floor(A.clientWidth - (B + U)), Yj = floor(A.clientHeight - (H + W)), Xj = floor(B), Zj = {
+			rootMargin: -G + "px " + -Z + "px " + -Yj + "px " + -Xj + "px",
 			threshold: max(0, min(1, P)) || 1
-		}, Bj = !0;
-		function Vj(_) {
+		}, Qj = !0;
+		function $j(_) {
 			let E = _[0].intersectionRatio;
 			if (E !== P) {
-				if (!Bj) return M();
+				if (!Qj) return M();
 				E ? M(!1, E) : O = setTimeout(() => {
 					M(!1, 1e-7);
 				}, 1e3);
 			}
-			E === 1 && !rectsAreEqual(z, n.getBoundingClientRect()) && M(), Bj = !1;
+			E === 1 && !rectsAreEqual(z, n.getBoundingClientRect()) && M(), Qj = !1;
 		}
 		try {
-			E = new IntersectionObserver(Vj, {
-				...zj,
+			E = new IntersectionObserver($j, {
+				...Zj,
 				root: A.ownerDocument
 			});
 		} catch {
-			E = new IntersectionObserver(Vj, zj);
+			E = new IntersectionObserver($j, Zj);
 		}
 		E.observe(n);
 	}
@@ -2687,10 +2688,10 @@ function autoUpdate(n, _, E, O) {
 		})), E();
 	}), z && !P && W.observe(z), W.observe(_));
 	let G, Z = P ? getBoundingClientRect(n) : null;
-	P && Lj();
-	function Lj() {
+	P && Yj();
+	function Yj() {
 		let _ = getBoundingClientRect(n);
-		Z && !rectsAreEqual(Z, _) && E(), Z = _, G = requestAnimationFrame(Lj);
+		Z && !rectsAreEqual(Z, _) && E(), Z = _, G = requestAnimationFrame(Yj);
 	}
 	return E(), () => {
 		var n;
@@ -2757,23 +2758,23 @@ function useFloating(_) {
 		isPositioned: !1
 	}), [W, G] = React$1.useState(A);
 	deepEqual(W, A) || G(A);
-	let [Z, Lj] = React$1.useState(null), [Rj, zj] = React$1.useState(null), Bj = React$1.useCallback((n) => {
-		n !== Gj.current && (Gj.current = n, Lj(n));
-	}, []), Vj = React$1.useCallback((n) => {
-		n !== Kj.current && (Kj.current = n, zj(n));
-	}, []), Uj = M || Z, Wj = N || Rj, Gj = React$1.useRef(null), Kj = React$1.useRef(null), qj = React$1.useRef(H), Jj = z != null, Yj = useLatestRef(z), Xj = useLatestRef(j), Zj = useLatestRef(B), Qj = React$1.useCallback(() => {
-		if (!Gj.current || !Kj.current) return;
+	let [Z, Yj] = React$1.useState(null), [Xj, Zj] = React$1.useState(null), Qj = React$1.useCallback((n) => {
+		n !== rM.current && (rM.current = n, Yj(n));
+	}, []), $j = React$1.useCallback((n) => {
+		n !== iM.current && (iM.current = n, Zj(n));
+	}, []), tM = M || Z, nM = N || Xj, rM = React$1.useRef(null), iM = React$1.useRef(null), aM = React$1.useRef(H), oM = z != null, sM = useLatestRef(z), cM = useLatestRef(j), lM = useLatestRef(B), uM = React$1.useCallback(() => {
+		if (!rM.current || !iM.current) return;
 		let n = {
 			placement: E,
 			strategy: O,
 			middleware: W
 		};
-		Xj.current && (n.platform = Xj.current), computePosition(Gj.current, Kj.current, n).then((n) => {
+		cM.current && (n.platform = cM.current), computePosition(rM.current, iM.current, n).then((n) => {
 			let _ = {
 				...n,
-				isPositioned: Zj.current !== !1
+				isPositioned: lM.current !== !1
 			};
-			$j.current && !deepEqual(qj.current, _) && (qj.current = _, ReactDOM$1.flushSync(() => {
+			dM.current && !deepEqual(aM.current, _) && (aM.current = _, ReactDOM$1.flushSync(() => {
 				U(_);
 			}));
 		});
@@ -2781,50 +2782,50 @@ function useFloating(_) {
 		W,
 		E,
 		O,
-		Xj,
-		Zj
+		cM,
+		lM
 	]);
 	index(() => {
-		B === !1 && qj.current.isPositioned && (qj.current.isPositioned = !1, U((n) => ({
+		B === !1 && aM.current.isPositioned && (aM.current.isPositioned = !1, U((n) => ({
 			...n,
 			isPositioned: !1
 		})));
 	}, [B]);
-	let $j = React$1.useRef(!1);
-	index(() => ($j.current = !0, () => {
-		$j.current = !1;
+	let dM = React$1.useRef(!1);
+	index(() => (dM.current = !0, () => {
+		dM.current = !1;
 	}), []), index(() => {
-		if (Uj && (Gj.current = Uj), Wj && (Kj.current = Wj), Uj && Wj) {
-			if (Yj.current) return Yj.current(Uj, Wj, Qj);
-			Qj();
+		if (tM && (rM.current = tM), nM && (iM.current = nM), tM && nM) {
+			if (sM.current) return sM.current(tM, nM, uM);
+			uM();
 		}
 	}, [
-		Uj,
-		Wj,
-		Qj,
-		Yj,
-		Jj
+		tM,
+		nM,
+		uM,
+		sM,
+		oM
 	]);
-	let eM = React$1.useMemo(() => ({
-		reference: Gj,
-		floating: Kj,
-		setReference: Bj,
-		setFloating: Vj
-	}), [Bj, Vj]), tM = React$1.useMemo(() => ({
-		reference: Uj,
-		floating: Wj
-	}), [Uj, Wj]), nM = React$1.useMemo(() => {
+	let fM = React$1.useMemo(() => ({
+		reference: rM,
+		floating: iM,
+		setReference: Qj,
+		setFloating: $j
+	}), [Qj, $j]), pM = React$1.useMemo(() => ({
+		reference: tM,
+		floating: nM
+	}), [tM, nM]), mM = React$1.useMemo(() => {
 		let n = {
 			position: O,
 			left: 0,
 			top: 0
 		};
-		if (!tM.floating) return n;
-		let _ = roundByDPR(tM.floating, H.x), E = roundByDPR(tM.floating, H.y);
+		if (!pM.floating) return n;
+		let _ = roundByDPR(pM.floating, H.x), E = roundByDPR(pM.floating, H.y);
 		return P ? {
 			...n,
 			transform: "translate(" + _ + "px, " + E + "px)",
-			...getDPR(tM.floating) >= 1.5 && { willChange: "transform" }
+			...getDPR(pM.floating) >= 1.5 && { willChange: "transform" }
 		} : {
 			position: O,
 			left: _,
@@ -2833,22 +2834,22 @@ function useFloating(_) {
 	}, [
 		O,
 		P,
-		tM.floating,
+		pM.floating,
 		H.x,
 		H.y
 	]);
 	return React$1.useMemo(() => ({
 		...H,
-		update: Qj,
-		refs: eM,
-		elements: tM,
-		floatingStyles: nM
+		update: uM,
+		refs: fM,
+		elements: pM,
+		floatingStyles: mM
 	}), [
 		H,
-		Qj,
-		eM,
-		tM,
-		nM
+		uM,
+		fM,
+		pM,
+		mM
 	]);
 }
 var arrow$1$1 = (n) => {
@@ -2925,70 +2926,70 @@ var ANCHOR_NAME$2 = "PopperAnchor", PopperAnchor = React$1.forwardRef((_, E) => 
 });
 PopperAnchor.displayName = ANCHOR_NAME$2;
 var CONTENT_NAME$6 = "PopperContent", [PopperContentProvider, useContentContext] = createPopperContext(CONTENT_NAME$6), PopperContent = React$1.forwardRef((_, E) => {
-	let { __scopePopper: O, side: A = "bottom", sideOffset: j = 0, align: M = "center", alignOffset: N = 0, arrowPadding: P = 0, avoidCollisions: z = !0, collisionBoundary: B = [], collisionPadding: H = 0, sticky: U = "partial", hideWhenDetached: W = !1, updatePositionStrategy: G = "optimized", onPlaced: Z, ...Lj } = _, Rj = usePopperContext(CONTENT_NAME$6, O), [zj, Bj] = React$1.useState(null), Vj = useComposedRefs$1(E, (n) => Bj(n)), [Hj, Uj] = React$1.useState(null), Wj = useSize(Hj), Gj = Wj?.width ?? 0, qj = Wj?.height ?? 0, Jj = A + (M === "center" ? "" : "-" + M), Yj = typeof H == "number" ? H : {
+	let { __scopePopper: O, side: A = "bottom", sideOffset: j = 0, align: M = "center", alignOffset: N = 0, arrowPadding: P = 0, avoidCollisions: z = !0, collisionBoundary: B = [], collisionPadding: H = 0, sticky: U = "partial", hideWhenDetached: W = !1, updatePositionStrategy: G = "optimized", onPlaced: Z, ...Yj } = _, Xj = usePopperContext(CONTENT_NAME$6, O), [Zj, Qj] = React$1.useState(null), $j = useComposedRefs$1(E, (n) => Qj(n)), [eM, tM] = React$1.useState(null), nM = useSize(eM), rM = nM?.width ?? 0, aM = nM?.height ?? 0, oM = A + (M === "center" ? "" : "-" + M), sM = typeof H == "number" ? H : {
 		top: 0,
 		right: 0,
 		bottom: 0,
 		left: 0,
 		...H
-	}, Xj = Array.isArray(B) ? B : [B], Zj = Xj.length > 0, Qj = {
-		padding: Yj,
-		boundary: Xj.filter(isNotNull$2),
-		altBoundary: Zj
-	}, { refs: $j, floatingStyles: eM, placement: tM, isPositioned: nM, middlewareData: rM } = useFloating({
+	}, cM = Array.isArray(B) ? B : [B], lM = cM.length > 0, uM = {
+		padding: sM,
+		boundary: cM.filter(isNotNull$2),
+		altBoundary: lM
+	}, { refs: dM, floatingStyles: fM, placement: pM, isPositioned: mM, middlewareData: hM } = useFloating({
 		strategy: "fixed",
-		placement: Jj,
+		placement: oM,
 		whileElementsMounted: (...n) => autoUpdate(...n, { animationFrame: G === "always" }),
-		elements: { reference: Rj.anchor },
+		elements: { reference: Xj.anchor },
 		middleware: [
 			offset({
-				mainAxis: j + qj,
+				mainAxis: j + aM,
 				alignmentAxis: N
 			}),
 			z && shift({
 				mainAxis: !0,
 				crossAxis: !1,
 				limiter: U === "partial" ? limitShift() : void 0,
-				...Qj
+				...uM
 			}),
-			z && flip({ ...Qj }),
+			z && flip({ ...uM }),
 			size({
-				...Qj,
+				...uM,
 				apply: ({ elements: n, rects: _, availableWidth: E, availableHeight: O }) => {
 					let { width: A, height: j } = _.reference, M = n.floating.style;
 					M.setProperty("--radix-popper-available-width", `${E}px`), M.setProperty("--radix-popper-available-height", `${O}px`), M.setProperty("--radix-popper-anchor-width", `${A}px`), M.setProperty("--radix-popper-anchor-height", `${j}px`);
 				}
 			}),
-			Hj && arrow({
-				element: Hj,
+			eM && arrow({
+				element: eM,
 				padding: P
 			}),
 			transformOrigin({
-				arrowWidth: Gj,
-				arrowHeight: qj
+				arrowWidth: rM,
+				arrowHeight: aM
 			}),
 			W && hide({
 				strategy: "referenceHidden",
-				...Qj
+				...uM
 			})
 		]
-	}), [iM, aM] = getSideAndAlignFromPlacement(tM), oM = useCallbackRef(Z);
+	}), [gM, _M] = getSideAndAlignFromPlacement(pM), vM = useCallbackRef(Z);
 	useLayoutEffect2(() => {
-		nM && oM?.();
-	}, [nM, oM]);
-	let sM = rM.arrow?.x, cM = rM.arrow?.y, lM = rM.arrow?.centerOffset !== 0, [uM, dM] = React$1.useState();
+		mM && vM?.();
+	}, [mM, vM]);
+	let yM = hM.arrow?.x, bM = hM.arrow?.y, xM = hM.arrow?.centerOffset !== 0, [SM, CM] = React$1.useState();
 	return useLayoutEffect2(() => {
-		zj && dM(window.getComputedStyle(zj).zIndex);
-	}, [zj]), /* @__PURE__ */ jsx("div", {
-		ref: $j.setFloating,
+		Zj && CM(window.getComputedStyle(Zj).zIndex);
+	}, [Zj]), /* @__PURE__ */ jsx("div", {
+		ref: dM.setFloating,
 		"data-radix-popper-content-wrapper": "",
 		style: {
-			...eM,
-			transform: nM ? eM.transform : "translate(0, -200%)",
+			...fM,
+			transform: mM ? fM.transform : "translate(0, -200%)",
 			minWidth: "max-content",
-			zIndex: uM,
-			"--radix-popper-transform-origin": [rM.transformOrigin?.x, rM.transformOrigin?.y].join(" "),
-			...rM.hide?.referenceHidden && {
+			zIndex: SM,
+			"--radix-popper-transform-origin": [hM.transformOrigin?.x, hM.transformOrigin?.y].join(" "),
+			...hM.hide?.referenceHidden && {
 				visibility: "hidden",
 				pointerEvents: "none"
 			}
@@ -2996,19 +2997,19 @@ var CONTENT_NAME$6 = "PopperContent", [PopperContentProvider, useContentContext]
 		dir: _.dir,
 		children: /* @__PURE__ */ jsx(PopperContentProvider, {
 			scope: O,
-			placedSide: iM,
-			onArrowChange: Uj,
-			arrowX: sM,
-			arrowY: cM,
-			shouldHideArrow: lM,
+			placedSide: gM,
+			onArrowChange: tM,
+			arrowX: yM,
+			arrowY: bM,
+			shouldHideArrow: xM,
 			children: /* @__PURE__ */ jsx(Primitive.div, {
-				"data-side": iM,
-				"data-align": aM,
-				...Lj,
-				ref: Vj,
+				"data-side": gM,
+				"data-align": _M,
+				...Yj,
+				ref: $j,
 				style: {
-					...Lj.style,
-					animation: nM ? void 0 : "none"
+					...Yj.style,
+					animation: mM ? void 0 : "none"
 				}
 			})
 		})
@@ -3091,27 +3092,27 @@ var Root2$4 = Popper, Anchor = PopperAnchor, Content$1 = PopperContent, Arrow = 
 }));
 RovingFocusGroup.displayName = GROUP_NAME$3;
 var RovingFocusGroupImpl = React$1.forwardRef((_, E) => {
-	let { __scopeRovingFocusGroup: O, orientation: A, loop: j = !1, dir: M, currentTabStopId: N, defaultCurrentTabStopId: P, onCurrentTabStopIdChange: z, onEntryFocus: B, preventScrollOnEntryFocus: H = !1, ...U } = _, W = React$1.useRef(null), G = useComposedRefs$1(E, W), Z = useDirection(M), [Lj, Rj] = useControllableState({
+	let { __scopeRovingFocusGroup: O, orientation: A, loop: j = !1, dir: M, currentTabStopId: N, defaultCurrentTabStopId: P, onCurrentTabStopIdChange: z, onEntryFocus: B, preventScrollOnEntryFocus: H = !1, ...U } = _, W = React$1.useRef(null), G = useComposedRefs$1(E, W), Z = useDirection(M), [Yj, Xj] = useControllableState({
 		prop: N,
 		defaultProp: P ?? null,
 		onChange: z,
 		caller: GROUP_NAME$3
-	}), [zj, Bj] = React$1.useState(!1), Vj = useCallbackRef(B), Hj = useCollection$1(O), Uj = React$1.useRef(!1), [Wj, Gj] = React$1.useState(0);
+	}), [Zj, Qj] = React$1.useState(!1), $j = useCallbackRef(B), eM = useCollection$1(O), tM = React$1.useRef(!1), [nM, rM] = React$1.useState(0);
 	return React$1.useEffect(() => {
 		let n = W.current;
-		if (n) return n.addEventListener(ENTRY_FOCUS, Vj), () => n.removeEventListener(ENTRY_FOCUS, Vj);
-	}, [Vj]), /* @__PURE__ */ jsx(RovingFocusProvider, {
+		if (n) return n.addEventListener(ENTRY_FOCUS, $j), () => n.removeEventListener(ENTRY_FOCUS, $j);
+	}, [$j]), /* @__PURE__ */ jsx(RovingFocusProvider, {
 		scope: O,
 		orientation: A,
 		dir: Z,
 		loop: j,
-		currentTabStopId: Lj,
-		onItemFocus: React$1.useCallback((n) => Rj(n), [Rj]),
-		onItemShiftTab: React$1.useCallback(() => Bj(!0), []),
-		onFocusableItemAdd: React$1.useCallback(() => Gj((n) => n + 1), []),
-		onFocusableItemRemove: React$1.useCallback(() => Gj((n) => n - 1), []),
+		currentTabStopId: Yj,
+		onItemFocus: React$1.useCallback((n) => Xj(n), [Xj]),
+		onItemShiftTab: React$1.useCallback(() => Qj(!0), []),
+		onFocusableItemAdd: React$1.useCallback(() => rM((n) => n + 1), []),
+		onFocusableItemRemove: React$1.useCallback(() => rM((n) => n - 1), []),
 		children: /* @__PURE__ */ jsx(Primitive.div, {
-			tabIndex: zj || Wj === 0 ? -1 : 0,
+			tabIndex: Zj || nM === 0 ? -1 : 0,
 			"data-orientation": A,
 			...U,
 			ref: G,
@@ -3120,28 +3121,28 @@ var RovingFocusGroupImpl = React$1.forwardRef((_, E) => {
 				..._.style
 			},
 			onMouseDown: composeEventHandlers(_.onMouseDown, () => {
-				Uj.current = !0;
+				tM.current = !0;
 			}),
 			onFocus: composeEventHandlers(_.onFocus, (n) => {
-				let _ = !Uj.current;
-				if (n.target === n.currentTarget && _ && !zj) {
+				let _ = !tM.current;
+				if (n.target === n.currentTarget && _ && !Zj) {
 					let _ = new CustomEvent(ENTRY_FOCUS, EVENT_OPTIONS);
 					if (n.currentTarget.dispatchEvent(_), !_.defaultPrevented) {
-						let n = Hj().filter((n) => n.focusable);
+						let n = eM().filter((n) => n.focusable);
 						focusFirst$1([
 							n.find((n) => n.active),
-							n.find((n) => n.id === Lj),
+							n.find((n) => n.id === Yj),
 							...n
 						].filter(Boolean).map((n) => n.ref.current), H);
 					}
 				}
-				Uj.current = !1;
+				tM.current = !1;
 			}),
-			onBlur: composeEventHandlers(_.onBlur, () => Bj(!1))
+			onBlur: composeEventHandlers(_.onBlur, () => Qj(!1))
 		})
 	});
 }), ITEM_NAME$3 = "RovingFocusGroupItem", RovingFocusGroupItem = React$1.forwardRef((_, E) => {
-	let { __scopeRovingFocusGroup: O, focusable: A = !0, active: j = !1, tabStopId: M, children: N, ...P } = _, z = useId$1(), B = M || z, H = useRovingFocusContext(ITEM_NAME$3, O), U = H.currentTabStopId === B, W = useCollection$1(O), { onFocusableItemAdd: G, onFocusableItemRemove: Z, currentTabStopId: Lj } = H;
+	let { __scopeRovingFocusGroup: O, focusable: A = !0, active: j = !1, tabStopId: M, children: N, ...P } = _, z = useId$1(), B = M || z, H = useRovingFocusContext(ITEM_NAME$3, O), U = H.currentTabStopId === B, W = useCollection$1(O), { onFocusableItemAdd: G, onFocusableItemRemove: Z, currentTabStopId: Yj } = H;
 	return React$1.useEffect(() => {
 		if (A) return G(), () => Z();
 	}, [
@@ -3184,7 +3185,7 @@ var RovingFocusGroupImpl = React$1.forwardRef((_, E) => {
 			}),
 			children: typeof N == "function" ? N({
 				isCurrentTabStop: U,
-				hasTabStop: Lj != null
+				hasTabStop: Yj != null
 			}) : N
 		})
 	});
@@ -3335,40 +3336,40 @@ var CONTENT_NAME$5 = "MenuContent", [MenuContentProvider, useMenuContentContext]
 		onDismiss: () => E.onOpenChange(!1)
 	});
 }), Slot$1 = /* @__PURE__ */ createSlot("MenuContent.ScrollLock"), MenuContentImpl = React$1.forwardRef((_, E) => {
-	let { __scopeMenu: O, loop: A = !1, trapFocus: j, onOpenAutoFocus: M, onCloseAutoFocus: N, disableOutsidePointerEvents: P, onEntryFocus: z, onEscapeKeyDown: B, onPointerDownOutside: H, onFocusOutside: U, onInteractOutside: W, onDismiss: G, disableOutsideScroll: Z, ...Lj } = _, Rj = useMenuContext(CONTENT_NAME$5, O), zj = useMenuRootContext(CONTENT_NAME$5, O), Bj = usePopperScope$2(O), Vj = useRovingFocusGroupScope$1(O), Hj = useCollection(O), [Uj, Wj] = React$1.useState(null), Gj = React$1.useRef(null), qj = useComposedRefs$1(E, Gj, Rj.onContentChange), Jj = React$1.useRef(0), Yj = React$1.useRef(""), Xj = React$1.useRef(0), Zj = React$1.useRef(null), Qj = React$1.useRef("right"), $j = React$1.useRef(0), eM = Z ? Combination_default : React$1.Fragment, tM = Z ? {
+	let { __scopeMenu: O, loop: A = !1, trapFocus: j, onOpenAutoFocus: M, onCloseAutoFocus: N, disableOutsidePointerEvents: P, onEntryFocus: z, onEscapeKeyDown: B, onPointerDownOutside: H, onFocusOutside: U, onInteractOutside: W, onDismiss: G, disableOutsideScroll: Z, ...Yj } = _, Xj = useMenuContext(CONTENT_NAME$5, O), Zj = useMenuRootContext(CONTENT_NAME$5, O), Qj = usePopperScope$2(O), $j = useRovingFocusGroupScope$1(O), eM = useCollection(O), [tM, nM] = React$1.useState(null), rM = React$1.useRef(null), aM = useComposedRefs$1(E, rM, Xj.onContentChange), oM = React$1.useRef(0), sM = React$1.useRef(""), cM = React$1.useRef(0), lM = React$1.useRef(null), uM = React$1.useRef("right"), dM = React$1.useRef(0), fM = Z ? Combination_default : React$1.Fragment, pM = Z ? {
 		as: Slot$1,
 		allowPinchZoom: !0
-	} : void 0, nM = (n) => {
-		let _ = Yj.current + n, E = Hj().filter((n) => !n.disabled), O = document.activeElement, A = E.find((n) => n.ref.current === O)?.textValue, j = getNextMatch(E.map((n) => n.textValue), _, A), M = E.find((n) => n.textValue === j)?.ref.current;
+	} : void 0, mM = (n) => {
+		let _ = sM.current + n, E = eM().filter((n) => !n.disabled), O = document.activeElement, A = E.find((n) => n.ref.current === O)?.textValue, j = getNextMatch(E.map((n) => n.textValue), _, A), M = E.find((n) => n.textValue === j)?.ref.current;
 		(function n(_) {
-			Yj.current = _, window.clearTimeout(Jj.current), _ !== "" && (Jj.current = window.setTimeout(() => n(""), 1e3));
+			sM.current = _, window.clearTimeout(oM.current), _ !== "" && (oM.current = window.setTimeout(() => n(""), 1e3));
 		})(_), M && setTimeout(() => M.focus());
 	};
-	React$1.useEffect(() => () => window.clearTimeout(Jj.current), []), useFocusGuards();
-	let rM = React$1.useCallback((n) => Qj.current === Zj.current?.side && isPointerInGraceArea(n, Zj.current?.area), []);
+	React$1.useEffect(() => () => window.clearTimeout(oM.current), []), useFocusGuards();
+	let hM = React$1.useCallback((n) => uM.current === lM.current?.side && isPointerInGraceArea(n, lM.current?.area), []);
 	return /* @__PURE__ */ jsx(MenuContentProvider, {
 		scope: O,
-		searchRef: Yj,
+		searchRef: sM,
 		onItemEnter: React$1.useCallback((n) => {
-			rM(n) && n.preventDefault();
-		}, [rM]),
+			hM(n) && n.preventDefault();
+		}, [hM]),
 		onItemLeave: React$1.useCallback((n) => {
-			rM(n) || (Gj.current?.focus(), Wj(null));
-		}, [rM]),
+			hM(n) || (rM.current?.focus(), nM(null));
+		}, [hM]),
 		onTriggerLeave: React$1.useCallback((n) => {
-			rM(n) && n.preventDefault();
-		}, [rM]),
-		pointerGraceTimerRef: Xj,
+			hM(n) && n.preventDefault();
+		}, [hM]),
+		pointerGraceTimerRef: cM,
 		onPointerGraceIntentChange: React$1.useCallback((n) => {
-			Zj.current = n;
+			lM.current = n;
 		}, []),
-		children: /* @__PURE__ */ jsx(eM, {
-			...tM,
+		children: /* @__PURE__ */ jsx(fM, {
+			...pM,
 			children: /* @__PURE__ */ jsx(FocusScope, {
 				asChild: !0,
 				trapped: j,
 				onMountAutoFocus: composeEventHandlers(M, (n) => {
-					n.preventDefault(), Gj.current?.focus({ preventScroll: !0 });
+					n.preventDefault(), rM.current?.focus({ preventScroll: !0 });
 				}),
 				onUnmountAutoFocus: N,
 				children: /* @__PURE__ */ jsx(DismissableLayer, {
@@ -3381,44 +3382,44 @@ var CONTENT_NAME$5 = "MenuContent", [MenuContentProvider, useMenuContentContext]
 					onDismiss: G,
 					children: /* @__PURE__ */ jsx(Root$2, {
 						asChild: !0,
-						...Vj,
-						dir: zj.dir,
+						...$j,
+						dir: Zj.dir,
 						orientation: "vertical",
 						loop: A,
-						currentTabStopId: Uj,
-						onCurrentTabStopIdChange: Wj,
+						currentTabStopId: tM,
+						onCurrentTabStopIdChange: nM,
 						onEntryFocus: composeEventHandlers(z, (n) => {
-							zj.isUsingKeyboardRef.current || n.preventDefault();
+							Zj.isUsingKeyboardRef.current || n.preventDefault();
 						}),
 						preventScrollOnEntryFocus: !0,
 						children: /* @__PURE__ */ jsx(Content$1, {
 							role: "menu",
 							"aria-orientation": "vertical",
-							"data-state": getOpenState(Rj.open),
+							"data-state": getOpenState(Xj.open),
 							"data-radix-menu-content": "",
-							dir: zj.dir,
-							...Bj,
-							...Lj,
-							ref: qj,
+							dir: Zj.dir,
+							...Qj,
+							...Yj,
+							ref: aM,
 							style: {
 								outline: "none",
-								...Lj.style
+								...Yj.style
 							},
-							onKeyDown: composeEventHandlers(Lj.onKeyDown, (n) => {
+							onKeyDown: composeEventHandlers(Yj.onKeyDown, (n) => {
 								let _ = n.target.closest("[data-radix-menu-content]") === n.currentTarget, E = n.ctrlKey || n.altKey || n.metaKey, O = n.key.length === 1;
-								_ && (n.key === "Tab" && n.preventDefault(), !E && O && nM(n.key));
-								let A = Gj.current;
+								_ && (n.key === "Tab" && n.preventDefault(), !E && O && mM(n.key));
+								let A = rM.current;
 								if (n.target !== A || !FIRST_LAST_KEYS.includes(n.key)) return;
 								n.preventDefault();
-								let j = Hj().filter((n) => !n.disabled).map((n) => n.ref.current);
+								let j = eM().filter((n) => !n.disabled).map((n) => n.ref.current);
 								LAST_KEYS.includes(n.key) && j.reverse(), focusFirst(j);
 							}),
 							onBlur: composeEventHandlers(_.onBlur, (n) => {
-								n.currentTarget.contains(n.target) || (window.clearTimeout(Jj.current), Yj.current = "");
+								n.currentTarget.contains(n.target) || (window.clearTimeout(oM.current), sM.current = "");
 							}),
 							onPointerMove: composeEventHandlers(_.onPointerMove, whenMouse((n) => {
-								let _ = n.target, E = $j.current !== n.clientX;
-								n.currentTarget.contains(_) && E && (Qj.current = n.clientX > $j.current ? "right" : "left", $j.current = n.clientX);
+								let _ = n.target, E = dM.current !== n.clientX;
+								n.currentTarget.contains(_) && E && (uM.current = n.clientX > dM.current ? "right" : "left", dM.current = n.clientX);
 							}))
 						})
 					})
@@ -4366,11 +4367,11 @@ function useStateMachine(_, E) {
 	return React$1.useReducer((n, _) => E[n][_] ?? n, _);
 }
 var SCROLL_AREA_NAME = "ScrollArea", [createScrollAreaContext, createScrollAreaScope] = createContextScope(SCROLL_AREA_NAME), [ScrollAreaProvider, useScrollAreaContext] = createScrollAreaContext(SCROLL_AREA_NAME), ScrollArea = React$1.forwardRef((_, E) => {
-	let { __scopeScrollArea: O, type: A = "hover", dir: j, scrollHideDelay: M = 600, ...N } = _, [P, z] = React$1.useState(null), [B, H] = React$1.useState(null), [U, W] = React$1.useState(null), [G, Z] = React$1.useState(null), [Lj, Rj] = React$1.useState(null), [zj, Bj] = React$1.useState(0), [Vj, Hj] = React$1.useState(0), [Uj, Wj] = React$1.useState(!1), [Gj, qj] = React$1.useState(!1), Jj = useComposedRefs$1(E, (n) => z(n)), Yj = useDirection(j);
+	let { __scopeScrollArea: O, type: A = "hover", dir: j, scrollHideDelay: M = 600, ...N } = _, [P, z] = React$1.useState(null), [B, H] = React$1.useState(null), [U, W] = React$1.useState(null), [G, Z] = React$1.useState(null), [Yj, Xj] = React$1.useState(null), [Zj, Qj] = React$1.useState(0), [$j, eM] = React$1.useState(0), [tM, nM] = React$1.useState(!1), [rM, aM] = React$1.useState(!1), oM = useComposedRefs$1(E, (n) => z(n)), sM = useDirection(j);
 	return /* @__PURE__ */ jsx(ScrollAreaProvider, {
 		scope: O,
 		type: A,
-		dir: Yj,
+		dir: sM,
 		scrollHideDelay: M,
 		scrollArea: P,
 		viewport: B,
@@ -4379,22 +4380,22 @@ var SCROLL_AREA_NAME = "ScrollArea", [createScrollAreaContext, createScrollAreaS
 		onContentChange: W,
 		scrollbarX: G,
 		onScrollbarXChange: Z,
-		scrollbarXEnabled: Uj,
-		onScrollbarXEnabledChange: Wj,
-		scrollbarY: Lj,
-		onScrollbarYChange: Rj,
-		scrollbarYEnabled: Gj,
-		onScrollbarYEnabledChange: qj,
-		onCornerWidthChange: Bj,
-		onCornerHeightChange: Hj,
+		scrollbarXEnabled: tM,
+		onScrollbarXEnabledChange: nM,
+		scrollbarY: Yj,
+		onScrollbarYChange: Xj,
+		scrollbarYEnabled: rM,
+		onScrollbarYEnabledChange: aM,
+		onCornerWidthChange: Qj,
+		onCornerHeightChange: eM,
 		children: /* @__PURE__ */ jsx(Primitive.div, {
-			dir: Yj,
+			dir: sM,
 			...N,
-			ref: Jj,
+			ref: oM,
 			style: {
 				position: "relative",
-				"--radix-scroll-area-corner-width": zj + "px",
-				"--radix-scroll-area-corner-height": Vj + "px",
+				"--radix-scroll-area-corner-width": Zj + "px",
+				"--radix-scroll-area-corner-height": $j + "px",
 				..._.style
 			}
 		})
@@ -4665,46 +4666,46 @@ var ScrollAreaScrollbarHover = React$1.forwardRef((_, E) => {
 		}
 	});
 }), [ScrollbarProvider, useScrollbarContext] = createScrollAreaContext(SCROLLBAR_NAME), ScrollAreaScrollbarImpl = React$1.forwardRef((_, E) => {
-	let { __scopeScrollArea: O, sizes: A, hasThumb: j, onThumbChange: M, onThumbPointerUp: N, onThumbPointerDown: P, onThumbPositionChange: z, onDragScroll: B, onWheelScroll: H, onResize: U, ...W } = _, G = useScrollAreaContext(SCROLLBAR_NAME, O), [Z, Lj] = React$1.useState(null), Rj = useComposedRefs$1(E, (n) => Lj(n)), zj = React$1.useRef(null), Bj = React$1.useRef(""), Vj = G.viewport, Hj = A.content - A.viewport, Uj = useCallbackRef(H), Wj = useCallbackRef(z), Gj = useDebounceCallback(U, 10);
-	function qj(n) {
-		zj.current && B({
-			x: n.clientX - zj.current.left,
-			y: n.clientY - zj.current.top
+	let { __scopeScrollArea: O, sizes: A, hasThumb: j, onThumbChange: M, onThumbPointerUp: N, onThumbPointerDown: P, onThumbPositionChange: z, onDragScroll: B, onWheelScroll: H, onResize: U, ...W } = _, G = useScrollAreaContext(SCROLLBAR_NAME, O), [Z, Yj] = React$1.useState(null), Xj = useComposedRefs$1(E, (n) => Yj(n)), Zj = React$1.useRef(null), Qj = React$1.useRef(""), $j = G.viewport, eM = A.content - A.viewport, tM = useCallbackRef(H), nM = useCallbackRef(z), rM = useDebounceCallback(U, 10);
+	function aM(n) {
+		Zj.current && B({
+			x: n.clientX - Zj.current.left,
+			y: n.clientY - Zj.current.top
 		});
 	}
 	return React$1.useEffect(() => {
 		let n = (n) => {
 			let _ = n.target;
-			Z?.contains(_) && Uj(n, Hj);
+			Z?.contains(_) && tM(n, eM);
 		};
 		return document.addEventListener("wheel", n, { passive: !1 }), () => document.removeEventListener("wheel", n, { passive: !1 });
 	}, [
-		Vj,
+		$j,
 		Z,
-		Hj,
-		Uj
-	]), React$1.useEffect(Wj, [A, Wj]), useResizeObserver(Z, Gj), useResizeObserver(G.content, Gj), /* @__PURE__ */ jsx(ScrollbarProvider, {
+		eM,
+		tM
+	]), React$1.useEffect(nM, [A, nM]), useResizeObserver(Z, rM), useResizeObserver(G.content, rM), /* @__PURE__ */ jsx(ScrollbarProvider, {
 		scope: O,
 		scrollbar: Z,
 		hasThumb: j,
 		onThumbChange: useCallbackRef(M),
 		onThumbPointerUp: useCallbackRef(N),
-		onThumbPositionChange: Wj,
+		onThumbPositionChange: nM,
 		onThumbPointerDown: useCallbackRef(P),
 		children: /* @__PURE__ */ jsx(Primitive.div, {
 			...W,
-			ref: Rj,
+			ref: Xj,
 			style: {
 				position: "absolute",
 				...W.style
 			},
 			onPointerDown: composeEventHandlers(_.onPointerDown, (n) => {
-				n.button === 0 && (n.target.setPointerCapture(n.pointerId), zj.current = Z.getBoundingClientRect(), Bj.current = document.body.style.webkitUserSelect, document.body.style.webkitUserSelect = "none", G.viewport && (G.viewport.style.scrollBehavior = "auto"), qj(n));
+				n.button === 0 && (n.target.setPointerCapture(n.pointerId), Zj.current = Z.getBoundingClientRect(), Qj.current = document.body.style.webkitUserSelect, document.body.style.webkitUserSelect = "none", G.viewport && (G.viewport.style.scrollBehavior = "auto"), aM(n));
 			}),
-			onPointerMove: composeEventHandlers(_.onPointerMove, qj),
+			onPointerMove: composeEventHandlers(_.onPointerMove, aM),
 			onPointerUp: composeEventHandlers(_.onPointerUp, (n) => {
 				let _ = n.target;
-				_.hasPointerCapture(n.pointerId) && _.releasePointerCapture(n.pointerId), document.body.style.webkitUserSelect = Bj.current, G.viewport && (G.viewport.style.scrollBehavior = ""), zj.current = null;
+				_.hasPointerCapture(n.pointerId) && _.releasePointerCapture(n.pointerId), document.body.style.webkitUserSelect = Qj.current, G.viewport && (G.viewport.style.scrollBehavior = ""), Zj.current = null;
 			})
 		})
 	});
@@ -4846,7 +4847,7 @@ function useResizeObserver(n, _) {
 	}, [n, E]);
 }
 var Root$1 = ScrollArea, Viewport = ScrollAreaViewport, Scrollbar = ScrollAreaScrollbar, Thumb$1 = ScrollAreaThumb, Corner = ScrollAreaCorner, SWITCH_NAME = "Switch", [createSwitchContext, createSwitchScope] = createContextScope(SWITCH_NAME), [SwitchProvider, useSwitchContext] = createSwitchContext(SWITCH_NAME), Switch = React$1.forwardRef((_, E) => {
-	let { __scopeSwitch: O, name: A, checked: j, defaultChecked: M, required: N, disabled: P, value: z = "on", onCheckedChange: B, form: H, ...U } = _, [W, G] = React$1.useState(null), Z = useComposedRefs$1(E, (n) => G(n)), Lj = React$1.useRef(!1), Rj = W ? H || !!W.closest("form") : !0, [zj, Bj] = useControllableState({
+	let { __scopeSwitch: O, name: A, checked: j, defaultChecked: M, required: N, disabled: P, value: z = "on", onCheckedChange: B, form: H, ...U } = _, [W, G] = React$1.useState(null), Z = useComposedRefs$1(E, (n) => G(n)), Yj = React$1.useRef(!1), Xj = W ? H || !!W.closest("form") : !0, [Zj, Qj] = useControllableState({
 		prop: j,
 		defaultProp: M ?? !1,
 		onChange: B,
@@ -4854,28 +4855,28 @@ var Root$1 = ScrollArea, Viewport = ScrollAreaViewport, Scrollbar = ScrollAreaSc
 	});
 	return /* @__PURE__ */ jsxs(SwitchProvider, {
 		scope: O,
-		checked: zj,
+		checked: Zj,
 		disabled: P,
 		children: [/* @__PURE__ */ jsx(Primitive.button, {
 			type: "button",
 			role: "switch",
-			"aria-checked": zj,
+			"aria-checked": Zj,
 			"aria-required": N,
-			"data-state": getState(zj),
+			"data-state": getState(Zj),
 			"data-disabled": P ? "" : void 0,
 			disabled: P,
 			value: z,
 			...U,
 			ref: Z,
 			onClick: composeEventHandlers(_.onClick, (n) => {
-				Bj((n) => !n), Rj && (Lj.current = n.isPropagationStopped(), Lj.current || n.stopPropagation());
+				Qj((n) => !n), Xj && (Yj.current = n.isPropagationStopped(), Yj.current || n.stopPropagation());
 			})
-		}), Rj && /* @__PURE__ */ jsx(SwitchBubbleInput, {
+		}), Xj && /* @__PURE__ */ jsx(SwitchBubbleInput, {
 			control: W,
-			bubbles: !Lj.current,
+			bubbles: !Yj.current,
 			name: A,
 			value: z,
-			checked: zj,
+			checked: Zj,
 			required: N,
 			disabled: P,
 			form: H,
@@ -5059,22 +5060,22 @@ var Root2 = Tabs, List = TabsList, Trigger = TabsTrigger, Content = TabsContent,
 };
 TooltipProvider.displayName = PROVIDER_NAME;
 var TOOLTIP_NAME = "Tooltip", [TooltipContextProvider, useTooltipContext] = createTooltipContext(TOOLTIP_NAME), Tooltip = (_) => {
-	let { __scopeTooltip: E, children: O, open: A, defaultOpen: j, onOpenChange: M, disableHoverableContent: N, delayDuration: P } = _, z = useTooltipProviderContext(TOOLTIP_NAME, _.__scopeTooltip), B = usePopperScope(E), [H, U] = React$1.useState(null), W = useId$1(), G = React$1.useRef(0), Z = N ?? z.disableHoverableContent, Lj = P ?? z.delayDuration, Rj = React$1.useRef(!1), [zj, Bj] = useControllableState({
+	let { __scopeTooltip: E, children: O, open: A, defaultOpen: j, onOpenChange: M, disableHoverableContent: N, delayDuration: P } = _, z = useTooltipProviderContext(TOOLTIP_NAME, _.__scopeTooltip), B = usePopperScope(E), [H, U] = React$1.useState(null), W = useId$1(), G = React$1.useRef(0), Z = N ?? z.disableHoverableContent, Yj = P ?? z.delayDuration, Xj = React$1.useRef(!1), [Zj, Qj] = useControllableState({
 		prop: A,
 		defaultProp: j ?? !1,
 		onChange: (n) => {
 			n ? (z.onOpen(), document.dispatchEvent(new CustomEvent(TOOLTIP_OPEN))) : z.onClose(), M?.(n);
 		},
 		caller: TOOLTIP_NAME
-	}), Vj = React$1.useMemo(() => zj ? Rj.current ? "delayed-open" : "instant-open" : "closed", [zj]), Hj = React$1.useCallback(() => {
-		window.clearTimeout(G.current), G.current = 0, Rj.current = !1, Bj(!0);
-	}, [Bj]), Uj = React$1.useCallback(() => {
-		window.clearTimeout(G.current), G.current = 0, Bj(!1);
-	}, [Bj]), Wj = React$1.useCallback(() => {
+	}), $j = React$1.useMemo(() => Zj ? Xj.current ? "delayed-open" : "instant-open" : "closed", [Zj]), eM = React$1.useCallback(() => {
+		window.clearTimeout(G.current), G.current = 0, Xj.current = !1, Qj(!0);
+	}, [Qj]), tM = React$1.useCallback(() => {
+		window.clearTimeout(G.current), G.current = 0, Qj(!1);
+	}, [Qj]), nM = React$1.useCallback(() => {
 		window.clearTimeout(G.current), G.current = window.setTimeout(() => {
-			Rj.current = !0, Bj(!0), G.current = 0;
-		}, Lj);
-	}, [Lj, Bj]);
+			Xj.current = !0, Qj(!0), G.current = 0;
+		}, Yj);
+	}, [Yj, Qj]);
 	return React$1.useEffect(() => () => {
 		G.current &&= (window.clearTimeout(G.current), 0);
 	}, []), /* @__PURE__ */ jsx(Root2$4, {
@@ -5082,22 +5083,22 @@ var TOOLTIP_NAME = "Tooltip", [TooltipContextProvider, useTooltipContext] = crea
 		children: /* @__PURE__ */ jsx(TooltipContextProvider, {
 			scope: E,
 			contentId: W,
-			open: zj,
-			stateAttribute: Vj,
+			open: Zj,
+			stateAttribute: $j,
 			trigger: H,
 			onTriggerChange: U,
 			onTriggerEnter: React$1.useCallback(() => {
-				z.isOpenDelayedRef.current ? Wj() : Hj();
+				z.isOpenDelayedRef.current ? nM() : eM();
 			}, [
 				z.isOpenDelayedRef,
-				Wj,
-				Hj
+				nM,
+				eM
 			]),
 			onTriggerLeave: React$1.useCallback(() => {
-				Z ? Uj() : (window.clearTimeout(G.current), G.current = 0);
-			}, [Uj, Z]),
-			onOpen: Hj,
-			onClose: Uj,
+				Z ? tM() : (window.clearTimeout(G.current), G.current = 0);
+			}, [tM, Z]),
+			onOpen: eM,
+			onClose: tM,
 			disableHoverableContent: Z,
 			children: O
 		})
@@ -5910,14 +5911,14 @@ var I$3 = React$1.forwardRef((_, E) => {
 	React$1.useEffect(() => U(O), [O]);
 	let [W, G] = React$1.useState(A);
 	React$1.useEffect(() => G(A), [A]);
-	let [Z, Lj] = React$1.useState(j);
-	React$1.useEffect(() => Lj(j), [j]);
-	let [Rj, zj] = React$1.useState(M);
-	React$1.useEffect(() => zj(M), [M]);
-	let [Bj, Vj] = React$1.useState(N);
-	React$1.useEffect(() => Vj(N), [N]);
-	let [Hj, Uj] = React$1.useState(P);
-	return React$1.useEffect(() => Uj(P), [P]), React$1.createElement(A$2, {
+	let [Z, Yj] = React$1.useState(j);
+	React$1.useEffect(() => Yj(j), [j]);
+	let [Xj, Zj] = React$1.useState(M);
+	React$1.useEffect(() => Zj(M), [M]);
+	let [Qj, $j] = React$1.useState(N);
+	React$1.useEffect(() => $j(N), [N]);
+	let [eM, tM] = React$1.useState(P);
+	return React$1.useEffect(() => tM(P), [P]), React$1.createElement(A$2, {
 		...B,
 		ref: E,
 		isRoot: !0,
@@ -5925,62 +5926,62 @@ var I$3 = React$1.forwardRef((_, E) => {
 		appearance: H,
 		accentColor: W,
 		grayColor: Z,
-		panelBackground: Rj,
-		radius: Bj,
-		scaling: Hj,
+		panelBackground: Xj,
+		radius: Qj,
+		scaling: eM,
 		onAppearanceChange: U,
 		onAccentColorChange: G,
-		onGrayColorChange: Lj,
-		onPanelBackgroundChange: zj,
-		onRadiusChange: Vj,
-		onScalingChange: Uj
+		onGrayColorChange: Yj,
+		onPanelBackgroundChange: Zj,
+		onRadiusChange: $j,
+		onScalingChange: tM
 	});
 });
 I$3.displayName = "ThemeRoot";
 var A$2 = React$1.forwardRef((_, E) => {
-	let O = React$1.useContext(P$3), { asChild: A, isRoot: j, hasBackground: M, appearance: N = O?.appearance ?? s$13.appearance.default, accentColor: P = O?.accentColor ?? s$13.accentColor.default, grayColor: z = O?.resolvedGrayColor ?? s$13.grayColor.default, panelBackground: B = O?.panelBackground ?? s$13.panelBackground.default, radius: H = O?.radius ?? s$13.radius.default, scaling: U = O?.scaling ?? s$13.scaling.default, onAppearanceChange: W = d$5, onAccentColorChange: G = d$5, onGrayColorChange: Z = d$5, onPanelBackgroundChange: Lj = d$5, onRadiusChange: Rj = d$5, onScalingChange: zj = d$5, ...Bj } = _, Vj = A ? Slot$3 : "div", Hj = z === "auto" ? a$12(P) : z, Uj = _.appearance === "light" || _.appearance === "dark", Wj = M === void 0 ? j || Uj : M;
+	let O = React$1.useContext(P$3), { asChild: A, isRoot: j, hasBackground: M, appearance: N = O?.appearance ?? s$13.appearance.default, accentColor: P = O?.accentColor ?? s$13.accentColor.default, grayColor: z = O?.resolvedGrayColor ?? s$13.grayColor.default, panelBackground: B = O?.panelBackground ?? s$13.panelBackground.default, radius: H = O?.radius ?? s$13.radius.default, scaling: U = O?.scaling ?? s$13.scaling.default, onAppearanceChange: W = d$5, onAccentColorChange: G = d$5, onGrayColorChange: Z = d$5, onPanelBackgroundChange: Yj = d$5, onRadiusChange: Xj = d$5, onScalingChange: Zj = d$5, ...Qj } = _, $j = A ? Slot$3 : "div", eM = z === "auto" ? a$12(P) : z, tM = _.appearance === "light" || _.appearance === "dark", nM = M === void 0 ? j || tM : M;
 	return React$1.createElement(P$3.Provider, { value: React$1.useMemo(() => ({
 		appearance: N,
 		accentColor: P,
 		grayColor: z,
-		resolvedGrayColor: Hj,
+		resolvedGrayColor: eM,
 		panelBackground: B,
 		radius: H,
 		scaling: U,
 		onAppearanceChange: W,
 		onAccentColorChange: G,
 		onGrayColorChange: Z,
-		onPanelBackgroundChange: Lj,
-		onRadiusChange: Rj,
-		onScalingChange: zj
+		onPanelBackgroundChange: Yj,
+		onRadiusChange: Xj,
+		onScalingChange: Zj
 	}), [
 		N,
 		P,
 		z,
-		Hj,
+		eM,
 		B,
 		H,
 		U,
 		W,
 		G,
 		Z,
-		Lj,
-		Rj,
-		zj
-	]) }, React$1.createElement(Vj, {
+		Yj,
+		Xj,
+		Zj
+	]) }, React$1.createElement($j, {
 		"data-is-root-theme": j ? "true" : "false",
 		"data-accent-color": P,
-		"data-gray-color": Hj,
-		"data-has-background": Wj ? "true" : "false",
+		"data-gray-color": eM,
+		"data-has-background": nM ? "true" : "false",
 		"data-panel-background": B,
 		"data-radius": H,
 		"data-scaling": U,
 		ref: E,
-		...Bj,
+		...Qj,
 		className: (0, import_classnames$18.default)("radix-themes", {
 			light: N === "light",
 			dark: N === "dark"
-		}, Bj.className)
+		}, Qj.className)
 	}));
 });
 A$2.displayName = "ThemeImpl";
@@ -6752,7 +6753,7 @@ function S$2(n) {
 	return [(0, import_classnames$10.default)(_, O, j, N, z, H, W), l$1(E, A, M, P, B, U, G)];
 }
 var import_classnames$9 = /* @__PURE__ */ __toESM(require_classnames()), c = React$1.forwardRef((_, E) => {
-	let { rest: O, ...A } = a$5(_), [j, M] = S$2(A), { asChild: N, children: P, className: z, style: B, type: H, scrollHideDelay: U = H === "scroll" ? void 0 : 0, dir: W, size: G = t$3.size.default, radius: Z = t$3.radius.default, scrollbars: Lj = t$3.scrollbars.default, ...Rj } = O;
+	let { rest: O, ...A } = a$5(_), [j, M] = S$2(A), { asChild: N, children: P, className: z, style: B, type: H, scrollHideDelay: U = H === "scroll" ? void 0 : 0, dir: W, size: G = t$3.size.default, radius: Z = t$3.radius.default, scrollbars: Yj = t$3.scrollbars.default, ...Xj } = O;
 	return React$1.createElement(Root$1, {
 		type: H,
 		scrollHideDelay: U,
@@ -6763,10 +6764,10 @@ var import_classnames$9 = /* @__PURE__ */ __toESM(require_classnames()), c = Rea
 		asChild: N,
 		children: P
 	}, (_) => React$1.createElement(React$1.Fragment, null, React$1.createElement(Viewport, {
-		...Rj,
+		...Xj,
 		ref: E,
 		className: "rt-ScrollAreaViewport"
-	}, _), React$1.createElement("div", { className: "rt-ScrollAreaViewportFocusRing" }), Lj === "vertical" ? null : React$1.createElement(Scrollbar, {
+	}, _), React$1.createElement("div", { className: "rt-ScrollAreaViewportFocusRing" }), Yj === "vertical" ? null : React$1.createElement(Scrollbar, {
 		"data-radius": Z,
 		orientation: "horizontal",
 		className: (0, import_classnames$9.default)("rt-ScrollAreaScrollbar", g$3({
@@ -6774,7 +6775,7 @@ var import_classnames$9 = /* @__PURE__ */ __toESM(require_classnames()), c = Rea
 			value: G,
 			propValues: t$3.size.values
 		}))
-	}, React$1.createElement(Thumb$1, { className: "rt-ScrollAreaThumb" })), Lj === "horizontal" ? null : React$1.createElement(Scrollbar, {
+	}, React$1.createElement(Thumb$1, { className: "rt-ScrollAreaThumb" })), Yj === "horizontal" ? null : React$1.createElement(Scrollbar, {
 		"data-radius": Z,
 		orientation: "vertical",
 		className: (0, import_classnames$9.default)("rt-ScrollAreaScrollbar", g$3({
@@ -6782,7 +6783,7 @@ var import_classnames$9 = /* @__PURE__ */ __toESM(require_classnames()), c = Rea
 			value: G,
 			propValues: t$3.size.values
 		}))
-	}, React$1.createElement(Thumb$1, { className: "rt-ScrollAreaThumb" })), Lj === "both" ? React$1.createElement(Corner, { className: "rt-ScrollAreaCorner" }) : null)));
+	}, React$1.createElement(Thumb$1, { className: "rt-ScrollAreaThumb" })), Yj === "both" ? React$1.createElement(Corner, { className: "rt-ScrollAreaCorner" }) : null)));
 });
 c.displayName = "ScrollArea";
 var n$2 = {
@@ -7985,17 +7986,17 @@ function $e({ document: n, event: _, hitRegions: E, initialLayoutMap: O, mounted
 	E.forEach((n) => {
 		let { group: E, groupSize: P } = n, { disableCursor: z, orientation: B, panels: H } = E, U = 0;
 		U = j ? B === "horizontal" ? (_.clientX - j.x) / P * 100 : (_.clientY - j.y) / P * 100 : B === "horizontal" ? _.clientX < 0 ? -100 : 100 : _.clientY < 0 ? -100 : 100;
-		let W = O.get(E), { defaultLayoutDeferred: G, derivedPanelConstraints: Z, layout: Lj, separatorToPanels: Rj } = A.get(E) ?? { defaultLayoutDeferred: !1 };
-		if (Z && W && Lj && Rj) {
+		let W = O.get(E), { defaultLayoutDeferred: G, derivedPanelConstraints: Z, layout: Yj, separatorToPanels: Xj } = A.get(E) ?? { defaultLayoutDeferred: !1 };
+		if (Z && W && Yj && Xj) {
 			let _ = Z$1({
 				delta: U,
 				initialLayout: W,
 				panelConstraints: Z,
 				pivotIndices: n.panels.map((n) => H.indexOf(n)),
-				prevLayout: Lj,
+				prevLayout: Yj,
 				trigger: "mouse-or-touch"
 			});
-			if (B$1(_, Lj)) {
+			if (B$1(_, Yj)) {
 				if (U !== 0 && !z) switch (B) {
 					case "horizontal":
 						M |= U < 0 ? De : Oe$1;
@@ -8009,7 +8010,7 @@ function $e({ document: n, event: _, hitRegions: E, initialLayoutMap: O, mounted
 					defaultLayoutDeferred: G,
 					derivedPanelConstraints: Z,
 					layout: _,
-					separatorToPanels: Rj
+					separatorToPanels: Xj
 				});
 				let E = n.group.panels.map(({ id: n }) => n).join(",");
 				n.group.inMemoryLayouts[E] = _;
@@ -8221,64 +8222,64 @@ function Pt(n, _) {
 function Rt({ children: n, className: _, defaultLayout: E, disableCursor: O, disabled: A, elementRef: j, groupRef: M, id: N, onLayoutChange: P, orientation: z = "horizontal", style: B, ...H }) {
 	let U = useRef({}), G = le$1((n) => {
 		B$1(U.current, n) || (U.current = n, P?.(n));
-	}), Z = ae$1(N), Lj = useRef(null), [Rj, Hj] = useState(!1), [Uj, Wj] = useState(E ?? {}), [Gj, qj] = wt(), Jj = useRef({
+	}), Z = ae$1(N), Yj = useRef(null), [Xj, eM] = useState(!1), [tM, nM] = useState(E ?? {}), [rM, aM] = wt(), oM = useRef({
 		lastExpandedPanelSizes: {},
 		layouts: {},
 		panels: [],
 		separators: []
-	}), Yj = ue$1(Lj, j);
+	}), sM = ue$1(Yj, j);
 	Pt(Z, M);
-	let Xj = useMemo(() => ({
+	let cM = useMemo(() => ({
 		id: Z,
 		orientation: z,
 		registerPanel: (n) => {
-			let _ = Jj.current;
-			return _.panels = ie$1(z, [..._.panels, n]), qj(), () => {
-				_.panels = _.panels.filter((_) => _ !== n), qj();
+			let _ = oM.current;
+			return _.panels = ie$1(z, [..._.panels, n]), aM(), () => {
+				_.panels = _.panels.filter((_) => _ !== n), aM();
 			};
 		},
 		registerSeparator: (n) => {
-			let _ = Jj.current;
-			return _.separators = ie$1(z, [..._.separators, n]), qj(), () => {
-				_.separators = _.separators.filter((_) => _ !== n), qj();
+			let _ = oM.current;
+			return _.separators = ie$1(z, [..._.separators, n]), aM(), () => {
+				_.separators = _.separators.filter((_) => _ !== n), aM();
 			};
 		}
 	}), [
 		Z,
-		qj,
+		aM,
 		z
-	]), Zj = Lt({
+	]), lM = Lt({
 		defaultLayout: E,
 		disableCursor: O
-	}), Qj = useRef(null);
+	}), uM = useRef(null);
 	A$1(() => {
-		let n = Lj.current;
+		let n = Yj.current;
 		if (n === null) return;
-		let _ = Jj.current, E = {
-			defaultLayout: Zj.defaultLayout,
-			disableCursor: !!Zj.disableCursor,
+		let _ = oM.current, E = {
+			defaultLayout: lM.defaultLayout,
+			disableCursor: !!lM.disableCursor,
 			disabled: !!A,
 			element: n,
 			id: Z,
-			inMemoryLastExpandedPanelSizes: Jj.current.lastExpandedPanelSizes,
-			inMemoryLayouts: Jj.current.layouts,
+			inMemoryLastExpandedPanelSizes: oM.current.lastExpandedPanelSizes,
+			inMemoryLayouts: oM.current.layouts,
 			orientation: z,
 			panels: _.panels,
 			separators: _.separators
 		};
-		Qj.current = E;
+		uM.current = E;
 		let O = bt(E), j = D$1().mountedGroups.get(E);
 		if (j) {
 			let { defaultLayoutDeferred: n, derivedPanelConstraints: _, layout: E } = j;
-			!n && _.length > 0 && (Wj(E), G?.(E));
+			!n && _.length > 0 && (nM(E), G?.(E));
 		}
 		let M = T$1.addListener("interactionStateChange", (n) => {
 			switch (n.state) {
 				case "active":
-					Hj(n.hitRegions.some((n) => n.group === E));
+					eM(n.hitRegions.some((n) => n.group === E));
 					break;
 				default:
-					Hj(!1);
+					eM(!1);
 					break;
 			}
 		}), N = T$1.addListener("mountedGroupsChange", (n) => {
@@ -8286,30 +8287,30 @@ function Rt({ children: n, className: _, defaultLayout: E, disableCursor: O, dis
 			if (_) {
 				let { defaultLayoutDeferred: n, derivedPanelConstraints: E, layout: O } = _;
 				if (n || E.length === 0) return;
-				Wj(O), G?.(O);
+				nM(O), G?.(O);
 			}
 		});
 		return () => {
-			Qj.current = null, O(), M(), N();
+			uM.current = null, O(), M(), N();
 		};
 	}, [
 		A,
 		Z,
 		G,
 		z,
-		Gj,
-		Zj
+		rM,
+		lM
 	]), useEffect(() => {
-		let n = Qj.current;
+		let n = uM.current;
 		n && (n.defaultLayout = E, n.disableCursor = !!O);
 	});
-	let $j = { [Fe]: Rj ? "none" : void 0 };
-	for (let n in Uj) {
+	let dM = { [Fe]: Xj ? "none" : void 0 };
+	for (let n in tM) {
 		let _ = Ve(Z, n);
-		$j[_] = Uj[n];
+		dM[_] = tM[n];
 	}
 	return /* @__PURE__ */ jsx(je.Provider, {
-		value: Xj,
+		value: cM,
 		children: /* @__PURE__ */ jsx("div", {
 			...H,
 			"aria-orientation": z,
@@ -8317,13 +8318,13 @@ function Rt({ children: n, className: _, defaultLayout: E, disableCursor: O, dis
 			"data-group": !0,
 			"data-testid": Z,
 			id: Z,
-			ref: Yj,
+			ref: sM,
 			style: {
 				height: "100%",
 				width: "100%",
 				overflow: "hidden",
 				...B,
-				...$j,
+				...dM,
 				display: "flex",
 				flexDirection: z === "horizontal" ? "row" : "column",
 				flexWrap: "nowrap"
@@ -8441,12 +8442,12 @@ function It(n, _) {
 	});
 }
 function kt({ children: n, className: _, collapsedSize: E = "0%", collapsible: O = !1, defaultSize: A, elementRef: j, id: M, maxSize: N = "100%", minSize: P = "0%", onResize: z, panelRef: B, style: H, ...U }) {
-	let W = !!M, G = ae$1(M), Z = useRef(null), Lj = ue$1(Z, j), { id: Rj, registerPanel: zj } = ce$1(), Vj = z !== null, Hj = le$1((n, _, E) => {
+	let W = !!M, G = ae$1(M), Z = useRef(null), Yj = ue$1(Z, j), { id: Xj, registerPanel: Zj } = ce$1(), $j = z !== null, eM = le$1((n, _, E) => {
 		z?.(n, M, E);
 	});
 	A$1(() => {
 		let n = Z.current;
-		if (n !== null) return zj({
+		if (n !== null) return Zj({
 			element: n,
 			id: G,
 			idIsStable: W,
@@ -8454,7 +8455,7 @@ function kt({ children: n, className: _, collapsedSize: E = "0%", collapsible: O
 				expandToSize: void 0,
 				prevSize: void 0
 			},
-			onResize: Vj ? Hj : void 0,
+			onResize: $j ? eM : void 0,
 			panelConstraints: {
 				collapsedSize: E,
 				collapsible: O,
@@ -8467,25 +8468,25 @@ function kt({ children: n, className: _, collapsedSize: E = "0%", collapsible: O
 		E,
 		O,
 		A,
-		Vj,
+		$j,
 		G,
 		W,
 		N,
 		P,
-		Hj,
-		zj
+		eM,
+		Zj
 	]), It(G, B);
-	let Uj = Ve(Rj, G);
+	let tM = Ve(Xj, G);
 	return /* @__PURE__ */ jsx("div", {
 		...U,
 		"data-panel": !0,
 		"data-testid": G,
 		id: G,
-		ref: Lj,
+		ref: Yj,
 		style: {
 			...Gt,
 			flexBasis: 0,
-			flexGrow: `var(${Uj}, 1)`,
+			flexGrow: `var(${tM}, 1)`,
 			flexShrink: 1,
 			overflow: "hidden",
 			pointerEvents: `var(${Fe})`
@@ -8548,7 +8549,7 @@ function Dt({ layout: n, panelConstraints: _, panelId: E, panelIndex: O }) {
 	};
 }
 function Ot({ children: n, className: _, elementRef: E, id: O, style: A, ...j }) {
-	let M = ae$1(O), [N, P] = useState({}), [z, B] = useState("inactive"), H = useRef(null), U = ue$1(H, E), { id: W, orientation: G, registerSeparator: Z } = ce$1(), Lj = G === "horizontal" ? "vertical" : "horizontal";
+	let M = ae$1(O), [N, P] = useState({}), [z, B] = useState("inactive"), H = useRef(null), U = ue$1(H, E), { id: W, orientation: G, registerSeparator: Z } = ce$1(), Yj = G === "horizontal" ? "vertical" : "horizontal";
 	return A$1(() => {
 		let n = H.current;
 		if (n !== null) {
@@ -8584,7 +8585,7 @@ function Ot({ children: n, className: _, elementRef: E, id: O, style: A, ...j })
 	]), /* @__PURE__ */ jsx("div", {
 		...j,
 		"aria-controls": N.valueControls,
-		"aria-orientation": Lj,
+		"aria-orientation": Yj,
 		"aria-valuemax": N.valueMax,
 		"aria-valuemin": N.valueMin,
 		"aria-valuenow": N.valueNow,
@@ -8750,7 +8751,7 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 			}
 			return n;
 		});
-	}, []), Lj = React.useCallback(() => {
+	}, []), Yj = React.useCallback(() => {
 		M((n) => {
 			if (n.clipboard.length > 0) {
 				let _ = n.clipboard.map((n) => ({
@@ -8769,7 +8770,7 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 			}
 			return n;
 		});
-	}, []), Rj = React.useCallback((n) => {
+	}, []), Xj = React.useCallback((n) => {
 		let _ = {};
 		n.type === "box" && (_.backgroundColor = "var(--gray-4)"), n.type === "text-container" && (_.backgroundColor = "var(--gray-4)", _.border = "1px solid var(--gray-8)", _.padding = "8px", _.display = "flex", _.alignItems = "flex-start", _.justifyContent = "flex-start");
 		let E = {
@@ -8794,7 +8795,7 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				selectedElementIds: [E.id]
 			};
 		});
-	}, []), zj = React.useCallback((n) => {
+	}, []), Zj = React.useCallback((n) => {
 		M((_) => {
 			let E = _.elements.filter((_) => _.id !== n), O = _.history.slice(0, _.historyIndex + 1);
 			return O.push(E), {
@@ -8805,7 +8806,7 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				historyIndex: O.length - 1
 			};
 		});
-	}, []), Bj = React.useCallback(() => {
+	}, []), Qj = React.useCallback(() => {
 		M((n) => {
 			if (n.selectedElementIds.length === 0) return n;
 			let _ = n.elements.filter((_) => !n.selectedElementIds.includes(_.id)), E = n.history.slice(0, n.historyIndex + 1);
@@ -8817,7 +8818,7 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				historyIndex: E.length - 1
 			};
 		});
-	}, []), Hj = React.useCallback((n, _ = !1) => {
+	}, []), eM = React.useCallback((n, _ = !1) => {
 		M((E) => {
 			if (n === null) return {
 				...E,
@@ -8834,12 +8835,12 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				selectedElementIds: [n]
 			};
 		});
-	}, []), Uj = React.useCallback((n) => {
+	}, []), tM = React.useCallback((n) => {
 		M((_) => ({
 			..._,
 			selectedElementIds: n
 		}));
-	}, []), Wj = React.useCallback((n, _) => {
+	}, []), nM = React.useCallback((n, _) => {
 		M((E) => {
 			let O = [...E.elements], A = O[n];
 			O.splice(n, 1), O.splice(_, 0, A);
@@ -8851,7 +8852,7 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				historyIndex: j.length - 1
 			};
 		});
-	}, []), Gj = React.useCallback((n, _, E = !0) => {
+	}, []), rM = React.useCallback((n, _, E = !0) => {
 		M((O) => {
 			let A = O.elements.map((E) => E.id === n ? {
 				...E,
@@ -8864,7 +8865,7 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				historyIndex: M
 			};
 		});
-	}, []), qj = React.useCallback((n, _ = !0) => {
+	}, []), aM = React.useCallback((n, _ = !0) => {
 		M((E) => {
 			let O = [...E.elements], A = [], j = /* @__PURE__ */ new Set();
 			n.forEach(({ id: n, changes: _ }) => {
@@ -8918,7 +8919,7 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				historyIndex: P
 			};
 		});
-	}, []), Jj = React.useCallback((n) => {
+	}, []), oM = React.useCallback((n) => {
 		M((_) => {
 			let E = _.elements.filter((_) => n.includes(_.id));
 			if (E.length === 0) return _;
@@ -8946,7 +8947,7 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				historyIndex: z.length - 1
 			};
 		});
-	}, []), Yj = React.useCallback((n) => {
+	}, []), sM = React.useCallback((n) => {
 		M((_) => {
 			let E = _.elements.find((_) => _.id === n);
 			if (!E || E.type !== "group") return _;
@@ -8962,7 +8963,7 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				historyIndex: j.length - 1
 			};
 		});
-	}, []), Xj = React.useCallback((n, _) => {
+	}, []), cM = React.useCallback((n, _) => {
 		M((E) => {
 			let O = E.elements.map((E) => E.id === n ? {
 				...E,
@@ -8973,7 +8974,7 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				elements: O
 			};
 		});
-	}, []), Zj = React.useCallback((n, _) => {
+	}, []), lM = React.useCallback((n, _) => {
 		if (!n.find((n) => n.id === _ && n.type === "group")) return n;
 		let E = n.filter((n) => n.groupId === _);
 		if (E.length === 0) return n;
@@ -8985,7 +8986,7 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 			width: j - O,
 			height: M - A
 		} : n);
-	}, []), Qj = React.useCallback((n, _) => {
+	}, []), uM = React.useCallback((n, _) => {
 		M((E) => {
 			let O = E.elements.find((_) => _.id === n), A = E.elements.find((n) => n.id === _ && n.type === "group");
 			if (!O || !A) return E;
@@ -8993,7 +8994,7 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				...E,
 				groupId: _
 			} : E);
-			j = Zj(j, _);
+			j = lM(j, _);
 			let M = E.history.slice(0, E.historyIndex + 1);
 			return M.push(j), {
 				...E,
@@ -9002,7 +9003,7 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				historyIndex: M.length - 1
 			};
 		});
-	}, [Zj]), $j = React.useCallback((n) => {
+	}, [lM]), dM = React.useCallback((n) => {
 		M((_) => {
 			let E = _.elements.find((_) => _.id === n);
 			if (!E || !E.groupId) return _;
@@ -9010,7 +9011,7 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				..._,
 				groupId: void 0
 			} : _);
-			A = Zj(A, O);
+			A = lM(A, O);
 			let j = _.history.slice(0, _.historyIndex + 1);
 			return j.push(A), {
 				..._,
@@ -9019,7 +9020,7 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				historyIndex: j.length - 1
 			};
 		});
-	}, [Zj]), eM = React.useCallback((n, _, E) => {
+	}, [lM]), fM = React.useCallback((n, _, E) => {
 		M((O) => {
 			let A = O.elements.find((_) => _.id === n && _.type === "group");
 			if (!A) return O;
@@ -9048,13 +9049,13 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				historyIndex: B.length - 1
 			};
 		});
-	}, []), tM = React.useCallback((n, _) => {
+	}, []), pM = React.useCallback((n, _) => {
 		M((E) => ({
 			...E,
 			mockData: n,
 			singleMockData: _
 		}));
-	}, []), nM = React.useCallback((n) => {
+	}, []), mM = React.useCallback((n) => {
 		M((_) => ({
 			..._,
 			listSettings: {
@@ -9062,65 +9063,65 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				...n
 			}
 		}));
-	}, []), rM = React.useMemo(() => ({
+	}, []), hM = React.useMemo(() => ({
 		state: j,
-		addElement: Rj,
-		removeElement: zj,
-		removeSelected: Bj,
-		selectElement: Hj,
-		setSelectedElements: Uj,
-		moveElement: Wj,
-		updateElement: Gj,
-		updateElements: qj,
-		groupElements: Jj,
-		ungroupElements: Yj,
-		renameElement: Xj,
-		addToGroup: Qj,
-		removeFromGroup: $j,
-		resizeGroup: eM,
-		setMockData: tM,
-		updateListSettings: nM,
+		addElement: Xj,
+		removeElement: Zj,
+		removeSelected: Qj,
+		selectElement: eM,
+		setSelectedElements: tM,
+		moveElement: nM,
+		updateElement: rM,
+		updateElements: aM,
+		groupElements: oM,
+		ungroupElements: sM,
+		renameElement: cM,
+		addToGroup: uM,
+		removeFromGroup: dM,
+		resizeGroup: fM,
+		setMockData: pM,
+		updateListSettings: mM,
 		setCanvasHeight: N,
 		loadState: U,
 		undo: W,
 		redo: G,
 		copy: Z,
-		paste: Lj,
+		paste: Yj,
 		setGridSize: P,
 		setZoom: z,
 		setPan: B,
 		setSnapLines: H
 	}), [
 		j,
-		Rj,
-		zj,
-		Bj,
-		Hj,
-		Uj,
-		Wj,
-		Gj,
-		qj,
-		Jj,
-		Yj,
 		Xj,
+		Zj,
 		Qj,
-		$j,
 		eM,
 		tM,
 		nM,
+		rM,
+		aM,
+		oM,
+		sM,
+		cM,
+		uM,
+		dM,
+		fM,
+		pM,
+		mM,
 		N,
 		U,
 		W,
 		G,
 		Z,
-		Lj,
+		Yj,
 		P,
 		z,
 		B,
 		H
 	]);
 	return /* @__PURE__ */ jsx(EditorContext.Provider, {
-		value: rM,
+		value: hM,
 		children: n
 	});
 }, useEditor = () => {
@@ -9562,16 +9563,16 @@ var __assign$1 = function() {
 			maxHeight: _
 		};
 	}, _.prototype.calculateNewSizeFromDirection = function(n, _) {
-		var E = this.props.scale || 1, O = normalizeToPair(this.props.resizeRatio || 1), A = O[0], j = O[1], M = this.state, N = M.direction, P = M.original, z = this.props, B = z.lockAspectRatio, H = z.lockAspectRatioExtraHeight, U = z.lockAspectRatioExtraWidth, W = P.width, G = P.height, Z = H || 0, Lj = U || 0;
-		return hasDirection("right", N) && (W = P.width + (n - P.x) * A / E, B && (G = (W - Lj) / this.ratio + Z)), hasDirection("left", N) && (W = P.width - (n - P.x) * A / E, B && (G = (W - Lj) / this.ratio + Z)), hasDirection("bottom", N) && (G = P.height + (_ - P.y) * j / E, B && (W = (G - Z) * this.ratio + Lj)), hasDirection("top", N) && (G = P.height - (_ - P.y) * j / E, B && (W = (G - Z) * this.ratio + Lj)), {
+		var E = this.props.scale || 1, O = normalizeToPair(this.props.resizeRatio || 1), A = O[0], j = O[1], M = this.state, N = M.direction, P = M.original, z = this.props, B = z.lockAspectRatio, H = z.lockAspectRatioExtraHeight, U = z.lockAspectRatioExtraWidth, W = P.width, G = P.height, Z = H || 0, Yj = U || 0;
+		return hasDirection("right", N) && (W = P.width + (n - P.x) * A / E, B && (G = (W - Yj) / this.ratio + Z)), hasDirection("left", N) && (W = P.width - (n - P.x) * A / E, B && (G = (W - Yj) / this.ratio + Z)), hasDirection("bottom", N) && (G = P.height + (_ - P.y) * j / E, B && (W = (G - Z) * this.ratio + Yj)), hasDirection("top", N) && (G = P.height - (_ - P.y) * j / E, B && (W = (G - Z) * this.ratio + Yj)), {
 			newWidth: W,
 			newHeight: G
 		};
 	}, _.prototype.calculateNewSizeFromAspectRatio = function(n, _, E, O) {
 		var A = this.props, j = A.lockAspectRatio, M = A.lockAspectRatioExtraHeight, N = A.lockAspectRatioExtraWidth, P = O.width === void 0 ? 10 : O.width, z = E.width === void 0 || E.width < 0 ? n : E.width, B = O.height === void 0 ? 10 : O.height, H = E.height === void 0 || E.height < 0 ? _ : E.height, U = M || 0, W = N || 0;
 		if (j) {
-			var G = (B - U) * this.ratio + W, Z = (H - U) * this.ratio + W, Lj = (P - W) / this.ratio + U, Rj = (z - W) / this.ratio + U, zj = Math.max(P, G), Bj = Math.min(z, Z), Vj = Math.max(B, Lj), Hj = Math.min(H, Rj);
-			n = clamp$1(n, zj, Bj), _ = clamp$1(_, Vj, Hj);
+			var G = (B - U) * this.ratio + W, Z = (H - U) * this.ratio + W, Yj = (P - W) / this.ratio + U, Xj = (z - W) / this.ratio + U, Zj = Math.max(P, G), Qj = Math.min(z, Z), $j = Math.max(B, Yj), eM = Math.min(H, Xj);
+			n = clamp$1(n, Zj, Qj), _ = clamp$1(_, $j, eM);
 		} else n = clamp$1(n, P, z), _ = clamp$1(_, B, H);
 		return {
 			newWidth: n,
@@ -9628,56 +9629,56 @@ var __assign$1 = function() {
 			} catch {}
 			var E = this.props, O = E.maxWidth, A = E.maxHeight, j = E.minWidth, M = E.minHeight, N = isTouchEvent(n) ? n.touches[0].clientX : n.clientX, P = isTouchEvent(n) ? n.touches[0].clientY : n.clientY, z = this.state, B = z.direction, H = z.original, U = z.width, W = z.height, G = this.getParentSize(), Z = calculateNewMax(G, this.window.innerWidth, this.window.innerHeight, O, A, j, M);
 			O = Z.maxWidth, A = Z.maxHeight, j = Z.minWidth, M = Z.minHeight;
-			var Lj = this.calculateNewSizeFromDirection(N, P), Rj = Lj.newHeight, zj = Lj.newWidth, Bj = this.calculateNewMaxFromBoundary(O, A);
-			this.props.snap && this.props.snap.x && (zj = findClosestSnap(zj, this.props.snap.x, this.props.snapGap)), this.props.snap && this.props.snap.y && (Rj = findClosestSnap(Rj, this.props.snap.y, this.props.snapGap));
-			var Vj = this.calculateNewSizeFromAspectRatio(zj, Rj, {
-				width: Bj.maxWidth,
-				height: Bj.maxHeight
+			var Yj = this.calculateNewSizeFromDirection(N, P), Xj = Yj.newHeight, Zj = Yj.newWidth, Qj = this.calculateNewMaxFromBoundary(O, A);
+			this.props.snap && this.props.snap.x && (Zj = findClosestSnap(Zj, this.props.snap.x, this.props.snapGap)), this.props.snap && this.props.snap.y && (Xj = findClosestSnap(Xj, this.props.snap.y, this.props.snapGap));
+			var $j = this.calculateNewSizeFromAspectRatio(Zj, Xj, {
+				width: Qj.maxWidth,
+				height: Qj.maxHeight
 			}, {
 				width: j,
 				height: M
 			});
-			if (zj = Vj.newWidth, Rj = Vj.newHeight, this.props.grid) {
-				var Hj = snap(zj, this.props.grid[0], this.props.gridGap ? this.props.gridGap[0] : 0), Uj = snap(Rj, this.props.grid[1], this.props.gridGap ? this.props.gridGap[1] : 0), Gj = this.props.snapGap || 0, Kj = Gj === 0 || Math.abs(Hj - zj) <= Gj ? Hj : zj, qj = Gj === 0 || Math.abs(Uj - Rj) <= Gj ? Uj : Rj;
-				zj = Kj, Rj = qj;
+			if (Zj = $j.newWidth, Xj = $j.newHeight, this.props.grid) {
+				var eM = snap(Zj, this.props.grid[0], this.props.gridGap ? this.props.gridGap[0] : 0), tM = snap(Xj, this.props.grid[1], this.props.gridGap ? this.props.gridGap[1] : 0), rM = this.props.snapGap || 0, iM = rM === 0 || Math.abs(eM - Zj) <= rM ? eM : Zj, aM = rM === 0 || Math.abs(tM - Xj) <= rM ? tM : Xj;
+				Zj = iM, Xj = aM;
 			}
-			var Jj = {
-				width: zj - H.width,
-				height: Rj - H.height
+			var oM = {
+				width: Zj - H.width,
+				height: Xj - H.height
 			};
-			if (this.delta = Jj, U && typeof U == "string") {
+			if (this.delta = oM, U && typeof U == "string") {
 				if (U.endsWith("%")) {
-					var Yj = zj / G.width * 100;
-					zj = `${Yj}%`;
+					var sM = Zj / G.width * 100;
+					Zj = `${sM}%`;
 				} else if (U.endsWith("vw")) {
-					var Xj = zj / this.window.innerWidth * 100;
-					zj = `${Xj}vw`;
+					var cM = Zj / this.window.innerWidth * 100;
+					Zj = `${cM}vw`;
 				} else if (U.endsWith("vh")) {
-					var Zj = zj / this.window.innerHeight * 100;
-					zj = `${Zj}vh`;
+					var lM = Zj / this.window.innerHeight * 100;
+					Zj = `${lM}vh`;
 				}
 			}
 			if (W && typeof W == "string") {
 				if (W.endsWith("%")) {
-					var Yj = Rj / G.height * 100;
-					Rj = `${Yj}%`;
+					var sM = Xj / G.height * 100;
+					Xj = `${sM}%`;
 				} else if (W.endsWith("vw")) {
-					var Xj = Rj / this.window.innerWidth * 100;
-					Rj = `${Xj}vw`;
+					var cM = Xj / this.window.innerWidth * 100;
+					Xj = `${cM}vw`;
 				} else if (W.endsWith("vh")) {
-					var Zj = Rj / this.window.innerHeight * 100;
-					Rj = `${Zj}vh`;
+					var lM = Xj / this.window.innerHeight * 100;
+					Xj = `${lM}vh`;
 				}
 			}
-			var Qj = {
-				width: this.createSizeForCssProperty(zj, "width"),
-				height: this.createSizeForCssProperty(Rj, "height")
+			var uM = {
+				width: this.createSizeForCssProperty(Zj, "width"),
+				height: this.createSizeForCssProperty(Xj, "height")
 			};
-			this.flexDir === "row" ? Qj.flexBasis = Qj.width : this.flexDir === "column" && (Qj.flexBasis = Qj.height);
-			var $j = this.state.width !== Qj.width, eM = this.state.height !== Qj.height, tM = this.state.flexBasis !== Qj.flexBasis, nM = $j || eM || tM;
-			nM && flushSync(function() {
-				_.setState(Qj);
-			}), this.props.onResize && nM && this.props.onResize(n, B, this.resizable, Jj);
+			this.flexDir === "row" ? uM.flexBasis = uM.width : this.flexDir === "column" && (uM.flexBasis = uM.height);
+			var dM = this.state.width !== uM.width, fM = this.state.height !== uM.height, pM = this.state.flexBasis !== uM.flexBasis, mM = dM || fM || pM;
+			mM && flushSync(function() {
+				_.setState(uM);
+			}), this.props.onResize && mM && this.props.onResize(n, B, this.resizable, oM);
 		}
 	}, _.prototype.onMouseUp = function(n) {
 		var _ = this.state, E = _.isResizing, O = _.direction;
@@ -9761,7 +9762,7 @@ var __assign$1 = function() {
 		snapGap: 0
 	}, _;
 }(PureComponent);
-const formatValue = (n, _) => {
+const formatValue$1 = (n, _) => {
 	if (n == null) return "";
 	if (_.type === "boolean") return String(n) === "true" || n === !0 || typeof n == "number" && n > 0 ? _.trueLabel || "Sim" : _.falseLabel || "Não";
 	if (_.type === "date") try {
@@ -9780,7 +9781,7 @@ const formatValue = (n, _) => {
 		return isNaN(E) ? String(n) : _.numberFormat === "currency" ? (_.currencySymbol || "R$") + " " + E.toFixed(_.decimalPlaces || 2) : _.numberFormat === "percent" ? E.toFixed(_.decimalPlaces || 0) + "%" : E.toFixed(_.decimalPlaces || 0);
 	}
 	return String(n);
-}, checkCondition = (n, _, E) => {
+}, checkCondition$1 = (n, _, E) => {
 	let O = String(n).toLowerCase(), A = String(E).toLowerCase();
 	switch (_) {
 		case "equals": return O === A;
@@ -11186,32 +11187,32 @@ var AnimationSettings = ({ element: n, updateElement: _ }) => {
 	});
 };
 const ElementContextMenu = ({ children: n, element: _ }) => {
-	let { updateElement: E, removeElement: O, removeSelected: A, addElement: j, moveElement: M, copy: N, paste: P, state: z, renameElement: B, groupElements: H, ungroupElements: U } = useEditor(), [W, G] = useState(!1), [Z, Lj] = useState(!1), [Rj, zj] = useState(!1), [Hj, Uj] = useState(!1), [Wj, Jj] = useState("formatting"), [Yj, Xj] = useState({
+	let { updateElement: E, removeElement: O, removeSelected: A, addElement: j, moveElement: M, copy: N, paste: P, state: z, renameElement: B, groupElements: H, ungroupElements: U } = useEditor(), [W, G] = useState(!1), [Z, Yj] = useState(!1), [Xj, Zj] = useState(!1), [eM, tM] = useState(!1), [nM, oM] = useState("formatting"), [sM, cM] = useState({
 		open: !1,
 		prop: "",
 		value: ""
-	}), [Zj, Qj] = useState(!1), [$j, eM] = useState(""), [tM, nM] = useState(""), [rM, iM] = useState(_.content), [aM, oM] = useState(_.dataBinding || ""), sM = useRef(null), cM = useRef(null), lM = (n) => {
-		let _ = sM.current;
+	}), [lM, uM] = useState(!1), [dM, fM] = useState(""), [pM, mM] = useState(""), [hM, gM] = useState(_.content), [_M, vM] = useState(_.dataBinding || ""), yM = useRef(null), bM = useRef(null), xM = (n) => {
+		let _ = yM.current;
 		if (_) {
-			let E = _.selectionStart, O = _.selectionEnd, A = rM;
-			iM(A.substring(0, E) + `{{${n}}}` + A.substring(O)), setTimeout(() => {
+			let E = _.selectionStart, O = _.selectionEnd, A = hM;
+			gM(A.substring(0, E) + `{{${n}}}` + A.substring(O)), setTimeout(() => {
 				_.focus();
 				let O = E + n.length + 4;
 				_.setSelectionRange(O, O);
 			}, 0);
-		} else iM((_) => _ + `{{${n}}}`);
-	}, uM = (n) => {
+		} else gM((_) => _ + `{{${n}}}`);
+	}, SM = (n) => {
 		E(_.id, { style: {
 			..._.style,
 			...n
 		} });
-	}, dM = () => {
+	}, CM = () => {
 		let n = z.elements.findIndex((n) => n.id === _.id);
 		n < z.elements.length - 1 && M(n, z.elements.length - 1);
-	}, fM = () => {
+	}, wM = () => {
 		let n = z.elements.findIndex((n) => n.id === _.id);
 		n > 0 && M(n, 0);
-	}, pM = () => {
+	}, TM = () => {
 		z.selectedElementIds.includes(_.id) && z.selectedElementIds.length > 1 ? (N(), P()) : j({
 			type: _.type,
 			content: _.content,
@@ -11221,7 +11222,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 			height: _.height,
 			style: _.style
 		});
-	}, mM = [
+	}, EM = [
 		"#000000",
 		"#FFFFFF",
 		"#FF0000",
@@ -11231,8 +11232,8 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 		"#808080",
 		"#800080",
 		"transparent"
-	], hM = (n, _) => {
-		Xj({
+	], DM = (n, _) => {
+		cM({
 			open: !0,
 			prop: n,
 			value: _
@@ -11248,8 +11249,8 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 					direction: "column",
 					gap: "3",
 					children: [/* @__PURE__ */ jsx(u$1, {
-						value: tM,
-						onChange: (n) => nM(n.target.value),
+						value: pM,
+						onChange: (n) => mM(n.target.value),
 						placeholder: "Nome da camada..."
 					}), /* @__PURE__ */ jsxs(p$1, {
 						gap: "3",
@@ -11260,7 +11261,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 							children: "Cancelar"
 						}) }), /* @__PURE__ */ jsx(o, {
 							onClick: () => {
-								B(_.id, tM), G(!1);
+								B(_.id, pM), G(!1);
 							},
 							children: "Salvar"
 						})]
@@ -11270,7 +11271,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 		}),
 		/* @__PURE__ */ jsx(s$4, {
 			open: Z,
-			onOpenChange: Lj,
+			onOpenChange: Yj,
 			children: /* @__PURE__ */ jsxs(p$8, {
 				style: { maxWidth: 450 },
 				children: [/* @__PURE__ */ jsx(g$2, { children: "Editar Texto" }), /* @__PURE__ */ jsxs(p$1, {
@@ -11278,9 +11279,9 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 					gap: "3",
 					children: [
 						/* @__PURE__ */ jsx(r, {
-							ref: sM,
-							value: rM,
-							onChange: (n) => iM(n.target.value),
+							ref: yM,
+							value: hM,
+							onChange: (n) => gM(n.target.value),
 							placeholder: "Digite o novo texto...",
 							style: { height: 100 }
 						}),
@@ -11298,7 +11299,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 									color: "blue",
 									variant: "surface",
 									style: { cursor: "pointer" },
-									onClick: () => lM(n.dataName),
+									onClick: () => xM(n.dataName),
 									children: n.name
 								}, n.dataName))
 							})]
@@ -11312,7 +11313,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 								children: "Cancelar"
 							}) }), /* @__PURE__ */ jsx(o, {
 								onClick: () => {
-									E(_.id, { content: rM }), Lj(!1);
+									E(_.id, { content: hM }), Yj(!1);
 								},
 								children: "Salvar"
 							})]
@@ -11322,8 +11323,8 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 			})
 		}),
 		/* @__PURE__ */ jsx(s$4, {
-			open: Rj,
-			onOpenChange: zj,
+			open: Xj,
+			onOpenChange: Zj,
 			children: /* @__PURE__ */ jsxs(p$8, {
 				style: { maxWidth: 450 },
 				children: [/* @__PURE__ */ jsx(g$2, { children: "Vincular Dados Manualmente" }), /* @__PURE__ */ jsxs(p$1, {
@@ -11335,8 +11336,8 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 							children: "Nome da propriedade (ex: titulo, preco, imagem):"
 						}),
 						/* @__PURE__ */ jsx(u$1, {
-							value: aM,
-							onChange: (n) => oM(n.target.value),
+							value: _M,
+							onChange: (n) => vM(n.target.value),
 							placeholder: "propriedade"
 						}),
 						/* @__PURE__ */ jsxs(p$1, {
@@ -11348,8 +11349,8 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 								children: "Cancelar"
 							}) }), /* @__PURE__ */ jsx(o, {
 								onClick: () => {
-									let n = aM, O = { dataBinding: n };
-									(_.type === "text" || _.type === "text-container") && (O.content = `{{${n}}}`), E(_.id, O), zj(!1);
+									let n = _M, O = { dataBinding: n };
+									(_.type === "text" || _.type === "text-container") && (O.content = `{{${n}}}`), E(_.id, O), Zj(!1);
 								},
 								children: "Vincular"
 							})]
@@ -11359,8 +11360,8 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 			})
 		}),
 		/* @__PURE__ */ jsx(s$4, {
-			open: Yj.open,
-			onOpenChange: (n) => Xj((_) => ({
+			open: sM.open,
+			onOpenChange: (n) => cM((_) => ({
 				..._,
 				open: n
 			})),
@@ -11369,8 +11370,8 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 				children: [
 					/* @__PURE__ */ jsx(g$2, { children: "Selecionar Cor" }),
 					/* @__PURE__ */ jsx(ColorPickerContent, {
-						color: Yj.value,
-						onChange: (n) => Xj((_) => ({
+						color: sM.value,
+						onChange: (n) => cM((_) => ({
 							..._,
 							value: n
 						}))
@@ -11385,7 +11386,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 							children: "Cancelar"
 						}) }), /* @__PURE__ */ jsx(o, {
 							onClick: () => {
-								uM({ [Yj.prop]: Yj.value }), Xj((n) => ({
+								SM({ [sM.prop]: sM.value }), cM((n) => ({
 									...n,
 									open: !1
 								}));
@@ -11398,21 +11399,21 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 		}),
 		/* @__PURE__ */ jsx(ElementAdvancedSettings, {
 			elementId: _.id,
-			open: Hj,
-			onOpenChange: Uj,
-			initialTab: Wj
+			open: eM,
+			onOpenChange: tM,
+			initialTab: nM
 		}),
 		/* @__PURE__ */ jsx(s$4, {
-			open: Zj,
-			onOpenChange: Qj,
+			open: lM,
+			onOpenChange: uM,
 			children: /* @__PURE__ */ jsxs(p$8, {
 				style: { maxWidth: 450 },
 				children: [/* @__PURE__ */ jsx(g$2, { children: "Inserir URL da Imagem" }), /* @__PURE__ */ jsxs(p$1, {
 					direction: "column",
 					gap: "3",
 					children: [/* @__PURE__ */ jsx(u$1, {
-						value: $j,
-						onChange: (n) => eM(n.target.value),
+						value: dM,
+						onChange: (n) => fM(n.target.value),
 						placeholder: "https://exemplo.com/imagem.png"
 					}), /* @__PURE__ */ jsxs(p$1, {
 						gap: "3",
@@ -11423,7 +11424,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 							children: "Cancelar"
 						}) }), /* @__PURE__ */ jsx(o, {
 							onClick: () => {
-								E(_.id, { content: $j }), Qj(!1);
+								E(_.id, { content: dM }), uM(!1);
 							},
 							children: "Aplicar"
 						})]
@@ -11433,7 +11434,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 		}),
 		/* @__PURE__ */ jsx("input", {
 			type: "file",
-			ref: cM,
+			ref: bM,
 			style: { display: "none" },
 			accept: "image/*",
 			onChange: (n) => {
@@ -11499,7 +11500,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 						/* @__PURE__ */ jsx(Item2$1, {
 							className: "ContextMenuItem",
 							onSelect: () => {
-								oM(_.dataBinding || ""), zj(!0);
+								vM(_.dataBinding || ""), Zj(!0);
 							},
 							children: "Outro / Manual..."
 						}),
@@ -11515,14 +11516,14 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 				(_.type === "text" || _.type === "text-container") && /* @__PURE__ */ jsxs(Fragment$1, { children: [/* @__PURE__ */ jsx(Item2$1, {
 					className: "ContextMenuItem",
 					onSelect: () => {
-						iM(_.content), Lj(!0);
+						gM(_.content), Yj(!0);
 					},
 					children: "Editar Texto..."
 				}), /* @__PURE__ */ jsx(Separator2$1, { className: "ContextMenuSeparator" })] }),
 				/* @__PURE__ */ jsx(Item2$1, {
 					className: "ContextMenuItem",
 					onSelect: () => {
-						nM(_.name || (_.type === "group" ? "Grupo" : "Elemento")), G(!0);
+						mM(_.name || (_.type === "group" ? "Grupo" : "Elemento")), G(!0);
 					},
 					children: "Renomear..."
 				}),
@@ -11539,13 +11540,13 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 				/* @__PURE__ */ jsx(Separator2$1, { className: "ContextMenuSeparator" }),
 				/* @__PURE__ */ jsx(Item2$1, {
 					className: "ContextMenuItem",
-					onSelect: () => Uj(!0),
+					onSelect: () => tM(!0),
 					children: "Configurações Avançadas..."
 				}),
 				/* @__PURE__ */ jsx(Separator2$1, { className: "ContextMenuSeparator" }),
 				/* @__PURE__ */ jsx(Item2$1, {
 					className: "ContextMenuItem",
-					onSelect: pM,
+					onSelect: TM,
 					children: z.selectedElementIds.includes(_.id) && z.selectedElementIds.length > 1 ? `Duplicar Selecionados (${z.selectedElementIds.length})` : "Duplicar"
 				}),
 				/* @__PURE__ */ jsx(Item2$1, {
@@ -11569,12 +11570,12 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 						alignOffset: -5,
 						children: [/* @__PURE__ */ jsx(Item2$1, {
 							className: "ContextMenuItem",
-							onSelect: () => cM.current?.click(),
+							onSelect: () => bM.current?.click(),
 							children: "Carregar do Computador"
 						}), /* @__PURE__ */ jsx(Item2$1, {
 							className: "ContextMenuItem",
 							onSelect: () => {
-								eM(typeof _.content == "string" ? _.content : ""), Qj(!0);
+								fM(typeof _.content == "string" ? _.content : ""), uM(!0);
 							},
 							children: "Inserir URL"
 						})]
@@ -11592,17 +11593,17 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 						children: [
 							/* @__PURE__ */ jsx(Item2$1, {
 								className: "ContextMenuItem",
-								onSelect: () => uM({ objectFit: "cover" }),
+								onSelect: () => SM({ objectFit: "cover" }),
 								children: "Preencher (Cover)"
 							}),
 							/* @__PURE__ */ jsx(Item2$1, {
 								className: "ContextMenuItem",
-								onSelect: () => uM({ objectFit: "contain" }),
+								onSelect: () => SM({ objectFit: "contain" }),
 								children: "Ajustar (Contain)"
 							}),
 							/* @__PURE__ */ jsx(Item2$1, {
 								className: "ContextMenuItem",
-								onSelect: () => uM({ objectFit: "fill" }),
+								onSelect: () => SM({ objectFit: "fill" }),
 								children: "Esticar (Fill)"
 							})
 						]
@@ -11621,11 +11622,11 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 					alignOffset: -5,
 					children: [/* @__PURE__ */ jsx(Item2$1, {
 						className: "ContextMenuItem",
-						onSelect: dM,
+						onSelect: CM,
 						children: "Trazer para frente"
 					}), /* @__PURE__ */ jsx(Item2$1, {
 						className: "ContextMenuItem",
-						onSelect: fM,
+						onSelect: wM,
 						children: "Enviar para trás"
 					})]
 				}) })] }),
@@ -11643,7 +11644,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 						alignOffset: -5,
 						children: z.availableFonts && z.availableFonts.map((n) => /* @__PURE__ */ jsxs(Item2$1, {
 							className: "ContextMenuItem",
-							onSelect: () => uM({ fontFamily: n }),
+							onSelect: () => SM({ fontFamily: n }),
 							style: { fontFamily: n },
 							children: [n, _.style?.fontFamily === n && /* @__PURE__ */ jsx("div", {
 								className: "RightSlot",
@@ -11672,7 +11673,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 							64
 						].map((n) => /* @__PURE__ */ jsxs(Item2$1, {
 							className: "ContextMenuItem",
-							onSelect: () => uM({ fontSize: `${n}px` }),
+							onSelect: () => SM({ fontSize: `${n}px` }),
 							children: [n, "px"]
 						}, n))
 					}) })] }),
@@ -11687,9 +11688,9 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 						sideOffset: 2,
 						alignOffset: -5,
 						children: [
-							mM.filter((n) => n !== "transparent").map((n) => /* @__PURE__ */ jsxs(Item2$1, {
+							EM.filter((n) => n !== "transparent").map((n) => /* @__PURE__ */ jsxs(Item2$1, {
 								className: "ContextMenuItem",
-								onSelect: () => uM({ color: n }),
+								onSelect: () => SM({ color: n }),
 								children: [/* @__PURE__ */ jsx("div", { style: {
 									width: 12,
 									height: 12,
@@ -11701,7 +11702,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 							/* @__PURE__ */ jsx(Separator2$1, { className: "ContextMenuSeparator" }),
 							/* @__PURE__ */ jsx(Item2$1, {
 								className: "ContextMenuItem",
-								onSelect: () => hM("color", _.style?.color || "#000000"),
+								onSelect: () => DM("color", _.style?.color || "#000000"),
 								children: "Outra Cor..."
 							})
 						]
@@ -11718,11 +11719,11 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 						alignOffset: -5,
 						children: [/* @__PURE__ */ jsx(Item2$1, {
 							className: "ContextMenuItem",
-							onSelect: () => uM({ fontWeight: "normal" }),
+							onSelect: () => SM({ fontWeight: "normal" }),
 							children: "Normal"
 						}), /* @__PURE__ */ jsx(Item2$1, {
 							className: "ContextMenuItem",
-							onSelect: () => uM({ fontWeight: "bold" }),
+							onSelect: () => SM({ fontWeight: "bold" }),
 							children: "Negrito"
 						})]
 					}) })] }),
@@ -11739,17 +11740,17 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 						children: [
 							/* @__PURE__ */ jsx(Item2$1, {
 								className: "ContextMenuItem",
-								onSelect: () => uM({ textAlign: "left" }),
+								onSelect: () => SM({ textAlign: "left" }),
 								children: "Esquerda"
 							}),
 							/* @__PURE__ */ jsx(Item2$1, {
 								className: "ContextMenuItem",
-								onSelect: () => uM({ textAlign: "center" }),
+								onSelect: () => SM({ textAlign: "center" }),
 								children: "Centro"
 							}),
 							/* @__PURE__ */ jsx(Item2$1, {
 								className: "ContextMenuItem",
-								onSelect: () => uM({ textAlign: "right" }),
+								onSelect: () => SM({ textAlign: "right" }),
 								children: "Direita"
 							})
 						]
@@ -11767,7 +11768,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 						children: [
 							/* @__PURE__ */ jsx(Item2$1, {
 								className: "ContextMenuItem",
-								onSelect: () => uM({
+								onSelect: () => SM({
 									display: "flex",
 									flexDirection: "column",
 									justifyContent: "flex-start"
@@ -11776,7 +11777,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 							}),
 							/* @__PURE__ */ jsx(Item2$1, {
 								className: "ContextMenuItem",
-								onSelect: () => uM({
+								onSelect: () => SM({
 									display: "flex",
 									flexDirection: "column",
 									justifyContent: "center"
@@ -11785,7 +11786,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 							}),
 							/* @__PURE__ */ jsx(Item2$1, {
 								className: "ContextMenuItem",
-								onSelect: () => uM({
+								onSelect: () => SM({
 									display: "flex",
 									flexDirection: "column",
 									justifyContent: "flex-end"
@@ -11806,9 +11807,9 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 					sideOffset: 2,
 					alignOffset: -5,
 					children: [
-						mM.map((n) => /* @__PURE__ */ jsxs(Item2$1, {
+						EM.map((n) => /* @__PURE__ */ jsxs(Item2$1, {
 							className: "ContextMenuItem",
-							onSelect: () => uM({ backgroundColor: n }),
+							onSelect: () => SM({ backgroundColor: n }),
 							children: [/* @__PURE__ */ jsx("div", { style: {
 								width: 12,
 								height: 12,
@@ -11820,7 +11821,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 						/* @__PURE__ */ jsx(Separator2$1, { className: "ContextMenuSeparator" }),
 						/* @__PURE__ */ jsx(Item2$1, {
 							className: "ContextMenuItem",
-							onSelect: () => hM("backgroundColor", _.style?.backgroundColor || "transparent"),
+							onSelect: () => DM("backgroundColor", _.style?.backgroundColor || "transparent"),
 							children: "Outra Cor..."
 						})
 					]
@@ -11846,14 +11847,14 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 							"50%"
 						].map((n) => /* @__PURE__ */ jsx(Item2$1, {
 							className: "ContextMenuItem",
-							onSelect: () => uM({ borderRadius: typeof n == "number" ? `${n}px` : n }),
+							onSelect: () => SM({ borderRadius: typeof n == "number" ? `${n}px` : n }),
 							children: n === "50%" ? "Círculo" : `${n}px`
 						}, n)),
 						/* @__PURE__ */ jsx(Separator2$1, { className: "ContextMenuSeparator" }),
 						/* @__PURE__ */ jsx(Item2$1, {
 							className: "ContextMenuItem",
 							onSelect: () => {
-								Jj("style"), Uj(!0);
+								oM("style"), tM(!0);
 							},
 							children: "Personalizar..."
 						})
@@ -11880,14 +11881,14 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 							32
 						].map((n) => /* @__PURE__ */ jsxs(Item2$1, {
 							className: "ContextMenuItem",
-							onSelect: () => uM({ padding: `${n}px` }),
+							onSelect: () => SM({ padding: `${n}px` }),
 							children: [n, "px"]
 						}, n)),
 						/* @__PURE__ */ jsx(Separator2$1, { className: "ContextMenuSeparator" }),
 						/* @__PURE__ */ jsx(Item2$1, {
 							className: "ContextMenuItem",
 							onSelect: () => {
-								Jj("style"), Uj(!0);
+								oM("style"), tM(!0);
 							},
 							children: "Personalizar..."
 						})
@@ -11897,55 +11898,55 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 		}) })] })
 	] });
 }, DraggableElement = React.memo(({ element: n, isSelected: _ }) => {
-	let { selectElement: E, updateElement: O, updateElements: A, state: j, resizeGroup: M, setSnapLines: N } = useEditor(), [P, z] = useState(!1), [B, H] = useState(!1), [U, G] = useState(!1), Z = useRef(null), Lj = useRef({
+	let { selectElement: E, updateElement: O, updateElements: A, state: j, resizeGroup: M, setSnapLines: N } = useEditor(), [P, z] = useState(!1), [B, H] = useState(!1), [U, G] = useState(!1), Z = useRef(null), Yj = useRef({
 		x: 0,
 		y: 0
-	}), Rj = useRef({}), zj = useRef(!1), Hj = useRef(!1), Uj = useRef(0), Wj = useRef(0), Gj = useRef({
+	}), Xj = useRef({}), Zj = useRef(!1), eM = useRef(!1), tM = useRef(0), nM = useRef(0), rM = useRef({
 		x: 0,
 		y: 0
-	}), Jj = useRef(!1), Yj = j.canvasHeight || 150, Xj = j.isList ? j.mockData.length > 0 ? j.mockData[0] : null : j.singleMockData, Zj = n.content, Qj = {};
-	if (Xj) {
-		if (n.type === "text" || n.type === "text-container") Zj = Zj.replace(/\{\{(.*?)\}\}/g, (_, E) => {
-			let O = Xj[E.trim()];
-			return O == null ? _ : n.formatting ? formatValue(O, n.formatting) : String(O);
+	}), oM = useRef(!1), sM = j.canvasHeight || 150, cM = j.isList ? j.mockData.length > 0 ? j.mockData[0] : null : j.singleMockData, lM = n.content, uM = {};
+	if (cM) {
+		if (n.type === "text" || n.type === "text-container") lM = lM.replace(/\{\{(.*?)\}\}/g, (_, E) => {
+			let O = cM[E.trim()];
+			return O == null ? _ : n.formatting ? formatValue$1(O, n.formatting) : String(O);
 		});
 		else if (n.type === "image") if (n.dataBinding) {
-			let _ = Xj[n.dataBinding];
-			_ != null && (Zj = String(_));
-		} else Zj = Zj.replace(/\{\{(.*?)\}\}/g, (n, _) => {
-			let E = Xj[_.trim()];
+			let _ = cM[n.dataBinding];
+			_ != null && (lM = String(_));
+		} else lM = lM.replace(/\{\{(.*?)\}\}/g, (n, _) => {
+			let E = cM[_.trim()];
 			return E == null ? n : String(E);
 		});
 		n.styleBindings && Object.entries(n.styleBindings).forEach(([n, _]) => {
-			let E = Xj[_];
-			E != null && (Qj = {
-				...Qj,
+			let E = cM[_];
+			E != null && (uM = {
+				...uM,
 				[n]: String(E)
 			});
 		}), n.conditions && n.conditions.forEach((n) => {
-			let _ = Xj[n.property];
-			checkCondition(_, n.operator, n.value) && (Qj = {
-				...Qj,
+			let _ = cM[n.property];
+			checkCondition$1(_, n.operator, n.value) && (uM = {
+				...uM,
 				...n.style
 			});
 		});
 	}
-	let $j = Qj.display === "none";
-	if ($j && _) {
-		let { display: n, ..._ } = Qj;
-		Qj = _;
+	let dM = uM.display === "none";
+	if (dM && _) {
+		let { display: n, ..._ } = uM;
+		uM = _;
 	}
-	let eM = (_) => {
-		_.stopPropagation(), !zj.current && !Hj.current && !P && (_.shiftKey ? E(n.id, !0) : E(n.id, !1));
-	}, tM = (O) => {
+	let fM = (_) => {
+		_.stopPropagation(), !Zj.current && !eM.current && !P && (_.shiftKey ? E(n.id, !0) : E(n.id, !1));
+	}, pM = (O) => {
 		if (O.button !== 0) return;
 		O.stopPropagation();
 		let A = O.shiftKey;
-		if (zj.current = !1, Hj.current = !1, n.groupId && !_) {
+		if (Zj.current = !1, eM.current = !1, n.groupId && !_) {
 			E(n.groupId, A);
 			return;
 		}
-		_ || (E(n.id, A), Hj.current = !0), z(!0), Lj.current = {
+		_ || (E(n.id, A), eM.current = !0), z(!0), Yj.current = {
 			x: O.clientX,
 			y: O.clientY
 		}, O.currentTarget.setPointerCapture(O.pointerId);
@@ -11957,17 +11958,17 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 				x: n.x,
 				y: n.y
 			});
-		}), Rj.current = N;
-	}, nM = (_) => {
+		}), Xj.current = N;
+	}, mM = (_) => {
 		if (P) {
-			let E = j.zoom || 1, O = (_.clientX - Lj.current.x) / E, M = (_.clientY - Lj.current.y) / E;
-			(Math.abs(O) > 2 || Math.abs(M) > 2) && (zj.current = !0);
-			let P = 5 / E, z = [], B = Object.entries(Rj.current).map(([_, E]) => {
+			let E = j.zoom || 1, O = (_.clientX - Yj.current.x) / E, M = (_.clientY - Yj.current.y) / E;
+			(Math.abs(O) > 2 || Math.abs(M) > 2) && (Zj.current = !0);
+			let P = 5 / E, z = [], B = Object.entries(Xj.current).map(([_, E]) => {
 				let A = E.x + O, N = E.y + M;
 				if (j.gridSize > 0) A = Math.round(A / j.gridSize) * j.gridSize, N = Math.round(N / j.gridSize) * j.gridSize;
 				else {
 					let E = !1, O = !1, M = n.width ?? 100, B = n.height ?? 100;
-					Object.keys(Rj.current).length === 1 && j.elements.forEach((n) => {
+					Object.keys(Xj.current).length === 1 && j.elements.forEach((n) => {
 						if (n.id === _) return;
 						let j = n.width ?? 100, H = n.height ?? 100;
 						E || (Math.abs(A - n.x) < P ? (A = n.x, E = !0, z.push({
@@ -12000,7 +12001,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 				if (A = Math.max(0, A), j.isList) {
 					N = Math.max(0, N);
 					let _ = n.height ?? 100;
-					Yj > 0 && (N = Math.min(N, Yj - _)), N = Math.max(0, N);
+					sM > 0 && (N = Math.min(N, sM - _)), N = Math.max(0, N);
 				}
 				return {
 					id: _,
@@ -12012,25 +12013,25 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 			});
 			N && N(z), A(B, !1);
 		}
-	}, rM = (n) => {
+	}, hM = (n) => {
 		P && (z(!1), n.currentTarget.releasePointerCapture(n.pointerId), A([], !0), N && N([]));
-	}, iM = (_) => {
+	}, gM = (_) => {
 		_.stopPropagation(), _.preventDefault(), G(!0);
 		let E = _.target.closest(".resizable-element");
 		if (E) {
 			let O = E.getBoundingClientRect();
-			Gj.current = {
+			rM.current = {
 				x: O.left + O.width / 2,
 				y: O.top + O.height / 2
 			};
-			let A = _.clientX - Gj.current.x, j = _.clientY - Gj.current.y;
-			Uj.current = Math.atan2(j, A) * (180 / Math.PI), Wj.current = n.rotation || 0;
+			let A = _.clientX - rM.current.x, j = _.clientY - rM.current.y;
+			tM.current = Math.atan2(j, A) * (180 / Math.PI), nM.current = n.rotation || 0;
 		}
 	};
 	useEffect(() => {
 		let _ = (_) => {
 			if (U) {
-				let E = _.clientX - Gj.current.x, A = _.clientY - Gj.current.y, j = Math.atan2(A, E) * (180 / Math.PI) - Uj.current, M = (Wj.current + j) % 360;
+				let E = _.clientX - rM.current.x, A = _.clientY - rM.current.y, j = Math.atan2(A, E) * (180 / Math.PI) - tM.current, M = (nM.current + j) % 360;
 				O(n.id, { rotation: M }, !1);
 			}
 		}, E = () => {
@@ -12052,7 +12053,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 			}
 		});
 	}, [
-		Zj,
+		lM,
 		n.autoGrow,
 		n.containerExpansion,
 		n.style,
@@ -12062,7 +12063,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 		n.id,
 		n.type
 	]);
-	let aM = {
+	let _M = {
 		position: "relative",
 		left: 0,
 		top: 0,
@@ -12080,7 +12081,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 		userSelect: "none",
 		boxSizing: "border-box",
 		...n.style,
-		...Qj
+		...uM
 	};
 	return /* @__PURE__ */ jsx(Resizable, {
 		className: "resizable-element",
@@ -12088,9 +12089,9 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 			width: n.width ?? 100,
 			height: n.autoGrow ? "auto" : n.height ?? 100
 		},
-		maxHeight: j.isList ? Math.max(10, Yj - n.y) : void 0,
+		maxHeight: j.isList ? Math.max(10, sM - n.y) : void 0,
 		onResizeStart: (n) => {
-			H(!0), Jj.current = !!n.shiftKey;
+			H(!0), oM.current = !!n.shiftKey;
 		},
 		onResizeStop: (_, E, A, j) => {
 			H(!1);
@@ -12177,8 +12178,8 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 			position: "absolute",
 			transform: `translate(${n.x ?? 0}px, ${n.y ?? 0}px) rotate(${n.rotation || 0}deg)`,
 			height: n.autoGrow ? "auto" : void 0,
-			display: $j && !_ ? "none" : void 0,
-			opacity: $j && _ ? .4 : 1,
+			display: dM && !_ ? "none" : void 0,
+			opacity: dM && _ ? .4 : 1,
 			zIndex: _ ? 1e3 : void 0,
 			outline: "none",
 			overflow: "visible"
@@ -12193,7 +12194,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 			bottomLeft: !1,
 			topLeft: !1
 		},
-		lockAspectRatio: Jj.current === !0,
+		lockAspectRatio: oM.current === !0,
 		grid: j.gridSize > 0 ? [j.gridSize, j.gridSize] : void 0,
 		children: /* @__PURE__ */ jsx(ElementContextMenu, {
 			element: n,
@@ -12206,18 +12207,18 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 				children: [/* @__PURE__ */ jsxs(p, {
 					ref: Z,
 					style: {
-						...aM,
-						whiteSpace: n.type === "text-container" && n.autoGrow && n.containerExpansion === "horizontal" ? "nowrap" : aM.whiteSpace,
+						..._M,
+						whiteSpace: n.type === "text-container" && n.autoGrow && n.containerExpansion === "horizontal" ? "nowrap" : _M.whiteSpace,
 						width: n.type === "text-container" && n.autoGrow && n.containerExpansion === "horizontal" ? "max-content" : "100%",
 						height: n.type === "text-container" && n.autoGrow && n.containerExpansion === "vertical" ? "auto" : "100%"
 					},
-					onPointerDown: tM,
-					onPointerMove: nM,
-					onPointerUp: rM,
+					onPointerDown: pM,
+					onPointerMove: mM,
+					onPointerUp: hM,
 					onMouseDown: (n) => {
 						n.button === 0 && n.stopPropagation();
 					},
-					onClick: eM,
+					onClick: fM,
 					title: n.name,
 					onMouseEnter: (n) => {
 						_ || (n.currentTarget.style.borderColor = "var(--gray-6)");
@@ -12248,7 +12249,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 								width: "100%",
 								height: "100%"
 							},
-							children: Zj
+							children: lM
 						}),
 						n.type === "text-container" && /* @__PURE__ */ jsx(p$2, {
 							style: {
@@ -12256,10 +12257,10 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 								height: "100%",
 								display: "block"
 							},
-							children: Zj
+							children: lM
 						}),
-						n.type === "image" && (Zj ? /* @__PURE__ */ jsx("img", {
-							src: Zj,
+						n.type === "image" && (lM ? /* @__PURE__ */ jsx("img", {
+							src: lM,
 							alt: "Element",
 							style: {
 								width: "100%",
@@ -12324,7 +12325,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 						zIndex: 50,
 						boxShadow: "0 0 0 2px white"
 					},
-					onMouseDown: iM,
+					onMouseDown: gM,
 					children: /* @__PURE__ */ jsx(p, { style: {
 						position: "absolute",
 						top: 12,
@@ -12339,44 +12340,44 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 		})
 	});
 }), Canvas = () => {
-	let { state: n, selectElement: _, setSelectedElements: E, addElement: O, setZoom: A, setPan: j, undo: M, redo: N, copy: P, paste: z, removeSelected: B, updateElements: U } = useEditor(), G = useRef(null), [Z, Lj] = useState(null), Rj = useRef(!1), zj = useRef(!1), Hj = useRef(!1), Uj = useRef({
+	let { state: n, selectElement: _, setSelectedElements: E, addElement: O, setZoom: A, setPan: j, undo: M, redo: N, copy: P, paste: z, removeSelected: B, updateElements: U } = useEditor(), G = useRef(null), [Z, Yj] = useState(null), Xj = useRef(!1), Zj = useRef(!1), eM = useRef(!1), tM = useRef({
 		x: 0,
 		y: 0
-	}), Wj = useRef({
+	}), nM = useRef({
 		x: 0,
 		y: 0
-	}), Gj = useRef([]), Jj = (E) => {
-		if (E.button === 1 || E.button === 0 && Hj.current) {
-			E.preventDefault(), zj.current = !0, Wj.current = {
+	}), rM = useRef([]), oM = (E) => {
+		if (E.button === 1 || E.button === 0 && eM.current) {
+			E.preventDefault(), Zj.current = !0, nM.current = {
 				x: E.clientX,
 				y: E.clientY
 			};
 			return;
 		}
-		Rj.current = !0;
+		Xj.current = !0;
 		let O = G.current?.getBoundingClientRect();
 		if (!O) return;
 		let A = O.left, j = O.top;
-		Uj.current = {
+		tM.current = {
 			x: (E.clientX - A - n.pan.x) / n.zoom,
 			y: (E.clientY - j - n.pan.y) / n.zoom
-		}, Gj.current = n.selectedElementIds, E.shiftKey || (_(null), Gj.current = []), window.addEventListener("mousemove", Yj), window.addEventListener("mouseup", Xj);
-	}, Yj = useCallback((_) => {
+		}, rM.current = n.selectedElementIds, E.shiftKey || (_(null), rM.current = []), window.addEventListener("mousemove", sM), window.addEventListener("mouseup", cM);
+	}, sM = useCallback((_) => {
 		if (!G.current) return;
-		if (zj.current) {
-			let E = _.clientX - Wj.current.x, O = _.clientY - Wj.current.y;
+		if (Zj.current) {
+			let E = _.clientX - nM.current.x, O = _.clientY - nM.current.y;
 			j({
 				x: n.pan.x + E,
 				y: n.pan.y + O
-			}), Wj.current = {
+			}), nM.current = {
 				x: _.clientX,
 				y: _.clientY
 			};
 			return;
 		}
-		if (!Rj.current) return;
-		let O = G.current.getBoundingClientRect(), A = (_.clientX - O.left - n.pan.x) / n.zoom, M = (_.clientY - O.top - n.pan.y) / n.zoom, N = Math.min(Uj.current.x, A), P = Math.min(Uj.current.y, M), z = Math.abs(A - Uj.current.x), B = Math.abs(M - Uj.current.y);
-		if (Lj({
+		if (!Xj.current) return;
+		let O = G.current.getBoundingClientRect(), A = (_.clientX - O.left - n.pan.x) / n.zoom, M = (_.clientY - O.top - n.pan.y) / n.zoom, N = Math.min(tM.current.x, A), P = Math.min(tM.current.y, M), z = Math.abs(A - tM.current.x), B = Math.abs(M - tM.current.y);
+		if (Yj({
 			x: N,
 			y: P,
 			width: z,
@@ -12386,7 +12387,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 			n.elements.forEach((n) => {
 				let E = n.x ?? 0, O = n.y ?? 0, A = n.width ?? 100, j = n.height ?? 100, M = E + A, H = O + j, U = N + z, W = P + B;
 				E < U && M > N && O < W && H > P && _.push(n.id);
-			}), E(Array.from(new Set([...Gj.current, ..._])));
+			}), E(Array.from(new Set([...rM.current, ..._])));
 		}
 	}, [
 		n.elements,
@@ -12394,15 +12395,15 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 		n.zoom,
 		E,
 		j
-	]), Xj = useCallback(() => {
-		Rj.current = !1, zj.current = !1, Lj(null), window.removeEventListener("mousemove", Yj), window.removeEventListener("mouseup", Xj);
-	}, [Yj]), Zj = useRef(n);
+	]), cM = useCallback(() => {
+		Xj.current = !1, Zj.current = !1, Yj(null), window.removeEventListener("mousemove", sM), window.removeEventListener("mouseup", cM);
+	}, [sM]), lM = useRef(n);
 	useEffect(() => {
-		Zj.current = n;
+		lM.current = n;
 	}, [n]), useEffect(() => {
 		let n = (n) => {
 			n.preventDefault();
-			let _ = Zj.current;
+			let _ = lM.current;
 			if (n.ctrlKey || n.metaKey) A(Math.min(Math.max(.1, _.zoom - n.deltaY * .001), 5));
 			else {
 				let E = n.shiftKey ? n.deltaY : n.deltaX, O = n.shiftKey ? n.deltaX : n.deltaY;
@@ -12417,7 +12418,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 		};
 	}, [A, j]), useEffect(() => {
 		let _ = (_) => {
-			if (_.code === "Space" && !_.repeat && !(_.target instanceof HTMLInputElement || _.target instanceof HTMLTextAreaElement) && (Hj.current = !0, G.current && (G.current.style.cursor = "grab")), !(_.target instanceof HTMLInputElement || _.target instanceof HTMLTextAreaElement) && ((_.ctrlKey || _.metaKey) && _.key.toLowerCase() === "z" && (_.preventDefault(), _.shiftKey ? N() : M()), (_.ctrlKey || _.metaKey) && _.key.toLowerCase() === "y" && (_.preventDefault(), N()), (_.ctrlKey || _.metaKey) && _.key.toLowerCase() === "c" && (_.preventDefault(), P()), (_.ctrlKey || _.metaKey) && _.key.toLowerCase() === "v" && (_.preventDefault(), z()), (_.key === "Delete" || _.key === "Backspace") && (_.preventDefault(), B()), [
+			if (_.code === "Space" && !_.repeat && !(_.target instanceof HTMLInputElement || _.target instanceof HTMLTextAreaElement) && (eM.current = !0, G.current && (G.current.style.cursor = "grab")), !(_.target instanceof HTMLInputElement || _.target instanceof HTMLTextAreaElement) && ((_.ctrlKey || _.metaKey) && _.key.toLowerCase() === "z" && (_.preventDefault(), _.shiftKey ? N() : M()), (_.ctrlKey || _.metaKey) && _.key.toLowerCase() === "y" && (_.preventDefault(), N()), (_.ctrlKey || _.metaKey) && _.key.toLowerCase() === "c" && (_.preventDefault(), P()), (_.ctrlKey || _.metaKey) && _.key.toLowerCase() === "v" && (_.preventDefault(), z()), (_.key === "Delete" || _.key === "Backspace") && (_.preventDefault(), B()), [
 				"ArrowUp",
 				"ArrowDown",
 				"ArrowLeft",
@@ -12445,10 +12446,10 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 				}), O.length > 0 && U(O);
 			}
 		}, E = (n) => {
-			n.code === "Space" && (Hj.current = !1, G.current && !zj.current && (G.current.style.cursor = "default"));
+			n.code === "Space" && (eM.current = !1, G.current && !Zj.current && (G.current.style.cursor = "default"));
 		};
 		return window.addEventListener("keydown", _), window.addEventListener("keyup", E), () => {
-			window.removeEventListener("keydown", _), window.removeEventListener("keyup", E), window.removeEventListener("mousemove", Yj), window.removeEventListener("mouseup", Xj);
+			window.removeEventListener("keydown", _), window.removeEventListener("keyup", E), window.removeEventListener("mousemove", sM), window.removeEventListener("mouseup", cM);
 		};
 	}, [
 		M,
@@ -12459,24 +12460,24 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 		U,
 		n.selectedElementIds,
 		n.elements,
-		Yj,
-		Xj
+		sM,
+		cM
 	]);
-	let Qj = useRef(!1), { setCanvasHeight: $j } = useEditor(), eM = (n) => {
-		n.stopPropagation(), n.preventDefault(), Qj.current = !0, window.addEventListener("mousemove", tM), window.addEventListener("mouseup", nM);
-	}, tM = useCallback((n) => {
-		if (!Qj.current || !G.current) return;
+	let uM = useRef(!1), { setCanvasHeight: dM } = useEditor(), fM = (n) => {
+		n.stopPropagation(), n.preventDefault(), uM.current = !0, window.addEventListener("mousemove", pM), window.addEventListener("mouseup", mM);
+	}, pM = useCallback((n) => {
+		if (!uM.current || !G.current) return;
 		let _ = G.current.getBoundingClientRect(), E = n.clientY - _.top, O = Math.max(50, Math.min(E, 2e3));
-		$j(Math.round(O));
-	}, [$j]), nM = useCallback(() => {
-		Qj.current = !1, window.removeEventListener("mousemove", tM), window.removeEventListener("mouseup", nM);
-	}, [tM]);
+		dM(Math.round(O));
+	}, [dM]), mM = useCallback(() => {
+		uM.current = !1, window.removeEventListener("mousemove", pM), window.removeEventListener("mouseup", mM);
+	}, [pM]);
 	useEffect(() => () => {
-		window.removeEventListener("mousemove", tM), window.removeEventListener("mouseup", nM);
-	}, [tM, nM]);
-	let rM = (n) => {
+		window.removeEventListener("mousemove", pM), window.removeEventListener("mouseup", mM);
+	}, [pM, mM]);
+	let hM = (n) => {
 		n.preventDefault(), n.dataTransfer.dropEffect = "copy";
-	}, iM = (n) => {
+	}, gM = (n) => {
 		n.preventDefault();
 		let _ = n.dataTransfer.getData("application/x-editor-prop");
 		if (_) {
@@ -12491,19 +12492,19 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 				dataBinding: _
 			});
 		}
-	}, aM = n.canvasHeight || 150;
+	}, _M = n.canvasHeight || 150;
 	return /* @__PURE__ */ jsxs(p, {
 		ref: G,
-		onMouseDown: Jj,
-		onDragOver: rM,
-		onDrop: iM,
+		onMouseDown: oM,
+		onDragOver: hM,
+		onDrop: gM,
 		style: {
 			width: "100%",
 			height: "100%",
 			position: "relative",
 			overflow: "hidden",
 			backgroundColor: "var(--color-background)",
-			cursor: zj.current ? "grabbing" : "default",
+			cursor: Zj.current ? "grabbing" : "default",
 			backgroundImage: "radial-gradient(var(--gray-5) 1px, transparent 1px)",
 			backgroundSize: `${20 * n.zoom}px ${20 * n.zoom}px`,
 			backgroundPosition: `${n.pan.x}px ${n.pan.y}px`
@@ -12576,7 +12577,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 				n.isList && /* @__PURE__ */ jsxs("div", {
 					style: {
 						position: "absolute",
-						top: aM,
+						top: _M,
 						left: 0,
 						right: 0,
 						height: "10px",
@@ -12588,7 +12589,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 						justifyContent: "center",
 						group: "resize-handle"
 					},
-					onMouseDown: eM,
+					onMouseDown: fM,
 					children: [/* @__PURE__ */ jsx("div", { style: {
 						width: "100%",
 						height: "2px",
@@ -12612,7 +12613,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 						},
 						children: [
 							"Altura do Item: ",
-							aM,
+							_M,
 							"px"
 						]
 					})]
@@ -12691,22 +12692,22 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 		})]
 	});
 }, EditorSettings = () => {
-	let { state: n, updateListSettings: _, setCanvasHeight: E, setGridSize: O } = useEditor(), [A, j] = useState(!1), [M, N] = useState(""), [P, z] = useState("asc"), [B, H] = useState("bottom"), [U, G] = useState("down"), [Z, Lj] = useState("150"), [Rj, zj] = useState(""), [Bj, Hj] = useState("0"), [Uj, Wj] = useState("slideIn"), [Gj, Jj] = useState(.3), [Yj, Xj] = useState("ease-out");
+	let { state: n, updateListSettings: _, setCanvasHeight: E, setGridSize: O } = useEditor(), [A, j] = useState(!1), [M, N] = useState(""), [P, z] = useState("asc"), [B, H] = useState("bottom"), [U, G] = useState("down"), [Z, Yj] = useState("150"), [Xj, Zj] = useState(""), [Qj, eM] = useState("0"), [tM, nM] = useState("slideIn"), [rM, oM] = useState(.3), [sM, cM] = useState("ease-out");
 	return useEffect(() => {
 		if (A) {
-			N(n.listSettings.sortProp || "__none__"), z(n.listSettings.sortOrder || "asc"), H(n.listSettings.newestPosition || "bottom"), G(n.listSettings.scrollDirection || "down"), zj(n.listSettings.containerHeight ? String(n.listSettings.containerHeight) : ""), Lj(String(n.canvasHeight || 150)), Hj(String(n.gridSize || 0));
+			N(n.listSettings.sortProp || "__none__"), z(n.listSettings.sortOrder || "asc"), H(n.listSettings.newestPosition || "bottom"), G(n.listSettings.scrollDirection || "down"), Zj(n.listSettings.containerHeight ? String(n.listSettings.containerHeight) : ""), Yj(String(n.canvasHeight || 150)), eM(String(n.gridSize || 0));
 			let _ = n.listSettings.entryAnimation;
-			Wj(_?.type || "slideIn"), Jj(_?.duration || .3), Xj(_?.timingFunction || "ease-out");
+			nM(_?.type || "slideIn"), oM(_?.duration || .3), cM(_?.timingFunction || "ease-out");
 		}
 	}, [A]), useEffect(() => {
 		if (!A) return;
 		let _ = parseInt(Z, 10);
 		!isNaN(_) && _ > 0 && n.canvasHeight !== _ && E(_);
-		let j = parseInt(Bj, 10);
+		let j = parseInt(Qj, 10);
 		!isNaN(j) && j >= 0 && n.gridSize !== j && O(j);
 	}, [
 		Z,
-		Bj,
+		Qj,
 		A,
 		E,
 		O,
@@ -12885,7 +12886,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 											type: "number",
 											min: "10",
 											value: Z,
-											onChange: (n) => Lj(n.target.value)
+											onChange: (n) => Yj(n.target.value)
 										}),
 										/* @__PURE__ */ jsx(p$2, {
 											size: "1",
@@ -12906,8 +12907,8 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 											type: "number",
 											min: "0",
 											placeholder: "Auto (100%)",
-											value: Rj,
-											onChange: (n) => zj(n.target.value)
+											value: Xj,
+											onChange: (n) => Zj(n.target.value)
 										}),
 										/* @__PURE__ */ jsx(p$2, {
 											size: "1",
@@ -12933,8 +12934,8 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 										as: "div",
 										children: "Efeito"
 									}), /* @__PURE__ */ jsxs("select", {
-										value: Uj,
-										onChange: (n) => Wj(n.target.value),
+										value: tM,
+										onChange: (n) => nM(n.target.value),
 										style: {
 											width: "100%",
 											padding: "6px",
@@ -12996,8 +12997,8 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 										type: "number",
 										step: "0.1",
 										min: "0.1",
-										value: Gj,
-										onChange: (n) => Jj(parseFloat(n.target.value) || .3)
+										value: rM,
+										onChange: (n) => oM(parseFloat(n.target.value) || .3)
 									})] }),
 									/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
 										size: "1",
@@ -13005,8 +13006,8 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 										as: "div",
 										children: "Curva (Easing)"
 									}), /* @__PURE__ */ jsxs("select", {
-										value: Yj,
-										onChange: (n) => Xj(n.target.value),
+										value: sM,
+										onChange: (n) => cM(n.target.value),
 										style: {
 											width: "100%",
 											padding: "6px",
@@ -13061,8 +13062,8 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 											children: "Tamanho do Grid (px) - 0 para desativar"
 										}), /* @__PURE__ */ jsx(u$1, {
 											type: "number",
-											value: Bj,
-											onChange: (n) => Hj(n.target.value),
+											value: Qj,
+											onChange: (n) => eM(n.target.value),
 											placeholder: "0"
 										})]
 									})
@@ -13081,11 +13082,11 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 						children: "Cancelar"
 					}) }), /* @__PURE__ */ jsx(D$2, { children: /* @__PURE__ */ jsx(o, {
 						onClick: () => {
-							let n = parseInt(Rj, 10), E = {
-								type: Uj,
-								duration: Number(Gj),
+							let n = parseInt(Xj, 10), E = {
+								type: tM,
+								duration: Number(rM),
 								delay: 0,
-								timingFunction: Yj
+								timingFunction: sM
 							};
 							_({
 								sortProp: M === "__none__" ? "" : M,
@@ -13249,13 +13250,13 @@ function createRenderBatcher(n, _) {
 	}, j = () => E = !0, M = stepsOrder.reduce((n, E) => (n[E] = createRenderStep(j, _ ? E : void 0), n), {}), { setup: N, read: P, resolveKeyframes: z, preUpdate: B, update: H, preRender: U, render: W, postRender: G } = M, Z = () => {
 		let j = MotionGlobalConfig.useManualTiming ? A.timestamp : performance.now();
 		E = !1, MotionGlobalConfig.useManualTiming || (A.delta = O ? 1e3 / 60 : Math.max(Math.min(j - A.timestamp, maxElapsed), 1)), A.timestamp = j, A.isProcessing = !0, N.process(A), P.process(A), z.process(A), B.process(A), H.process(A), U.process(A), W.process(A), G.process(A), A.isProcessing = !1, E && _ && (O = !1, n(Z));
-	}, Lj = () => {
+	}, Yj = () => {
 		E = !0, O = !0, A.isProcessing || n(Z);
 	};
 	return {
 		schedule: stepsOrder.reduce((n, _) => {
 			let O = M[_];
-			return n[_] = (n, _ = !1, A = !1) => (E || Lj(), O.schedule(n, _, A)), n;
+			return n[_] = (n, _ = !1, A = !1) => (E || Yj(), O.schedule(n, _, A)), n;
 		}, {}),
 		cancel: (n) => {
 			for (let _ = 0; _ < stepsOrder.length; _++) M[stepsOrder[_]].cancel(n);
@@ -13613,40 +13614,40 @@ function spring(n = springDefaults.visualDuration, _ = springDefaults.bounce) {
 	}, { stiffness: P, damping: z, mass: B, duration: H, velocity: U, isResolvedFromDuration: W } = getSpringOptions({
 		...E,
 		velocity: -/* @__PURE__ */ millisecondsToSeconds(E.velocity || 0)
-	}), G = U || 0, Z = z / (2 * Math.sqrt(P * B)), Lj = M - j, Rj = /* @__PURE__ */ millisecondsToSeconds(Math.sqrt(P / B)), zj = Math.abs(Lj) < 5;
-	O ||= zj ? springDefaults.restSpeed.granular : springDefaults.restSpeed.default, A ||= zj ? springDefaults.restDelta.granular : springDefaults.restDelta.default;
-	let Bj;
+	}), G = U || 0, Z = z / (2 * Math.sqrt(P * B)), Yj = M - j, Xj = /* @__PURE__ */ millisecondsToSeconds(Math.sqrt(P / B)), Zj = Math.abs(Yj) < 5;
+	O ||= Zj ? springDefaults.restSpeed.granular : springDefaults.restSpeed.default, A ||= Zj ? springDefaults.restDelta.granular : springDefaults.restDelta.default;
+	let Qj;
 	if (Z < 1) {
-		let n = calcAngularFreq(Rj, Z);
-		Bj = (_) => M - Math.exp(-Z * Rj * _) * ((G + Z * Rj * Lj) / n * Math.sin(n * _) + Lj * Math.cos(n * _));
-	} else if (Z === 1) Bj = (n) => M - Math.exp(-Rj * n) * (Lj + (G + Rj * Lj) * n);
+		let n = calcAngularFreq(Xj, Z);
+		Qj = (_) => M - Math.exp(-Z * Xj * _) * ((G + Z * Xj * Yj) / n * Math.sin(n * _) + Yj * Math.cos(n * _));
+	} else if (Z === 1) Qj = (n) => M - Math.exp(-Xj * n) * (Yj + (G + Xj * Yj) * n);
 	else {
-		let n = Rj * Math.sqrt(Z * Z - 1);
-		Bj = (_) => {
-			let E = Math.exp(-Z * Rj * _), O = Math.min(n * _, 300);
-			return M - E * ((G + Z * Rj * Lj) * Math.sinh(O) + n * Lj * Math.cosh(O)) / n;
+		let n = Xj * Math.sqrt(Z * Z - 1);
+		Qj = (_) => {
+			let E = Math.exp(-Z * Xj * _), O = Math.min(n * _, 300);
+			return M - E * ((G + Z * Xj * Yj) * Math.sinh(O) + n * Yj * Math.cosh(O)) / n;
 		};
 	}
-	let Vj = {
+	let $j = {
 		calculatedDuration: W && H || null,
 		next: (n) => {
-			let _ = Bj(n);
+			let _ = Qj(n);
 			if (W) N.done = n >= H;
 			else {
 				let E = n === 0 ? G : 0;
-				Z < 1 && (E = n === 0 ? /* @__PURE__ */ secondsToMilliseconds(G) : calcGeneratorVelocity(Bj, n, _));
+				Z < 1 && (E = n === 0 ? /* @__PURE__ */ secondsToMilliseconds(G) : calcGeneratorVelocity(Qj, n, _));
 				let j = Math.abs(E) <= O, P = Math.abs(M - _) <= A;
 				N.done = j && P;
 			}
 			return N.value = N.done ? M : _, N;
 		},
 		toString: () => {
-			let n = Math.min(calcGeneratorDuration(Vj), maxGeneratorDuration), _ = generateLinearEasing((_) => Vj.next(n * _).value, n, 30);
+			let n = Math.min(calcGeneratorDuration($j), maxGeneratorDuration), _ = generateLinearEasing((_) => $j.next(n * _).value, n, 30);
 			return n + "ms " + _;
 		},
 		toTransition: () => {}
 	};
-	return Vj;
+	return $j;
 }
 spring.applyToOptions = (n) => {
 	let _ = createGeneratorEasing(n, 100, spring);
@@ -13656,26 +13657,26 @@ function inertia({ keyframes: n, velocity: _ = 0, power: E = .8, timeConstant: O
 	let H = n[0], U = {
 		done: !1,
 		value: H
-	}, W = (n) => N !== void 0 && n < N || P !== void 0 && n > P, G = (n) => N === void 0 ? P : P === void 0 || Math.abs(N - n) < Math.abs(P - n) ? N : P, Z = E * _, Lj = H + Z, Rj = M === void 0 ? Lj : M(Lj);
-	Rj !== Lj && (Z = Rj - H);
-	let zj = (n) => -Z * Math.exp(-n / O), Bj = (n) => Rj + zj(n), Vj = (n) => {
-		let _ = zj(n), E = Bj(n);
-		U.done = Math.abs(_) <= z, U.value = U.done ? Rj : E;
-	}, Hj, Uj, Wj = (n) => {
-		W(U.value) && (Hj = n, Uj = spring({
+	}, W = (n) => N !== void 0 && n < N || P !== void 0 && n > P, G = (n) => N === void 0 ? P : P === void 0 || Math.abs(N - n) < Math.abs(P - n) ? N : P, Z = E * _, Yj = H + Z, Xj = M === void 0 ? Yj : M(Yj);
+	Xj !== Yj && (Z = Xj - H);
+	let Zj = (n) => -Z * Math.exp(-n / O), Qj = (n) => Xj + Zj(n), $j = (n) => {
+		let _ = Zj(n), E = Qj(n);
+		U.done = Math.abs(_) <= z, U.value = U.done ? Xj : E;
+	}, eM, tM, nM = (n) => {
+		W(U.value) && (eM = n, tM = spring({
 			keyframes: [U.value, G(U.value)],
-			velocity: calcGeneratorVelocity(Bj, n, U.value),
+			velocity: calcGeneratorVelocity(Qj, n, U.value),
 			damping: A,
 			stiffness: j,
 			restDelta: z,
 			restSpeed: B
 		}));
 	};
-	return Wj(0), {
+	return nM(0), {
 		calculatedDuration: null,
 		next: (n) => {
 			let _ = !1;
-			return !Uj && Hj === void 0 && (_ = !0, Vj(n), Wj(n)), Hj !== void 0 && n >= Hj ? Uj.next(n - Hj) : (!_ && Vj(n), U);
+			return !tM && eM === void 0 && (_ = !0, $j(n), nM(n)), eM !== void 0 && n >= eM ? tM.next(n - eM) : (!_ && $j(n), U);
 		}
 	};
 }
@@ -13795,22 +13796,22 @@ var WithPromise = class {
 		if (this.startTime === null) return E.next(0);
 		let { delay: P = 0, keyframes: z, repeat: B, repeatType: H, repeatDelay: U, type: W, onUpdate: G, finalKeyframe: Z } = this.options;
 		this.speed > 0 ? this.startTime = Math.min(this.startTime, n) : this.speed < 0 && (this.startTime = Math.min(n - O / this.speed, this.startTime)), _ ? this.currentTime = n : this.updateTime(n);
-		let Lj = this.currentTime - P * (this.playbackSpeed >= 0 ? 1 : -1), Rj = this.playbackSpeed >= 0 ? Lj < 0 : Lj > O;
-		this.currentTime = Math.max(Lj, 0), this.state === "finished" && this.holdTime === null && (this.currentTime = O);
-		let zj = this.currentTime, Bj = E;
+		let Yj = this.currentTime - P * (this.playbackSpeed >= 0 ? 1 : -1), Xj = this.playbackSpeed >= 0 ? Yj < 0 : Yj > O;
+		this.currentTime = Math.max(Yj, 0), this.state === "finished" && this.holdTime === null && (this.currentTime = O);
+		let Zj = this.currentTime, Qj = E;
 		if (B) {
 			let n = Math.min(this.currentTime, O) / M, _ = Math.floor(n), E = n % 1;
-			!E && n >= 1 && (E = 1), E === 1 && _--, _ = Math.min(_, B + 1), _ % 2 && (H === "reverse" ? (E = 1 - E, U && (E -= U / M)) : H === "mirror" && (Bj = j)), zj = clamp(0, 1, E) * M;
+			!E && n >= 1 && (E = 1), E === 1 && _--, _ = Math.min(_, B + 1), _ % 2 && (H === "reverse" ? (E = 1 - E, U && (E -= U / M)) : H === "mirror" && (Qj = j)), Zj = clamp(0, 1, E) * M;
 		}
-		let Vj = Rj ? {
+		let $j = Xj ? {
 			done: !1,
 			value: z[0]
-		} : Bj.next(zj);
-		A && (Vj.value = A(Vj.value));
-		let { done: Hj } = Vj;
-		!Rj && N !== null && (Hj = this.playbackSpeed >= 0 ? this.currentTime >= O : this.currentTime <= 0);
-		let Uj = this.holdTime === null && (this.state === "finished" || this.state === "running" && Hj);
-		return Uj && W !== inertia && (Vj.value = getFinalKeyframe$1(z, this.options, Z, this.speed)), G && G(Vj.value), Uj && this.finish(), Vj;
+		} : Qj.next(Zj);
+		A && ($j.value = A($j.value));
+		let { done: eM } = $j;
+		!Xj && N !== null && (eM = this.playbackSpeed >= 0 ? this.currentTime >= O : this.currentTime <= 0);
+		let tM = this.holdTime === null && (this.state === "finished" || this.state === "running" && eM);
+		return tM && W !== inertia && ($j.value = getFinalKeyframe$1(z, this.options, Z, this.speed)), G && G($j.value), tM && this.finish(), $j;
 	}
 	then(n, _) {
 		return this.finished.then(n, _);
@@ -14873,46 +14874,46 @@ function onlyElements(n) {
 	}), _;
 }
 var AnimatePresence = ({ children: n, custom: _, initial: E = !0, onExitComplete: O, presenceAffectsLayout: A = !0, mode: j = "sync", propagate: M = !1, anchorX: N = "left", root: P }) => {
-	let [z, B] = usePresence(M), H = useMemo(() => onlyElements(n), [n]), W = M && !z ? [] : H.map(getChildKey), G = useRef(!0), Z = useRef(H), Lj = useConstant(() => /* @__PURE__ */ new Map()), Rj = useRef(/* @__PURE__ */ new Set()), [Hj, Uj] = useState(H), [Wj, qj] = useState(H);
+	let [z, B] = usePresence(M), H = useMemo(() => onlyElements(n), [n]), W = M && !z ? [] : H.map(getChildKey), G = useRef(!0), Z = useRef(H), Yj = useConstant(() => /* @__PURE__ */ new Map()), Xj = useRef(/* @__PURE__ */ new Set()), [eM, tM] = useState(H), [nM, aM] = useState(H);
 	useIsomorphicLayoutEffect(() => {
 		G.current = !1, Z.current = H;
-		for (let n = 0; n < Wj.length; n++) {
-			let _ = getChildKey(Wj[n]);
-			W.includes(_) ? (Lj.delete(_), Rj.current.delete(_)) : Lj.get(_) !== !0 && Lj.set(_, !1);
+		for (let n = 0; n < nM.length; n++) {
+			let _ = getChildKey(nM[n]);
+			W.includes(_) ? (Yj.delete(_), Xj.current.delete(_)) : Yj.get(_) !== !0 && Yj.set(_, !1);
 		}
 	}, [
-		Wj,
+		nM,
 		W.length,
 		W.join("-")
 	]);
-	let Jj = [];
-	if (H !== Hj) {
+	let oM = [];
+	if (H !== eM) {
 		let n = [...H];
-		for (let _ = 0; _ < Wj.length; _++) {
-			let E = Wj[_], O = getChildKey(E);
-			W.includes(O) || (n.splice(_, 0, E), Jj.push(E));
+		for (let _ = 0; _ < nM.length; _++) {
+			let E = nM[_], O = getChildKey(E);
+			W.includes(O) || (n.splice(_, 0, E), oM.push(E));
 		}
-		return j === "wait" && Jj.length && (n = Jj), qj(onlyElements(n)), Uj(H), null;
+		return j === "wait" && oM.length && (n = oM), aM(onlyElements(n)), tM(H), null;
 	}
-	process.env.NODE_ENV !== "production" && j === "wait" && Wj.length > 1 && console.warn("You're attempting to animate multiple children within AnimatePresence, but its mode is set to \"wait\". This will lead to odd visual behaviour.");
-	let { forceRender: Yj } = useContext(LayoutGroupContext);
-	return jsx(Fragment$1, { children: Wj.map((n) => {
-		let U = getChildKey(n), zj = M && !z ? !1 : H === Wj || W.includes(U);
+	process.env.NODE_ENV !== "production" && j === "wait" && nM.length > 1 && console.warn("You're attempting to animate multiple children within AnimatePresence, but its mode is set to \"wait\". This will lead to odd visual behaviour.");
+	let { forceRender: sM } = useContext(LayoutGroupContext);
+	return jsx(Fragment$1, { children: nM.map((n) => {
+		let U = getChildKey(n), Zj = M && !z ? !1 : H === nM || W.includes(U);
 		return jsx(PresenceChild, {
-			isPresent: zj,
+			isPresent: Zj,
 			initial: !G.current || E ? void 0 : !1,
 			custom: _,
 			presenceAffectsLayout: A,
 			mode: j,
 			root: P,
-			onExitComplete: zj ? void 0 : () => {
-				if (Rj.current.has(U)) return;
-				if (Rj.current.add(U), Lj.has(U)) Lj.set(U, !0);
+			onExitComplete: Zj ? void 0 : () => {
+				if (Xj.current.has(U)) return;
+				if (Xj.current.add(U), Yj.has(U)) Yj.set(U, !0);
 				else return;
 				let n = !0;
-				Lj.forEach((_) => {
+				Yj.forEach((_) => {
 					_ || (n = !1);
-				}), n && (Yj?.(), qj(Z.current), M && B?.(), O && O());
+				}), n && (sM?.(), aM(Z.current), M && B?.(), O && O());
 			},
 			anchorX: N,
 			children: n
@@ -15341,12 +15342,12 @@ function useVisualElement(n, _, E, O, A, j) {
 	useInsertionEffect(() => {
 		H && Z.current && H.update(E, P);
 	});
-	let Rj = E[optimizedAppearDataAttribute], zj = useRef(!!Rj && !window.MotionHandoffIsComplete?.(Rj) && window.MotionHasOptimisedAnimation?.(Rj));
+	let Xj = E[optimizedAppearDataAttribute], Zj = useRef(!!Xj && !window.MotionHandoffIsComplete?.(Xj) && window.MotionHasOptimisedAnimation?.(Xj));
 	return useIsomorphicLayoutEffect(() => {
-		H && (Z.current = !0, window.MotionIsMounted = !0, H.updateFeatures(), H.scheduleRenderMicrotask(), zj.current && H.animationState && H.animationState.animateChanges());
+		H && (Z.current = !0, window.MotionIsMounted = !0, H.updateFeatures(), H.scheduleRenderMicrotask(), Zj.current && H.animationState && H.animationState.animateChanges());
 	}), useEffect(() => {
-		H && (!zj.current && H.animationState && H.animationState.animateChanges(), zj.current &&= (queueMicrotask(() => {
-			window.MotionHandoffMarkAsComplete?.(Rj);
+		H && (!Zj.current && H.animationState && H.animationState.animateChanges(), Zj.current &&= (queueMicrotask(() => {
+			window.MotionHandoffMarkAsComplete?.(Xj);
 		}), !1), H.enteringChildren = void 0);
 	}), H;
 }
@@ -16024,34 +16025,34 @@ function createAnimationState(n) {
 	function M(j) {
 		let { props: M } = n, N = getVariantContext(n.parent) || {}, P = [], z = /* @__PURE__ */ new Set(), B = {}, H = Infinity;
 		for (let _ = 0; _ < numAnimationTypes; _++) {
-			let U = reversePriorityOrder[_], W = E[U], G = M[U] === void 0 ? N[U] : M[U], Z = isVariantLabel(G), Lj = U === j ? W.isActive : null;
-			Lj === !1 && (H = _);
-			let Rj = G === N[U] && G !== M[U] && Z;
-			if (Rj && O && n.manuallyAnimateOnMount && (Rj = !1), W.protectedKeys = { ...B }, !W.isActive && Lj === null || !G && !W.prevProp || isAnimationControls(G) || typeof G == "boolean") continue;
-			let zj = checkVariantsDidChange(W.prevProp, G), Bj = zj || U === j && W.isActive && !Rj && Z || _ > H && Z, Vj = !1, Hj = Array.isArray(G) ? G : [G], Uj = Hj.reduce(A(U), {});
-			Lj === !1 && (Uj = {});
-			let { prevResolvedValues: Wj = {} } = W, Gj = {
-				...Wj,
-				...Uj
-			}, Kj = (_) => {
-				Bj = !0, z.has(_) && (Vj = !0, z.delete(_)), W.needsAnimating[_] = !0;
+			let U = reversePriorityOrder[_], W = E[U], G = M[U] === void 0 ? N[U] : M[U], Z = isVariantLabel(G), Yj = U === j ? W.isActive : null;
+			Yj === !1 && (H = _);
+			let Xj = G === N[U] && G !== M[U] && Z;
+			if (Xj && O && n.manuallyAnimateOnMount && (Xj = !1), W.protectedKeys = { ...B }, !W.isActive && Yj === null || !G && !W.prevProp || isAnimationControls(G) || typeof G == "boolean") continue;
+			let Zj = checkVariantsDidChange(W.prevProp, G), Qj = Zj || U === j && W.isActive && !Xj && Z || _ > H && Z, $j = !1, eM = Array.isArray(G) ? G : [G], tM = eM.reduce(A(U), {});
+			Yj === !1 && (tM = {});
+			let { prevResolvedValues: nM = {} } = W, rM = {
+				...nM,
+				...tM
+			}, iM = (_) => {
+				Qj = !0, z.has(_) && ($j = !0, z.delete(_)), W.needsAnimating[_] = !0;
 				let E = n.getValue(_);
 				E && (E.liveStyle = !1);
 			};
-			for (let n in Gj) {
-				let _ = Uj[n], E = Wj[n];
+			for (let n in rM) {
+				let _ = tM[n], E = nM[n];
 				if (B.hasOwnProperty(n)) continue;
 				let O = !1;
-				O = isKeyframesTarget(_) && isKeyframesTarget(E) ? !shallowCompare(_, E) : _ !== E, O ? _ == null ? z.add(n) : Kj(n) : _ !== void 0 && z.has(n) ? Kj(n) : W.protectedKeys[n] = !0;
+				O = isKeyframesTarget(_) && isKeyframesTarget(E) ? !shallowCompare(_, E) : _ !== E, O ? _ == null ? z.add(n) : iM(n) : _ !== void 0 && z.has(n) ? iM(n) : W.protectedKeys[n] = !0;
 			}
-			W.prevProp = G, W.prevResolvedValues = Uj, W.isActive && (B = {
+			W.prevProp = G, W.prevResolvedValues = tM, W.isActive && (B = {
 				...B,
-				...Uj
-			}), O && n.blockInitialAnimation && (Bj = !1);
-			let qj = Rj && zj;
-			Bj && (!qj || Vj) && P.push(...Hj.map((_) => {
+				...tM
+			}), O && n.blockInitialAnimation && (Qj = !1);
+			let aM = Xj && Zj;
+			Qj && (!aM || $j) && P.push(...eM.map((_) => {
 				let E = { type: U };
-				if (typeof _ == "string" && O && !qj && n.manuallyAnimateOnMount && n.parent) {
+				if (typeof _ == "string" && O && !aM && n.manuallyAnimateOnMount && n.parent) {
 					let { parent: O } = n, A = resolveVariant(O, _);
 					if (O.enteringChildren && A) {
 						let { delayChildren: _ } = A.transition || {};
@@ -17553,7 +17554,7 @@ var gestureAnimations = {
 	if (n.id === _.id) return !1;
 	let E = .1;
 	return n.x >= _.x - E && n.x + n.width <= _.x + _.width + E && n.y >= _.y - E && n.y + n.height <= _.y + _.height + E;
-}, measureTextHeight = (n, _, E, O, A = 1.2) => {
+}, measureTextHeight$1 = (n, _, E, O, A = 1.2) => {
 	if (!n) return 0;
 	let j = document.createElement("canvas").getContext("2d");
 	if (!j) return 0;
@@ -17574,7 +17575,7 @@ const processLayout = (n, _) => {
 			let j = n.content;
 			_ && (j = j.replace(/\{\{(.*?)\}\}/g, (E, O) => {
 				let A = _[O.trim()];
-				return A == null ? E : n.formatting ? formatValue(A, n.formatting) : String(A);
+				return A == null ? E : n.formatting ? formatValue$1(A, n.formatting) : String(A);
 			}));
 			let N = parseInt(String(n.style?.fontSize || 16)), P = String(n.style?.fontFamily || "Arial");
 			if (M && n.containerExpansion === "horizontal") {
@@ -17585,7 +17586,7 @@ const processLayout = (n, _) => {
 					O > n.width && (n.width = O, n.content = j);
 				}
 			} else {
-				let _ = measureTextHeight(j, n.width, P, N), M = n.height, z = _ - M;
+				let _ = measureTextHeight$1(j, n.width, P, N), M = n.height, z = _ - M;
 				if (z > 0) {
 					n.height = _, n.content = j;
 					let N = [], P = O.get(n.id);
@@ -17725,7 +17726,7 @@ var getAnimationVariants = (n) => {
 	if (E) {
 		if (n.type === "text" || n.type === "text-container") O = O.replace(/\{\{(.*?)\}\}/g, (_, O) => {
 			let A = E[O.trim()];
-			return A == null ? _ : n.formatting ? formatValue(A, n.formatting) : String(A);
+			return A == null ? _ : n.formatting ? formatValue$1(A, n.formatting) : String(A);
 		});
 		else if (n.type === "image") if (n.dataBinding) {
 			let _ = E[n.dataBinding];
@@ -17950,16 +17951,16 @@ const Preview = () => {
 	});
 };
 var LayersPanel = ({ onOpenSettings: n }) => {
-	let { state: _, selectElement: E, renameElement: O, addToGroup: A, removeFromGroup: j, groupElements: M } = useEditor(), [N, P] = useState({}), [z, B] = useState(!1), [H, U] = useState(null), [W, G] = useState(""), Z = _.elements.filter((n) => n.type === "group"), Lj = /* @__PURE__ */ new Map();
+	let { state: _, selectElement: E, renameElement: O, addToGroup: A, removeFromGroup: j, groupElements: M } = useEditor(), [N, P] = useState({}), [z, B] = useState(!1), [H, U] = useState(null), [W, G] = useState(""), Z = _.elements.filter((n) => n.type === "group"), Yj = /* @__PURE__ */ new Map();
 	Z.forEach((n) => {
-		Lj.set(n.id, _.elements.filter((_) => _.groupId === n.id));
+		Yj.set(n.id, _.elements.filter((_) => _.groupId === n.id));
 	});
-	let Rj = _.elements.filter((n) => n.type !== "group" && !n.groupId), zj = (n) => {
+	let Xj = _.elements.filter((n) => n.type !== "group" && !n.groupId), Zj = (n) => {
 		P((_) => ({
 			..._,
 			[n]: !_[n]
 		}));
-	}, Bj = (O, j = 0) => /* @__PURE__ */ jsx(p, {
+	}, Qj = (O, j = 0) => /* @__PURE__ */ jsx(p, {
 		style: {
 			borderRadius: 6,
 			backgroundColor: _.selectedElementIds.includes(O.id) ? "var(--gray-5)" : "var(--gray-3)",
@@ -18024,9 +18025,9 @@ var LayersPanel = ({ onOpenSettings: n }) => {
 		direction: "column",
 		gap: "2",
 		children: [
-			Rj.map((n) => Bj(n, 0)),
+			Xj.map((n) => Qj(n, 0)),
 			Z.map((_) => {
-				let O = N[_.id] === !0, j = Lj.get(_.id) || [];
+				let O = N[_.id] === !0, j = Yj.get(_.id) || [];
 				return /* @__PURE__ */ jsxs(p, {
 					style: {
 						border: "1px dashed var(--gray-6)",
@@ -18043,7 +18044,7 @@ var LayersPanel = ({ onOpenSettings: n }) => {
 						onClick: () => {
 							E(_.id), n && n(_.id);
 						},
-						onDoubleClick: () => zj(_.id),
+						onDoubleClick: () => Zj(_.id),
 						onDragOver: (n) => {
 							n.preventDefault();
 						},
@@ -18072,7 +18073,7 @@ var LayersPanel = ({ onOpenSettings: n }) => {
 						direction: "column",
 						gap: "2",
 						style: { padding: "6px 8px" },
-						children: [j.map((n) => Bj(n, 1)), j.length === 0 && /* @__PURE__ */ jsx(p$2, {
+						children: [j.map((n) => Qj(n, 1)), j.length === 0 && /* @__PURE__ */ jsx(p$2, {
 							size: "1",
 							color: "gray",
 							children: "Solte elementos aqui para agrupar"
@@ -18132,7 +18133,7 @@ var LayersPanel = ({ onOpenSettings: n }) => {
 		]
 	});
 }, EditorContent = ({ layout: n, initialState: E, onSave: O, theme: A = "light" }) => {
-	let [j, M] = useState(!0), [N, P] = useState(!0), [z, B] = useState(null), [H, U] = useState(!1), { addElement: W, loadState: G, state: Z, undo: Lj, redo: Rj, copy: zj, paste: Bj, removeSelected: Hj, updateElements: Uj } = useEditor(), Wj = React.useRef(null), Gj = () => {
+	let [j, M] = useState(!0), [N, P] = useState(!0), [z, B] = useState(null), [H, U] = useState(!1), { addElement: W, loadState: G, state: Z, undo: Yj, redo: Xj, copy: Zj, paste: Qj, removeSelected: eM, updateElements: tM } = useEditor(), nM = React.useRef(null), rM = () => {
 		let n = {
 			elements: Z.elements,
 			isList: Z.isList,
@@ -18143,9 +18144,9 @@ var LayersPanel = ({ onOpenSettings: n }) => {
 			gridSize: Z.gridSize
 		}, _ = JSON.stringify(n, null, 2), E = new Blob([_], { type: "application/json" }), O = URL.createObjectURL(E), A = document.createElement("a");
 		A.href = O, A.download = `layout-${(/* @__PURE__ */ new Date()).toISOString().slice(0, 10)}.json`, document.body.appendChild(A), A.click(), document.body.removeChild(A), URL.revokeObjectURL(O);
-	}, Jj = () => {
-		Wj.current?.click();
-	}, Yj = (n) => {
+	}, oM = () => {
+		nM.current?.click();
+	}, sM = (n) => {
 		let _ = n.target.files?.[0];
 		if (!_) return;
 		let E = new FileReader();
@@ -18185,11 +18186,11 @@ var LayersPanel = ({ onOpenSettings: n }) => {
 	}, [W]), React.useEffect(() => {
 		let n = (n) => {
 			if (!(document.activeElement?.tagName === "INPUT" || document.activeElement?.tagName === "TEXTAREA" || document.activeElement?.isContentEditable)) {
-				if ((n.ctrlKey || n.metaKey) && n.key === "z") n.shiftKey ? (n.preventDefault(), Rj()) : (n.preventDefault(), Lj());
-				else if ((n.ctrlKey || n.metaKey) && n.key === "y") n.preventDefault(), Rj();
-				else if ((n.ctrlKey || n.metaKey) && n.key === "c") n.preventDefault(), zj();
-				else if ((n.ctrlKey || n.metaKey) && n.key === "v") n.preventDefault(), Bj();
-				else if (n.key === "Delete" || n.key === "Backspace") Z.selectedElementIds.length > 0 && (n.preventDefault(), Hj());
+				if ((n.ctrlKey || n.metaKey) && n.key === "z") n.shiftKey ? (n.preventDefault(), Xj()) : (n.preventDefault(), Yj());
+				else if ((n.ctrlKey || n.metaKey) && n.key === "y") n.preventDefault(), Xj();
+				else if ((n.ctrlKey || n.metaKey) && n.key === "c") n.preventDefault(), Zj();
+				else if ((n.ctrlKey || n.metaKey) && n.key === "v") n.preventDefault(), Qj();
+				else if (n.key === "Delete" || n.key === "Backspace") Z.selectedElementIds.length > 0 && (n.preventDefault(), eM());
 				else if ([
 					"ArrowUp",
 					"ArrowDown",
@@ -18207,20 +18208,20 @@ var LayersPanel = ({ onOpenSettings: n }) => {
 								changes: j
 							});
 						}
-					}), E.length > 0 && Uj(E);
+					}), E.length > 0 && tM(E);
 				}
 			}
 		};
 		return window.addEventListener("keydown", n), () => window.removeEventListener("keydown", n);
 	}, [
-		Lj,
-		Rj,
-		zj,
-		Bj,
-		Hj,
+		Yj,
+		Xj,
+		Zj,
+		Qj,
+		eM,
 		Z.selectedElementIds,
 		Z.elements,
-		Uj
+		tM
 	]), React.useEffect(() => {
 		if (E) try {
 			let n = typeof E == "string" ? JSON.parse(E) : E;
@@ -18229,7 +18230,7 @@ var LayersPanel = ({ onOpenSettings: n }) => {
 			console.error("Failed to load initial state", n);
 		}
 	}, [E, G]);
-	let Xj = (n) => {
+	let cM = (n) => {
 		console.log(`Adding element of type: ${n}`), W({
 			type: n,
 			content: `New ${n}`
@@ -18290,19 +18291,19 @@ var LayersPanel = ({ onOpenSettings: n }) => {
 								style: { width: "240px" },
 								children: [
 									/* @__PURE__ */ jsx(v$3, {
-										onSelect: () => Xj("text"),
+										onSelect: () => cM("text"),
 										children: "Texto"
 									}),
 									/* @__PURE__ */ jsx(v$3, {
-										onSelect: () => Xj("image"),
+										onSelect: () => cM("image"),
 										children: "Imagem"
 									}),
 									/* @__PURE__ */ jsx(v$3, {
-										onSelect: () => Xj("box"),
+										onSelect: () => cM("box"),
 										children: "Caixa (Container)"
 									}),
 									/* @__PURE__ */ jsx(v$3, {
-										onSelect: () => Xj("text-container"),
+										onSelect: () => cM("text-container"),
 										children: "Container com Texto"
 									})
 								]
@@ -18341,7 +18342,7 @@ var LayersPanel = ({ onOpenSettings: n }) => {
 										cursor: "pointer",
 										justifyContent: "center"
 									},
-									onClick: Gj,
+									onClick: rM,
 									children: [/* @__PURE__ */ jsx(DownloadIcon, {}), " Exportar"]
 								}), /* @__PURE__ */ jsxs(o, {
 									variant: "soft",
@@ -18351,16 +18352,16 @@ var LayersPanel = ({ onOpenSettings: n }) => {
 										cursor: "pointer",
 										justifyContent: "center"
 									},
-									onClick: Jj,
+									onClick: oM,
 									children: [/* @__PURE__ */ jsx(UploadIcon, {}), " Importar"]
 								})]
 							}),
 							/* @__PURE__ */ jsx("input", {
 								type: "file",
-								ref: Wj,
+								ref: nM,
 								style: { display: "none" },
 								accept: ".json",
-								onChange: Yj
+								onChange: sM
 							}),
 							/* @__PURE__ */ jsx(p, {
 								mt: "2",
@@ -18546,5 +18547,442 @@ const GenericEditor = (n) => /* @__PURE__ */ jsx(EditorProvider, {
 	availableProps: n.layout.props,
 	theme: n.theme,
 	children: /* @__PURE__ */ jsx(EditorContent, { ...n })
-}), generateHTML = (n, _, E = {}) => Function("elements", "data", "options", getRendererCode() + "\nreturn renderTemplate(elements, data, options);")(n, _, E), getRendererCode = () => "\n/**\n * Render Template\n * @param {Array} elements - The JSON configuration of elements\n * @param {Object|Array} data - The data object to inject (Object for single, Array for list)\n * @param {Object} options - { isList: boolean, listSettings: { sortProp: string, sortOrder: 'asc'|'desc', newestPosition: 'top'|'bottom', scrollDirection: 'up'|'down', containerHeight: number }, canvasHeight: number }\n * @returns {string} - The generated HTML string\n */\nfunction renderTemplate(elements, data, options = {}) {\n    const { isList, listSettings, canvasHeight } = options;\n\n    const measureTextHeight = (text, width, fontFamily, fontSize, lineHeightMultiplier = 1.2) => {\n        if (!text) return 0;\n        try {\n            const canvas = document.createElement('canvas');\n            const context = canvas.getContext('2d');\n            if (!context) return 0;\n            context.font = `${fontSize}px ${fontFamily}`;\n            const words = String(text).split(' ');\n            let line = '';\n            let lineCount = 1;\n            for (let i = 0; i < words.length; i++) {\n                const testLine = line + words[i] + ' ';\n                const metrics = context.measureText(testLine);\n                const testWidth = metrics.width;\n                if (testWidth > width && i > 0) {\n                    line = words[i] + ' ';\n                    lineCount++;\n                } else {\n                    line = testLine;\n                }\n            }\n            const explicitLines = String(text).split('\\n').length - 1;\n            lineCount += explicitLines;\n            return Math.ceil(lineCount * fontSize * lineHeightMultiplier);\n        } catch (_) {\n            return 0;\n        }\n    };\n\n    const computeLayout = (elements, itemData) => {\n        const layoutElements = JSON.parse(JSON.stringify(elements));\n        \n        const isInside = (inner, outer) => {\n             const eps = 0.1;\n             return (\n                 inner.x >= outer.x - eps &&\n                 inner.x + inner.width <= outer.x + outer.width + eps &&\n                 inner.y >= outer.y - eps &&\n                 inner.y + inner.height <= outer.y + outer.height + eps\n             );\n        };\n\n        const autoGrowElements = layoutElements\n            .filter(el => (el.type === 'text' || el.type === 'text-container') && el.autoGrow)\n            .sort((a, b) => a.y - b.y);\n\n        autoGrowElements.forEach(textEl => {\n            let content = textEl.content;\n            content = content.replace(/\\{\\{(.*?)\\}\\}/g, (match, key) => {\n                const val = itemData[key.trim()];\n                return val !== undefined && val !== null ? String(val) : match;\n            });\n            \n            const fontSize = parseInt(String((textEl.style && textEl.style.fontSize) || 16));\n            const fontFamily = String((textEl.style && textEl.style.fontFamily) || 'Arial');\n            \n            const isHorizontal = textEl.type === 'text-container' && textEl.containerExpansion === 'horizontal';\n            \n            if (isHorizontal) {\n                try {\n                    const canvas = document.createElement('canvas');\n                    const context = canvas.getContext('2d');\n                    if (context) {\n                         context.font = `${fontSize}px ${fontFamily}`;\n                         const metrics = context.measureText(content);\n                         const padding = parseInt(String((textEl.style && textEl.style.padding) || 0)) * 2;\n                         const newWidth = Math.ceil(metrics.width + padding);\n                         if (newWidth > textEl.width) {\n                             textEl.width = newWidth;\n                         }\n                    }\n                } catch(e) {}\n            } else {\n                const measuredHeight = measureTextHeight(content, textEl.width, fontFamily, fontSize);\n                const designHeight = textEl.height;\n                const delta = measuredHeight - designHeight;\n                \n                if (delta > 0) {\n                    const originalBottom = textEl.y + designHeight;\n                    const originalTextRect = {\n                        x: textEl.x,\n                        y: textEl.y,\n                        width: textEl.width,\n                        height: designHeight\n                    };\n                    \n                    textEl.height = measuredHeight;\n                    \n                    layoutElements.forEach(other => {\n                        if (other.id === textEl.id) return;\n                        \n                        if (isInside(originalTextRect, other)) {\n                            other.height += delta;\n                        }\n                        \n                        if (other.y >= originalBottom) {\n                            other.y += delta;\n                        }\n                    });\n                }\n            }\n        });\n        \n        let maxY = 0;\n        layoutElements.forEach(el => {\n            const bottom = el.y + el.height;\n            if (bottom > maxY) maxY = bottom;\n        });\n        \n        return { layoutElements, maxY };\n    };\n\n    const computeItemHeight = (elements, itemData, fallbackHeight) => {\n        const { maxY } = computeLayout(elements, itemData);\n        return fallbackHeight ? Math.max(maxY, fallbackHeight) : maxY;\n    };\n\n    const formatValue = (value, formatting) => {\n        if (!formatting || formatting.type === 'text') return value !== undefined && value !== null ? String(value) : '';\n        if (value === undefined || value === null) return '';\n\n        if (formatting.type === 'boolean') {\n             const isTrue = String(value) === 'true' || value === true || (typeof value === 'number' && value > 0);\n             return isTrue ? (formatting.trueLabel || 'Sim') : (formatting.falseLabel || 'Não');\n        }\n\n        if (formatting.type === 'date') {\n            try {\n                const date = new Date(value);\n                if (isNaN(date.getTime())) return String(value);\n                \n                if (formatting.dateFormat) {\n                     const d = date.getDate().toString().padStart(2, '0');\n                     const m = (date.getMonth() + 1).toString().padStart(2, '0');\n                     const y = date.getFullYear();\n                     const H = date.getHours().toString().padStart(2, '0');\n                     const M = date.getMinutes().toString().padStart(2, '0');\n                     const S = date.getSeconds().toString().padStart(2, '0');\n                     \n                     return formatting.dateFormat\n                        .replace('DD', d)\n                        .replace('MM', m)\n                        .replace('YYYY', String(y))\n                        .replace('HH', H)\n                        .replace('mm', M)\n                        .replace('ss', S);\n                }\n                return date.toLocaleDateString();\n            } catch (e) { return String(value); }\n        }\n\n        if (formatting.type === 'number') {\n             const num = parseFloat(value);\n             if (isNaN(num)) return String(value);\n             \n             if (formatting.numberFormat === 'currency') {\n                 return (formatting.currencySymbol || 'R$') + ' ' + num.toFixed(formatting.decimalPlaces || 2);\n             }\n             if (formatting.numberFormat === 'percent') {\n                 return num.toFixed(formatting.decimalPlaces || 0) + '%';\n             }\n             if (formatting.decimalPlaces !== undefined) {\n                 return num.toFixed(formatting.decimalPlaces);\n             }\n             return num.toFixed(formatting.decimalPlaces || 0);\n        }\n        \n        return String(value);\n    };\n\n    const checkCondition = (propValue, operator, ruleValue) => {\n        const val = String(propValue).toLowerCase();\n        const target = String(ruleValue).toLowerCase();\n        \n        switch (operator) {\n            case 'equals': return val === target;\n            case 'notEquals': return val !== target;\n            case 'contains': return val.includes(target);\n            case 'greaterThan': return parseFloat(val) > parseFloat(target);\n            case 'lessThan': return parseFloat(val) < parseFloat(target);\n            case 'truthy': return !!propValue;\n            case 'falsy': return !propValue;\n            default: return false;\n        }\n    };\n\n    const camelToKebab = (string) => {\n        return string.replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, '$1-$2').toLowerCase();\n    };\n\n    const hex8ToRgba = (hex) => {\n        const m = /^#([0-9a-fA-F]{8})$/.exec(hex);\n        if (!m) return hex;\n        const h = m[1];\n        const r = parseInt(h.slice(0, 2), 16);\n        const g = parseInt(h.slice(2, 4), 16);\n        const b = parseInt(h.slice(4, 6), 16);\n        const a = parseInt(h.slice(6, 8), 16) / 255;\n        return `rgba(${r}, ${g}, ${b}, ${a})`;\n    };\n\n    const styleObjectToString = (style) => {\n        if (!style) return '';\n        const pxProps = [\n            'width', 'height', 'top', 'left', 'right', 'bottom', \n            'fontSize', 'borderRadius', 'padding', 'margin', 'borderWidth',\n            'borderTopLeftRadius', 'borderTopRightRadius', 'borderBottomRightRadius', 'borderBottomLeftRadius'\n        ];\n        \n        return Object.entries(style)\n            .map(([key, value]) => {\n                if (value === undefined || value === null) return '';\n                const cssKey = camelToKebab(key);\n                let cssValue = (typeof value === 'number' && pxProps.includes(key)) ? value + 'px' : value;\n                if (typeof cssValue === 'string') {\n                    if (/^#([0-9a-fA-F]{8})$/.test(cssValue)) {\n                        cssValue = hex8ToRgba(cssValue);\n                    }\n                }\n                return `${cssKey}: ${cssValue}`;\n            })\n            .filter(Boolean)\n            .join('; ');\n    };\n\n    const getAnimationStyles = (anim) => {\n        if (!anim || anim.type === 'none') return {};\n        return {\n            animationName: anim.type,\n            animationDuration: (anim.duration || 1) + 's',\n            animationDelay: (anim.delay || 0) + 's',\n            animationIterationCount: anim.iterationCount || 1,\n            animationTimingFunction: anim.timingFunction || 'ease',\n            animationFillMode: 'both'\n        };\n    };\n\n    const keyframesCss = `\n    @keyframes slideIn {\n                from { opacity: 0; transform: translateY(20px); }\n                to { opacity: 1; transform: translateY(0); }\n    }\n    @keyframes fadeIn { \n        from { opacity: 0; } \n        to { opacity: 1; } \n    }\n    @keyframes slideInLeft { \n        from { opacity: 0; transform: translateX(-50px); } \n        to { opacity: 1; transform: translateX(0); } \n    }\n    @keyframes slideInRight { \n        from { opacity: 0; transform: translateX(50px); } \n        to { opacity: 1; transform: translateX(0); } \n    }\n    @keyframes slideInUp { \n        from { opacity: 0; transform: translateY(50px); } \n        to { opacity: 1; transform: translateY(0); } \n    }\n    @keyframes slideInDown { \n        from { opacity: 0; transform: translateY(-50px); } \n        to { opacity: 1; transform: translateY(0); } \n    }\n    @keyframes zoomIn { \n        from { opacity: 0; transform: scale(0.5); } \n        to { opacity: 1; transform: scale(1); } \n    }\n    @keyframes bounceIn {\n        0% { opacity: 0; transform: scale(0.3); }\n        50% { opacity: 1; transform: scale(1.05); }\n        70% { transform: scale(0.9); }\n        100% { transform: scale(1); }\n    }\n    @keyframes pulse {\n        0% { transform: scale(1); }\n        50% { transform: scale(1.05); }\n        100% { transform: scale(1); }\n    }\n    @keyframes shake {\n        0%, 100% { transform: translateX(0); }\n        10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }\n        20%, 40%, 60%, 80% { transform: translateX(5px); }\n    }\n    @keyframes spin { \n        from { transform: rotate(0deg); } \n        to { transform: rotate(360deg); } \n    }\n    \n    /* Improved / Smoother Animations */\n    @keyframes smoothSlideUp {\n        0% { opacity: 0; transform: translateY(30px); }\n        100% { opacity: 1; transform: translateY(0); }\n    }\n    @keyframes popIn {\n        0% { opacity: 0; transform: scale(0.8) translateY(10px); }\n        100% { opacity: 1; transform: scale(1) translateY(0); }\n    }\n    @keyframes blurIn {\n        0% { opacity: 0; filter: blur(10px); }\n        100% { opacity: 1; filter: blur(0); }\n    }\n    `;\n\n    const renderItem = (itemData, index = 0, offsetY = 0) => {\n        const { layoutElements } = computeLayout(elements, itemData);\n        return layoutElements.map(element => {\n            let content = element.content;\n            let imgSrc = '';\n\n            // Resolve Content & Formatting\n            if (element.type === 'text' || element.type === 'text-container') {\n                content = content.replace(/\\{\\{(.*?)\\}\\}/g, (match, key) => {\n                    const val = itemData[key.trim()];\n                    if (val === undefined || val === null) return match;\n                    if (element.formatting) {\n                        return formatValue(val, element.formatting);\n                    }\n                    return String(val);\n                });\n            } else if (element.type === 'image') {\n                 if (element.dataBinding) {\n                    const val = itemData[element.dataBinding];\n                    if (val !== undefined && val !== null) {\n                        imgSrc = String(val);\n                    } else {\n                        imgSrc = content;\n                    }\n                 } else {\n                     imgSrc = content.replace(/\\{\\{(.*?)\\}\\}/g, (match, key) => {\n                        const val = itemData[key.trim()];\n                        return val !== undefined && val !== null ? String(val) : match;\n                    });\n                 }\n            }\n\n            // Resolve Conditional Styles\n            let conditionalStyles = {};\n            if (element.conditions) {\n                element.conditions.forEach(rule => {\n                    const propVal = itemData[rule.property];\n                    if (checkCondition(propVal, rule.operator, rule.value)) {\n                         conditionalStyles = { ...conditionalStyles, ...rule.style };\n                    }\n                });\n            }\n\n            // Resolve Style Bindings\n            let bindingStyles = {};\n            if (element.styleBindings) {\n                Object.entries(element.styleBindings).forEach(([styleProp, variableName]) => {\n                    const val = itemData[variableName];\n                    if (val !== undefined && val !== null) {\n                        bindingStyles[styleProp] = String(val);\n                    }\n                });\n            }\n\n            const baseStyle = {\n                position: 'absolute',\n                left: element.x,\n                top: element.y + offsetY,\n                width: element.width,\n                height: element.autoGrow ? 'auto' : element.height,\n                transform: element.rotation ? `rotate(${element.rotation}deg)` : undefined,\n                overflow: element.autoGrow ? 'visible' : 'hidden',\n                whiteSpace: (element.type === 'text-container' && element.autoGrow && element.containerExpansion === 'horizontal') ? 'nowrap' : (element.autoGrow ? 'pre-wrap' : undefined),\n                wordBreak: element.autoGrow ? 'break-word' : undefined,\n                ...element.style,\n                ...conditionalStyles,\n                ...bindingStyles\n            };\n            \n            if (element.type === 'text' && !baseStyle.padding) {\n                // baseStyle.padding = '8px'; // Removed default padding to respect resize box\n            }\n            \n            const styleString = styleObjectToString(baseStyle);\n\n            if (element.type === 'text' || element.type === 'text-container') {\n                return `<div style=\"${styleString}\">${content}</div>`;\n            } else if (element.type === 'image') {\n                const imgStyle = styleObjectToString({\n                    width: '100%',\n                    height: '100%',\n                    objectFit: element.style?.objectFit || 'cover',\n                    display: 'block'\n                });\n                return `<div style=\"${styleString}\"><img src=\"${imgSrc}\" alt=\"Element\" style=\"${imgStyle}\" /></div>`;\n            } else if (element.type === 'box') {\n                return `<div style=\"${styleString}\"></div>`;\n            } else if (element.type === 'checkbox') {\n                let isChecked = false;\n                if (element.dataBinding) {\n                    const val = itemData[element.dataBinding];\n                    isChecked = val === true || String(val) === 'true';\n                }\n                const checkboxStyle = styleObjectToString({\n                    ...baseStyle,\n                    display: 'flex',\n                    alignItems: 'center',\n                    justifyContent: 'center'\n                });\n                return `<div style=\"${checkboxStyle}\"><input type=\"checkbox\" ${isChecked ? 'checked' : ''} disabled style=\"width:100%;height:100%;margin:0;\" /></div>`;\n            }\n            return '';\n        }).join('\\n');\n    };\n\n    if (isList && Array.isArray(data)) {\n        // Calculate per-item height respecting autoGrow\n        // Sort data\n        let listData = [...data];\n        if (listSettings && listSettings.sortProp) {\n            const prop = listSettings.sortProp;\n            const order = listSettings.sortOrder === 'asc' ? 1 : -1;\n            listData.sort((a, b) => {\n                const valA = a[prop];\n                const valB = b[prop];\n                if (valA < valB) return -1 * order;\n                if (valA > valB) return 1 * order;\n                return 0;\n            });\n        }\n\n        // Handle newest position\n        if (listSettings && listSettings.newestPosition === 'top') {\n            listData.reverse();\n        }\n\n        // Generate HTML for all items\n        const itemsHtml = listData.map((item, index) => {\n            const itemHtml = renderItem(item, index, 0);\n            const itemHeight = computeItemHeight(elements, item, canvasHeight);\n            const itemContainerStyle = styleObjectToString({\n                position: 'relative',\n                height: itemHeight,\n                width: '100%'\n            });\n\n            return `<div class=\"list-item\" style=\"${itemContainerStyle}\">${itemHtml}</div>`;\n        }).join('\\n');\n\n        // Animation Styles based on settings\n        const scrollDirection = (listSettings && listSettings.scrollDirection) || 'down';\n        const containerHeight = (listSettings && listSettings.containerHeight) ? listSettings.containerHeight + 'px' : '100%';\n        \n        const justify = (listSettings && listSettings.newestPosition === 'top') ? 'flex-start' : 'flex-end';\n\n        // Entry Animation from settings\n        const entryAnim = listSettings && listSettings.entryAnimation ? listSettings.entryAnimation : { type: 'slideIn', duration: 0.3, timingFunction: 'ease-out' };\n        const entryAnimName = entryAnim.type === 'none' ? 'none' : entryAnim.type;\n        const entryAnimDuration = entryAnim.duration + 's';\n        const entryAnimTiming = entryAnim.timingFunction || 'ease-out';\n\n        const animationCss = `\n            ${keyframesCss}\n\n            .list-wrapper {\n                display: flex;\n                flex-direction: column;\n                justify-content: ${justify};\n                height: ${containerHeight};\n                width: 100%;\n                overflow-y: auto;\n                overflow-x: hidden;\n                box-sizing: border-box;\n                padding: 10px;\n            }\n            .list-item {\n                flex-shrink: 0;\n                animation: ${entryAnimName} ${entryAnimDuration} ${entryAnimTiming};\n                margin-bottom: 10px;\n                width: 100%;\n                position: relative;\n            }\n        `;\n        \n        const scrollScript = scrollDirection === 'up' \n            ? `<script>\n                document.addEventListener('DOMContentLoaded', () => {\n                    const wrapper = document.querySelector('.list-wrapper');\n                    if(wrapper) wrapper.scrollTop = wrapper.scrollHeight;\n                });\n               <\/script>`\n            : '';\n\n        // Inject Smart Script for Dynamic Updates\n        const injectionScript = `\n            <script>\n            (function() {\n                try {\n                    const elements = ${JSON.stringify(elements)};\n                    const formatValue = ${formatValue.toString()};\n                    const checkCondition = ${checkCondition.toString()};\n                    const camelToKebab = ${camelToKebab.toString()};\n                    const hex8ToRgba = ${hex8ToRgba.toString()};\n                    const styleObjectToString = ${styleObjectToString.toString()};\n                    const getAnimationStyles = ${getAnimationStyles.toString()};\n                    const renderItem = ${renderItem.toString()};\n\n                    const measureTextHeight = ${measureTextHeight.toString()};\n                    const computeLayout = ${computeLayout.toString()};\n                    const computeItemHeight = ${computeItemHeight.toString()};\n                    const itemHeightFallback = ${canvasHeight || 0};\n                    const newestPosition = \"${(listSettings && listSettings.newestPosition) || 'bottom'}\";\n                    const scrollDirection = \"${(listSettings && listSettings.scrollDirection) || 'down'}\";\n\n                    window.addItem = function(data) {\n                        const wrapper = document.querySelector('.list-wrapper');\n                        if (!wrapper) return;\n\n                        const itemHtml = renderItem(data, 0, 0);\n                        const itemHeight = computeItemHeight(elements, data, itemHeightFallback);\n                        const itemContainerStyle = styleObjectToString({\n                            position: 'relative',\n                            height: itemHeight,\n                            width: '100%'\n                        });\n\n                        const div = document.createElement('div');\n                        div.className = 'list-item';\n                        div.setAttribute('style', itemContainerStyle);\n                        div.innerHTML = itemHtml;\n\n                        if (newestPosition === 'top') {\n                            wrapper.insertBefore(div, wrapper.firstChild);\n                        } else {\n                            wrapper.appendChild(div);\n                        }\n                        \n                        if (scrollDirection === 'up') {\n                           wrapper.scrollTop = wrapper.scrollHeight;\n                        }\n                    };\n                } catch(e) { console.error(\"Smart List Init Error\", e); }\n            })();\n            <\/script>\n        `;\n\n        return `\n            <style>${animationCss}</style>\n            <div class=\"list-wrapper\">\n                ${itemsHtml}\n            </div>\n            ${scrollScript}\n            ${injectionScript}\n        `;\n    }\n\n    // Single Item\n    const contentHtml = renderItem(data);\n    return `<div style=\"position: relative; width: 100%; height: 100%; overflow: hidden;\">${contentHtml}</div>`;\n}\n";
+});
+var camelToKebab = (n) => n.replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, "$1-$2").toLowerCase(), hex8ToRgba = (n) => {
+	let _ = /^#([0-9a-fA-F]{8})$/.exec(n);
+	if (!_) return n;
+	let E = _[1];
+	return `rgba(${parseInt(E.slice(0, 2), 16)}, ${parseInt(E.slice(2, 4), 16)}, ${parseInt(E.slice(4, 6), 16)}, ${parseInt(E.slice(6, 8), 16) / 255})`;
+}, styleObjectToString = (n) => {
+	if (!n) return "";
+	let _ = [
+		"width",
+		"height",
+		"top",
+		"left",
+		"right",
+		"bottom",
+		"fontSize",
+		"borderRadius",
+		"padding",
+		"margin",
+		"borderWidth",
+		"borderTopLeftRadius",
+		"borderTopRightRadius",
+		"borderBottomRightRadius",
+		"borderBottomLeftRadius",
+		"minHeight",
+		"maxHeight",
+		"minWidth",
+		"maxWidth"
+	];
+	return Object.entries(n).map(([n, E]) => {
+		if (E == null) return "";
+		let O = camelToKebab(n), A = typeof E == "number" && _.includes(n) ? E + "px" : E;
+		return typeof A == "string" && /^#([0-9a-fA-F]{8})$/.test(A) && (A = hex8ToRgba(A)), `${O}: ${A}`;
+	}).filter(Boolean).join("; ");
+}, measureTextHeight = (n, _, E, O, A = 1.2) => {
+	if (!n) return 0;
+	try {
+		let j = document.createElement("canvas").getContext("2d");
+		if (!j) return 0;
+		j.font = `${O}px ${E}`;
+		let M = String(n).split("\n"), N = 0;
+		for (let n of M) {
+			let E = n.split(" "), O = "";
+			if (E.length === 1 && E[0] === "") {
+				N++;
+				continue;
+			}
+			for (let n = 0; n < E.length; n++) {
+				let A = E[n], M = j.measureText(A).width;
+				if (M > _) {
+					O.trim().length > 0 && (N++, O = ""), N += Math.ceil(M / _);
+					continue;
+				}
+				let P = O + A + " ";
+				j.measureText(P).width > _ && O.trim().length > 0 ? (N++, O = A + " ") : O = P;
+			}
+			O.length > 0 && N++;
+		}
+		return Math.ceil(N * O * A);
+	} catch {
+		return 0;
+	}
+}, checkCondition = (n, _, E) => {
+	let O = String(n).toLowerCase(), A = String(E).toLowerCase();
+	switch (_) {
+		case "equals": return O === A;
+		case "notEquals": return O !== A;
+		case "contains": return O.includes(A);
+		case "greaterThan": return parseFloat(O) > parseFloat(A);
+		case "lessThan": return parseFloat(O) < parseFloat(A);
+		case "truthy": return !!n;
+		case "falsy": return !n;
+		default: return !1;
+	}
+}, formatValue = (n, _) => {
+	if (!_ || _.type === "text") return n == null ? "" : String(n);
+	if (n == null) return "";
+	if (_.type === "boolean") return String(n) === "true" || n === !0 || typeof n == "number" && n > 0 ? _.trueLabel || "Sim" : _.falseLabel || "Não";
+	if (_.type === "date") try {
+		let E = new Date(n);
+		if (isNaN(E.getTime())) return String(n);
+		if (_.dateFormat) {
+			let n = E.getDate().toString().padStart(2, "0"), O = (E.getMonth() + 1).toString().padStart(2, "0"), A = E.getFullYear(), j = E.getHours().toString().padStart(2, "0"), M = E.getMinutes().toString().padStart(2, "0"), N = E.getSeconds().toString().padStart(2, "0");
+			return _.dateFormat.replace("DD", n).replace("MM", O).replace("YYYY", String(A)).replace("HH", j).replace("mm", M).replace("ss", N);
+		}
+		return E.toLocaleDateString();
+	} catch {
+		return String(n);
+	}
+	if (_.type === "number") {
+		let E = parseFloat(n);
+		return isNaN(E) ? String(n) : _.numberFormat === "currency" ? (_.currencySymbol || "R$") + " " + E.toFixed(_.decimalPlaces || 2) : _.numberFormat === "percent" ? E.toFixed(_.decimalPlaces || 0) + "%" : E.toFixed(_.decimalPlaces || 0);
+	}
+	return String(n);
+}, computeLayout = (n, _) => {
+	let E = JSON.parse(JSON.stringify(n));
+	E.forEach((n) => {
+		n._originalY = n.y, n._originalHeight = n.height;
+	});
+	let O = (n, _) => {
+		let E = .1;
+		return n.x >= _.x - E && n.x + n.width <= _.x + _.width + E && n.y >= _.y - E && n.y + n.height <= _.y + _.height + E;
+	};
+	E.filter((n) => (n.type === "text" || n.type === "text-container") && n.autoGrow).sort((n, _) => n.y - _.y).forEach((n) => {
+		let A = n.content;
+		A = A.replace(/\{\{(.*?)\}\}/g, (n, E) => {
+			let O = _[E.trim()];
+			return O == null ? n : String(O);
+		});
+		let j = parseInt(String(n.style && n.style.fontSize || 16)), M = String(n.style && n.style.fontFamily || "Arial");
+		if (n.type === "text-container" && n.containerExpansion === "horizontal") try {
+			let _ = document.createElement("canvas").getContext("2d");
+			if (_) {
+				_.font = `${j}px ${M}`;
+				let E = _.measureText(A), O = parseInt(String(n.style && n.style.padding || 0)) * 2, N = Math.ceil(E.width + O);
+				N > n.width && (n.width = N);
+			}
+		} catch {}
+		else {
+			let _ = 0, N = parseInt(String(n.style && n.style.padding || 0)), P = Math.max(1, n.width - N * 2), z = /<([a-z]+)([^>]*?)>/i.exec(A);
+			if (z) {
+				let n = z[2], E = /height=["']?(\d+)["']?/i.exec(n), O = /height:\s*(\d+)px/i.exec(n);
+				_ = E ? parseInt(E[1]) : O ? parseInt(O[1]) : measureTextHeight(A, P, M, j);
+			} else _ = measureTextHeight(A, P, M, j);
+			let B = _ + N * 2;
+			(!z || z && !_) && (B += 4);
+			let H = parseInt(String(n.style && n.style.minHeight || 0)), U = Math.max(B, H), W = n.height, G = U - W;
+			if (G > 0) {
+				let _ = n.y + W, A = {
+					x: n.x,
+					y: n.y,
+					width: n.width,
+					height: W
+				};
+				n.height = U, E.forEach((E) => {
+					if (E.id !== n.id) {
+						if (O(A, E)) {
+							E.height += G;
+							return;
+						}
+						E.y >= _ && Math.max(0, Math.min(n.x + n.width, E.x + E.width) - Math.max(n.x, E.x)) > 0 && (E.y += G);
+					}
+				});
+			}
+		}
+	});
+	let A = 0;
+	return E.forEach((n) => {
+		let _ = n.y + n.height;
+		_ > A && (A = _);
+	}), {
+		layoutElements: E,
+		maxY: A
+	};
+}, computeItemHeight = (n, _, E) => {
+	let { maxY: O } = computeLayout(n, _);
+	return E ? Math.max(O, E) : O;
+}, vanillaRenderItem = (n, _, E = 0, O = 0) => {
+	let { layoutElements: A } = computeLayout(n, _), j = A, M = (n) => {
+		let E = n.content, O = "";
+		if (n.type === "text" || n.type === "text-container") E = E.replace(/\{\{(.*?)\}\}/g, (E, O) => {
+			let A = _[O.trim()];
+			return A == null ? E : n.formatting ? formatValue(A, n.formatting) : String(A);
+		});
+		else if (n.type === "image") if (n.dataBinding) {
+			let A = _[n.dataBinding];
+			O = A == null ? E : String(A);
+		} else O = E.replace(/\{\{(.*?)\}\}/g, (n, E) => {
+			let O = _[E.trim()];
+			return O == null ? n : String(O);
+		});
+		let A = {};
+		n.conditions && n.conditions.forEach((n) => {
+			let E = _[n.property];
+			checkCondition(E, n.operator, n.value) && (A = {
+				...A,
+				...n.style
+			});
+		});
+		let j = {};
+		n.styleBindings && Object.entries(n.styleBindings).forEach(([n, E]) => {
+			let O = _[E];
+			O != null && (j[n] = String(O));
+		});
+		let M = {
+			width: n.width,
+			height: n.autoGrow ? "auto" : n.height,
+			transform: n.rotation ? `rotate(${n.rotation}deg)` : void 0,
+			overflow: n.autoGrow ? "visible" : "hidden",
+			whiteSpace: n.type === "text-container" && n.autoGrow && n.containerExpansion === "horizontal" ? "nowrap" : n.autoGrow ? "pre-wrap" : void 0,
+			wordBreak: n.autoGrow ? "break-word" : void 0,
+			...n.style,
+			...A,
+			...j
+		};
+		return {
+			content: E,
+			imgSrc: O,
+			baseStyle: M
+		};
+	}, N = (n, E, O, A) => {
+		if (n.type === "text" || n.type === "text-container") return `<div style="${E}">${O}</div>`;
+		if (n.type === "image") return `<div style="${E}"><img src="${A}" alt="Element" style="${styleObjectToString({
+			width: "100%",
+			height: "100%",
+			objectFit: n.style?.objectFit || "cover",
+			display: "block"
+		})}" /></div>`;
+		if (n.type === "box") return `<div style="${E}"></div>`;
+		if (n.type === "checkbox") {
+			let O = !1;
+			if (n.dataBinding) {
+				let E = _[n.dataBinding];
+				O = E === !0 || String(E) === "true";
+			}
+			return `<div style="${E}; display: flex; align-items: center; justify-content: center;"><input type="checkbox" ${O ? "checked" : ""} disabled style="width:100%;height:100%;margin:0;" /></div>`;
+		}
+		return "";
+	};
+	return j.map((n) => {
+		let { content: _, imgSrc: E, baseStyle: A } = M(n);
+		return N(n, styleObjectToString({
+			...A,
+			position: "absolute",
+			left: n.x,
+			top: n.y + O
+		}), _, E);
+	}).join("\n");
+}, ElementRenderer = ({ element: n, itemData: _ }) => {
+	let E = n.content, O = "";
+	if (n.type === "text" || n.type === "text-container") E = E.replace(/\{\{(.*?)\}\}/g, (E, O) => {
+		let A = _[O.trim()];
+		return A == null ? E : n.formatting ? formatValue(A, n.formatting) : String(A);
+	});
+	else if (n.type === "image") if (n.dataBinding) {
+		let A = _[n.dataBinding];
+		O = A == null ? E : String(A);
+	} else O = E.replace(/\{\{(.*?)\}\}/g, (n, E) => {
+		let O = _[E.trim()];
+		return O == null ? n : String(O);
+	});
+	let A = {};
+	n.conditions && n.conditions.forEach((n) => {
+		let E = _[n.property];
+		checkCondition(E, n.operator, n.value) && (A = {
+			...A,
+			...n.style
+		});
+	});
+	let j = {};
+	n.styleBindings && Object.entries(n.styleBindings).forEach(([n, E]) => {
+		let O = _[E];
+		O != null && (j[n] = String(O));
+	});
+	let M = {
+		position: "absolute",
+		left: n.x,
+		top: n.y,
+		width: n.width,
+		height: n.autoGrow ? "auto" : n.height,
+		transform: n.rotation ? `rotate(${n.rotation}deg)` : void 0,
+		overflow: n.autoGrow ? "visible" : "hidden",
+		whiteSpace: n.type === "text-container" && n.autoGrow && n.containerExpansion === "horizontal" ? "nowrap" : n.autoGrow ? "pre-wrap" : void 0,
+		wordBreak: n.autoGrow ? "break-word" : void 0,
+		...n.style,
+		...A,
+		...j
+	};
+	if (n.type === "text" || n.type === "text-container") return /<[a-z][\s\S]*>/i.test(E) ? /* @__PURE__ */ jsx("div", {
+		style: M,
+		dangerouslySetInnerHTML: { __html: E }
+	}) : /* @__PURE__ */ jsx("div", {
+		style: M,
+		children: E
+	});
+	if (n.type === "image") {
+		let _ = {
+			width: "100%",
+			height: "100%",
+			objectFit: n.style?.objectFit || "cover",
+			display: "block"
+		};
+		return /* @__PURE__ */ jsx("div", {
+			style: M,
+			children: /* @__PURE__ */ jsx("img", {
+				src: O,
+				alt: "Element",
+				style: _
+			})
+		});
+	} else if (n.type === "box") return /* @__PURE__ */ jsx("div", { style: M });
+	else if (n.type === "checkbox") {
+		let E = !1;
+		if (n.dataBinding) {
+			let O = _[n.dataBinding];
+			E = O === !0 || String(O) === "true";
+		}
+		return /* @__PURE__ */ jsx("div", {
+			style: {
+				...M,
+				display: "flex",
+				alignItems: "center",
+				justifyContent: "center"
+			},
+			children: /* @__PURE__ */ jsx("input", {
+				type: "checkbox",
+				checked: E,
+				disabled: !0,
+				style: {
+					width: "100%",
+					height: "100%",
+					margin: 0
+				}
+			})
+		});
+	}
+	return null;
+}, HtmlDocument = ({ elements: n, data: _, options: E }) => {
+	let { isList: O, listSettings: A } = E;
+	if (O && Array.isArray(_)) {
+		let O = [..._];
+		if (A?.sortProp) {
+			let n = A.sortProp, _ = A.sortOrder === "asc" ? 1 : -1;
+			O.sort((E, O) => (E[n] < O[n] ? -1 : 1) * _);
+		}
+		A?.newestPosition === "top" && O.reverse();
+		let j = A?.newestPosition === "top" ? "flex-start" : "flex-end", M = A?.entryAnimation || {
+			type: "slideIn",
+			duration: .3
+		}, N = M.type === "none" ? "none" : M.type, P = M.duration + "s", z = M.timingFunction || "ease-out", B = {
+			display: "flex",
+			flexDirection: "column",
+			justifyContent: j,
+			height: A?.containerHeight ? A.containerHeight + "px" : "100%",
+			width: "100%",
+			overflowY: "auto",
+			overflowX: "hidden",
+			boxSizing: "border-box",
+			padding: "10px"
+		};
+		return /* @__PURE__ */ jsxs(Fragment$1, { children: [
+			/* @__PURE__ */ jsx("style", { dangerouslySetInnerHTML: { __html: "\n    @keyframes slideIn {\n                from { opacity: 0; transform: translateY(20px); }\n                to { opacity: 1; transform: translateY(0); }\n    }\n    @keyframes fadeIn { \n        from { opacity: 0; } \n        to { opacity: 1; } \n    }\n    @keyframes slideInLeft { \n        from { opacity: 0; transform: translateX(-50px); } \n        to { opacity: 1; transform: translateX(0); } \n    }\n    @keyframes slideInRight { \n        from { opacity: 0; transform: translateX(50px); } \n        to { opacity: 1; transform: translateX(0); } \n    }\n    @keyframes slideInUp { \n        from { opacity: 0; transform: translateY(50px); } \n        to { opacity: 1; transform: translateY(0); } \n    }\n    @keyframes slideInDown { \n        from { opacity: 0; transform: translateY(-50px); } \n        to { opacity: 1; transform: translateY(0); } \n    }\n    @keyframes zoomIn { \n        from { opacity: 0; transform: scale(0.5); } \n        to { opacity: 1; transform: scale(1); } \n    }\n    @keyframes bounceIn {\n        0% { opacity: 0; transform: scale(0.3); }\n        50% { opacity: 1; transform: scale(1.05); }\n        70% { transform: scale(0.9); }\n        100% { transform: scale(1); }\n    }\n    @keyframes pulse {\n        0% { transform: scale(1); }\n        50% { transform: scale(1.05); }\n        100% { transform: scale(1); }\n    }\n    @keyframes shake {\n        0%, 100% { transform: translateX(0); }\n        10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }\n        20%, 40%, 60%, 80% { transform: translateX(5px); }\n    }\n    @keyframes spin { \n        from { transform: rotate(0deg); } \n        to { transform: rotate(360deg); } \n    }\n    \n    /* Improved / Smoother Animations */\n    @keyframes smoothSlideUp {\n        0% { opacity: 0; transform: translateY(30px); }\n        100% { opacity: 1; transform: translateY(0); }\n    }\n    @keyframes popIn {\n        0% { opacity: 0; transform: scale(0.8) translateY(10px); }\n        100% { opacity: 1; transform: scale(1) translateY(0); }\n    }\n    @keyframes blurIn {\n        0% { opacity: 0; filter: blur(10px); }\n        100% { opacity: 1; filter: blur(0); }\n    }\n        .list-wrapper::-webkit-scrollbar { width: 6px; }\n        .list-wrapper::-webkit-scrollbar-thumb { background-color: rgba(0,0,0,0.2); border-radius: 3px; }\n    " } }),
+			/* @__PURE__ */ jsx("div", {
+				className: "list-wrapper",
+				style: B,
+				children: O.map((_, O) => /* @__PURE__ */ jsx("div", {
+					className: "list-item",
+					style: {
+						position: "relative",
+						minHeight: computeItemHeight(n, _, E.canvasHeight || 0),
+						width: "100%",
+						flexShrink: 0,
+						animation: `${N} ${P} ${z}`,
+						marginBottom: "10px"
+					},
+					children: (() => {
+						let { layoutElements: E } = computeLayout(n, _);
+						return /* @__PURE__ */ jsx(Fragment$1, { children: E.map((n) => /* @__PURE__ */ jsx(ElementRenderer, {
+							element: n,
+							itemData: _
+						}, n.id)) });
+					})()
+				}, O))
+			}),
+			A?.scrollDirection === "up" && /* @__PURE__ */ jsx("script", { dangerouslySetInnerHTML: { __html: "document.addEventListener('DOMContentLoaded', () => { const w = document.querySelector('.list-wrapper'); if(w) w.scrollTop = w.scrollHeight; });" } })
+		] });
+	}
+	let { layoutElements: j } = computeLayout(n, _);
+	return /* @__PURE__ */ jsx("div", {
+		style: {
+			position: "relative",
+			width: "100%",
+			height: "100%",
+			overflow: "hidden"
+		},
+		children: j.map((n) => /* @__PURE__ */ jsx(ElementRenderer, {
+			element: n,
+			itemData: _
+		}, n.id))
+	});
+};
+const generateHTML = (n, _, E = {}) => renderToStaticMarkup(/* @__PURE__ */ jsx(HtmlDocument, {
+	elements: n,
+	data: _,
+	options: E
+})) + (E.isList ? getRuntimeScript(n, E) : "");
+var getRuntimeScript = (n, _) => `
+    <script>
+    (function() {
+        try {
+            const elements = ${JSON.stringify(n)};
+            
+            // Helper functions definitions
+            const camelToKebab = ${camelToKebab.toString()};
+            const hex8ToRgba = ${hex8ToRgba.toString()};
+            const styleObjectToString = ${styleObjectToString.toString()};
+            const measureTextHeight = ${measureTextHeight.toString()};
+            const checkCondition = ${checkCondition.toString()};
+            const formatValue = ${formatValue.toString()};
+            const computeLayout = ${computeLayout.toString()};
+            const computeItemHeight = ${computeItemHeight.toString()};
+            const renderItem = ${vanillaRenderItem.toString()};
+            
+            const itemHeightFallback = ${_.canvasHeight || 0};
+            const newestPosition = "${_.listSettings && _.listSettings.newestPosition || "bottom"}";
+            const scrollDirection = "${_.listSettings && _.listSettings.scrollDirection || "down"}";
+
+            window.addItem = function(data) {
+                const wrapper = document.querySelector('.list-wrapper');
+                if (!wrapper) return;
+
+                const itemHtml = renderItem(elements, data, 0, 0);
+                const itemHeight = computeItemHeight(elements, data, itemHeightFallback);
+                const itemContainerStyle = styleObjectToString({
+                    position: 'relative',
+                    minHeight: itemHeight,
+                    width: '100%'
+                });
+
+                const div = document.createElement('div');
+                div.className = 'list-item';
+                div.setAttribute('style', itemContainerStyle);
+                div.innerHTML = itemHtml;
+
+                if (newestPosition === 'top') {
+                    wrapper.insertBefore(div, wrapper.firstChild);
+                } else {
+                    wrapper.appendChild(div);
+                }
+                
+                if (scrollDirection === 'up') {
+                   wrapper.scrollTop = wrapper.scrollHeight;
+                }
+            };
+        } catch(e) { console.error("Smart List Init Error", e); }
+    })();
+    <\/script>
+    `;
 export { GenericEditor as EditorContent, generateHTML };
