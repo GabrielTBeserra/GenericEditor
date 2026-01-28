@@ -406,6 +406,7 @@ const EditorContent: React.FC<EditorProps> = ({ layout, initialState, onSave, th
                                             <DropdownMenu.Item onSelect={() => handleAddElement('text')}>Texto</DropdownMenu.Item>
                                             <DropdownMenu.Item onSelect={() => handleAddElement('image')}>Imagem</DropdownMenu.Item>
                                             <DropdownMenu.Item onSelect={() => handleAddElement('box')}>Caixa (Container)</DropdownMenu.Item>
+                                            <DropdownMenu.Item onSelect={() => handleAddElement('text-container')}>Container com Texto</DropdownMenu.Item>
                                         </DropdownMenu.Content>
                                     </DropdownMenu.Root>
 

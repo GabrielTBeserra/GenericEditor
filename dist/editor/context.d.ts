@@ -25,7 +25,7 @@ export interface IElementAnimation {
 }
 export interface IElement {
     id: string;
-    type: 'text' | 'image' | 'box' | 'group';
+    type: 'text' | 'image' | 'box' | 'group' | 'text-container';
     name?: string;
     groupId?: string;
     content: string;
@@ -39,6 +39,7 @@ export interface IElement {
     formatting?: IElementFormatting;
     conditions?: IElementCondition[];
     autoGrow?: boolean;
+    containerExpansion?: 'vertical' | 'horizontal';
     animation?: IElementAnimation;
     styleBindings?: Record<string, string>;
 }
@@ -69,10 +70,28 @@ interface IEditorState {
     historyIndex: number;
     clipboard: IElement[];
     gridSize: number;
+    zoom: number;
+    pan: {
+        x: number;
+        y: number;
+    };
+    snapLines: {
+        orientation: 'horizontal' | 'vertical';
+        position: number;
+    }[];
 }
 interface IEditorContext {
     state: IEditorState;
     setGridSize: (size: number) => void;
+    setZoom: (zoom: number) => void;
+    setPan: (pan: {
+        x: number;
+        y: number;
+    }) => void;
+    setSnapLines: (lines: {
+        orientation: 'horizontal' | 'vertical';
+        position: number;
+    }[]) => void;
     addElement: (element: Omit<IElement, 'id' | 'x' | 'y' | 'width' | 'height'> & Partial<Pick<IElement, 'x' | 'y' | 'width' | 'height'>>) => void;
     removeElement: (id: string) => void;
     removeSelected: () => void;

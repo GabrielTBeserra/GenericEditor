@@ -125,7 +125,7 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
     const handleSaveBinding = () => {
         const propName = tempBinding;
         const updates: Partial<IElement> = { dataBinding: propName };
-        if (element.type === 'text') {
+        if (element.type === 'text' || element.type === 'text-container') {
             updates.content = `{{${propName}}}`;
         }
         updateElement(element.id, updates);
@@ -315,7 +315,7 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                                                     className="ContextMenuItem"
                                                     onSelect={() => {
                                                         const updates: Partial<IElement> = { dataBinding: prop.dataName };
-                                                        if (element.type === 'text') {
+                                                        if (element.type === 'text' || element.type === 'text-container' || element.type === 'image') {
                                                             updates.content = `{{${prop.dataName}}}`;
                                                         }
                                                         updateElement(element.id, updates);
@@ -351,7 +351,7 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                         <ContextMenu.Separator className="ContextMenuSeparator" />
 
                         {/* Text Specific Actions */}
-                        {element.type === 'text' && (
+                        {(element.type === 'text' || element.type === 'text-container') && (
                             <>
                                 <ContextMenu.Item className="ContextMenuItem" onSelect={handleOpenEditContent}>
                                     Editar Texto...
@@ -460,7 +460,7 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                         <ContextMenu.Separator className="ContextMenuSeparator" />
 
                         {/* Text Styling */}
-                        {element.type === 'text' && (
+                        {(element.type === 'text' || element.type === 'text-container') && (
                             <>
                                 <ContextMenu.Sub>
                                     <ContextMenu.SubTrigger className="ContextMenuSubTrigger">

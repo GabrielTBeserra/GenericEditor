@@ -29,7 +29,7 @@ export interface IElementAnimation {
 
 export interface IElement {
     id: string;
-    type: 'text' | 'image' | 'box' | 'group';
+    type: 'text' | 'image' | 'box' | 'group' | 'text-container';
     name?: string;
     groupId?: string;
     content: string;
@@ -43,6 +43,7 @@ export interface IElement {
     formatting?: IElementFormatting;
     conditions?: IElementCondition[];
     autoGrow?: boolean;
+    containerExpansion?: 'vertical' | 'horizontal';
     animation?: IElementAnimation;
     styleBindings?: Record<string, string>; // propName -> variableName
 }
@@ -76,11 +77,17 @@ interface IEditorState {
     historyIndex: number;
     clipboard: IElement[];
     gridSize: number; // 0 to disable
+    zoom: number;
+    pan: { x: number, y: number };
+    snapLines: { orientation: 'horizontal' | 'vertical', position: number }[];
 }
 
 interface IEditorContext {
     state: IEditorState;
     setGridSize: (size: number) => void;
+    setZoom: (zoom: number) => void;
+    setPan: (pan: { x: number, y: number }) => void;
+    setSnapLines: (lines: { orientation: 'horizontal' | 'vertical', position: number }[]) => void;
     addElement: (element: Omit<IElement, 'id' | 'x' | 'y' | 'width' | 'height'> & Partial<Pick<IElement, 'x' | 'y' | 'width' | 'height'>>) => void;
     removeElement: (id: string) => void;
     removeSelected: () => void;
@@ -136,7 +143,10 @@ export const EditorProvider: React.FC<{ children: ReactNode; isList?: boolean; a
         history: [[]],
         historyIndex: 0,
         clipboard: [],
-        gridSize: 0
+        gridSize: 0,
+        zoom: 1,
+        pan: { x: 0, y: 0 },
+        snapLines: []
     });
 
     // Load fonts
@@ -166,6 +176,18 @@ export const EditorProvider: React.FC<{ children: ReactNode; isList?: boolean; a
 
     const setGridSize = React.useCallback((size: number) => {
         setState(prev => ({ ...prev, gridSize: size }));
+    }, []);
+
+    const setZoom = React.useCallback((zoom: number) => {
+        setState(prev => ({ ...prev, zoom }));
+    }, []);
+
+    const setPan = React.useCallback((pan: { x: number, y: number }) => {
+        setState(prev => ({ ...prev, pan }));
+    }, []);
+
+    const setSnapLines = React.useCallback((lines: { orientation: 'horizontal' | 'vertical', position: number }[]) => {
+        setState(prev => ({ ...prev, snapLines: lines }));
     }, []);
 
     const loadState = React.useCallback((savedState: Partial<IEditorState>) => {
@@ -258,6 +280,14 @@ export const EditorProvider: React.FC<{ children: ReactNode; isList?: boolean; a
         const defaultStyles: React.CSSProperties = {};
         if (element.type === 'box') {
             defaultStyles.backgroundColor = 'var(--gray-4)';
+        }
+        if (element.type === 'text-container') {
+            defaultStyles.backgroundColor = 'var(--gray-4)';
+            defaultStyles.border = '1px solid var(--gray-8)';
+            defaultStyles.padding = '8px';
+            defaultStyles.display = 'flex';
+            defaultStyles.alignItems = 'flex-start';
+            defaultStyles.justifyContent = 'flex-start';
         }
 
         const newElement: IElement = {
@@ -691,8 +721,11 @@ export const EditorProvider: React.FC<{ children: ReactNode; isList?: boolean; a
         redo,
         copy,
         paste,
-        setGridSize
-    }), [state, addElement, removeElement, removeSelected, selectElement, setSelectedElements, moveElement, updateElement, updateElements, groupElements, ungroupElements, renameElement, addToGroup, removeFromGroup, resizeGroup, setMockData, updateListSettings, setCanvasHeight, loadState, undo, redo, copy, paste, setGridSize]);
+        setGridSize,
+        setZoom,
+        setPan,
+        setSnapLines
+    }), [state, addElement, removeElement, removeSelected, selectElement, setSelectedElements, moveElement, updateElement, updateElements, groupElements, ungroupElements, renameElement, addToGroup, removeFromGroup, resizeGroup, setMockData, updateListSettings, setCanvasHeight, loadState, undo, redo, copy, paste, setGridSize, setZoom, setPan, setSnapLines]);
 
     return (
         <EditorContext.Provider value={contextValue}>

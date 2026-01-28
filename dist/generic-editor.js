@@ -8644,7 +8644,13 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 		history: [[]],
 		historyIndex: 0,
 		clipboard: [],
-		gridSize: 0
+		gridSize: 0,
+		zoom: 1,
+		pan: {
+			x: 0,
+			y: 0
+		},
+		snapLines: []
 	});
 	React.useEffect(() => {
 		j.availableFonts.forEach((n) => {
@@ -8678,6 +8684,21 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 			gridSize: n
 		}));
 	}, []), z = React.useCallback((n) => {
+		M((_) => ({
+			..._,
+			zoom: n
+		}));
+	}, []), B = React.useCallback((n) => {
+		M((_) => ({
+			..._,
+			pan: n
+		}));
+	}, []), H = React.useCallback((n) => {
+		M((_) => ({
+			..._,
+			snapLines: n
+		}));
+	}, []), U = React.useCallback((n) => {
 		M((_) => {
 			let E = n.elements || _.elements;
 			return {
@@ -8692,7 +8713,7 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				clipboard: []
 			};
 		});
-	}, []), B = React.useCallback(() => {
+	}, []), W = React.useCallback(() => {
 		M((n) => {
 			if (n.historyIndex > 0) {
 				let _ = n.historyIndex - 1;
@@ -8705,7 +8726,7 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 			}
 			return n;
 		});
-	}, []), H = React.useCallback(() => {
+	}, []), G = React.useCallback(() => {
 		M((n) => {
 			if (n.historyIndex < n.history.length - 1) {
 				let _ = n.historyIndex + 1;
@@ -8718,7 +8739,7 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 			}
 			return n;
 		});
-	}, []), U = React.useCallback(() => {
+	}, []), Z = React.useCallback(() => {
 		M((n) => {
 			if (n.selectedElementIds.length > 0) {
 				let _ = n.elements.filter((_) => n.selectedElementIds.includes(_.id));
@@ -8729,7 +8750,7 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 			}
 			return n;
 		});
-	}, []), W = React.useCallback(() => {
+	}, []), Lj = React.useCallback(() => {
 		M((n) => {
 			if (n.clipboard.length > 0) {
 				let _ = n.clipboard.map((n) => ({
@@ -8748,9 +8769,9 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 			}
 			return n;
 		});
-	}, []), G = React.useCallback((n) => {
+	}, []), Rj = React.useCallback((n) => {
 		let _ = {};
-		n.type === "box" && (_.backgroundColor = "var(--gray-4)");
+		n.type === "box" && (_.backgroundColor = "var(--gray-4)"), n.type === "text-container" && (_.backgroundColor = "var(--gray-4)", _.border = "1px solid var(--gray-8)", _.padding = "8px", _.display = "flex", _.alignItems = "flex-start", _.justifyContent = "flex-start");
 		let E = {
 			id: crypto.randomUUID(),
 			x: 50,
@@ -8773,7 +8794,7 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				selectedElementIds: [E.id]
 			};
 		});
-	}, []), Z = React.useCallback((n) => {
+	}, []), zj = React.useCallback((n) => {
 		M((_) => {
 			let E = _.elements.filter((_) => _.id !== n), O = _.history.slice(0, _.historyIndex + 1);
 			return O.push(E), {
@@ -8784,7 +8805,7 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				historyIndex: O.length - 1
 			};
 		});
-	}, []), Lj = React.useCallback(() => {
+	}, []), Bj = React.useCallback(() => {
 		M((n) => {
 			if (n.selectedElementIds.length === 0) return n;
 			let _ = n.elements.filter((_) => !n.selectedElementIds.includes(_.id)), E = n.history.slice(0, n.historyIndex + 1);
@@ -8796,7 +8817,7 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				historyIndex: E.length - 1
 			};
 		});
-	}, []), Rj = React.useCallback((n, _ = !1) => {
+	}, []), Hj = React.useCallback((n, _ = !1) => {
 		M((E) => {
 			if (n === null) return {
 				...E,
@@ -8813,12 +8834,12 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				selectedElementIds: [n]
 			};
 		});
-	}, []), zj = React.useCallback((n) => {
+	}, []), Uj = React.useCallback((n) => {
 		M((_) => ({
 			..._,
 			selectedElementIds: n
 		}));
-	}, []), Bj = React.useCallback((n, _) => {
+	}, []), Wj = React.useCallback((n, _) => {
 		M((E) => {
 			let O = [...E.elements], A = O[n];
 			O.splice(n, 1), O.splice(_, 0, A);
@@ -8830,7 +8851,7 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				historyIndex: j.length - 1
 			};
 		});
-	}, []), Hj = React.useCallback((n, _, E = !0) => {
+	}, []), Gj = React.useCallback((n, _, E = !0) => {
 		M((O) => {
 			let A = O.elements.map((E) => E.id === n ? {
 				...E,
@@ -8843,7 +8864,7 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				historyIndex: M
 			};
 		});
-	}, []), Uj = React.useCallback((n, _ = !0) => {
+	}, []), qj = React.useCallback((n, _ = !0) => {
 		M((E) => {
 			let O = [...E.elements], A = [], j = /* @__PURE__ */ new Set();
 			n.forEach(({ id: n, changes: _ }) => {
@@ -8897,7 +8918,7 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				historyIndex: P
 			};
 		});
-	}, []), Wj = React.useCallback((n) => {
+	}, []), Jj = React.useCallback((n) => {
 		M((_) => {
 			let E = _.elements.filter((_) => n.includes(_.id));
 			if (E.length === 0) return _;
@@ -8925,7 +8946,7 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				historyIndex: z.length - 1
 			};
 		});
-	}, []), Gj = React.useCallback((n) => {
+	}, []), Yj = React.useCallback((n) => {
 		M((_) => {
 			let E = _.elements.find((_) => _.id === n);
 			if (!E || E.type !== "group") return _;
@@ -8941,7 +8962,7 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				historyIndex: j.length - 1
 			};
 		});
-	}, []), qj = React.useCallback((n, _) => {
+	}, []), Xj = React.useCallback((n, _) => {
 		M((E) => {
 			let O = E.elements.map((E) => E.id === n ? {
 				...E,
@@ -8952,7 +8973,7 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				elements: O
 			};
 		});
-	}, []), Jj = React.useCallback((n, _) => {
+	}, []), Zj = React.useCallback((n, _) => {
 		if (!n.find((n) => n.id === _ && n.type === "group")) return n;
 		let E = n.filter((n) => n.groupId === _);
 		if (E.length === 0) return n;
@@ -8964,7 +8985,7 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 			width: j - O,
 			height: M - A
 		} : n);
-	}, []), Yj = React.useCallback((n, _) => {
+	}, []), Qj = React.useCallback((n, _) => {
 		M((E) => {
 			let O = E.elements.find((_) => _.id === n), A = E.elements.find((n) => n.id === _ && n.type === "group");
 			if (!O || !A) return E;
@@ -8972,7 +8993,7 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				...E,
 				groupId: _
 			} : E);
-			j = Jj(j, _);
+			j = Zj(j, _);
 			let M = E.history.slice(0, E.historyIndex + 1);
 			return M.push(j), {
 				...E,
@@ -8981,7 +9002,7 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				historyIndex: M.length - 1
 			};
 		});
-	}, [Jj]), Xj = React.useCallback((n) => {
+	}, [Zj]), $j = React.useCallback((n) => {
 		M((_) => {
 			let E = _.elements.find((_) => _.id === n);
 			if (!E || !E.groupId) return _;
@@ -8989,7 +9010,7 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				..._,
 				groupId: void 0
 			} : _);
-			A = Jj(A, O);
+			A = Zj(A, O);
 			let j = _.history.slice(0, _.historyIndex + 1);
 			return j.push(A), {
 				..._,
@@ -8998,7 +9019,7 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				historyIndex: j.length - 1
 			};
 		});
-	}, [Jj]), Zj = React.useCallback((n, _, E) => {
+	}, [Zj]), eM = React.useCallback((n, _, E) => {
 		M((O) => {
 			let A = O.elements.find((_) => _.id === n && _.type === "group");
 			if (!A) return O;
@@ -9027,13 +9048,13 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				historyIndex: B.length - 1
 			};
 		});
-	}, []), Qj = React.useCallback((n, _) => {
+	}, []), tM = React.useCallback((n, _) => {
 		M((E) => ({
 			...E,
 			mockData: n,
 			singleMockData: _
 		}));
-	}, []), $j = React.useCallback((n) => {
+	}, []), nM = React.useCallback((n) => {
 		M((_) => ({
 			..._,
 			listSettings: {
@@ -9041,36 +9062,36 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				...n
 			}
 		}));
-	}, []), eM = React.useMemo(() => ({
+	}, []), rM = React.useMemo(() => ({
 		state: j,
-		addElement: G,
-		removeElement: Z,
-		removeSelected: Lj,
-		selectElement: Rj,
-		setSelectedElements: zj,
-		moveElement: Bj,
-		updateElement: Hj,
-		updateElements: Uj,
-		groupElements: Wj,
-		ungroupElements: Gj,
-		renameElement: qj,
-		addToGroup: Yj,
-		removeFromGroup: Xj,
-		resizeGroup: Zj,
-		setMockData: Qj,
-		updateListSettings: $j,
+		addElement: Rj,
+		removeElement: zj,
+		removeSelected: Bj,
+		selectElement: Hj,
+		setSelectedElements: Uj,
+		moveElement: Wj,
+		updateElement: Gj,
+		updateElements: qj,
+		groupElements: Jj,
+		ungroupElements: Yj,
+		renameElement: Xj,
+		addToGroup: Qj,
+		removeFromGroup: $j,
+		resizeGroup: eM,
+		setMockData: tM,
+		updateListSettings: nM,
 		setCanvasHeight: N,
-		loadState: z,
-		undo: B,
-		redo: H,
-		copy: U,
-		paste: W,
-		setGridSize: P
+		loadState: U,
+		undo: W,
+		redo: G,
+		copy: Z,
+		paste: Lj,
+		setGridSize: P,
+		setZoom: z,
+		setPan: B,
+		setSnapLines: H
 	}), [
 		j,
-		G,
-		Z,
-		Lj,
 		Rj,
 		zj,
 		Bj,
@@ -9079,21 +9100,27 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 		Wj,
 		Gj,
 		qj,
+		Jj,
 		Yj,
 		Xj,
-		Zj,
 		Qj,
 		$j,
+		eM,
+		tM,
+		nM,
 		N,
-		z,
-		B,
-		H,
 		U,
 		W,
-		P
+		G,
+		Z,
+		Lj,
+		P,
+		z,
+		B,
+		H
 	]);
 	return /* @__PURE__ */ jsx(EditorContext.Provider, {
-		value: eM,
+		value: rM,
 		children: n
 	});
 }, useEditor = () => {
@@ -10442,21 +10469,53 @@ var AnimationSettings = ({ element: n, updateElement: _ }) => {
 				color: "gray",
 				children: "Configure como os dados serão exibidos quando substituídos."
 			}),
-			n.type === "text" && /* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsxs(p$1, {
-				align: "center",
-				gap: "2",
-				mb: "3",
-				children: [/* @__PURE__ */ jsx(i, {
-					checked: n.autoGrow || !1,
-					onCheckedChange: (E) => _(n.id, { autoGrow: E })
-				}), /* @__PURE__ */ jsx(p$2, {
-					size: "2",
-					children: "Expandir altura automaticamente (Multilinha)"
-				})]
-			}), /* @__PURE__ */ jsx(o$2, {
-				size: "4",
-				mb: "3"
-			})] }),
+			(n.type === "text" || n.type === "text-container") && /* @__PURE__ */ jsxs(p, { children: [
+				/* @__PURE__ */ jsxs(p$1, {
+					align: "center",
+					gap: "2",
+					mb: "3",
+					children: [/* @__PURE__ */ jsx(i, {
+						checked: n.autoGrow || !1,
+						onCheckedChange: (E) => _(n.id, { autoGrow: E })
+					}), /* @__PURE__ */ jsx(p$2, {
+						size: "2",
+						children: n.type === "text-container" ? "Expandir container automaticamente" : "Expandir altura automaticamente (Multilinha)"
+					})]
+				}),
+				n.type === "text-container" && n.autoGrow && /* @__PURE__ */ jsxs(p, {
+					mb: "3",
+					ml: "4",
+					children: [/* @__PURE__ */ jsx(p$2, {
+						size: "1",
+						mb: "1",
+						as: "div",
+						children: "Direção de Expansão"
+					}), /* @__PURE__ */ jsxs("select", {
+						value: n.containerExpansion || "vertical",
+						onChange: (E) => _(n.id, { containerExpansion: E.target.value }),
+						style: {
+							width: "100%",
+							padding: "6px",
+							borderRadius: "4px",
+							border: "1px solid var(--gray-6)",
+							backgroundColor: "var(--color-panel-solid)",
+							color: "var(--gray-12)",
+							fontSize: "14px"
+						},
+						children: [/* @__PURE__ */ jsx("option", {
+							value: "vertical",
+							children: "Vertical (Altura Cresce)"
+						}), /* @__PURE__ */ jsx("option", {
+							value: "horizontal",
+							children: "Horizontal (Largura Cresce)"
+						})]
+					})]
+				}),
+				/* @__PURE__ */ jsx(o$2, {
+					size: "4",
+					mb: "3"
+				})
+			] }),
 			/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
 				size: "1",
 				mb: "1",
@@ -11290,7 +11349,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 							}) }), /* @__PURE__ */ jsx(o, {
 								onClick: () => {
 									let n = aM, O = { dataBinding: n };
-									_.type === "text" && (O.content = `{{${n}}}`), E(_.id, O), zj(!1);
+									(_.type === "text" || _.type === "text-container") && (O.content = `{{${n}}}`), E(_.id, O), zj(!1);
 								},
 								children: "Vincular"
 							})]
@@ -11426,7 +11485,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 							className: "ContextMenuItem",
 							onSelect: () => {
 								let O = { dataBinding: n.dataName };
-								_.type === "text" && (O.content = `{{${n.dataName}}}`), E(_.id, O);
+								(_.type === "text" || _.type === "text-container") && (O.content = `{{${n.dataName}}}`), E(_.id, O);
 							},
 							children: [
 								n.name,
@@ -11453,7 +11512,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 					]
 				}) })] }),
 				/* @__PURE__ */ jsx(Separator2$1, { className: "ContextMenuSeparator" }),
-				_.type === "text" && /* @__PURE__ */ jsxs(Fragment$1, { children: [/* @__PURE__ */ jsx(Item2$1, {
+				(_.type === "text" || _.type === "text-container") && /* @__PURE__ */ jsxs(Fragment$1, { children: [/* @__PURE__ */ jsx(Item2$1, {
 					className: "ContextMenuItem",
 					onSelect: () => {
 						iM(_.content), Lj(!0);
@@ -11571,7 +11630,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 					})]
 				}) })] }),
 				/* @__PURE__ */ jsx(Separator2$1, { className: "ContextMenuSeparator" }),
-				_.type === "text" && /* @__PURE__ */ jsxs(Fragment$1, { children: [
+				(_.type === "text" || _.type === "text-container") && /* @__PURE__ */ jsxs(Fragment$1, { children: [
 					/* @__PURE__ */ jsxs(Sub2$1, { children: [/* @__PURE__ */ jsxs(SubTrigger2$1, {
 						className: "ContextMenuSubTrigger",
 						children: ["Fonte", /* @__PURE__ */ jsx("div", {
@@ -11838,58 +11897,58 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 		}) })] })
 	] });
 }, DraggableElement = React.memo(({ element: n, isSelected: _ }) => {
-	let { selectElement: E, updateElement: O, updateElements: A, state: j, resizeGroup: M } = useEditor(), [N, P] = useState(!1), [z, B] = useState(!1), H = useRef({
+	let { selectElement: E, updateElement: O, updateElements: A, state: j, resizeGroup: M, setSnapLines: N } = useEditor(), [P, z] = useState(!1), [B, H] = useState(!1), [U, G] = useState(!1), Z = useRef(null), Lj = useRef({
 		x: 0,
 		y: 0
-	}), U = useRef({}), G = useRef(!1), Z = useRef(!1), Lj = useRef(0), Rj = useRef(0), zj = useRef({
+	}), Rj = useRef({}), zj = useRef(!1), Hj = useRef(!1), Uj = useRef(0), Wj = useRef(0), Gj = useRef({
 		x: 0,
 		y: 0
-	}), Hj = useRef(!1), Uj = j.canvasHeight || 150, Wj = j.isList ? j.mockData.length > 0 ? j.mockData[0] : null : j.singleMockData, Gj = n.content, Jj = {};
-	if (Wj) {
-		if (n.type === "text") Gj = Gj.replace(/\{\{(.*?)\}\}/g, (_, E) => {
-			let O = Wj[E.trim()];
+	}), Jj = useRef(!1), Yj = j.canvasHeight || 150, Xj = j.isList ? j.mockData.length > 0 ? j.mockData[0] : null : j.singleMockData, Zj = n.content, Qj = {};
+	if (Xj) {
+		if (n.type === "text" || n.type === "text-container") Zj = Zj.replace(/\{\{(.*?)\}\}/g, (_, E) => {
+			let O = Xj[E.trim()];
 			return O == null ? _ : n.formatting ? formatValue(O, n.formatting) : String(O);
 		});
 		else if (n.type === "image") if (n.dataBinding) {
-			let _ = Wj[n.dataBinding];
-			_ != null && (Gj = String(_));
-		} else Gj = Gj.replace(/\{\{(.*?)\}\}/g, (n, _) => {
-			let E = Wj[_.trim()];
+			let _ = Xj[n.dataBinding];
+			_ != null && (Zj = String(_));
+		} else Zj = Zj.replace(/\{\{(.*?)\}\}/g, (n, _) => {
+			let E = Xj[_.trim()];
 			return E == null ? n : String(E);
 		});
 		n.styleBindings && Object.entries(n.styleBindings).forEach(([n, _]) => {
-			let E = Wj[_];
-			E != null && (Jj = {
-				...Jj,
+			let E = Xj[_];
+			E != null && (Qj = {
+				...Qj,
 				[n]: String(E)
 			});
 		}), n.conditions && n.conditions.forEach((n) => {
-			let _ = Wj[n.property];
-			checkCondition(_, n.operator, n.value) && (Jj = {
-				...Jj,
+			let _ = Xj[n.property];
+			checkCondition(_, n.operator, n.value) && (Qj = {
+				...Qj,
 				...n.style
 			});
 		});
 	}
-	let Yj = Jj.display === "none";
-	if (Yj && _) {
-		let { display: n, ..._ } = Jj;
-		Jj = _;
+	let $j = Qj.display === "none";
+	if ($j && _) {
+		let { display: n, ..._ } = Qj;
+		Qj = _;
 	}
-	let Xj = (_) => {
-		_.stopPropagation(), !G.current && !Z.current && !N && (_.shiftKey ? E(n.id, !0) : E(n.id, !1));
-	}, Zj = (O) => {
+	let eM = (_) => {
+		_.stopPropagation(), !zj.current && !Hj.current && !P && (_.shiftKey ? E(n.id, !0) : E(n.id, !1));
+	}, tM = (O) => {
 		if (O.button !== 0) return;
 		O.stopPropagation();
 		let A = O.shiftKey;
-		if (G.current = !1, Z.current = !1, n.groupId && !_) {
+		if (zj.current = !1, Hj.current = !1, n.groupId && !_) {
 			E(n.groupId, A);
 			return;
 		}
-		_ || (E(n.id, A), Z.current = !0), P(!0), H.current = {
+		_ || (E(n.id, A), Hj.current = !0), z(!0), Lj.current = {
 			x: O.clientX,
 			y: O.clientY
-		};
+		}, O.currentTarget.setPointerCapture(O.pointerId);
 		let M = new Set(j.selectedElementIds);
 		_ || (A || M.clear(), M.add(n.id));
 		let N = {};
@@ -11898,55 +11957,107 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 				x: n.x,
 				y: n.y
 			});
-		}), U.current = N;
-	}, Qj = (_) => {
-		_.stopPropagation(), _.preventDefault(), B(!0);
+		}), Rj.current = N;
+	}, nM = (_) => {
+		if (P) {
+			let E = j.zoom || 1, O = (_.clientX - Lj.current.x) / E, M = (_.clientY - Lj.current.y) / E;
+			(Math.abs(O) > 2 || Math.abs(M) > 2) && (zj.current = !0);
+			let P = 5 / E, z = [], B = Object.entries(Rj.current).map(([_, E]) => {
+				let A = E.x + O, N = E.y + M;
+				if (j.gridSize > 0) A = Math.round(A / j.gridSize) * j.gridSize, N = Math.round(N / j.gridSize) * j.gridSize;
+				else {
+					let E = !1, O = !1, M = n.width ?? 100, B = n.height ?? 100;
+					Object.keys(Rj.current).length === 1 && j.elements.forEach((n) => {
+						if (n.id === _) return;
+						let j = n.width ?? 100, H = n.height ?? 100;
+						E || (Math.abs(A - n.x) < P ? (A = n.x, E = !0, z.push({
+							orientation: "vertical",
+							position: n.x
+						})) : Math.abs(A - (n.x + j)) < P ? (A = n.x + j, E = !0, z.push({
+							orientation: "vertical",
+							position: n.x + j
+						})) : Math.abs(A + M - n.x) < P ? (A = n.x - M, E = !0, z.push({
+							orientation: "vertical",
+							position: n.x
+						})) : Math.abs(A + M - (n.x + j)) < P && (A = n.x + j - M, E = !0, z.push({
+							orientation: "vertical",
+							position: n.x + j
+						}))), O || (Math.abs(N - n.y) < P ? (N = n.y, O = !0, z.push({
+							orientation: "horizontal",
+							position: n.y
+						})) : Math.abs(N - (n.y + H)) < P ? (N = n.y + H, O = !0, z.push({
+							orientation: "horizontal",
+							position: n.y + H
+						})) : Math.abs(N + B - n.y) < P ? (N = n.y - B, O = !0, z.push({
+							orientation: "horizontal",
+							position: n.y
+						})) : Math.abs(N + B - (n.y + H)) < P && (N = n.y + H - B, O = !0, z.push({
+							orientation: "horizontal",
+							position: n.y + H
+						})));
+					});
+				}
+				return j.isList && (N = Math.max(0, N)), {
+					id: _,
+					changes: {
+						x: A,
+						y: N
+					}
+				};
+			});
+			N && N(z), A(B, !1);
+		}
+	}, rM = (n) => {
+		P && (z(!1), n.currentTarget.releasePointerCapture(n.pointerId), A([], !0), N && N([]));
+	}, iM = (_) => {
+		_.stopPropagation(), _.preventDefault(), G(!0);
 		let E = _.target.closest(".resizable-element");
 		if (E) {
 			let O = E.getBoundingClientRect();
-			zj.current = {
+			Gj.current = {
 				x: O.left + O.width / 2,
 				y: O.top + O.height / 2
 			};
-			let A = _.clientX - zj.current.x, j = _.clientY - zj.current.y;
-			Lj.current = Math.atan2(j, A) * (180 / Math.PI), Rj.current = n.rotation || 0;
+			let A = _.clientX - Gj.current.x, j = _.clientY - Gj.current.y;
+			Uj.current = Math.atan2(j, A) * (180 / Math.PI), Wj.current = n.rotation || 0;
 		}
 	};
 	useEffect(() => {
 		let _ = (_) => {
-			if (N) {
-				let n = _.clientX - H.current.x, E = _.clientY - H.current.y;
-				(Math.abs(n) > 2 || Math.abs(E) > 2) && (G.current = !0), A(Object.entries(U.current).map(([_, O]) => {
-					let A = O.x + n, M = O.y + E;
-					return j.gridSize > 0 && (A = Math.round(A / j.gridSize) * j.gridSize, M = Math.round(M / j.gridSize) * j.gridSize), j.isList && (M = Math.max(0, M)), {
-						id: _,
-						changes: {
-							x: A,
-							y: M
-						}
-					};
-				}), !1);
-			}
-			if (z) {
-				let E = _.clientX - zj.current.x, A = _.clientY - zj.current.y, j = Math.atan2(A, E) * (180 / Math.PI) - Lj.current, M = (Rj.current + j) % 360;
+			if (U) {
+				let E = _.clientX - Gj.current.x, A = _.clientY - Gj.current.y, j = Math.atan2(A, E) * (180 / Math.PI) - Uj.current, M = (Wj.current + j) % 360;
 				O(n.id, { rotation: M }, !1);
 			}
 		}, E = () => {
-			N && (P(!1), A([], !0)), z && (B(!1), O(n.id, { rotation: n.rotation }, !0));
+			U && (G(!1), O(n.id, { rotation: n.rotation }, !0));
 		};
-		return (N || z) && (window.addEventListener("mousemove", _), window.addEventListener("mouseup", E)), () => {
+		return U && (window.addEventListener("mousemove", _), window.addEventListener("mouseup", E)), () => {
 			window.removeEventListener("mousemove", _), window.removeEventListener("mouseup", E);
 		};
 	}, [
-		N,
-		z,
+		U,
 		n.id,
 		O,
-		A,
-		j.isList,
-		j.selectedElementIds
+		n.rotation
+	]), useEffect(() => {
+		n.type === "text-container" && n.autoGrow && n.containerExpansion === "horizontal" && requestAnimationFrame(() => {
+			if (Z.current) {
+				let _ = Z.current.scrollWidth;
+				Math.abs(_ - (n.width ?? 0)) > 2 && O(n.id, { width: _ }, !1);
+			}
+		});
+	}, [
+		Zj,
+		n.autoGrow,
+		n.containerExpansion,
+		n.style,
+		n.width,
+		n.formatting,
+		O,
+		n.id,
+		n.type
 	]);
-	let $j = {
+	let aM = {
 		position: "absolute",
 		left: 0,
 		top: 0,
@@ -11954,16 +12065,16 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 		height: n.autoGrow ? "auto" : "100%",
 		minHeight: n.autoGrow ? "100%" : void 0,
 		padding: n.type === "image" || n.type === "text" ? 0 : "8px",
-		border: _ ? "2px solid var(--accent-9)" : "1px dashed transparent",
-		outline: _ ? "none" : "1px solid transparent",
-		cursor: N ? "grabbing" : "grab",
+		border: _ || B ? "2px solid var(--accent-9)" : "1px dashed transparent",
+		outline: _ || B ? "none" : "1px solid transparent",
+		cursor: P ? "grabbing" : "grab",
 		borderRadius: "var(--radius-2)",
 		overflow: n.autoGrow ? "visible" : "hidden",
 		whiteSpace: n.autoGrow ? "pre-wrap" : void 0,
 		wordBreak: n.autoGrow ? "break-word" : void 0,
 		userSelect: "none",
 		...n.style,
-		...Jj
+		...Qj
 	};
 	return /* @__PURE__ */ jsx(Resizable, {
 		className: "resizable-element",
@@ -11971,11 +12082,12 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 			width: n.width ?? 100,
 			height: n.autoGrow ? "auto" : n.height ?? 100
 		},
-		maxHeight: j.isList ? Math.max(10, Uj - n.y) : void 0,
+		maxHeight: j.isList ? Math.max(10, Yj - n.y) : void 0,
 		onResizeStart: (n) => {
-			Hj.current = !!n.shiftKey;
+			H(!0), Jj.current = !!n.shiftKey;
 		},
 		onResizeStop: (_, E, A, j) => {
+			H(!1);
 			let N = (n.width ?? 100) + j.width, P = (n.height ?? 100) + j.height;
 			n.type === "group" ? M(n.id, N, P) : O(n.id, {
 				width: N,
@@ -11986,8 +12098,10 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 			position: "absolute",
 			transform: `translate(${n.x ?? 0}px, ${n.y ?? 0}px) rotate(${n.rotation || 0}deg)`,
 			height: n.autoGrow ? "auto" : void 0,
-			display: Yj && !_ ? "none" : void 0,
-			opacity: Yj && _ ? .4 : 1
+			display: $j && !_ ? "none" : void 0,
+			opacity: $j && _ ? .4 : 1,
+			zIndex: _ ? 1e3 : void 0,
+			outline: _ ? "1px dashed var(--accent-9)" : void 0
 		},
 		enable: _ && !n.autoGrow ? void 0 : {
 			top: !1,
@@ -11999,7 +12113,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 			bottomLeft: !1,
 			topLeft: !1
 		},
-		lockAspectRatio: Hj.current === !0,
+		lockAspectRatio: Jj.current === !0,
 		grid: j.gridSize > 0 ? [j.gridSize, j.gridSize] : void 0,
 		children: /* @__PURE__ */ jsx(ElementContextMenu, {
 			element: n,
@@ -12010,9 +12124,20 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 					position: "relative"
 				},
 				children: [/* @__PURE__ */ jsxs(p, {
-					style: $j,
-					onMouseDown: Zj,
-					onClick: Xj,
+					ref: Z,
+					style: {
+						...aM,
+						whiteSpace: n.type === "text-container" && n.autoGrow && n.containerExpansion === "horizontal" ? "nowrap" : aM.whiteSpace,
+						width: n.type === "text-container" && n.autoGrow && n.containerExpansion === "horizontal" ? "max-content" : "100%",
+						height: n.type === "text-container" && n.autoGrow && n.containerExpansion === "vertical" ? "auto" : "100%"
+					},
+					onPointerDown: tM,
+					onPointerMove: nM,
+					onPointerUp: rM,
+					onMouseDown: (n) => {
+						n.button === 0 && n.stopPropagation();
+					},
+					onClick: eM,
 					title: n.name,
 					onMouseEnter: (n) => {
 						_ || (n.currentTarget.style.borderColor = "var(--gray-6)");
@@ -12020,16 +12145,41 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 					onMouseLeave: (n) => {
 						_ || (n.currentTarget.style.borderColor = "transparent");
 					},
+					onDragOver: (n) => {
+						n.preventDefault(), n.stopPropagation(), n.dataTransfer.dropEffect = "copy";
+					},
+					onDrop: (_) => {
+						_.preventDefault(), _.stopPropagation();
+						let E = _.dataTransfer.getData("application/x-editor-prop");
+						if (E) if (n.type === "text" || n.type === "text-container") {
+							let _ = n.content ? `${n.content} {{${E}}}` : `{{${E}}}`;
+							O(n.id, {
+								content: _,
+								dataBinding: E
+							});
+						} else n.type === "image" && O(n.id, {
+							dataBinding: E,
+							content: `{{${E}}}`
+						});
+					},
 					children: [
 						n.type === "text" && /* @__PURE__ */ jsx(p$2, {
 							style: {
 								width: "100%",
 								height: "100%"
 							},
-							children: Gj
+							children: Zj
 						}),
-						n.type === "image" && (Gj ? /* @__PURE__ */ jsx("img", {
-							src: Gj,
+						n.type === "text-container" && /* @__PURE__ */ jsx(p$2, {
+							style: {
+								width: "100%",
+								height: "100%",
+								display: "block"
+							},
+							children: Zj
+						}),
+						n.type === "image" && (Zj ? /* @__PURE__ */ jsx("img", {
+							src: Zj,
 							alt: "Element",
 							style: {
 								width: "100%",
@@ -12094,7 +12244,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 						zIndex: 50,
 						boxShadow: "0 0 0 2px white"
 					},
-					onMouseDown: Qj,
+					onMouseDown: iM,
 					children: /* @__PURE__ */ jsx(p, { style: {
 						position: "absolute",
 						top: 12,
@@ -12109,53 +12259,130 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 		})
 	});
 }), Canvas = () => {
-	let { state: n, selectElement: _, setSelectedElements: E, addElement: O } = useEditor(), A = useRef(null), [j, M] = useState(null), N = useRef(!1), P = useRef({
+	let { state: n, selectElement: _, setSelectedElements: E, addElement: O, setZoom: A, setPan: j, undo: M, redo: N, copy: P, paste: z, removeSelected: B, updateElements: U } = useEditor(), G = useRef(null), [Z, Lj] = useState(null), Rj = useRef(!1), zj = useRef(!1), Hj = useRef(!1), Uj = useRef({
 		x: 0,
 		y: 0
-	}), z = useRef([]), B = (E) => {
-		if (E.target !== A.current && E.target !== E.currentTarget) return;
-		N.current = !0;
-		let O = A.current?.getBoundingClientRect();
-		O && (P.current = {
-			x: E.clientX - O.left,
-			y: E.clientY - O.top
-		}, z.current = n.selectedElementIds, E.shiftKey || (_(null), z.current = []), window.addEventListener("mousemove", U), window.addEventListener("mouseup", G));
-	}, U = useCallback((_) => {
-		if (!N.current || !A.current) return;
-		let O = A.current.getBoundingClientRect(), j = _.clientX - O.left, B = _.clientY - O.top, H = Math.min(P.current.x, j), U = Math.min(P.current.y, B), W = Math.abs(j - P.current.x), G = Math.abs(B - P.current.y);
-		if (M({
-			x: H,
-			y: U,
-			width: W,
-			height: G
-		}), W > 2 || G > 2) {
+	}), Wj = useRef({
+		x: 0,
+		y: 0
+	}), Gj = useRef([]), Jj = (E) => {
+		if (E.button === 1 || E.button === 0 && Hj.current) {
+			E.preventDefault(), zj.current = !0, Wj.current = {
+				x: E.clientX,
+				y: E.clientY
+			};
+			return;
+		}
+		Rj.current = !0;
+		let O = G.current?.getBoundingClientRect();
+		if (!O) return;
+		let A = O.left, j = O.top;
+		Uj.current = {
+			x: (E.clientX - A - n.pan.x) / n.zoom,
+			y: (E.clientY - j - n.pan.y) / n.zoom
+		}, Gj.current = n.selectedElementIds, E.shiftKey || (_(null), Gj.current = []), window.addEventListener("mousemove", Yj), window.addEventListener("mouseup", Xj);
+	}, Yj = useCallback((_) => {
+		if (!G.current) return;
+		if (zj.current) {
+			let E = _.clientX - Wj.current.x, O = _.clientY - Wj.current.y;
+			j({
+				x: n.pan.x + E,
+				y: n.pan.y + O
+			}), Wj.current = {
+				x: _.clientX,
+				y: _.clientY
+			};
+			return;
+		}
+		if (!Rj.current) return;
+		let O = G.current.getBoundingClientRect(), A = (_.clientX - O.left - n.pan.x) / n.zoom, M = (_.clientY - O.top - n.pan.y) / n.zoom, N = Math.min(Uj.current.x, A), P = Math.min(Uj.current.y, M), z = Math.abs(A - Uj.current.x), B = Math.abs(M - Uj.current.y);
+		if (Lj({
+			x: N,
+			y: P,
+			width: z,
+			height: B
+		}), z > 2 || B > 2) {
 			let _ = [];
 			n.elements.forEach((n) => {
-				let E = n.x ?? 0, O = n.y ?? 0, A = n.width ?? 100, j = n.height ?? 100, M = E + A, N = O + j, P = H + W, z = U + G;
-				E < P && M > H && O < z && N > U && _.push(n.id);
-			}), E(Array.from(new Set([...z.current, ..._])));
+				let E = n.x ?? 0, O = n.y ?? 0, A = n.width ?? 100, j = n.height ?? 100, M = E + A, H = O + j, U = N + z, W = P + B;
+				E < U && M > N && O < W && H > P && _.push(n.id);
+			}), E(Array.from(new Set([...Gj.current, ..._])));
 		}
-	}, [n.elements, E]), G = useCallback(() => {
-		N.current = !1, M(null), window.removeEventListener("mousemove", U), window.removeEventListener("mouseup", G);
-	}, [U]);
+	}, [
+		n.elements,
+		n.pan,
+		n.zoom,
+		E,
+		j
+	]), Xj = useCallback(() => {
+		Rj.current = !1, zj.current = !1, Lj(null), window.removeEventListener("mousemove", Yj), window.removeEventListener("mouseup", Xj);
+	}, [Yj]), Zj = (_) => {
+		if (_.ctrlKey || _.metaKey) _.preventDefault(), A(Math.min(Math.max(.1, n.zoom - _.deltaY * .001), 5));
+		else {
+			let E = _.shiftKey ? _.deltaY : _.deltaX, O = _.shiftKey ? _.deltaX : _.deltaY;
+			j({
+				x: n.pan.x - E * 1,
+				y: n.pan.y - O * 1
+			});
+		}
+	};
+	useEffect(() => {
+		let _ = (_) => {
+			if (_.code === "Space" && !_.repeat && !(_.target instanceof HTMLInputElement || _.target instanceof HTMLTextAreaElement) && (Hj.current = !0, G.current && (G.current.style.cursor = "grab")), !(_.target instanceof HTMLInputElement || _.target instanceof HTMLTextAreaElement) && ((_.ctrlKey || _.metaKey) && _.key.toLowerCase() === "z" && (_.preventDefault(), _.shiftKey ? N() : M()), (_.ctrlKey || _.metaKey) && _.key.toLowerCase() === "y" && (_.preventDefault(), N()), (_.ctrlKey || _.metaKey) && _.key.toLowerCase() === "c" && (_.preventDefault(), P()), (_.ctrlKey || _.metaKey) && _.key.toLowerCase() === "v" && (_.preventDefault(), z()), (_.key === "Delete" || _.key === "Backspace") && (_.preventDefault(), B()), [
+				"ArrowUp",
+				"ArrowDown",
+				"ArrowLeft",
+				"ArrowRight"
+			].includes(_.key))) {
+				_.preventDefault();
+				let E = _.shiftKey ? 10 : 1, O = [];
+				n.selectedElementIds.forEach((A) => {
+					let j = n.elements.find((n) => n.id === A);
+					if (j) {
+						let { x: n = 0, y: M = 0 } = j;
+						_.key === "ArrowUp" && (M -= E), _.key === "ArrowDown" && (M += E), _.key === "ArrowLeft" && (n -= E), _.key === "ArrowRight" && (n += E), O.push({
+							id: A,
+							changes: {
+								x: n,
+								y: M
+							}
+						});
+					}
+				}), O.length > 0 && U(O);
+			}
+		}, E = (n) => {
+			n.code === "Space" && (Hj.current = !1, G.current && !zj.current && (G.current.style.cursor = "default"));
+		};
+		return window.addEventListener("keydown", _), window.addEventListener("keyup", E), () => {
+			window.removeEventListener("keydown", _), window.removeEventListener("keyup", E), window.removeEventListener("mousemove", Yj), window.removeEventListener("mouseup", Xj);
+		};
+	}, [
+		M,
+		N,
+		P,
+		z,
+		B,
+		U,
+		n.selectedElementIds,
+		n.elements,
+		Yj,
+		Xj
+	]);
+	let Qj = useRef(!1), { setCanvasHeight: $j } = useEditor(), eM = (n) => {
+		n.stopPropagation(), n.preventDefault(), Qj.current = !0, window.addEventListener("mousemove", tM), window.addEventListener("mouseup", nM);
+	}, tM = useCallback((n) => {
+		if (!Qj.current || !G.current) return;
+		let _ = G.current.getBoundingClientRect(), E = n.clientY - _.top, O = Math.max(50, Math.min(E, 2e3));
+		$j(Math.round(O));
+	}, [$j]), nM = useCallback(() => {
+		Qj.current = !1, window.removeEventListener("mousemove", tM), window.removeEventListener("mouseup", nM);
+	}, [tM]);
 	useEffect(() => () => {
-		window.removeEventListener("mousemove", U), window.removeEventListener("mouseup", G);
-	}, [U, G]);
-	let Z = useRef(!1), { setCanvasHeight: Lj } = useEditor(), Rj = (n) => {
-		n.stopPropagation(), n.preventDefault(), Z.current = !0, window.addEventListener("mousemove", zj), window.addEventListener("mouseup", Hj);
-	}, zj = useCallback((n) => {
-		if (!Z.current || !A.current) return;
-		let _ = A.current.getBoundingClientRect(), E = n.clientY - _.top, O = Math.max(50, Math.min(E, 2e3));
-		Lj(Math.round(O));
-	}, [Lj]), Hj = useCallback(() => {
-		Z.current = !1, window.removeEventListener("mousemove", zj), window.removeEventListener("mouseup", Hj);
-	}, [zj]);
-	useEffect(() => () => {
-		window.removeEventListener("mousemove", zj), window.removeEventListener("mouseup", Hj);
-	}, [zj, Hj]);
-	let Uj = (n) => {
+		window.removeEventListener("mousemove", tM), window.removeEventListener("mouseup", nM);
+	}, [tM, nM]);
+	let rM = (n) => {
 		n.preventDefault(), n.dataTransfer.dropEffect = "copy";
-	}, Wj = (n) => {
+	}, iM = (n) => {
 		n.preventDefault();
 		let _ = n.dataTransfer.getData("application/x-editor-prop");
 		if (_) {
@@ -12170,92 +12397,181 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 				dataBinding: _
 			});
 		}
-	}, Gj = n.canvasHeight || 150;
+	}, aM = n.canvasHeight || 150;
 	return /* @__PURE__ */ jsxs(p, {
-		ref: A,
-		onMouseDown: B,
-		onDragOver: Uj,
-		onDrop: Wj,
+		ref: G,
+		onMouseDown: Jj,
+		onDragOver: rM,
+		onDrop: iM,
+		onWheel: Zj,
 		style: {
 			width: "100%",
 			height: "100%",
 			position: "relative",
 			overflow: "hidden",
 			backgroundColor: "var(--color-background)",
+			cursor: zj.current ? "grabbing" : "default",
 			backgroundImage: "radial-gradient(var(--gray-5) 1px, transparent 1px)",
-			backgroundSize: "20px 20px"
+			backgroundSize: `${20 * n.zoom}px ${20 * n.zoom}px`,
+			backgroundPosition: `${n.pan.x}px ${n.pan.y}px`
 		},
-		children: [
-			j && /* @__PURE__ */ jsx("div", { style: {
+		children: [/* @__PURE__ */ jsxs("div", {
+			style: {
+				transform: `translate(${n.pan.x}px, ${n.pan.y}px) scale(${n.zoom})`,
+				transformOrigin: "0 0",
+				width: "100%",
+				height: "100%",
 				position: "absolute",
-				left: j.x,
-				top: j.y,
-				width: j.width,
-				height: j.height,
-				backgroundColor: "rgba(0, 120, 255, 0.1)",
-				border: "1px solid rgba(0, 120, 255, 0.5)",
-				pointerEvents: "none",
-				zIndex: 9999
-			} }),
-			n.isList && /* @__PURE__ */ jsxs("div", {
-				style: {
-					position: "absolute",
-					top: Gj,
-					left: 0,
-					right: 0,
-					height: "10px",
-					marginTop: "-5px",
-					cursor: "ns-resize",
-					zIndex: 100,
-					display: "flex",
-					alignItems: "center",
-					justifyContent: "center",
-					group: "resize-handle"
-				},
-				onMouseDown: Rj,
-				children: [/* @__PURE__ */ jsx("div", { style: {
+				top: 0,
+				left: 0,
+				pointerEvents: "none"
+			},
+			children: [
+				/* @__PURE__ */ jsx("div", { style: {
 					width: "100%",
-					height: "2px",
-					backgroundColor: "var(--accent-9)",
-					borderBottom: "none",
-					opacity: .8,
-					boxShadow: "0 1px 4px rgba(0,0,0,0.2)"
-				} }), /* @__PURE__ */ jsxs("div", {
+					height: "100%",
+					position: "absolute",
+					left: 0,
+					top: 0,
+					pointerEvents: "auto"
+				} }),
+				Z && /* @__PURE__ */ jsx("div", { style: {
+					position: "absolute",
+					left: Z.x,
+					top: Z.y,
+					width: Z.width,
+					height: Z.height,
+					backgroundColor: "rgba(0, 120, 255, 0.1)",
+					border: "1px solid rgba(0, 120, 255, 0.5)",
+					pointerEvents: "none",
+					zIndex: 9999
+				} }),
+				n.snapLines.map((n, _) => /* @__PURE__ */ jsx("div", { style: {
+					position: "absolute",
+					left: n.orientation === "vertical" ? n.position : 0,
+					top: n.orientation === "horizontal" ? n.position : 0,
+					width: n.orientation === "vertical" ? "1px" : "100%",
+					height: n.orientation === "horizontal" ? "1px" : "100%",
+					backgroundColor: "red",
+					zIndex: 9999,
+					pointerEvents: "none"
+				} }, _)),
+				n.isList && /* @__PURE__ */ jsxs("div", {
 					style: {
 						position: "absolute",
-						right: 10,
-						top: -20,
-						backgroundColor: "var(--accent-9)",
-						color: "white",
-						fontSize: "11px",
-						padding: "2px 6px",
-						borderRadius: "4px",
-						fontWeight: 500,
-						pointerEvents: "none",
-						boxShadow: "0 2px 5px rgba(0,0,0,0.1)"
+						top: aM,
+						left: 0,
+						right: 0,
+						height: "10px",
+						marginTop: "-5px",
+						cursor: "ns-resize",
+						zIndex: 100,
+						display: "flex",
+						alignItems: "center",
+						justifyContent: "center",
+						group: "resize-handle"
 					},
-					children: [
-						"Altura do Item: ",
-						Gj,
-						"px"
-					]
-				})]
-			}),
-			n.elements.length === 0 && /* @__PURE__ */ jsx(p$1, {
-				align: "center",
-				justify: "center",
-				style: {
-					height: "100%",
-					color: "var(--gray-8)",
-					pointerEvents: "none"
-				},
-				children: /* @__PURE__ */ jsx(p$2, { children: "Adicione elementos e arraste livremente" })
-			}),
-			n.elements.map((_) => /* @__PURE__ */ jsx(DraggableElement, {
-				element: _,
-				isSelected: n.selectedElementIds.includes(_.id)
-			}, _.id))
-		]
+					onMouseDown: eM,
+					children: [/* @__PURE__ */ jsx("div", { style: {
+						width: "100%",
+						height: "2px",
+						backgroundColor: "var(--accent-9)",
+						borderBottom: "none",
+						opacity: .8,
+						boxShadow: "0 1px 4px rgba(0,0,0,0.2)"
+					} }), /* @__PURE__ */ jsxs("div", {
+						style: {
+							position: "absolute",
+							right: 10,
+							top: -20,
+							backgroundColor: "var(--accent-9)",
+							color: "white",
+							fontSize: "11px",
+							padding: "2px 6px",
+							borderRadius: "4px",
+							fontWeight: 500,
+							pointerEvents: "none",
+							boxShadow: "0 2px 5px rgba(0,0,0,0.1)"
+						},
+						children: [
+							"Altura do Item: ",
+							aM,
+							"px"
+						]
+					})]
+				}),
+				n.elements.length === 0 && /* @__PURE__ */ jsx(p$1, {
+					align: "center",
+					justify: "center",
+					style: {
+						height: "100%",
+						color: "var(--gray-8)",
+						pointerEvents: "none",
+						transform: `scale(${1 / n.zoom})`
+					},
+					children: /* @__PURE__ */ jsx(p$2, { children: "Adicione elementos e arraste livremente" })
+				}),
+				n.elements.map((_) => /* @__PURE__ */ jsx("div", {
+					style: { pointerEvents: "auto" },
+					children: /* @__PURE__ */ jsx(DraggableElement, {
+						element: _,
+						isSelected: n.selectedElementIds.includes(_.id)
+					})
+				}, _.id))
+			]
+		}), /* @__PURE__ */ jsxs("div", {
+			style: {
+				position: "absolute",
+				bottom: 20,
+				right: 20,
+				display: "flex",
+				gap: "8px",
+				backgroundColor: "var(--color-panel-solid)",
+				padding: "4px",
+				borderRadius: "8px",
+				boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
+				zIndex: 1e3
+			},
+			children: [
+				/* @__PURE__ */ jsx("button", {
+					onClick: () => A(Math.max(.1, n.zoom - .1)),
+					style: {
+						padding: "4px 8px",
+						cursor: "pointer"
+					},
+					children: "-"
+				}),
+				/* @__PURE__ */ jsxs("span", {
+					style: {
+						padding: "4px 8px",
+						minWidth: "50px",
+						textAlign: "center"
+					},
+					children: [Math.round(n.zoom * 100), "%"]
+				}),
+				/* @__PURE__ */ jsx("button", {
+					onClick: () => A(Math.min(5, n.zoom + .1)),
+					style: {
+						padding: "4px 8px",
+						cursor: "pointer"
+					},
+					children: "+"
+				}),
+				/* @__PURE__ */ jsx("button", {
+					onClick: () => {
+						A(1), j({
+							x: 0,
+							y: 0
+						});
+					},
+					style: {
+						padding: "4px 8px",
+						cursor: "pointer"
+					},
+					children: "Reset"
+				})
+			]
+		})]
 	});
 }, EditorSettings = () => {
 	let { state: n, updateListSettings: _, setCanvasHeight: E, setGridSize: O } = useEditor(), [A, j] = useState(!1), [M, N] = useState(""), [P, z] = useState("asc"), [B, H] = useState("bottom"), [U, G] = useState("down"), [Z, Lj] = useState("150"), [Rj, zj] = useState(""), [Bj, Hj] = useState("0"), [Uj, Wj] = useState("slideIn"), [Gj, Jj] = useState(.3), [Yj, Xj] = useState("ease-out");
@@ -17116,7 +17432,11 @@ var gestureAnimations = {
 	...gestureAnimations,
 	...drag,
 	...layout
-}, createDomVisualElement), isInside = (n, _) => n.id === _.id ? !1 : n.x >= _.x && n.x + n.width <= _.x + _.width && n.y >= _.y && n.y + n.height <= _.y + _.height, measureTextHeight = (n, _, E, O, A = 1.2) => {
+}, createDomVisualElement), isInside = (n, _) => {
+	if (n.id === _.id) return !1;
+	let E = .1;
+	return n.x >= _.x - E && n.x + n.width <= _.x + _.width + E && n.y >= _.y - E && n.y + n.height <= _.y + _.height + E;
+}, measureTextHeight = (n, _, E, O, A = 1.2) => {
 	if (!n) return 0;
 	let j = document.createElement("canvas").getContext("2d");
 	if (!j) return 0;
@@ -17132,30 +17452,40 @@ var gestureAnimations = {
 const processLayout = (n, _) => {
 	let E = n.map((n) => ({ ...n })), O = new Map(n.map((n) => [n.id, n])), A = [];
 	E.forEach((n) => {
-		if (n.type === "text" && n.autoGrow) {
+		let j = n.type === "text", M = n.type === "text-container";
+		if ((j || M) && n.autoGrow) {
 			let j = n.content;
 			_ && (j = j.replace(/\{\{(.*?)\}\}/g, (E, O) => {
 				let A = _[O.trim()];
 				return A == null ? E : n.formatting ? formatValue(A, n.formatting) : String(A);
 			}));
-			let M = parseInt(String(n.style?.fontSize || 16)), N = String(n.style?.fontFamily || "Arial"), P = measureTextHeight(j, n.width, N, M), z = n.height, B = P - z;
-			if (B > 0) {
-				n.height = P, n.content = j;
-				let _ = [], M = O.get(n.id);
-				M && E.forEach((n) => {
-					if (n.type === "box") {
-						let E = O.get(n.id);
-						E && isInside(M, E) && _.push(n);
-					}
-				});
-				let N = new Set([n.id]);
-				_.forEach((n) => {
-					n.height += B, N.add(n.id);
-				}), A.push({
-					triggerY: n.y + z,
-					delta: B,
-					ignoreIds: N
-				});
+			let N = parseInt(String(n.style?.fontSize || 16)), P = String(n.style?.fontFamily || "Arial");
+			if (M && n.containerExpansion === "horizontal") {
+				let _ = document.createElement("canvas").getContext("2d");
+				if (_) {
+					_.font = `${N}px ${P}`;
+					let E = _.measureText(j), O = Math.ceil(E.width + parseInt(String(n.style?.padding || 0)) * 2);
+					O > n.width && (n.width = O, n.content = j);
+				}
+			} else {
+				let _ = measureTextHeight(j, n.width, P, N), M = n.height, z = _ - M;
+				if (z > 0) {
+					n.height = _, n.content = j;
+					let N = [], P = O.get(n.id);
+					P && E.forEach((_) => {
+						if (_.id === n.id) return;
+						let E = O.get(_.id);
+						E && isInside(P, E) && N.push(_);
+					});
+					let B = new Set([n.id]);
+					N.forEach((n) => {
+						n.height += z, B.add(n.id);
+					}), A.push({
+						triggerY: n.y + M,
+						delta: z,
+						ignoreIds: B
+					});
+				}
 			}
 		}
 	}), E.forEach((n) => {
@@ -17276,9 +17606,9 @@ var getAnimationVariants = (n) => {
 }, PreviewElementRenderer = ({ element: n, offsetY: _ = 0, dataContext: E }) => {
 	let O = n.content;
 	if (E) {
-		if (n.type === "text") O = O.replace(/\{\{(.*?)\}\}/g, (n, _) => {
-			let O = E[_.trim()];
-			return O == null ? n : String(O);
+		if (n.type === "text" || n.type === "text-container") O = O.replace(/\{\{(.*?)\}\}/g, (_, O) => {
+			let A = E[O.trim()];
+			return A == null ? _ : n.formatting ? formatValue(A, n.formatting) : String(A);
 		});
 		else if (n.type === "image") if (n.dataBinding) {
 			let _ = E[n.dataBinding];
@@ -17293,15 +17623,24 @@ var getAnimationVariants = (n) => {
 			position: "absolute",
 			left: 0,
 			top: 0,
-			width: `${n.width}px`,
-			height: `${n.height}px`,
+			width: n.type === "text-container" && n.autoGrow && n.containerExpansion === "horizontal" ? "max-content" : `${n.width}px`,
+			height: n.autoGrow ? "auto" : `${n.height}px`,
 			transform: `translate(${n.x}px, ${n.y + _}px) rotate(${n.rotation || 0}deg)`,
-			padding: n.type === "image" || n.type === "text" ? 0 : "8px",
-			overflow: "hidden",
+			padding: n.type === "image" || n.type === "text" || n.type === "text-container" ? 0 : "8px",
+			overflow: n.autoGrow ? "visible" : "hidden",
+			whiteSpace: n.type === "text-container" && n.autoGrow && n.containerExpansion === "horizontal" ? "nowrap" : n.autoGrow ? "pre-wrap" : void 0,
+			wordBreak: n.autoGrow ? "break-word" : void 0,
 			...n.style
 		},
 		children: [
-			n.type === "text" && /* @__PURE__ */ jsx(p$2, { children: O }),
+			(n.type === "text" || n.type === "text-container") && /* @__PURE__ */ jsx(p$2, {
+				style: {
+					width: "100%",
+					height: "100%",
+					display: "block"
+				},
+				children: O
+			}),
 			n.type === "image" && (O ? /* @__PURE__ */ jsx("img", {
 				src: O,
 				alt: "Element",
@@ -17825,6 +18164,10 @@ var LayersPanel = ({ onOpenSettings: n }) => {
 									/* @__PURE__ */ jsx(v$3, {
 										onSelect: () => Xj("box"),
 										children: "Caixa (Container)"
+									}),
+									/* @__PURE__ */ jsx(v$3, {
+										onSelect: () => Xj("text-container"),
+										children: "Container com Texto"
 									})
 								]
 							})] }),
@@ -18067,5 +18410,5 @@ const GenericEditor = (n) => /* @__PURE__ */ jsx(EditorProvider, {
 	availableProps: n.layout.props,
 	theme: n.theme,
 	children: /* @__PURE__ */ jsx(EditorContent, { ...n })
-}), generateHTML = (n, _, E = {}) => Function("elements", "data", "options", getRendererCode() + "\nreturn renderTemplate(elements, data, options);")(n, _, E), getRendererCode = () => "\n/**\n * Render Template\n * @param {Array} elements - The JSON configuration of elements\n * @param {Object|Array} data - The data object to inject (Object for single, Array for list)\n * @param {Object} options - { isList: boolean, listSettings: { sortProp: string, sortOrder: 'asc'|'desc', newestPosition: 'top'|'bottom', scrollDirection: 'up'|'down', containerHeight: number }, canvasHeight: number }\n * @returns {string} - The generated HTML string\n */\nfunction renderTemplate(elements, data, options = {}) {\n    const { isList, listSettings, canvasHeight } = options;\n\n    const measureTextHeight = (text, width, fontFamily, fontSize, lineHeightMultiplier = 1.2) => {\n        if (!text) return 0;\n        try {\n            const canvas = document.createElement('canvas');\n            const context = canvas.getContext('2d');\n            if (!context) return 0;\n            context.font = `${fontSize}px ${fontFamily}`;\n            const words = String(text).split(' ');\n            let line = '';\n            let lineCount = 1;\n            for (let i = 0; i < words.length; i++) {\n                const testLine = line + words[i] + ' ';\n                const metrics = context.measureText(testLine);\n                const testWidth = metrics.width;\n                if (testWidth > width && i > 0) {\n                    line = words[i] + ' ';\n                    lineCount++;\n                } else {\n                    line = testLine;\n                }\n            }\n            const explicitLines = String(text).split('\\n').length - 1;\n            lineCount += explicitLines;\n            return Math.ceil(lineCount * fontSize * lineHeightMultiplier);\n        } catch (_) {\n            return 0;\n        }\n    };\n\n    const computeItemHeight = (elements, itemData, fallbackHeight) => {\n        let maxY = 0;\n        elements.forEach(el => {\n            let height = el.height;\n            if (el.type === 'text' && el.autoGrow) {\n                let content = el.content;\n                content = content.replace(/\\{\\{(.*?)\\}\\}/g, (match, key) => {\n                    const val = itemData[key.trim()];\n                    return val !== undefined && val !== null ? String(val) : match;\n                });\n                const fontSize = parseInt(String((el.style && el.style.fontSize) || 16));\n                const fontFamily = String((el.style && el.style.fontFamily) || 'Arial');\n                const measured = measureTextHeight(content, el.width, fontFamily, fontSize);\n                height = Math.max(height, measured);\n            }\n            const bottom = el.y + height;\n            if (bottom > maxY) maxY = bottom;\n        });\n        return fallbackHeight ? Math.max(maxY, fallbackHeight) : maxY;\n    };\n\n    const formatValue = (value, formatting) => {\n        if (!formatting || formatting.type === 'text') return value !== undefined && value !== null ? String(value) : '';\n        if (value === undefined || value === null) return '';\n\n        if (formatting.type === 'boolean') {\n             const isTrue = String(value) === 'true' || value === true || (typeof value === 'number' && value > 0);\n             return isTrue ? (formatting.trueLabel || 'Sim') : (formatting.falseLabel || 'Não');\n        }\n\n        if (formatting.type === 'date') {\n            try {\n                const date = new Date(value);\n                if (isNaN(date.getTime())) return String(value);\n                \n                if (formatting.dateFormat) {\n                     const d = date.getDate().toString().padStart(2, '0');\n                     const m = (date.getMonth() + 1).toString().padStart(2, '0');\n                     const y = date.getFullYear();\n                     const H = date.getHours().toString().padStart(2, '0');\n                     const M = date.getMinutes().toString().padStart(2, '0');\n                     const S = date.getSeconds().toString().padStart(2, '0');\n                     \n                     return formatting.dateFormat\n                        .replace('DD', d)\n                        .replace('MM', m)\n                        .replace('YYYY', String(y))\n                        .replace('HH', H)\n                        .replace('mm', M)\n                        .replace('ss', S);\n                }\n                return date.toLocaleDateString();\n            } catch (e) { return String(value); }\n        }\n\n        if (formatting.type === 'number') {\n             const num = parseFloat(value);\n             if (isNaN(num)) return String(value);\n             \n             if (formatting.numberFormat === 'currency') {\n                 return (formatting.currencySymbol || 'R$') + ' ' + num.toFixed(formatting.decimalPlaces || 2);\n             }\n             if (formatting.numberFormat === 'percent') {\n                 return num.toFixed(formatting.decimalPlaces || 0) + '%';\n             }\n             if (formatting.decimalPlaces !== undefined) {\n                 return num.toFixed(formatting.decimalPlaces);\n             }\n             return num.toFixed(formatting.decimalPlaces || 0);\n        }\n        \n        return String(value);\n    };\n\n    const checkCondition = (propValue, operator, ruleValue) => {\n        const val = String(propValue).toLowerCase();\n        const target = String(ruleValue).toLowerCase();\n        \n        switch (operator) {\n            case 'equals': return val === target;\n            case 'notEquals': return val !== target;\n            case 'contains': return val.includes(target);\n            case 'greaterThan': return parseFloat(val) > parseFloat(target);\n            case 'lessThan': return parseFloat(val) < parseFloat(target);\n            case 'truthy': return !!propValue;\n            case 'falsy': return !propValue;\n            default: return false;\n        }\n    };\n\n    const camelToKebab = (string) => {\n        return string.replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, '$1-$2').toLowerCase();\n    };\n\n    const hex8ToRgba = (hex) => {\n        const m = /^#([0-9a-fA-F]{8})$/.exec(hex);\n        if (!m) return hex;\n        const h = m[1];\n        const r = parseInt(h.slice(0, 2), 16);\n        const g = parseInt(h.slice(2, 4), 16);\n        const b = parseInt(h.slice(4, 6), 16);\n        const a = parseInt(h.slice(6, 8), 16) / 255;\n        return `rgba(${r}, ${g}, ${b}, ${a})`;\n    };\n\n    const styleObjectToString = (style) => {\n        if (!style) return '';\n        const pxProps = [\n            'width', 'height', 'top', 'left', 'right', 'bottom', \n            'fontSize', 'borderRadius', 'padding', 'margin', 'borderWidth',\n            'borderTopLeftRadius', 'borderTopRightRadius', 'borderBottomRightRadius', 'borderBottomLeftRadius'\n        ];\n        \n        return Object.entries(style)\n            .map(([key, value]) => {\n                if (value === undefined || value === null) return '';\n                const cssKey = camelToKebab(key);\n                let cssValue = (typeof value === 'number' && pxProps.includes(key)) ? value + 'px' : value;\n                if (typeof cssValue === 'string') {\n                    if (/^#([0-9a-fA-F]{8})$/.test(cssValue)) {\n                        cssValue = hex8ToRgba(cssValue);\n                    }\n                }\n                return `${cssKey}: ${cssValue}`;\n            })\n            .filter(Boolean)\n            .join('; ');\n    };\n\n    const getAnimationStyles = (anim) => {\n        if (!anim || anim.type === 'none') return {};\n        return {\n            animationName: anim.type,\n            animationDuration: (anim.duration || 1) + 's',\n            animationDelay: (anim.delay || 0) + 's',\n            animationIterationCount: anim.iterationCount || 1,\n            animationTimingFunction: anim.timingFunction || 'ease',\n            animationFillMode: 'both'\n        };\n    };\n\n    const keyframesCss = `\n    @keyframes slideIn {\n                from { opacity: 0; transform: translateY(20px); }\n                to { opacity: 1; transform: translateY(0); }\n    }\n    @keyframes fadeIn { \n        from { opacity: 0; } \n        to { opacity: 1; } \n    }\n    @keyframes slideInLeft { \n        from { opacity: 0; transform: translateX(-50px); } \n        to { opacity: 1; transform: translateX(0); } \n    }\n    @keyframes slideInRight { \n        from { opacity: 0; transform: translateX(50px); } \n        to { opacity: 1; transform: translateX(0); } \n    }\n    @keyframes slideInUp { \n        from { opacity: 0; transform: translateY(50px); } \n        to { opacity: 1; transform: translateY(0); } \n    }\n    @keyframes slideInDown { \n        from { opacity: 0; transform: translateY(-50px); } \n        to { opacity: 1; transform: translateY(0); } \n    }\n    @keyframes zoomIn { \n        from { opacity: 0; transform: scale(0.5); } \n        to { opacity: 1; transform: scale(1); } \n    }\n    @keyframes bounceIn {\n        0% { opacity: 0; transform: scale(0.3); }\n        50% { opacity: 1; transform: scale(1.05); }\n        70% { transform: scale(0.9); }\n        100% { transform: scale(1); }\n    }\n    @keyframes pulse {\n        0% { transform: scale(1); }\n        50% { transform: scale(1.05); }\n        100% { transform: scale(1); }\n    }\n    @keyframes shake {\n        0%, 100% { transform: translateX(0); }\n        10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }\n        20%, 40%, 60%, 80% { transform: translateX(5px); }\n    }\n    @keyframes spin { \n        from { transform: rotate(0deg); } \n        to { transform: rotate(360deg); } \n    }\n    \n    /* Improved / Smoother Animations */\n    @keyframes smoothSlideUp {\n        0% { opacity: 0; transform: translateY(30px); }\n        100% { opacity: 1; transform: translateY(0); }\n    }\n    @keyframes popIn {\n        0% { opacity: 0; transform: scale(0.8) translateY(10px); }\n        100% { opacity: 1; transform: scale(1) translateY(0); }\n    }\n    @keyframes blurIn {\n        0% { opacity: 0; filter: blur(10px); }\n        100% { opacity: 1; filter: blur(0); }\n    }\n    `;\n\n    const renderItem = (itemData, index = 0, offsetY = 0) => {\n        return elements.map(element => {\n            let content = element.content;\n            let imgSrc = '';\n\n            // Resolve Content & Formatting\n            if (element.type === 'text') {\n                content = content.replace(/\\{\\{(.*?)\\}\\}/g, (match, key) => {\n                    const val = itemData[key.trim()];\n                    if (val === undefined || val === null) return match;\n                    if (element.formatting) {\n                        return formatValue(val, element.formatting);\n                    }\n                    return String(val);\n                });\n            } else if (element.type === 'image') {\n                 if (element.dataBinding) {\n                    const val = itemData[element.dataBinding];\n                    if (val !== undefined && val !== null) {\n                        imgSrc = String(val);\n                    } else {\n                        imgSrc = content;\n                    }\n                 } else {\n                     imgSrc = content.replace(/\\{\\{(.*?)\\}\\}/g, (match, key) => {\n                        const val = itemData[key.trim()];\n                        return val !== undefined && val !== null ? String(val) : match;\n                    });\n                 }\n            }\n\n            // Resolve Conditional Styles\n            let conditionalStyles = {};\n            if (element.conditions) {\n                element.conditions.forEach(rule => {\n                    const propVal = itemData[rule.property];\n                    if (checkCondition(propVal, rule.operator, rule.value)) {\n                         conditionalStyles = { ...conditionalStyles, ...rule.style };\n                    }\n                });\n            }\n\n            // Resolve Style Bindings\n            let bindingStyles = {};\n            if (element.styleBindings) {\n                Object.entries(element.styleBindings).forEach(([styleProp, variableName]) => {\n                    const val = itemData[variableName];\n                    if (val !== undefined && val !== null) {\n                        bindingStyles[styleProp] = String(val);\n                    }\n                });\n            }\n\n            const baseStyle = {\n                position: 'absolute',\n                left: element.x,\n                top: element.y + offsetY,\n                width: element.width,\n                height: element.autoGrow ? 'auto' : element.height,\n                transform: element.rotation ? `rotate(${element.rotation}deg)` : undefined,\n                overflow: element.autoGrow ? 'visible' : 'hidden',\n                whiteSpace: element.autoGrow ? 'pre-wrap' : undefined,\n                wordBreak: element.autoGrow ? 'break-word' : undefined,\n                ...element.style,\n                ...conditionalStyles,\n                ...bindingStyles\n            };\n            \n            // Fix: remove padding if it's not explicitly set, or handle it for text\n            if (element.type === 'text' && !baseStyle.padding) {\n                // baseStyle.padding = '8px'; // Removed default padding to respect resize box\n            }\n            \n            const styleString = styleObjectToString(baseStyle);\n\n            if (element.type === 'text') {\n                return `<div style=\"${styleString}\">${content}</div>`;\n            } else if (element.type === 'image') {\n                const imgStyle = styleObjectToString({\n                    width: '100%',\n                    height: '100%',\n                    objectFit: element.style?.objectFit || 'cover',\n                    display: 'block'\n                });\n                return `<div style=\"${styleString}\"><img src=\"${imgSrc}\" alt=\"Element\" style=\"${imgStyle}\" /></div>`;\n            } else if (element.type === 'box') {\n                 return `<div style=\"${styleString}\"></div>`;\n            }\n            return '';\n        }).join('\\n');\n    };\n\n    if (isList && Array.isArray(data)) {\n        // Calculate per-item height respecting autoGrow\n        // Sort data\n        let listData = [...data];\n        if (listSettings && listSettings.sortProp) {\n            const prop = listSettings.sortProp;\n            const order = listSettings.sortOrder === 'asc' ? 1 : -1;\n            listData.sort((a, b) => {\n                const valA = a[prop];\n                const valB = b[prop];\n                if (valA < valB) return -1 * order;\n                if (valA > valB) return 1 * order;\n                return 0;\n            });\n        }\n        \n        // Handle newest position\n        if (listSettings && listSettings.newestPosition === 'top') {\n             listData.reverse();\n        }\n\n        // Generate HTML for all items\n        const itemsHtml = listData.map((item, index) => {\n             const itemHtml = renderItem(item, index, 0); \n             const itemHeight = computeItemHeight(elements, item, canvasHeight);\n             const itemContainerStyle = styleObjectToString({\n                 position: 'relative',\n                 height: itemHeight,\n                 width: '100%'\n             });\n             \n             return `<div class=\"list-item\" style=\"${itemContainerStyle}\">${itemHtml}</div>`;\n        }).join('\\n');\n\n        // Animation Styles based on settings\n        const scrollDirection = (listSettings && listSettings.scrollDirection) || 'down';\n        const containerHeight = (listSettings && listSettings.containerHeight) ? listSettings.containerHeight + 'px' : '100%';\n        \n        const justify = (listSettings && listSettings.newestPosition === 'top') ? 'flex-start' : 'flex-end';\n\n        // Entry Animation from settings\n        const entryAnim = listSettings && listSettings.entryAnimation ? listSettings.entryAnimation : { type: 'slideIn', duration: 0.3, timingFunction: 'ease-out' };\n        const entryAnimName = entryAnim.type === 'none' ? 'none' : entryAnim.type;\n        const entryAnimDuration = entryAnim.duration + 's';\n        const entryAnimTiming = entryAnim.timingFunction || 'ease-out';\n\n        const animationCss = `\n            ${keyframesCss}\n\n            .list-wrapper {\n                display: flex;\n                flex-direction: column;\n                justify-content: ${justify};\n                height: ${containerHeight};\n                width: 100%;\n                overflow-y: auto;\n                overflow-x: hidden;\n                box-sizing: border-box;\n                padding: 10px;\n            }\n            .list-item {\n                flex-shrink: 0;\n                animation: ${entryAnimName} ${entryAnimDuration} ${entryAnimTiming};\n                margin-bottom: 10px;\n                width: 100%;\n                position: relative;\n            }\n        `;\n        \n        const scrollScript = scrollDirection === 'up' \n            ? `<script>\n                document.addEventListener('DOMContentLoaded', () => {\n                    const wrapper = document.querySelector('.list-wrapper');\n                    if(wrapper) wrapper.scrollTop = wrapper.scrollHeight;\n                });\n               <\/script>`\n            : '';\n\n        // Inject Smart Script for Dynamic Updates\n        const injectionScript = `\n            <script>\n            (function() {\n                try {\n                    const elements = ${JSON.stringify(elements)};\n                    const formatValue = ${formatValue.toString()};\n                    const checkCondition = ${checkCondition.toString()};\n                    const camelToKebab = ${camelToKebab.toString()};\n                    const hex8ToRgba = ${hex8ToRgba.toString()};\n                    const styleObjectToString = ${styleObjectToString.toString()};\n                    const getAnimationStyles = ${getAnimationStyles.toString()};\n                    const renderItem = ${renderItem.toString()};\n\n                    const measureTextHeight = ${measureTextHeight.toString()};\n                    const computeItemHeight = ${computeItemHeight.toString()};\n                    const itemHeightFallback = ${canvasHeight || 0};\n                    const newestPosition = \"${(listSettings && listSettings.newestPosition) || 'bottom'}\";\n                    const scrollDirection = \"${(listSettings && listSettings.scrollDirection) || 'down'}\";\n\n                    window.addItem = function(data) {\n                        const wrapper = document.querySelector('.list-wrapper');\n                        if (!wrapper) return;\n\n                        const itemHtml = renderItem(data, 0, 0);\n                        const itemHeight = computeItemHeight(elements, data, itemHeightFallback);\n                        const itemContainerStyle = styleObjectToString({\n                            position: 'relative',\n                            height: itemHeight,\n                            width: '100%'\n                        });\n\n                        const div = document.createElement('div');\n                        div.className = 'list-item';\n                        div.setAttribute('style', itemContainerStyle);\n                        div.innerHTML = itemHtml;\n\n                        if (newestPosition === 'top') {\n                            wrapper.insertBefore(div, wrapper.firstChild);\n                        } else {\n                            wrapper.appendChild(div);\n                        }\n                        \n                        if (scrollDirection === 'up') {\n                           wrapper.scrollTop = wrapper.scrollHeight;\n                        }\n                    };\n                } catch(e) { console.error(\"Smart List Init Error\", e); }\n            })();\n            <\/script>\n        `;\n\n        return `\n            <style>${animationCss}</style>\n            <div class=\"list-wrapper\">\n                ${itemsHtml}\n            </div>\n            ${scrollScript}\n            ${injectionScript}\n        `;\n    }\n\n    // Single Item\n    const contentHtml = renderItem(data);\n    return `<div style=\"position: relative; width: 100%; height: 100%; overflow: hidden;\">${contentHtml}</div>`;\n}\n";
+}), generateHTML = (n, _, E = {}) => Function("elements", "data", "options", getRendererCode() + "\nreturn renderTemplate(elements, data, options);")(n, _, E), getRendererCode = () => "\n/**\n * Render Template\n * @param {Array} elements - The JSON configuration of elements\n * @param {Object|Array} data - The data object to inject (Object for single, Array for list)\n * @param {Object} options - { isList: boolean, listSettings: { sortProp: string, sortOrder: 'asc'|'desc', newestPosition: 'top'|'bottom', scrollDirection: 'up'|'down', containerHeight: number }, canvasHeight: number }\n * @returns {string} - The generated HTML string\n */\nfunction renderTemplate(elements, data, options = {}) {\n    const { isList, listSettings, canvasHeight } = options;\n\n    const measureTextHeight = (text, width, fontFamily, fontSize, lineHeightMultiplier = 1.2) => {\n        if (!text) return 0;\n        try {\n            const canvas = document.createElement('canvas');\n            const context = canvas.getContext('2d');\n            if (!context) return 0;\n            context.font = `${fontSize}px ${fontFamily}`;\n            const words = String(text).split(' ');\n            let line = '';\n            let lineCount = 1;\n            for (let i = 0; i < words.length; i++) {\n                const testLine = line + words[i] + ' ';\n                const metrics = context.measureText(testLine);\n                const testWidth = metrics.width;\n                if (testWidth > width && i > 0) {\n                    line = words[i] + ' ';\n                    lineCount++;\n                } else {\n                    line = testLine;\n                }\n            }\n            const explicitLines = String(text).split('\\n').length - 1;\n            lineCount += explicitLines;\n            return Math.ceil(lineCount * fontSize * lineHeightMultiplier);\n        } catch (_) {\n            return 0;\n        }\n    };\n\n    const computeLayout = (elements, itemData) => {\n        const layoutElements = JSON.parse(JSON.stringify(elements));\n        \n        const isInside = (inner, outer) => {\n             const eps = 0.1;\n             return (\n                 inner.x >= outer.x - eps &&\n                 inner.x + inner.width <= outer.x + outer.width + eps &&\n                 inner.y >= outer.y - eps &&\n                 inner.y + inner.height <= outer.y + outer.height + eps\n             );\n        };\n\n        const autoGrowElements = layoutElements\n            .filter(el => (el.type === 'text' || el.type === 'text-container') && el.autoGrow)\n            .sort((a, b) => a.y - b.y);\n\n        autoGrowElements.forEach(textEl => {\n            let content = textEl.content;\n            content = content.replace(/\\{\\{(.*?)\\}\\}/g, (match, key) => {\n                const val = itemData[key.trim()];\n                return val !== undefined && val !== null ? String(val) : match;\n            });\n            \n            const fontSize = parseInt(String((textEl.style && textEl.style.fontSize) || 16));\n            const fontFamily = String((textEl.style && textEl.style.fontFamily) || 'Arial');\n            \n            const isHorizontal = textEl.type === 'text-container' && textEl.containerExpansion === 'horizontal';\n            \n            if (isHorizontal) {\n                // Horizontal expansion: Update width only\n                // Requires canvas context which is available in measureTextHeight scope or we create new one\n                // For simplicity, we can't easily access the measure logic here if it's not exposed, \n                // but measureTextHeight is available in this scope.\n                // However measureTextHeight calculates HEIGHT. We need WIDTH.\n                \n                try {\n                    const canvas = document.createElement('canvas');\n                    const context = canvas.getContext('2d');\n                    if (context) {\n                         context.font = `${fontSize}px ${fontFamily}`;\n                         const metrics = context.measureText(content);\n                         const padding = parseInt(String((textEl.style && textEl.style.padding) || 0)) * 2;\n                         const newWidth = Math.ceil(metrics.width + padding);\n                         if (newWidth > textEl.width) {\n                             textEl.width = newWidth;\n                         }\n                    }\n                } catch(e) {}\n            } else {\n                // Vertical Expansion\n                const measuredHeight = measureTextHeight(content, textEl.width, fontFamily, fontSize);\n                const designHeight = textEl.height;\n                const delta = measuredHeight - designHeight;\n                \n                if (delta > 0) {\n                    const originalBottom = textEl.y + designHeight;\n                    const originalTextRect = {\n                        x: textEl.x,\n                        y: textEl.y,\n                        width: textEl.width,\n                        height: designHeight\n                    };\n                    \n                    textEl.height = measuredHeight;\n                    \n                    layoutElements.forEach(other => {\n                        if (other.id === textEl.id) return;\n                        \n                        if (isInside(originalTextRect, other)) {\n                            other.height += delta;\n                        }\n                        \n                        if (other.y >= originalBottom) {\n                            other.y += delta;\n                        }\n                    });\n                }\n            }\n        });\n        \n        let maxY = 0;\n        layoutElements.forEach(el => {\n            const bottom = el.y + el.height;\n            if (bottom > maxY) maxY = bottom;\n        });\n        \n        return { layoutElements, maxY };\n    };\n\n    const computeItemHeight = (elements, itemData, fallbackHeight) => {\n        const { maxY } = computeLayout(elements, itemData);\n        return fallbackHeight ? Math.max(maxY, fallbackHeight) : maxY;\n    };\n\n    const formatValue = (value, formatting) => {\n        if (!formatting || formatting.type === 'text') return value !== undefined && value !== null ? String(value) : '';\n        if (value === undefined || value === null) return '';\n\n        if (formatting.type === 'boolean') {\n             const isTrue = String(value) === 'true' || value === true || (typeof value === 'number' && value > 0);\n             return isTrue ? (formatting.trueLabel || 'Sim') : (formatting.falseLabel || 'Não');\n        }\n\n        if (formatting.type === 'date') {\n            try {\n                const date = new Date(value);\n                if (isNaN(date.getTime())) return String(value);\n                \n                if (formatting.dateFormat) {\n                     const d = date.getDate().toString().padStart(2, '0');\n                     const m = (date.getMonth() + 1).toString().padStart(2, '0');\n                     const y = date.getFullYear();\n                     const H = date.getHours().toString().padStart(2, '0');\n                     const M = date.getMinutes().toString().padStart(2, '0');\n                     const S = date.getSeconds().toString().padStart(2, '0');\n                     \n                     return formatting.dateFormat\n                        .replace('DD', d)\n                        .replace('MM', m)\n                        .replace('YYYY', String(y))\n                        .replace('HH', H)\n                        .replace('mm', M)\n                        .replace('ss', S);\n                }\n                return date.toLocaleDateString();\n            } catch (e) { return String(value); }\n        }\n\n        if (formatting.type === 'number') {\n             const num = parseFloat(value);\n             if (isNaN(num)) return String(value);\n             \n             if (formatting.numberFormat === 'currency') {\n                 return (formatting.currencySymbol || 'R$') + ' ' + num.toFixed(formatting.decimalPlaces || 2);\n             }\n             if (formatting.numberFormat === 'percent') {\n                 return num.toFixed(formatting.decimalPlaces || 0) + '%';\n             }\n             if (formatting.decimalPlaces !== undefined) {\n                 return num.toFixed(formatting.decimalPlaces);\n             }\n             return num.toFixed(formatting.decimalPlaces || 0);\n        }\n        \n        return String(value);\n    };\n\n    const checkCondition = (propValue, operator, ruleValue) => {\n        const val = String(propValue).toLowerCase();\n        const target = String(ruleValue).toLowerCase();\n        \n        switch (operator) {\n            case 'equals': return val === target;\n            case 'notEquals': return val !== target;\n            case 'contains': return val.includes(target);\n            case 'greaterThan': return parseFloat(val) > parseFloat(target);\n            case 'lessThan': return parseFloat(val) < parseFloat(target);\n            case 'truthy': return !!propValue;\n            case 'falsy': return !propValue;\n            default: return false;\n        }\n    };\n\n    const camelToKebab = (string) => {\n        return string.replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, '$1-$2').toLowerCase();\n    };\n\n    const hex8ToRgba = (hex) => {\n        const m = /^#([0-9a-fA-F]{8})$/.exec(hex);\n        if (!m) return hex;\n        const h = m[1];\n        const r = parseInt(h.slice(0, 2), 16);\n        const g = parseInt(h.slice(2, 4), 16);\n        const b = parseInt(h.slice(4, 6), 16);\n        const a = parseInt(h.slice(6, 8), 16) / 255;\n        return `rgba(${r}, ${g}, ${b}, ${a})`;\n    };\n\n    const styleObjectToString = (style) => {\n        if (!style) return '';\n        const pxProps = [\n            'width', 'height', 'top', 'left', 'right', 'bottom', \n            'fontSize', 'borderRadius', 'padding', 'margin', 'borderWidth',\n            'borderTopLeftRadius', 'borderTopRightRadius', 'borderBottomRightRadius', 'borderBottomLeftRadius'\n        ];\n        \n        return Object.entries(style)\n            .map(([key, value]) => {\n                if (value === undefined || value === null) return '';\n                const cssKey = camelToKebab(key);\n                let cssValue = (typeof value === 'number' && pxProps.includes(key)) ? value + 'px' : value;\n                if (typeof cssValue === 'string') {\n                    if (/^#([0-9a-fA-F]{8})$/.test(cssValue)) {\n                        cssValue = hex8ToRgba(cssValue);\n                    }\n                }\n                return `${cssKey}: ${cssValue}`;\n            })\n            .filter(Boolean)\n            .join('; ');\n    };\n\n    const getAnimationStyles = (anim) => {\n        if (!anim || anim.type === 'none') return {};\n        return {\n            animationName: anim.type,\n            animationDuration: (anim.duration || 1) + 's',\n            animationDelay: (anim.delay || 0) + 's',\n            animationIterationCount: anim.iterationCount || 1,\n            animationTimingFunction: anim.timingFunction || 'ease',\n            animationFillMode: 'both'\n        };\n    };\n\n    const keyframesCss = `\n    @keyframes slideIn {\n                from { opacity: 0; transform: translateY(20px); }\n                to { opacity: 1; transform: translateY(0); }\n    }\n    @keyframes fadeIn { \n        from { opacity: 0; } \n        to { opacity: 1; } \n    }\n    @keyframes slideInLeft { \n        from { opacity: 0; transform: translateX(-50px); } \n        to { opacity: 1; transform: translateX(0); } \n    }\n    @keyframes slideInRight { \n        from { opacity: 0; transform: translateX(50px); } \n        to { opacity: 1; transform: translateX(0); } \n    }\n    @keyframes slideInUp { \n        from { opacity: 0; transform: translateY(50px); } \n        to { opacity: 1; transform: translateY(0); } \n    }\n    @keyframes slideInDown { \n        from { opacity: 0; transform: translateY(-50px); } \n        to { opacity: 1; transform: translateY(0); } \n    }\n    @keyframes zoomIn { \n        from { opacity: 0; transform: scale(0.5); } \n        to { opacity: 1; transform: scale(1); } \n    }\n    @keyframes bounceIn {\n        0% { opacity: 0; transform: scale(0.3); }\n        50% { opacity: 1; transform: scale(1.05); }\n        70% { transform: scale(0.9); }\n        100% { transform: scale(1); }\n    }\n    @keyframes pulse {\n        0% { transform: scale(1); }\n        50% { transform: scale(1.05); }\n        100% { transform: scale(1); }\n    }\n    @keyframes shake {\n        0%, 100% { transform: translateX(0); }\n        10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }\n        20%, 40%, 60%, 80% { transform: translateX(5px); }\n    }\n    @keyframes spin { \n        from { transform: rotate(0deg); } \n        to { transform: rotate(360deg); } \n    }\n    \n    /* Improved / Smoother Animations */\n    @keyframes smoothSlideUp {\n        0% { opacity: 0; transform: translateY(30px); }\n        100% { opacity: 1; transform: translateY(0); }\n    }\n    @keyframes popIn {\n        0% { opacity: 0; transform: scale(0.8) translateY(10px); }\n        100% { opacity: 1; transform: scale(1) translateY(0); }\n    }\n    @keyframes blurIn {\n        0% { opacity: 0; filter: blur(10px); }\n        100% { opacity: 1; filter: blur(0); }\n    }\n    `;\n\n    const renderItem = (itemData, index = 0, offsetY = 0) => {\n        const { layoutElements } = computeLayout(elements, itemData);\n        return layoutElements.map(element => {\n            let content = element.content;\n            let imgSrc = '';\n\n            // Resolve Content & Formatting\n            if (element.type === 'text' || element.type === 'text-container') {\n                content = content.replace(/\\{\\{(.*?)\\}\\}/g, (match, key) => {\n                    const val = itemData[key.trim()];\n                    if (val === undefined || val === null) return match;\n                    if (element.formatting) {\n                        return formatValue(val, element.formatting);\n                    }\n                    return String(val);\n                });\n            } else if (element.type === 'image') {\n                 if (element.dataBinding) {\n                    const val = itemData[element.dataBinding];\n                    if (val !== undefined && val !== null) {\n                        imgSrc = String(val);\n                    } else {\n                        imgSrc = content;\n                    }\n                 } else {\n                     imgSrc = content.replace(/\\{\\{(.*?)\\}\\}/g, (match, key) => {\n                        const val = itemData[key.trim()];\n                        return val !== undefined && val !== null ? String(val) : match;\n                    });\n                 }\n            }\n\n            // Resolve Conditional Styles\n            let conditionalStyles = {};\n            if (element.conditions) {\n                element.conditions.forEach(rule => {\n                    const propVal = itemData[rule.property];\n                    if (checkCondition(propVal, rule.operator, rule.value)) {\n                         conditionalStyles = { ...conditionalStyles, ...rule.style };\n                    }\n                });\n            }\n\n            // Resolve Style Bindings\n            let bindingStyles = {};\n            if (element.styleBindings) {\n                Object.entries(element.styleBindings).forEach(([styleProp, variableName]) => {\n                    const val = itemData[variableName];\n                    if (val !== undefined && val !== null) {\n                        bindingStyles[styleProp] = String(val);\n                    }\n                });\n            }\n\n            const baseStyle = {\n                position: 'absolute',\n                left: element.x,\n                top: element.y + offsetY,\n                width: element.width,\n                height: element.autoGrow ? 'auto' : element.height,\n                transform: element.rotation ? `rotate(${element.rotation}deg)` : undefined,\n                overflow: element.autoGrow ? 'visible' : 'hidden',\n                whiteSpace: (element.type === 'text-container' && element.autoGrow && element.containerExpansion === 'horizontal') ? 'nowrap' : (element.autoGrow ? 'pre-wrap' : undefined),\n                wordBreak: element.autoGrow ? 'break-word' : undefined,\n                ...element.style,\n                ...conditionalStyles,\n                ...bindingStyles\n            };\n            \n            // Fix: remove padding if it's not explicitly set, or handle it for text\n            if (element.type === 'text' && !baseStyle.padding) {\n                // baseStyle.padding = '8px'; // Removed default padding to respect resize box\n            }\n            \n            const styleString = styleObjectToString(baseStyle);\n\n            if (element.type === 'text' || element.type === 'text-container') {\n                return `<div style=\"${styleString}\">${content}</div>`;\n            } else if (element.type === 'image') {\n                const imgStyle = styleObjectToString({\n                    width: '100%',\n                    height: '100%',\n                    objectFit: element.style?.objectFit || 'cover',\n                    display: 'block'\n                });\n                return `<div style=\"${styleString}\"><img src=\"${imgSrc}\" alt=\"Element\" style=\"${imgStyle}\" /></div>`;\n            } else if (element.type === 'box') {\n                 return `<div style=\"${styleString}\"></div>`;\n            }\n            return '';\n        }).join('\\n');\n    };\n\n    if (isList && Array.isArray(data)) {\n        // Calculate per-item height respecting autoGrow\n        // Sort data\n        let listData = [...data];\n        if (listSettings && listSettings.sortProp) {\n            const prop = listSettings.sortProp;\n            const order = listSettings.sortOrder === 'asc' ? 1 : -1;\n            listData.sort((a, b) => {\n                const valA = a[prop];\n                const valB = b[prop];\n                if (valA < valB) return -1 * order;\n                if (valA > valB) return 1 * order;\n                return 0;\n            });\n        }\n        \n        // Handle newest position\n        if (listSettings && listSettings.newestPosition === 'top') {\n             listData.reverse();\n        }\n\n        // Generate HTML for all items\n        const itemsHtml = listData.map((item, index) => {\n             const itemHtml = renderItem(item, index, 0); \n             const itemHeight = computeItemHeight(elements, item, canvasHeight);\n             const itemContainerStyle = styleObjectToString({\n                 position: 'relative',\n                 height: itemHeight,\n                 width: '100%'\n             });\n             \n             return `<div class=\"list-item\" style=\"${itemContainerStyle}\">${itemHtml}</div>`;\n        }).join('\\n');\n\n        // Animation Styles based on settings\n        const scrollDirection = (listSettings && listSettings.scrollDirection) || 'down';\n        const containerHeight = (listSettings && listSettings.containerHeight) ? listSettings.containerHeight + 'px' : '100%';\n        \n        const justify = (listSettings && listSettings.newestPosition === 'top') ? 'flex-start' : 'flex-end';\n\n        // Entry Animation from settings\n        const entryAnim = listSettings && listSettings.entryAnimation ? listSettings.entryAnimation : { type: 'slideIn', duration: 0.3, timingFunction: 'ease-out' };\n        const entryAnimName = entryAnim.type === 'none' ? 'none' : entryAnim.type;\n        const entryAnimDuration = entryAnim.duration + 's';\n        const entryAnimTiming = entryAnim.timingFunction || 'ease-out';\n\n        const animationCss = `\n            ${keyframesCss}\n\n            .list-wrapper {\n                display: flex;\n                flex-direction: column;\n                justify-content: ${justify};\n                height: ${containerHeight};\n                width: 100%;\n                overflow-y: auto;\n                overflow-x: hidden;\n                box-sizing: border-box;\n                padding: 10px;\n            }\n            .list-item {\n                flex-shrink: 0;\n                animation: ${entryAnimName} ${entryAnimDuration} ${entryAnimTiming};\n                margin-bottom: 10px;\n                width: 100%;\n                position: relative;\n            }\n        `;\n        \n        const scrollScript = scrollDirection === 'up' \n            ? `<script>\n                document.addEventListener('DOMContentLoaded', () => {\n                    const wrapper = document.querySelector('.list-wrapper');\n                    if(wrapper) wrapper.scrollTop = wrapper.scrollHeight;\n                });\n               <\/script>`\n            : '';\n\n        // Inject Smart Script for Dynamic Updates\n        const injectionScript = `\n            <script>\n            (function() {\n                try {\n                    const elements = ${JSON.stringify(elements)};\n                    const formatValue = ${formatValue.toString()};\n                    const checkCondition = ${checkCondition.toString()};\n                    const camelToKebab = ${camelToKebab.toString()};\n                    const hex8ToRgba = ${hex8ToRgba.toString()};\n                    const styleObjectToString = ${styleObjectToString.toString()};\n                    const getAnimationStyles = ${getAnimationStyles.toString()};\n                    const renderItem = ${renderItem.toString()};\n\n                    const measureTextHeight = ${measureTextHeight.toString()};\n                    const computeLayout = ${computeLayout.toString()};\n                    const computeItemHeight = ${computeItemHeight.toString()};\n                    const itemHeightFallback = ${canvasHeight || 0};\n                    const newestPosition = \"${(listSettings && listSettings.newestPosition) || 'bottom'}\";\n                    const scrollDirection = \"${(listSettings && listSettings.scrollDirection) || 'down'}\";\n\n                    window.addItem = function(data) {\n                        const wrapper = document.querySelector('.list-wrapper');\n                        if (!wrapper) return;\n\n                        const itemHtml = renderItem(data, 0, 0);\n                        const itemHeight = computeItemHeight(elements, data, itemHeightFallback);\n                        const itemContainerStyle = styleObjectToString({\n                            position: 'relative',\n                            height: itemHeight,\n                            width: '100%'\n                        });\n\n                        const div = document.createElement('div');\n                        div.className = 'list-item';\n                        div.setAttribute('style', itemContainerStyle);\n                        div.innerHTML = itemHtml;\n\n                        if (newestPosition === 'top') {\n                            wrapper.insertBefore(div, wrapper.firstChild);\n                        } else {\n                            wrapper.appendChild(div);\n                        }\n                        \n                        if (scrollDirection === 'up') {\n                           wrapper.scrollTop = wrapper.scrollHeight;\n                        }\n                    };\n                } catch(e) { console.error(\"Smart List Init Error\", e); }\n            })();\n            <\/script>\n        `;\n\n        return `\n            <style>${animationCss}</style>\n            <div class=\"list-wrapper\">\n                ${itemsHtml}\n            </div>\n            ${scrollScript}\n            ${injectionScript}\n        `;\n    }\n\n    // Single Item\n    const contentHtml = renderItem(data);\n    return `<div style=\"position: relative; width: 100%; height: 100%; overflow: hidden;\">${contentHtml}</div>`;\n}\n";
 export { GenericEditor as EditorContent, generateHTML };

@@ -3,6 +3,7 @@ import { Box, Button, Flex, ScrollArea, Text } from '@radix-ui/themes';
 import { AnimatePresence, motion } from 'framer-motion';
 import React from 'react';
 import { useEditor, type IElement, type IElementAnimation } from '../context';
+import { formatValue } from '../utils/helpers';
 
 const getAnimationVariants = (anim?: IElementAnimation) => {
     if (!anim || anim.type === 'none') return {
@@ -55,10 +56,16 @@ const PreviewElementRenderer: React.FC<{ element: IElement; offsetY?: number; da
     // Resolve content based on data binding
     let content = element.content;
     if (dataContext) {
-        if (element.type === 'text') {
+        if (element.type === 'text' || element.type === 'text-container') {
             content = content.replace(/\{\{(.*?)\}\}/g, (match, key) => {
                 const val = dataContext[key.trim()];
-                return val !== undefined && val !== null ? String(val) : match;
+                if (val !== undefined && val !== null) {
+                    if (element.formatting) {
+                        return formatValue(val, element.formatting);
+                    }
+                    return String(val);
+                }
+                return match;
             });
         } else if (element.type === 'image') {
             if (element.dataBinding) {
@@ -79,18 +86,20 @@ const PreviewElementRenderer: React.FC<{ element: IElement; offsetY?: number; da
         position: 'absolute',
         left: 0,
         top: 0,
-        width: `${element.width}px`,
-        height: `${element.height}px`,
+        width: (element.type === 'text-container' && element.autoGrow && element.containerExpansion === 'horizontal') ? 'max-content' : `${element.width}px`,
+        height: element.autoGrow ? 'auto' : `${element.height}px`,
         transform: `translate(${element.x}px, ${element.y + offsetY}px) rotate(${element.rotation || 0}deg)`,
-        padding: (element.type === 'image' || element.type === 'text') ? 0 : '8px',
-        overflow: 'hidden',
+        padding: (element.type === 'image' || element.type === 'text' || element.type === 'text-container') ? 0 : '8px',
+        overflow: element.autoGrow ? 'visible' : 'hidden',
+        whiteSpace: (element.type === 'text-container' && element.autoGrow && element.containerExpansion === 'horizontal') ? 'nowrap' : (element.autoGrow ? 'pre-wrap' : undefined),
+        wordBreak: element.autoGrow ? 'break-word' : undefined,
         ...element.style
     };
 
     return (
         <Box style={commonStyles}>
-            {element.type === 'text' && (
-                <Text>{content}</Text>
+            {(element.type === 'text' || element.type === 'text-container') && (
+                <Text style={{ width: '100%', height: '100%', display: 'block' }}>{content}</Text>
             )}
 
             {element.type === 'image' && (
@@ -109,6 +118,17 @@ const PreviewElementRenderer: React.FC<{ element: IElement; offsetY?: number; da
 
             {element.type === 'box' && (
                 <Box style={{ width: '100%', height: '100%' }} />
+            )}
+
+            {element.type === 'checkbox' && (
+                <Box style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <input
+                        type="checkbox"
+                        checked={dataContext && element.dataBinding ? (dataContext[element.dataBinding] === true || String(dataContext[element.dataBinding]) === 'true') : false}
+                        readOnly
+                        style={{ width: '100%', height: '100%', margin: 0 }}
+                    />
+                </Box>
             )}
         </Box>
     );

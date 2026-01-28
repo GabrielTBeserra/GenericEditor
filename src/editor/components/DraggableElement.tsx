@@ -11,9 +11,11 @@ interface DraggableElementProps {
 }
 
 export const DraggableElement: React.FC<DraggableElementProps> = React.memo(({ element, isSelected }) => {
-    const { selectElement, updateElement, updateElements, state, resizeGroup } = useEditor();
+    const { selectElement, updateElement, updateElements, state, resizeGroup, setSnapLines } = useEditor();
     const [isDragging, setIsDragging] = useState(false);
+    const [isResizing, setIsResizing] = useState(false);
     const [isRotating, setIsRotating] = useState(false);
+    const contentRef = useRef<HTMLDivElement>(null);
 
     // Refs for drag calculations
     const dragStartPos = useRef({ x: 0, y: 0 });
@@ -40,7 +42,7 @@ export const DraggableElement: React.FC<DraggableElementProps> = React.memo(({ e
     let conditionalStyles: React.CSSProperties = {};
 
     if (dataContext) {
-        if (element.type === 'text') {
+        if (element.type === 'text' || element.type === 'text-container') {
             displayContent = displayContent.replace(/\{\{(.*?)\}\}/g, (match, key) => {
                 const val = dataContext[key.trim()];
                 if (val !== undefined && val !== null) {
@@ -110,7 +112,7 @@ export const DraggableElement: React.FC<DraggableElementProps> = React.memo(({ e
         }
     };
 
-    const handleMouseDown = (e: React.MouseEvent) => {
+    const handlePointerDown = (e: React.PointerEvent) => {
         if (e.button !== 0) return;
         e.stopPropagation();
 
@@ -145,6 +147,9 @@ export const DraggableElement: React.FC<DraggableElementProps> = React.memo(({ e
         setIsDragging(true);
         dragStartPos.current = { x: e.clientX, y: e.clientY };
 
+        // Capture pointer to ensure we receive all move/up events even if cursor leaves the element
+        (e.currentTarget as Element).setPointerCapture(e.pointerId);
+
         // Capture initial positions...
         // Note: We use state.selectedElementIds but if we just selected, it might be stale.
         // We handle this by checking if !isSelected and adding self.
@@ -162,6 +167,100 @@ export const DraggableElement: React.FC<DraggableElementProps> = React.memo(({ e
             }
         });
         initialPositions.current = positions;
+    };
+
+    const handlePointerMove = (e: React.PointerEvent) => {
+        if (isDragging) {
+            const zoom = state.zoom || 1;
+            const dx = (e.clientX - dragStartPos.current.x) / zoom;
+            const dy = (e.clientY - dragStartPos.current.y) / zoom;
+
+            if (Math.abs(dx) > 2 || Math.abs(dy) > 2) {
+                hasMoved.current = true;
+            }
+
+            // Snapping Logic Variables
+            const snapThreshold = 5 / zoom;
+            const activeSnapLines: { orientation: 'horizontal' | 'vertical', position: number }[] = [];
+
+            const updates = Object.entries(initialPositions.current).map(([id, startPos]) => {
+                let newX = startPos.x + dx;
+                let newY = startPos.y + dy;
+
+                // Apply Grid Snapping (Priority 1)
+                if (state.gridSize > 0) {
+                    newX = Math.round(newX / state.gridSize) * state.gridSize;
+                    newY = Math.round(newY / state.gridSize) * state.gridSize;
+                }
+                // Apply Smart Snapping (Priority 2, only if Grid is off or ignored)
+                else {
+                    // Find potential snap targets (other elements)
+                    // Only snap the primary dragged element (for simplicity) or all?
+                    // Let's snap based on the current element being updated
+                    // We need to check against ALL other elements (except selected ones)
+
+                    let snappedX = false;
+                    let snappedY = false;
+
+                    // Calculate current element bounds
+                    const width = element.width ?? 100;
+                    const height = element.height ?? 100;
+
+                    // Simplified Smart Snapping: Only if dragging a SINGLE element
+                    if (Object.keys(initialPositions.current).length === 1) {
+                        state.elements.forEach(other => {
+                            if (other.id === id) return; // Skip self
+
+                            const otherW = other.width ?? 100;
+                            const otherH = other.height ?? 100;
+
+                            // Vertical Snapping (X axis alignment)
+                            if (!snappedX) {
+                                if (Math.abs(newX - other.x) < snapThreshold) { newX = other.x; snappedX = true; activeSnapLines.push({ orientation: 'vertical', position: other.x }); }
+                                else if (Math.abs(newX - (other.x + otherW)) < snapThreshold) { newX = other.x + otherW; snappedX = true; activeSnapLines.push({ orientation: 'vertical', position: other.x + otherW }); }
+                                else if (Math.abs((newX + width) - other.x) < snapThreshold) { newX = other.x - width; snappedX = true; activeSnapLines.push({ orientation: 'vertical', position: other.x }); }
+                                else if (Math.abs((newX + width) - (other.x + otherW)) < snapThreshold) { newX = other.x + otherW - width; snappedX = true; activeSnapLines.push({ orientation: 'vertical', position: other.x + otherW }); }
+                            }
+
+                            // Horizontal Snapping (Y axis alignment)
+                            if (!snappedY) {
+                                if (Math.abs(newY - other.y) < snapThreshold) { newY = other.y; snappedY = true; activeSnapLines.push({ orientation: 'horizontal', position: other.y }); }
+                                else if (Math.abs(newY - (other.y + otherH)) < snapThreshold) { newY = other.y + otherH; snappedY = true; activeSnapLines.push({ orientation: 'horizontal', position: other.y + otherH }); }
+                                else if (Math.abs((newY + height) - other.y) < snapThreshold) { newY = other.y - height; snappedY = true; activeSnapLines.push({ orientation: 'horizontal', position: other.y }); }
+                                else if (Math.abs((newY + height) - (other.y + otherH)) < snapThreshold) { newY = other.y + otherH - height; snappedY = true; activeSnapLines.push({ orientation: 'horizontal', position: other.y + otherH }); }
+                            }
+                        });
+                    }
+                }
+
+                // Boundary checks (basic)
+                if (state.isList) {
+                    newY = Math.max(0, newY);
+                }
+
+                return {
+                    id,
+                    changes: { x: newX, y: newY }
+                };
+            });
+
+            if (setSnapLines) {
+                setSnapLines(activeSnapLines);
+            }
+
+            // Update GLOBAL state without history for smooth drag
+            updateElements(updates, false);
+        }
+    };
+
+    const handlePointerUp = (e: React.PointerEvent) => {
+        if (isDragging) {
+            setIsDragging(false);
+            (e.currentTarget as Element).releasePointerCapture(e.pointerId);
+            // Commit to history by triggering an update with empty changes but addToHistory=true
+            updateElements([], true);
+            if (setSnapLines) setSnapLines([]);
+        }
     };
 
     const handleRotateStart = (e: React.MouseEvent) => {
@@ -185,39 +284,6 @@ export const DraggableElement: React.FC<DraggableElementProps> = React.memo(({ e
 
     useEffect(() => {
         const handleMouseMove = (e: MouseEvent) => {
-            if (isDragging) {
-                const dx = e.clientX - dragStartPos.current.x;
-                const dy = e.clientY - dragStartPos.current.y;
-
-                if (Math.abs(dx) > 2 || Math.abs(dy) > 2) {
-                    hasMoved.current = true;
-                }
-
-                const updates = Object.entries(initialPositions.current).map(([id, startPos]) => {
-                    let newX = startPos.x + dx;
-                    let newY = startPos.y + dy;
-
-                    // Apply Grid Snapping
-                    if (state.gridSize > 0) {
-                        newX = Math.round(newX / state.gridSize) * state.gridSize;
-                        newY = Math.round(newY / state.gridSize) * state.gridSize;
-                    }
-
-                    // Boundary checks (basic) - applying to all elements based on their own start pos
-                    if (state.isList) {
-                        newY = Math.max(0, newY);
-                    }
-
-                    return {
-                        id,
-                        changes: { x: newX, y: newY }
-                    };
-                });
-
-                // Update GLOBAL state without history for smooth drag
-                updateElements(updates, false);
-            }
-
             if (isRotating) {
                 const dx = e.clientX - centerPos.current.x;
                 const dy = e.clientY - centerPos.current.y;
@@ -233,28 +299,13 @@ export const DraggableElement: React.FC<DraggableElementProps> = React.memo(({ e
         };
 
         const handleMouseUp = () => {
-            if (isDragging) {
-                setIsDragging(false);
-                // Commit to history by triggering an update with empty changes but addToHistory=true
-                // This works because the state was already updated during drag (with addToHistory=false)
-                updateElements([], true);
-            }
             if (isRotating) {
                 setIsRotating(false);
-                // Same history issue for rotation
                 updateElement(element.id, { rotation: element.rotation }, true);
             }
         };
 
-        // We need to track the latest delta for the mouseUp history commit
-        // Or we can just commit on the *next* update?
-        // Let's try to capture the final state in MouseUp.
-        // We can't access 'element' prop inside the event listener if we don't add it to deps.
-        // If we add it to deps, we re-bind listeners on every frame -> bad performance.
-
-        // Solution: Use a ref to store the latest 'updates' payload.
-
-        if (isDragging || isRotating) {
+        if (isRotating) {
             window.addEventListener('mousemove', handleMouseMove);
             window.addEventListener('mouseup', handleMouseUp);
         }
@@ -263,7 +314,7 @@ export const DraggableElement: React.FC<DraggableElementProps> = React.memo(({ e
             window.removeEventListener('mousemove', handleMouseMove);
             window.removeEventListener('mouseup', handleMouseUp);
         };
-    }, [isDragging, isRotating, element.id, updateElement, updateElements, state.isList, state.selectedElementIds]);
+    }, [isRotating, element.id, updateElement, element.rotation]);
     // Note: state.selectedElementIds in deps means if selection changes, drag stops? 
     // Ideally selection doesn't change during drag.
 
@@ -271,6 +322,21 @@ export const DraggableElement: React.FC<DraggableElementProps> = React.memo(({ e
     // Let's use a mutable ref for the last updates to commit them on MouseUp.
 
     // ... Revised Effect below ...
+
+    // Auto-resize for horizontal text container
+    useEffect(() => {
+        if (element.type === 'text-container' && element.autoGrow && element.containerExpansion === 'horizontal') {
+            const measure = () => {
+                if (contentRef.current) {
+                    const newWidth = contentRef.current.scrollWidth;
+                    if (Math.abs(newWidth - (element.width ?? 0)) > 2) {
+                        updateElement(element.id, { width: newWidth }, false);
+                    }
+                }
+            };
+            requestAnimationFrame(measure);
+        }
+    }, [displayContent, element.autoGrow, element.containerExpansion, element.style, element.width, element.formatting, updateElement, element.id, element.type]);
 
     const commonStyles: React.CSSProperties = {
         position: 'absolute',
@@ -280,8 +346,8 @@ export const DraggableElement: React.FC<DraggableElementProps> = React.memo(({ e
         height: element.autoGrow ? 'auto' : '100%',
         minHeight: element.autoGrow ? '100%' : undefined,
         padding: (element.type === 'image' || element.type === 'text') ? 0 : '8px',
-        border: isSelected ? '2px solid var(--accent-9)' : '1px dashed transparent',
-        outline: isSelected ? 'none' : '1px solid transparent',
+        border: (isSelected || isResizing) ? '2px solid var(--accent-9)' : '1px dashed transparent',
+        outline: (isSelected || isResizing) ? 'none' : '1px solid transparent',
         cursor: isDragging ? 'grabbing' : 'grab',
         borderRadius: 'var(--radius-2)',
         overflow: element.autoGrow ? 'visible' : 'hidden',
@@ -301,9 +367,11 @@ export const DraggableElement: React.FC<DraggableElementProps> = React.memo(({ e
             }}
             maxHeight={state.isList ? Math.max(10, canvasHeight - element.y) : undefined}
             onResizeStart={(e) => {
+                setIsResizing(true);
                 keepAspectRef.current = !!(e as any).shiftKey;
             }}
             onResizeStop={(_e, _direction, _ref, d) => {
+                setIsResizing(false);
                 const newWidth = (element.width ?? 100) + d.width;
                 const newHeight = (element.height ?? 100) + d.height;
                 if (element.type === 'group') {
@@ -317,7 +385,10 @@ export const DraggableElement: React.FC<DraggableElementProps> = React.memo(({ e
                 transform: `translate(${element.x ?? 0}px, ${element.y ?? 0}px) rotate(${element.rotation || 0}deg)`,
                 height: element.autoGrow ? 'auto' : undefined,
                 display: (isHidden && !isSelected) ? 'none' : undefined,
-                opacity: (isHidden && isSelected) ? 0.4 : 1
+                opacity: (isHidden && isSelected) ? 0.4 : 1,
+                zIndex: isSelected ? 1000 : undefined,
+                // Add outline during resize/selection to ensure visibility
+                outline: isSelected ? '1px dashed var(--accent-9)' : undefined
             }}
             enable={isSelected && !element.autoGrow ? undefined : {
                 top: false, right: isSelected, bottom: false, left: isSelected,
@@ -329,8 +400,27 @@ export const DraggableElement: React.FC<DraggableElementProps> = React.memo(({ e
             <ElementContextMenu element={element}>
                 <div style={{ width: '100%', height: '100%', position: 'relative' }}>
                     <Box
-                        style={commonStyles}
-                        onMouseDown={handleMouseDown}
+                        ref={contentRef}
+                        style={{
+                            ...commonStyles,
+                            // Override for text-container horizontal expansion
+                            whiteSpace: (element.type === 'text-container' && element.autoGrow && element.containerExpansion === 'horizontal')
+                                ? 'nowrap'
+                                : commonStyles.whiteSpace,
+                            width: (element.type === 'text-container' && element.autoGrow && element.containerExpansion === 'horizontal')
+                                ? 'max-content'
+                                : '100%',
+                            height: (element.type === 'text-container' && element.autoGrow && element.containerExpansion === 'vertical')
+                                ? 'auto'
+                                : '100%'
+                        }}
+                        onPointerDown={handlePointerDown}
+                        onPointerMove={handlePointerMove}
+                        onPointerUp={handlePointerUp}
+                        onMouseDown={(e) => {
+                            // Prevent mousedown from bubbling to canvas and deselecting
+                            if (e.button === 0) e.stopPropagation();
+                        }}
                         onClick={handleClick}
                         title={element.name}
                         onMouseEnter={(e) => {
@@ -339,9 +429,48 @@ export const DraggableElement: React.FC<DraggableElementProps> = React.memo(({ e
                         onMouseLeave={(e) => {
                             if (!isSelected) e.currentTarget.style.borderColor = 'transparent';
                         }}
+                        onDragOver={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            e.dataTransfer.dropEffect = 'copy';
+                        }}
+                        onDrop={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            const propName = e.dataTransfer.getData('application/x-editor-prop');
+                            if (propName) {
+                                if (element.type === 'text' || element.type === 'text-container') {
+                                    // Append variable to existing content
+                                    const newContent = element.content ? `${element.content} {{${propName}}}` : `{{${propName}}}`;
+                                    updateElement(element.id, {
+                                        content: newContent,
+                                        dataBinding: propName // Also set primary binding property
+                                    });
+                                } else if (element.type === 'image') {
+                                    // For image, bind to source
+                                    updateElement(element.id, {
+                                        dataBinding: propName,
+                                        content: `{{${propName}}}`
+                                    });
+                                } else if (element.type === 'checkbox') {
+                                    updateElement(element.id, {
+                                        dataBinding: propName
+                                    });
+                                }
+                            }
+                        }}
                     >
                         {element.type === 'text' && (
                             <Text style={{ width: '100%', height: '100%' }}>{displayContent}</Text>
+                        )}
+                        {element.type === 'text-container' && (
+                            <Text style={{
+                                width: '100%',
+                                height: '100%',
+                                display: 'block'
+                            }}>
+                                {displayContent}
+                            </Text>
                         )}
                         {element.type === 'image' && (
                             displayContent ? (

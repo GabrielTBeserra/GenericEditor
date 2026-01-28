@@ -10,11 +10,12 @@ interface ILayoutShift {
 // Helper to check if inner element is spatially inside outer element
 const isInside = (inner: IElement, outer: IElement): boolean => {
     if (inner.id === outer.id) return false;
+    const eps = 0.1;
     return (
-        inner.x >= outer.x &&
-        inner.x + inner.width <= outer.x + outer.width &&
-        inner.y >= outer.y &&
-        inner.y + inner.height <= outer.y + outer.height
+        inner.x >= outer.x - eps &&
+        inner.x + inner.width <= outer.x + outer.width + eps &&
+        inner.y >= outer.y - eps &&
+        inner.y + inner.height <= outer.y + outer.height + eps
     );
 };
 
@@ -70,7 +71,10 @@ export const processLayout = (
 
     // 1. Resolve Content & Calculate Growth
     processedElements.forEach(element => {
-        if (element.type === 'text' && element.autoGrow) {
+        const isText = element.type === 'text';
+        const isTextContainer = element.type === 'text-container';
+
+        if ((isText || isTextContainer) && element.autoGrow) {
             // Resolve content
             let content = element.content;
             if (dataContext) {
@@ -90,47 +94,65 @@ export const processLayout = (
             const fontSize = parseInt(String(element.style?.fontSize || 16));
             const fontFamily = String(element.style?.fontFamily || 'Arial');
 
-            // Measure
-            const newHeight = measureTextHeight(content, element.width, fontFamily, fontSize);
-            const originalHeight = element.height;
-            const delta = newHeight - originalHeight;
+            // Check expansion direction
+            const isHorizontal = isTextContainer && element.containerExpansion === 'horizontal';
 
-            // Apply growth if positive
-            if (delta > 0) {
-                element.height = newHeight;
-                element.content = content; // Store resolved content for rendering optimization? 
-                // Actually PreviewRenderer resolves it again, but for layout we need it resolved.
-                // We won't save content back to state, just use for calculation.
+            if (isHorizontal) {
+                // Measure Width
+                // Simple canvas measurement for width
+                const canvas = document.createElement('canvas');
+                const context = canvas.getContext('2d');
+                if (context) {
+                    context.font = `${fontSize}px ${fontFamily}`;
+                    const metrics = context.measureText(content);
+                    const newWidth = Math.ceil(metrics.width + (parseInt(String(element.style?.padding || 0)) * 2));
 
-                // Find ancestors (Containers)
-                const ancestors: IElement[] = [];
-                const originalElement = originalElementsMap.get(element.id);
+                    if (newWidth > element.width) {
+                        element.width = newWidth;
+                        element.content = content;
+                    }
+                }
+            } else {
+                // Measure Height (Vertical Expansion)
+                const newHeight = measureTextHeight(content, element.width, fontFamily, fontSize);
+                const originalHeight = element.height;
+                const delta = newHeight - originalHeight;
 
-                if (originalElement) {
-                    processedElements.forEach(possibleParent => {
-                        if (possibleParent.type === 'box') {
+                // Apply growth if positive
+                if (delta > 0) {
+                    element.height = newHeight;
+                    element.content = content; // Store resolved content
+
+                    // Find ancestors (Containers)
+                    const ancestors: IElement[] = [];
+                    const originalElement = originalElementsMap.get(element.id);
+
+                    if (originalElement) {
+                        processedElements.forEach(possibleParent => {
+                            if (possibleParent.id === element.id) return;
+
                             const originalParent = originalElementsMap.get(possibleParent.id);
                             if (originalParent && isInside(originalElement, originalParent)) {
                                 ancestors.push(possibleParent);
                             }
-                        }
+                        });
+                    }
+
+                    // Expand ancestors
+                    const ignoreIds = new Set<string>([element.id]);
+                    ancestors.forEach(ancestor => {
+                        ancestor.height += delta;
+                        ignoreIds.add(ancestor.id);
+                    });
+
+                    // Record Shift
+                    // Trigger is based on the ORIGINAL bottom edge of the text
+                    shifts.push({
+                        triggerY: element.y + originalHeight,
+                        delta: delta,
+                        ignoreIds: ignoreIds
                     });
                 }
-
-                // Expand ancestors
-                const ignoreIds = new Set<string>([element.id]);
-                ancestors.forEach(ancestor => {
-                    ancestor.height += delta;
-                    ignoreIds.add(ancestor.id);
-                });
-
-                // Record Shift
-                // Trigger is based on the ORIGINAL bottom edge of the text
-                shifts.push({
-                    triggerY: element.y + originalHeight,
-                    delta: delta,
-                    ignoreIds: ignoreIds
-                });
             }
         }
     });

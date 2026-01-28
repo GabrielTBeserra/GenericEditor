@@ -186,15 +186,42 @@ const FormattingSettings: React.FC<{ element: IElement; updateElement: any }> = 
                 Configure como os dados serão exibidos quando substituídos.
             </Text>
 
-            {element.type === 'text' && (
+            {(element.type === 'text' || element.type === 'text-container') && (
                 <Box>
                     <Flex align="center" gap="2" mb="3">
                         <Switch
                             checked={element.autoGrow || false}
                             onCheckedChange={(checked) => updateElement(element.id, { autoGrow: checked })}
                         />
-                        <Text size="2">Expandir altura automaticamente (Multilinha)</Text>
+                        <Text size="2">
+                            {element.type === 'text-container'
+                                ? "Expandir container automaticamente"
+                                : "Expandir altura automaticamente (Multilinha)"}
+                        </Text>
                     </Flex>
+
+                    {element.type === 'text-container' && element.autoGrow && (
+                        <Box mb="3" ml="4">
+                            <Text size="1" mb="1" as="div">Direção de Expansão</Text>
+                            <select
+                                value={element.containerExpansion || 'vertical'}
+                                onChange={(e) => updateElement(element.id, { containerExpansion: e.target.value as any })}
+                                style={{
+                                    width: '100%',
+                                    padding: '6px',
+                                    borderRadius: '4px',
+                                    border: '1px solid var(--gray-6)',
+                                    backgroundColor: 'var(--color-panel-solid)',
+                                    color: 'var(--gray-12)',
+                                    fontSize: '14px'
+                                }}
+                            >
+                                <option value="vertical">Vertical (Altura Cresce)</option>
+                                <option value="horizontal">Horizontal (Largura Cresce)</option>
+                            </select>
+                        </Box>
+                    )}
+
                     <Separator size="4" mb="3" />
                 </Box>
             )}

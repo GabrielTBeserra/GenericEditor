@@ -57,24 +57,98 @@ function renderTemplate(elements, data, options = {}) {
         }
     };
 
-    const computeItemHeight = (elements, itemData, fallbackHeight) => {
-        let maxY = 0;
-        elements.forEach(el => {
-            let height = el.height;
-            if (el.type === 'text' && el.autoGrow) {
-                let content = el.content;
-                content = content.replace(/\\{\\{(.*?)\\}\\}/g, (match, key) => {
-                    const val = itemData[key.trim()];
-                    return val !== undefined && val !== null ? String(val) : match;
-                });
-                const fontSize = parseInt(String((el.style && el.style.fontSize) || 16));
-                const fontFamily = String((el.style && el.style.fontFamily) || 'Arial');
-                const measured = measureTextHeight(content, el.width, fontFamily, fontSize);
-                height = Math.max(height, measured);
+    const computeLayout = (elements, itemData) => {
+        const layoutElements = JSON.parse(JSON.stringify(elements));
+        
+        const isInside = (inner, outer) => {
+             const eps = 0.1;
+             return (
+                 inner.x >= outer.x - eps &&
+                 inner.x + inner.width <= outer.x + outer.width + eps &&
+                 inner.y >= outer.y - eps &&
+                 inner.y + inner.height <= outer.y + outer.height + eps
+             );
+        };
+
+        const autoGrowElements = layoutElements
+            .filter(el => (el.type === 'text' || el.type === 'text-container') && el.autoGrow)
+            .sort((a, b) => a.y - b.y);
+
+        autoGrowElements.forEach(textEl => {
+            let content = textEl.content;
+            content = content.replace(/\\{\\{(.*?)\\}\\}/g, (match, key) => {
+                const val = itemData[key.trim()];
+                return val !== undefined && val !== null ? String(val) : match;
+            });
+            
+            const fontSize = parseInt(String((textEl.style && textEl.style.fontSize) || 16));
+            const fontFamily = String((textEl.style && textEl.style.fontFamily) || 'Arial');
+            
+            const isHorizontal = textEl.type === 'text-container' && textEl.containerExpansion === 'horizontal';
+            
+            if (isHorizontal) {
+                // Horizontal expansion: Update width only
+                // Requires canvas context which is available in measureTextHeight scope or we create new one
+                // For simplicity, we can't easily access the measure logic here if it's not exposed, 
+                // but measureTextHeight is available in this scope.
+                // However measureTextHeight calculates HEIGHT. We need WIDTH.
+                
+                try {
+                    const canvas = document.createElement('canvas');
+                    const context = canvas.getContext('2d');
+                    if (context) {
+                         context.font = \`\${fontSize}px \${fontFamily}\`;
+                         const metrics = context.measureText(content);
+                         const padding = parseInt(String((textEl.style && textEl.style.padding) || 0)) * 2;
+                         const newWidth = Math.ceil(metrics.width + padding);
+                         if (newWidth > textEl.width) {
+                             textEl.width = newWidth;
+                         }
+                    }
+                } catch(e) {}
+            } else {
+                // Vertical Expansion
+                const measuredHeight = measureTextHeight(content, textEl.width, fontFamily, fontSize);
+                const designHeight = textEl.height;
+                const delta = measuredHeight - designHeight;
+                
+                if (delta > 0) {
+                    const originalBottom = textEl.y + designHeight;
+                    const originalTextRect = {
+                        x: textEl.x,
+                        y: textEl.y,
+                        width: textEl.width,
+                        height: designHeight
+                    };
+                    
+                    textEl.height = measuredHeight;
+                    
+                    layoutElements.forEach(other => {
+                        if (other.id === textEl.id) return;
+                        
+                        if (isInside(originalTextRect, other)) {
+                            other.height += delta;
+                        }
+                        
+                        if (other.y >= originalBottom) {
+                            other.y += delta;
+                        }
+                    });
+                }
             }
-            const bottom = el.y + height;
+        });
+        
+        let maxY = 0;
+        layoutElements.forEach(el => {
+            const bottom = el.y + el.height;
             if (bottom > maxY) maxY = bottom;
         });
+        
+        return { layoutElements, maxY };
+    };
+
+    const computeItemHeight = (elements, itemData, fallbackHeight) => {
+        const { maxY } = computeLayout(elements, itemData);
         return fallbackHeight ? Math.max(maxY, fallbackHeight) : maxY;
     };
 
@@ -264,12 +338,13 @@ function renderTemplate(elements, data, options = {}) {
     \`;
 
     const renderItem = (itemData, index = 0, offsetY = 0) => {
-        return elements.map(element => {
+        const { layoutElements } = computeLayout(elements, itemData);
+        return layoutElements.map(element => {
             let content = element.content;
             let imgSrc = '';
 
             // Resolve Content & Formatting
-            if (element.type === 'text') {
+            if (element.type === 'text' || element.type === 'text-container') {
                 content = content.replace(/\\{\\{(.*?)\\}\\}/g, (match, key) => {
                     const val = itemData[key.trim()];
                     if (val === undefined || val === null) return match;
@@ -324,7 +399,7 @@ function renderTemplate(elements, data, options = {}) {
                 height: element.autoGrow ? 'auto' : element.height,
                 transform: element.rotation ? \`rotate(\${element.rotation}deg)\` : undefined,
                 overflow: element.autoGrow ? 'visible' : 'hidden',
-                whiteSpace: element.autoGrow ? 'pre-wrap' : undefined,
+                whiteSpace: (element.type === 'text-container' && element.autoGrow && element.containerExpansion === 'horizontal') ? 'nowrap' : (element.autoGrow ? 'pre-wrap' : undefined),
                 wordBreak: element.autoGrow ? 'break-word' : undefined,
                 ...element.style,
                 ...conditionalStyles,
@@ -338,7 +413,7 @@ function renderTemplate(elements, data, options = {}) {
             
             const styleString = styleObjectToString(baseStyle);
 
-            if (element.type === 'text') {
+            if (element.type === 'text' || element.type === 'text-container') {
                 return \`<div style="\${styleString}">\${content}</div>\`;
             } else if (element.type === 'image') {
                 const imgStyle = styleObjectToString({
@@ -349,44 +424,57 @@ function renderTemplate(elements, data, options = {}) {
                 });
                 return \`<div style="\${styleString}"><img src="\${imgSrc}" alt="Element" style="\${imgStyle}" /></div>\`;
             } else if (element.type === 'box') {
-                 return \`<div style="\${styleString}"></div>\`;
-            }
-            return '';
+                 return `< div style = "${styleString}" > </div>`;
+} else if (element.type === 'checkbox') {
+    let isChecked = false;
+    if (element.dataBinding) {
+        const val = itemData[element.dataBinding];
+        isChecked = val === true || String(val) === 'true';
+    }
+    const checkboxStyle = styleObjectToString({
+        ...baseStyle,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+    });
+    return `<div style="${checkboxStyle}"><input type="checkbox" ${isChecked ? 'checked' : ''} disabled style="width:100%;height:100%;margin:0;" /></div>`;
+}
+return '';
         }).join('\\n');
     };
 
-    if (isList && Array.isArray(data)) {
-        // Calculate per-item height respecting autoGrow
-        // Sort data
-        let listData = [...data];
-        if (listSettings && listSettings.sortProp) {
-            const prop = listSettings.sortProp;
-            const order = listSettings.sortOrder === 'asc' ? 1 : -1;
-            listData.sort((a, b) => {
-                const valA = a[prop];
-                const valB = b[prop];
-                if (valA < valB) return -1 * order;
-                if (valA > valB) return 1 * order;
-                return 0;
-            });
-        }
-        
-        // Handle newest position
-        if (listSettings && listSettings.newestPosition === 'top') {
-             listData.reverse();
-        }
+if (isList && Array.isArray(data)) {
+    // Calculate per-item height respecting autoGrow
+    // Sort data
+    let listData = [...data];
+    if (listSettings && listSettings.sortProp) {
+        const prop = listSettings.sortProp;
+        const order = listSettings.sortOrder === 'asc' ? 1 : -1;
+        listData.sort((a, b) => {
+            const valA = a[prop];
+            const valB = b[prop];
+            if (valA < valB) return -1 * order;
+            if (valA > valB) return 1 * order;
+            return 0;
+        });
+    }
 
-        // Generate HTML for all items
-        const itemsHtml = listData.map((item, index) => {
-             const itemHtml = renderItem(item, index, 0); 
-             const itemHeight = computeItemHeight(elements, item, canvasHeight);
-             const itemContainerStyle = styleObjectToString({
-                 position: 'relative',
-                 height: itemHeight,
-                 width: '100%'
-             });
-             
-             return \`<div class="list-item" style="\${itemContainerStyle}">\${itemHtml}</div>\`;
+    // Handle newest position
+    if (listSettings && listSettings.newestPosition === 'top') {
+        listData.reverse();
+    }
+
+    // Generate HTML for all items
+    const itemsHtml = listData.map((item, index) => {
+        const itemHtml = renderItem(item, index, 0);
+        const itemHeight = computeItemHeight(elements, item, canvasHeight);
+        const itemContainerStyle = styleObjectToString({
+            position: 'relative',
+            height: itemHeight,
+            width: '100%'
+        });
+
+        return \`<div class="list-item" style="\${itemContainerStyle}">\${itemHtml}</div>\`;
         }).join('\\n');
 
         // Animation Styles based on settings
@@ -448,6 +536,7 @@ function renderTemplate(elements, data, options = {}) {
                     const renderItem = \${renderItem.toString()};
 
                     const measureTextHeight = \${measureTextHeight.toString()};
+                    const computeLayout = \${computeLayout.toString()};
                     const computeItemHeight = \${computeItemHeight.toString()};
                     const itemHeightFallback = \${canvasHeight || 0};
                     const newestPosition = "\${(listSettings && listSettings.newestPosition) || 'bottom'}";
@@ -500,4 +589,4 @@ function renderTemplate(elements, data, options = {}) {
     return \`<div style="position: relative; width: 100%; height: 100%; overflow: hidden;">\${contentHtml}</div>\`;
 }
 `;
-};
+    };
