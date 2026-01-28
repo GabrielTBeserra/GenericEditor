@@ -33,49 +33,26 @@ export const Canvas: React.FC<CanvasProps> = () => {
     const startPos = useRef({ x: 0, y: 0 });
     const panStart = useRef({ x: 0, y: 0 });
     const initialSelection = useRef<string[]>([]);
+    const lastReportedSelection = useRef<string[]>([]);
 
-    const handleMouseDown = (e: React.MouseEvent) => {
-        // We rely on elements calling stopPropagation(). 
-        // If the event reaches here, it means we clicked on the empty canvas/background.
+    // State Ref for Event Listeners (Must be declared before handlers)
+    const stateRef = useRef(state);
+    const lastUpdateRef = useRef(0);
 
-        // Middle mouse or Space+Click -> Pan
-        if (e.button === 1 || (e.button === 0 && isSpacePressed.current)) {
-            e.preventDefault();
-            isPanning.current = true;
-            panStart.current = { x: e.clientX, y: e.clientY };
-            return;
-        }
+    // Update stateRef whenever state changes
+    useEffect(() => {
+        stateRef.current = state;
+    }, [state]);
 
-        isSelecting.current = true;
-        const rect = canvasRef.current?.getBoundingClientRect();
-        if (!rect) return;
-
-        // Calculate Canvas Coordinates
-        const offsetX = rect.left;
-        const offsetY = rect.top;
-
-        const canvasX = (e.clientX - offsetX - state.pan.x) / state.zoom;
-        const canvasY = (e.clientY - offsetY - state.pan.y) / state.zoom;
-
-        startPos.current = { x: canvasX, y: canvasY };
-        initialSelection.current = state.selectedElementIds;
-
-        if (!e.shiftKey) {
-            selectElement(null);
-            initialSelection.current = [];
-        }
-
-        window.addEventListener('mousemove', handleWindowMouseMove);
-        window.addEventListener('mouseup', handleWindowMouseUp);
-    };
-
-    const handleWindowMouseMove = useCallback((e: MouseEvent) => {
+    const handlePointerMove = useCallback((e: PointerEvent) => {
         if (!canvasRef.current) return;
+
+        const currentState = stateRef.current;
 
         if (isPanning.current) {
             const dx = e.clientX - panStart.current.x;
             const dy = e.clientY - panStart.current.y;
-            setPan({ x: state.pan.x + dx, y: state.pan.y + dy });
+            setPan({ x: currentState.pan.x + dx, y: currentState.pan.y + dy });
             panStart.current = { x: e.clientX, y: e.clientY };
             return;
         }
@@ -84,8 +61,8 @@ export const Canvas: React.FC<CanvasProps> = () => {
 
         const rect = canvasRef.current.getBoundingClientRect();
 
-        const canvasX = (e.clientX - rect.left - state.pan.x) / state.zoom;
-        const canvasY = (e.clientY - rect.top - state.pan.y) / state.zoom;
+        const canvasX = (e.clientX - rect.left - currentState.pan.x) / currentState.zoom;
+        const canvasY = (e.clientY - rect.top - currentState.pan.y) / currentState.zoom;
 
         const x = Math.min(startPos.current.x, canvasX);
         const y = Math.min(startPos.current.y, canvasY);
@@ -94,10 +71,14 @@ export const Canvas: React.FC<CanvasProps> = () => {
 
         setSelectionBox({ x, y, width, height });
 
-        // Only select if box has some size to avoid accidental selection on simple click
-        if (width > 2 || height > 2) {
+        // Throttle selection updates to 50ms to prevent render blocking
+        const now = Date.now();
+        if (now - lastUpdateRef.current < 50) return;
+
+        // Only select if box has some size
+        if (width > 0 || height > 0) {
             const intersectingIds: string[] = [];
-            state.elements.forEach(el => {
+            currentState.elements.forEach(el => {
                 const elX = el.x ?? 0;
                 const elY = el.y ?? 0;
                 const elWidth = el.width ?? 100;
@@ -115,21 +96,75 @@ export const Canvas: React.FC<CanvasProps> = () => {
 
             // Merge with initial selection if Shift is held
             const newSelection = Array.from(new Set([...initialSelection.current, ...intersectingIds]));
-            setSelectedElements(newSelection);
-        }
-    }, [state.elements, state.pan, state.zoom, setSelectedElements, setPan]);
 
-    const handleWindowMouseUp = useCallback(() => {
+            // Optimization: Only update if selection changed
+            const prev = lastReportedSelection.current;
+            const isSame = prev.length === newSelection.length && prev.every(id => newSelection.includes(id));
+
+            if (!isSame) {
+                setSelectedElements(newSelection);
+                lastReportedSelection.current = newSelection;
+                lastUpdateRef.current = now;
+            }
+        }
+    }, [setSelectedElements, setPan]);
+
+    const handlePointerUp = useCallback((e: PointerEvent) => {
+        if (isSelecting.current || isPanning.current) {
+            (e.target as Element).releasePointerCapture(e.pointerId);
+        }
         isSelecting.current = false;
         isPanning.current = false;
         setSelectionBox(null);
-        window.removeEventListener('mousemove', handleWindowMouseMove);
-        window.removeEventListener('mouseup', handleWindowMouseUp);
-    }, [handleWindowMouseMove]);
+    }, []);
 
-    // State Ref for Event Listeners
-    const stateRef = useRef(state);
-    useEffect(() => { stateRef.current = state; }, [state]);
+    const handlePointerDown = (e: React.PointerEvent) => {
+        // Ignore Right Click (Context Menu)
+        if (e.button === 2) return;
+
+        // Ignore Resize/Rotate Handles (in case propagation wasn't stopped)
+        const target = e.target as HTMLElement;
+        if (target.closest('.resize-handle') || target.closest('.rotate-handle')) return;
+
+        // We rely on elements calling stopPropagation(). 
+        // If the event reaches here, it means we clicked on the empty canvas/background.
+
+        // Capture pointer to ensure we receive all move/up events even if cursor leaves the element
+        (e.currentTarget as Element).setPointerCapture(e.pointerId);
+
+        // Middle mouse or Space+Click -> Pan
+        if (e.button === 1 || (e.button === 0 && isSpacePressed.current)) {
+            e.preventDefault();
+            isPanning.current = true;
+            panStart.current = { x: e.clientX, y: e.clientY };
+            return;
+        }
+
+        // Only enable selection box if Shift is pressed
+        isSelecting.current = e.shiftKey;
+
+        const rect = canvasRef.current?.getBoundingClientRect();
+        if (!rect) return;
+
+        // Calculate Canvas Coordinates
+        const offsetX = rect.left;
+        const offsetY = rect.top;
+
+        const canvasX = (e.clientX - offsetX - state.pan.x) / state.zoom;
+        const canvasY = (e.clientY - offsetY - state.pan.y) / state.zoom;
+
+        startPos.current = { x: canvasX, y: canvasY };
+        initialSelection.current = state.selectedElementIds;
+        lastReportedSelection.current = state.selectedElementIds;
+
+        if (!e.shiftKey) {
+            selectElement(null);
+            initialSelection.current = [];
+            lastReportedSelection.current = [];
+        }
+    };
+
+
 
     // Handle Wheel Zoom and Pan (Native Listener for passive: false)
     useEffect(() => {
@@ -258,10 +293,8 @@ export const Canvas: React.FC<CanvasProps> = () => {
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
             window.removeEventListener('keyup', handleKeyUp);
-            window.removeEventListener('mousemove', handleWindowMouseMove);
-            window.removeEventListener('mouseup', handleWindowMouseUp);
         };
-    }, [undo, redo, copy, paste, removeSelected, updateElements, state.selectedElementIds, state.elements, handleWindowMouseMove, handleWindowMouseUp]);
+    }, [undo, redo, copy, paste, removeSelected, updateElements, state.selectedElementIds, state.elements]);
 
     // Canvas Resize Logic
     const isResizingCanvas = useRef(false);
@@ -331,7 +364,17 @@ export const Canvas: React.FC<CanvasProps> = () => {
     return (
         <Box
             ref={canvasRef}
-            onMouseDown={handleMouseDown}
+            onPointerDown={handlePointerDown}
+            onPointerMove={(e) => {
+                if (isSelecting.current || isPanning.current) {
+                    handlePointerMove(e.nativeEvent);
+                }
+            }}
+            onPointerUp={(e) => {
+                if (isSelecting.current || isPanning.current) {
+                    handlePointerUp(e.nativeEvent);
+                }
+            }}
             onDragOver={handleDragOver}
             onDrop={handleDrop}
             style={{
@@ -360,51 +403,7 @@ export const Canvas: React.FC<CanvasProps> = () => {
                     pointerEvents: 'none' // Let clicks pass through to background unless hitting a child with pointer-events: auto
                 }}
             >
-                {/* Elements Container - Needs pointer events */}
-                <div style={{ width: '100%', height: '100%', position: 'absolute', left: 0, top: 0, pointerEvents: 'auto' }}>
-                    {/* Placeholder for pointer events handling if needed, 
-                         but actually we want clicks on empty space to bubble to Box. 
-                         If this div has pointerEvents auto, it captures clicks.
-                         So we should actually remove pointerEvents auto from here OR 
-                         ensure this div propagates events to the Box.
-                         
-                         Actually, standard DOM bubbling:
-                         Box -> Div(Transform) -> Div(Elements) -> Element
-                         
-                         If we click Element: Element handles it, stops prop.
-                         If we click Empty Space:
-                           Div(Elements) receives click. Bubbles to Div(Transform). Bubbles to Box.
-                           Box handleMouseDown fires.
-                           
-                         So we don't need pointerEvents: none on the container.
-                         We just need to ensure the grid isn't blocking.
-                         We moved grid to Box background.
-                         
-                         Wait, if Div(Transform) is 100% width/height, does it cover the whole visible area?
-                         Yes.
-                         Does it cover "infinite" area?
-                         No, only 100% of viewport.
-                         But that's fine, we only click inside viewport.
-                         
-                         So we just need to remove the old grid div.
-                      */}
-                </div>
 
-                {selectionBox && (
-                    <div
-                        style={{
-                            position: 'absolute',
-                            left: selectionBox.x,
-                            top: selectionBox.y,
-                            width: selectionBox.width,
-                            height: selectionBox.height,
-                            backgroundColor: 'rgba(0, 120, 255, 0.1)',
-                            border: '1px solid rgba(0, 120, 255, 0.5)',
-                            pointerEvents: 'none',
-                            zIndex: 9999
-                        }}
-                    />
-                )}
 
                 {/* Snap Lines */}
                 {state.snapLines.map((line, i) => (
@@ -444,6 +443,32 @@ export const Canvas: React.FC<CanvasProps> = () => {
                         fontWeight: 500
                     }}>Início (0px)</span>
                 </div>
+
+                {state.elements.map((el) => (
+                    <div key={el.id} style={{ pointerEvents: 'auto' }}>
+                        <DraggableElement
+                            element={el}
+                            isSelected={state.selectedElementIds.includes(el.id)}
+                        />
+                    </div>
+                ))}
+
+                {/* Selection Box - Rendered LAST to be on top */}
+                {selectionBox && (
+                    <div
+                        style={{
+                            position: 'absolute',
+                            left: selectionBox.x,
+                            top: selectionBox.y,
+                            width: selectionBox.width,
+                            height: selectionBox.height,
+                            backgroundColor: 'rgba(0, 120, 255, 0.2)',
+                            border: '1px solid rgba(0, 120, 255, 0.8)',
+                            pointerEvents: 'none',
+                            zIndex: 999999
+                        }}
+                    />
+                )}
 
                 {state.isList && (
                     <div
@@ -505,16 +530,22 @@ export const Canvas: React.FC<CanvasProps> = () => {
                         <Text>Adicione elementos e arraste livremente</Text>
                     </Flex>
                 )}
-
-                {state.elements.map((el) => (
-                    <div key={el.id} style={{ pointerEvents: 'auto' }}>
-                        <DraggableElement
-                            element={el}
-                            isSelected={state.selectedElementIds.includes(el.id)}
-                        />
-                    </div>
-                ))}
             </div>
+
+            {/* Interaction Blocker - Prevents hover/click on elements during selection */}
+            {selectionBox && (
+                <div
+                    style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
+                        zIndex: 999995,
+                        pointerEvents: 'auto' // Capture all pointer events
+                    }}
+                />
+            )}
 
             {/* Zoom Controls Overlay */}
             <div style={{

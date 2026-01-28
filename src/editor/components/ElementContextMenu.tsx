@@ -7,6 +7,8 @@ import { ColorPickerContent } from './ColorPicker';
 import './context-menu.css';
 import { ElementAdvancedSettings } from './ElementAdvancedSettings';
 
+const stopProp = (e: React.PointerEvent) => e.stopPropagation();
+
 export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: IElement }> = ({ children, element }) => {
     const { updateElement, removeElement, removeSelected, addElement, moveElement, copy, paste, state, renameElement, groupElements, ungroupElements } = useEditor();
 
@@ -156,7 +158,7 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
         <>
             {/* Modais de Edição */}
             <Dialog.Root open={isRenameOpen} onOpenChange={setIsRenameOpen}>
-                <Dialog.Content style={{ maxWidth: 450 }}>
+                <Dialog.Content style={{ maxWidth: 450 }} onPointerDown={stopProp}>
                     <Dialog.Title>Renomear Camada</Dialog.Title>
                     <Flex direction="column" gap="3">
                         <TextField.Root
@@ -175,7 +177,7 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
             </Dialog.Root>
 
             <Dialog.Root open={isEditContentOpen} onOpenChange={setIsEditContentOpen}>
-                <Dialog.Content style={{ maxWidth: 450 }}>
+                <Dialog.Content style={{ maxWidth: 450 }} onPointerDown={stopProp}>
                     <Dialog.Title>Editar Texto</Dialog.Title>
                     <Flex direction="column" gap="3">
                         <TextArea
@@ -216,7 +218,7 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
             </Dialog.Root>
 
             <Dialog.Root open={isBindDataOpen} onOpenChange={setIsBindDataOpen}>
-                <Dialog.Content style={{ maxWidth: 450 }}>
+                <Dialog.Content style={{ maxWidth: 450 }} onPointerDown={stopProp}>
                     <Dialog.Title>Vincular Dados Manualmente</Dialog.Title>
                     <Flex direction="column" gap="3">
                         <Text size="2">Nome da propriedade (ex: titulo, preco, imagem):</Text>
@@ -236,7 +238,7 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
             </Dialog.Root>
 
             <Dialog.Root open={colorDialog.open} onOpenChange={(open) => setColorDialog(prev => ({ ...prev, open }))}>
-                <Dialog.Content style={{ maxWidth: 300 }}>
+                <Dialog.Content style={{ maxWidth: 300 }} onPointerDown={stopProp}>
                     <Dialog.Title>Selecionar Cor</Dialog.Title>
                     <ColorPickerContent
                         color={colorDialog.value}
@@ -259,7 +261,7 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
             />
 
             <Dialog.Root open={isImageUrlOpen} onOpenChange={setIsImageUrlOpen}>
-                <Dialog.Content style={{ maxWidth: 450 }}>
+                <Dialog.Content style={{ maxWidth: 450 }} onPointerDown={stopProp}>
                     <Dialog.Title>Inserir URL da Imagem</Dialog.Title>
                     <Flex direction="column" gap="3">
                         <TextField.Root
@@ -298,7 +300,7 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
 
                         {/* Data Binding */}
                         <ContextMenu.Sub>
-                            <ContextMenu.SubTrigger className="ContextMenuSubTrigger">
+                            <ContextMenu.SubTrigger className="ContextMenuSubTrigger" onPointerDown={stopProp}>
                                 Vincular Dados
                                 {element.dataBinding && <span style={{ fontSize: 10, marginLeft: 4, opacity: 0.7 }}>({element.dataBinding})</span>}
                                 <div className="RightSlot">
@@ -313,6 +315,7 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                                                 <ContextMenu.Item
                                                     key={prop.dataName}
                                                     className="ContextMenuItem"
+                                                    onPointerDown={stopProp}
                                                     onSelect={() => {
                                                         const updates: Partial<IElement> = { dataBinding: prop.dataName };
                                                         if (element.type === 'text' || element.type === 'text-container' || element.type === 'image') {
@@ -328,7 +331,7 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                                         </>
                                     )}
 
-                                    <ContextMenu.Item className="ContextMenuItem" onSelect={handleOpenBindData}>
+                                    <ContextMenu.Item className="ContextMenuItem" onPointerDown={stopProp} onSelect={handleOpenBindData}>
                                         Outro / Manual...
                                     </ContextMenu.Item>
 
@@ -337,6 +340,7 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                                             <ContextMenu.Separator className="ContextMenuSeparator" />
                                             <ContextMenu.Item
                                                 className="ContextMenuItem"
+                                                onPointerDown={stopProp}
                                                 onSelect={() => updateElement(element.id, { dataBinding: undefined })}
                                                 style={{ color: 'var(--red-9)' }}
                                             >
@@ -353,7 +357,7 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                         {/* Text Specific Actions */}
                         {(element.type === 'text' || element.type === 'text-container') && (
                             <>
-                                <ContextMenu.Item className="ContextMenuItem" onSelect={handleOpenEditContent}>
+                                <ContextMenu.Item className="ContextMenuItem" onPointerDown={stopProp} onSelect={handleOpenEditContent}>
                                     Editar Texto...
                                 </ContextMenu.Item>
                                 <ContextMenu.Separator className="ContextMenuSeparator" />
@@ -361,20 +365,20 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                         )}
 
                         {/* Grouping Actions */}
-                        <ContextMenu.Item className="ContextMenuItem" onSelect={handleOpenRename}>
+                        <ContextMenu.Item className="ContextMenuItem" onPointerDown={stopProp} onSelect={handleOpenRename}>
                             Renomear...
                         </ContextMenu.Item>
 
                         {/* Show Group option if selected items >= 1 and current element (or its parent) is part of selection */}
                         {(state.selectedElementIds.length >= 1 && (state.selectedElementIds.includes(element.id) || (element.groupId && state.selectedElementIds.includes(element.groupId)))) && (
-                            <ContextMenu.Item className="ContextMenuItem" onSelect={() => groupElements(state.selectedElementIds)}>
+                            <ContextMenu.Item className="ContextMenuItem" onPointerDown={stopProp} onSelect={() => groupElements(state.selectedElementIds)}>
                                 {state.selectedElementIds.length > 1 ? 'Agrupar Seleção' : 'Agrupar (Criar Pasta)'}
                             </ContextMenu.Item>
                         )}
 
                         {/* Show Ungroup if it is a group OR if its parent group is selected */}
                         {(element.type === 'group' || (element.groupId && state.selectedElementIds.includes(element.groupId))) && (
-                            <ContextMenu.Item className="ContextMenuItem" onSelect={() => ungroupElements(element.type === 'group' ? element.id : element.groupId!)}>
+                            <ContextMenu.Item className="ContextMenuItem" onPointerDown={stopProp} onSelect={() => ungroupElements(element.type === 'group' ? element.id : element.groupId!)}>
                                 {element.type === 'group' ? 'Desagrupar' : 'Desagrupar Pai'}
                             </ContextMenu.Item>
                         )}
@@ -382,17 +386,17 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                         <ContextMenu.Separator className="ContextMenuSeparator" />
 
                         {/* Common Actions */}
-                        <ContextMenu.Item className="ContextMenuItem" onSelect={() => setIsAdvancedSettingsOpen(true)}>
+                        <ContextMenu.Item className="ContextMenuItem" onPointerDown={stopProp} onSelect={() => setIsAdvancedSettingsOpen(true)}>
                             Configurações Avançadas...
                         </ContextMenu.Item>
                         <ContextMenu.Separator className="ContextMenuSeparator" />
 
-                        <ContextMenu.Item className="ContextMenuItem" onSelect={handleDuplicate}>
+                        <ContextMenu.Item className="ContextMenuItem" onPointerDown={stopProp} onSelect={handleDuplicate}>
                             {state.selectedElementIds.includes(element.id) && state.selectedElementIds.length > 1
                                 ? `Duplicar Selecionados (${state.selectedElementIds.length})`
                                 : 'Duplicar'}
                         </ContextMenu.Item>
-                        <ContextMenu.Item className="ContextMenuItem" onSelect={() => {
+                        <ContextMenu.Item className="ContextMenuItem" onPointerDown={stopProp} onSelect={() => {
                             if (state.selectedElementIds.includes(element.id) && state.selectedElementIds.length > 1) {
                                 removeSelected();
                             } else {
@@ -409,16 +413,16 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                         {element.type === 'image' && (
                             <>
                                 <ContextMenu.Sub>
-                                    <ContextMenu.SubTrigger className="ContextMenuSubTrigger">
+                                    <ContextMenu.SubTrigger className="ContextMenuSubTrigger" onPointerDown={stopProp}>
                                         Alterar Imagem
                                         <div className="RightSlot"><ChevronRightIcon /></div>
                                     </ContextMenu.SubTrigger>
                                     <ContextMenu.Portal>
                                         <ContextMenu.SubContent className="ContextMenuSubContent" sideOffset={2} alignOffset={-5}>
-                                            <ContextMenu.Item className="ContextMenuItem" onSelect={() => fileInputRef.current?.click()}>
+                                            <ContextMenu.Item className="ContextMenuItem" onPointerDown={stopProp} onSelect={() => fileInputRef.current?.click()}>
                                                 Carregar do Computador
                                             </ContextMenu.Item>
-                                            <ContextMenu.Item className="ContextMenuItem" onSelect={handleOpenImageUrl}>
+                                            <ContextMenu.Item className="ContextMenuItem" onPointerDown={stopProp} onSelect={handleOpenImageUrl}>
                                                 Inserir URL
                                             </ContextMenu.Item>
                                         </ContextMenu.SubContent>
@@ -426,15 +430,15 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                                 </ContextMenu.Sub>
 
                                 <ContextMenu.Sub>
-                                    <ContextMenu.SubTrigger className="ContextMenuSubTrigger">
+                                    <ContextMenu.SubTrigger className="ContextMenuSubTrigger" onPointerDown={stopProp}>
                                         Ajuste da Imagem
                                         <div className="RightSlot"><ChevronRightIcon /></div>
                                     </ContextMenu.SubTrigger>
                                     <ContextMenu.Portal>
                                         <ContextMenu.SubContent className="ContextMenuSubContent" sideOffset={2} alignOffset={-5}>
-                                            <ContextMenu.Item className="ContextMenuItem" onSelect={() => handleUpdateStyle({ objectFit: 'cover' })}>Preencher (Cover)</ContextMenu.Item>
-                                            <ContextMenu.Item className="ContextMenuItem" onSelect={() => handleUpdateStyle({ objectFit: 'contain' })}>Ajustar (Contain)</ContextMenu.Item>
-                                            <ContextMenu.Item className="ContextMenuItem" onSelect={() => handleUpdateStyle({ objectFit: 'fill' })}>Esticar (Fill)</ContextMenu.Item>
+                                            <ContextMenu.Item className="ContextMenuItem" onPointerDown={stopProp} onSelect={() => handleUpdateStyle({ objectFit: 'cover' })}>Preencher (Cover)</ContextMenu.Item>
+                                            <ContextMenu.Item className="ContextMenuItem" onPointerDown={stopProp} onSelect={() => handleUpdateStyle({ objectFit: 'contain' })}>Ajustar (Contain)</ContextMenu.Item>
+                                            <ContextMenu.Item className="ContextMenuItem" onPointerDown={stopProp} onSelect={() => handleUpdateStyle({ objectFit: 'fill' })}>Esticar (Fill)</ContextMenu.Item>
                                         </ContextMenu.SubContent>
                                     </ContextMenu.Portal>
                                 </ContextMenu.Sub>
@@ -445,14 +449,14 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
 
                         {/* Layering */}
                         <ContextMenu.Sub>
-                            <ContextMenu.SubTrigger className="ContextMenuSubTrigger">
+                            <ContextMenu.SubTrigger className="ContextMenuSubTrigger" onPointerDown={stopProp}>
                                 Camadas
                                 <div className="RightSlot"><ChevronRightIcon /></div>
                             </ContextMenu.SubTrigger>
                             <ContextMenu.Portal>
                                 <ContextMenu.SubContent className="ContextMenuSubContent" sideOffset={2} alignOffset={-5}>
-                                    <ContextMenu.Item className="ContextMenuItem" onSelect={handleBringToFront}>Trazer para frente</ContextMenu.Item>
-                                    <ContextMenu.Item className="ContextMenuItem" onSelect={handleSendToBack}>Enviar para trás</ContextMenu.Item>
+                                    <ContextMenu.Item className="ContextMenuItem" onPointerDown={stopProp} onSelect={handleBringToFront}>Trazer para frente</ContextMenu.Item>
+                                    <ContextMenu.Item className="ContextMenuItem" onPointerDown={stopProp} onSelect={handleSendToBack}>Enviar para trás</ContextMenu.Item>
                                 </ContextMenu.SubContent>
                             </ContextMenu.Portal>
                         </ContextMenu.Sub>
@@ -463,7 +467,7 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                         {(element.type === 'text' || element.type === 'text-container') && (
                             <>
                                 <ContextMenu.Sub>
-                                    <ContextMenu.SubTrigger className="ContextMenuSubTrigger">
+                                    <ContextMenu.SubTrigger className="ContextMenuSubTrigger" onPointerDown={stopProp}>
                                         Fonte
                                         <div className="RightSlot"><ChevronRightIcon /></div>
                                     </ContextMenu.SubTrigger>
@@ -473,6 +477,7 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                                                 <ContextMenu.Item
                                                     key={font}
                                                     className="ContextMenuItem"
+                                                    onPointerDown={stopProp}
                                                     onSelect={() => handleUpdateStyle({ fontFamily: font })}
                                                     style={{ fontFamily: font }}
                                                 >
@@ -485,14 +490,14 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                                 </ContextMenu.Sub>
 
                                 <ContextMenu.Sub>
-                                    <ContextMenu.SubTrigger className="ContextMenuSubTrigger">
+                                    <ContextMenu.SubTrigger className="ContextMenuSubTrigger" onPointerDown={stopProp}>
                                         Tamanho da Fonte
                                         <div className="RightSlot"><ChevronRightIcon /></div>
                                     </ContextMenu.SubTrigger>
                                     <ContextMenu.Portal>
                                         <ContextMenu.SubContent className="ContextMenuSubContent" sideOffset={2} alignOffset={-5}>
                                             {[12, 14, 16, 20, 24, 32, 48, 64].map(size => (
-                                                <ContextMenu.Item key={size} className="ContextMenuItem" onSelect={() => handleUpdateStyle({ fontSize: `${size}px` })}>
+                                                <ContextMenu.Item key={size} className="ContextMenuItem" onPointerDown={stopProp} onSelect={() => handleUpdateStyle({ fontSize: `${size}px` })}>
                                                     {size}px
                                                 </ContextMenu.Item>
                                             ))}
@@ -501,14 +506,14 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                                 </ContextMenu.Sub>
 
                                 <ContextMenu.Sub>
-                                    <ContextMenu.SubTrigger className="ContextMenuSubTrigger">
+                                    <ContextMenu.SubTrigger className="ContextMenuSubTrigger" onPointerDown={stopProp}>
                                         Cor do Texto
                                         <div className="RightSlot"><ChevronRightIcon /></div>
                                     </ContextMenu.SubTrigger>
                                     <ContextMenu.Portal>
                                         <ContextMenu.SubContent className="ContextMenuSubContent" sideOffset={2} alignOffset={-5}>
                                             {colors.filter(c => c !== 'transparent').map(color => (
-                                                <ContextMenu.Item key={color} className="ContextMenuItem" onSelect={() => handleUpdateStyle({ color })}>
+                                                <ContextMenu.Item key={color} className="ContextMenuItem" onPointerDown={stopProp} onSelect={() => handleUpdateStyle({ color })}>
                                                     <div style={{ width: 12, height: 12, backgroundColor: color, marginRight: 8, border: '1px solid #ccc' }} />
                                                     {color}
                                                 </ContextMenu.Item>
@@ -516,6 +521,7 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                                             <ContextMenu.Separator className="ContextMenuSeparator" />
                                             <ContextMenu.Item
                                                 className="ContextMenuItem"
+                                                onPointerDown={stopProp}
                                                 onSelect={() => handleOpenColorDialog('color', element.style?.color as string || '#000000')}
                                             >
                                                 Outra Cor...
@@ -525,42 +531,42 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                                 </ContextMenu.Sub>
 
                                 <ContextMenu.Sub>
-                                    <ContextMenu.SubTrigger className="ContextMenuSubTrigger">
+                                    <ContextMenu.SubTrigger className="ContextMenuSubTrigger" onPointerDown={stopProp}>
                                         Peso da Fonte
                                         <div className="RightSlot"><ChevronRightIcon /></div>
                                     </ContextMenu.SubTrigger>
                                     <ContextMenu.Portal>
                                         <ContextMenu.SubContent className="ContextMenuSubContent" sideOffset={2} alignOffset={-5}>
-                                            <ContextMenu.Item className="ContextMenuItem" onSelect={() => handleUpdateStyle({ fontWeight: 'normal' })}>Normal</ContextMenu.Item>
-                                            <ContextMenu.Item className="ContextMenuItem" onSelect={() => handleUpdateStyle({ fontWeight: 'bold' })}>Negrito</ContextMenu.Item>
+                                            <ContextMenu.Item className="ContextMenuItem" onPointerDown={stopProp} onSelect={() => handleUpdateStyle({ fontWeight: 'normal' })}>Normal</ContextMenu.Item>
+                                            <ContextMenu.Item className="ContextMenuItem" onPointerDown={stopProp} onSelect={() => handleUpdateStyle({ fontWeight: 'bold' })}>Negrito</ContextMenu.Item>
                                         </ContextMenu.SubContent>
                                     </ContextMenu.Portal>
                                 </ContextMenu.Sub>
 
                                 <ContextMenu.Sub>
-                                    <ContextMenu.SubTrigger className="ContextMenuSubTrigger">
+                                    <ContextMenu.SubTrigger className="ContextMenuSubTrigger" onPointerDown={stopProp}>
                                         Alinhamento
                                         <div className="RightSlot"><ChevronRightIcon /></div>
                                     </ContextMenu.SubTrigger>
                                     <ContextMenu.Portal>
                                         <ContextMenu.SubContent className="ContextMenuSubContent" sideOffset={2} alignOffset={-5}>
-                                            <ContextMenu.Item className="ContextMenuItem" onSelect={() => handleUpdateStyle({ textAlign: 'left' })}>Esquerda</ContextMenu.Item>
-                                            <ContextMenu.Item className="ContextMenuItem" onSelect={() => handleUpdateStyle({ textAlign: 'center' })}>Centro</ContextMenu.Item>
-                                            <ContextMenu.Item className="ContextMenuItem" onSelect={() => handleUpdateStyle({ textAlign: 'right' })}>Direita</ContextMenu.Item>
+                                            <ContextMenu.Item className="ContextMenuItem" onPointerDown={stopProp} onSelect={() => handleUpdateStyle({ textAlign: 'left' })}>Esquerda</ContextMenu.Item>
+                                            <ContextMenu.Item className="ContextMenuItem" onPointerDown={stopProp} onSelect={() => handleUpdateStyle({ textAlign: 'center' })}>Centro</ContextMenu.Item>
+                                            <ContextMenu.Item className="ContextMenuItem" onPointerDown={stopProp} onSelect={() => handleUpdateStyle({ textAlign: 'right' })}>Direita</ContextMenu.Item>
                                         </ContextMenu.SubContent>
                                     </ContextMenu.Portal>
                                 </ContextMenu.Sub>
 
                                 <ContextMenu.Sub>
-                                    <ContextMenu.SubTrigger className="ContextMenuSubTrigger">
+                                    <ContextMenu.SubTrigger className="ContextMenuSubTrigger" onPointerDown={stopProp}>
                                         Alinhamento Vertical
                                         <div className="RightSlot"><ChevronRightIcon /></div>
                                     </ContextMenu.SubTrigger>
                                     <ContextMenu.Portal>
                                         <ContextMenu.SubContent className="ContextMenuSubContent" sideOffset={2} alignOffset={-5}>
-                                            <ContextMenu.Item className="ContextMenuItem" onSelect={() => handleUpdateStyle({ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start' })}>Topo</ContextMenu.Item>
-                                            <ContextMenu.Item className="ContextMenuItem" onSelect={() => handleUpdateStyle({ display: 'flex', flexDirection: 'column', justifyContent: 'center' })}>Centro</ContextMenu.Item>
-                                            <ContextMenu.Item className="ContextMenuItem" onSelect={() => handleUpdateStyle({ display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' })}>Base</ContextMenu.Item>
+                                            <ContextMenu.Item className="ContextMenuItem" onPointerDown={stopProp} onSelect={() => handleUpdateStyle({ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start' })}>Topo</ContextMenu.Item>
+                                            <ContextMenu.Item className="ContextMenuItem" onPointerDown={stopProp} onSelect={() => handleUpdateStyle({ display: 'flex', flexDirection: 'column', justifyContent: 'center' })}>Centro</ContextMenu.Item>
+                                            <ContextMenu.Item className="ContextMenuItem" onPointerDown={stopProp} onSelect={() => handleUpdateStyle({ display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' })}>Base</ContextMenu.Item>
                                         </ContextMenu.SubContent>
                                     </ContextMenu.Portal>
                                 </ContextMenu.Sub>
@@ -569,14 +575,14 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
 
                         {/* Background Color */}
                         <ContextMenu.Sub>
-                            <ContextMenu.SubTrigger className="ContextMenuSubTrigger">
+                            <ContextMenu.SubTrigger className="ContextMenuSubTrigger" onPointerDown={stopProp}>
                                 Cor de Fundo
                                 <div className="RightSlot"><ChevronRightIcon /></div>
                             </ContextMenu.SubTrigger>
                             <ContextMenu.Portal>
                                 <ContextMenu.SubContent className="ContextMenuSubContent" sideOffset={2} alignOffset={-5}>
                                     {colors.map(color => (
-                                        <ContextMenu.Item key={color} className="ContextMenuItem" onSelect={() => handleUpdateStyle({ backgroundColor: color })}>
+                                        <ContextMenu.Item key={color} className="ContextMenuItem" onPointerDown={stopProp} onSelect={() => handleUpdateStyle({ backgroundColor: color })}>
                                             <div style={{ width: 12, height: 12, backgroundColor: color, marginRight: 8, border: '1px solid #ccc' }} />
                                             {color === 'transparent' ? 'Transparente' : color}
                                         </ContextMenu.Item>
@@ -584,6 +590,7 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                                     <ContextMenu.Separator className="ContextMenuSeparator" />
                                     <ContextMenu.Item
                                         className="ContextMenuItem"
+                                        onPointerDown={stopProp}
                                         onSelect={() => handleOpenColorDialog('backgroundColor', element.style?.backgroundColor as string || 'transparent')}
                                     >
                                         Outra Cor...
@@ -594,7 +601,7 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
 
                         {/* Border Radius */}
                         <ContextMenu.Sub>
-                            <ContextMenu.SubTrigger className="ContextMenuSubTrigger">
+                            <ContextMenu.SubTrigger className="ContextMenuSubTrigger" onPointerDown={stopProp}>
                                 Arredondamento
                                 <div className="RightSlot"><ChevronRightIcon /></div>
                             </ContextMenu.SubTrigger>
@@ -604,6 +611,7 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                                         <ContextMenu.Item
                                             key={radius}
                                             className="ContextMenuItem"
+                                            onPointerDown={stopProp}
                                             onSelect={() => handleUpdateStyle({ borderRadius: typeof radius === 'number' ? `${radius}px` : radius })}
                                         >
                                             {radius === '50%' ? 'Círculo' : `${radius}px`}
@@ -612,6 +620,7 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                                     <ContextMenu.Separator className="ContextMenuSeparator" />
                                     <ContextMenu.Item
                                         className="ContextMenuItem"
+                                        onPointerDown={stopProp}
                                         onSelect={() => {
                                             setSettingsTab("style");
                                             setIsAdvancedSettingsOpen(true);
@@ -625,20 +634,21 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
 
                         {/* Padding */}
                         <ContextMenu.Sub>
-                            <ContextMenu.SubTrigger className="ContextMenuSubTrigger">
+                            <ContextMenu.SubTrigger className="ContextMenuSubTrigger" onPointerDown={stopProp}>
                                 Espaçamento
                                 <div className="RightSlot"><ChevronRightIcon /></div>
                             </ContextMenu.SubTrigger>
                             <ContextMenu.Portal>
                                 <ContextMenu.SubContent className="ContextMenuSubContent" sideOffset={2} alignOffset={-5}>
                                     {[0, 4, 8, 12, 16, 24, 32].map(padding => (
-                                        <ContextMenu.Item key={padding} className="ContextMenuItem" onSelect={() => handleUpdateStyle({ padding: `${padding}px` })}>
+                                        <ContextMenu.Item key={padding} className="ContextMenuItem" onPointerDown={stopProp} onSelect={() => handleUpdateStyle({ padding: `${padding}px` })}>
                                             {padding}px
                                         </ContextMenu.Item>
                                     ))}
                                     <ContextMenu.Separator className="ContextMenuSeparator" />
                                     <ContextMenu.Item
                                         className="ContextMenuItem"
+                                        onPointerDown={stopProp}
                                         onSelect={() => {
                                             setSettingsTab("style");
                                             setIsAdvancedSettingsOpen(true);

@@ -410,24 +410,24 @@ export const DraggableElement: React.FC<DraggableElementProps> = React.memo(({ e
                 }
             }}
             handleComponent={{
-                topLeft: <div className="resize-handle top-left" />,
-                topRight: <div className="resize-handle top-right" />,
-                bottomLeft: <div className="resize-handle bottom-left" />,
-                bottomRight: <div className="resize-handle bottom-right" />,
-                top: <div className="resize-handle top" />,
-                bottom: <div className="resize-handle bottom" />,
-                left: <div className="resize-handle left" />,
-                right: <div className="resize-handle right" />
+                topLeft: <div className="resize-handle top-left" onPointerDown={(e) => { if (e.button === 0) { e.stopPropagation(); selectElement(element.id, e.shiftKey); } }} />,
+                topRight: <div className="resize-handle top-right" onPointerDown={(e) => { if (e.button === 0) { e.stopPropagation(); selectElement(element.id, e.shiftKey); } }} />,
+                bottomLeft: <div className="resize-handle bottom-left" onPointerDown={(e) => { if (e.button === 0) { e.stopPropagation(); selectElement(element.id, e.shiftKey); } }} />,
+                bottomRight: <div className="resize-handle bottom-right" onPointerDown={(e) => { if (e.button === 0) { e.stopPropagation(); selectElement(element.id, e.shiftKey); } }} />,
+                top: <div className="resize-handle top" onPointerDown={(e) => { if (e.button === 0) { e.stopPropagation(); selectElement(element.id, e.shiftKey); } }} />,
+                bottom: <div className="resize-handle bottom" onPointerDown={(e) => { if (e.button === 0) { e.stopPropagation(); selectElement(element.id, e.shiftKey); } }} />,
+                left: <div className="resize-handle left" onPointerDown={(e) => { if (e.button === 0) { e.stopPropagation(); selectElement(element.id, e.shiftKey); } }} />,
+                right: <div className="resize-handle right" onPointerDown={(e) => { if (e.button === 0) { e.stopPropagation(); selectElement(element.id, e.shiftKey); } }} />
             }}
             handleStyles={{
-                topLeft: { width: 10, height: 10, background: 'var(--accent-9)', borderRadius: '50%', left: -5, top: -5, zIndex: 1001 },
-                topRight: { width: 10, height: 10, background: 'var(--accent-9)', borderRadius: '50%', right: -5, top: -5, zIndex: 1001 },
-                bottomLeft: { width: 10, height: 10, background: 'var(--accent-9)', borderRadius: '50%', left: -5, bottom: -5, zIndex: 1001 },
-                bottomRight: { width: 10, height: 10, background: 'var(--accent-9)', borderRadius: '50%', right: -5, bottom: -5, zIndex: 1001 },
-                top: { height: 6, top: -3, zIndex: 1000 },
-                bottom: { height: 6, bottom: -3, zIndex: 1000 },
-                left: { width: 6, left: -3, zIndex: 1000 },
-                right: { width: 6, right: -3, zIndex: 1000 }
+                topLeft: { width: 10, height: 10, background: 'var(--accent-9)', borderRadius: '50%', left: -5, top: -5, zIndex: isSelected ? 1001 : 10, opacity: isSelected ? 1 : 0 },
+                topRight: { width: 10, height: 10, background: 'var(--accent-9)', borderRadius: '50%', right: -5, top: -5, zIndex: isSelected ? 1001 : 10, opacity: isSelected ? 1 : 0 },
+                bottomLeft: { width: 10, height: 10, background: 'var(--accent-9)', borderRadius: '50%', left: -5, bottom: -5, zIndex: isSelected ? 1001 : 10, opacity: isSelected ? 1 : 0 },
+                bottomRight: { width: 10, height: 10, background: 'var(--accent-9)', borderRadius: '50%', right: -5, bottom: -5, zIndex: isSelected ? 1001 : 10, opacity: isSelected ? 1 : 0 },
+                top: { height: 6, top: -3, zIndex: isSelected ? 1000 : 9, opacity: isSelected ? 1 : 0 },
+                bottom: { height: 6, bottom: -3, zIndex: isSelected ? 1000 : 9, opacity: isSelected ? 1 : 0 },
+                left: { width: 6, left: -3, zIndex: isSelected ? 1000 : 9, opacity: isSelected ? 1 : 0 },
+                right: { width: 6, right: -3, zIndex: isSelected ? 1000 : 9, opacity: isSelected ? 1 : 0 }
             }}
             style={{
                 position: 'absolute',
@@ -440,9 +440,9 @@ export const DraggableElement: React.FC<DraggableElementProps> = React.memo(({ e
                 outline: 'none',
                 overflow: 'visible'
             }}
-            enable={isSelected && !element.autoGrow ? undefined : {
-                top: false, right: isSelected, bottom: false, left: isSelected,
-                topRight: false, bottomRight: isSelected, bottomLeft: false, topLeft: false
+            enable={!element.autoGrow ? undefined : {
+                top: false, right: true, bottom: false, left: true,
+                topRight: false, bottomRight: true, bottomLeft: false, topLeft: false
             }}
             lockAspectRatio={(keepAspectRef as any).current === true}
             grid={state.gridSize > 0 ? [state.gridSize, state.gridSize] : undefined}
@@ -567,6 +567,7 @@ export const DraggableElement: React.FC<DraggableElementProps> = React.memo(({ e
 
                     {isSelected && (
                         <Box
+                            className="rotate-handle"
                             style={{
                                 position: 'absolute',
                                 top: -30,
@@ -581,6 +582,7 @@ export const DraggableElement: React.FC<DraggableElementProps> = React.memo(({ e
                                 boxShadow: '0 0 0 2px white'
                             }}
                             onMouseDown={handleRotateStart}
+                            onPointerDown={(e) => e.stopPropagation()}
                         >
                             <Box
                                 style={{

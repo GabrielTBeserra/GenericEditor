@@ -8,6 +8,7 @@ import { Canvas } from './components/Canvas';
 import { EditorSettings } from './components/EditorSettings';
 import { ElementAdvancedSettings } from './components/ElementAdvancedSettings';
 import { Preview } from './components/Preview';
+import { ShortcutsDialog } from './components/ShortcutsDialog';
 import { EditorProvider, useEditor, type IElement } from './context';
 import type { ILayout } from './types';
 
@@ -518,7 +519,9 @@ const EditorContent: React.FC<EditorProps> = ({ layout, initialState, onSave, th
                     </Box>
 
                     {/* Top Right Controls */}
-                    <Flex style={{ position: 'absolute', top: 10, right: 10, zIndex: 10 }} gap="2">
+                    <Flex style={{ position: 'absolute', top: 10, right: 10, zIndex: 10 }} gap="3" align="center">
+
+                        <ShortcutsDialog />
 
                         <IconButton
                             size="2"

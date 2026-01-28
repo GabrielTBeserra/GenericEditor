@@ -19,7 +19,7 @@ export const ElementAdvancedSettings: React.FC<ElementAdvancedSettingsProps> = (
 
     return (
         <Dialog.Root open={open} onOpenChange={onOpenChange}>
-            <Dialog.Content style={{ maxWidth: 600, minHeight: 400 }}>
+            <Dialog.Content style={{ maxWidth: 600, minHeight: 400 }} onPointerDown={(e) => e.stopPropagation()}>
                 <Dialog.Title>Configurações Avançadas</Dialog.Title>
 
                 <Tabs.Root defaultValue={initialTab}>

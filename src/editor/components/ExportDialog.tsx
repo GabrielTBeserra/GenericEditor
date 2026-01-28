@@ -83,7 +83,7 @@ export const ExportDialog: React.FC<{ onSaveExternal?: (json: string) => void }>
                 </Button>
             </Dialog.Trigger>
 
-            <Dialog.Content style={{ maxWidth: 800 }}>
+            <Dialog.Content style={{ maxWidth: 800 }} onPointerDown={(e) => e.stopPropagation()}>
                 <Dialog.Title>Gerenciar Template</Dialog.Title>
                 <Dialog.Description size="2" mb="4">
                     Exporte, salve ou carregue o estado do seu editor.
