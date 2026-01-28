@@ -87,12 +87,6 @@ function renderTemplate(elements, data, options = {}) {
             const isHorizontal = textEl.type === 'text-container' && textEl.containerExpansion === 'horizontal';
             
             if (isHorizontal) {
-                // Horizontal expansion: Update width only
-                // Requires canvas context which is available in measureTextHeight scope or we create new one
-                // For simplicity, we can't easily access the measure logic here if it's not exposed, 
-                // but measureTextHeight is available in this scope.
-                // However measureTextHeight calculates HEIGHT. We need WIDTH.
-                
                 try {
                     const canvas = document.createElement('canvas');
                     const context = canvas.getContext('2d');
@@ -107,7 +101,6 @@ function renderTemplate(elements, data, options = {}) {
                     }
                 } catch(e) {}
             } else {
-                // Vertical Expansion
                 const measuredHeight = measureTextHeight(content, textEl.width, fontFamily, fontSize);
                 const designHeight = textEl.height;
                 const delta = measuredHeight - designHeight;
@@ -406,7 +399,6 @@ function renderTemplate(elements, data, options = {}) {
                 ...bindingStyles
             };
             
-            // Fix: remove padding if it's not explicitly set, or handle it for text
             if (element.type === 'text' && !baseStyle.padding) {
                 // baseStyle.padding = '8px'; // Removed default padding to respect resize box
             }
@@ -424,57 +416,57 @@ function renderTemplate(elements, data, options = {}) {
                 });
                 return \`<div style="\${styleString}"><img src="\${imgSrc}" alt="Element" style="\${imgStyle}" /></div>\`;
             } else if (element.type === 'box') {
-                 return `< div style = "${styleString}" > </div>`;
-} else if (element.type === 'checkbox') {
-    let isChecked = false;
-    if (element.dataBinding) {
-        const val = itemData[element.dataBinding];
-        isChecked = val === true || String(val) === 'true';
-    }
-    const checkboxStyle = styleObjectToString({
-        ...baseStyle,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
-    });
-    return `<div style="${checkboxStyle}"><input type="checkbox" ${isChecked ? 'checked' : ''} disabled style="width:100%;height:100%;margin:0;" /></div>`;
-}
-return '';
+                return \`<div style="\${styleString}"></div>\`;
+            } else if (element.type === 'checkbox') {
+                let isChecked = false;
+                if (element.dataBinding) {
+                    const val = itemData[element.dataBinding];
+                    isChecked = val === true || String(val) === 'true';
+                }
+                const checkboxStyle = styleObjectToString({
+                    ...baseStyle,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                });
+                return \`<div style="\${checkboxStyle}"><input type="checkbox" \${isChecked ? 'checked' : ''} disabled style="width:100%;height:100%;margin:0;" /></div>\`;
+            }
+            return '';
         }).join('\\n');
     };
 
-if (isList && Array.isArray(data)) {
-    // Calculate per-item height respecting autoGrow
-    // Sort data
-    let listData = [...data];
-    if (listSettings && listSettings.sortProp) {
-        const prop = listSettings.sortProp;
-        const order = listSettings.sortOrder === 'asc' ? 1 : -1;
-        listData.sort((a, b) => {
-            const valA = a[prop];
-            const valB = b[prop];
-            if (valA < valB) return -1 * order;
-            if (valA > valB) return 1 * order;
-            return 0;
-        });
-    }
+    if (isList && Array.isArray(data)) {
+        // Calculate per-item height respecting autoGrow
+        // Sort data
+        let listData = [...data];
+        if (listSettings && listSettings.sortProp) {
+            const prop = listSettings.sortProp;
+            const order = listSettings.sortOrder === 'asc' ? 1 : -1;
+            listData.sort((a, b) => {
+                const valA = a[prop];
+                const valB = b[prop];
+                if (valA < valB) return -1 * order;
+                if (valA > valB) return 1 * order;
+                return 0;
+            });
+        }
 
-    // Handle newest position
-    if (listSettings && listSettings.newestPosition === 'top') {
-        listData.reverse();
-    }
+        // Handle newest position
+        if (listSettings && listSettings.newestPosition === 'top') {
+            listData.reverse();
+        }
 
-    // Generate HTML for all items
-    const itemsHtml = listData.map((item, index) => {
-        const itemHtml = renderItem(item, index, 0);
-        const itemHeight = computeItemHeight(elements, item, canvasHeight);
-        const itemContainerStyle = styleObjectToString({
-            position: 'relative',
-            height: itemHeight,
-            width: '100%'
-        });
+        // Generate HTML for all items
+        const itemsHtml = listData.map((item, index) => {
+            const itemHtml = renderItem(item, index, 0);
+            const itemHeight = computeItemHeight(elements, item, canvasHeight);
+            const itemContainerStyle = styleObjectToString({
+                position: 'relative',
+                height: itemHeight,
+                width: '100%'
+            });
 
-        return \`<div class="list-item" style="\${itemContainerStyle}">\${itemHtml}</div>\`;
+            return \`<div class="list-item" style="\${itemContainerStyle}">\${itemHtml}</div>\`;
         }).join('\\n');
 
         // Animation Styles based on settings
@@ -589,4 +581,4 @@ if (isList && Array.isArray(data)) {
     return \`<div style="position: relative; width: 100%; height: 100%; overflow: hidden;">\${contentHtml}</div>\`;
 }
 `;
-    };
+};

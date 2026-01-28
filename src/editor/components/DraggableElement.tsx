@@ -234,7 +234,18 @@ export const DraggableElement: React.FC<DraggableElementProps> = React.memo(({ e
                 }
 
                 // Boundary checks (basic)
+                // Prevent going left of 0
+                newX = Math.max(0, newX);
+
                 if (state.isList) {
+                    newY = Math.max(0, newY);
+
+                    // Boundary check: Prevent going below canvasHeight (Template Height)
+                    const elHeight = element.height ?? 100;
+                    if (canvasHeight > 0) {
+                        newY = Math.min(newY, canvasHeight - elHeight);
+                    }
+                    // Re-enforce top boundary
                     newY = Math.max(0, newY);
                 }
 
@@ -339,7 +350,7 @@ export const DraggableElement: React.FC<DraggableElementProps> = React.memo(({ e
     }, [displayContent, element.autoGrow, element.containerExpansion, element.style, element.width, element.formatting, updateElement, element.id, element.type]);
 
     const commonStyles: React.CSSProperties = {
-        position: 'absolute',
+        position: 'relative', // Changed from absolute to relative to support autoGrow parent expansion
         left: 0,
         top: 0,
         width: '100%',
@@ -347,13 +358,14 @@ export const DraggableElement: React.FC<DraggableElementProps> = React.memo(({ e
         minHeight: element.autoGrow ? '100%' : undefined,
         padding: (element.type === 'image' || element.type === 'text') ? 0 : '8px',
         border: (isSelected || isResizing) ? '2px solid var(--accent-9)' : '1px dashed transparent',
-        outline: (isSelected || isResizing) ? 'none' : '1px solid transparent',
+        outline: 'none', // Removed internal outline to rely on border
         cursor: isDragging ? 'grabbing' : 'grab',
         borderRadius: 'var(--radius-2)',
         overflow: element.autoGrow ? 'visible' : 'hidden',
         whiteSpace: element.autoGrow ? 'pre-wrap' : undefined,
         wordBreak: element.autoGrow ? 'break-word' : undefined,
         userSelect: 'none',
+        boxSizing: 'border-box', // Ensure padding doesn't affect dimensions
         ...element.style,
         ...conditionalStyles
     };
@@ -370,15 +382,52 @@ export const DraggableElement: React.FC<DraggableElementProps> = React.memo(({ e
                 setIsResizing(true);
                 keepAspectRef.current = !!(e as any).shiftKey;
             }}
-            onResizeStop={(_e, _direction, _ref, d) => {
+            onResizeStop={(_e, direction, _ref, d) => {
                 setIsResizing(false);
                 const newWidth = (element.width ?? 100) + d.width;
                 const newHeight = (element.height ?? 100) + d.height;
+
+                let newX = element.x ?? 0;
+                let newY = element.y ?? 0;
+
+                // Adjust position for left/top resizes
+                if (direction.includes('left')) {
+                    newX -= d.width;
+                }
+                if (direction.includes('top')) {
+                    newY -= d.height;
+                }
+
                 if (element.type === 'group') {
                     resizeGroup(element.id, newWidth, newHeight);
+                    // Groups might need position update logic too if implemented in resizeGroup, 
+                    // but usually resizeGroup just scales children? 
+                    // If resizeGroup doesn't handle position shift, we might need to update group X/Y separately.
+                    // Assuming updateElement works for groups too for position:
+                    updateElement(element.id, { x: newX, y: newY }, true);
                 } else {
-                    updateElement(element.id, { width: newWidth, height: newHeight });
+                    updateElement(element.id, { width: newWidth, height: newHeight, x: newX, y: newY });
                 }
+            }}
+            handleComponent={{
+                topLeft: <div className="resize-handle top-left" />,
+                topRight: <div className="resize-handle top-right" />,
+                bottomLeft: <div className="resize-handle bottom-left" />,
+                bottomRight: <div className="resize-handle bottom-right" />,
+                top: <div className="resize-handle top" />,
+                bottom: <div className="resize-handle bottom" />,
+                left: <div className="resize-handle left" />,
+                right: <div className="resize-handle right" />
+            }}
+            handleStyles={{
+                topLeft: { width: 10, height: 10, background: 'var(--accent-9)', borderRadius: '50%', left: -5, top: -5, zIndex: 1001 },
+                topRight: { width: 10, height: 10, background: 'var(--accent-9)', borderRadius: '50%', right: -5, top: -5, zIndex: 1001 },
+                bottomLeft: { width: 10, height: 10, background: 'var(--accent-9)', borderRadius: '50%', left: -5, bottom: -5, zIndex: 1001 },
+                bottomRight: { width: 10, height: 10, background: 'var(--accent-9)', borderRadius: '50%', right: -5, bottom: -5, zIndex: 1001 },
+                top: { height: 6, top: -3, zIndex: 1000 },
+                bottom: { height: 6, bottom: -3, zIndex: 1000 },
+                left: { width: 6, left: -3, zIndex: 1000 },
+                right: { width: 6, right: -3, zIndex: 1000 }
             }}
             style={{
                 position: 'absolute',
@@ -387,8 +436,9 @@ export const DraggableElement: React.FC<DraggableElementProps> = React.memo(({ e
                 display: (isHidden && !isSelected) ? 'none' : undefined,
                 opacity: (isHidden && isSelected) ? 0.4 : 1,
                 zIndex: isSelected ? 1000 : undefined,
-                // Add outline during resize/selection to ensure visibility
-                outline: isSelected ? '1px dashed var(--accent-9)' : undefined
+                // Removed outline to avoid double borders with inner content
+                outline: 'none',
+                overflow: 'visible'
             }}
             enable={isSelected && !element.autoGrow ? undefined : {
                 top: false, right: isSelected, bottom: false, left: isSelected,

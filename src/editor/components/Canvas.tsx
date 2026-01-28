@@ -127,28 +127,44 @@ export const Canvas: React.FC<CanvasProps> = () => {
         window.removeEventListener('mouseup', handleWindowMouseUp);
     }, [handleWindowMouseMove]);
 
-    // Handle Wheel Zoom and Pan
-    const handleWheel = (e: React.WheelEvent) => {
-        if (e.ctrlKey || e.metaKey) {
-            e.preventDefault();
-            const zoomSensitivity = 0.001;
-            const newZoom = Math.min(Math.max(0.1, state.zoom - e.deltaY * zoomSensitivity), 5);
-            setZoom(newZoom);
-        } else {
-            // Regular scroll -> Pan
-            // Shift + Wheel -> Horizontal Pan
-            // Wheel -> Vertical Pan
-            // Note: deltaMode can vary (pixel, line, page). Assuming pixel for simplicity or low values.
-            const panSensitivity = 1;
-            const dx = e.shiftKey ? e.deltaY : e.deltaX;
-            const dy = e.shiftKey ? e.deltaX : e.deltaY;
+    // State Ref for Event Listeners
+    const stateRef = useRef(state);
+    useEffect(() => { stateRef.current = state; }, [state]);
 
-            setPan({
-                x: state.pan.x - dx * panSensitivity,
-                y: state.pan.y - dy * panSensitivity
-            });
+    // Handle Wheel Zoom and Pan (Native Listener for passive: false)
+    useEffect(() => {
+        const handleWheel = (e: WheelEvent) => {
+            e.preventDefault();
+
+            const currentState = stateRef.current;
+
+            if (e.ctrlKey || e.metaKey) {
+                const zoomSensitivity = 0.001;
+                const newZoom = Math.min(Math.max(0.1, currentState.zoom - e.deltaY * zoomSensitivity), 5);
+                setZoom(newZoom);
+            } else {
+                const panSensitivity = 1;
+                const dx = e.shiftKey ? e.deltaY : e.deltaX;
+                const dy = e.shiftKey ? e.deltaX : e.deltaY;
+
+                setPan({
+                    x: currentState.pan.x - dx * panSensitivity,
+                    y: currentState.pan.y - dy * panSensitivity
+                });
+            }
+        };
+
+        const canvasEl = canvasRef.current;
+        if (canvasEl) {
+            canvasEl.addEventListener('wheel', handleWheel, { passive: false });
         }
-    };
+
+        return () => {
+            if (canvasEl) {
+                canvasEl.removeEventListener('wheel', handleWheel);
+            }
+        };
+    }, [setZoom, setPan]);
 
     // Handle Global Hotkeys
     useEffect(() => {
@@ -207,6 +223,20 @@ export const Canvas: React.FC<CanvasProps> = () => {
                         if (e.key === 'ArrowDown') y += step;
                         if (e.key === 'ArrowLeft') x -= step;
                         if (e.key === 'ArrowRight') x += step;
+
+                        // Boundary check: Prevent left < 0
+                        x = Math.max(0, x);
+
+                        if (state.isList) {
+                            y = Math.max(0, y);
+                            const elHeight = el.height ?? 100;
+                            const canvasHeight = state.canvasHeight || 150;
+                            if (canvasHeight > 0) {
+                                y = Math.min(y, canvasHeight - elHeight);
+                            }
+                            y = Math.max(0, y);
+                        }
+
                         updates.push({ id, changes: { x, y } });
                     }
                 });
@@ -304,7 +334,6 @@ export const Canvas: React.FC<CanvasProps> = () => {
             onMouseDown={handleMouseDown}
             onDragOver={handleDragOver}
             onDrop={handleDrop}
-            onWheel={handleWheel}
             style={{
                 width: '100%',
                 height: '100%',
@@ -393,6 +422,28 @@ export const Canvas: React.FC<CanvasProps> = () => {
                         }}
                     />
                 ))}
+
+                {/* Top Boundary Indicator */}
+                <div style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '1px',
+                    borderTop: '1px dashed var(--accent-9)',
+                    opacity: 0.6,
+                    zIndex: 5,
+                    pointerEvents: 'none'
+                }}>
+                    <span style={{
+                        position: 'absolute',
+                        top: -16,
+                        left: 4,
+                        fontSize: '10px',
+                        color: 'var(--accent-9)',
+                        fontWeight: 500
+                    }}>Início (0px)</span>
+                </div>
 
                 {state.isList && (
                     <div

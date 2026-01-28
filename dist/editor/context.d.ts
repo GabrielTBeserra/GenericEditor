@@ -25,7 +25,7 @@ export interface IElementAnimation {
 }
 export interface IElement {
     id: string;
-    type: 'text' | 'image' | 'box' | 'group' | 'text-container';
+    type: 'text' | 'image' | 'box' | 'group' | 'text-container' | 'checkbox';
     name?: string;
     groupId?: string;
     content: string;
