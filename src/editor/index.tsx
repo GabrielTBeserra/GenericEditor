@@ -1,5 +1,5 @@
 import { DoubleArrowLeftIcon, DoubleArrowRightIcon, DownloadIcon, EyeNoneIcon, EyeOpenIcon, Share1Icon, UploadIcon } from '@radix-ui/react-icons';
-import { Badge, Box, Button, DropdownMenu, Flex, Grid, IconButton, ScrollArea, Tabs, Text, Theme } from '@radix-ui/themes';
+import { Badge, Box, Button, Dialog, DropdownMenu, Flex, Grid, IconButton, ScrollArea, Tabs, Text, Theme } from '@radix-ui/themes';
 import '@radix-ui/themes/styles.css';
 import React, { useState } from 'react';
 import { Group, Panel, Separator } from 'react-resizable-panels';
@@ -28,8 +28,18 @@ const EditorContent: React.FC<EditorProps> = ({ layout, initialState, onSave, th
     const [isSidebarVisible, setIsSidebarVisible] = useState(true);
     const [settingsElementId, setSettingsElementId] = useState<string | null>(null);
     const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
     const { addElement, loadState, state, undo, redo, copy, paste, removeSelected, updateElements } = useEditor();
     const fileInputRef = React.useRef<HTMLInputElement>(null);
+
+    React.useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
 
     const handleExport = () => {
         const stateToSave = {
@@ -460,6 +470,15 @@ const EditorContent: React.FC<EditorProps> = ({ layout, initialState, onSave, th
                     onOpenChange={setIsSettingsOpen}
                 />
             )}
+
+            <Dialog.Root open={isMobile}>
+                <Dialog.Content style={{ maxWidth: 450 }}>
+                    <Dialog.Title>Dispositivo Não Suportado</Dialog.Title>
+                    <Dialog.Description size="2">
+                        Por favor, utilize um computador ou tablet para acessar o editor. O sistema não foi desenvolvido para celulares.
+                    </Dialog.Description>
+                </Dialog.Content>
+            </Dialog.Root>
         </Theme>
     );
 };
