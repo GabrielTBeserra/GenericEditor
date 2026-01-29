@@ -21322,27 +21322,34 @@ const Ruler = ({ orientation: n }) => {
 	});
 };
 var EditorContent = ({ layout: n, initialState: E, onSave: O, theme: A = "light" }) => {
-	let [j, M] = useState(!0), [N, P] = useState(!0), [z, B] = useState(null), [H, U] = useState(!1), { addElement: W, loadState: G, state: Z, undo: HF, redo: UF, copy: WF, paste: GF, removeSelected: KF, updateElements: qF } = useEditor(), YF = React.useRef(null), XF = () => {
+	let [j, M] = useState(!0), [N, P] = useState(!0), [z, B] = useState(null), [H, U] = useState(!1), [W, G] = useState(!1), { addElement: Z, loadState: HF, state: UF, undo: WF, redo: GF, copy: KF, paste: qF, removeSelected: YF, updateElements: XF } = useEditor(), ZF = React.useRef(null);
+	React.useEffect(() => {
+		let n = () => {
+			G(window.innerWidth < 768);
+		};
+		return n(), window.addEventListener("resize", n), () => window.removeEventListener("resize", n);
+	}, []);
+	let QF = () => {
 		let n = {
-			elements: Z.elements,
-			isList: Z.isList,
-			mockData: Z.mockData,
-			singleMockData: Z.singleMockData,
-			listSettings: Z.listSettings,
-			canvasHeight: Z.canvasHeight,
-			gridSize: Z.gridSize
+			elements: UF.elements,
+			isList: UF.isList,
+			mockData: UF.mockData,
+			singleMockData: UF.singleMockData,
+			listSettings: UF.listSettings,
+			canvasHeight: UF.canvasHeight,
+			gridSize: UF.gridSize
 		}, _ = JSON.stringify(n, null, 2), E = new Blob([_], { type: "application/json" }), O = URL.createObjectURL(E), A = document.createElement("a");
 		A.href = O, A.download = `layout-${(/* @__PURE__ */ new Date()).toISOString().slice(0, 10)}.json`, document.body.appendChild(A), A.click(), document.body.removeChild(A), URL.revokeObjectURL(O);
-	}, ZF = () => {
-		YF.current?.click();
-	}, QF = (n) => {
+	}, $F = () => {
+		ZF.current?.click();
+	}, eI = (n) => {
 		let _ = n.target.files?.[0];
 		if (!_) return;
 		let E = new FileReader();
 		E.onload = (n) => {
 			try {
 				let _ = n.target?.result;
-				G(JSON.parse(_));
+				HF(JSON.parse(_));
 			} catch (n) {
 				console.error("Failed to import layout", n), alert("Erro ao importar layout. Arquivo inválido.");
 			}
@@ -21360,7 +21367,7 @@ var EditorContent = ({ layout: n, initialState: E, onSave: O, theme: A = "light"
 						let n = new FileReader();
 						n.onload = (n) => {
 							let _ = n.target?.result;
-							W({
+							Z({
 								type: "image",
 								content: _,
 								width: 200,
@@ -21372,24 +21379,24 @@ var EditorContent = ({ layout: n, initialState: E, onSave: O, theme: A = "light"
 			}
 		};
 		return window.addEventListener("paste", n), () => window.removeEventListener("paste", n);
-	}, [W]), React.useEffect(() => {
+	}, [Z]), React.useEffect(() => {
 		let n = (n) => {
 			if (!(document.activeElement?.tagName === "INPUT" || document.activeElement?.tagName === "TEXTAREA" || document.activeElement?.isContentEditable)) {
-				if ((n.ctrlKey || n.metaKey) && n.key === "z") n.shiftKey ? (n.preventDefault(), UF()) : (n.preventDefault(), HF());
-				else if ((n.ctrlKey || n.metaKey) && n.key === "y") n.preventDefault(), UF();
-				else if ((n.ctrlKey || n.metaKey) && n.key === "c") n.preventDefault(), WF();
-				else if ((n.ctrlKey || n.metaKey) && n.key === "v") n.preventDefault(), GF();
-				else if (n.key === "Delete" || n.key === "Backspace") Z.selectedElementIds.length > 0 && (n.preventDefault(), KF());
+				if ((n.ctrlKey || n.metaKey) && n.key === "z") n.shiftKey ? (n.preventDefault(), GF()) : (n.preventDefault(), WF());
+				else if ((n.ctrlKey || n.metaKey) && n.key === "y") n.preventDefault(), GF();
+				else if ((n.ctrlKey || n.metaKey) && n.key === "c") n.preventDefault(), KF();
+				else if ((n.ctrlKey || n.metaKey) && n.key === "v") n.preventDefault(), qF();
+				else if (n.key === "Delete" || n.key === "Backspace") UF.selectedElementIds.length > 0 && (n.preventDefault(), YF());
 				else if ([
 					"ArrowUp",
 					"ArrowDown",
 					"ArrowLeft",
 					"ArrowRight"
-				].includes(n.key) && Z.selectedElementIds.length > 0) {
+				].includes(n.key) && UF.selectedElementIds.length > 0) {
 					n.preventDefault();
 					let _ = n.shiftKey ? 10 : 1, E = [];
-					Z.selectedElementIds.forEach((O) => {
-						let A = Z.elements.find((n) => n.id === O);
+					UF.selectedElementIds.forEach((O) => {
+						let A = UF.elements.find((n) => n.id === O);
 						if (A) {
 							let j = {};
 							n.key === "ArrowUp" && (j.y = A.y - _), n.key === "ArrowDown" && (j.y = A.y + _), n.key === "ArrowLeft" && (j.x = A.x - _), n.key === "ArrowRight" && (j.x = A.x + _), E.push({
@@ -21397,30 +21404,30 @@ var EditorContent = ({ layout: n, initialState: E, onSave: O, theme: A = "light"
 								changes: j
 							});
 						}
-					}), E.length > 0 && qF(E);
+					}), E.length > 0 && XF(E);
 				}
 			}
 		};
 		return window.addEventListener("keydown", n), () => window.removeEventListener("keydown", n);
 	}, [
-		HF,
-		UF,
 		WF,
 		GF,
 		KF,
-		Z.selectedElementIds,
-		Z.elements,
-		qF
+		qF,
+		YF,
+		UF.selectedElementIds,
+		UF.elements,
+		XF
 	]), React.useEffect(() => {
 		if (E) try {
 			let n = typeof E == "string" ? JSON.parse(E) : E;
-			Array.isArray(n) ? G({ elements: n }) : n.elements && G(n);
+			Array.isArray(n) ? HF({ elements: n }) : n.elements && HF(n);
 		} catch (n) {
 			console.error("Failed to load initial state", n);
 		}
-	}, [E, G]);
-	let $F = (n) => {
-		console.log(`Adding element of type: ${n}`), W({
+	}, [E, HF]);
+	let rI = (n) => {
+		console.log(`Adding element of type: ${n}`), Z({
 			type: n,
 			content: `New ${n}`
 		});
@@ -21431,373 +21438,386 @@ var EditorContent = ({ layout: n, initialState: E, onSave: O, theme: A = "light"
 		grayColor: "slate",
 		radius: "medium",
 		scaling: "100%",
-		children: [/* @__PURE__ */ jsxs(p$1, {
-			direction: "row",
-			style: {
-				height: "100vh",
-				width: "100%",
-				overflow: "hidden",
-				backgroundColor: "var(--color-background)"
-			},
-			children: [N && /* @__PURE__ */ jsxs(p$1, {
-				direction: "column",
-				width: "280px",
+		children: [
+			/* @__PURE__ */ jsxs(p$1, {
+				direction: "row",
 				style: {
-					borderRight: "1px solid var(--gray-5)",
-					backgroundColor: "var(--gray-2)",
-					flexShrink: 0,
-					height: "100%"
+					height: "100vh",
+					width: "100%",
+					overflow: "hidden",
+					backgroundColor: "var(--color-background)"
 				},
-				children: [/* @__PURE__ */ jsx(p, {
-					p: "4",
+				children: [N && /* @__PURE__ */ jsxs(p$1, {
+					direction: "column",
+					width: "280px",
 					style: {
-						borderBottom: "1px solid var(--gray-5)",
-						backgroundColor: "var(--gray-2)"
+						borderRight: "1px solid var(--gray-5)",
+						backgroundColor: "var(--gray-2)",
+						flexShrink: 0,
+						height: "100%"
 					},
-					children: /* @__PURE__ */ jsx(p$1, {
-						direction: "column",
-						gap: "3",
-						children: /* @__PURE__ */ jsxs(p, { children: [
-							/* @__PURE__ */ jsx(p$2, {
-								size: "2",
-								weight: "bold",
-								mb: "2",
-								as: "div",
-								children: "Editor"
-							}),
-							/* @__PURE__ */ jsxs(I$2, { children: [/* @__PURE__ */ jsx(h$1, { children: /* @__PURE__ */ jsx(o, {
-								variant: "solid",
-								color: "green",
-								size: "3",
-								style: {
-									width: "100%",
-									cursor: "pointer",
-									justifyContent: "center",
-									marginBottom: "8px"
-								},
-								children: "Adicionar Novo +"
-							}) }), /* @__PURE__ */ jsxs(g$1, {
-								style: { width: "240px" },
-								children: [
-									/* @__PURE__ */ jsx(v$3, {
-										onSelect: () => $F("text"),
-										children: "Texto"
-									}),
-									/* @__PURE__ */ jsx(v$3, {
-										onSelect: () => $F("image"),
-										children: "Imagem"
-									}),
-									/* @__PURE__ */ jsx(v$3, {
-										onSelect: () => $F("box"),
-										children: "Caixa (Container)"
-									}),
-									/* @__PURE__ */ jsx(v$3, {
-										onSelect: () => $F("text-container"),
-										children: "Container com Texto"
-									})
-								]
-							})] }),
-							/* @__PURE__ */ jsxs(o, {
-								variant: "soft",
-								color: "blue",
-								style: {
-									width: "100%",
-									justifyContent: "center",
-									cursor: "pointer"
-								},
-								onClick: () => {
-									if (O) {
-										let n = {
-											elements: Z.elements,
-											isList: Z.isList,
-											mockData: Z.mockData,
-											singleMockData: Z.singleMockData,
-											listSettings: Z.listSettings,
-											canvasHeight: Z.canvasHeight
-										};
-										O(JSON.stringify(n, null, 2));
-									}
-								},
-								children: [/* @__PURE__ */ jsx(Share1Icon, {}), " Salvar Alterações"]
-							}),
-							/* @__PURE__ */ jsxs(p$1, {
-								gap: "2",
-								mt: "2",
-								children: [/* @__PURE__ */ jsxs(o, {
-									variant: "soft",
-									color: "gray",
-									style: {
-										flex: 1,
-										cursor: "pointer",
-										justifyContent: "center"
-									},
-									onClick: XF,
-									children: [/* @__PURE__ */ jsx(DownloadIcon, {}), " Exportar"]
-								}), /* @__PURE__ */ jsxs(o, {
-									variant: "soft",
-									color: "gray",
-									style: {
-										flex: 1,
-										cursor: "pointer",
-										justifyContent: "center"
-									},
-									onClick: ZF,
-									children: [/* @__PURE__ */ jsx(UploadIcon, {}), " Importar"]
-								})]
-							}),
-							/* @__PURE__ */ jsx("input", {
-								type: "file",
-								ref: YF,
-								style: { display: "none" },
-								accept: ".json",
-								onChange: QF
-							}),
-							/* @__PURE__ */ jsx(p, {
-								mt: "2",
-								children: /* @__PURE__ */ jsx(EditorSettings, {})
-							})
-						] })
-					})
-				}), /* @__PURE__ */ jsx(c, {
-					type: "auto",
-					scrollbars: "vertical",
-					style: { flex: 1 },
-					children: /* @__PURE__ */ jsx(p, {
+					children: [/* @__PURE__ */ jsx(p, {
 						p: "4",
-						children: /* @__PURE__ */ jsxs(m$1, {
-							defaultValue: "layers",
-							children: [/* @__PURE__ */ jsxs(b$1, { children: [
-								/* @__PURE__ */ jsx(P$1, {
-									value: "layers",
-									children: "Camadas"
+						style: {
+							borderBottom: "1px solid var(--gray-5)",
+							backgroundColor: "var(--gray-2)"
+						},
+						children: /* @__PURE__ */ jsx(p$1, {
+							direction: "column",
+							gap: "3",
+							children: /* @__PURE__ */ jsxs(p, { children: [
+								/* @__PURE__ */ jsx(p$2, {
+									size: "2",
+									weight: "bold",
+									mb: "2",
+									as: "div",
+									children: "Editor"
 								}),
-								/* @__PURE__ */ jsx(P$1, {
-									value: "history",
-									children: "Histórico"
-								}),
-								/* @__PURE__ */ jsx(P$1, {
-									value: "vars",
-									children: "Variáveis"
-								})
-							] }), /* @__PURE__ */ jsxs(p, {
-								pt: "3",
-								children: [
-									/* @__PURE__ */ jsx(f$2, {
-										value: "layers",
-										children: /* @__PURE__ */ jsx(LayersPanel, { onOpenSettings: (n) => {
-											B(n), U(!0);
-										} })
-									}),
-									/* @__PURE__ */ jsx(f$2, {
-										value: "history",
-										children: /* @__PURE__ */ jsx(HistoryPanel, {})
-									}),
-									/* @__PURE__ */ jsx(f$2, {
-										value: "vars",
-										children: /* @__PURE__ */ jsxs(p, { children: [
-											/* @__PURE__ */ jsx(p$2, {
-												size: "2",
-												weight: "bold",
-												mb: "2",
-												as: "div",
-												children: "Variáveis Disponíveis"
-											}),
-											/* @__PURE__ */ jsx(p$2, {
-												size: "1",
-												color: "gray",
-												mb: "2",
-												as: "div",
-												children: "Clique para copiar ou arraste"
-											}),
-											/* @__PURE__ */ jsxs(p$1, {
-												direction: "column",
-												gap: "2",
-												children: [n.props.map((n, _) => /* @__PURE__ */ jsxs(e, {
-													color: "blue",
-													variant: "soft",
-													size: "2",
-													style: {
-														padding: "8px",
-														justifyContent: "flex-start",
-														cursor: "grab"
-													},
-													title: `Clique para copiar {{${n.dataName}}}`,
-													draggable: !0,
-													onDragStart: (_) => {
-														_.dataTransfer.setData("application/x-editor-prop", n.dataName), _.dataTransfer.effectAllowed = "copy";
-													},
-													onClick: () => {
-														let _ = `{{${n.dataName}}}`;
-														navigator.clipboard.writeText(_);
-													},
-													children: [n.name, /* @__PURE__ */ jsx(p$2, {
-														color: "gray",
-														style: {
-															marginLeft: "auto",
-															fontSize: "10px"
-														},
-														children: `{{${n.dataName}}}`
-													})]
-												}, _)), n.props.length === 0 && /* @__PURE__ */ jsx(p$2, {
-													size: "1",
-													color: "gray",
-													style: { fontStyle: "italic" },
-													children: "Nenhuma variável configurada."
-												})]
-											})
-										] })
-									})
-								]
-							})]
-						})
-					})
-				})]
-			}), /* @__PURE__ */ jsxs(p, {
-				style: {
-					flex: 1,
-					position: "relative",
-					height: "100%"
-				},
-				children: [
-					/* @__PURE__ */ jsx(p, {
-						style: {
-							position: "absolute",
-							top: 10,
-							left: 10,
-							zIndex: 10
-						},
-						children: /* @__PURE__ */ jsx(o$2, {
-							size: "2",
-							variant: "soft",
-							color: "gray",
-							onClick: () => P(!N),
-							title: N ? "Ocultar Barra Lateral" : "Mostrar Barra Lateral",
-							children: jsx(N ? DoubleArrowLeftIcon : DoubleArrowRightIcon, {})
-						})
-					}),
-					/* @__PURE__ */ jsxs(p$1, {
-						style: {
-							position: "absolute",
-							top: 10,
-							right: 10,
-							zIndex: 10
-						},
-						gap: "3",
-						align: "center",
-						children: [/* @__PURE__ */ jsx(ShortcutsDialog, {}), /* @__PURE__ */ jsx(o$2, {
-							size: "2",
-							variant: "soft",
-							color: j ? "blue" : "gray",
-							onClick: () => M(!j),
-							title: j ? "Ocultar Preview" : "Mostrar Preview",
-							children: jsx(j ? EyeOpenIcon : EyeNoneIcon, {})
-						})]
-					}),
-					/* @__PURE__ */ jsxs(Rt, {
-						orientation: "horizontal",
-						style: {
-							height: "100%",
-							width: "100%"
-						},
-						children: [
-							/* @__PURE__ */ jsx(kt, {
-								defaultSize: 50,
-								minSize: 20,
-								children: /* @__PURE__ */ jsxs(o$1, {
-									columns: "20px 1fr",
-									rows: "20px 1fr",
+								/* @__PURE__ */ jsxs(I$2, { children: [/* @__PURE__ */ jsx(h$1, { children: /* @__PURE__ */ jsx(o, {
+									variant: "solid",
+									color: "green",
+									size: "3",
 									style: {
-										height: "100%",
 										width: "100%",
-										backgroundColor: "var(--color-background)"
+										cursor: "pointer",
+										justifyContent: "center",
+										marginBottom: "8px"
 									},
+									children: "Adicionar Novo +"
+								}) }), /* @__PURE__ */ jsxs(g$1, {
+									style: { width: "240px" },
 									children: [
-										/* @__PURE__ */ jsx(p, { style: {
-											backgroundColor: "var(--gray-2)",
-											borderRight: "1px solid var(--gray-6)",
-											borderBottom: "1px solid var(--gray-6)",
-											zIndex: 30
-										} }),
-										/* @__PURE__ */ jsx(p, {
-											style: {
-												backgroundColor: "var(--gray-2)",
-												borderBottom: "1px solid var(--gray-6)",
-												overflow: "hidden",
-												zIndex: 30
-											},
-											children: /* @__PURE__ */ jsx(Ruler, { orientation: "horizontal" })
+										/* @__PURE__ */ jsx(v$3, {
+											onSelect: () => rI("text"),
+											children: "Texto"
 										}),
-										/* @__PURE__ */ jsx(p, {
-											style: {
-												backgroundColor: "var(--gray-2)",
-												borderRight: "1px solid var(--gray-6)",
-												overflow: "hidden",
-												zIndex: 30
-											},
-											children: /* @__PURE__ */ jsx(Ruler, { orientation: "vertical" })
+										/* @__PURE__ */ jsx(v$3, {
+											onSelect: () => rI("image"),
+											children: "Imagem"
 										}),
-										/* @__PURE__ */ jsxs(p, {
-											style: {
-												position: "relative",
-												overflow: "hidden",
-												width: "100%",
-												height: "100%"
-											},
-											children: [
-												/* @__PURE__ */ jsx(p, {
-													style: {
-														position: "absolute",
-														top: 16,
-														left: "50%",
-														transform: "translateX(-50%)",
-														zIndex: 20
-													},
-													children: /* @__PURE__ */ jsx(AlignmentToolbar, {})
-												}),
-												/* @__PURE__ */ jsx(p, {
-													style: {
-														position: "absolute",
-														bottom: 16,
-														right: 16,
-														zIndex: 20
-													},
-													children: /* @__PURE__ */ jsx(ViewToolbar, {})
-												}),
-												/* @__PURE__ */ jsx(Canvas, {}),
-												/* @__PURE__ */ jsx(Minimap, {})
-											]
+										/* @__PURE__ */ jsx(v$3, {
+											onSelect: () => rI("box"),
+											children: "Caixa (Container)"
+										}),
+										/* @__PURE__ */ jsx(v$3, {
+											onSelect: () => rI("text-container"),
+											children: "Container com Texto"
 										})
 									]
-								})
-							}),
-							j && /* @__PURE__ */ jsx(Ot, { style: {
-								width: "4px",
-								backgroundColor: "var(--gray-6)",
-								cursor: "col-resize",
-								transition: "background-color 0.2s"
-							} }),
-							j && /* @__PURE__ */ jsx(kt, {
-								defaultSize: 50,
-								minSize: 20,
-								children: /* @__PURE__ */ jsx(p, {
+								})] }),
+								/* @__PURE__ */ jsxs(o, {
+									variant: "soft",
+									color: "blue",
 									style: {
-										height: "100%",
 										width: "100%",
-										backgroundColor: "var(--gray-3)",
-										borderLeft: "1px solid var(--gray-5)"
+										justifyContent: "center",
+										cursor: "pointer"
 									},
-									children: /* @__PURE__ */ jsx(Preview, {})
+									onClick: () => {
+										if (O) {
+											let n = {
+												elements: UF.elements,
+												isList: UF.isList,
+												mockData: UF.mockData,
+												singleMockData: UF.singleMockData,
+												listSettings: UF.listSettings,
+												canvasHeight: UF.canvasHeight
+											};
+											O(JSON.stringify(n, null, 2));
+										}
+									},
+									children: [/* @__PURE__ */ jsx(Share1Icon, {}), " Salvar Alterações"]
+								}),
+								/* @__PURE__ */ jsxs(p$1, {
+									gap: "2",
+									mt: "2",
+									children: [/* @__PURE__ */ jsxs(o, {
+										variant: "soft",
+										color: "gray",
+										style: {
+											flex: 1,
+											cursor: "pointer",
+											justifyContent: "center"
+										},
+										onClick: QF,
+										children: [/* @__PURE__ */ jsx(DownloadIcon, {}), " Exportar"]
+									}), /* @__PURE__ */ jsxs(o, {
+										variant: "soft",
+										color: "gray",
+										style: {
+											flex: 1,
+											cursor: "pointer",
+											justifyContent: "center"
+										},
+										onClick: $F,
+										children: [/* @__PURE__ */ jsx(UploadIcon, {}), " Importar"]
+									})]
+								}),
+								/* @__PURE__ */ jsx("input", {
+									type: "file",
+									ref: ZF,
+									style: { display: "none" },
+									accept: ".json",
+									onChange: eI
+								}),
+								/* @__PURE__ */ jsx(p, {
+									mt: "2",
+									children: /* @__PURE__ */ jsx(EditorSettings, {})
 								})
+							] })
+						})
+					}), /* @__PURE__ */ jsx(c, {
+						type: "auto",
+						scrollbars: "vertical",
+						style: { flex: 1 },
+						children: /* @__PURE__ */ jsx(p, {
+							p: "4",
+							children: /* @__PURE__ */ jsxs(m$1, {
+								defaultValue: "layers",
+								children: [/* @__PURE__ */ jsxs(b$1, { children: [
+									/* @__PURE__ */ jsx(P$1, {
+										value: "layers",
+										children: "Camadas"
+									}),
+									/* @__PURE__ */ jsx(P$1, {
+										value: "history",
+										children: "Histórico"
+									}),
+									/* @__PURE__ */ jsx(P$1, {
+										value: "vars",
+										children: "Variáveis"
+									})
+								] }), /* @__PURE__ */ jsxs(p, {
+									pt: "3",
+									children: [
+										/* @__PURE__ */ jsx(f$2, {
+											value: "layers",
+											children: /* @__PURE__ */ jsx(LayersPanel, { onOpenSettings: (n) => {
+												B(n), U(!0);
+											} })
+										}),
+										/* @__PURE__ */ jsx(f$2, {
+											value: "history",
+											children: /* @__PURE__ */ jsx(HistoryPanel, {})
+										}),
+										/* @__PURE__ */ jsx(f$2, {
+											value: "vars",
+											children: /* @__PURE__ */ jsxs(p, { children: [
+												/* @__PURE__ */ jsx(p$2, {
+													size: "2",
+													weight: "bold",
+													mb: "2",
+													as: "div",
+													children: "Variáveis Disponíveis"
+												}),
+												/* @__PURE__ */ jsx(p$2, {
+													size: "1",
+													color: "gray",
+													mb: "2",
+													as: "div",
+													children: "Clique para copiar ou arraste"
+												}),
+												/* @__PURE__ */ jsxs(p$1, {
+													direction: "column",
+													gap: "2",
+													children: [n.props.map((n, _) => /* @__PURE__ */ jsxs(e, {
+														color: "blue",
+														variant: "soft",
+														size: "2",
+														style: {
+															padding: "8px",
+															justifyContent: "flex-start",
+															cursor: "grab"
+														},
+														title: `Clique para copiar {{${n.dataName}}}`,
+														draggable: !0,
+														onDragStart: (_) => {
+															_.dataTransfer.setData("application/x-editor-prop", n.dataName), _.dataTransfer.effectAllowed = "copy";
+														},
+														onClick: () => {
+															let _ = `{{${n.dataName}}}`;
+															navigator.clipboard.writeText(_);
+														},
+														children: [n.name, /* @__PURE__ */ jsx(p$2, {
+															color: "gray",
+															style: {
+																marginLeft: "auto",
+																fontSize: "10px"
+															},
+															children: `{{${n.dataName}}}`
+														})]
+													}, _)), n.props.length === 0 && /* @__PURE__ */ jsx(p$2, {
+														size: "1",
+														color: "gray",
+														style: { fontStyle: "italic" },
+														children: "Nenhuma variável configurada."
+													})]
+												})
+											] })
+										})
+									]
+								})]
 							})
-						]
-					})
-				]
-			})]
-		}), z && /* @__PURE__ */ jsx(ElementAdvancedSettings, {
-			elementId: z,
-			open: H,
-			onOpenChange: U
-		})]
+						})
+					})]
+				}), /* @__PURE__ */ jsxs(p, {
+					style: {
+						flex: 1,
+						position: "relative",
+						height: "100%"
+					},
+					children: [
+						/* @__PURE__ */ jsx(p, {
+							style: {
+								position: "absolute",
+								top: 10,
+								left: 10,
+								zIndex: 10
+							},
+							children: /* @__PURE__ */ jsx(o$2, {
+								size: "2",
+								variant: "soft",
+								color: "gray",
+								onClick: () => P(!N),
+								title: N ? "Ocultar Barra Lateral" : "Mostrar Barra Lateral",
+								children: jsx(N ? DoubleArrowLeftIcon : DoubleArrowRightIcon, {})
+							})
+						}),
+						/* @__PURE__ */ jsxs(p$1, {
+							style: {
+								position: "absolute",
+								top: 10,
+								right: 10,
+								zIndex: 10
+							},
+							gap: "3",
+							align: "center",
+							children: [/* @__PURE__ */ jsx(ShortcutsDialog, {}), /* @__PURE__ */ jsx(o$2, {
+								size: "2",
+								variant: "soft",
+								color: j ? "blue" : "gray",
+								onClick: () => M(!j),
+								title: j ? "Ocultar Preview" : "Mostrar Preview",
+								children: jsx(j ? EyeOpenIcon : EyeNoneIcon, {})
+							})]
+						}),
+						/* @__PURE__ */ jsxs(Rt, {
+							orientation: "horizontal",
+							style: {
+								height: "100%",
+								width: "100%"
+							},
+							children: [
+								/* @__PURE__ */ jsx(kt, {
+									defaultSize: 50,
+									minSize: 20,
+									children: /* @__PURE__ */ jsxs(o$1, {
+										columns: "20px 1fr",
+										rows: "20px 1fr",
+										style: {
+											height: "100%",
+											width: "100%",
+											backgroundColor: "var(--color-background)"
+										},
+										children: [
+											/* @__PURE__ */ jsx(p, { style: {
+												backgroundColor: "var(--gray-2)",
+												borderRight: "1px solid var(--gray-6)",
+												borderBottom: "1px solid var(--gray-6)",
+												zIndex: 30
+											} }),
+											/* @__PURE__ */ jsx(p, {
+												style: {
+													backgroundColor: "var(--gray-2)",
+													borderBottom: "1px solid var(--gray-6)",
+													overflow: "hidden",
+													zIndex: 30
+												},
+												children: /* @__PURE__ */ jsx(Ruler, { orientation: "horizontal" })
+											}),
+											/* @__PURE__ */ jsx(p, {
+												style: {
+													backgroundColor: "var(--gray-2)",
+													borderRight: "1px solid var(--gray-6)",
+													overflow: "hidden",
+													zIndex: 30
+												},
+												children: /* @__PURE__ */ jsx(Ruler, { orientation: "vertical" })
+											}),
+											/* @__PURE__ */ jsxs(p, {
+												style: {
+													position: "relative",
+													overflow: "hidden",
+													width: "100%",
+													height: "100%"
+												},
+												children: [
+													/* @__PURE__ */ jsx(p, {
+														style: {
+															position: "absolute",
+															top: 16,
+															left: "50%",
+															transform: "translateX(-50%)",
+															zIndex: 20
+														},
+														children: /* @__PURE__ */ jsx(AlignmentToolbar, {})
+													}),
+													/* @__PURE__ */ jsx(p, {
+														style: {
+															position: "absolute",
+															bottom: 16,
+															right: 16,
+															zIndex: 20
+														},
+														children: /* @__PURE__ */ jsx(ViewToolbar, {})
+													}),
+													/* @__PURE__ */ jsx(Canvas, {}),
+													/* @__PURE__ */ jsx(Minimap, {})
+												]
+											})
+										]
+									})
+								}),
+								j && /* @__PURE__ */ jsx(Ot, { style: {
+									width: "4px",
+									backgroundColor: "var(--gray-6)",
+									cursor: "col-resize",
+									transition: "background-color 0.2s"
+								} }),
+								j && /* @__PURE__ */ jsx(kt, {
+									defaultSize: 50,
+									minSize: 20,
+									children: /* @__PURE__ */ jsx(p, {
+										style: {
+											height: "100%",
+											width: "100%",
+											backgroundColor: "var(--gray-3)",
+											borderLeft: "1px solid var(--gray-5)"
+										},
+										children: /* @__PURE__ */ jsx(Preview, {})
+									})
+								})
+							]
+						})
+					]
+				})]
+			}),
+			z && /* @__PURE__ */ jsx(ElementAdvancedSettings, {
+				elementId: z,
+				open: H,
+				onOpenChange: U
+			}),
+			/* @__PURE__ */ jsx(s$4, {
+				open: W,
+				children: /* @__PURE__ */ jsxs(p$8, {
+					style: { maxWidth: 450 },
+					children: [/* @__PURE__ */ jsx(g$2, { children: "Dispositivo Não Suportado" }), /* @__PURE__ */ jsx(m$3, {
+						size: "2",
+						children: "Por favor, utilize um computador ou tablet para acessar o editor. O sistema não foi desenvolvido para celulares."
+					})]
+				})
+			})
+		]
 	});
 };
 const GenericEditor = (n) => /* @__PURE__ */ jsx(EditorProvider, {
