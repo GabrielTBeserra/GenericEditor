@@ -3,6 +3,7 @@ import { Badge, Box, Button, Dialog, DropdownMenu, Flex, Grid, IconButton, Scrol
 import '@radix-ui/themes/styles.css';
 import React, { useState } from 'react';
 import { Group, Panel, Separator } from 'react-resizable-panels';
+import pkg from '../../package.json';
 import { AlignmentToolbar } from './components/AlignmentToolbar';
 import { Canvas } from './components/Canvas';
 import { EditorSettings } from './components/EditorSettings';
@@ -237,7 +238,10 @@ const EditorContent: React.FC<EditorProps> = ({ layout, initialState, onSave, th
                         <Box p="4" style={{ borderBottom: '1px solid var(--gray-5)', backgroundColor: 'var(--gray-2)' }}>
                             <Flex direction="column" gap="3">
                                 <Box>
-                                    <Text size="2" weight="bold" mb="2" as="div">Editor</Text>
+                                    <Flex justify="between" align="center" mb="2">
+                                        <Text size="2" weight="bold">Editor</Text>
+                                        <Badge color="gray" variant="soft" radius="full">v{pkg.version}</Badge>
+                                    </Flex>
 
                                     <DropdownMenu.Root>
                                         <DropdownMenu.Trigger>
