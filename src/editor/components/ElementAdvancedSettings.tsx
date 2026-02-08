@@ -474,6 +474,7 @@ const ConditionalSettings: React.FC<{ element: IElement; updateElement: (id: str
         { label: 'Cor do Texto', value: 'color' },
         { label: 'Cor de Fundo', value: 'backgroundColor' },
         { label: 'Cor da Borda', value: 'borderColor' },
+        { label: 'Cor da Sombra', value: 'boxShadowColor' },
     ];
 
     const handleUpdateBindings = (prop: string, variable: string | null) => {

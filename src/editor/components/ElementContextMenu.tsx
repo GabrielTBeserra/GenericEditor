@@ -89,12 +89,37 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
     const colors = ['#000000', '#FFFFFF', '#FF0000', '#00FF00', '#0000FF', '#FFA500', '#808080', '#800080', 'transparent'];
     const borderWidths = [0, 1, 2, 4, 8];
     const borderStyles = ['solid', 'dashed', 'dotted', 'double'];
+    const shadowPresets = [
+        { label: 'Sem Sombra', value: 'none' },
+        { label: 'Suave', value: '0 2px 8px rgba(0, 0, 0, 0.12)' },
+        { label: 'Média', value: '0 6px 16px rgba(0, 0, 0, 0.18)' },
+        { label: 'Forte', value: '0 10px 24px rgba(0, 0, 0, 0.28)' },
+        { label: 'Brilho', value: '0 0 16px rgba(0, 0, 0, 0.35)' }
+    ];
+
+    const applyShadowColor = (boxShadow: string | undefined, color: string) => {
+        if (!boxShadow || boxShadow === 'none') {
+            return `0 4px 12px ${color}`;
+        }
+        const parts = boxShadow.split(',');
+        const last = parts[parts.length - 1].trim();
+        const colorPattern = /(rgba?\([^)]+\)|#(?:[0-9a-fA-F]{3,8})|[a-zA-Z]+)\s*$/;
+        const updatedLast = colorPattern.test(last) ? last.replace(colorPattern, color) : `${last} ${color}`;
+        parts[parts.length - 1] = updatedLast;
+        return parts.join(', ');
+    };
 
     const handleOpenColorDialog = (prop: string, currentValue: string) => {
         setColorDialog({ open: true, prop, value: currentValue });
     };
 
     const handleSaveColorDialog = () => {
+        if (colorDialog.prop === 'boxShadowColor') {
+            const nextShadow = applyShadowColor(element.style?.boxShadow as string | undefined, colorDialog.value);
+            handleUpdateStyle({ boxShadow: nextShadow });
+            setColorDialog(prev => ({ ...prev, open: false }));
+            return;
+        }
         handleUpdateStyle({ [colorDialog.prop]: colorDialog.value });
         setColorDialog(prev => ({ ...prev, open: false }));
     };
@@ -127,6 +152,15 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
             return;
         }
         handleUpdateStyle({ borderColor: color });
+    };
+
+    const handleShadowPreset = (shadow: string) => {
+        handleUpdateStyle({ boxShadow: shadow });
+    };
+
+    const handleShadowColor = (color: string) => {
+        const nextShadow = applyShadowColor(element.style?.boxShadow as string | undefined, color);
+        handleUpdateStyle({ boxShadow: nextShadow });
     };
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -634,6 +668,47 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                                         className="ContextMenuItem"
                                         onPointerDown={stopProp}
                                         onSelect={() => handleOpenColorDialog('backgroundColor', element.style?.backgroundColor as string || 'transparent')}
+                                    >
+                                        Outra Cor...
+                                    </ContextMenu.Item>
+                                </ContextMenu.SubContent>
+                            </ContextMenu.Portal>
+                        </ContextMenu.Sub>
+
+                        <ContextMenu.Sub>
+                            <ContextMenu.SubTrigger className="ContextMenuSubTrigger" onPointerDown={stopProp}>
+                                Sombra
+                                <div className="RightSlot"><ChevronRightIcon /></div>
+                            </ContextMenu.SubTrigger>
+                            <ContextMenu.Portal>
+                                <ContextMenu.SubContent className="ContextMenuSubContent" sideOffset={2} alignOffset={-5}>
+                                    {shadowPresets.map(preset => (
+                                        <ContextMenu.Item
+                                            key={preset.label}
+                                            className="ContextMenuItem"
+                                            onPointerDown={stopProp}
+                                            onSelect={() => handleShadowPreset(preset.value)}
+                                        >
+                                            {preset.label}
+                                        </ContextMenu.Item>
+                                    ))}
+                                    <ContextMenu.Separator className="ContextMenuSeparator" />
+                                    {colors.filter(c => c !== 'transparent').map(color => (
+                                        <ContextMenu.Item
+                                            key={color}
+                                            className="ContextMenuItem"
+                                            onPointerDown={stopProp}
+                                            onSelect={() => handleShadowColor(color)}
+                                        >
+                                            <div style={{ width: 12, height: 12, backgroundColor: color, marginRight: 8, border: '1px solid #ccc' }} />
+                                            {color}
+                                        </ContextMenu.Item>
+                                    ))}
+                                    <ContextMenu.Separator className="ContextMenuSeparator" />
+                                    <ContextMenu.Item
+                                        className="ContextMenuItem"
+                                        onPointerDown={stopProp}
+                                        onSelect={() => handleOpenColorDialog('boxShadowColor', '#000000')}
                                     >
                                         Outra Cor...
                                     </ContextMenu.Item>

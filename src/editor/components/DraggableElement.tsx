@@ -40,6 +40,17 @@ export const DraggableElement: React.FC<DraggableElementProps> = React.memo(({ e
 
     let displayContent = element.content;
     let conditionalStyles: React.CSSProperties = {};
+    const applyShadowColor = (boxShadow: string | undefined, color: string) => {
+        if (!boxShadow || boxShadow === 'none') {
+            return `0 4px 12px ${color}`;
+        }
+        const parts = boxShadow.split(',');
+        const last = parts[parts.length - 1].trim();
+        const colorPattern = /(rgba?\([^)]+\)|#(?:[0-9a-fA-F]{3,8})|[a-zA-Z]+)\s*$/;
+        const updatedLast = colorPattern.test(last) ? last.replace(colorPattern, color) : `${last} ${color}`;
+        parts[parts.length - 1] = updatedLast;
+        return parts.join(', ');
+    };
 
     if (dataContext) {
         if (element.type === 'text' || element.type === 'text-container') {
@@ -71,7 +82,12 @@ export const DraggableElement: React.FC<DraggableElementProps> = React.memo(({ e
             Object.entries(element.styleBindings).forEach(([styleProp, variableName]) => {
                 const val = dataContext[variableName];
                 if (val !== undefined && val !== null) {
-                    conditionalStyles = { ...conditionalStyles, [styleProp]: String(val) };
+                    if (styleProp === 'boxShadowColor') {
+                        const baseShadow = (conditionalStyles.boxShadow as string) || (element.style?.boxShadow as string | undefined);
+                        conditionalStyles = { ...conditionalStyles, boxShadow: applyShadowColor(baseShadow, String(val)) };
+                    } else {
+                        conditionalStyles = { ...conditionalStyles, [styleProp]: String(val) };
+                    }
                 }
             });
         }

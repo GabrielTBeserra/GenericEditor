@@ -50,6 +50,18 @@ const styleObjectToString = (style: Record<string, string | number | undefined |
         .join('; ');
 };
 
+const applyShadowColor = (boxShadow: string | undefined, color: string) => {
+    if (!boxShadow || boxShadow === 'none') {
+        return `0 4px 12px ${color}`;
+    }
+    const parts = boxShadow.split(',');
+    const last = parts[parts.length - 1].trim();
+    const colorPattern = /(rgba?\([^)]+\)|#(?:[0-9a-fA-F]{3,8})|[a-zA-Z]+)\s*$/;
+    const updatedLast = colorPattern.test(last) ? last.replace(colorPattern, color) : `${last} ${color}`;
+    parts[parts.length - 1] = updatedLast;
+    return parts.join(', ');
+};
+
 const measureTextHeight = (text: string, width: number, fontFamily: string, fontSize: number, lineHeightMultiplier = 1.2) => {
     if (!text) return 0;
     try {
@@ -387,7 +399,12 @@ const vanillaRenderItem = (elements: IElement[], itemData: GenericData, _index =
             Object.entries(element.styleBindings).forEach(([styleProp, variableName]) => {
                 const val = itemData[variableName as string];
                 if (val !== undefined && val !== null) {
-                    bindingStyles[styleProp] = String(val);
+                    if (styleProp === 'boxShadowColor') {
+                        const baseShadow = (conditionalStyles as { boxShadow?: string }).boxShadow || (element.style?.boxShadow as string | undefined);
+                        bindingStyles.boxShadow = applyShadowColor(baseShadow, String(val));
+                    } else {
+                        bindingStyles[styleProp] = String(val);
+                    }
                 }
             });
         }
@@ -484,7 +501,14 @@ const ElementRenderer: React.FC<{ element: IElement, itemData: GenericData }> = 
     if (element.styleBindings) {
         Object.entries(element.styleBindings).forEach(([styleProp, variableName]) => {
             const val = itemData[variableName];
-            if (val !== undefined && val !== null) bindingStyles[styleProp] = String(val);
+            if (val !== undefined && val !== null) {
+                if (styleProp === 'boxShadowColor') {
+                    const baseShadow = (conditionalStyles as { boxShadow?: string }).boxShadow || (element.style?.boxShadow as string | undefined);
+                    bindingStyles.boxShadow = applyShadowColor(baseShadow, String(val));
+                } else {
+                    bindingStyles[styleProp] = String(val);
+                }
+            }
         });
     }
 
@@ -700,6 +724,7 @@ const getRuntimeScript = (elements: IElement[], options: RenderOptions) => {
             const camelToKebab = ${camelToKebab.toString()};
             const hex8ToRgba = ${hex8ToRgba.toString()};
             const styleObjectToString = ${styleObjectToString.toString()};
+            const applyShadowColor = ${applyShadowColor.toString()};
             const measureTextHeight = ${measureTextHeight.toString()};
             const checkCondition = ${checkCondition.toString()};
             const formatValue = ${formatValue.toString()};
@@ -771,6 +796,7 @@ function renderTemplate(elements, data, options = {}) {
     const camelToKebab = ${camelToKebab.toString()};
     const hex8ToRgba = ${hex8ToRgba.toString()};
     const styleObjectToString = ${styleObjectToString.toString()};
+    const applyShadowColor = ${applyShadowColor.toString()};
     const measureTextHeight = ${measureTextHeight.toString()};
     const checkCondition = ${checkCondition.toString()};
     const formatValue = ${formatValue.toString()};
