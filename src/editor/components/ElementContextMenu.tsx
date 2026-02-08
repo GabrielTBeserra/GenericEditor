@@ -87,6 +87,8 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
     };
 
     const colors = ['#000000', '#FFFFFF', '#FF0000', '#00FF00', '#0000FF', '#FFA500', '#808080', '#800080', 'transparent'];
+    const borderWidths = [0, 1, 2, 4, 8];
+    const borderStyles = ['solid', 'dashed', 'dotted', 'double'];
 
     const handleOpenColorDialog = (prop: string, currentValue: string) => {
         setColorDialog({ open: true, prop, value: currentValue });
@@ -95,6 +97,36 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
     const handleSaveColorDialog = () => {
         handleUpdateStyle({ [colorDialog.prop]: colorDialog.value });
         setColorDialog(prev => ({ ...prev, open: false }));
+    };
+
+    const handleBorderWidth = (width: number) => {
+        if (width === 0) {
+            handleUpdateStyle({ borderWidth: '0px', borderStyle: 'none' });
+            return;
+        }
+        handleUpdateStyle({ borderWidth: `${width}px`, borderStyle: (element.style?.borderStyle as string) || 'solid' });
+    };
+
+    const handleBorderStyle = (style: string) => {
+        const currentWidth = parseInt((element.style?.borderWidth as string) || '0', 10);
+        if (!currentWidth) {
+            handleUpdateStyle({ borderStyle: style, borderWidth: '1px' });
+            return;
+        }
+        handleUpdateStyle({ borderStyle: style });
+    };
+
+    const handleBorderColor = (color: string) => {
+        const currentWidth = parseInt((element.style?.borderWidth as string) || '0', 10);
+        if (!currentWidth) {
+            handleUpdateStyle({
+                borderColor: color,
+                borderWidth: '1px',
+                borderStyle: (element.style?.borderStyle as string) || 'solid'
+            });
+            return;
+        }
+        handleUpdateStyle({ borderColor: color });
     };
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -602,6 +634,58 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                                         className="ContextMenuItem"
                                         onPointerDown={stopProp}
                                         onSelect={() => handleOpenColorDialog('backgroundColor', element.style?.backgroundColor as string || 'transparent')}
+                                    >
+                                        Outra Cor...
+                                    </ContextMenu.Item>
+                                </ContextMenu.SubContent>
+                            </ContextMenu.Portal>
+                        </ContextMenu.Sub>
+
+                        <ContextMenu.Sub>
+                            <ContextMenu.SubTrigger className="ContextMenuSubTrigger" onPointerDown={stopProp}>
+                                Borda
+                                <div className="RightSlot"><ChevronRightIcon /></div>
+                            </ContextMenu.SubTrigger>
+                            <ContextMenu.Portal>
+                                <ContextMenu.SubContent className="ContextMenuSubContent" sideOffset={2} alignOffset={-5}>
+                                    {borderWidths.map(width => (
+                                        <ContextMenu.Item
+                                            key={width}
+                                            className="ContextMenuItem"
+                                            onPointerDown={stopProp}
+                                            onSelect={() => handleBorderWidth(width)}
+                                        >
+                                            {width === 0 ? 'Sem Borda' : `${width}px`}
+                                        </ContextMenu.Item>
+                                    ))}
+                                    <ContextMenu.Separator className="ContextMenuSeparator" />
+                                    {borderStyles.map(style => (
+                                        <ContextMenu.Item
+                                            key={style}
+                                            className="ContextMenuItem"
+                                            onPointerDown={stopProp}
+                                            onSelect={() => handleBorderStyle(style)}
+                                        >
+                                            {style}
+                                        </ContextMenu.Item>
+                                    ))}
+                                    <ContextMenu.Separator className="ContextMenuSeparator" />
+                                    {colors.map(color => (
+                                        <ContextMenu.Item
+                                            key={color}
+                                            className="ContextMenuItem"
+                                            onPointerDown={stopProp}
+                                            onSelect={() => handleBorderColor(color)}
+                                        >
+                                            <div style={{ width: 12, height: 12, backgroundColor: color, marginRight: 8, border: '1px solid #ccc' }} />
+                                            {color === 'transparent' ? 'Transparente' : color}
+                                        </ContextMenu.Item>
+                                    ))}
+                                    <ContextMenu.Separator className="ContextMenuSeparator" />
+                                    <ContextMenu.Item
+                                        className="ContextMenuItem"
+                                        onPointerDown={stopProp}
+                                        onSelect={() => handleOpenColorDialog('borderColor', element.style?.borderColor as string || '#000000')}
                                     >
                                         Outra Cor...
                                     </ContextMenu.Item>

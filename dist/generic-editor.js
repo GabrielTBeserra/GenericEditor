@@ -8853,7 +8853,7 @@ function Ot({ children: n, className: _, elementRef: E, id: O, style: A, ...j })
 Ot.displayName = "Separator";
 var package_default = {
 	name: "@1urso/generic-editor",
-	version: "0.1.67",
+	version: "0.1.68",
 	publishConfig: { access: "public" },
 	type: "module",
 	main: "./dist/generic-editor.umd.cjs",
@@ -11611,12 +11611,59 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 		"#808080",
 		"#800080",
 		"transparent"
-	], wI = (n, _) => {
+	], wI = [
+		0,
+		1,
+		2,
+		4,
+		8
+	], TI = [
+		"solid",
+		"dashed",
+		"dotted",
+		"double"
+	], EI = (n, _) => {
 		nI({
 			open: !0,
 			prop: n,
 			value: _
 		});
+	}, DI = () => {
+		yI({ [tI.prop]: tI.value }), nI((n) => ({
+			...n,
+			open: !1
+		}));
+	}, OI = (n) => {
+		if (n === 0) {
+			yI({
+				borderWidth: "0px",
+				borderStyle: "none"
+			});
+			return;
+		}
+		yI({
+			borderWidth: `${n}px`,
+			borderStyle: _.style?.borderStyle || "solid"
+		});
+	}, kI = (n) => {
+		if (!parseInt(_.style?.borderWidth || "0", 10)) {
+			yI({
+				borderStyle: n,
+				borderWidth: "1px"
+			});
+			return;
+		}
+		yI({ borderStyle: n });
+	}, AI = (n) => {
+		if (!parseInt(_.style?.borderWidth || "0", 10)) {
+			yI({
+				borderColor: n,
+				borderWidth: "1px",
+				borderStyle: _.style?.borderStyle || "solid"
+			});
+			return;
+		}
+		yI({ borderColor: n });
 	};
 	return /* @__PURE__ */ jsxs(Fragment$1, { children: [
 		/* @__PURE__ */ jsx(s$4, {
@@ -11768,12 +11815,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 							color: "gray",
 							children: "Cancelar"
 						}) }), /* @__PURE__ */ jsx(o, {
-							onClick: () => {
-								yI({ [tI.prop]: tI.value }), nI((n) => ({
-									...n,
-									open: !1
-								}));
-							},
+							onClick: DI,
 							children: "Aplicar"
 						})]
 					})
@@ -12133,7 +12175,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 							/* @__PURE__ */ jsx(Item2$1, {
 								className: "ContextMenuItem",
 								onPointerDown: stopProp,
-								onSelect: () => wI("color", _.style?.color || "#000000"),
+								onSelect: () => EI("color", _.style?.color || "#000000"),
 								children: "Outra Cor..."
 							})
 						]
@@ -12266,7 +12308,54 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 						/* @__PURE__ */ jsx(Item2$1, {
 							className: "ContextMenuItem",
 							onPointerDown: stopProp,
-							onSelect: () => wI("backgroundColor", _.style?.backgroundColor || "transparent"),
+							onSelect: () => EI("backgroundColor", _.style?.backgroundColor || "transparent"),
+							children: "Outra Cor..."
+						})
+					]
+				}) })] }),
+				/* @__PURE__ */ jsxs(Sub2$1, { children: [/* @__PURE__ */ jsxs(SubTrigger2$1, {
+					className: "ContextMenuSubTrigger",
+					onPointerDown: stopProp,
+					children: ["Borda", /* @__PURE__ */ jsx("div", {
+						className: "RightSlot",
+						children: /* @__PURE__ */ jsx(ChevronRightIcon, {})
+					})]
+				}), /* @__PURE__ */ jsx(Portal2$1, { children: /* @__PURE__ */ jsxs(SubContent2$1, {
+					className: "ContextMenuSubContent",
+					sideOffset: 2,
+					alignOffset: -5,
+					children: [
+						wI.map((n) => /* @__PURE__ */ jsx(Item2$1, {
+							className: "ContextMenuItem",
+							onPointerDown: stopProp,
+							onSelect: () => OI(n),
+							children: n === 0 ? "Sem Borda" : `${n}px`
+						}, n)),
+						/* @__PURE__ */ jsx(Separator2$1, { className: "ContextMenuSeparator" }),
+						TI.map((n) => /* @__PURE__ */ jsx(Item2$1, {
+							className: "ContextMenuItem",
+							onPointerDown: stopProp,
+							onSelect: () => kI(n),
+							children: n
+						}, n)),
+						/* @__PURE__ */ jsx(Separator2$1, { className: "ContextMenuSeparator" }),
+						CI.map((n) => /* @__PURE__ */ jsxs(Item2$1, {
+							className: "ContextMenuItem",
+							onPointerDown: stopProp,
+							onSelect: () => AI(n),
+							children: [/* @__PURE__ */ jsx("div", { style: {
+								width: 12,
+								height: 12,
+								backgroundColor: n,
+								marginRight: 8,
+								border: "1px solid #ccc"
+							} }), n === "transparent" ? "Transparente" : n]
+						}, n)),
+						/* @__PURE__ */ jsx(Separator2$1, { className: "ContextMenuSeparator" }),
+						/* @__PURE__ */ jsx(Item2$1, {
+							className: "ContextMenuItem",
+							onPointerDown: stopProp,
+							onSelect: () => EI("borderColor", _.style?.borderColor || "#000000"),
 							children: "Outra Cor..."
 						})
 					]
