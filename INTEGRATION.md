@@ -13,9 +13,9 @@ Certifique-se de que as dependências necessárias (React, Radix UI Themes, etc.
 ### Importação
 
 ```typescript
-import { GenericEditor as Editor } from './path/to/editor';
+import { GenericEditor as Editor } from "./path/to/editor";
 // Importe também o CSS do Radix se ainda não estiver global
-import '@radix-ui/themes/styles.css';
+import "@radix-ui/themes/styles.css";
 ```
 
 ## 3. Entrada de Dados (Props)
@@ -23,7 +23,7 @@ import '@radix-ui/themes/styles.css';
 O componente `Editor` aceita as seguintes propriedades principais:
 
 ```typescript
-<Editor 
+<Editor
     layout={editorLayout}       // Configuração inicial (variáveis, modo lista)
     initialState={savedJson}    // (Opcional) JSON de um layout salvo anteriormente
     onSave={handleSave}         // Callback acionado ao clicar em Salvar
@@ -36,13 +36,13 @@ Define as variáveis disponíveis para interpolação (`{{variavel}}`) e se o ed
 
 ```typescript
 const editorLayout = {
-    isList: true, // true para listas (ex: feed, chat), false para item único (ex: crachá)
-    name: 'Nome do Modelo',
-    props: [
-        { name: 'Título do Produto', dataName: 'titulo' }, // 'titulo' será usado em {{titulo}}
-        { name: 'Preço', dataName: 'preco' },
-        { name: 'URL da Imagem', dataName: 'imagemUrl' }
-    ]
+  isList: true, // true para listas (ex: feed, chat), false para item único (ex: crachá)
+  name: "Nome do Modelo",
+  props: [
+    { name: "Título do Produto", dataName: "titulo" }, // 'titulo' será usado em {{titulo}}
+    { name: "Preço", dataName: "preco" },
+    { name: "URL da Imagem", dataName: "imagemUrl" },
+  ],
 };
 ```
 
@@ -56,17 +56,93 @@ const savedState = { elements: [...], isList: true, ... };
 <Editor initialState={savedState} ... />
 ```
 
+### Templates Externos
+
+Para permitir que o sistema controle os templates e o editor apenas reconheça e aplique, use as props `templates`, `activeTemplateId` e `onTemplateChange`.
+
+```typescript
+const templates = [
+  { id: 'classic', name: 'Clássico', state: savedJsonClassic },
+  { id: 'card', name: 'Cartão', state: savedJsonCard },
+];
+
+const [activeTemplateId, setActiveTemplateId] = useState('classic');
+
+<Editor
+  layout={editorLayout}
+  templates={templates}
+  activeTemplateId={activeTemplateId}
+  onTemplateChange={setActiveTemplateId}
+/>
+```
+
+O editor aplica o template quando `activeTemplateId` muda. Se você não quiser controle externo, pode omitir `activeTemplateId` e `onTemplateChange` e o próprio editor aplica o template selecionado.
+
+#### Como habilitar
+
+- Envie a lista em `templates` com `id`, `name` e `state`.
+- Controle qual template está ativo pelo `activeTemplateId`.
+- Use `onTemplateChange` para receber a seleção do usuário e persistir no seu sistema.
+
+#### Como enviar templates do sistema
+
+Você pode entregar templates via API, arquivo local ou banco de dados. O campo `state` aceita:
+
+- JSON completo salvo pelo editor (com `elements`, `listSettings`, `canvasHeight`, etc.)
+- Array simples de elementos
+
+Exemplo de payload:
+
+```json
+{
+  "templates": [
+    {
+      "id": "classic",
+      "name": "Clássico",
+      "description": "Layout simples com nome e mensagem.",
+      "state": {
+        "elements": [
+          {
+            "type": "text",
+            "content": "{{displayName}}",
+            "x": 20,
+            "y": 20,
+            "width": 240,
+            "height": 40
+          }
+        ]
+      }
+    }
+  ]
+}
+```
+
+#### Como usar no frontend
+
+```typescript
+const [activeTemplateId, setActiveTemplateId] = useState('classic');
+
+<Editor
+  layout={editorLayout}
+  templates={templates}
+  activeTemplateId={activeTemplateId}
+  onTemplateChange={setActiveTemplateId}
+/>
+```
+
+Ao trocar o `activeTemplateId`, o editor aplica imediatamente o estado do template no canvas.
+
 ## 4. Saída de Dados (Salvamento)
 
 Quando o usuário clica em "Salvar", a função `onSave` é chamada com uma string JSON.
 
 ```typescript
 const handleSave = (jsonString: string) => {
-    // Salve este JSON no seu banco de dados ou sistema de arquivos
-    console.log("JSON exportado:", jsonString);
-    
-    // Exemplo: Salvar em arquivo no Electron
-    // window.electronAPI.saveLayout(jsonString);
+  // Salve este JSON no seu banco de dados ou sistema de arquivos
+  console.log("JSON exportado:", jsonString);
+
+  // Exemplo: Salvar em arquivo no Electron
+  // window.electronAPI.saveLayout(jsonString);
 };
 ```
 
@@ -96,9 +172,9 @@ const realData = [
 const htmlOutput = generateHTML(
     layoutConfig.elements, // Array de elementos do JSON
     realData,              // Dados para preencher {{variavel}}
-    { 
+    {
         isList: layoutConfig.isList,
-        listSettings: layoutConfig.listSettings 
+        listSettings: layoutConfig.listSettings
     }
 );
 
@@ -113,6 +189,7 @@ const htmlOutput = generateHTML(
 ### Comportamento de Lista (Feed/Chat)
 
 Se `isList: true`, o HTML gerado incluirá CSS para:
+
 - Posicionar novos itens no final da lista (`justify-content: flex-end`).
 - Animar a entrada de novos itens (slide in de baixo para cima).
 - Manter o scroll ancorado na parte inferior.
@@ -124,9 +201,11 @@ Isso é ideal para displays que recebem dados via Socket.
 Se você precisa que o HTML gerado seja atualizado em tempo real (ex: recebendo dados via Socket sem recarregar a página), você tem duas opções:
 
 ### Opção A: Regenerar HTML (Mais simples para React)
+
 Sempre que novos dados chegarem no componente pai, chame `generateHTML` novamente com o array de dados atualizado. O React atualizará o DOM.
 
 ### Opção B: Renderer JavaScript Puro (Para HTML estático independente)
+
 O editor exporta uma função `getRendererCode()` que retorna o código fonte de uma função JS `renderTemplate`. Você pode injetar esse código em um arquivo HTML estático.
 
 ### Opção C: Smart Script Injection (Recomendado para Listas)
@@ -142,15 +221,15 @@ Isso permite adicionar novos itens dinamicamente sem precisar regenerar o HTML i
 
 // Quando chegar um novo dado via Socket/Evento:
 const novoItem = {
-    titulo: "Novo Produto Chegou",
-    preco: "R$ 50,00",
-    imagemUrl: "..."
+  titulo: "Novo Produto Chegou",
+  preco: "R$ 50,00",
+  imagemUrl: "...",
 };
 
-// Basta chamar a função global. 
+// Basta chamar a função global.
 // Ela cuida de gerar o HTML, inserir na posição correta e animar.
 if (window.addItem) {
-    window.addItem(novoItem);
+  window.addItem(novoItem);
 }
 ```
 
@@ -160,22 +239,22 @@ Exemplo de estrutura de um arquivo HTML "player" (Manual - Opção B):
 
 ```html
 <html>
-<body>
+  <body>
     <div id="app"></div>
     <script>
-        // Código do renderer (obtido via getRendererCode() ou copiado do projeto)
-        function renderTemplate(elements, data, options) { ... }
+      // Código do renderer (obtido via getRendererCode() ou copiado do projeto)
+      function renderTemplate(elements, data, options) { ... }
 
-        // Configuração (injetada pelo seu app)
-        const layoutConfig = { ... }; // JSON do editor
+      // Configuração (injetada pelo seu app)
+      const layoutConfig = { ... }; // JSON do editor
 
-        // Socket ou Evento
-        window.electronAPI.onNewData((newData) => {
-            // Se for lista, adicione ao array existente ou renderize apenas o novo item e faça append
-            const html = renderTemplate(layoutConfig.elements, newData, { isList: true });
-            document.getElementById('app').innerHTML = html; 
-        });
+      // Socket ou Evento
+      window.electronAPI.onNewData((newData) => {
+          // Se for lista, adicione ao array existente ou renderize apenas o novo item e faça append
+          const html = renderTemplate(layoutConfig.elements, newData, { isList: true });
+          document.getElementById('app').innerHTML = html;
+      });
     </script>
-</body>
+  </body>
 </html>
 ```

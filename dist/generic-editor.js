@@ -8853,7 +8853,7 @@ function Ot({ children: n, className: _, elementRef: E, id: O, style: A, ...j })
 Ot.displayName = "Separator";
 var package_default = {
 	name: "@1urso/generic-editor",
-	version: "0.1.66",
+	version: "0.1.67",
 	publishConfig: { access: "public" },
 	type: "module",
 	main: "./dist/generic-editor.umd.cjs",
@@ -21395,35 +21395,35 @@ const ShortcutsDialog = () => /* @__PURE__ */ jsxs(s$4, { children: [/* @__PURE_
 		]
 	});
 };
-var EditorContent = ({ layout: n, initialState: E, onSave: O, theme: A = "light" }) => {
-	let [j, M] = useState(!0), [N, P] = useState(!0), [z, B] = useState(null), [H, U] = useState(!1), [W, G] = useState(!1), { addElement: Z, loadState: KF, state: qF, undo: JF, redo: YF, copy: XF, paste: ZF, removeSelected: $F, updateElements: eI } = useEditor(), tI = React.useRef(null);
+var EditorContent = ({ layout: n, initialState: E, onSave: O, theme: A = "light", templates: j, activeTemplateId: M, onTemplateChange: N }) => {
+	let [P, z] = useState(!0), [B, H] = useState(!0), [U, W] = useState(null), [G, Z] = useState(!1), [KF, qF] = useState(!1), [JF, YF] = useState(j && j.length > 0 ? j[0].id : null), XF = React.useRef(null), { addElement: ZF, loadState: $F, state: eI, undo: tI, redo: nI, copy: rI, paste: iI, removeSelected: sI, updateElements: cI } = useEditor(), lI = React.useRef(null);
 	React.useEffect(() => {
 		let n = () => {
-			G(window.innerWidth < 768);
+			qF(window.innerWidth < 768);
 		};
 		return n(), window.addEventListener("resize", n), () => window.removeEventListener("resize", n);
 	}, []);
-	let nI = () => {
+	let uI = () => {
 		let n = {
-			elements: qF.elements,
-			isList: qF.isList,
-			mockData: qF.mockData,
-			singleMockData: qF.singleMockData,
-			listSettings: qF.listSettings,
-			canvasHeight: qF.canvasHeight,
-			gridSize: qF.gridSize
+			elements: eI.elements,
+			isList: eI.isList,
+			mockData: eI.mockData,
+			singleMockData: eI.singleMockData,
+			listSettings: eI.listSettings,
+			canvasHeight: eI.canvasHeight,
+			gridSize: eI.gridSize
 		}, _ = JSON.stringify(n, null, 2), E = new Blob([_], { type: "application/json" }), O = URL.createObjectURL(E), A = document.createElement("a");
 		A.href = O, A.download = `layout-${(/* @__PURE__ */ new Date()).toISOString().slice(0, 10)}.json`, document.body.appendChild(A), A.click(), document.body.removeChild(A), URL.revokeObjectURL(O);
-	}, rI = () => {
-		tI.current?.click();
-	}, iI = (n) => {
+	}, dI = () => {
+		lI.current?.click();
+	}, fI = (n) => {
 		let _ = n.target.files?.[0];
 		if (!_) return;
 		let E = new FileReader();
 		E.onload = (n) => {
 			try {
 				let _ = n.target?.result;
-				KF(JSON.parse(_));
+				$F(JSON.parse(_));
 			} catch (n) {
 				console.error("Failed to import layout", n), alert("Erro ao importar layout. Arquivo inválido.");
 			}
@@ -21441,7 +21441,7 @@ var EditorContent = ({ layout: n, initialState: E, onSave: O, theme: A = "light"
 						let n = new FileReader();
 						n.onload = (n) => {
 							let _ = n.target?.result;
-							Z({
+							ZF({
 								type: "image",
 								content: _,
 								width: 200,
@@ -21453,24 +21453,24 @@ var EditorContent = ({ layout: n, initialState: E, onSave: O, theme: A = "light"
 			}
 		};
 		return window.addEventListener("paste", n), () => window.removeEventListener("paste", n);
-	}, [Z]), React.useEffect(() => {
+	}, [ZF]), React.useEffect(() => {
 		let n = (n) => {
 			if (!(document.activeElement?.tagName === "INPUT" || document.activeElement?.tagName === "TEXTAREA" || document.activeElement?.isContentEditable)) {
-				if ((n.ctrlKey || n.metaKey) && n.key === "z") n.shiftKey ? (n.preventDefault(), YF()) : (n.preventDefault(), JF());
-				else if ((n.ctrlKey || n.metaKey) && n.key === "y") n.preventDefault(), YF();
-				else if ((n.ctrlKey || n.metaKey) && n.key === "c") n.preventDefault(), XF();
-				else if ((n.ctrlKey || n.metaKey) && n.key === "v") n.preventDefault(), ZF();
-				else if (n.key === "Delete" || n.key === "Backspace") qF.selectedElementIds.length > 0 && (n.preventDefault(), $F());
+				if ((n.ctrlKey || n.metaKey) && n.key === "z") n.shiftKey ? (n.preventDefault(), nI()) : (n.preventDefault(), tI());
+				else if ((n.ctrlKey || n.metaKey) && n.key === "y") n.preventDefault(), nI();
+				else if ((n.ctrlKey || n.metaKey) && n.key === "c") n.preventDefault(), rI();
+				else if ((n.ctrlKey || n.metaKey) && n.key === "v") n.preventDefault(), iI();
+				else if (n.key === "Delete" || n.key === "Backspace") eI.selectedElementIds.length > 0 && (n.preventDefault(), sI());
 				else if ([
 					"ArrowUp",
 					"ArrowDown",
 					"ArrowLeft",
 					"ArrowRight"
-				].includes(n.key) && qF.selectedElementIds.length > 0) {
+				].includes(n.key) && eI.selectedElementIds.length > 0) {
 					n.preventDefault();
 					let _ = n.shiftKey ? 10 : 1, E = [];
-					qF.selectedElementIds.forEach((O) => {
-						let A = qF.elements.find((n) => n.id === O);
+					eI.selectedElementIds.forEach((O) => {
+						let A = eI.elements.find((n) => n.id === O);
 						if (A) {
 							let j = {};
 							n.key === "ArrowUp" && (j.y = A.y - _), n.key === "ArrowDown" && (j.y = A.y + _), n.key === "ArrowLeft" && (j.x = A.x - _), n.key === "ArrowRight" && (j.x = A.x + _), E.push({
@@ -21478,30 +21478,66 @@ var EditorContent = ({ layout: n, initialState: E, onSave: O, theme: A = "light"
 								changes: j
 							});
 						}
-					}), E.length > 0 && eI(E);
+					}), E.length > 0 && cI(E);
 				}
 			}
 		};
 		return window.addEventListener("keydown", n), () => window.removeEventListener("keydown", n);
 	}, [
-		JF,
-		YF,
-		XF,
-		ZF,
-		$F,
-		qF.selectedElementIds,
-		qF.elements,
-		eI
+		tI,
+		nI,
+		rI,
+		iI,
+		sI,
+		eI.selectedElementIds,
+		eI.elements,
+		cI
 	]), React.useEffect(() => {
 		if (E) try {
 			let n = typeof E == "string" ? JSON.parse(E) : E;
-			Array.isArray(n) ? KF({ elements: n }) : n.elements && KF(n);
+			Array.isArray(n) ? $F({ elements: n }) : n.elements && $F(n);
 		} catch (n) {
 			console.error("Failed to load initial state", n);
 		}
-	}, [E, KF]);
-	let sI = (n) => {
-		console.log(`Adding element of type: ${n}`), Z({
+	}, [E, $F]), React.useEffect(() => {
+		if (!(!j || j.length === 0)) {
+			if (M) {
+				YF(M);
+				return;
+			}
+			JF || YF(j[0].id);
+		}
+	}, [
+		M,
+		JF,
+		j
+	]);
+	let pI = React.useCallback((n) => {
+		if (n) try {
+			let _ = typeof n == "string" ? JSON.parse(n) : n;
+			if (Array.isArray(_)) {
+				$F({ elements: _ });
+				return;
+			}
+			if (_ && typeof _ == "object" && "elements" in _) {
+				$F(_);
+				return;
+			}
+		} catch (n) {
+			console.error("Failed to apply template", n);
+		}
+	}, [$F]);
+	React.useEffect(() => {
+		if (!j || j.length === 0 || !M || XF.current === M) return;
+		let n = j.find((n) => n.id === M);
+		n && (pI(n.state), XF.current = M);
+	}, [
+		M,
+		pI,
+		j
+	]);
+	let mI = (n) => {
+		console.log(`Adding element of type: ${n}`), ZF({
 			type: n,
 			content: `New ${n}`
 		});
@@ -21521,7 +21557,7 @@ var EditorContent = ({ layout: n, initialState: E, onSave: O, theme: A = "light"
 					overflow: "hidden",
 					backgroundColor: "var(--gray-1)"
 				},
-				children: [N && /* @__PURE__ */ jsxs(p$1, {
+				children: [B && /* @__PURE__ */ jsxs(p$1, {
 					direction: "column",
 					width: "300px",
 					style: {
@@ -21571,19 +21607,19 @@ var EditorContent = ({ layout: n, initialState: E, onSave: O, theme: A = "light"
 									style: { width: "240px" },
 									children: [
 										/* @__PURE__ */ jsx(v$3, {
-											onSelect: () => sI("text"),
+											onSelect: () => mI("text"),
 											children: "Texto"
 										}),
 										/* @__PURE__ */ jsx(v$3, {
-											onSelect: () => sI("image"),
+											onSelect: () => mI("image"),
 											children: "Imagem"
 										}),
 										/* @__PURE__ */ jsx(v$3, {
-											onSelect: () => sI("box"),
+											onSelect: () => mI("box"),
 											children: "Caixa (Container)"
 										}),
 										/* @__PURE__ */ jsx(v$3, {
-											onSelect: () => sI("text-container"),
+											onSelect: () => mI("text-container"),
 											children: "Container com Texto"
 										})
 									]
@@ -21599,12 +21635,12 @@ var EditorContent = ({ layout: n, initialState: E, onSave: O, theme: A = "light"
 									onClick: () => {
 										if (O) {
 											let n = {
-												elements: qF.elements,
-												isList: qF.isList,
-												mockData: qF.mockData,
-												singleMockData: qF.singleMockData,
-												listSettings: qF.listSettings,
-												canvasHeight: qF.canvasHeight
+												elements: eI.elements,
+												isList: eI.isList,
+												mockData: eI.mockData,
+												singleMockData: eI.singleMockData,
+												listSettings: eI.listSettings,
+												canvasHeight: eI.canvasHeight
 											};
 											O(JSON.stringify(n, null, 2));
 										}
@@ -21622,7 +21658,7 @@ var EditorContent = ({ layout: n, initialState: E, onSave: O, theme: A = "light"
 											cursor: "pointer",
 											justifyContent: "center"
 										},
-										onClick: nI,
+										onClick: uI,
 										children: [/* @__PURE__ */ jsx(DownloadIcon, {}), " Exportar"]
 									}), /* @__PURE__ */ jsxs(o, {
 										variant: "soft",
@@ -21632,16 +21668,16 @@ var EditorContent = ({ layout: n, initialState: E, onSave: O, theme: A = "light"
 											cursor: "pointer",
 											justifyContent: "center"
 										},
-										onClick: rI,
+										onClick: dI,
 										children: [/* @__PURE__ */ jsx(UploadIcon, {}), " Importar"]
 									})]
 								}),
 								/* @__PURE__ */ jsx("input", {
 									type: "file",
-									ref: tI,
+									ref: lI,
 									style: { display: "none" },
 									accept: ".json",
-									onChange: iI
+									onChange: fI
 								}),
 								/* @__PURE__ */ jsxs(p, {
 									mt: "3",
@@ -21678,6 +21714,77 @@ var EditorContent = ({ layout: n, initialState: E, onSave: O, theme: A = "light"
 										]
 									})]
 								}),
+								j && j.length > 0 && /* @__PURE__ */ jsxs(p, {
+									mt: "3",
+									style: {
+										backgroundColor: "var(--gray-2)",
+										border: "1px solid var(--gray-4)",
+										borderRadius: 12,
+										padding: 12
+									},
+									children: [
+										/* @__PURE__ */ jsx(p$2, {
+											size: "2",
+											weight: "bold",
+											children: "Templates"
+										}),
+										/* @__PURE__ */ jsx(p$2, {
+											size: "1",
+											color: "gray",
+											mt: "1",
+											as: "div",
+											children: "Selecione um template fornecido pelo sistema."
+										}),
+										/* @__PURE__ */ jsx(p, {
+											mt: "2",
+											children: /* @__PURE__ */ jsx("select", {
+												value: JF || "",
+												onChange: (n) => YF(n.target.value),
+												style: {
+													width: "100%",
+													padding: "8px",
+													borderRadius: "6px",
+													border: "1px solid var(--gray-6)",
+													backgroundColor: "var(--gray-1)",
+													color: "var(--gray-12)",
+													fontSize: "14px",
+													outline: "none"
+												},
+												children: j.map((n) => /* @__PURE__ */ jsx("option", {
+													value: n.id,
+													children: n.name
+												}, n.id))
+											})
+										}),
+										JF && j.find((n) => n.id === JF)?.description && /* @__PURE__ */ jsx(p$2, {
+											size: "1",
+											color: "gray",
+											as: "div",
+											mt: "2",
+											children: j.find((n) => n.id === JF)?.description
+										}),
+										/* @__PURE__ */ jsx(o, {
+											variant: "soft",
+											color: "blue",
+											style: {
+												width: "100%",
+												justifyContent: "center",
+												cursor: "pointer",
+												marginTop: "10px"
+											},
+											onClick: () => {
+												if (!JF) return;
+												if (N) {
+													N(JF);
+													return;
+												}
+												let n = j.find((n) => n.id === JF);
+												n && (pI(n.state), XF.current = JF);
+											},
+											children: "Aplicar Template"
+										})
+									]
+								}),
 								/* @__PURE__ */ jsx(p, {
 									mt: "3",
 									children: /* @__PURE__ */ jsx(EditorSettings, {})
@@ -21711,7 +21818,7 @@ var EditorContent = ({ layout: n, initialState: E, onSave: O, theme: A = "light"
 										/* @__PURE__ */ jsx(f$2, {
 											value: "layers",
 											children: /* @__PURE__ */ jsx(LayersPanel, { onOpenSettings: (n) => {
-												B(n), U(!0);
+												W(n), Z(!0);
 											} })
 										}),
 										/* @__PURE__ */ jsx(f$2, {
@@ -21796,9 +21903,9 @@ var EditorContent = ({ layout: n, initialState: E, onSave: O, theme: A = "light"
 								size: "2",
 								variant: "soft",
 								color: "gray",
-								onClick: () => P(!N),
-								title: N ? "Ocultar Barra Lateral" : "Mostrar Barra Lateral",
-								children: jsx(N ? DoubleArrowLeftIcon : DoubleArrowRightIcon, {})
+								onClick: () => H(!B),
+								title: B ? "Ocultar Barra Lateral" : "Mostrar Barra Lateral",
+								children: jsx(B ? DoubleArrowLeftIcon : DoubleArrowRightIcon, {})
 							})
 						}),
 						/* @__PURE__ */ jsxs(p$1, {
@@ -21813,10 +21920,10 @@ var EditorContent = ({ layout: n, initialState: E, onSave: O, theme: A = "light"
 							children: [/* @__PURE__ */ jsx(ShortcutsDialog, {}), /* @__PURE__ */ jsx(o$2, {
 								size: "2",
 								variant: "soft",
-								color: j ? "blue" : "gray",
-								onClick: () => M(!j),
-								title: j ? "Ocultar Preview" : "Mostrar Preview",
-								children: jsx(j ? EyeOpenIcon : EyeNoneIcon, {})
+								color: P ? "blue" : "gray",
+								onClick: () => z(!P),
+								title: P ? "Ocultar Preview" : "Mostrar Preview",
+								children: jsx(P ? EyeOpenIcon : EyeNoneIcon, {})
 							})]
 						}),
 						/* @__PURE__ */ jsxs(Rt, {
@@ -21896,13 +22003,13 @@ var EditorContent = ({ layout: n, initialState: E, onSave: O, theme: A = "light"
 										]
 									})
 								}),
-								j && /* @__PURE__ */ jsx(Ot, { style: {
+								P && /* @__PURE__ */ jsx(Ot, { style: {
 									width: "4px",
 									backgroundColor: "var(--gray-6)",
 									cursor: "col-resize",
 									transition: "background-color 0.2s"
 								} }),
-								j && /* @__PURE__ */ jsx(kt, {
+								P && /* @__PURE__ */ jsx(kt, {
 									defaultSize: 50,
 									minSize: 20,
 									children: /* @__PURE__ */ jsx(p, {
@@ -21920,13 +22027,13 @@ var EditorContent = ({ layout: n, initialState: E, onSave: O, theme: A = "light"
 					]
 				})]
 			}),
-			z && /* @__PURE__ */ jsx(ElementAdvancedSettings, {
-				elementId: z,
-				open: H,
-				onOpenChange: U
+			U && /* @__PURE__ */ jsx(ElementAdvancedSettings, {
+				elementId: U,
+				open: G,
+				onOpenChange: Z
 			}),
 			/* @__PURE__ */ jsx(s$4, {
-				open: W,
+				open: KF,
 				children: /* @__PURE__ */ jsxs(p$8, {
 					style: { maxWidth: 450 },
 					children: [/* @__PURE__ */ jsx(g$2, { children: "Dispositivo Não Suportado" }), /* @__PURE__ */ jsx(m$3, {

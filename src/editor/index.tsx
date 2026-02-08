@@ -16,20 +16,25 @@ import { Ruler } from './components/Ruler';
 import { ShortcutsDialog } from './components/ShortcutsDialog';
 import { ViewToolbar } from './components/ViewToolbar';
 import { EditorProvider, useEditor, type IElement } from './context';
-import type { ILayout } from './types';
+import type { ILayout, ITemplate } from './types';
 export interface EditorProps {
     layout: ILayout;
     initialState?: unknown; // To load saved state
     onSave?: (json: string) => void; // Callback for saving
     theme?: 'light' | 'dark'; // Theme configuration
+    templates?: ITemplate[];
+    activeTemplateId?: string;
+    onTemplateChange?: (templateId: string) => void;
 }
 
-const EditorContent: React.FC<EditorProps> = ({ layout, initialState, onSave, theme = 'light' }) => {
+const EditorContent: React.FC<EditorProps> = ({ layout, initialState, onSave, theme = 'light', templates, activeTemplateId, onTemplateChange }) => {
     const [isPreviewVisible, setIsPreviewVisible] = useState(true);
     const [isSidebarVisible, setIsSidebarVisible] = useState(true);
     const [settingsElementId, setSettingsElementId] = useState<string | null>(null);
     const [isSettingsOpen, setIsSettingsOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
+    const [localTemplateId, setLocalTemplateId] = useState<string | null>(templates && templates.length > 0 ? templates[0].id : null);
+    const lastAppliedTemplateIdRef = React.useRef<string | null>(null);
     const { addElement, loadState, state, undo, redo, copy, paste, removeSelected, updateElements } = useEditor();
     const fileInputRef = React.useRef<HTMLInputElement>(null);
 
@@ -200,6 +205,43 @@ const EditorContent: React.FC<EditorProps> = ({ layout, initialState, onSave, th
         }
     }, [initialState, loadState]);
 
+    React.useEffect(() => {
+        if (!templates || templates.length === 0) return;
+        if (activeTemplateId) {
+            setLocalTemplateId(activeTemplateId);
+            return;
+        }
+        if (!localTemplateId) {
+            setLocalTemplateId(templates[0].id);
+        }
+    }, [activeTemplateId, localTemplateId, templates]);
+
+    const applyTemplateState = React.useCallback((templateState: unknown) => {
+        if (!templateState) return;
+        try {
+            const parsed = typeof templateState === 'string' ? JSON.parse(templateState) : templateState;
+            if (Array.isArray(parsed)) {
+                loadState({ elements: parsed });
+                return;
+            }
+            if (parsed && typeof parsed === 'object' && 'elements' in parsed) {
+                loadState(parsed as { elements: IElement[] });
+                return;
+            }
+        } catch (e) {
+            console.error('Failed to apply template', e);
+        }
+    }, [loadState]);
+
+    React.useEffect(() => {
+        if (!templates || templates.length === 0 || !activeTemplateId) return;
+        if (lastAppliedTemplateIdRef.current === activeTemplateId) return;
+        const template = templates.find(item => item.id === activeTemplateId);
+        if (!template) return;
+        applyTemplateState(template.state);
+        lastAppliedTemplateIdRef.current = activeTemplateId;
+    }, [activeTemplateId, applyTemplateState, templates]);
+
     const handleAddElement = (type: string) => {
         console.log(`Adding element of type: ${type}`);
         addElement({ type: type as IElement['type'], content: `New ${type}` });
@@ -301,6 +343,58 @@ const EditorContent: React.FC<EditorProps> = ({ layout, initialState, onSave, th
                                             <Text size="1" color="gray">3. Use Camadas e Variáveis para organizar.</Text>
                                         </Flex>
                                     </Box>
+
+                                    {templates && templates.length > 0 && (
+                                        <Box mt="3" style={{ backgroundColor: 'var(--gray-2)', border: '1px solid var(--gray-4)', borderRadius: 12, padding: 12 }}>
+                                            <Text size="2" weight="bold">Templates</Text>
+                                            <Text size="1" color="gray" mt="1" as="div">Selecione um template fornecido pelo sistema.</Text>
+                                            <Box mt="2">
+                                                <select
+                                                    value={localTemplateId || ''}
+                                                    onChange={(e) => setLocalTemplateId(e.target.value)}
+                                                    style={{
+                                                        width: '100%',
+                                                        padding: '8px',
+                                                        borderRadius: '6px',
+                                                        border: '1px solid var(--gray-6)',
+                                                        backgroundColor: 'var(--gray-1)',
+                                                        color: 'var(--gray-12)',
+                                                        fontSize: '14px',
+                                                        outline: 'none'
+                                                    }}
+                                                >
+                                                    {templates.map(template => (
+                                                        <option key={template.id} value={template.id}>
+                                                            {template.name}
+                                                        </option>
+                                                    ))}
+                                                </select>
+                                            </Box>
+                                            {localTemplateId && templates.find(t => t.id === localTemplateId)?.description && (
+                                                <Text size="1" color="gray" as="div" mt="2">
+                                                    {templates.find(t => t.id === localTemplateId)?.description}
+                                                </Text>
+                                            )}
+                                            <Button
+                                                variant="soft"
+                                                color="blue"
+                                                style={{ width: '100%', justifyContent: 'center', cursor: 'pointer', marginTop: '10px' }}
+                                                onClick={() => {
+                                                    if (!localTemplateId) return;
+                                                    if (onTemplateChange) {
+                                                        onTemplateChange(localTemplateId);
+                                                        return;
+                                                    }
+                                                    const template = templates.find(item => item.id === localTemplateId);
+                                                    if (!template) return;
+                                                    applyTemplateState(template.state);
+                                                    lastAppliedTemplateIdRef.current = localTemplateId;
+                                                }}
+                                            >
+                                                Aplicar Template
+                                            </Button>
+                                        </Box>
+                                    )}
 
                                     <Box mt="3">
                                         <EditorSettings />

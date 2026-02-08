@@ -382,6 +382,57 @@ The injected script automatically handles:
 
 ---
 
+## Templates
+
+Use templates to let your system provide ready-to-use layouts and let the editor apply them.
+
+### Enable
+
+```tsx
+const templates = [
+  { id: 'classic', name: 'Clássico', state: savedJsonClassic },
+  { id: 'card', name: 'Cartão', state: savedJsonCard },
+];
+
+const [activeTemplateId, setActiveTemplateId] = useState('classic');
+
+<EditorContent
+  layout={editorLayout}
+  templates={templates}
+  activeTemplateId={activeTemplateId}
+  onTemplateChange={setActiveTemplateId}
+/>
+```
+
+### Send
+
+Provide templates from your backend or local store. The `state` field accepts:
+
+- Full saved JSON (with `elements`, `listSettings`, `canvasHeight`, etc.)
+- A simple array of elements
+
+```json
+{
+  "templates": [
+    {
+      "id": "classic",
+      "name": "Clássico",
+      "description": "Layout simples com nome e mensagem.",
+      "state": {
+        "elements": [{ "type": "text", "content": "{{displayName}}", "x": 20, "y": 20, "width": 240, "height": 40 }]
+      }
+    }
+  ]
+}
+```
+
+### Use
+
+- When `activeTemplateId` changes, the editor applies the template state to the canvas.
+- If you omit `activeTemplateId` and `onTemplateChange`, the editor applies the template the user selects locally.
+
+---
+
 ## API Reference
 
 ### Component `<EditorContent />`
@@ -422,3 +473,6 @@ interface IProp {
 | `onSave`       | `(json: string) => void` | No       | Callback triggered on save.           |
 | `initialState` | `any`                    | No       | Previously saved state (parsed JSON). |
 | `theme`        | `'light' \| 'dark'`      | No       | Interface theme (default: `'light'`). |
+| `templates`    | `ITemplate[]`            | No       | Lista de templates fornecidos pelo sistema. |
+| `activeTemplateId` | `string`             | No       | Template ativo controlado externamente. |
+| `onTemplateChange` | `(id: string) => void` | No   | Callback para o sistema trocar template. |

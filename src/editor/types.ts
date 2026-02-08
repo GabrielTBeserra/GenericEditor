@@ -10,3 +10,10 @@ export interface ILayout {
 }
 
 export type GenericData = Record<string, unknown>;
+
+export interface ITemplate {
+    id: string;
+    name: string;
+    state: unknown;
+    description?: string;
+}
