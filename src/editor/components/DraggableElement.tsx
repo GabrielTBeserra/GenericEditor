@@ -41,15 +41,14 @@ export const DraggableElement: React.FC<DraggableElementProps> = React.memo(({ e
     let displayContent = element.content;
     let conditionalStyles: React.CSSProperties = {};
     const applyShadowColor = (boxShadow: string | undefined, color: string) => {
-        if (!boxShadow || boxShadow === 'none') {
-            return `0 4px 12px ${color}`;
-        }
-        const parts = boxShadow.split(',');
-        const last = parts[parts.length - 1].trim();
         const colorPattern = /(rgba?\([^)]+\)|#(?:[0-9a-fA-F]{3,8})|[a-zA-Z]+)\s*$/;
-        const updatedLast = colorPattern.test(last) ? last.replace(colorPattern, color) : `${last} ${color}`;
-        parts[parts.length - 1] = updatedLast;
-        return parts.join(', ');
+        if (!boxShadow || boxShadow === 'none') {
+            return `0 4px 12px 0 ${color}`;
+        }
+        if (colorPattern.test(boxShadow)) {
+            return boxShadow.replace(colorPattern, color);
+        }
+        return `${boxShadow} ${color}`;
     };
 
     if (dataContext) {

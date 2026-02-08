@@ -96,17 +96,47 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
         { label: 'Forte', value: '0 10px 24px rgba(0, 0, 0, 0.28)' },
         { label: 'Brilho', value: '0 0 16px rgba(0, 0, 0, 0.35)' }
     ];
+    const shadowDirections = [
+        { label: 'Cima', x: 0, y: -6 },
+        { label: 'Baixo', x: 0, y: 6 },
+        { label: 'Esquerda', x: -6, y: 0 },
+        { label: 'Direita', x: 6, y: 0 },
+        { label: 'Diagonal', x: 6, y: 6 }
+    ];
+
+    const extractShadowColor = (boxShadow: string | undefined) => {
+        if (!boxShadow || boxShadow === 'none') return undefined;
+        const colorMatch = boxShadow.match(/(rgba?\([^)]+\)|#(?:[0-9a-fA-F]{3,8})|[a-zA-Z]+)\s*$/);
+        return colorMatch ? colorMatch[1] : undefined;
+    };
+
+    const parseShadow = (boxShadow: string | undefined) => {
+        const fallback = { x: 0, y: 4, blur: 12, spread: 0, color: 'rgba(0, 0, 0, 0.25)' };
+        if (!boxShadow || boxShadow === 'none') return fallback;
+        const lengths = (boxShadow.match(/-?\d+px/g) || []).map(v => parseInt(v, 10));
+        const color = extractShadowColor(boxShadow) || fallback.color;
+        return {
+            x: lengths[0] ?? fallback.x,
+            y: lengths[1] ?? fallback.y,
+            blur: lengths[2] ?? fallback.blur,
+            spread: lengths[3] ?? fallback.spread,
+            color
+        };
+    };
+
+    const buildShadow = (shadow: { x: number; y: number; blur: number; spread: number; color: string }) => {
+        return `${shadow.x}px ${shadow.y}px ${shadow.blur}px ${shadow.spread}px ${shadow.color}`;
+    };
 
     const applyShadowColor = (boxShadow: string | undefined, color: string) => {
-        if (!boxShadow || boxShadow === 'none') {
-            return `0 4px 12px ${color}`;
-        }
-        const parts = boxShadow.split(',');
-        const last = parts[parts.length - 1].trim();
         const colorPattern = /(rgba?\([^)]+\)|#(?:[0-9a-fA-F]{3,8})|[a-zA-Z]+)\s*$/;
-        const updatedLast = colorPattern.test(last) ? last.replace(colorPattern, color) : `${last} ${color}`;
-        parts[parts.length - 1] = updatedLast;
-        return parts.join(', ');
+        if (!boxShadow || boxShadow === 'none') {
+            return buildShadow({ ...parseShadow(undefined), color });
+        }
+        if (colorPattern.test(boxShadow)) {
+            return boxShadow.replace(colorPattern, color);
+        }
+        return `${boxShadow} ${color}`;
     };
 
     const handleOpenColorDialog = (prop: string, currentValue: string) => {
@@ -126,7 +156,7 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
 
     const handleBorderWidth = (width: number) => {
         if (width === 0) {
-            handleUpdateStyle({ borderWidth: '0px', borderStyle: 'none' });
+            handleUpdateStyle({ border: 'none', borderWidth: '0px', borderStyle: 'none', borderColor: 'transparent' });
             return;
         }
         handleUpdateStyle({ borderWidth: `${width}px`, borderStyle: (element.style?.borderStyle as string) || 'solid' });
@@ -161,6 +191,10 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
     const handleShadowColor = (color: string) => {
         const nextShadow = applyShadowColor(element.style?.boxShadow as string | undefined, color);
         handleUpdateStyle({ boxShadow: nextShadow });
+    };
+    const handleShadowDirection = (x: number, y: number) => {
+        const current = parseShadow(element.style?.boxShadow as string | undefined);
+        handleUpdateStyle({ boxShadow: buildShadow({ ...current, x, y }) });
     };
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -690,6 +724,17 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                                             onSelect={() => handleShadowPreset(preset.value)}
                                         >
                                             {preset.label}
+                                        </ContextMenu.Item>
+                                    ))}
+                                    <ContextMenu.Separator className="ContextMenuSeparator" />
+                                    {shadowDirections.map(direction => (
+                                        <ContextMenu.Item
+                                            key={direction.label}
+                                            className="ContextMenuItem"
+                                            onPointerDown={stopProp}
+                                            onSelect={() => handleShadowDirection(direction.x, direction.y)}
+                                        >
+                                            {direction.label}
                                         </ContextMenu.Item>
                                     ))}
                                     <ContextMenu.Separator className="ContextMenuSeparator" />

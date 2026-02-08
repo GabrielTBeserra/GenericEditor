@@ -8853,7 +8853,7 @@ function Ot({ children: n, className: _, elementRef: E, id: O, style: A, ...j })
 Ot.displayName = "Separator";
 var package_default = {
 	name: "@1urso/generic-editor",
-	version: "0.1.69",
+	version: "0.1.70",
 	publishConfig: { access: "public" },
 	type: "module",
 	main: "./dist/generic-editor.umd.cjs",
@@ -11647,19 +11647,68 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 			label: "Brilho",
 			value: "0 0 16px rgba(0, 0, 0, 0.35)"
 		}
-	], OI = (n, _) => {
-		if (!n || n === "none") return `0 4px 12px ${_}`;
-		let E = n.split(","), O = E[E.length - 1].trim(), A = /(rgba?\([^)]+\)|#(?:[0-9a-fA-F]{3,8})|[a-zA-Z]+)\s*$/, j = A.test(O) ? O.replace(A, _) : `${O} ${_}`;
-		return E[E.length - 1] = j, E.join(", ");
-	}, kI = (n, _) => {
+	], OI = [
+		{
+			label: "Cima",
+			x: 0,
+			y: -6
+		},
+		{
+			label: "Baixo",
+			x: 0,
+			y: 6
+		},
+		{
+			label: "Esquerda",
+			x: -6,
+			y: 0
+		},
+		{
+			label: "Direita",
+			x: 6,
+			y: 0
+		},
+		{
+			label: "Diagonal",
+			x: 6,
+			y: 6
+		}
+	], kI = (n) => {
+		if (!n || n === "none") return;
+		let _ = n.match(/(rgba?\([^)]+\)|#(?:[0-9a-fA-F]{3,8})|[a-zA-Z]+)\s*$/);
+		return _ ? _[1] : void 0;
+	}, AI = (n) => {
+		let _ = {
+			x: 0,
+			y: 4,
+			blur: 12,
+			spread: 0,
+			color: "rgba(0, 0, 0, 0.25)"
+		};
+		if (!n || n === "none") return _;
+		let E = (n.match(/-?\d+px/g) || []).map((n) => parseInt(n, 10)), O = kI(n) || _.color;
+		return {
+			x: E[0] ?? _.x,
+			y: E[1] ?? _.y,
+			blur: E[2] ?? _.blur,
+			spread: E[3] ?? _.spread,
+			color: O
+		};
+	}, jI = (n) => `${n.x}px ${n.y}px ${n.blur}px ${n.spread}px ${n.color}`, MI = (n, _) => {
+		let E = /(rgba?\([^)]+\)|#(?:[0-9a-fA-F]{3,8})|[a-zA-Z]+)\s*$/;
+		return !n || n === "none" ? jI({
+			...AI(void 0),
+			color: _
+		}) : E.test(n) ? n.replace(E, _) : `${n} ${_}`;
+	}, NI = (n, _) => {
 		rI({
 			open: !0,
 			prop: n,
 			value: _
 		});
-	}, AI = () => {
+	}, PI = () => {
 		if (nI.prop === "boxShadowColor") {
-			bI({ boxShadow: OI(_.style?.boxShadow, nI.value) }), rI((n) => ({
+			bI({ boxShadow: MI(_.style?.boxShadow, nI.value) }), rI((n) => ({
 				...n,
 				open: !1
 			}));
@@ -11669,11 +11718,13 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 			...n,
 			open: !1
 		}));
-	}, jI = (n) => {
+	}, FI = (n) => {
 		if (n === 0) {
 			bI({
+				border: "none",
 				borderWidth: "0px",
-				borderStyle: "none"
+				borderStyle: "none",
+				borderColor: "transparent"
 			});
 			return;
 		}
@@ -11681,7 +11732,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 			borderWidth: `${n}px`,
 			borderStyle: _.style?.borderStyle || "solid"
 		});
-	}, MI = (n) => {
+	}, II = (n) => {
 		if (!parseInt(_.style?.borderWidth || "0", 10)) {
 			bI({
 				borderStyle: n,
@@ -11690,7 +11741,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 			return;
 		}
 		bI({ borderStyle: n });
-	}, NI = (n) => {
+	}, LI = (n) => {
 		if (!parseInt(_.style?.borderWidth || "0", 10)) {
 			bI({
 				borderColor: n,
@@ -11700,10 +11751,16 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 			return;
 		}
 		bI({ borderColor: n });
-	}, PI = (n) => {
+	}, RI = (n) => {
 		bI({ boxShadow: n });
-	}, FI = (n) => {
-		bI({ boxShadow: OI(_.style?.boxShadow, n) });
+	}, BI = (n) => {
+		bI({ boxShadow: MI(_.style?.boxShadow, n) });
+	}, HI = (n, E) => {
+		bI({ boxShadow: jI({
+			...AI(_.style?.boxShadow),
+			x: n,
+			y: E
+		}) });
 	};
 	return /* @__PURE__ */ jsxs(Fragment$1, { children: [
 		/* @__PURE__ */ jsx(s$4, {
@@ -11855,7 +11912,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 							color: "gray",
 							children: "Cancelar"
 						}) }), /* @__PURE__ */ jsx(o, {
-							onClick: AI,
+							onClick: PI,
 							children: "Aplicar"
 						})]
 					})
@@ -12215,7 +12272,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 							/* @__PURE__ */ jsx(Item2$1, {
 								className: "ContextMenuItem",
 								onPointerDown: stopProp,
-								onSelect: () => kI("color", _.style?.color || "#000000"),
+								onSelect: () => NI("color", _.style?.color || "#000000"),
 								children: "Outra Cor..."
 							})
 						]
@@ -12348,7 +12405,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 						/* @__PURE__ */ jsx(Item2$1, {
 							className: "ContextMenuItem",
 							onPointerDown: stopProp,
-							onSelect: () => kI("backgroundColor", _.style?.backgroundColor || "transparent"),
+							onSelect: () => NI("backgroundColor", _.style?.backgroundColor || "transparent"),
 							children: "Outra Cor..."
 						})
 					]
@@ -12368,14 +12425,21 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 						DI.map((n) => /* @__PURE__ */ jsx(Item2$1, {
 							className: "ContextMenuItem",
 							onPointerDown: stopProp,
-							onSelect: () => PI(n.value),
+							onSelect: () => RI(n.value),
+							children: n.label
+						}, n.label)),
+						/* @__PURE__ */ jsx(Separator2$1, { className: "ContextMenuSeparator" }),
+						OI.map((n) => /* @__PURE__ */ jsx(Item2$1, {
+							className: "ContextMenuItem",
+							onPointerDown: stopProp,
+							onSelect: () => HI(n.x, n.y),
 							children: n.label
 						}, n.label)),
 						/* @__PURE__ */ jsx(Separator2$1, { className: "ContextMenuSeparator" }),
 						wI.filter((n) => n !== "transparent").map((n) => /* @__PURE__ */ jsxs(Item2$1, {
 							className: "ContextMenuItem",
 							onPointerDown: stopProp,
-							onSelect: () => FI(n),
+							onSelect: () => BI(n),
 							children: [/* @__PURE__ */ jsx("div", { style: {
 								width: 12,
 								height: 12,
@@ -12388,7 +12452,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 						/* @__PURE__ */ jsx(Item2$1, {
 							className: "ContextMenuItem",
 							onPointerDown: stopProp,
-							onSelect: () => kI("boxShadowColor", "#000000"),
+							onSelect: () => NI("boxShadowColor", "#000000"),
 							children: "Outra Cor..."
 						})
 					]
@@ -12408,21 +12472,21 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 						TI.map((n) => /* @__PURE__ */ jsx(Item2$1, {
 							className: "ContextMenuItem",
 							onPointerDown: stopProp,
-							onSelect: () => jI(n),
+							onSelect: () => FI(n),
 							children: n === 0 ? "Sem Borda" : `${n}px`
 						}, n)),
 						/* @__PURE__ */ jsx(Separator2$1, { className: "ContextMenuSeparator" }),
 						EI.map((n) => /* @__PURE__ */ jsx(Item2$1, {
 							className: "ContextMenuItem",
 							onPointerDown: stopProp,
-							onSelect: () => MI(n),
+							onSelect: () => II(n),
 							children: n
 						}, n)),
 						/* @__PURE__ */ jsx(Separator2$1, { className: "ContextMenuSeparator" }),
 						wI.map((n) => /* @__PURE__ */ jsxs(Item2$1, {
 							className: "ContextMenuItem",
 							onPointerDown: stopProp,
-							onSelect: () => NI(n),
+							onSelect: () => LI(n),
 							children: [/* @__PURE__ */ jsx("div", { style: {
 								width: 12,
 								height: 12,
@@ -12435,7 +12499,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 						/* @__PURE__ */ jsx(Item2$1, {
 							className: "ContextMenuItem",
 							onPointerDown: stopProp,
-							onSelect: () => kI("borderColor", _.style?.borderColor || "#000000"),
+							onSelect: () => NI("borderColor", _.style?.borderColor || "#000000"),
 							children: "Outra Cor..."
 						})
 					]
@@ -12525,9 +12589,8 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 		x: 0,
 		y: 0
 	}), nI = useRef(!1), rI = j.canvasHeight || 150, iI = j.isList ? j.mockData.length > 0 ? j.mockData[0] : null : j.singleMockData, aI = n.content, cI = {}, lI = (n, _) => {
-		if (!n || n === "none") return `0 4px 12px ${_}`;
-		let E = n.split(","), O = E[E.length - 1].trim(), A = /(rgba?\([^)]+\)|#(?:[0-9a-fA-F]{3,8})|[a-zA-Z]+)\s*$/, j = A.test(O) ? O.replace(A, _) : `${O} ${_}`;
-		return E[E.length - 1] = j, E.join(", ");
+		let E = /(rgba?\([^)]+\)|#(?:[0-9a-fA-F]{3,8})|[a-zA-Z]+)\s*$/;
+		return !n || n === "none" ? `0 4px 12px 0 ${_}` : E.test(n) ? n.replace(E, _) : `${n} ${_}`;
 	};
 	if (iI) {
 		if (n.type === "text" || n.type === "text-container") aI = aI.replace(/\{\{(.*?)\}\}/g, (_, E) => {
@@ -22264,9 +22327,8 @@ var camelToKebab = (n) => n.replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, "$1-$2").toL
 		return typeof A == "string" && /^#([0-9a-fA-F]{8})$/.test(A) && (A = hex8ToRgba(A)), `${O}: ${A}`;
 	}).filter(Boolean).join("; ");
 }, applyShadowColor = (n, _) => {
-	if (!n || n === "none") return `0 4px 12px ${_}`;
-	let E = n.split(","), O = E[E.length - 1].trim(), A = /(rgba?\([^)]+\)|#(?:[0-9a-fA-F]{3,8})|[a-zA-Z]+)\s*$/, j = A.test(O) ? O.replace(A, _) : `${O} ${_}`;
-	return E[E.length - 1] = j, E.join(", ");
+	let E = /(rgba?\([^)]+\)|#(?:[0-9a-fA-F]{3,8})|[a-zA-Z]+)\s*$/;
+	return !n || n === "none" ? `0 4px 12px 0 ${_}` : E.test(n) ? n.replace(E, _) : `${n} ${_}`;
 }, measureTextHeight = (n, _, E, O, A = 1.2) => {
 	if (!n) return 0;
 	try {
