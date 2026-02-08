@@ -491,8 +491,7 @@ export const Canvas: React.FC<CanvasProps> = () => {
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            group: 'resize-handle'
-                        } as any}
+                        }}
                         onMouseDown={handleCanvasResizeStart}
                     >
                         {/* Visual Line */}

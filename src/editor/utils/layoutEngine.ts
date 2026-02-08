@@ -1,4 +1,5 @@
 import type { IElement } from '../context';
+import type { GenericData } from '../types';
 import { formatValue } from './helpers';
 
 interface ILayoutShift {
@@ -61,7 +62,7 @@ const measureTextHeight = (
 
 export const processLayout = (
     elements: IElement[],
-    dataContext: any
+    dataContext: GenericData
 ): { elements: IElement[], totalHeight: number } => {
     // Deep clone elements to avoid mutating state
     const processedElements = elements.map(el => ({ ...el }));

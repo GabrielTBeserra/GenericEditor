@@ -2,6 +2,7 @@ import { Cross2Icon, PlusIcon, TrashIcon } from '@radix-ui/react-icons';
 import { Box, Button, Dialog, Flex, Grid, IconButton, Separator, Switch, Tabs, Text, TextField } from '@radix-ui/themes';
 import React, { useState } from 'react';
 import { useEditor, type IElement, type IElementAnimation, type IElementCondition, type IElementFormatting } from '../context';
+import type { IProp } from '../types';
 import { ColorInput } from './ColorPicker';
 
 interface ElementAdvancedSettingsProps {
@@ -59,7 +60,7 @@ export const ElementAdvancedSettings: React.FC<ElementAdvancedSettingsProps> = (
     );
 };
 
-const AnimationSettings: React.FC<{ element: IElement; updateElement: any }> = ({ element, updateElement }) => {
+const AnimationSettings: React.FC<{ element: IElement; updateElement: (id: string, changes: Partial<IElement>) => void }> = ({ element, updateElement }) => {
     const animation = element.animation || { type: 'none', duration: 1, delay: 0 };
 
     const handleUpdate = (updates: Partial<IElementAnimation>) => {
@@ -78,7 +79,7 @@ const AnimationSettings: React.FC<{ element: IElement; updateElement: any }> = (
                 <Text size="1" mb="1" as="div">Tipo de Animação</Text>
                 <select
                     value={animation.type}
-                    onChange={(e) => handleUpdate({ type: e.target.value as any })}
+                    onChange={(e) => handleUpdate({ type: e.target.value as IElementAnimation['type'] })}
                     style={{
                         width: '100%',
                         padding: '6px',
@@ -135,7 +136,7 @@ const AnimationSettings: React.FC<{ element: IElement; updateElement: any }> = (
                         <Text size="1" mb="1" as="div">Curva de Tempo (Easing)</Text>
                         <select
                             value={animation.timingFunction || 'ease'}
-                            onChange={(e) => handleUpdate({ timingFunction: e.target.value as any })}
+                            onChange={(e) => handleUpdate({ timingFunction: e.target.value as IElementAnimation['timingFunction'] })}
                             style={{
                                 width: '100%',
                                 padding: '6px',
@@ -171,7 +172,7 @@ const AnimationSettings: React.FC<{ element: IElement; updateElement: any }> = (
     );
 };
 
-const FormattingSettings: React.FC<{ element: IElement; updateElement: any }> = ({ element, updateElement }) => {
+const FormattingSettings: React.FC<{ element: IElement; updateElement: (id: string, changes: Partial<IElement>) => void }> = ({ element, updateElement }) => {
     const formatting = element.formatting || { type: 'text' };
 
     const handleUpdate = (updates: Partial<IElementFormatting>) => {
@@ -205,7 +206,7 @@ const FormattingSettings: React.FC<{ element: IElement; updateElement: any }> = 
                             <Text size="1" mb="1" as="div">Direção de Expansão</Text>
                             <select
                                 value={element.containerExpansion || 'vertical'}
-                                onChange={(e) => updateElement(element.id, { containerExpansion: e.target.value as any })}
+                                onChange={(e) => updateElement(element.id, { containerExpansion: e.target.value as 'vertical' | 'horizontal' })}
                                 style={{
                                     width: '100%',
                                     padding: '6px',
@@ -230,7 +231,7 @@ const FormattingSettings: React.FC<{ element: IElement; updateElement: any }> = 
                 <Text size="1" mb="1" as="div">Tipo de Formatação</Text>
                 <select
                     value={formatting.type}
-                    onChange={(e) => handleUpdate({ type: e.target.value as any })}
+                    onChange={(e) => handleUpdate({ type: e.target.value as IElementFormatting['type'] })}
                     style={{
                         width: '100%',
                         padding: '6px',
@@ -289,7 +290,7 @@ const FormattingSettings: React.FC<{ element: IElement; updateElement: any }> = 
                         <Text size="1" mb="1" as="div">Estilo</Text>
                         <select
                             value={formatting.numberFormat || 'decimal'}
-                            onChange={(e) => handleUpdate({ numberFormat: e.target.value as any })}
+                            onChange={(e) => handleUpdate({ numberFormat: e.target.value as IElementFormatting['numberFormat'] })}
                             style={{
                                 width: '100%',
                                 padding: '6px',
@@ -330,7 +331,7 @@ const FormattingSettings: React.FC<{ element: IElement; updateElement: any }> = 
     );
 };
 
-const StyleSettings: React.FC<{ element: IElement; updateElement: any }> = ({ element, updateElement }) => {
+const StyleSettings: React.FC<{ element: IElement; updateElement: (id: string, changes: Partial<IElement>) => void }> = ({ element, updateElement }) => {
     const style = element.style || {};
     const [isIndividual, setIsIndividual] = useState(
         style.borderTopLeftRadius !== undefined ||
@@ -464,7 +465,7 @@ const StyleSettings: React.FC<{ element: IElement; updateElement: any }> = ({ el
     );
 };
 
-const ConditionalSettings: React.FC<{ element: IElement; updateElement: any; availableProps: any[] }> = ({ element, updateElement, availableProps }) => {
+const ConditionalSettings: React.FC<{ element: IElement; updateElement: (id: string, changes: Partial<IElement>) => void; availableProps: IProp[] }> = ({ element, updateElement, availableProps }) => {
     const conditions = element.conditions || [];
     const styleBindings = element.styleBindings || {};
     const [editingId, setEditingId] = useState<string | null>(null);
@@ -626,7 +627,7 @@ const ConditionalSettings: React.FC<{ element: IElement; updateElement: any; ava
                                     <Text size="1" mb="1" as="div">Operador</Text>
                                     <select
                                         value={editingRule.operator}
-                                        onChange={(e) => handleUpdateRule(editingRule.id, { operator: e.target.value as any })}
+                                        onChange={(e) => handleUpdateRule(editingRule.id, { operator: e.target.value as IElementCondition['operator'] })}
                                         style={{
                                             width: '100%',
                                             padding: '6px',

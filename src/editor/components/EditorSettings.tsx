@@ -15,9 +15,9 @@ export const EditorSettings: React.FC = () => {
     const [localGridSize, setLocalGridSize] = useState('0');
 
     // Animation State
-    const [localEntryAnimType, setLocalEntryAnimType] = useState('slideIn'); // Default
+    const [localEntryAnimType, setLocalEntryAnimType] = useState<IElementAnimation['type']>('slideIn'); // Default
     const [localEntryAnimDuration, setLocalEntryAnimDuration] = useState(0.3);
-    const [localEntryAnimTiming, setLocalEntryAnimTiming] = useState('ease-out');
+    const [localEntryAnimTiming, setLocalEntryAnimTiming] = useState<NonNullable<IElementAnimation['timingFunction']>>('ease-out');
 
     // Sync local state with context when opening
     useEffect(() => {
@@ -62,10 +62,10 @@ export const EditorSettings: React.FC = () => {
         const containerHeight = parseInt(localContainerHeight, 10);
 
         const entryAnimation: IElementAnimation = {
-            type: localEntryAnimType as any,
+            type: localEntryAnimType,
             duration: Number(localEntryAnimDuration),
             delay: 0,
-            timingFunction: localEntryAnimTiming as any
+            timingFunction: localEntryAnimTiming
         };
 
         updateListSettings({
@@ -221,7 +221,7 @@ export const EditorSettings: React.FC = () => {
                                 <Text size="1" mb="1" as="div">Efeito</Text>
                                 <select
                                     value={localEntryAnimType}
-                                    onChange={(e) => setLocalEntryAnimType(e.target.value)}
+                                    onChange={(e) => setLocalEntryAnimType(e.target.value as IElementAnimation['type'])}
                                     style={{
                                         width: '100%',
                                         padding: '6px',
@@ -258,7 +258,7 @@ export const EditorSettings: React.FC = () => {
                                 <Text size="1" mb="1" as="div">Curva (Easing)</Text>
                                 <select
                                     value={localEntryAnimTiming}
-                                    onChange={(e) => setLocalEntryAnimTiming(e.target.value)}
+                                    onChange={(e) => setLocalEntryAnimTiming(e.target.value as NonNullable<IElementAnimation['timingFunction']>)}
                                     style={{
                                         width: '100%',
                                         padding: '6px',

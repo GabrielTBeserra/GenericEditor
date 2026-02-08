@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, type ReactNode } from 'react';
-
+import type { GenericData } from './types';
 export interface IElementCondition {
     id: string;
     property: string;
@@ -20,11 +20,11 @@ export interface IElementFormatting {
 }
 
 export interface IElementAnimation {
-    type: 'none' | 'fadeIn' | 'slideInLeft' | 'slideInRight' | 'slideInUp' | 'slideInDown' | 'zoomIn' | 'bounceIn' | 'pulse' | 'shake' | 'spin' | 'smoothSlideUp' | 'popIn' | 'blurIn';
+    type: 'none' | 'fadeIn' | 'slideIn' | 'slideInLeft' | 'slideInRight' | 'slideInUp' | 'slideInDown' | 'zoomIn' | 'bounceIn' | 'pulse' | 'shake' | 'spin' | 'smoothSlideUp' | 'popIn' | 'blurIn';
     duration: number; // in seconds
     delay: number; // in seconds
     iterationCount?: number | 'infinite';
-    timingFunction?: 'linear' | 'ease' | 'ease-in' | 'ease-out' | 'ease-in-out';
+    timingFunction?: 'linear' | 'ease' | 'ease-in' | 'ease-out' | 'ease-in-out' | 'bounce';
 }
 
 export interface IElement {
@@ -68,8 +68,8 @@ interface IEditorState {
     elements: IElement[];
     selectedElementIds: string[];
     isList: boolean;
-    mockData: any[]; // Used for list mode
-    singleMockData: Record<string, any>; // Used for non-list mode
+    mockData: GenericData[]; // Used for list mode
+    singleMockData: GenericData; // Used for non-list mode
     listSettings: IListSettings;
     canvasHeight?: number; // Height of the canvas in list mode
     availableProps: IProp[];
@@ -114,7 +114,7 @@ export interface IEditorContext {
     addToGroup: (elementId: string, groupId: string) => void;
     removeFromGroup: (elementId: string) => void;
     resizeGroup: (groupId: string, newWidth: number, newHeight: number) => void;
-    setMockData: (data: any[], singleData: Record<string, any>) => void;
+    setMockData: (data: GenericData[], singleData: GenericData) => void;
     updateListSettings: (settings: Partial<IListSettings>) => void;
     setCanvasHeight: (height: number) => void;
     loadState: (savedState: Partial<IEditorState>) => void;
@@ -778,7 +778,7 @@ export const EditorProvider: React.FC<{ children: ReactNode; isList?: boolean; a
         });
     }, []);
 
-    const setMockData = React.useCallback((data: any[], singleData: Record<string, any>) => {
+    const setMockData = React.useCallback((data: GenericData[], singleData: GenericData) => {
         setState(prev => ({
             ...prev,
             mockData: data,

@@ -1,6 +1,7 @@
 import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
-import type { IElement, IElementFormatting, IListSettings } from '../context';
+import type { IElement, IElementAnimation, IElementFormatting, IListSettings } from '../context';
+import type { GenericData } from '../types';
 
 interface RenderOptions {
     isList?: boolean;
@@ -25,7 +26,7 @@ const hex8ToRgba = (hex: string) => {
     return `rgba(${r}, ${g}, ${b}, ${a})`;
 };
 
-const styleObjectToString = (style: any) => {
+const styleObjectToString = (style: Record<string, string | number | undefined | null>) => {
     if (!style) return '';
     const pxProps = [
         'width', 'height', 'top', 'left', 'right', 'bottom',
@@ -106,7 +107,7 @@ const measureTextHeight = (text: string, width: number, fontFamily: string, font
     }
 };
 
-const checkCondition = (propValue: any, operator: string, ruleValue: any) => {
+const checkCondition = (propValue: unknown, operator: string, ruleValue: unknown) => {
     const val = String(propValue).toLowerCase();
     const target = String(ruleValue).toLowerCase();
 
@@ -122,7 +123,7 @@ const checkCondition = (propValue: any, operator: string, ruleValue: any) => {
     }
 };
 
-const formatValue = (value: any, formatting: IElementFormatting) => {
+const formatValue = (value: unknown, formatting: IElementFormatting) => {
     if (!formatting || formatting.type === 'text') return value !== undefined && value !== null ? String(value) : '';
     if (value === undefined || value === null) return '';
 
@@ -133,7 +134,7 @@ const formatValue = (value: any, formatting: IElementFormatting) => {
 
     if (formatting.type === 'date') {
         try {
-            const date = new Date(value);
+            const date = new Date(value as string | number | Date);
             if (isNaN(date.getTime())) return String(value);
             if (formatting.dateFormat) {
                 const d = date.getDate().toString().padStart(2, '0');
@@ -151,7 +152,7 @@ const formatValue = (value: any, formatting: IElementFormatting) => {
     }
 
     if (formatting.type === 'number') {
-        const num = parseFloat(value);
+        const num = parseFloat(value as string);
         if (isNaN(num)) return String(value);
         if (formatting.numberFormat === 'currency') return (formatting.currencySymbol || 'R$') + ' ' + num.toFixed(formatting.decimalPlaces || 2);
         if (formatting.numberFormat === 'percent') return num.toFixed(formatting.decimalPlaces || 0) + '%';
@@ -161,17 +162,27 @@ const formatValue = (value: any, formatting: IElementFormatting) => {
     return String(value);
 };
 
-const computeLayout = (elements: IElement[], itemData: any) => {
+const getSafeTimingFunction = (tf?: string) => {
+    switch (tf) {
+        case 'linear': return 'linear';
+        case 'ease-in': return 'ease-in';
+        case 'ease-out': return 'ease-out';
+        case 'ease-in-out': return 'ease-in-out';
+        case 'bounce': return 'cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+        default: return 'ease-out';
+    }
+};
+
+const computeLayout = (elements: IElement[], itemData: GenericData) => {
     // Clone elements to avoid mutating state
-    const layoutElements = JSON.parse(JSON.stringify(elements));
+    const layoutElements: IElement[] = JSON.parse(JSON.stringify(elements));
+    // Create a map of original states to reference original positions
+    const originalElementsMap = new Map(layoutElements.map(el => [el.id, { ...el }]));
 
-    // Store original dimensions for Flow Layout calculations
-    layoutElements.forEach((el: any) => {
-        el._originalY = el.y;
-        el._originalHeight = el.height;
-    });
+    const shifts: { triggerY: number; delta: number; ignoreIds: Set<string> }[] = [];
 
-    const isInside = (inner: any, outer: any) => {
+    const isInside = (inner: IElement, outer: IElement) => {
+        if (inner.id === outer.id) return false;
         const eps = 0.1;
         return (
             inner.x >= outer.x - eps &&
@@ -181,104 +192,140 @@ const computeLayout = (elements: IElement[], itemData: any) => {
         );
     };
 
-    const autoGrowElements = layoutElements
-        .filter((el: any) => (el.type === 'text' || el.type === 'text-container') && el.autoGrow)
-        .sort((a: any, b: any) => a.y - b.y);
+    // 1. Resolve Content & Calculate Growth
+    layoutElements.forEach((element) => {
+        const isText = element.type === 'text';
+        const isTextContainer = element.type === 'text-container';
 
-    autoGrowElements.forEach((textEl: any) => {
-        let content = textEl.content;
-        content = content.replace(/\{\{(.*?)\}\}/g, (match: any, key: string) => {
-            const val = itemData[key.trim()];
-            return val !== undefined && val !== null ? String(val) : match;
-        });
-
-        const fontSize = parseInt(String((textEl.style && textEl.style.fontSize) || 16));
-        const fontFamily = String((textEl.style && textEl.style.fontFamily) || 'Arial');
-        const isHorizontal = textEl.type === 'text-container' && textEl.containerExpansion === 'horizontal';
-
-        if (isHorizontal) {
-            try {
-                const canvas = document.createElement('canvas');
-                const context = canvas.getContext('2d');
-                if (context) {
-                    context.font = `${fontSize}px ${fontFamily}`;
-                    const metrics = context.measureText(content);
-                    const padding = parseInt(String((textEl.style && textEl.style.padding) || 0)) * 2;
-                    const newWidth = Math.ceil(metrics.width + padding);
-                    if (newWidth > textEl.width) textEl.width = newWidth;
-                }
-            } catch (e) { }
-        } else {
-            // Check for HTML content (e.g. <img> tags) to attempt height parsing
-            let contentHeight = 0;
-            const padding = parseInt(String((textEl.style && textEl.style.padding) || 0));
-            const availableWidth = Math.max(1, textEl.width - (padding * 2));
-
-            const htmlTagMatch = /<([a-z]+)([^>]*?)>/i.exec(content);
-
-            if (htmlTagMatch) {
-                // Attempt to find height in attributes or style
-                const attrs = htmlTagMatch[2];
-                const heightAttr = /height=["']?(\d+)["']?/i.exec(attrs);
-                const styleHeight = /height:\s*(\d+)px/i.exec(attrs);
-
-                if (heightAttr) {
-                    contentHeight = parseInt(heightAttr[1]);
-                } else if (styleHeight) {
-                    contentHeight = parseInt(styleHeight[1]);
-                } else {
-                    // Fallback: If it's an image without explicit height, assume it might be taller than text.
-                    // But without loading it, we can't know. 
-                    // We'll still run measureTextHeight as a baseline, but maybe check line breaks.
-                    contentHeight = measureTextHeight(content, availableWidth, fontFamily, fontSize);
-                }
-            } else {
-                contentHeight = measureTextHeight(content, availableWidth, fontFamily, fontSize);
-            }
-
-            // Add padding and a safety buffer (4px) to the final measured height to prevent overlap
-            let measuredHeight = contentHeight + (padding * 2);
-            if (!htmlTagMatch || (htmlTagMatch && !contentHeight)) {
-                measuredHeight += 4;
-            }
-
-            // Respect configured min-height from styles
-            const styleMinHeight = parseInt(String((textEl.style && textEl.style.minHeight) || 0));
-            // The final height should be at least the measured content height or the configured min-height
-            const targetHeight = Math.max(measuredHeight, styleMinHeight);
-
-            const designHeight = textEl.height;
-            // Only grow if target height exceeds design height
-            const delta = targetHeight - designHeight;
-
-            if (delta > 0) {
-                const originalBottom = textEl.y + designHeight;
-                const originalTextRect = { x: textEl.x, y: textEl.y, width: textEl.width, height: designHeight };
-                textEl.height = targetHeight;
-                layoutElements.forEach((other: any) => {
-                    if (other.id === textEl.id) return;
-
-                    // If element is strictly inside the expanding one, grow it too
-                    if (isInside(originalTextRect, other)) {
-                        other.height += delta;
-                        return;
+        if ((isText || isTextContainer) && element.autoGrow) {
+            // Resolve content
+            let content = element.content;
+            content = content.replace(/\{\{(.*?)\}\}/g, (_match: string, key: string) => {
+                const val = itemData[key.trim()];
+                if (val !== undefined && val !== null) {
+                    if (element.formatting) {
+                        return formatValue(val, element.formatting);
                     }
+                    return String(val);
+                }
+                return _match;
+            });
 
-                    // Only shift elements that are visibly below AND have horizontal overlap
-                    // This prevents shifting elements in adjacent columns
-                    if (other.y >= originalBottom) {
-                        const xOverlap = Math.max(0, Math.min(textEl.x + textEl.width, other.x + other.width) - Math.max(textEl.x, other.x));
-                        if (xOverlap > 0) {
-                            other.y += delta;
+            // Get style props
+            const fontSize = parseInt(String((element.style && element.style.fontSize) || 16));
+            const fontFamily = String((element.style && element.style.fontFamily) || 'Arial');
+
+            // Check expansion direction
+            const isHorizontal = isTextContainer && element.containerExpansion === 'horizontal';
+
+            if (isHorizontal) {
+                // Measure Width
+                try {
+                    const canvas = document.createElement('canvas');
+                    const context = canvas.getContext('2d');
+                    if (context) {
+                        context.font = `${fontSize}px ${fontFamily}`;
+                        const metrics = context.measureText(content);
+                        const padding = parseInt(String((element.style && element.style.padding) || 0)) * 2;
+                        const newWidth = Math.ceil(metrics.width + padding);
+
+                        if (newWidth > element.width) {
+                            element.width = newWidth;
+                            element.content = content;
                         }
                     }
-                });
+                } catch (e) { }
+            } else {
+                // Measure Height (Vertical Expansion)
+                // Check for HTML content (e.g. <img> tags)
+                let contentHeight = 0;
+                const padding = parseInt(String((element.style && element.style.padding) || 0));
+                const availableWidth = Math.max(1, element.width - (padding * 2));
+
+                const htmlTagMatch = /<([a-z]+)([^>]*?)>/i.exec(content);
+
+                if (htmlTagMatch) {
+                    const attrs = htmlTagMatch[2];
+                    const heightAttr = /height=["']?(\d+)["']?/i.exec(attrs);
+                    const styleHeight = /height:\s*(\d+)px/i.exec(attrs);
+
+                    if (heightAttr) {
+                        contentHeight = parseInt(heightAttr[1]);
+                    } else if (styleHeight) {
+                        contentHeight = parseInt(styleHeight[1]);
+                    } else {
+                        contentHeight = measureTextHeight(content, availableWidth, fontFamily, fontSize);
+                    }
+                } else {
+                    contentHeight = measureTextHeight(content, availableWidth, fontFamily, fontSize);
+                }
+
+                // Add padding and safety buffer
+                let measuredHeight = contentHeight + (padding * 2);
+                if (!htmlTagMatch || (htmlTagMatch && !contentHeight)) {
+                    measuredHeight += 4;
+                }
+
+                const styleMinHeight = parseInt(String((element.style && element.style.minHeight) || 0));
+                const targetHeight = Math.max(measuredHeight, styleMinHeight);
+                const originalHeight = element.height;
+                const delta = targetHeight - originalHeight;
+
+                // Apply growth if positive
+                if (delta > 0) {
+                    element.height = targetHeight;
+                    element.content = content;
+
+                    // Find ancestors (Containers)
+                    const ancestors: IElement[] = [];
+                    const originalElement = originalElementsMap.get(element.id);
+
+                    if (originalElement) {
+                        layoutElements.forEach(possibleParent => {
+                            if (possibleParent.id === element.id) return;
+                            const originalParent = originalElementsMap.get(possibleParent.id);
+                            if (originalParent && isInside(originalElement, originalParent)) {
+                                ancestors.push(possibleParent);
+                            }
+                        });
+                    }
+
+                    // Expand ancestors
+                    const ignoreIds = new Set<string>([element.id]);
+                    ancestors.forEach(ancestor => {
+                        ancestor.height += delta;
+                        ignoreIds.add(ancestor.id);
+                    });
+
+                    // Record Shift
+                    shifts.push({
+                        triggerY: element.y + originalHeight,
+                        delta: delta,
+                        ignoreIds: ignoreIds
+                    });
+                }
             }
         }
     });
 
+    // 2. Apply Shifts
+    layoutElements.forEach(element => {
+        const originalElement = originalElementsMap.get(element.id);
+        if (!originalElement) return;
+
+        let totalShift = 0;
+        shifts.forEach(shift => {
+            if (shift.ignoreIds.has(element.id)) return;
+            if (originalElement.y >= shift.triggerY - 0.1) {
+                totalShift += shift.delta;
+            }
+        });
+
+        element.y += totalShift;
+    });
+
     let maxY = 0;
-    layoutElements.forEach((el: any) => {
+    layoutElements.forEach((el) => {
         const bottom = el.y + el.height;
         if (bottom > maxY) maxY = bottom;
     });
@@ -286,27 +333,27 @@ const computeLayout = (elements: IElement[], itemData: any) => {
     return { layoutElements, maxY };
 };
 
-const computeItemHeight = (elements: IElement[], itemData: any, fallbackHeight: number) => {
+const computeItemHeight = (elements: IElement[], itemData: GenericData, fallbackHeight: number) => {
     const { maxY } = computeLayout(elements, itemData);
     return fallbackHeight ? Math.max(maxY, fallbackHeight) : maxY;
 };
 
 // --- Vanilla Renderer Logic (for Exports & Runtime) ---
 // This function is defined here to be stringified and injected into exports.
-const vanillaRenderItem = (elements: IElement[], itemData: any, _index = 0, offsetY = 0) => {
+const vanillaRenderItem = (elements: IElement[], itemData: GenericData, _index = 0, offsetY = 0) => {
     const { layoutElements } = computeLayout(elements, itemData);
 
     // Use all elements as absolute positioned, but with updated coordinates from computeLayout
     const allElements = layoutElements;
 
-    const renderElementContent = (element: any) => {
+    const renderElementContent = (element: IElement) => {
         let content = element.content;
         let imgSrc = '';
 
         if (element.type === 'text' || element.type === 'text-container') {
-            content = content.replace(/\{\{(.*?)\}\}/g, (match: any, key: string) => {
+            content = content.replace(/\{\{(.*?)\}\}/g, (_match: string, key: string) => {
                 const val = itemData[key.trim()];
-                if (val === undefined || val === null) return match;
+                if (val === undefined || val === null) return _match;
                 if (element.formatting) {
                     return formatValue(val, element.formatting);
                 }
@@ -318,16 +365,16 @@ const vanillaRenderItem = (elements: IElement[], itemData: any, _index = 0, offs
                 if (val !== undefined && val !== null) imgSrc = String(val);
                 else imgSrc = content;
             } else {
-                imgSrc = content.replace(/\{\{(.*?)\}\}/g, (match: any, key: string) => {
+                imgSrc = content.replace(/\{\{(.*?)\}\}/g, (_match: string, key: string) => {
                     const val = itemData[key.trim()];
-                    return val !== undefined && val !== null ? String(val) : match;
+                    return val !== undefined && val !== null ? String(val) : _match;
                 });
             }
         }
 
         let conditionalStyles = {};
         if (element.conditions) {
-            element.conditions.forEach((rule: any) => {
+            element.conditions.forEach((rule) => {
                 const propVal = itemData[rule.property];
                 if (checkCondition(propVal, rule.operator, rule.value)) {
                     conditionalStyles = { ...conditionalStyles, ...rule.style };
@@ -335,7 +382,7 @@ const vanillaRenderItem = (elements: IElement[], itemData: any, _index = 0, offs
             });
         }
 
-        let bindingStyles: any = {};
+        const bindingStyles: Record<string, string> = {};
         if (element.styleBindings) {
             Object.entries(element.styleBindings).forEach(([styleProp, variableName]) => {
                 const val = itemData[variableName as string];
@@ -360,7 +407,7 @@ const vanillaRenderItem = (elements: IElement[], itemData: any, _index = 0, offs
         return { content, imgSrc, baseStyle };
     };
 
-    const renderHtmlTag = (element: any, styleString: string, content: string, imgSrc: string) => {
+    const renderHtmlTag = (element: IElement, styleString: string, content: string, imgSrc: string) => {
         if (element.type === 'text' || element.type === 'text-container') {
             return `<div style="${styleString}">${content}</div>`;
         } else if (element.type === 'image') {
@@ -383,7 +430,7 @@ const vanillaRenderItem = (elements: IElement[], itemData: any, _index = 0, offs
     };
 
     // Render All Elements (Absolute)
-    return allElements.map((element: any) => {
+    return allElements.map((element: IElement) => {
         const { content, imgSrc, baseStyle } = renderElementContent(element);
         const styleString = styleObjectToString({
             ...baseStyle,
@@ -397,7 +444,7 @@ const vanillaRenderItem = (elements: IElement[], itemData: any, _index = 0, offs
 
 // --- React Components ---
 
-const ElementRenderer: React.FC<{ element: IElement, itemData: any }> = ({ element, itemData }) => {
+const ElementRenderer: React.FC<{ element: IElement, itemData: GenericData }> = ({ element, itemData }) => {
     let content = element.content;
     let imgSrc = '';
 
@@ -433,7 +480,7 @@ const ElementRenderer: React.FC<{ element: IElement, itemData: any }> = ({ eleme
     }
 
     // Style Bindings
-    let bindingStyles: any = {};
+    const bindingStyles: Record<string, string> = {};
     if (element.styleBindings) {
         Object.entries(element.styleBindings).forEach(([styleProp, variableName]) => {
             const val = itemData[variableName];
@@ -465,7 +512,7 @@ const ElementRenderer: React.FC<{ element: IElement, itemData: any }> = ({ eleme
     } else if (element.type === 'image') {
         const imgStyle: React.CSSProperties = {
             width: '100%', height: '100%',
-            objectFit: (element.style?.objectFit as any) || 'cover',
+            objectFit: (element.style?.objectFit as React.CSSProperties['objectFit']) || 'cover',
             display: 'block'
         };
         return <div style={baseStyle}><img src={imgSrc} alt="Element" style={imgStyle} /></div>;
@@ -486,7 +533,7 @@ const ElementRenderer: React.FC<{ element: IElement, itemData: any }> = ({ eleme
     return null;
 };
 
-const HtmlDocument: React.FC<{ elements: IElement[], data: any, options: RenderOptions }> = ({ elements, data, options }) => {
+const HtmlDocument: React.FC<{ elements: IElement[], data: GenericData | GenericData[], options: RenderOptions }> = ({ elements, data, options }) => {
     const { isList, listSettings } = options;
 
     // CSS Keyframes string (replicated from original)
@@ -563,15 +610,15 @@ const HtmlDocument: React.FC<{ elements: IElement[], data: any, options: RenderO
         if (listSettings?.sortProp) {
             const prop = listSettings.sortProp;
             const order = listSettings.sortOrder === 'asc' ? 1 : -1;
-            listData.sort((a, b) => (a[prop] < b[prop] ? -1 : 1) * order);
+            listData.sort((a, b) => ((a[prop] as number | string) < (b[prop] as number | string) ? -1 : 1) * order);
         }
         if (listSettings?.newestPosition === 'top') listData.reverse();
 
         const justify = listSettings?.newestPosition === 'top' ? 'flex-start' : 'flex-end';
-        const entryAnim = (listSettings?.entryAnimation || { type: 'slideIn', duration: 0.3 }) as any;
+        const entryAnim: IElementAnimation = listSettings?.entryAnimation || { type: 'slideIn', duration: 0.3, delay: 0 };
         const entryAnimName = entryAnim.type === 'none' ? 'none' : entryAnim.type;
         const entryAnimDuration = entryAnim.duration + 's';
-        const entryAnimTiming = entryAnim.timingFunction || 'ease-out';
+        const entryAnimTiming = getSafeTimingFunction(entryAnim.timingFunction);
 
         const containerStyle: React.CSSProperties = {
             display: 'flex',
@@ -603,7 +650,7 @@ const HtmlDocument: React.FC<{ elements: IElement[], data: any, options: RenderO
                                     // Render all elements as absolute, relying on computeLayout for positioning
                                     return (
                                         <>
-                                            {layoutElements.map((el: any) => (
+                                            {layoutElements.map((el: IElement) => (
                                                 <ElementRenderer key={el.id} element={el} itemData={item} />
                                             ))}
                                         </>
@@ -621,17 +668,17 @@ const HtmlDocument: React.FC<{ elements: IElement[], data: any, options: RenderO
     }
 
     // Single Item Rendering
-    const { layoutElements } = computeLayout(elements, data);
+    const { layoutElements } = computeLayout(elements, data as GenericData);
     return (
         <div style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden' }}>
-            {layoutElements.map((el: any) => (
-                <ElementRenderer key={el.id} element={el} itemData={data} />
+            {layoutElements.map((el) => (
+                <ElementRenderer key={el.id} element={el} itemData={data as GenericData} />
             ))}
         </div>
     );
 };
 
-export const generateHTML = (elements: IElement[], data: any, options: RenderOptions = {}): string => {
+export const generateHTML = (elements: IElement[], data: GenericData | GenericData[], options: RenderOptions = {}): string => {
     // 1. Generate Static HTML using React
     const html = renderToStaticMarkup(<HtmlDocument elements={elements} data={data} options={options} />);
 
@@ -717,6 +764,7 @@ function renderTemplate(elements, data, options = {}) {
     const measureTextHeight = ${measureTextHeight.toString()};
     const checkCondition = ${checkCondition.toString()};
     const formatValue = ${formatValue.toString()};
+    const getSafeTimingFunction = ${getSafeTimingFunction.toString()};
     const computeLayout = ${computeLayout.toString()};
     const computeItemHeight = ${computeItemHeight.toString()};
     const renderItem = ${vanillaRenderItem.toString()};
@@ -736,7 +784,7 @@ function renderTemplate(elements, data, options = {}) {
         const entryAnim = (listSettings && listSettings.entryAnimation) || { type: 'slideIn', duration: 0.3 };
         const entryAnimName = entryAnim.type === 'none' ? 'none' : entryAnim.type;
         const entryAnimDuration = entryAnim.duration + 's';
-        const entryAnimTiming = entryAnim.timingFunction || 'ease-out';
+        const entryAnimTiming = getSafeTimingFunction(entryAnim.timingFunction);
 
         const containerStyle = styleObjectToString({
             display: 'flex',
@@ -761,12 +809,46 @@ function renderTemplate(elements, data, options = {}) {
             return \`<div class="list-item" style="\${itemStyle}">\${content}</div>\`;
         }).join('');
 
-        // Include Keyframes (truncated for brevity in export, but essential ones should be here)
+        // Include Keyframes
         const css = \`
             .list-wrapper::-webkit-scrollbar { width: 6px; }
             .list-wrapper::-webkit-scrollbar-thumb { background-color: rgba(0,0,0,0.2); border-radius: 3px; }
             @keyframes slideIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
             @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+            @keyframes slideInLeft { from { opacity: 0; transform: translateX(-50px); } to { opacity: 1; transform: translateX(0); } }
+            @keyframes slideInRight { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
+            @keyframes slideInUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
+            @keyframes slideInDown { from { opacity: 0; transform: translateY(-50px); } to { opacity: 1; transform: translateY(0); } }
+            @keyframes zoomIn { from { opacity: 0; transform: scale(0.5); } to { opacity: 1; transform: scale(1); } }
+            @keyframes bounceIn {
+                0% { opacity: 0; transform: scale(0.3); }
+                50% { opacity: 1; transform: scale(1.05); }
+                70% { transform: scale(0.9); }
+                100% { transform: scale(1); }
+            }
+            @keyframes pulse {
+                0% { transform: scale(1); }
+                50% { transform: scale(1.05); }
+                100% { transform: scale(1); }
+            }
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+                20%, 40%, 60%, 80% { transform: translateX(5px); }
+            }
+            @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+            @keyframes smoothSlideUp {
+                0% { opacity: 0; transform: translateY(30px); }
+                100% { opacity: 1; transform: translateY(0); }
+            }
+            @keyframes popIn {
+                0% { opacity: 0; transform: scale(0.8) translateY(10px); }
+                100% { opacity: 1; transform: scale(1) translateY(0); }
+            }
+            @keyframes blurIn {
+                0% { opacity: 0; filter: blur(10px); }
+                100% { opacity: 1; filter: blur(0); }
+            }
         \`;
 
         const scrollScript = (listSettings && listSettings.scrollDirection === 'up') 

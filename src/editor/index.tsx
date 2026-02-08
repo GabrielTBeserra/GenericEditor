@@ -158,12 +158,12 @@ const EditorContent: React.FC<EditorProps> = ({ layout, initialState, onSave, th
                     e.preventDefault();
                     const step = e.shiftKey ? 10 : 1;
 
-                    const updates: { id: string, changes: any }[] = [];
+                    const updates: { id: string, changes: Partial<IElement> }[] = [];
 
                     state.selectedElementIds.forEach(id => {
                         const element = state.elements.find(el => el.id === id);
                         if (element) {
-                            const change: any = {};
+                            const change: Partial<IElement> = {};
                             if (e.key === 'ArrowUp') change.y = element.y - step;
                             if (e.key === 'ArrowDown') change.y = element.y + step;
                             if (e.key === 'ArrowLeft') change.x = element.x - step;

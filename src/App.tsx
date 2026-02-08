@@ -28,7 +28,7 @@ const editorLayout = {
  };
 
 function App() {
-  const [layoutState, setLayoutState] = useState<any>(null);
+  const [layoutState, setLayoutState] = useState<unknown>(null);
 
   const handleSave = (json: string) => {
     console.log("Salvando Layout:", json);

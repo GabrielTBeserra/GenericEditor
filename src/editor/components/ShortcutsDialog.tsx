@@ -12,7 +12,7 @@ import { Button, Dialog, Flex, Grid, Kbd, Text, Box, Separator } from '@radix-ui
 import React from 'react';
 
 export const ShortcutsDialog: React.FC = () => {
-    const ShortcutRow = ({ icon: Icon, label, keys }: { icon: any, label: string, keys: string[] }) => (
+    const ShortcutRow = ({ icon: Icon, label, keys }: { icon: React.ElementType, label: string, keys: string[] }) => (
         <Flex align="center" justify="between" py="2">
             <Flex align="center" gap="2">
                 <Box style={{ color: 'var(--gray-10)' }}>

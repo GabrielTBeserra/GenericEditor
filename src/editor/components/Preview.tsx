@@ -1,17 +1,30 @@
 import { PlayIcon, StopIcon } from '@radix-ui/react-icons';
 import { Box, Button, Flex, ScrollArea, Text } from '@radix-ui/themes';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, type Easing, type Variants } from 'framer-motion';
 import React from 'react';
-import { useEditor, type IElement, type IElementAnimation } from '../context';
+import type { IElement, IElementAnimation } from '../context';
+import { useEditor } from '../context';
 import { formatValue } from '../utils/helpers';
 
-const getAnimationVariants = (anim?: IElementAnimation) => {
+const getTimingFunction = (tf?: string): Easing => {
+    switch (tf) {
+        case 'linear': return 'linear';
+        case 'ease-in': return 'easeIn';
+        case 'ease-out': return 'easeOut';
+        case 'ease-in-out': return 'easeInOut';
+        case 'bounce': return 'easeOut'; // Fallback
+        case 'ease': return 'easeInOut';
+        default: return 'easeOut';
+    }
+};
+
+const getAnimationVariants = (anim?: IElementAnimation): Variants => {
     if (!anim || anim.type === 'none') return {
         initial: { opacity: 0, y: 20, scale: 0.95 },
         animate: { opacity: 1, y: 0, scale: 1 }
     };
 
-    const variants: any = { initial: {}, animate: {} };
+    const variants: Variants = { initial: {}, animate: {} };
 
     switch (anim.type) {
         case 'fadeIn':
@@ -52,7 +65,7 @@ const getAnimationVariants = (anim?: IElementAnimation) => {
     return variants;
 };
 
-const PreviewElementRenderer: React.FC<{ element: IElement; offsetY?: number; dataContext?: any }> = ({ element, offsetY = 0, dataContext }) => {
+const PreviewElementRenderer: React.FC<{ element: IElement; offsetY?: number; dataContext?: GenericData }> = ({ element, offsetY = 0, dataContext }) => {
     // Resolve content based on data binding
     let content = element.content;
     if (dataContext) {
@@ -107,7 +120,7 @@ const PreviewElementRenderer: React.FC<{ element: IElement; offsetY?: number; da
                     <img
                         src={content}
                         alt="Element"
-                        style={{ width: '100%', height: '100%', objectFit: (element.style?.objectFit as any) || 'cover', display: 'block' }}
+                        style={{ width: '100%', height: '100%', objectFit: (element.style?.objectFit as React.CSSProperties['objectFit']) || 'cover', display: 'block' }}
                     />
                 ) : (
                     <Box style={{ width: '100%', height: '100%', backgroundColor: '#eee', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -134,9 +147,10 @@ const PreviewElementRenderer: React.FC<{ element: IElement; offsetY?: number; da
     );
 };
 
+import type { GenericData } from '../types';
 import { processLayout } from '../utils/layoutEngine';
 
-const ListItem: React.FC<{ item: any; elements: IElement[]; animation?: IElementAnimation }> = ({ item, elements, animation }) => {
+const ListItem: React.FC<{ item: GenericData; elements: IElement[]; animation?: IElementAnimation }> = ({ item, elements, animation }) => {
     // Calculate layout for this specific item
     const { elements: processedElements, totalHeight } = React.useMemo(() => {
         return processLayout(elements, item);
@@ -144,16 +158,25 @@ const ListItem: React.FC<{ item: any; elements: IElement[]; animation?: IElement
 
     const variants = React.useMemo(() => getAnimationVariants(animation), [animation]);
 
+    // Merge transition from variants if it exists (for spring animations like bounceIn)
+    const transition = React.useMemo(() => {
+        const variantTransition = (variants.animate as any)?.transition;
+        if (variantTransition) return variantTransition;
+
+        return {
+            duration: animation?.duration || 0.4,
+            ease: getTimingFunction(animation?.timingFunction)
+        };
+    }, [animation, variants]);
+
     return (
         <motion.div
             layout
-            initial={variants.initial}
-            animate={variants.animate}
+            variants={variants}
+            initial="initial"
+            animate="animate"
             exit={{ opacity: 0, scale: 0.9 }}
-            transition={{
-                duration: animation?.duration || 0.4,
-                ease: (animation?.timingFunction || "easeOut") as any
-            }}
+            transition={transition}
             whileHover={{
                 scale: 1.02,
                 transition: { duration: 0.2 }
@@ -181,11 +204,11 @@ const ListItem: React.FC<{ item: any; elements: IElement[]; animation?: IElement
 export const Preview: React.FC = () => {
     const { state } = useEditor();
     const [isSimulating, setIsSimulating] = React.useState(false);
-    const [simulationItems, setSimulationItems] = React.useState<any[]>([]);
+    const [simulationItems, setSimulationItems] = React.useState<GenericData[]>([]);
 
     // Simulation logic
     React.useEffect(() => {
-        let interval: any;
+        let interval: ReturnType<typeof setInterval>;
         if (isSimulating && state.isList) {
             // Initial item
             if (simulationItems.length === 0) {
@@ -225,7 +248,7 @@ export const Preview: React.FC = () => {
 
         if (state.isList) {
             // Determine data source
-            let listData: any[] = [];
+            let listData: GenericData[] = [];
 
             if (isSimulating) {
                 listData = simulationItems;
@@ -238,8 +261,8 @@ export const Preview: React.FC = () => {
                     const order = state.listSettings.sortOrder === 'asc' ? 1 : -1;
 
                     listData = [...listData].sort((a, b) => {
-                        const valA = a[prop];
-                        const valB = b[prop];
+                        const valA = a[prop] as number | string;
+                        const valB = b[prop] as number | string;
                         if (valA < valB) return -1 * order;
                         if (valA > valB) return 1 * order;
                         return 0;
@@ -259,10 +282,10 @@ export const Preview: React.FC = () => {
                     p="4"
                     style={{ width: '100%', minHeight: '100%' }}
                 >
-                    <AnimatePresence mode="popLayout" initial={false}>
+                    <AnimatePresence mode="popLayout">
                         {listData.map((item, index) => (
                             <ListItem
-                                key={item.id || index}
+                                key={(item.id as React.Key) || index}
                                 item={item}
                                 elements={state.elements}
                                 animation={state.listSettings.entryAnimation}

@@ -383,7 +383,7 @@ export const DraggableElement: React.FC<DraggableElementProps> = React.memo(({ e
             maxHeight={state.isList ? Math.max(10, canvasHeight - element.y) : undefined}
             onResizeStart={(e) => {
                 setIsResizing(true);
-                keepAspectRef.current = !!(e as any).shiftKey;
+                keepAspectRef.current = !!(e as React.MouseEvent).shiftKey;
             }}
             onResizeStop={(_e, direction, _ref, d) => {
                 setIsResizing(false);
@@ -447,7 +447,7 @@ export const DraggableElement: React.FC<DraggableElementProps> = React.memo(({ e
                 top: false, right: true, bottom: false, left: true,
                 topRight: false, bottomRight: true, bottomLeft: false, topLeft: false
             }}
-            lockAspectRatio={(keepAspectRef as any).current === true}
+            lockAspectRatio={keepAspectRef.current}
             grid={state.gridSize > 0 ? [state.gridSize, state.gridSize] : undefined}
         >
             <ElementContextMenu element={element}>
@@ -530,7 +530,7 @@ export const DraggableElement: React.FC<DraggableElementProps> = React.memo(({ e
                                 <img
                                     src={displayContent}
                                     alt="Element"
-                                    style={{ width: '100%', height: '100%', objectFit: (element.style?.objectFit as any) || 'cover', display: 'block', pointerEvents: 'none' }}
+                                    style={{ width: '100%', height: '100%', objectFit: (element.style?.objectFit as React.CSSProperties['objectFit']) || 'cover', display: 'block', pointerEvents: 'none' }}
                                 />
                             ) : (
                                 <Box style={{ width: '100%', height: '100%', backgroundColor: '#eee', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>

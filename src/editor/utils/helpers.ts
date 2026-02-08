@@ -1,6 +1,6 @@
 import type { IElementFormatting } from '../context';
 
-export const formatValue = (value: any, formatting: IElementFormatting): string => {
+export const formatValue = (value: unknown, formatting: IElementFormatting): string => {
     if (value === undefined || value === null) return '';
 
     if (formatting.type === 'boolean') {
@@ -9,7 +9,7 @@ export const formatValue = (value: any, formatting: IElementFormatting): string 
     }
     if (formatting.type === 'date') {
         try {
-            const date = new Date(value);
+            const date = new Date(value as string | number | Date);
             if (isNaN(date.getTime())) return String(value);
 
             if (formatting.dateFormat) {
@@ -32,7 +32,7 @@ export const formatValue = (value: any, formatting: IElementFormatting): string 
         } catch { return String(value); }
     }
     if (formatting.type === 'number') {
-        const num = parseFloat(value);
+        const num = parseFloat(String(value));
         if (isNaN(num)) return String(value);
 
         if (formatting.numberFormat === 'currency') {
@@ -46,7 +46,7 @@ export const formatValue = (value: any, formatting: IElementFormatting): string 
     return String(value);
 };
 
-export const checkCondition = (propValue: any, operator: string, ruleValue: string): boolean => {
+export const checkCondition = (propValue: unknown, operator: string, ruleValue: string): boolean => {
     const val = String(propValue).toLowerCase();
     const target = String(ruleValue).toLowerCase();
 

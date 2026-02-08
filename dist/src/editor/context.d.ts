@@ -1,4 +1,5 @@
 import { default as React, ReactNode } from 'react';
+import { GenericData } from './types';
 export interface IElementCondition {
     id: string;
     property: string;
@@ -17,11 +18,11 @@ export interface IElementFormatting {
     mapping?: Record<string, string>;
 }
 export interface IElementAnimation {
-    type: 'none' | 'fadeIn' | 'slideInLeft' | 'slideInRight' | 'slideInUp' | 'slideInDown' | 'zoomIn' | 'bounceIn' | 'pulse' | 'shake' | 'spin' | 'smoothSlideUp' | 'popIn' | 'blurIn';
+    type: 'none' | 'fadeIn' | 'slideIn' | 'slideInLeft' | 'slideInRight' | 'slideInUp' | 'slideInDown' | 'zoomIn' | 'bounceIn' | 'pulse' | 'shake' | 'spin' | 'smoothSlideUp' | 'popIn' | 'blurIn';
     duration: number;
     delay: number;
     iterationCount?: number | 'infinite';
-    timingFunction?: 'linear' | 'ease' | 'ease-in' | 'ease-out' | 'ease-in-out';
+    timingFunction?: 'linear' | 'ease' | 'ease-in' | 'ease-out' | 'ease-in-out' | 'bounce';
 }
 export interface IElement {
     id: string;
@@ -61,8 +62,8 @@ interface IEditorState {
     elements: IElement[];
     selectedElementIds: string[];
     isList: boolean;
-    mockData: any[];
-    singleMockData: Record<string, any>;
+    mockData: GenericData[];
+    singleMockData: GenericData;
     listSettings: IListSettings;
     canvasHeight?: number;
     availableProps: IProp[];
@@ -120,7 +121,7 @@ export interface IEditorContext {
     addToGroup: (elementId: string, groupId: string) => void;
     removeFromGroup: (elementId: string) => void;
     resizeGroup: (groupId: string, newWidth: number, newHeight: number) => void;
-    setMockData: (data: any[], singleData: Record<string, any>) => void;
+    setMockData: (data: GenericData[], singleData: GenericData) => void;
     updateListSettings: (settings: Partial<IListSettings>) => void;
     setCanvasHeight: (height: number) => void;
     loadState: (savedState: Partial<IEditorState>) => void;
