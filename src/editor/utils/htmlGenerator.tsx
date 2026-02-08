@@ -703,6 +703,7 @@ const getRuntimeScript = (elements: IElement[], options: RenderOptions) => {
             const measureTextHeight = ${measureTextHeight.toString()};
             const checkCondition = ${checkCondition.toString()};
             const formatValue = ${formatValue.toString()};
+            const getSafeTimingFunction = ${getSafeTimingFunction.toString()};
             const computeLayout = ${computeLayout.toString()};
             const computeItemHeight = ${computeItemHeight.toString()};
             const renderItem = ${vanillaRenderItem.toString()};
@@ -710,6 +711,11 @@ const getRuntimeScript = (elements: IElement[], options: RenderOptions) => {
             const itemHeightFallback = ${options.canvasHeight || 0};
             const newestPosition = "${(options.listSettings && options.listSettings.newestPosition) || 'bottom'}";
             const scrollDirection = "${(options.listSettings && options.listSettings.scrollDirection) || 'down'}";
+            const entryAnimation = ${JSON.stringify(options.listSettings && options.listSettings.entryAnimation ? options.listSettings.entryAnimation : { type: 'slideIn', duration: 0.3, delay: 0 })};
+            const entryAnimName = entryAnimation.type === 'none' ? 'none' : entryAnimation.type;
+            const entryAnimDuration = (entryAnimation.duration || 0.3) + 's';
+            const entryAnimDelay = (entryAnimation.delay || 0) + 's';
+            const entryAnimTiming = getSafeTimingFunction(entryAnimation.timingFunction);
 
             window.addItem = function(data) {
                 const wrapper = document.querySelector('.list-wrapper');
@@ -720,7 +726,11 @@ const getRuntimeScript = (elements: IElement[], options: RenderOptions) => {
                 const itemContainerStyle = styleObjectToString({
                     position: 'relative',
                     minHeight: itemHeight,
-                    width: '100%'
+                    width: '100%',
+                    flexShrink: 0,
+                    marginBottom: '10px',
+                    animation: entryAnimName === 'none' ? 'none' : entryAnimName + ' ' + entryAnimDuration + ' ' + entryAnimTiming + ' ' + entryAnimDelay,
+                    animationFillMode: entryAnimName === 'none' ? undefined : 'both'
                 });
 
                 const div = document.createElement('div');

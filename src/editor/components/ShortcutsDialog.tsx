@@ -1,52 +1,52 @@
-import { 
-    QuestionMarkIcon, 
-    CursorArrowIcon, 
-    MoveIcon, 
-    TrashIcon, 
-    ClipboardIcon, 
-    SymbolIcon, 
+import {
+    ClipboardIcon,
+    CursorArrowIcon,
     MagnifyingGlassIcon,
-    SpaceEvenlyHorizontallyIcon
+    MoveIcon,
+    QuestionMarkIcon,
+    SpaceEvenlyHorizontallyIcon,
+    SymbolIcon,
+    TrashIcon
 } from '@radix-ui/react-icons';
-import { Button, Dialog, Flex, Grid, Kbd, Text, Box, Separator } from '@radix-ui/themes';
+import { Box, Button, Dialog, Flex, Grid, Kbd, Separator, Text } from '@radix-ui/themes';
 import React from 'react';
 
-export const ShortcutsDialog: React.FC = () => {
-    const ShortcutRow = ({ icon: Icon, label, keys }: { icon: React.ElementType, label: string, keys: string[] }) => (
-        <Flex align="center" justify="between" py="2">
-            <Flex align="center" gap="2">
-                <Box style={{ color: 'var(--gray-10)' }}>
-                    <Icon />
-                </Box>
-                <Text size="2">{label}</Text>
-            </Flex>
-            <Flex gap="1">
-                {keys.map((k, i) => (
-                    <React.Fragment key={i}>
-                        <Kbd>{k}</Kbd>
-                        {i < keys.length - 1 && <Text size="1" color="gray">+</Text>}
-                    </React.Fragment>
-                ))}
-            </Flex>
+const ShortcutRow = ({ icon: Icon, label, keys }: { icon: React.ElementType, label: string, keys: string[] }) => (
+    <Flex align="center" justify="between" py="2">
+        <Flex align="center" gap="2">
+            <Box style={{ color: 'var(--gray-10)' }}>
+                <Icon />
+            </Box>
+            <Text size="2">{label}</Text>
         </Flex>
-    );
+        <Flex gap="1">
+            {keys.map((k, i) => (
+                <React.Fragment key={i}>
+                    <Kbd>{k}</Kbd>
+                    {i < keys.length - 1 && <Text size="1" color="gray">+</Text>}
+                </React.Fragment>
+            ))}
+        </Flex>
+    </Flex>
+);
 
+export const ShortcutsDialog: React.FC = () => {
     return (
         <Dialog.Root>
             <Dialog.Trigger>
-                <Button 
-                    variant="solid" 
-                    color="amber" 
-                    radius="full" 
-                    style={{ 
-                        width: 40, 
-                        height: 40, 
-                        padding: 0,
+                <Button
+                    variant="solid"
+                    color="amber"
+                    radius="full"
+                    style={{
+                        height: 36,
+                        padding: '0 14px',
                         boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
                     }}
                     title="Atalhos de Teclado"
                 >
-                    <QuestionMarkIcon width="24" height="24" />
+                    <QuestionMarkIcon width="18" height="18" />
+                    Ajuda
                 </Button>
             </Dialog.Trigger>
 
@@ -55,7 +55,7 @@ export const ShortcutsDialog: React.FC = () => {
                 <Text size="2" color="gray" mb="4" as="p">
                     Agilize seu fluxo de trabalho com estes atalhos.
                 </Text>
-                
+
                 <Grid columns="2" gap="6">
                     <Box>
                         <Text size="2" weight="bold" mb="2" color="blue">Edição Básica</Text>

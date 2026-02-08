@@ -155,6 +155,12 @@ export const LayersPanel: React.FC<{ onOpenSettings?: (id: string) => void }> = 
             </Box>
 
             <Box style={{ flex: 1, overflowY: 'auto', padding: 8 }}>
+                {displayElements.length === 0 && (
+                    <Box style={{ backgroundColor: 'var(--gray-2)', border: '1px dashed var(--gray-5)', borderRadius: 10, padding: 12, marginBottom: 8 }}>
+                        <Text size="2" weight="bold">Nenhuma camada ainda</Text>
+                        <Text size="1" color="gray">Adicione um elemento para começar. Ele vai aparecer aqui.</Text>
+                    </Box>
+                )}
                 <DndContext
                     sensors={sensors}
                     onDragStart={handleDragStart}

@@ -220,22 +220,23 @@ const EditorContent: React.FC<EditorProps> = ({ layout, initialState, onSave, th
     };
 
     return (
-        <Theme appearance={theme} accentColor="blue" grayColor="slate" radius="medium" scaling="100%">
-            <Flex direction="row" style={{ height: '100vh', width: '100%', overflow: 'hidden', backgroundColor: 'var(--color-background)' }}>
+        <Theme appearance={theme} accentColor="blue" grayColor="slate" radius="large" scaling="105%">
+            <Flex direction="row" style={{ height: '100vh', width: '100%', overflow: 'hidden', backgroundColor: 'var(--gray-1)' }}>
                 {/* Toolbar */}
                 {isSidebarVisible && (
                     <Flex
                         direction="column"
-                        width="280px"
+                        width="300px"
                         style={{
                             borderRight: '1px solid var(--gray-5)',
-                            backgroundColor: 'var(--gray-2)',
+                            backgroundColor: 'var(--gray-1)',
                             flexShrink: 0,
-                            height: '100%'
+                            height: '100%',
+                            boxShadow: '1px 0 0 var(--gray-4)'
                         }}
                     >
                         {/* Fixed Controls Header */}
-                        <Box p="4" style={{ borderBottom: '1px solid var(--gray-5)', backgroundColor: 'var(--gray-2)' }}>
+                        <Box p="4" style={{ borderBottom: '1px solid var(--gray-5)', backgroundColor: 'var(--gray-1)' }}>
                             <Flex direction="column" gap="3">
                                 <Box>
                                     <Flex justify="between" align="center" mb="2">
@@ -246,7 +247,7 @@ const EditorContent: React.FC<EditorProps> = ({ layout, initialState, onSave, th
                                     <DropdownMenu.Root>
                                         <DropdownMenu.Trigger>
                                             <Button variant="solid" color="green" size="3" style={{ width: '100%', cursor: 'pointer', justifyContent: 'center', marginBottom: '8px' }}>
-                                                Adicionar Novo +
+                                                Adicionar elemento
                                             </Button>
                                         </DropdownMenu.Trigger>
                                         <DropdownMenu.Content style={{ width: '240px' }}>
@@ -292,7 +293,16 @@ const EditorContent: React.FC<EditorProps> = ({ layout, initialState, onSave, th
                                         onChange={handleImportFile}
                                     />
 
-                                    <Box mt="2">
+                                    <Box mt="3" style={{ backgroundColor: 'var(--gray-2)', border: '1px solid var(--gray-4)', borderRadius: 12, padding: 12 }}>
+                                        <Text size="2" weight="bold">Como começar</Text>
+                                        <Flex direction="column" gap="1" mt="2">
+                                            <Text size="1" color="gray">1. Adicione um elemento pelo botão acima.</Text>
+                                            <Text size="1" color="gray">2. Arraste no canvas para mover e redimensionar.</Text>
+                                            <Text size="1" color="gray">3. Use Camadas e Variáveis para organizar.</Text>
+                                        </Flex>
+                                    </Box>
+
+                                    <Box mt="3">
                                         <EditorSettings />
                                     </Box>
                                 </Box>

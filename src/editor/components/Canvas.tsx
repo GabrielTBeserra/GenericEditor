@@ -404,9 +404,8 @@ export const Canvas: React.FC<CanvasProps> = () => {
                 height: '100%',
                 position: 'relative',
                 overflow: 'hidden',
-                backgroundColor: 'var(--color-background)',
+                backgroundColor: 'var(--gray-1)',
                 cursor: isPanning.current ? 'grabbing' : 'default',
-                // Infinite Grid Background
                 backgroundImage: 'radial-gradient(var(--gray-5) 1px, transparent 1px)',
                 backgroundSize: `${20 * state.zoom}px ${20 * state.zoom}px`,
                 backgroundPosition: `${state.pan.x}px ${state.pan.y}px`
@@ -522,21 +521,25 @@ export const Canvas: React.FC<CanvasProps> = () => {
                     </div>
                 )}
 
-                {state.elements.length === 0 && (
-                    <Flex
-                        align="center"
-                        justify="center"
-                        style={{
-                            height: '100%',
-                            color: 'var(--gray-8)',
-                            pointerEvents: 'none',
-                            transform: `scale(${1 / state.zoom})` // Keep text readable
-                        }}
-                    >
-                        <Text>Adicione elementos e arraste livremente</Text>
-                    </Flex>
-                )}
             </div>
+
+            {state.elements.length === 0 && (
+                <Flex
+                    align="center"
+                    justify="center"
+                    style={{
+                        position: 'absolute',
+                        inset: 0,
+                        pointerEvents: 'none'
+                    }}
+                >
+                    <Box style={{ backgroundColor: 'var(--gray-2)', border: '1px solid var(--gray-4)', borderRadius: 12, padding: 16, maxWidth: 320, textAlign: 'center', boxShadow: '0 6px 20px rgba(0,0,0,0.08)' }}>
+                        <Text size="3" weight="bold">Comece adicionando um elemento</Text>
+                        <Text size="2" color="gray" as="div" mt="2">Depois, arraste para mover e use os cantos para redimensionar.</Text>
+                        <Text size="1" color="gray" as="div" mt="2">Dica: clique com o botão direito para mais opções.</Text>
+                    </Box>
+                </Flex>
+            )}
 
             {/* Interaction Blocker - Prevents hover/click on elements during selection */}
             {selectionBox && (
@@ -553,24 +556,6 @@ export const Canvas: React.FC<CanvasProps> = () => {
                 />
             )}
 
-            {/* Zoom Controls Overlay */}
-            <div style={{
-                position: 'absolute',
-                bottom: 20,
-                right: 20,
-                display: 'flex',
-                gap: '8px',
-                backgroundColor: 'var(--color-panel-solid)',
-                padding: '4px',
-                borderRadius: '8px',
-                boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
-                zIndex: 1000
-            }}>
-                <button onClick={() => setZoom(Math.max(0.1, state.zoom - 0.1))} style={{ padding: '4px 8px', cursor: 'pointer' }}>-</button>
-                <span style={{ padding: '4px 8px', minWidth: '50px', textAlign: 'center' }}>{Math.round(state.zoom * 100)}%</span>
-                <button onClick={() => setZoom(Math.min(5, state.zoom + 0.1))} style={{ padding: '4px 8px', cursor: 'pointer' }}>+</button>
-                <button onClick={() => { setZoom(1); setPan({ x: 0, y: 0 }); }} style={{ padding: '4px 8px', cursor: 'pointer' }}>Reset</button>
-            </div>
         </Box>
     );
 };
