@@ -1,6 +1,6 @@
 {
   "name": "@1urso/generic-editor",
-  "version": "0.1.70",
+  "version": "0.1.71",
   "publishConfig": {
     "access": "public"
   },

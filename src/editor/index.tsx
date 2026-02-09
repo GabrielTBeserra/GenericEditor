@@ -274,227 +274,246 @@ const EditorContent: React.FC<EditorProps> = ({ layout, initialState, onSave, th
                             backgroundColor: 'var(--gray-1)',
                             flexShrink: 0,
                             height: '100%',
-                            boxShadow: '1px 0 0 var(--gray-4)'
+                            boxShadow: '1px 0 0 var(--gray-4)',
+                            overflow: 'hidden'
                         }}
                     >
-                        {/* Fixed Controls Header */}
-                        <Box p="4" style={{ borderBottom: '1px solid var(--gray-5)', backgroundColor: 'var(--gray-1)' }}>
-                            <Flex direction="column" gap="3">
-                                <Box>
-                                    <Flex justify="between" align="center" mb="2">
-                                        <Text size="2" weight="bold">Editor</Text>
-                                        <Badge color="gray" variant="soft" radius="full">v{pkg.version}</Badge>
-                                    </Flex>
+                        <ScrollArea type="auto" scrollbars="vertical" style={{ height: '100%' }}>
+                            <Flex direction="column">
+                                {/* Fixed Controls Header */}
+                                <Box p="4" style={{ borderBottom: '1px solid var(--gray-5)', backgroundColor: 'var(--gray-1)' }}>
+                                    <Flex direction="column" gap="3">
+                                        <Box>
+                                            <Flex justify="between" align="center" mb="2">
+                                                <Text size="2" weight="bold">Editor</Text>
+                                                <Badge color="gray" variant="soft" radius="full">v{pkg.version}</Badge>
+                                            </Flex>
 
-                                    <DropdownMenu.Root>
-                                        <DropdownMenu.Trigger>
-                                            <Button variant="solid" color="green" size="3" style={{ width: '100%', cursor: 'pointer', justifyContent: 'center', marginBottom: '8px' }}>
-                                                Adicionar elemento
-                                            </Button>
-                                        </DropdownMenu.Trigger>
-                                        <DropdownMenu.Content style={{ width: '240px' }}>
-                                            <DropdownMenu.Item onSelect={() => handleAddElement('text')}>Texto</DropdownMenu.Item>
-                                            <DropdownMenu.Item onSelect={() => handleAddElement('image')}>Imagem</DropdownMenu.Item>
-                                            <DropdownMenu.Item onSelect={() => handleAddElement('box')}>Caixa (Container)</DropdownMenu.Item>
-                                            <DropdownMenu.Item onSelect={() => handleAddElement('text-container')}>Container com Texto</DropdownMenu.Item>
-                                        </DropdownMenu.Content>
-                                    </DropdownMenu.Root>
+                                            <DropdownMenu.Root>
+                                                <DropdownMenu.Trigger>
+                                                    <Button variant="solid" color="green" size="3" style={{ width: '100%', cursor: 'pointer', justifyContent: 'center', marginBottom: '8px' }}>
+                                                        Adicionar elemento
+                                                    </Button>
+                                                </DropdownMenu.Trigger>
+                                                <DropdownMenu.Content style={{ width: '240px' }}>
+                                                    <DropdownMenu.Item onSelect={() => handleAddElement('text')}>Texto</DropdownMenu.Item>
+                                                    <DropdownMenu.Item onSelect={() => handleAddElement('image')}>Imagem</DropdownMenu.Item>
+                                                    <DropdownMenu.Item onSelect={() => handleAddElement('box')}>Caixa (Container)</DropdownMenu.Item>
+                                                    <DropdownMenu.Item onSelect={() => handleAddElement('text-container')}>Container com Texto</DropdownMenu.Item>
+                                                </DropdownMenu.Content>
+                                            </DropdownMenu.Root>
 
-                                    <Button
-                                        variant="soft"
-                                        color="blue"
-                                        style={{ width: '100%', justifyContent: 'center', cursor: 'pointer' }}
-                                        onClick={handleSave}
-                                    >
-                                        <Share1Icon /> Salvar Alterações
-                                    </Button>
-
-                                    <Flex gap="2" mt="2">
-                                        <Button
-                                            variant="soft"
-                                            color="gray"
-                                            style={{ flex: 1, cursor: 'pointer', justifyContent: 'center' }}
-                                            onClick={handleExport}
-                                        >
-                                            <DownloadIcon /> Exportar
-                                        </Button>
-                                        <Button
-                                            variant="soft"
-                                            color="gray"
-                                            style={{ flex: 1, cursor: 'pointer', justifyContent: 'center' }}
-                                            onClick={handleImportClick}
-                                        >
-                                            <UploadIcon /> Importar
-                                        </Button>
-                                    </Flex>
-                                    <input
-                                        type="file"
-                                        ref={fileInputRef}
-                                        style={{ display: 'none' }}
-                                        accept=".json"
-                                        onChange={handleImportFile}
-                                    />
-
-                                    <Box mt="3" style={{ backgroundColor: 'var(--gray-2)', border: '1px solid var(--gray-4)', borderRadius: 12, padding: 12 }}>
-                                        <Text size="2" weight="bold">Como começar</Text>
-                                        <Flex direction="column" gap="1" mt="2">
-                                            <Text size="1" color="gray">1. Adicione um elemento pelo botão acima.</Text>
-                                            <Text size="1" color="gray">2. Arraste no canvas para mover e redimensionar.</Text>
-                                            <Text size="1" color="gray">3. Use Camadas e Variáveis para organizar.</Text>
-                                        </Flex>
-                                    </Box>
-
-                                    {templates && templates.length > 0 && (
-                                        <Box mt="3" style={{ backgroundColor: 'var(--gray-2)', border: '1px solid var(--gray-4)', borderRadius: 12, padding: 12 }}>
-                                            <Text size="2" weight="bold">Templates</Text>
-                                            <Text size="1" color="gray" mt="1" as="div">Selecione um template fornecido pelo sistema.</Text>
-                                            <Box mt="2">
-                                                <select
-                                                    value={localTemplateId || ''}
-                                                    onChange={(e) => setLocalTemplateId(e.target.value)}
-                                                    style={{
-                                                        width: '100%',
-                                                        padding: '8px',
-                                                        borderRadius: '6px',
-                                                        border: '1px solid var(--gray-6)',
-                                                        backgroundColor: 'var(--gray-1)',
-                                                        color: 'var(--gray-12)',
-                                                        fontSize: '14px',
-                                                        outline: 'none'
-                                                    }}
-                                                >
-                                                    {templates.map(template => (
-                                                        <option key={template.id} value={template.id}>
-                                                            {template.name}
-                                                        </option>
-                                                    ))}
-                                                </select>
-                                            </Box>
-                                            {localTemplateId && templates.find(t => t.id === localTemplateId)?.description && (
-                                                <Text size="1" color="gray" as="div" mt="2">
-                                                    {templates.find(t => t.id === localTemplateId)?.description}
-                                                </Text>
-                                            )}
                                             <Button
                                                 variant="soft"
                                                 color="blue"
-                                                style={{ width: '100%', justifyContent: 'center', cursor: 'pointer', marginTop: '10px' }}
-                                                onClick={() => {
-                                                    if (!localTemplateId) return;
-                                                    if (onTemplateChange) {
-                                                        onTemplateChange(localTemplateId);
-                                                        return;
-                                                    }
-                                                    const template = templates.find(item => item.id === localTemplateId);
-                                                    if (!template) return;
-                                                    applyTemplateState(template.state);
-                                                    lastAppliedTemplateIdRef.current = localTemplateId;
-                                                }}
+                                                style={{ width: '100%', justifyContent: 'center', cursor: 'pointer' }}
+                                                onClick={handleSave}
                                             >
-                                                Aplicar Template
+                                                <Share1Icon /> Salvar Alterações
                                             </Button>
-                                        </Box>
-                                    )}
 
-                                    <Box mt="3">
-                                        <EditorSettings />
-                                    </Box>
-                                </Box>
-                            </Flex>
-                        </Box>
+                                            <Flex gap="2" mt="2">
+                                                <Button
+                                                    variant="soft"
+                                                    color="gray"
+                                                    style={{ flex: 1, cursor: 'pointer', justifyContent: 'center' }}
+                                                    onClick={handleExport}
+                                                >
+                                                    <DownloadIcon /> Exportar
+                                                </Button>
+                                                <Button
+                                                    variant="soft"
+                                                    color="gray"
+                                                    style={{ flex: 1, cursor: 'pointer', justifyContent: 'center' }}
+                                                    onClick={handleImportClick}
+                                                >
+                                                    <UploadIcon /> Importar
+                                                </Button>
+                                            </Flex>
+                                            <input
+                                                type="file"
+                                                ref={fileInputRef}
+                                                style={{ display: 'none' }}
+                                                accept=".json"
+                                                onChange={handleImportFile}
+                                            />
 
-                        <ScrollArea type="auto" scrollbars="vertical" style={{ flex: 1 }}>
-                            <Box p="4">
-                                <Tabs.Root defaultValue="layers">
-                                    <Tabs.List>
-                                        <Tabs.Trigger value="layers">Camadas</Tabs.Trigger>
-                                        <Tabs.Trigger value="history">Histórico</Tabs.Trigger>
-                                        <Tabs.Trigger value="vars">Variáveis</Tabs.Trigger>
-                                    </Tabs.List>
-
-                                    <Box pt="3">
-                                        <Tabs.Content value="layers">
-                                            <LayersPanel onOpenSettings={(id) => { setSettingsElementId(id); setIsSettingsOpen(true); }} />
-                                        </Tabs.Content>
-
-                                        <Tabs.Content value="history">
-                                            <HistoryPanel />
-                                        </Tabs.Content>
-
-                                        <Tabs.Content value="vars">
-                                            <Box>
-                                                <Text size="2" weight="bold" mb="2" as="div">Variáveis Disponíveis</Text>
-                                                <Text size="1" color="gray" mb="2" as="div">Clique para copiar ou arraste</Text>
-                                                <Flex direction="column" gap="2">
-                                                    {layout.props.map((prop, index) => (
-                                                        <Badge
-                                                            key={index}
-                                                            color="blue"
-                                                            variant="soft"
-                                                            size="2"
-                                                            style={{ padding: '8px', justifyContent: 'flex-start', cursor: 'grab' }}
-                                                            title={`Clique para copiar {{${prop.dataName}}}`}
-                                                            draggable
-                                                            onDragStart={(e) => {
-                                                                e.dataTransfer.setData('application/x-editor-prop', prop.dataName);
-                                                                e.dataTransfer.effectAllowed = 'copy';
-                                                            }}
-                                                            onClick={() => {
-                                                                const text = `{{${prop.dataName}}}`;
-                                                                navigator.clipboard.writeText(text);
-                                                            }}
-                                                        >
-                                                            {prop.name}
-                                                            <Text color="gray" style={{ marginLeft: 'auto', fontSize: '10px' }}>{`{{${prop.dataName}}}`}</Text>
-                                                        </Badge>
-                                                    ))}
-                                                    {layout.props.length === 0 && (
-                                                        <Text size="1" color="gray" style={{ fontStyle: 'italic' }}>
-                                                            Nenhuma variável configurada.
-                                                        </Text>
-                                                    )}
+                                            <Box mt="3" style={{ backgroundColor: 'var(--gray-2)', border: '1px solid var(--gray-4)', borderRadius: 12, padding: 12 }}>
+                                                <Text size="2" weight="bold">Como começar</Text>
+                                                <Flex direction="column" gap="1" mt="2">
+                                                    <Text size="1" color="gray">1. Adicione um elemento pelo botão acima.</Text>
+                                                    <Text size="1" color="gray">2. Arraste no canvas para mover e redimensionar.</Text>
+                                                    <Text size="1" color="gray">3. Use Camadas e Variáveis para organizar.</Text>
                                                 </Flex>
                                             </Box>
-                                        </Tabs.Content>
-                                    </Box>
-                                </Tabs.Root>
-                            </Box>
+
+                                            {templates && templates.length > 0 && (
+                                                <Box mt="3" style={{ backgroundColor: 'var(--gray-2)', border: '1px solid var(--gray-4)', borderRadius: 12, padding: 12 }}>
+                                                    <Text size="2" weight="bold">Templates</Text>
+                                                    <Text size="1" color="gray" mt="1" as="div">Selecione um template fornecido pelo sistema.</Text>
+                                                    <Box mt="2">
+                                                        <select
+                                                            value={localTemplateId || ''}
+                                                            onChange={(e) => setLocalTemplateId(e.target.value)}
+                                                            style={{
+                                                                width: '100%',
+                                                                padding: '8px',
+                                                                borderRadius: '6px',
+                                                                border: '1px solid var(--gray-6)',
+                                                                backgroundColor: 'var(--gray-1)',
+                                                                color: 'var(--gray-12)',
+                                                                fontSize: '14px',
+                                                                outline: 'none'
+                                                            }}
+                                                        >
+                                                            {templates.map(template => (
+                                                                <option key={template.id} value={template.id}>
+                                                                    {template.name}
+                                                                </option>
+                                                            ))}
+                                                        </select>
+                                                    </Box>
+                                                    {localTemplateId && templates.find(t => t.id === localTemplateId)?.description && (
+                                                        <Text size="1" color="gray" as="div" mt="2">
+                                                            {templates.find(t => t.id === localTemplateId)?.description}
+                                                        </Text>
+                                                    )}
+                                                    <Button
+                                                        variant="soft"
+                                                        color="blue"
+                                                        style={{ width: '100%', justifyContent: 'center', cursor: 'pointer', marginTop: '10px' }}
+                                                        onClick={() => {
+                                                            if (!localTemplateId) return;
+                                                            if (onTemplateChange) {
+                                                                onTemplateChange(localTemplateId);
+                                                                return;
+                                                            }
+                                                            const template = templates.find(item => item.id === localTemplateId);
+                                                            if (!template) return;
+                                                            applyTemplateState(template.state);
+                                                            lastAppliedTemplateIdRef.current = localTemplateId;
+                                                        }}
+                                                    >
+                                                        Aplicar Template
+                                                    </Button>
+                                                </Box>
+                                            )}
+
+                                            <Box mt="3">
+                                                <EditorSettings />
+                                            </Box>
+                                        </Box>
+                                    </Flex>
+                                </Box>
+
+                                <Box p="4">
+                                    <Tabs.Root defaultValue="layers">
+                                        <Tabs.List>
+                                            <Tabs.Trigger value="layers">Camadas</Tabs.Trigger>
+                                            <Tabs.Trigger value="history">Histórico</Tabs.Trigger>
+                                            <Tabs.Trigger value="vars">Variáveis</Tabs.Trigger>
+                                        </Tabs.List>
+
+                                        <Box pt="3">
+                                            <Tabs.Content value="layers">
+                                                <LayersPanel onOpenSettings={(id) => { setSettingsElementId(id); setIsSettingsOpen(true); }} />
+                                            </Tabs.Content>
+
+                                            <Tabs.Content value="history">
+                                                <HistoryPanel />
+                                            </Tabs.Content>
+
+                                            <Tabs.Content value="vars">
+                                                <Box>
+                                                    <Text size="2" weight="bold" mb="2" as="div">Variáveis Disponíveis</Text>
+                                                    <Text size="1" color="gray" mb="2" as="div">Clique para copiar ou arraste</Text>
+                                                    <Flex direction="column" gap="2">
+                                                        {layout.props.map((prop, index) => (
+                                                            <Badge
+                                                                key={index}
+                                                                color="blue"
+                                                                variant="soft"
+                                                                size="2"
+                                                                style={{ padding: '8px', justifyContent: 'flex-start', cursor: 'grab' }}
+                                                                title={`Clique para copiar {{${prop.dataName}}}`}
+                                                                draggable
+                                                                onDragStart={(e) => {
+                                                                    e.dataTransfer.setData('application/x-editor-prop', prop.dataName);
+                                                                    e.dataTransfer.effectAllowed = 'copy';
+                                                                }}
+                                                                onClick={() => {
+                                                                    const text = `{{${prop.dataName}}}`;
+                                                                    navigator.clipboard.writeText(text);
+                                                                }}
+                                                            >
+                                                                {prop.name}
+                                                                <Text color="gray" style={{ marginLeft: 'auto', fontSize: '10px' }}>{`{{${prop.dataName}}}`}</Text>
+                                                            </Badge>
+                                                        ))}
+                                                        {layout.props.length === 0 && (
+                                                            <Text size="1" color="gray" style={{ fontStyle: 'italic' }}>
+                                                                Nenhuma variável configurada.
+                                                            </Text>
+                                                        )}
+                                                    </Flex>
+                                                </Box>
+                                            </Tabs.Content>
+                                        </Box>
+                                    </Tabs.Root>
+                                </Box>
+                            </Flex>
                         </ScrollArea>
                     </Flex>
                 )}
 
                 {/* Main Content Area (Resizable Split) */}
-                <Box style={{ flex: 1, position: 'relative', height: '100%' }}>
-                    {/* Toggle Sidebar Button - Top Left */}
-                    <Box style={{ position: 'absolute', top: 10, left: 10, zIndex: 10 }}>
-                        <IconButton
-                            size="2"
-                            variant="soft"
-                            color="gray"
-                            onClick={() => setIsSidebarVisible(!isSidebarVisible)}
-                            title={isSidebarVisible ? "Ocultar Barra Lateral" : "Mostrar Barra Lateral"}
-                        >
-                            {isSidebarVisible ? <DoubleArrowLeftIcon /> : <DoubleArrowRightIcon />}
-                        </IconButton>
-                    </Box>
+                <Flex direction="column" style={{ flex: 1, height: '100%', overflow: 'hidden' }}>
+                    {/* Toolbar Superior */}
+                    <Flex 
+                        justify="between" 
+                        align="center" 
+                        px="3" 
+                        py="2" 
+                        style={{ 
+                            borderBottom: '1px solid var(--gray-6)', 
+                            backgroundColor: 'var(--gray-1)',
+                            flexShrink: 0,
+                            zIndex: 10
+                        }}
+                    >
+                        {/* Left Controls */}
+                        <Flex gap="3" align="center">
+                            <IconButton
+                                size="2"
+                                variant="ghost"
+                                color="gray"
+                                onClick={() => setIsSidebarVisible(!isSidebarVisible)}
+                                title={isSidebarVisible ? "Ocultar Barra Lateral" : "Mostrar Barra Lateral"}
+                                style={{ cursor: 'pointer' }}
+                            >
+                                {isSidebarVisible ? <DoubleArrowLeftIcon /> : <DoubleArrowRightIcon />}
+                            </IconButton>
+                        </Flex>
 
-                    {/* Top Right Controls */}
-                    <Flex style={{ position: 'absolute', top: 10, right: 10, zIndex: 10 }} gap="3" align="center">
+                        {/* Right Controls */}
+                        <Flex gap="3" align="center">
+                            <ShortcutsDialog />
 
-                        <ShortcutsDialog />
-
-                        <IconButton
-                            size="2"
-                            variant="soft"
-                            color={isPreviewVisible ? 'blue' : 'gray'}
-                            onClick={() => setIsPreviewVisible(!isPreviewVisible)}
-                            title={isPreviewVisible ? "Ocultar Preview" : "Mostrar Preview"}
-                        >
-                            {isPreviewVisible ? <EyeOpenIcon /> : <EyeNoneIcon />}
-                        </IconButton>
+                            <IconButton
+                                size="2"
+                                variant="ghost"
+                                color={isPreviewVisible ? 'blue' : 'gray'}
+                                onClick={() => setIsPreviewVisible(!isPreviewVisible)}
+                                title={isPreviewVisible ? "Ocultar Preview" : "Mostrar Preview"}
+                                style={{ cursor: 'pointer' }}
+                            >
+                                {isPreviewVisible ? <EyeOpenIcon /> : <EyeNoneIcon />}
+                            </IconButton>
+                        </Flex>
                     </Flex>
 
-                    <Group orientation="horizontal" style={{ height: '100%', width: '100%' }}>
+                    <Box style={{ flex: 1, position: 'relative', overflow: 'hidden' }}>
+                        <Group orientation="horizontal" style={{ height: '100%', width: '100%' }}>
                         {/* Editor Canvas Area */}
                         <Panel defaultSize={50} minSize={20}>
                             <Grid
@@ -569,6 +588,7 @@ const EditorContent: React.FC<EditorProps> = ({ layout, initialState, onSave, th
                         )}
                     </Group>
                 </Box>
+                </Flex>
             </Flex>
 
             {settingsElementId && (

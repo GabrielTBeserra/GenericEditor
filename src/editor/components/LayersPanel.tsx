@@ -149,12 +149,12 @@ export const LayersPanel: React.FC<{ onOpenSettings?: (id: string) => void }> = 
     };
 
     return (
-        <Flex direction="column" style={{ height: '100%' }}>
+        <Flex direction="column">
             <Box p="3" style={{ borderBottom: '1px solid var(--gray-6)' }}>
                 <Text size="2" weight="bold">Camadas</Text>
             </Box>
 
-            <Box style={{ flex: 1, overflowY: 'auto', padding: 8 }}>
+            <Box style={{ padding: 8 }}>
                 {displayElements.length === 0 && (
                     <Box style={{ backgroundColor: 'var(--gray-2)', border: '1px dashed var(--gray-5)', borderRadius: 10, padding: 12, marginBottom: 8 }}>
                         <Text size="2" weight="bold">Nenhuma camada ainda</Text>

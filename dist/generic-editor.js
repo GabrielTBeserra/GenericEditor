@@ -8853,7 +8853,7 @@ function Ot({ children: n, className: _, elementRef: E, id: O, style: A, ...j })
 Ot.displayName = "Separator";
 var package_default = {
 	name: "@1urso/generic-editor",
-	version: "0.1.70",
+	version: "0.1.71",
 	publishConfig: { access: "public" },
 	type: "module",
 	main: "./dist/generic-editor.umd.cjs",
@@ -13858,10 +13858,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 	let { state: n, jumpToHistory: _, undo: E, redo: O } = useEditor();
 	return /* @__PURE__ */ jsxs(p$1, {
 		direction: "column",
-		style: {
-			height: "100%",
-			width: "100%"
-		},
+		style: { width: "100%" },
 		children: [/* @__PURE__ */ jsxs(p$1, {
 			justify: "between",
 			align: "center",
@@ -13891,38 +13888,34 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 					children: "Refazer"
 				})]
 			})]
-		}), /* @__PURE__ */ jsx(c, {
-			scrollbars: "vertical",
-			style: { flex: 1 },
-			children: /* @__PURE__ */ jsx(p, {
-				p: "0",
-				children: n.history.map((E, O) => {
-					let A = O === n.historyIndex, j = O > n.historyIndex, M = n.historyDescriptions?.[O] || (O === 0 ? "Estado Inicial" : `Alteração ${O}`);
-					return /* @__PURE__ */ jsx(p, {
-						p: "2",
-						style: {
-							backgroundColor: A ? "var(--accent-3)" : "transparent",
-							opacity: j ? .5 : 1,
-							cursor: "pointer",
-							borderBottom: "1px solid var(--gray-3)"
-						},
-						onClick: () => _(O),
-						className: "history-item",
-						children: /* @__PURE__ */ jsxs(p$1, {
-							align: "center",
-							justify: "between",
-							children: [/* @__PURE__ */ jsx(p$2, {
-								size: "2",
-								weight: A ? "bold" : "regular",
-								children: M
-							}), A && /* @__PURE__ */ jsx(p$2, {
-								size: "1",
-								color: "blue",
-								children: "Atual"
-							})]
-						})
-					}, O);
-				})
+		}), /* @__PURE__ */ jsx(p, {
+			p: "0",
+			children: n.history.map((E, O) => {
+				let A = O === n.historyIndex, j = O > n.historyIndex, M = n.historyDescriptions?.[O] || (O === 0 ? "Estado Inicial" : `Alteração ${O}`);
+				return /* @__PURE__ */ jsx(p, {
+					p: "2",
+					style: {
+						backgroundColor: A ? "var(--accent-3)" : "transparent",
+						opacity: j ? .5 : 1,
+						cursor: "pointer",
+						borderBottom: "1px solid var(--gray-3)"
+					},
+					onClick: () => _(O),
+					className: "history-item",
+					children: /* @__PURE__ */ jsxs(p$1, {
+						align: "center",
+						justify: "between",
+						children: [/* @__PURE__ */ jsx(p$2, {
+							size: "2",
+							weight: A ? "bold" : "regular",
+							children: M
+						}), A && /* @__PURE__ */ jsx(p$2, {
+							size: "1",
+							color: "blue",
+							children: "Atual"
+						})]
+					})
+				}, O);
 			})
 		})]
 	});
@@ -16393,7 +16386,6 @@ const LayersPanel = ({ onOpenSettings: n }) => {
 	};
 	return /* @__PURE__ */ jsxs(p$1, {
 		direction: "column",
-		style: { height: "100%" },
 		children: [/* @__PURE__ */ jsx(p, {
 			p: "3",
 			style: { borderBottom: "1px solid var(--gray-6)" },
@@ -16403,11 +16395,7 @@ const LayersPanel = ({ onOpenSettings: n }) => {
 				children: "Camadas"
 			})
 		}), /* @__PURE__ */ jsxs(p, {
-			style: {
-				flex: 1,
-				overflowY: "auto",
-				padding: 8
-			},
+			style: { padding: 8 },
 			children: [N.length === 0 && /* @__PURE__ */ jsxs(p, {
 				style: {
 					backgroundColor: "var(--gray-2)",
@@ -21863,7 +21851,7 @@ var EditorContent = ({ layout: n, initialState: E, onSave: O, theme: A = "light"
 					overflow: "hidden",
 					backgroundColor: "var(--gray-1)"
 				},
-				children: [B && /* @__PURE__ */ jsxs(p$1, {
+				children: [B && /* @__PURE__ */ jsx(p$1, {
 					direction: "column",
 					width: "300px",
 					style: {
@@ -21871,368 +21859,380 @@ var EditorContent = ({ layout: n, initialState: E, onSave: O, theme: A = "light"
 						backgroundColor: "var(--gray-1)",
 						flexShrink: 0,
 						height: "100%",
-						boxShadow: "1px 0 0 var(--gray-4)"
+						boxShadow: "1px 0 0 var(--gray-4)",
+						overflow: "hidden"
 					},
-					children: [/* @__PURE__ */ jsx(p, {
-						p: "4",
-						style: {
-							borderBottom: "1px solid var(--gray-5)",
-							backgroundColor: "var(--gray-1)"
-						},
-						children: /* @__PURE__ */ jsx(p$1, {
+					children: /* @__PURE__ */ jsx(c, {
+						type: "auto",
+						scrollbars: "vertical",
+						style: { height: "100%" },
+						children: /* @__PURE__ */ jsxs(p$1, {
 							direction: "column",
-							gap: "3",
-							children: /* @__PURE__ */ jsxs(p, { children: [
-								/* @__PURE__ */ jsxs(p$1, {
-									justify: "between",
-									align: "center",
-									mb: "2",
-									children: [/* @__PURE__ */ jsx(p$2, {
-										size: "2",
-										weight: "bold",
-										children: "Editor"
-									}), /* @__PURE__ */ jsxs(e, {
-										color: "gray",
-										variant: "soft",
-										radius: "full",
-										children: ["v", package_default.version]
-									})]
-								}),
-								/* @__PURE__ */ jsxs(I$2, { children: [/* @__PURE__ */ jsx(h$1, { children: /* @__PURE__ */ jsx(o, {
-									variant: "solid",
-									color: "green",
-									size: "3",
-									style: {
-										width: "100%",
-										cursor: "pointer",
-										justifyContent: "center",
-										marginBottom: "8px"
-									},
-									children: "Adicionar elemento"
-								}) }), /* @__PURE__ */ jsxs(g$1, {
-									style: { width: "240px" },
-									children: [
-										/* @__PURE__ */ jsx(v$3, {
-											onSelect: () => _I("text"),
-											children: "Texto"
-										}),
-										/* @__PURE__ */ jsx(v$3, {
-											onSelect: () => _I("image"),
-											children: "Imagem"
-										}),
-										/* @__PURE__ */ jsx(v$3, {
-											onSelect: () => _I("box"),
-											children: "Caixa (Container)"
-										}),
-										/* @__PURE__ */ jsx(v$3, {
-											onSelect: () => _I("text-container"),
-											children: "Container com Texto"
-										})
-									]
-								})] }),
-								/* @__PURE__ */ jsxs(o, {
-									variant: "soft",
-									color: "blue",
-									style: {
-										width: "100%",
-										justifyContent: "center",
-										cursor: "pointer"
-									},
-									onClick: () => {
-										if (O) {
-											let n = {
-												elements: rI.elements,
-												isList: rI.isList,
-												mockData: rI.mockData,
-												singleMockData: rI.singleMockData,
-												listSettings: rI.listSettings,
-												canvasHeight: rI.canvasHeight
-											};
-											O(JSON.stringify(n, null, 2));
-										}
-									},
-									children: [/* @__PURE__ */ jsx(Share1Icon, {}), " Salvar Alterações"]
-								}),
-								/* @__PURE__ */ jsxs(p$1, {
-									gap: "2",
-									mt: "2",
-									children: [/* @__PURE__ */ jsxs(o, {
-										variant: "soft",
-										color: "gray",
-										style: {
-											flex: 1,
-											cursor: "pointer",
-											justifyContent: "center"
-										},
-										onClick: pI,
-										children: [/* @__PURE__ */ jsx(DownloadIcon, {}), " Exportar"]
-									}), /* @__PURE__ */ jsxs(o, {
-										variant: "soft",
-										color: "gray",
-										style: {
-											flex: 1,
-											cursor: "pointer",
-											justifyContent: "center"
-										},
-										onClick: mI,
-										children: [/* @__PURE__ */ jsx(UploadIcon, {}), " Importar"]
-									})]
-								}),
-								/* @__PURE__ */ jsx("input", {
-									type: "file",
-									ref: fI,
-									style: { display: "none" },
-									accept: ".json",
-									onChange: hI
-								}),
-								/* @__PURE__ */ jsxs(p, {
-									mt: "3",
-									style: {
-										backgroundColor: "var(--gray-2)",
-										border: "1px solid var(--gray-4)",
-										borderRadius: 12,
-										padding: 12
-									},
-									children: [/* @__PURE__ */ jsx(p$2, {
-										size: "2",
-										weight: "bold",
-										children: "Como começar"
-									}), /* @__PURE__ */ jsxs(p$1, {
-										direction: "column",
-										gap: "1",
-										mt: "2",
-										children: [
-											/* @__PURE__ */ jsx(p$2, {
-												size: "1",
+							children: [/* @__PURE__ */ jsx(p, {
+								p: "4",
+								style: {
+									borderBottom: "1px solid var(--gray-5)",
+									backgroundColor: "var(--gray-1)"
+								},
+								children: /* @__PURE__ */ jsx(p$1, {
+									direction: "column",
+									gap: "3",
+									children: /* @__PURE__ */ jsxs(p, { children: [
+										/* @__PURE__ */ jsxs(p$1, {
+											justify: "between",
+											align: "center",
+											mb: "2",
+											children: [/* @__PURE__ */ jsx(p$2, {
+												size: "2",
+												weight: "bold",
+												children: "Editor"
+											}), /* @__PURE__ */ jsxs(e, {
 												color: "gray",
-												children: "1. Adicione um elemento pelo botão acima."
-											}),
-											/* @__PURE__ */ jsx(p$2, {
-												size: "1",
-												color: "gray",
-												children: "2. Arraste no canvas para mover e redimensionar."
-											}),
-											/* @__PURE__ */ jsx(p$2, {
-												size: "1",
-												color: "gray",
-												children: "3. Use Camadas e Variáveis para organizar."
-											})
-										]
-									})]
-								}),
-								j && j.length > 0 && /* @__PURE__ */ jsxs(p, {
-									mt: "3",
-									style: {
-										backgroundColor: "var(--gray-2)",
-										border: "1px solid var(--gray-4)",
-										borderRadius: 12,
-										padding: 12
-									},
-									children: [
-										/* @__PURE__ */ jsx(p$2, {
-											size: "2",
-											weight: "bold",
-											children: "Templates"
+												variant: "soft",
+												radius: "full",
+												children: ["v", package_default.version]
+											})]
 										}),
-										/* @__PURE__ */ jsx(p$2, {
-											size: "1",
-											color: "gray",
-											mt: "1",
-											as: "div",
-											children: "Selecione um template fornecido pelo sistema."
-										}),
-										/* @__PURE__ */ jsx(p, {
-											mt: "2",
-											children: /* @__PURE__ */ jsx("select", {
-												value: ZF || "",
-												onChange: (n) => QF(n.target.value),
-												style: {
-													width: "100%",
-													padding: "8px",
-													borderRadius: "6px",
-													border: "1px solid var(--gray-6)",
-													backgroundColor: "var(--gray-1)",
-													color: "var(--gray-12)",
-													fontSize: "14px",
-													outline: "none"
-												},
-												children: j.map((n) => /* @__PURE__ */ jsx("option", {
-													value: n.id,
-													children: n.name
-												}, n.id))
-											})
-										}),
-										ZF && j.find((n) => n.id === ZF)?.description && /* @__PURE__ */ jsx(p$2, {
-											size: "1",
-											color: "gray",
-											as: "div",
-											mt: "2",
-											children: j.find((n) => n.id === ZF)?.description
-										}),
-										/* @__PURE__ */ jsx(o, {
+										/* @__PURE__ */ jsxs(I$2, { children: [/* @__PURE__ */ jsx(h$1, { children: /* @__PURE__ */ jsx(o, {
+											variant: "solid",
+											color: "green",
+											size: "3",
+											style: {
+												width: "100%",
+												cursor: "pointer",
+												justifyContent: "center",
+												marginBottom: "8px"
+											},
+											children: "Adicionar elemento"
+										}) }), /* @__PURE__ */ jsxs(g$1, {
+											style: { width: "240px" },
+											children: [
+												/* @__PURE__ */ jsx(v$3, {
+													onSelect: () => _I("text"),
+													children: "Texto"
+												}),
+												/* @__PURE__ */ jsx(v$3, {
+													onSelect: () => _I("image"),
+													children: "Imagem"
+												}),
+												/* @__PURE__ */ jsx(v$3, {
+													onSelect: () => _I("box"),
+													children: "Caixa (Container)"
+												}),
+												/* @__PURE__ */ jsx(v$3, {
+													onSelect: () => _I("text-container"),
+													children: "Container com Texto"
+												})
+											]
+										})] }),
+										/* @__PURE__ */ jsxs(o, {
 											variant: "soft",
 											color: "blue",
 											style: {
 												width: "100%",
 												justifyContent: "center",
-												cursor: "pointer",
-												marginTop: "10px"
+												cursor: "pointer"
 											},
 											onClick: () => {
-												if (!ZF) return;
-												if (N) {
-													N(ZF);
-													return;
+												if (O) {
+													let n = {
+														elements: rI.elements,
+														isList: rI.isList,
+														mockData: rI.mockData,
+														singleMockData: rI.singleMockData,
+														listSettings: rI.listSettings,
+														canvasHeight: rI.canvasHeight
+													};
+													O(JSON.stringify(n, null, 2));
 												}
-												let n = j.find((n) => n.id === ZF);
-												n && (gI(n.state), $F.current = ZF);
 											},
-											children: "Aplicar Template"
-										})
-									]
-								}),
-								/* @__PURE__ */ jsx(p, {
-									mt: "3",
-									children: /* @__PURE__ */ jsx(EditorSettings, {})
-								})
-							] })
-						})
-					}), /* @__PURE__ */ jsx(c, {
-						type: "auto",
-						scrollbars: "vertical",
-						style: { flex: 1 },
-						children: /* @__PURE__ */ jsx(p, {
-							p: "4",
-							children: /* @__PURE__ */ jsxs(m$1, {
-								defaultValue: "layers",
-								children: [/* @__PURE__ */ jsxs(b$1, { children: [
-									/* @__PURE__ */ jsx(P$1, {
-										value: "layers",
-										children: "Camadas"
-									}),
-									/* @__PURE__ */ jsx(P$1, {
-										value: "history",
-										children: "Histórico"
-									}),
-									/* @__PURE__ */ jsx(P$1, {
-										value: "vars",
-										children: "Variáveis"
-									})
-								] }), /* @__PURE__ */ jsxs(p, {
-									pt: "3",
-									children: [
-										/* @__PURE__ */ jsx(f$2, {
-											value: "layers",
-											children: /* @__PURE__ */ jsx(LayersPanel, { onOpenSettings: (n) => {
-												W(n), Z(!0);
-											} })
+											children: [/* @__PURE__ */ jsx(Share1Icon, {}), " Salvar Alterações"]
 										}),
-										/* @__PURE__ */ jsx(f$2, {
-											value: "history",
-											children: /* @__PURE__ */ jsx(HistoryPanel, {})
+										/* @__PURE__ */ jsxs(p$1, {
+											gap: "2",
+											mt: "2",
+											children: [/* @__PURE__ */ jsxs(o, {
+												variant: "soft",
+												color: "gray",
+												style: {
+													flex: 1,
+													cursor: "pointer",
+													justifyContent: "center"
+												},
+												onClick: pI,
+												children: [/* @__PURE__ */ jsx(DownloadIcon, {}), " Exportar"]
+											}), /* @__PURE__ */ jsxs(o, {
+												variant: "soft",
+												color: "gray",
+												style: {
+													flex: 1,
+													cursor: "pointer",
+													justifyContent: "center"
+												},
+												onClick: mI,
+												children: [/* @__PURE__ */ jsx(UploadIcon, {}), " Importar"]
+											})]
 										}),
-										/* @__PURE__ */ jsx(f$2, {
-											value: "vars",
-											children: /* @__PURE__ */ jsxs(p, { children: [
+										/* @__PURE__ */ jsx("input", {
+											type: "file",
+											ref: fI,
+											style: { display: "none" },
+											accept: ".json",
+											onChange: hI
+										}),
+										/* @__PURE__ */ jsxs(p, {
+											mt: "3",
+											style: {
+												backgroundColor: "var(--gray-2)",
+												border: "1px solid var(--gray-4)",
+												borderRadius: 12,
+												padding: 12
+											},
+											children: [/* @__PURE__ */ jsx(p$2, {
+												size: "2",
+												weight: "bold",
+												children: "Como começar"
+											}), /* @__PURE__ */ jsxs(p$1, {
+												direction: "column",
+												gap: "1",
+												mt: "2",
+												children: [
+													/* @__PURE__ */ jsx(p$2, {
+														size: "1",
+														color: "gray",
+														children: "1. Adicione um elemento pelo botão acima."
+													}),
+													/* @__PURE__ */ jsx(p$2, {
+														size: "1",
+														color: "gray",
+														children: "2. Arraste no canvas para mover e redimensionar."
+													}),
+													/* @__PURE__ */ jsx(p$2, {
+														size: "1",
+														color: "gray",
+														children: "3. Use Camadas e Variáveis para organizar."
+													})
+												]
+											})]
+										}),
+										j && j.length > 0 && /* @__PURE__ */ jsxs(p, {
+											mt: "3",
+											style: {
+												backgroundColor: "var(--gray-2)",
+												border: "1px solid var(--gray-4)",
+												borderRadius: 12,
+												padding: 12
+											},
+											children: [
 												/* @__PURE__ */ jsx(p$2, {
 													size: "2",
 													weight: "bold",
-													mb: "2",
-													as: "div",
-													children: "Variáveis Disponíveis"
+													children: "Templates"
 												}),
 												/* @__PURE__ */ jsx(p$2, {
 													size: "1",
 													color: "gray",
-													mb: "2",
+													mt: "1",
 													as: "div",
-													children: "Clique para copiar ou arraste"
+													children: "Selecione um template fornecido pelo sistema."
 												}),
-												/* @__PURE__ */ jsxs(p$1, {
-													direction: "column",
-													gap: "2",
-													children: [n.props.map((n, _) => /* @__PURE__ */ jsxs(e, {
-														color: "blue",
-														variant: "soft",
-														size: "2",
+												/* @__PURE__ */ jsx(p, {
+													mt: "2",
+													children: /* @__PURE__ */ jsx("select", {
+														value: ZF || "",
+														onChange: (n) => QF(n.target.value),
 														style: {
+															width: "100%",
 															padding: "8px",
-															justifyContent: "flex-start",
-															cursor: "grab"
+															borderRadius: "6px",
+															border: "1px solid var(--gray-6)",
+															backgroundColor: "var(--gray-1)",
+															color: "var(--gray-12)",
+															fontSize: "14px",
+															outline: "none"
 														},
-														title: `Clique para copiar {{${n.dataName}}}`,
-														draggable: !0,
-														onDragStart: (_) => {
-															_.dataTransfer.setData("application/x-editor-prop", n.dataName), _.dataTransfer.effectAllowed = "copy";
-														},
-														onClick: () => {
-															let _ = `{{${n.dataName}}}`;
-															navigator.clipboard.writeText(_);
-														},
-														children: [n.name, /* @__PURE__ */ jsx(p$2, {
-															color: "gray",
-															style: {
-																marginLeft: "auto",
-																fontSize: "10px"
-															},
-															children: `{{${n.dataName}}}`
-														})]
-													}, _)), n.props.length === 0 && /* @__PURE__ */ jsx(p$2, {
+														children: j.map((n) => /* @__PURE__ */ jsx("option", {
+															value: n.id,
+															children: n.name
+														}, n.id))
+													})
+												}),
+												ZF && j.find((n) => n.id === ZF)?.description && /* @__PURE__ */ jsx(p$2, {
+													size: "1",
+													color: "gray",
+													as: "div",
+													mt: "2",
+													children: j.find((n) => n.id === ZF)?.description
+												}),
+												/* @__PURE__ */ jsx(o, {
+													variant: "soft",
+													color: "blue",
+													style: {
+														width: "100%",
+														justifyContent: "center",
+														cursor: "pointer",
+														marginTop: "10px"
+													},
+													onClick: () => {
+														if (!ZF) return;
+														if (N) {
+															N(ZF);
+															return;
+														}
+														let n = j.find((n) => n.id === ZF);
+														n && (gI(n.state), $F.current = ZF);
+													},
+													children: "Aplicar Template"
+												})
+											]
+										}),
+										/* @__PURE__ */ jsx(p, {
+											mt: "3",
+											children: /* @__PURE__ */ jsx(EditorSettings, {})
+										})
+									] })
+								})
+							}), /* @__PURE__ */ jsx(p, {
+								p: "4",
+								children: /* @__PURE__ */ jsxs(m$1, {
+									defaultValue: "layers",
+									children: [/* @__PURE__ */ jsxs(b$1, { children: [
+										/* @__PURE__ */ jsx(P$1, {
+											value: "layers",
+											children: "Camadas"
+										}),
+										/* @__PURE__ */ jsx(P$1, {
+											value: "history",
+											children: "Histórico"
+										}),
+										/* @__PURE__ */ jsx(P$1, {
+											value: "vars",
+											children: "Variáveis"
+										})
+									] }), /* @__PURE__ */ jsxs(p, {
+										pt: "3",
+										children: [
+											/* @__PURE__ */ jsx(f$2, {
+												value: "layers",
+												children: /* @__PURE__ */ jsx(LayersPanel, { onOpenSettings: (n) => {
+													W(n), Z(!0);
+												} })
+											}),
+											/* @__PURE__ */ jsx(f$2, {
+												value: "history",
+												children: /* @__PURE__ */ jsx(HistoryPanel, {})
+											}),
+											/* @__PURE__ */ jsx(f$2, {
+												value: "vars",
+												children: /* @__PURE__ */ jsxs(p, { children: [
+													/* @__PURE__ */ jsx(p$2, {
+														size: "2",
+														weight: "bold",
+														mb: "2",
+														as: "div",
+														children: "Variáveis Disponíveis"
+													}),
+													/* @__PURE__ */ jsx(p$2, {
 														size: "1",
 														color: "gray",
-														style: { fontStyle: "italic" },
-														children: "Nenhuma variável configurada."
-													})]
-												})
-											] })
-										})
-									]
-								})]
-							})
+														mb: "2",
+														as: "div",
+														children: "Clique para copiar ou arraste"
+													}),
+													/* @__PURE__ */ jsxs(p$1, {
+														direction: "column",
+														gap: "2",
+														children: [n.props.map((n, _) => /* @__PURE__ */ jsxs(e, {
+															color: "blue",
+															variant: "soft",
+															size: "2",
+															style: {
+																padding: "8px",
+																justifyContent: "flex-start",
+																cursor: "grab"
+															},
+															title: `Clique para copiar {{${n.dataName}}}`,
+															draggable: !0,
+															onDragStart: (_) => {
+																_.dataTransfer.setData("application/x-editor-prop", n.dataName), _.dataTransfer.effectAllowed = "copy";
+															},
+															onClick: () => {
+																let _ = `{{${n.dataName}}}`;
+																navigator.clipboard.writeText(_);
+															},
+															children: [n.name, /* @__PURE__ */ jsx(p$2, {
+																color: "gray",
+																style: {
+																	marginLeft: "auto",
+																	fontSize: "10px"
+																},
+																children: `{{${n.dataName}}}`
+															})]
+														}, _)), n.props.length === 0 && /* @__PURE__ */ jsx(p$2, {
+															size: "1",
+															color: "gray",
+															style: { fontStyle: "italic" },
+															children: "Nenhuma variável configurada."
+														})]
+													})
+												] })
+											})
+										]
+									})]
+								})
+							})]
 						})
-					})]
-				}), /* @__PURE__ */ jsxs(p, {
+					})
+				}), /* @__PURE__ */ jsxs(p$1, {
+					direction: "column",
 					style: {
 						flex: 1,
-						position: "relative",
-						height: "100%"
+						height: "100%",
+						overflow: "hidden"
 					},
-					children: [
-						/* @__PURE__ */ jsx(p, {
-							style: {
-								position: "absolute",
-								top: 10,
-								left: 10,
-								zIndex: 10
-							},
+					children: [/* @__PURE__ */ jsxs(p$1, {
+						justify: "between",
+						align: "center",
+						px: "3",
+						py: "2",
+						style: {
+							borderBottom: "1px solid var(--gray-6)",
+							backgroundColor: "var(--gray-1)",
+							flexShrink: 0,
+							zIndex: 10
+						},
+						children: [/* @__PURE__ */ jsx(p$1, {
+							gap: "3",
+							align: "center",
 							children: /* @__PURE__ */ jsx(o$2, {
 								size: "2",
-								variant: "soft",
+								variant: "ghost",
 								color: "gray",
 								onClick: () => H(!B),
 								title: B ? "Ocultar Barra Lateral" : "Mostrar Barra Lateral",
+								style: { cursor: "pointer" },
 								children: jsx(B ? DoubleArrowLeftIcon : DoubleArrowRightIcon, {})
 							})
-						}),
-						/* @__PURE__ */ jsxs(p$1, {
-							style: {
-								position: "absolute",
-								top: 10,
-								right: 10,
-								zIndex: 10
-							},
+						}), /* @__PURE__ */ jsxs(p$1, {
 							gap: "3",
 							align: "center",
 							children: [/* @__PURE__ */ jsx(ShortcutsDialog, {}), /* @__PURE__ */ jsx(o$2, {
 								size: "2",
-								variant: "soft",
+								variant: "ghost",
 								color: P ? "blue" : "gray",
 								onClick: () => z(!P),
 								title: P ? "Ocultar Preview" : "Mostrar Preview",
+								style: { cursor: "pointer" },
 								children: jsx(P ? EyeOpenIcon : EyeNoneIcon, {})
 							})]
-						}),
-						/* @__PURE__ */ jsxs(Rt, {
+						})]
+					}), /* @__PURE__ */ jsx(p, {
+						style: {
+							flex: 1,
+							position: "relative",
+							overflow: "hidden"
+						},
+						children: /* @__PURE__ */ jsxs(Rt, {
 							orientation: "horizontal",
 							style: {
 								height: "100%",
@@ -22330,7 +22330,7 @@ var EditorContent = ({ layout: n, initialState: E, onSave: O, theme: A = "light"
 								})
 							]
 						})
-					]
+					})]
 				})]
 			}),
 			U && /* @__PURE__ */ jsx(ElementAdvancedSettings, {
