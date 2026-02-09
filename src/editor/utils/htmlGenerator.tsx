@@ -184,6 +184,21 @@ const getSafeTimingFunction = (tf?: string) => {
     }
 };
 
+const getElementAnimationStyle = (animation?: IElementAnimation) => {
+    if (!animation || animation.type === 'none') return {};
+    const duration = (animation.duration || 0.4) + 's';
+    const delay = (animation.delay || 0) + 's';
+    const timing = getSafeTimingFunction(animation.timingFunction);
+    const iterationCount = animation.iterationCount === 'infinite'
+        ? 'infinite'
+        : (typeof animation.iterationCount === 'number' ? Math.max(1, animation.iterationCount) : 1);
+    return {
+        animation: `${animation.type} ${duration} ${timing} ${delay}`,
+        animationIterationCount: iterationCount,
+        animationFillMode: 'both'
+    };
+};
+
 const computeLayout = (elements: IElement[], itemData: GenericData) => {
     // Clone elements to avoid mutating state
     const layoutElements: IElement[] = JSON.parse(JSON.stringify(elements));
@@ -417,7 +432,8 @@ const vanillaRenderItem = (elements: IElement[], itemData: GenericData, _index =
             wordBreak: element.autoGrow ? 'break-word' : undefined,
             ...element.style,
             ...conditionalStyles,
-            ...bindingStyles
+            ...bindingStyles,
+            ...getElementAnimationStyle(element.animation)
         };
 
         return { content, imgSrc, baseStyle };
@@ -523,7 +539,8 @@ const ElementRenderer: React.FC<{ element: IElement, itemData: GenericData }> = 
         wordBreak: element.autoGrow ? 'break-word' : undefined,
         ...element.style,
         ...conditionalStyles,
-        ...bindingStyles
+        ...bindingStyles,
+        ...getElementAnimationStyle(element.animation)
     };
 
     if (element.type === 'text' || element.type === 'text-container') {
@@ -693,11 +710,14 @@ const HtmlDocument: React.FC<{ elements: IElement[], data: GenericData | Generic
     // Single Item Rendering
     const { layoutElements } = computeLayout(elements, data as GenericData);
     return (
-        <div style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden' }}>
-            {layoutElements.map((el) => (
-                <ElementRenderer key={el.id} element={el} itemData={data as GenericData} />
-            ))}
-        </div>
+        <>
+            <style dangerouslySetInnerHTML={{ __html: keyframesCss }} />
+            <div style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden' }}>
+                {layoutElements.map((el) => (
+                    <ElementRenderer key={el.id} element={el} itemData={data as GenericData} />
+                ))}
+            </div>
+        </>
     );
 };
 
@@ -724,6 +744,7 @@ const getRuntimeScript = (elements: IElement[], options: RenderOptions) => {
             const hex8ToRgba = ${hex8ToRgba.toString()};
             const styleObjectToString = ${styleObjectToString.toString()};
             const applyShadowColor = ${applyShadowColor.toString()};
+            const getElementAnimationStyle = ${getElementAnimationStyle.toString()};
             const measureTextHeight = ${measureTextHeight.toString()};
             const checkCondition = ${checkCondition.toString()};
             const formatValue = ${formatValue.toString()};
@@ -800,11 +821,52 @@ function renderTemplate(elements, data, options = {}) {
     const checkCondition = ${checkCondition.toString()};
     const formatValue = ${formatValue.toString()};
     const getSafeTimingFunction = ${getSafeTimingFunction.toString()};
+    const getElementAnimationStyle = ${getElementAnimationStyle.toString()};
     const computeLayout = ${computeLayout.toString()};
     const computeItemHeight = ${computeItemHeight.toString()};
     const renderItem = ${vanillaRenderItem.toString()};
 
     // --- Rendering Logic ---
+    const keyframesCss = \`
+        .list-wrapper::-webkit-scrollbar { width: 6px; }
+        .list-wrapper::-webkit-scrollbar-thumb { background-color: rgba(0,0,0,0.2); border-radius: 3px; }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideInLeft { from { opacity: 0; transform: translateX(-50px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes slideInRight { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes slideInUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideInDown { from { opacity: 0; transform: translateY(-50px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes zoomIn { from { opacity: 0; transform: scale(0.5); } to { opacity: 1; transform: scale(1); } }
+        @keyframes bounceIn {
+            0% { opacity: 0; transform: scale(0.3); }
+            50% { opacity: 1; transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes smoothSlideUp {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes popIn {
+            0% { opacity: 0; transform: scale(0.8) translateY(10px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        @keyframes blurIn {
+            0% { opacity: 0; filter: blur(10px); }
+            100% { opacity: 1; filter: blur(0); }
+        }
+    \`;
 
     if (isList && Array.isArray(data)) {
         let listData = [...data];
@@ -844,54 +906,12 @@ function renderTemplate(elements, data, options = {}) {
             return \`<div class="list-item" style="\${itemStyle}">\${content}</div>\`;
         }).join('');
 
-        // Include Keyframes
-        const css = \`
-            .list-wrapper::-webkit-scrollbar { width: 6px; }
-            .list-wrapper::-webkit-scrollbar-thumb { background-color: rgba(0,0,0,0.2); border-radius: 3px; }
-            @keyframes slideIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-            @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-            @keyframes slideInLeft { from { opacity: 0; transform: translateX(-50px); } to { opacity: 1; transform: translateX(0); } }
-            @keyframes slideInRight { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
-            @keyframes slideInUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
-            @keyframes slideInDown { from { opacity: 0; transform: translateY(-50px); } to { opacity: 1; transform: translateY(0); } }
-            @keyframes zoomIn { from { opacity: 0; transform: scale(0.5); } to { opacity: 1; transform: scale(1); } }
-            @keyframes bounceIn {
-                0% { opacity: 0; transform: scale(0.3); }
-                50% { opacity: 1; transform: scale(1.05); }
-                70% { transform: scale(0.9); }
-                100% { transform: scale(1); }
-            }
-            @keyframes pulse {
-                0% { transform: scale(1); }
-                50% { transform: scale(1.05); }
-                100% { transform: scale(1); }
-            }
-            @keyframes shake {
-                0%, 100% { transform: translateX(0); }
-                10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-                20%, 40%, 60%, 80% { transform: translateX(5px); }
-            }
-            @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-            @keyframes smoothSlideUp {
-                0% { opacity: 0; transform: translateY(30px); }
-                100% { opacity: 1; transform: translateY(0); }
-            }
-            @keyframes popIn {
-                0% { opacity: 0; transform: scale(0.8) translateY(10px); }
-                100% { opacity: 1; transform: scale(1) translateY(0); }
-            }
-            @keyframes blurIn {
-                0% { opacity: 0; filter: blur(10px); }
-                100% { opacity: 1; filter: blur(0); }
-            }
-        \`;
-
         const scrollScript = (listSettings && listSettings.scrollDirection === 'up') 
             ? \`<script>document.addEventListener('DOMContentLoaded', () => { const w = document.querySelector('.list-wrapper'); if(w) w.scrollTop = w.scrollHeight; });</script>\`
             : '';
 
         return \`
-            <style>\${css}</style>
+            <style>\${keyframesCss}</style>
             <div class="list-wrapper" style="\${containerStyle}">
                 \${itemsHtml}
             </div>
@@ -901,7 +921,7 @@ function renderTemplate(elements, data, options = {}) {
 
     // Single Item
     const contentHtml = renderItem(elements, data);
-    return \`<div style="position: relative; width: 100%; height: 100%; overflow: hidden;">\${contentHtml}</div>\`;
+    return \`<style>\${keyframesCss}</style><div style="position: relative; width: 100%; height: 100%; overflow: hidden;">\${contentHtml}</div>\`;
 }
 `;
 };

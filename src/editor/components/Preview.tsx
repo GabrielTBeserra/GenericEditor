@@ -1,6 +1,6 @@
 import { PlayIcon, StopIcon } from '@radix-ui/react-icons';
 import { Box, Button, Flex, ScrollArea, Text } from '@radix-ui/themes';
-import { AnimatePresence, motion, type Easing, type Variants } from 'framer-motion';
+import { AnimatePresence, motion, type Easing, type Transition, type Variants } from 'framer-motion';
 import React from 'react';
 import type { IElement, IElementAnimation } from '../context';
 import { useEditor } from '../context';
@@ -55,14 +55,51 @@ const getAnimationVariants = (anim?: IElementAnimation): Variants => {
             variants.initial = { opacity: 0, scale: 0.3 };
             variants.animate = { opacity: 1, scale: 1, transition: { type: "spring", bounce: 0.6 } };
             break;
+        case 'smoothSlideUp':
+            variants.initial = { opacity: 0, y: 30 };
+            variants.animate = { opacity: 1, y: 0 };
+            break;
+        case 'popIn':
+            variants.initial = { opacity: 0, scale: 0.8, y: 10 };
+            variants.animate = { opacity: 1, scale: 1, y: 0 };
+            break;
+        case 'blurIn':
+            variants.initial = { opacity: 0, filter: 'blur(10px)' };
+            variants.animate = { opacity: 1, filter: 'blur(0px)' };
+            break;
         case 'pulse':
-            variants.animate = { scale: [1, 1.05, 1], transition: { repeat: Infinity } };
+            variants.animate = { scale: [1, 1.05, 1] };
+            break;
+        case 'shake':
+            variants.animate = { x: [0, -5, 5, -5, 5, 0] };
+            break;
+        case 'spin':
+            variants.animate = { rotate: 360 };
             break;
         default:
             variants.initial = { opacity: 0, y: 20 };
             variants.animate = { opacity: 1, y: 0 };
     }
     return variants;
+};
+
+const getAnimationTransition = (anim: IElementAnimation | undefined, variants: Variants | null) => {
+    const baseTransition = {
+        duration: anim?.duration || 0.4,
+        ease: getTimingFunction(anim?.timingFunction),
+        delay: anim?.delay || 0
+    };
+    let repeat: number | undefined;
+    if (anim?.iterationCount === 'infinite') {
+        repeat = Infinity;
+    } else if (typeof anim?.iterationCount === 'number' && anim.iterationCount > 1) {
+        repeat = anim.iterationCount - 1;
+    }
+    const variantTransition = (variants?.animate as { transition?: Transition } | undefined)?.transition;
+    if (variantTransition) {
+        return { ...baseTransition, ...variantTransition, delay: baseTransition.delay, repeat: repeat ?? variantTransition.repeat };
+    }
+    return repeat !== undefined ? { ...baseTransition, repeat } : baseTransition;
 };
 
 const PreviewElementRenderer: React.FC<{ element: IElement; offsetY?: number; dataContext?: GenericData }> = ({ element, offsetY = 0, dataContext }) => {
@@ -97,11 +134,11 @@ const PreviewElementRenderer: React.FC<{ element: IElement; offsetY?: number; da
 
     const commonStyles: React.CSSProperties = {
         position: 'absolute',
-        left: 0,
-        top: 0,
+        left: element.x,
+        top: element.y + offsetY,
         width: (element.type === 'text-container' && element.autoGrow && element.containerExpansion === 'horizontal') ? 'max-content' : `${element.width}px`,
         height: element.autoGrow ? 'auto' : `${element.height}px`,
-        transform: `translate(${element.x}px, ${element.y + offsetY}px) rotate(${element.rotation || 0}deg)`,
+        transform: element.rotation ? `rotate(${element.rotation}deg)` : undefined,
         padding: (element.type === 'image' || element.type === 'text' || element.type === 'text-container') ? 0 : '8px',
         overflow: element.autoGrow ? 'visible' : 'hidden',
         whiteSpace: (element.type === 'text-container' && element.autoGrow && element.containerExpansion === 'horizontal') ? 'nowrap' : (element.autoGrow ? 'pre-wrap' : undefined),
@@ -109,8 +146,12 @@ const PreviewElementRenderer: React.FC<{ element: IElement; offsetY?: number; da
         ...element.style
     };
 
-    return (
-        <Box style={commonStyles}>
+    const hasElementAnimation = element.animation && element.animation.type !== 'none';
+    const elementVariants = React.useMemo(() => (hasElementAnimation ? getAnimationVariants(element.animation) : null), [element.animation, hasElementAnimation]);
+    const elementTransition = React.useMemo(() => getAnimationTransition(element.animation, elementVariants), [element.animation, elementVariants]);
+
+    const contentNode = (
+        <>
             {(element.type === 'text' || element.type === 'text-container') && (
                 <Text style={{ width: '100%', height: '100%', display: 'block' }}>{content}</Text>
             )}
@@ -143,6 +184,26 @@ const PreviewElementRenderer: React.FC<{ element: IElement; offsetY?: number; da
                     />
                 </Box>
             )}
+        </>
+    );
+
+    if (hasElementAnimation && elementVariants) {
+        return (
+            <motion.div
+                variants={elementVariants}
+                initial="initial"
+                animate="animate"
+                transition={elementTransition}
+                style={commonStyles}
+            >
+                {contentNode}
+            </motion.div>
+        );
+    }
+
+    return (
+        <Box style={commonStyles}>
+            {contentNode}
         </Box>
     );
 };
@@ -160,7 +221,7 @@ const ListItem: React.FC<{ item: GenericData; elements: IElement[]; animation?: 
 
     // Merge transition from variants if it exists (for spring animations like bounceIn)
     const transition = React.useMemo(() => {
-        const variantTransition = (variants.animate as any)?.transition;
+        const variantTransition = (variants.animate as { transition?: Transition } | undefined)?.transition;
         if (variantTransition) return variantTransition;
 
         return {
