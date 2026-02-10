@@ -134,7 +134,8 @@ export const Canvas: React.FC<CanvasProps> = () => {
         (e.currentTarget as Element).setPointerCapture(e.pointerId);
 
         // Middle mouse or Space+Click -> Pan
-        if (e.button === 1 || (e.button === 0 && isSpacePressed.current)) {
+        // Also enable Pan for Touch input (mobile)
+        if (e.button === 1 || (e.button === 0 && isSpacePressed.current) || e.pointerType === 'touch') {
             e.preventDefault();
             isPanning.current = true;
             panStart.current = { x: e.clientX, y: e.clientY };

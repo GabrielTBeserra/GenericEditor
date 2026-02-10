@@ -108,7 +108,8 @@ export const processLayout = (
                     const metrics = context.measureText(content);
                     const newWidth = Math.ceil(metrics.width + (parseInt(String(element.style?.padding || 0)) * 2));
 
-                    if (newWidth > element.width) {
+                    // Update if width changed significantly (grow or shrink)
+                    if (Math.abs(newWidth - element.width) > 1) {
                         element.width = newWidth;
                         element.content = content;
                     }
@@ -119,8 +120,8 @@ export const processLayout = (
                 const originalHeight = element.height;
                 const delta = newHeight - originalHeight;
 
-                // Apply growth if positive
-                if (delta > 0) {
+                // Apply change if significant (grow or shrink)
+                if (Math.abs(delta) > 1) {
                     element.height = newHeight;
                     element.content = content; // Store resolved content
 

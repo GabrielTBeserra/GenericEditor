@@ -56,7 +56,7 @@ export const ShortcutsDialog: React.FC = () => {
                     Agilize seu fluxo de trabalho com estes atalhos.
                 </Text>
 
-                <Grid columns="2" gap="6">
+                <Grid columns={{ initial: '1', sm: '2' }} gap="6">
                     <Box>
                         <Text size="2" weight="bold" mb="2" color="blue">Edição Básica</Text>
                         <Separator size="4" mb="2" />

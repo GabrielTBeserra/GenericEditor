@@ -36,7 +36,9 @@ export const ViewToolbar: React.FC = () => {
 
         // Get viewport size (approximation, as we don't have direct ref to container here)
         // We can assume a reasonable default or try to use window size minus sidebar
-        const viewportWidth = window.innerWidth - 300; // Sidebar ~280px
+        const isMobile = window.innerWidth < 768;
+        const sidebarWidth = isMobile ? 0 : 300;
+        const viewportWidth = window.innerWidth - sidebarWidth; // Sidebar ~300px
         const viewportHeight = window.innerHeight - 100; // Header/Rulers
 
         const scaleX = viewportWidth / contentWidth;

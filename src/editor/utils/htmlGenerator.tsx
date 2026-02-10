@@ -255,7 +255,7 @@ const computeLayout = (elements: IElement[], itemData: GenericData) => {
                         const padding = parseInt(String((element.style && element.style.padding) || 0)) * 2;
                         const newWidth = Math.ceil(metrics.width + padding);
 
-                        if (newWidth > element.width) {
+                        if (Math.abs(newWidth - element.width) > 1) {
                             element.width = newWidth;
                             element.content = content;
                         }
@@ -297,8 +297,8 @@ const computeLayout = (elements: IElement[], itemData: GenericData) => {
                 const originalHeight = element.height;
                 const delta = targetHeight - originalHeight;
 
-                // Apply growth if positive
-                if (delta > 0) {
+                // Apply change (grow or shrink)
+                if (Math.abs(delta) > 1) {
                     element.height = targetHeight;
                     element.content = content;
 

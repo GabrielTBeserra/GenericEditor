@@ -1,5 +1,5 @@
 import { DoubleArrowLeftIcon, DoubleArrowRightIcon, DownloadIcon, EyeNoneIcon, EyeOpenIcon, Share1Icon, UploadIcon } from '@radix-ui/react-icons';
-import { Badge, Box, Button, Dialog, DropdownMenu, Flex, Grid, IconButton, ScrollArea, Tabs, Text, Theme } from '@radix-ui/themes';
+import { Badge, Box, Button, DropdownMenu, Flex, Grid, IconButton, ScrollArea, Tabs, Text, Theme } from '@radix-ui/themes';
 import '@radix-ui/themes/styles.css';
 import React, { useState } from 'react';
 import { Group, Panel, Separator } from 'react-resizable-panels';
@@ -40,7 +40,12 @@ const EditorContent: React.FC<EditorProps> = ({ layout, initialState, onSave, th
 
     React.useEffect(() => {
         const checkMobile = () => {
-            setIsMobile(window.innerWidth < 768);
+            const mobile = window.innerWidth < 768;
+            setIsMobile(mobile);
+            if (mobile) {
+                setIsSidebarVisible(false);
+                setIsPreviewVisible(false);
+            }
         };
         checkMobile();
         window.addEventListener('resize', checkMobile);
@@ -268,16 +273,27 @@ const EditorContent: React.FC<EditorProps> = ({ layout, initialState, onSave, th
                 {isSidebarVisible && (
                     <Flex
                         direction="column"
-                        width="300px"
+                        width={isMobile ? "100%" : "300px"}
                         style={{
                             borderRight: '1px solid var(--gray-5)',
                             backgroundColor: 'var(--gray-1)',
                             flexShrink: 0,
                             height: '100%',
                             boxShadow: '1px 0 0 var(--gray-4)',
-                            overflow: 'hidden'
+                            overflow: 'hidden',
+                            position: isMobile ? 'absolute' : 'relative',
+                            zIndex: isMobile ? 100 : 'auto',
+                            top: 0,
+                            left: 0
                         }}
                     >
+                        {isMobile && (
+                            <Flex justify="end" p="2">
+                                <IconButton variant="ghost" color="gray" onClick={() => setIsSidebarVisible(false)}>
+                                    <DoubleArrowLeftIcon />
+                                </IconButton>
+                            </Flex>
+                        )}
                         <ScrollArea type="auto" scrollbars="vertical" style={{ height: '100%' }}>
                             <Flex direction="column">
                                 {/* Fixed Controls Header */}
@@ -469,13 +485,13 @@ const EditorContent: React.FC<EditorProps> = ({ layout, initialState, onSave, th
                 {/* Main Content Area (Resizable Split) */}
                 <Flex direction="column" style={{ flex: 1, height: '100%', overflow: 'hidden' }}>
                     {/* Toolbar Superior */}
-                    <Flex 
-                        justify="between" 
-                        align="center" 
-                        px="3" 
-                        py="2" 
-                        style={{ 
-                            borderBottom: '1px solid var(--gray-6)', 
+                    <Flex
+                        justify="between"
+                        align="center"
+                        px="3"
+                        py="2"
+                        style={{
+                            borderBottom: '1px solid var(--gray-6)',
                             backgroundColor: 'var(--gray-1)',
                             flexShrink: 0,
                             zIndex: 10
@@ -514,80 +530,82 @@ const EditorContent: React.FC<EditorProps> = ({ layout, initialState, onSave, th
 
                     <Box style={{ flex: 1, position: 'relative', overflow: 'hidden' }}>
                         <Group orientation="horizontal" style={{ height: '100%', width: '100%' }}>
-                        {/* Editor Canvas Area */}
-                        <Panel defaultSize={50} minSize={20}>
-                            <Grid
-                                columns="20px 1fr"
-                                rows="20px 1fr"
-                                style={{
-                                    height: '100%',
-                                    width: '100%',
-                                    backgroundColor: 'var(--color-background)'
-                                }}
-                            >
-                                {/* Top Left Corner */}
-                                <Box style={{ backgroundColor: 'var(--gray-2)', borderRight: '1px solid var(--gray-6)', borderBottom: '1px solid var(--gray-6)', zIndex: 30 }} />
+                            {/* Editor Canvas Area */}
+                            {(!isMobile || !isPreviewVisible) && (
+                                <Panel defaultSize={50} minSize={20}>
+                                    <Grid
+                                        columns="20px 1fr"
+                                        rows="20px 1fr"
+                                        style={{
+                                            height: '100%',
+                                            width: '100%',
+                                            backgroundColor: 'var(--color-background)'
+                                        }}
+                                    >
+                                        {/* Top Left Corner */}
+                                        <Box style={{ backgroundColor: 'var(--gray-2)', borderRight: '1px solid var(--gray-6)', borderBottom: '1px solid var(--gray-6)', zIndex: 30 }} />
 
-                                {/* Top Ruler */}
-                                <Box style={{ backgroundColor: 'var(--gray-2)', borderBottom: '1px solid var(--gray-6)', overflow: 'hidden', zIndex: 30 }}>
-                                    <Ruler orientation="horizontal" />
-                                </Box>
+                                        {/* Top Ruler */}
+                                        <Box style={{ backgroundColor: 'var(--gray-2)', borderBottom: '1px solid var(--gray-6)', overflow: 'hidden', zIndex: 30 }}>
+                                            <Ruler orientation="horizontal" />
+                                        </Box>
 
-                                {/* Left Ruler */}
-                                <Box style={{ backgroundColor: 'var(--gray-2)', borderRight: '1px solid var(--gray-6)', overflow: 'hidden', zIndex: 30 }}>
-                                    <Ruler orientation="vertical" />
-                                </Box>
+                                        {/* Left Ruler */}
+                                        <Box style={{ backgroundColor: 'var(--gray-2)', borderRight: '1px solid var(--gray-6)', overflow: 'hidden', zIndex: 30 }}>
+                                            <Ruler orientation="vertical" />
+                                        </Box>
 
-                                {/* Canvas Area */}
-                                <Box style={{ position: 'relative', overflow: 'hidden', width: '100%', height: '100%' }}>
+                                        {/* Canvas Area */}
+                                        <Box style={{ position: 'relative', overflow: 'hidden', width: '100%', height: '100%' }}>
+                                            <Box style={{
+                                                position: 'absolute',
+                                                top: 16,
+                                                left: '50%',
+                                                transform: 'translateX(-50%)',
+                                                zIndex: 20
+                                            }}>
+                                                <AlignmentToolbar />
+                                            </Box>
+                                            <Box style={{
+                                                position: 'absolute',
+                                                bottom: 16,
+                                                right: 16,
+                                                zIndex: 20
+                                            }}>
+                                                <ViewToolbar />
+                                            </Box>
+                                            <Canvas />
+                                            <Minimap />
+                                        </Box>
+                                    </Grid>
+                                </Panel>
+                            )}
+
+                            {/* Resize Handle */}
+                            {(!isMobile && isPreviewVisible) && (
+                                <Separator style={{
+                                    width: '4px',
+                                    backgroundColor: 'var(--gray-6)',
+                                    cursor: 'col-resize',
+                                    transition: 'background-color 0.2s'
+                                }} />
+                            )}
+
+                            {/* Preview Area */}
+                            {isPreviewVisible && (
+                                <Panel defaultSize={50} minSize={20}>
                                     <Box style={{
-                                        position: 'absolute',
-                                        top: 16,
-                                        left: '50%',
-                                        transform: 'translateX(-50%)',
-                                        zIndex: 20
+                                        height: '100%',
+                                        width: '100%',
+                                        backgroundColor: 'var(--gray-3)',
+                                        borderLeft: '1px solid var(--gray-5)'
                                     }}>
-                                        <AlignmentToolbar />
+                                        <Preview />
                                     </Box>
-                                    <Box style={{
-                                        position: 'absolute',
-                                        bottom: 16,
-                                        right: 16,
-                                        zIndex: 20
-                                    }}>
-                                        <ViewToolbar />
-                                    </Box>
-                                    <Canvas />
-                                    <Minimap />
-                                </Box>
-                            </Grid>
-                        </Panel>
-
-                        {/* Resize Handle */}
-                        {isPreviewVisible && (
-                            <Separator style={{
-                                width: '4px',
-                                backgroundColor: 'var(--gray-6)',
-                                cursor: 'col-resize',
-                                transition: 'background-color 0.2s'
-                            }} />
-                        )}
-
-                        {/* Preview Area */}
-                        {isPreviewVisible && (
-                            <Panel defaultSize={50} minSize={20}>
-                                <Box style={{
-                                    height: '100%',
-                                    width: '100%',
-                                    backgroundColor: 'var(--gray-3)',
-                                    borderLeft: '1px solid var(--gray-5)'
-                                }}>
-                                    <Preview />
-                                </Box>
-                            </Panel>
-                        )}
-                    </Group>
-                </Box>
+                                </Panel>
+                            )}
+                        </Group>
+                    </Box>
                 </Flex>
             </Flex>
 
@@ -598,15 +616,6 @@ const EditorContent: React.FC<EditorProps> = ({ layout, initialState, onSave, th
                     onOpenChange={setIsSettingsOpen}
                 />
             )}
-
-            <Dialog.Root open={isMobile}>
-                <Dialog.Content style={{ maxWidth: 450 }}>
-                    <Dialog.Title>Dispositivo Não Suportado</Dialog.Title>
-                    <Dialog.Description size="2">
-                        Por favor, utilize um computador ou tablet para acessar o editor. O sistema não foi desenvolvido para celulares.
-                    </Dialog.Description>
-                </Dialog.Content>
-            </Dialog.Root>
         </Theme>
     );
 };

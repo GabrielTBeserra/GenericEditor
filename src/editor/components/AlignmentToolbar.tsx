@@ -137,12 +137,15 @@ export const AlignmentToolbar: React.FC = () => {
         <Flex
             gap="2"
             align="center"
+            wrap="wrap"
             style={{
                 backgroundColor: 'var(--color-panel-solid)',
                 padding: '8px',
                 borderRadius: '8px',
                 boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
-                border: '1px solid var(--gray-5)'
+                border: '1px solid var(--gray-5)',
+                maxWidth: '90vw',
+                justifyContent: 'center'
             }}
         >
             <IconButton variant="ghost" color="gray" onClick={handleAlignLeft} title="Alinhar à Esquerda">
