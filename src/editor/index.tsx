@@ -1,5 +1,5 @@
-import { DoubleArrowLeftIcon, DoubleArrowRightIcon, DownloadIcon, EyeNoneIcon, EyeOpenIcon, Share1Icon, UploadIcon } from '@radix-ui/react-icons';
-import { Badge, Box, Button, DropdownMenu, Flex, Grid, IconButton, ScrollArea, Tabs, Text, Theme } from '@radix-ui/themes';
+import { DoubleArrowLeftIcon, DoubleArrowRightIcon, DownloadIcon, EyeNoneIcon, EyeOpenIcon, FileTextIcon, Share1Icon, UploadIcon } from '@radix-ui/react-icons';
+import { Badge, Box, Button, Dialog, DropdownMenu, Flex, Grid, IconButton, ScrollArea, Tabs, Text, Theme } from '@radix-ui/themes';
 import '@radix-ui/themes/styles.css';
 import React, { useState } from 'react';
 import { Group, Panel, Separator } from 'react-resizable-panels';
@@ -32,6 +32,7 @@ const EditorContent: React.FC<EditorProps> = ({ layout, initialState, onSave, th
     const [isSidebarVisible, setIsSidebarVisible] = useState(true);
     const [settingsElementId, setSettingsElementId] = useState<string | null>(null);
     const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+    const [isTemplatesOpen, setIsTemplatesOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
     const [localTemplateId, setLocalTemplateId] = useState<string | null>(templates && templates.length > 0 ? templates[0].id : null);
     const lastAppliedTemplateIdRef = React.useRef<string | null>(null);
@@ -354,65 +355,17 @@ const EditorContent: React.FC<EditorProps> = ({ layout, initialState, onSave, th
                                                 onChange={handleImportFile}
                                             />
 
-                                            <Box mt="3" style={{ backgroundColor: 'var(--gray-2)', border: '1px solid var(--gray-4)', borderRadius: 12, padding: 12 }}>
-                                                <Text size="2" weight="bold">Como começar</Text>
-                                                <Flex direction="column" gap="1" mt="2">
-                                                    <Text size="1" color="gray">1. Adicione um elemento pelo botão acima.</Text>
-                                                    <Text size="1" color="gray">2. Arraste no canvas para mover e redimensionar.</Text>
-                                                    <Text size="1" color="gray">3. Use Camadas e Variáveis para organizar.</Text>
-                                                </Flex>
-                                            </Box>
+
 
                                             {templates && templates.length > 0 && (
-                                                <Box mt="3" style={{ backgroundColor: 'var(--gray-2)', border: '1px solid var(--gray-4)', borderRadius: 12, padding: 12 }}>
-                                                    <Text size="2" weight="bold">Templates</Text>
-                                                    <Text size="1" color="gray" mt="1" as="div">Selecione um template fornecido pelo sistema.</Text>
-                                                    <Box mt="2">
-                                                        <select
-                                                            value={localTemplateId || ''}
-                                                            onChange={(e) => setLocalTemplateId(e.target.value)}
-                                                            style={{
-                                                                width: '100%',
-                                                                padding: '8px',
-                                                                borderRadius: '6px',
-                                                                border: '1px solid var(--gray-6)',
-                                                                backgroundColor: 'var(--gray-1)',
-                                                                color: 'var(--gray-12)',
-                                                                fontSize: '14px',
-                                                                outline: 'none'
-                                                            }}
-                                                        >
-                                                            {templates.map(template => (
-                                                                <option key={template.id} value={template.id}>
-                                                                    {template.name}
-                                                                </option>
-                                                            ))}
-                                                        </select>
-                                                    </Box>
-                                                    {localTemplateId && templates.find(t => t.id === localTemplateId)?.description && (
-                                                        <Text size="1" color="gray" as="div" mt="2">
-                                                            {templates.find(t => t.id === localTemplateId)?.description}
-                                                        </Text>
-                                                    )}
-                                                    <Button
-                                                        variant="soft"
-                                                        color="blue"
-                                                        style={{ width: '100%', justifyContent: 'center', cursor: 'pointer', marginTop: '10px' }}
-                                                        onClick={() => {
-                                                            if (!localTemplateId) return;
-                                                            if (onTemplateChange) {
-                                                                onTemplateChange(localTemplateId);
-                                                                return;
-                                                            }
-                                                            const template = templates.find(item => item.id === localTemplateId);
-                                                            if (!template) return;
-                                                            applyTemplateState(template.state);
-                                                            lastAppliedTemplateIdRef.current = localTemplateId;
-                                                        }}
-                                                    >
-                                                        Aplicar Template
-                                                    </Button>
-                                                </Box>
+                                                <Button
+                                                    variant="soft"
+                                                    color="gray"
+                                                    style={{ width: '100%', justifyContent: 'center', cursor: 'pointer', marginTop: '8px' }}
+                                                    onClick={() => setIsTemplatesOpen(true)}
+                                                >
+                                                    <FileTextIcon /> Templates
+                                                </Button>
                                             )}
 
                                             <Box mt="3">
@@ -616,6 +569,73 @@ const EditorContent: React.FC<EditorProps> = ({ layout, initialState, onSave, th
                     onOpenChange={setIsSettingsOpen}
                 />
             )}
+
+            {/* Templates Modal */}
+            <Dialog.Root open={isTemplatesOpen} onOpenChange={setIsTemplatesOpen}>
+                <Dialog.Content style={{ maxWidth: 450 }}>
+                    <Dialog.Title>Galeria de Templates</Dialog.Title>
+                    <Dialog.Description size="2" mb="4">
+                        Escolha um layout pré-definido para começar.
+                    </Dialog.Description>
+
+                    {templates && templates.length > 0 ? (
+                        <Flex direction="column" gap="3">
+                            <Box>
+                                <Text size="2" weight="bold" as="div" mb="1">Selecione o Template</Text>
+                                <select
+                                    value={localTemplateId || ''}
+                                    onChange={(e) => setLocalTemplateId(e.target.value)}
+                                    style={{
+                                        width: '100%',
+                                        padding: '8px',
+                                        borderRadius: '6px',
+                                        border: '1px solid var(--gray-6)',
+                                        backgroundColor: 'var(--gray-1)',
+                                        color: 'var(--gray-12)',
+                                        fontSize: '14px',
+                                        outline: 'none'
+                                    }}
+                                >
+                                    {templates.map(template => (
+                                        <option key={template.id} value={template.id}>
+                                            {template.name}
+                                        </option>
+                                    ))}
+                                </select>
+                            </Box>
+
+                            {localTemplateId && templates.find(t => t.id === localTemplateId)?.description && (
+                                <Box p="3" style={{ backgroundColor: 'var(--gray-2)', borderRadius: 8 }}>
+                                    <Text size="2" color="gray">
+                                        {templates.find(t => t.id === localTemplateId)?.description}
+                                    </Text>
+                                </Box>
+                            )}
+
+                            <Flex gap="3" mt="4" justify="end">
+                                <Dialog.Close>
+                                    <Button variant="soft" color="gray">Cancelar</Button>
+                                </Dialog.Close>
+                                <Dialog.Close>
+                                    <Button onClick={() => {
+                                        if (!localTemplateId) return;
+                                        if (onTemplateChange) {
+                                            onTemplateChange(localTemplateId);
+                                            return;
+                                        }
+                                        const template = templates.find(item => item.id === localTemplateId);
+                                        if (!template) return;
+                                        applyTemplateState(template.state);
+                                        lastAppliedTemplateIdRef.current = localTemplateId;
+                                    }}>Aplicar</Button>
+                                </Dialog.Close>
+                            </Flex>
+                        </Flex>
+                    ) : (
+                        <Text>Nenhum template disponível.</Text>
+                    )}
+                </Dialog.Content>
+            </Dialog.Root>
         </Theme>
     );
 };
