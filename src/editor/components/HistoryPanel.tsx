@@ -3,8 +3,17 @@ import { Box, Button, Flex, Text } from '@radix-ui/themes';
 import React from 'react';
 import { useEditor } from '../context';
 
-export const HistoryPanel: React.FC = () => {
+interface HistoryPanelProps {
+    onClose?: () => void;
+}
+
+export const HistoryPanel: React.FC<HistoryPanelProps> = ({ onClose }) => {
     const { state, jumpToHistory, undo, redo } = useEditor();
+
+    const handleJump = (index: number) => {
+        jumpToHistory(index);
+        if (onClose) onClose();
+    };
 
     return (
         <Flex direction="column" style={{ width: '100%' }}>
@@ -39,7 +48,7 @@ export const HistoryPanel: React.FC = () => {
                                 cursor: 'pointer',
                                 borderBottom: '1px solid var(--gray-3)'
                             }}
-                            onClick={() => jumpToHistory(index)}
+                            onClick={() => handleJump(index)}
                             className="history-item"
                         >
                             <Flex align="center" justify="between">

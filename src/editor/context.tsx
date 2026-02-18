@@ -84,7 +84,6 @@ interface IEditorState {
     pan: { x: number, y: number };
     snapLines: { orientation: 'horizontal' | 'vertical', position: number }[];
     assets: IAsset[];
-    editorMode: 'simple' | 'advanced';
 }
 
 export interface IAsset {
@@ -126,7 +125,6 @@ export interface IEditorContext {
     paste: () => void;
     addAsset: (asset: IAsset) => void;
     removeAsset: (id: string) => void;
-    setEditorMode: (mode: 'simple' | 'advanced') => void;
 }
 
 export interface ISnapGuide {
@@ -171,7 +169,6 @@ export const EditorProvider: React.FC<{ children: ReactNode; isList?: boolean; a
         pan: { x: 0, y: 0 },
         snapLines: [],
         assets: [],
-        editorMode: 'simple'
     });
 
     // Load fonts
@@ -331,10 +328,14 @@ export const EditorProvider: React.FC<{ children: ReactNode; isList?: boolean; a
                 const newHistory = prev.history.slice(0, prev.historyIndex + 1);
                 newHistory.push(newElements);
 
+                const newDescriptions = prev.historyDescriptions.slice(0, prev.historyIndex + 1);
+                newDescriptions.push(`Colar Elementos`);
+
                 return {
                     ...prev,
                     elements: newElements,
                     history: newHistory,
+                    historyDescriptions: newDescriptions,
                     historyIndex: newHistory.length - 1,
                     selectedElementIds: newElementsToAdd.map(el => el.id)
                 };
@@ -373,10 +374,20 @@ export const EditorProvider: React.FC<{ children: ReactNode; isList?: boolean; a
             const newElements = [...prev.elements, newElement];
             const newHistory = prev.history.slice(0, prev.historyIndex + 1);
             newHistory.push(newElements);
+
+            const newDescriptions = prev.historyDescriptions.slice(0, prev.historyIndex + 1);
+            const typeMap: Record<string, string> = {
+                'text': 'Texto', 'image': 'Imagem', 'box': 'Caixa', 'group': 'Grupo',
+                'text-container': 'Texto em Caixa', 'checkbox': 'Caixa de Seleção'
+            };
+            const typeName = typeMap[newElement.type] || newElement.type;
+            newDescriptions.push(`Adicionou ${typeName}`);
+
             return {
                 ...prev,
                 elements: newElements,
                 history: newHistory,
+                historyDescriptions: newDescriptions,
                 historyIndex: newHistory.length - 1,
                 selectedElementIds: [newElement.id]
             };
@@ -463,10 +474,14 @@ export const EditorProvider: React.FC<{ children: ReactNode; isList?: boolean; a
             const newHistory = prev.history.slice(0, prev.historyIndex + 1);
             newHistory.push(newElements);
 
+            const newDescriptions = prev.historyDescriptions.slice(0, prev.historyIndex + 1);
+            newDescriptions.push(`Mover Elemento`);
+
             return {
                 ...prev,
                 elements: newElements,
                 history: newHistory,
+                historyDescriptions: newDescriptions,
                 historyIndex: newHistory.length - 1
             };
         });
@@ -478,17 +493,22 @@ export const EditorProvider: React.FC<{ children: ReactNode; isList?: boolean; a
 
             let newHistory = prev.history;
             let historyIndex = prev.historyIndex;
+            let newDescriptions = prev.historyDescriptions;
 
             if (addToHistory) {
                 newHistory = prev.history.slice(0, prev.historyIndex + 1);
                 newHistory.push(newElements);
                 historyIndex = newHistory.length - 1;
+
+                newDescriptions = prev.historyDescriptions.slice(0, prev.historyIndex + 1);
+                newDescriptions.push(`Atualizar Elemento`);
             }
 
             return {
                 ...prev,
                 elements: newElements,
                 history: newHistory,
+                historyDescriptions: newDescriptions,
                 historyIndex: historyIndex
             };
         });
@@ -567,17 +587,22 @@ export const EditorProvider: React.FC<{ children: ReactNode; isList?: boolean; a
 
             let newHistory = prev.history;
             let historyIndex = prev.historyIndex;
+            let newDescriptions = prev.historyDescriptions;
 
             if (addToHistory) {
                 newHistory = prev.history.slice(0, prev.historyIndex + 1);
                 newHistory.push(newElements);
                 historyIndex = newHistory.length - 1;
+
+                newDescriptions = prev.historyDescriptions.slice(0, prev.historyIndex + 1);
+                newDescriptions.push(`Atualizar Múltiplos Elementos`);
             }
 
             return {
                 ...prev,
                 elements: newElements,
                 history: newHistory,
+                historyDescriptions: newDescriptions,
                 historyIndex: historyIndex
             };
         });
@@ -804,52 +829,42 @@ export const EditorProvider: React.FC<{ children: ReactNode; isList?: boolean; a
     }, []);
 
     const removeAsset = React.useCallback((id: string) => {
-        setState(prev => ({
-            ...prev,
-            assets: prev.assets.filter(a => a.id !== id)
-        }));
+        setState(prev => ({ ...prev, assets: prev.assets.filter(a => a.id !== id) }));
     }, []);
-
-    const setEditorMode = React.useCallback((mode: 'simple' | 'advanced') => {
-        setState(prev => ({ ...prev, editorMode: mode }));
-    }, []);
-
-    const contextValue = React.useMemo(() => ({
-        state,
-        setEditorMode,
-        addElement,
-        removeElement,
-        removeSelected,
-        selectElement,
-        setSelectedElements,
-        moveElement,
-        updateElement,
-        updateElements,
-        groupElements,
-        ungroupElements,
-        renameElement,
-        addToGroup,
-        removeFromGroup,
-        resizeGroup,
-        setMockData,
-        updateListSettings,
-        setCanvasHeight,
-        loadState,
-        undo,
-        redo,
-        jumpToHistory,
-        copy,
-        paste,
-        setGridSize,
-        setZoom,
-        setPan,
-        setSnapLines,
-        addAsset,
-        removeAsset
-    }), [state, setEditorMode, addElement, removeElement, removeSelected, selectElement, setSelectedElements, moveElement, updateElement, updateElements, groupElements, ungroupElements, renameElement, addToGroup, removeFromGroup, resizeGroup, setMockData, updateListSettings, setCanvasHeight, loadState, undo, redo, jumpToHistory, copy, paste, setGridSize, setZoom, setPan, setSnapLines, addAsset, removeAsset]);
 
     return (
-        <EditorContext.Provider value={contextValue}>
+        <EditorContext.Provider value={React.useMemo(() => ({
+            state,
+            setGridSize,
+            setZoom,
+            setPan,
+            setSnapLines,
+            addElement,
+            removeElement,
+            removeSelected,
+            selectElement,
+            setSelectedElements,
+            moveElement,
+            updateElement,
+            updateElements,
+            groupElements,
+            ungroupElements,
+            renameElement,
+            addToGroup,
+            removeFromGroup,
+            resizeGroup,
+            setMockData,
+            updateListSettings,
+            setCanvasHeight,
+            loadState,
+            undo,
+            redo,
+            jumpToHistory,
+            copy,
+            paste,
+            addAsset,
+            removeAsset
+        }), [state, addElement, removeElement, removeSelected, selectElement, setSelectedElements, moveElement, updateElement, updateElements, groupElements, ungroupElements, renameElement, addToGroup, removeFromGroup, resizeGroup, setMockData, updateListSettings, setCanvasHeight, loadState, undo, redo, jumpToHistory, copy, paste, setGridSize, setZoom, setPan, setSnapLines, addAsset, removeAsset])}>
             {children}
         </EditorContext.Provider>
     );

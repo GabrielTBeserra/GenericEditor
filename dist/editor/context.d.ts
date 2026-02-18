@@ -84,7 +84,6 @@ interface IEditorState {
         position: number;
     }[];
     assets: IAsset[];
-    editorMode: 'simple' | 'advanced';
 }
 export interface IAsset {
     id: string;
@@ -133,7 +132,6 @@ export interface IEditorContext {
     paste: () => void;
     addAsset: (asset: IAsset) => void;
     removeAsset: (id: string) => void;
-    setEditorMode: (mode: 'simple' | 'advanced') => void;
 }
 export interface ISnapGuide {
     type: 'horizontal' | 'vertical';

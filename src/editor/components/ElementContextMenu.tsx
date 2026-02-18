@@ -5,7 +5,6 @@ import React, { useRef, useState } from 'react';
 import { useEditor, type IElement } from '../context';
 import { ColorPickerContent } from './ColorPicker';
 import './context-menu.css';
-import { ElementAdvancedSettings } from './ElementAdvancedSettings';
 
 const stopProp = (e: React.PointerEvent) => e.stopPropagation();
 
@@ -16,8 +15,6 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
     const [isRenameOpen, setIsRenameOpen] = useState(false);
     const [isEditContentOpen, setIsEditContentOpen] = useState(false);
     const [isBindDataOpen, setIsBindDataOpen] = useState(false);
-    const [isAdvancedSettingsOpen, setIsAdvancedSettingsOpen] = useState(false);
-    const [settingsTab, setSettingsTab] = useState("formatting");
     const [colorDialog, setColorDialog] = useState<{ open: boolean; prop: string; value: string }>({ open: false, prop: '', value: '' });
     const [isImageUrlOpen, setIsImageUrlOpen] = useState(false);
     const [tempImageUrl, setTempImageUrl] = useState('');
@@ -353,13 +350,6 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                 </Dialog.Content>
             </Dialog.Root>
 
-            <ElementAdvancedSettings
-                elementId={element.id}
-                open={isAdvancedSettingsOpen}
-                onOpenChange={setIsAdvancedSettingsOpen}
-                initialTab={settingsTab}
-            />
-
             <Dialog.Root open={isImageUrlOpen} onOpenChange={setIsImageUrlOpen}>
                 <Dialog.Content style={{ maxWidth: 450 }} onPointerDown={stopProp}>
                     <Dialog.Title>Inserir URL da Imagem</Dialog.Title>
@@ -496,10 +486,6 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                         <ContextMenu.Separator className="ContextMenuSeparator" />
 
                         {/* Common Actions */}
-                        <ContextMenu.Item className="ContextMenuItem" onPointerDown={stopProp} onSelect={() => setIsAdvancedSettingsOpen(true)}>
-                            Configurações Avançadas...
-                        </ContextMenu.Item>
-                        <ContextMenu.Separator className="ContextMenuSeparator" />
 
                         <ContextMenu.Item className="ContextMenuItem" onPointerDown={stopProp} onSelect={handleDuplicate}>
                             {state.selectedElementIds.includes(element.id) && state.selectedElementIds.length > 1
@@ -831,17 +817,6 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                                             {radius === '50%' ? 'Círculo' : `${radius}px`}
                                         </ContextMenu.Item>
                                     ))}
-                                    <ContextMenu.Separator className="ContextMenuSeparator" />
-                                    <ContextMenu.Item
-                                        className="ContextMenuItem"
-                                        onPointerDown={stopProp}
-                                        onSelect={() => {
-                                            setSettingsTab("style");
-                                            setIsAdvancedSettingsOpen(true);
-                                        }}
-                                    >
-                                        Personalizar...
-                                    </ContextMenu.Item>
                                 </ContextMenu.SubContent>
                             </ContextMenu.Portal>
                         </ContextMenu.Sub>
@@ -859,17 +834,6 @@ export const ElementContextMenu: React.FC<{ children: React.ReactNode; element: 
                                             {padding}px
                                         </ContextMenu.Item>
                                     ))}
-                                    <ContextMenu.Separator className="ContextMenuSeparator" />
-                                    <ContextMenu.Item
-                                        className="ContextMenuItem"
-                                        onPointerDown={stopProp}
-                                        onSelect={() => {
-                                            setSettingsTab("style");
-                                            setIsAdvancedSettingsOpen(true);
-                                        }}
-                                    >
-                                        Personalizar...
-                                    </ContextMenu.Item>
                                 </ContextMenu.SubContent>
                             </ContextMenu.Portal>
                         </ContextMenu.Sub>

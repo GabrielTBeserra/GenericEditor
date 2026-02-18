@@ -1,5 +1,5 @@
 import { GearIcon } from '@radix-ui/react-icons';
-import { Box, Button, Dialog, Flex, Grid, Text, TextField } from '@radix-ui/themes';
+import { Box, Button, Dialog, Flex, Grid, Select, Text, TextField } from '@radix-ui/themes';
 import React, { useEffect, useState } from 'react';
 import { useEditor, type IElementAnimation } from '../context';
 
@@ -98,91 +98,51 @@ export const EditorSettings: React.FC = () => {
                         <Text size="2" weight="bold">Ordenação</Text>
                         <Flex gap="3" align="center">
                             <Box flexGrow="1">
-                                <Text size="1" mb="1" as="div">Propriedade para Ordenar (ex: data, id)</Text>
-                                <select
-                                    value={localSortProp}
-                                    onChange={(e) => setLocalSortProp(e.target.value)}
-                                    style={{
-                                        width: '100%',
-                                        padding: '8px',
-                                        borderRadius: '4px',
-                                        border: '1px solid var(--gray-6)',
-                                        backgroundColor: 'var(--gray-2)',
-                                        color: 'var(--gray-12)',
-                                        fontSize: '14px',
-                                        outline: 'none'
-                                    }}
-                                >
-                                    <option value="__none__">(Nenhum)</option>
-                                    {state.availableProps.map(prop => (
-                                        <option key={prop.dataName} value={prop.dataName}>
-                                            {prop.name}
-                                        </option>
-                                    ))}
-                                </select>
+                                <Text size="1" mb="1" as="div">Propriedade para Ordenar</Text>
+                                <Select.Root value={localSortProp} onValueChange={setLocalSortProp}>
+                                    <Select.Trigger placeholder="Selecione..." style={{ width: '100%' }} />
+                                    <Select.Content>
+                                        <Select.Item value="__none__">(Nenhum)</Select.Item>
+                                        {state.availableProps.map(prop => (
+                                            <Select.Item key={prop.dataName} value={prop.dataName}>
+                                                {prop.name}
+                                            </Select.Item>
+                                        ))}
+                                    </Select.Content>
+                                </Select.Root>
                             </Box>
                             <Box>
                                 <Text size="1" mb="1" as="div">Direção</Text>
-                                <select
-                                    value={localSortOrder}
-                                    onChange={(e) => setLocalSortOrder(e.target.value as 'asc' | 'desc')}
-                                    style={{
-                                        width: '150px',
-                                        padding: '8px',
-                                        borderRadius: '4px',
-                                        border: '1px solid var(--gray-6)',
-                                        backgroundColor: 'var(--gray-2)',
-                                        color: 'var(--gray-12)',
-                                        fontSize: '14px',
-                                        outline: 'none'
-                                    }}
-                                >
-                                    <option value="asc">Crescente (A-Z)</option>
-                                    <option value="desc">Decrescente (Z-A)</option>
-                                </select>
+                                <Select.Root value={localSortOrder} onValueChange={(v) => setLocalSortOrder(v as 'asc' | 'desc')}>
+                                    <Select.Trigger style={{ width: '150px' }} />
+                                    <Select.Content>
+                                        <Select.Item value="asc">Crescente (A-Z)</Select.Item>
+                                        <Select.Item value="desc">Decrescente (Z-A)</Select.Item>
+                                    </Select.Content>
+                                </Select.Root>
                             </Box>
                         </Flex>
 
                         <Flex gap="3" align="center">
                             <Box flexGrow="1">
                                 <Text size="1" mb="1" as="div">Posição do Recente</Text>
-                                <select
-                                    value={localNewestPosition}
-                                    onChange={(e) => setLocalNewestPosition(e.target.value as 'top' | 'bottom')}
-                                    style={{
-                                        width: '100%',
-                                        padding: '8px',
-                                        borderRadius: '4px',
-                                        border: '1px solid var(--gray-6)',
-                                        backgroundColor: 'var(--gray-2)',
-                                        color: 'var(--gray-12)',
-                                        fontSize: '14px',
-                                        outline: 'none'
-                                    }}
-                                >
-                                    <option value="top">Topo (Início)</option>
-                                    <option value="bottom">Base (Final)</option>
-                                </select>
+                                <Select.Root value={localNewestPosition} onValueChange={(v) => setLocalNewestPosition(v as 'top' | 'bottom')}>
+                                    <Select.Trigger style={{ width: '100%' }} />
+                                    <Select.Content>
+                                        <Select.Item value="top">Topo (Início)</Select.Item>
+                                        <Select.Item value="bottom">Base (Final)</Select.Item>
+                                    </Select.Content>
+                                </Select.Root>
                             </Box>
                             <Box flexGrow="1">
                                 <Text size="1" mb="1" as="div">Comportamento de Rolagem</Text>
-                                <select
-                                    value={localScrollDirection}
-                                    onChange={(e) => setLocalScrollDirection(e.target.value as 'up' | 'down')}
-                                    style={{
-                                        width: '100%',
-                                        padding: '8px',
-                                        borderRadius: '4px',
-                                        border: '1px solid var(--gray-6)',
-                                        backgroundColor: 'var(--gray-2)',
-                                        color: 'var(--gray-12)',
-                                        fontSize: '14px',
-                                        outline: 'none'
-                                    }}
-                                >
-                                    <option value="down">Descer (Padrão)</option>
-                                    <option value="up">Subir (Chat)</option>
-                                </select>
+                                <Select.Root value={localScrollDirection} onValueChange={(v) => setLocalScrollDirection(v as 'up' | 'down')}>
+                                    <Select.Trigger style={{ width: '100%' }} />
+                                    <Select.Content>
+                                        <Select.Item value="down">Descer (Padrão)</Select.Item>
+                                        <Select.Item value="up">Subir (Chat)</Select.Item>
+                                    </Select.Content>
+                                </Select.Root>
                             </Box>
                         </Flex>
 
@@ -219,30 +179,21 @@ export const EditorSettings: React.FC = () => {
                         <Grid columns="3" gap="3">
                             <Box>
                                 <Text size="1" mb="1" as="div">Efeito</Text>
-                                <select
-                                    value={localEntryAnimType}
-                                    onChange={(e) => setLocalEntryAnimType(e.target.value as IElementAnimation['type'])}
-                                    style={{
-                                        width: '100%',
-                                        padding: '6px',
-                                        borderRadius: '4px',
-                                        border: '1px solid var(--gray-6)',
-                                        backgroundColor: 'var(--gray-2)',
-                                        color: 'var(--gray-12)',
-                                        fontSize: '14px'
-                                    }}
-                                >
-                                    <option value="none">Nenhum</option>
-                                    <option value="slideIn">Slide (Padrão)</option>
-                                    <option value="smoothSlideUp">Slide Suave (Up)</option>
-                                    <option value="fadeIn">Fade In</option>
-                                    <option value="popIn">Pop In</option>
-                                    <option value="blurIn">Blur In</option>
-                                    <option value="slideInLeft">Slide (Esq)</option>
-                                    <option value="slideInRight">Slide (Dir)</option>
-                                    <option value="zoomIn">Zoom In</option>
-                                    <option value="bounceIn">Bounce</option>
-                                </select>
+                                <Select.Root value={localEntryAnimType} onValueChange={(v) => setLocalEntryAnimType(v as IElementAnimation['type'])}>
+                                    <Select.Trigger style={{ width: '100%' }} />
+                                    <Select.Content>
+                                        <Select.Item value="none">Nenhum</Select.Item>
+                                        <Select.Item value="slideIn">Slide (Padrão)</Select.Item>
+                                        <Select.Item value="smoothSlideUp">Slide Suave (Up)</Select.Item>
+                                        <Select.Item value="fadeIn">Fade In</Select.Item>
+                                        <Select.Item value="popIn">Pop In</Select.Item>
+                                        <Select.Item value="blurIn">Blur In</Select.Item>
+                                        <Select.Item value="slideInLeft">Slide (Esq)</Select.Item>
+                                        <Select.Item value="slideInRight">Slide (Dir)</Select.Item>
+                                        <Select.Item value="zoomIn">Zoom In</Select.Item>
+                                        <Select.Item value="bounceIn">Bounce</Select.Item>
+                                    </Select.Content>
+                                </Select.Root>
                             </Box>
                             <Box>
                                 <Text size="1" mb="1" as="div">Duração (s)</Text>
@@ -256,31 +207,17 @@ export const EditorSettings: React.FC = () => {
                             </Box>
                             <Box>
                                 <Text size="1" mb="1" as="div">Curva (Easing)</Text>
-                                <select
-                                    value={localEntryAnimTiming}
-                                    onChange={(e) => setLocalEntryAnimTiming(e.target.value as NonNullable<IElementAnimation['timingFunction']>)}
-                                    style={{
-                                        width: '100%',
-                                        padding: '6px',
-                                        borderRadius: '4px',
-                                        border: '1px solid var(--gray-6)',
-                                        backgroundColor: 'var(--gray-2)',
-                                        color: 'var(--gray-12)',
-                                        fontSize: '14px'
-                                    }}
-                                >
-                                    <option value="ease">Ease</option>
-                                    <option value="ease-out">Ease Out</option>
-                                    <option value="linear">Linear</option>
-                                    <option value="bounce">Bounce</option>
-                                </select>
+                                <Select.Root value={localEntryAnimTiming} onValueChange={(v) => setLocalEntryAnimTiming(v as NonNullable<IElementAnimation['timingFunction']>)}>
+                                    <Select.Trigger style={{ width: '100%' }} />
+                                    <Select.Content>
+                                        <Select.Item value="ease">Ease</Select.Item>
+                                        <Select.Item value="ease-out">Ease Out</Select.Item>
+                                        <Select.Item value="linear">Linear</Select.Item>
+                                        <Select.Item value="bounce">Bounce</Select.Item>
+                                    </Select.Content>
+                                </Select.Root>
                             </Box>
                         </Grid>
-
-
-                        <Text size="1" color="gray">
-                            Essa propriedade será usada para ordenar os itens no modo lista.
-                        </Text>
 
                         <Box mt="2">
                             <Text size="2" weight="bold">Grid Snapping (Travar)</Text>

@@ -45,8 +45,7 @@ export const Canvas: React.FC<CanvasProps> = () => {
         stateRef.current = state;
     }, [state]);
 
-    const isEmpty = state.elements.length === 0;
-    const isSimpleMode = state.editorMode === 'simple';
+
 
     const handlePointerMove = useCallback((e: PointerEvent) => {
         if (!canvasRef.current) return;
@@ -428,41 +427,6 @@ export const Canvas: React.FC<CanvasProps> = () => {
                     pointerEvents: 'none' // Let clicks pass through to background unless hitting a child with pointer-events: auto
                 }}
             >
-
-                {/* Empty State for Simple Mode */}
-                {isEmpty && isSimpleMode && (
-                    <Flex
-                        direction="column"
-                        align="center"
-                        justify="center"
-                        style={{
-                            position: 'absolute',
-                            top: '50%',
-                            left: '50%',
-                            transform: 'translate(-50%, -50%)',
-                            opacity: 0.5,
-                            pointerEvents: 'none'
-                        }}
-                        gap="4"
-                    >
-                        <Box style={{
-                            width: 120,
-                            height: 120,
-                            border: '2px dashed var(--gray-8)',
-                            borderRadius: 12,
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center'
-                        }}>
-                            <Text size="8" color="gray">+</Text>
-                        </Box>
-                        <Text size="3" color="gray" align="center">
-                            Seu layout está vazio.<br />
-                            Escolha um template ou adicione blocos na barra lateral.
-                        </Text>
-                    </Flex>
-                )}
-
 
                 {/* Top Boundary Indicator */}
                 <div style={{

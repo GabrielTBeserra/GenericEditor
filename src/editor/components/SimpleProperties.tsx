@@ -1,17 +1,25 @@
 import {
+    ChevronDownIcon,
+    ChevronRightIcon,
     CopyIcon,
+    EyeNoneIcon,
+    EyeOpenIcon,
+    LockClosedIcon,
+    LockOpen1Icon,
     TextAlignCenterIcon,
     TextAlignLeftIcon,
     TextAlignRightIcon,
     TrashIcon
 } from '@radix-ui/react-icons';
-import { Box, Flex, Grid, IconButton, Separator, Slider, Text, TextArea, TextField } from '@radix-ui/themes';
-import React from 'react';
+import { Box, Button, Flex, Grid, IconButton, Select, Separator, Slider, Text, TextArea, TextField } from '@radix-ui/themes';
+import React, { useState } from 'react';
 import { useEditor, type IElement } from '../context';
+import { AdvancedPropertiesPanel } from './AdvancedPropertiesPanel';
 import { ColorInput } from './ColorPicker';
 
 export const SimpleProperties: React.FC = () => {
     const { state, updateElement, removeSelected, copy } = useEditor();
+    const [isAdvancedOpen, setIsAdvancedOpen] = useState(false);
 
     // In Simple Mode, we focus on the first selected element
     const elementId = state.selectedElementIds[0];
@@ -33,6 +41,10 @@ export const SimpleProperties: React.FC = () => {
     const currentFontSize = parseInt((element.style?.fontSize as string) || '14', 10);
     const currentBorderWidth = parseInt((element.style?.borderWidth as string) || '0', 10);
     const currentPadding = parseInt((element.style?.padding as string) || '0', 10);
+    const currentFontFamily = (element.style?.fontFamily as string) || 'Arial';
+    const currentFontWeight = (element.style?.fontWeight as string) || 'normal';
+
+    const fontOptions = state.availableFonts || ['Arial', 'Helvetica', 'Times New Roman', 'Courier New', 'Verdana', 'Georgia', 'Tahoma', 'Trebuchet MS'];
 
     return (
         <Flex direction="column" gap="4">
@@ -41,6 +53,23 @@ export const SimpleProperties: React.FC = () => {
                     {getElementLabel(element.type)}
                 </Text>
                 <Flex gap="2">
+                    <IconButton
+                        variant="soft"
+                        color={element.locked ? 'orange' : 'gray'}
+                        onClick={() => handleUpdate({ locked: !element.locked })}
+                        title={element.locked ? "Desbloquear" : "Bloquear"}
+                    >
+                        {element.locked ? <LockClosedIcon /> : <LockOpen1Icon />}
+                    </IconButton>
+                    <IconButton
+                        variant="soft"
+                        color={element.hidden ? 'blue' : 'gray'}
+                        onClick={() => handleUpdate({ hidden: !element.hidden })}
+                        title={element.hidden ? "Mostrar" : "Ocultar"}
+                    >
+                        {element.hidden ? <EyeNoneIcon /> : <EyeOpenIcon />}
+                    </IconButton>
+                    <Separator orientation="vertical" />
                     <IconButton variant="soft" color="gray" onClick={copy} title="Copiar">
                         <CopyIcon />
                     </IconButton>
@@ -85,6 +114,44 @@ export const SimpleProperties: React.FC = () => {
                     {/* Typography for Text Elements */}
                     {(element.type === 'text' || element.type === 'text-container') && (
                         <>
+                            <Grid columns="2" gap="3">
+                                <Box>
+                                    <Text size="1" color="gray" mb="1" as="div">Fonte</Text>
+                                    <Select.Root
+                                        value={currentFontFamily}
+                                        onValueChange={(val) => handleStyleUpdate({ fontFamily: val })}
+                                    >
+                                        <Select.Trigger style={{ width: '100%' }} />
+                                        <Select.Content>
+                                            <Select.Group>
+                                                <Select.Label>Fontes</Select.Label>
+                                                {fontOptions.map(font => (
+                                                    <Select.Item key={font} value={font} style={{ fontFamily: font }}>
+                                                        {font}
+                                                    </Select.Item>
+                                                ))}
+                                            </Select.Group>
+                                        </Select.Content>
+                                    </Select.Root>
+                                </Box>
+                                <Box>
+                                    <Text size="1" color="gray" mb="1" as="div">Peso</Text>
+                                    <Select.Root
+                                        value={currentFontWeight}
+                                        onValueChange={(val) => handleStyleUpdate({ fontWeight: val })}
+                                    >
+                                        <Select.Trigger style={{ width: '100%' }} />
+                                        <Select.Content>
+                                            <Select.Item value="normal">Normal</Select.Item>
+                                            <Select.Item value="bold">Negrito</Select.Item>
+                                            <Select.Item value="100">Fina</Select.Item>
+                                            <Select.Item value="300">Leve</Select.Item>
+                                            <Select.Item value="900">Pesada</Select.Item>
+                                        </Select.Content>
+                                    </Select.Root>
+                                </Box>
+                            </Grid>
+
                             <Box>
                                 <Flex justify="between" mb="1">
                                     <Text size="1" color="gray">Tamanho do Texto</Text>
@@ -176,6 +243,26 @@ export const SimpleProperties: React.FC = () => {
                         />
                     </Box>
                 </Flex>
+            </Box>
+
+            {/* Advanced Properties (Contextual Expansion) */}
+            <Box mt="2" pt="2" style={{ borderTop: '1px solid var(--gray-5)' }}>
+                <Button
+                    variant="ghost"
+                    onClick={() => setIsAdvancedOpen(!isAdvancedOpen)}
+                    style={{ width: '100%', justifyContent: 'space-between', color: 'var(--gray-11)', cursor: 'pointer' }}
+                >
+                    <Flex align="center" gap="2">
+                        <Text size="2">Mais opções</Text>
+                    </Flex>
+                    {isAdvancedOpen ? <ChevronDownIcon /> : <ChevronRightIcon />}
+                </Button>
+
+                {isAdvancedOpen && (
+                    <Box mt="3" className="advanced-properties-content">
+                        <AdvancedPropertiesPanel elementId={element.id} />
+                    </Box>
+                )}
             </Box>
         </Flex>
     );

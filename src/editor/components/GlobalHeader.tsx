@@ -1,5 +1,5 @@
-import { CheckIcon, DownloadIcon, FileTextIcon, PlusIcon, Share1Icon, UploadIcon } from '@radix-ui/react-icons';
-import { Button, DropdownMenu, Flex, Switch, Text } from '@radix-ui/themes';
+import { CheckIcon, DownloadIcon, FileTextIcon, ListBulletIcon, PlusIcon, Share1Icon, UploadIcon } from '@radix-ui/react-icons';
+import { Box, Button, DropdownMenu, Flex, IconButton, Text } from '@radix-ui/themes';
 import React, { useRef } from 'react';
 import { useEditor } from '../context';
 import type { ITemplate } from '../types';
@@ -9,11 +9,13 @@ interface GlobalHeaderProps {
     templates?: ITemplate[];
     setIsTemplatesOpen: (isOpen: boolean) => void;
     onFinish?: () => void;
+    onToggleSidebar?: () => void;
 }
 
-export const GlobalHeader: React.FC<GlobalHeaderProps> = ({ onSave, templates, setIsTemplatesOpen, onFinish }) => {
-    const { state, setEditorMode, loadState, addElement } = useEditor();
+export const GlobalHeader: React.FC<GlobalHeaderProps> = ({ onSave, templates, setIsTemplatesOpen, onFinish, onToggleSidebar }) => {
+    const { state, loadState, addElement } = useEditor();
     const fileInputRef = useRef<HTMLInputElement>(null);
+
 
     const handleExport = () => {
         const stateToSave = {
@@ -91,19 +93,16 @@ export const GlobalHeader: React.FC<GlobalHeaderProps> = ({ onSave, templates, s
                 zIndex: 100
             }}
         >
-            {/* Left: Brand & Mode Toggle */}
+            {/* Left: Brand */}
             <Flex gap="4" align="center">
+                {onToggleSidebar && (
+                    <Box display={{ initial: 'block', md: 'none' }}>
+                        <IconButton variant="ghost" color="gray" onClick={onToggleSidebar}>
+                            <ListBulletIcon width="24" height="24" />
+                        </IconButton>
+                    </Box>
+                )}
                 <Text size="3" weight="bold">Editor de Layout</Text>
-
-                <Flex align="center" gap="2" style={{ backgroundColor: 'var(--gray-3)', padding: '4px 8px', borderRadius: '6px' }}>
-                    <Text size="1" weight={state.editorMode === 'simple' ? 'bold' : 'regular'}>Simples</Text>
-                    <Switch
-                        size="1"
-                        checked={state.editorMode === 'advanced'}
-                        onCheckedChange={(checked) => setEditorMode(checked ? 'advanced' : 'simple')}
-                    />
-                    <Text size="1" weight={state.editorMode === 'advanced' ? 'bold' : 'regular'}>Avançado</Text>
-                </Flex>
             </Flex>
 
             {/* Right: Actions */}
@@ -144,7 +143,7 @@ export const GlobalHeader: React.FC<GlobalHeaderProps> = ({ onSave, templates, s
                 )}
 
                 {/* Simple Mode specific action */}
-                {state.editorMode === 'simple' && onFinish && (
+                {onFinish && (
                     <Button id="finish-button" variant="solid" color="green" onClick={onFinish} style={{ cursor: 'pointer', marginLeft: 8 }}>
                         <CheckIcon /> Finalizar e Testar
                     </Button>

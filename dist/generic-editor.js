@@ -167,6 +167,20 @@ var _excluded$3 = ["color"], AlignBottomIcon = /* @__PURE__ */ forwardRef(functi
 		fillRule: "evenodd",
 		clipRule: "evenodd"
 	}));
+}), _excluded$W = ["color"], ChevronDownIcon = /* @__PURE__ */ forwardRef(function(n, _) {
+	var E = n.color, O = E === void 0 ? "currentColor" : E, A = _objectWithoutPropertiesLoose(n, _excluded$W);
+	return createElement("svg", Object.assign({
+		width: "15",
+		height: "15",
+		viewBox: "0 0 15 15",
+		fill: "none",
+		xmlns: "http://www.w3.org/2000/svg"
+	}, A, { ref: _ }), createElement("path", {
+		d: "M3.13523 6.15803C3.3241 5.95657 3.64052 5.94637 3.84197 6.13523L7.5 9.56464L11.158 6.13523C11.3595 5.94637 11.6759 5.95657 11.8648 6.15803C12.0536 6.35949 12.0434 6.67591 11.842 6.86477L7.84197 10.6148C7.64964 10.7951 7.35036 10.7951 7.15803 10.6148L3.15803 6.86477C2.95657 6.67591 2.94637 6.35949 3.13523 6.15803Z",
+		fill: O,
+		fillRule: "evenodd",
+		clipRule: "evenodd"
+	}));
 }), _excluded$Y = ["color"], ChevronRightIcon = /* @__PURE__ */ forwardRef(function(n, _) {
 	var E = n.color, O = E === void 0 ? "currentColor" : E, A = _objectWithoutPropertiesLoose(n, _excluded$Y);
 	return createElement("svg", Object.assign({
@@ -373,6 +387,20 @@ var _excluded$3 = ["color"], AlignBottomIcon = /* @__PURE__ */ forwardRef(functi
 		xmlns: "http://www.w3.org/2000/svg"
 	}, A, { ref: _ }), createElement("path", {
 		d: "M2.5 1H12.5C13.3284 1 14 1.67157 14 2.5V12.5C14 13.3284 13.3284 14 12.5 14H2.5C1.67157 14 1 13.3284 1 12.5V2.5C1 1.67157 1.67157 1 2.5 1ZM2.5 2C2.22386 2 2 2.22386 2 2.5V8.3636L3.6818 6.6818C3.76809 6.59551 3.88572 6.54797 4.00774 6.55007C4.12975 6.55216 4.24568 6.60372 4.32895 6.69293L7.87355 10.4901L10.6818 7.6818C10.8575 7.50607 11.1425 7.50607 11.3182 7.6818L13 9.3636V2.5C13 2.22386 12.7761 2 12.5 2H2.5ZM2 12.5V9.6364L3.98887 7.64753L7.5311 11.4421L8.94113 13H2.5C2.22386 13 2 12.7761 2 12.5ZM12.5 13H10.155L8.48336 11.153L11 8.6364L13 10.6364V12.5C13 12.7761 12.7761 13 12.5 13ZM6.64922 5.5C6.64922 5.03013 7.03013 4.64922 7.5 4.64922C7.96987 4.64922 8.35078 5.03013 8.35078 5.5C8.35078 5.96987 7.96987 6.35078 7.5 6.35078C7.03013 6.35078 6.64922 5.96987 6.64922 5.5ZM7.5 3.74922C6.53307 3.74922 5.74922 4.53307 5.74922 5.5C5.74922 6.46693 6.53307 7.25078 7.5 7.25078C8.46693 7.25078 9.25078 6.46693 9.25078 5.5C9.25078 4.53307 8.46693 3.74922 7.5 3.74922Z",
+		fill: O,
+		fillRule: "evenodd",
+		clipRule: "evenodd"
+	}));
+}), _excluded$2Z = ["color"], ListBulletIcon = /* @__PURE__ */ forwardRef(function(n, _) {
+	var E = n.color, O = E === void 0 ? "currentColor" : E, A = _objectWithoutPropertiesLoose(n, _excluded$2Z);
+	return createElement("svg", Object.assign({
+		width: "15",
+		height: "15",
+		viewBox: "0 0 15 15",
+		fill: "none",
+		xmlns: "http://www.w3.org/2000/svg"
+	}, A, { ref: _ }), createElement("path", {
+		d: "M1.5 5.25C1.91421 5.25 2.25 4.91421 2.25 4.5C2.25 4.08579 1.91421 3.75 1.5 3.75C1.08579 3.75 0.75 4.08579 0.75 4.5C0.75 4.91421 1.08579 5.25 1.5 5.25ZM4 4.5C4 4.22386 4.22386 4 4.5 4H13.5C13.7761 4 14 4.22386 14 4.5C14 4.77614 13.7761 5 13.5 5H4.5C4.22386 5 4 4.77614 4 4.5ZM4.5 7C4.22386 7 4 7.22386 4 7.5C4 7.77614 4.22386 8 4.5 8H13.5C13.7761 8 14 7.77614 14 7.5C14 7.22386 13.7761 7 13.5 7H4.5ZM4.5 10C4.22386 10 4 10.2239 4 10.5C4 10.7761 4.22386 11 4.5 11H13.5C13.7761 11 14 10.7761 14 10.5C14 10.2239 13.7761 10 13.5 10H4.5ZM2.25 7.5C2.25 7.91421 1.91421 8.25 1.5 8.25C1.08579 8.25 0.75 7.91421 0.75 7.5C0.75 7.08579 1.08579 6.75 1.5 6.75C1.91421 6.75 2.25 7.08579 2.25 7.5ZM1.5 11.25C1.91421 11.25 2.25 10.9142 2.25 10.5C2.25 10.0858 1.91421 9.75 1.5 9.75C1.08579 9.75 0.75 10.0858 0.75 10.5C0.75 10.9142 1.08579 11.25 1.5 11.25Z",
 		fill: O,
 		fillRule: "evenodd",
 		clipRule: "evenodd"
@@ -783,7 +811,7 @@ function createSlot(_) {
 	});
 	return O.displayName = `${_}.Slot`, O;
 }
-var Slot$3 = /* @__PURE__ */ createSlot("Slot");
+var Slot$4 = /* @__PURE__ */ createSlot("Slot");
 /* @__NO_SIDE_EFFECTS__ */
 function createSlotClone(_) {
 	let E = React$1.forwardRef((_, E) => {
@@ -1155,15 +1183,15 @@ var DISMISSABLE_LAYER_NAME = "DismissableLayer", CONTEXT_UPDATE = "dismissableLa
 	layersWithOutsidePointerEventsDisabled: /* @__PURE__ */ new Set(),
 	branches: /* @__PURE__ */ new Set()
 }), DismissableLayer = React$1.forwardRef((_, E) => {
-	let { disableOutsidePointerEvents: O = !1, onEscapeKeyDown: A, onPointerDownOutside: j, onFocusOutside: M, onInteractOutside: N, onDismiss: P, ...z } = _, B = React$1.useContext(DismissableLayerContext), [H, U] = React$1.useState(null), W = H?.ownerDocument ?? globalThis?.document, [, G] = React$1.useState({}), Z = useComposedRefs$1(E, (n) => U(n)), TL = Array.from(B.layers), [EL] = [...B.layersWithOutsidePointerEventsDisabled].slice(-1), DL = TL.indexOf(EL), OL = H ? TL.indexOf(H) : -1, kL = B.layersWithOutsidePointerEventsDisabled.size > 0, AL = OL >= DL, jL = usePointerDownOutside((n) => {
+	let { disableOutsidePointerEvents: O = !1, onEscapeKeyDown: A, onPointerDownOutside: j, onFocusOutside: M, onInteractOutside: N, onDismiss: P, ...z } = _, B = React$1.useContext(DismissableLayerContext), [H, U] = React$1.useState(null), W = H?.ownerDocument ?? globalThis?.document, [, G] = React$1.useState({}), Z = useComposedRefs$1(E, (n) => U(n)), uz = Array.from(B.layers), [dz] = [...B.layersWithOutsidePointerEventsDisabled].slice(-1), fz = uz.indexOf(dz), pz = H ? uz.indexOf(H) : -1, mz = B.layersWithOutsidePointerEventsDisabled.size > 0, hz = pz >= fz, gz = usePointerDownOutside((n) => {
 		let _ = n.target, E = [...B.branches].some((n) => n.contains(_));
-		!AL || E || (j?.(n), N?.(n), n.defaultPrevented || P?.());
-	}, W), ML = useFocusOutside((n) => {
+		!hz || E || (j?.(n), N?.(n), n.defaultPrevented || P?.());
+	}, W), _z = useFocusOutside((n) => {
 		let _ = n.target;
 		[...B.branches].some((n) => n.contains(_)) || (M?.(n), N?.(n), n.defaultPrevented || P?.());
 	}, W);
 	return useEscapeKeydown((n) => {
-		OL === B.layers.size - 1 && (A?.(n), !n.defaultPrevented && P && (n.preventDefault(), P()));
+		pz === B.layers.size - 1 && (A?.(n), !n.defaultPrevented && P && (n.preventDefault(), P()));
 	}, W), React$1.useEffect(() => {
 		if (H) return O && (B.layersWithOutsidePointerEventsDisabled.size === 0 && (originalBodyPointerEvents = W.body.style.pointerEvents, W.body.style.pointerEvents = "none"), B.layersWithOutsidePointerEventsDisabled.add(H)), B.layers.add(H), dispatchUpdate(), () => {
 			O && B.layersWithOutsidePointerEventsDisabled.size === 1 && (W.body.style.pointerEvents = originalBodyPointerEvents);
@@ -1182,12 +1210,12 @@ var DISMISSABLE_LAYER_NAME = "DismissableLayer", CONTEXT_UPDATE = "dismissableLa
 		...z,
 		ref: Z,
 		style: {
-			pointerEvents: kL ? AL ? "auto" : "none" : void 0,
+			pointerEvents: mz ? hz ? "auto" : "none" : void 0,
 			..._.style
 		},
-		onFocusCapture: composeEventHandlers(_.onFocusCapture, ML.onFocusCapture),
-		onBlurCapture: composeEventHandlers(_.onBlurCapture, ML.onBlurCapture),
-		onPointerDownCapture: composeEventHandlers(_.onPointerDownCapture, jL.onPointerDownCapture)
+		onFocusCapture: composeEventHandlers(_.onFocusCapture, _z.onFocusCapture),
+		onBlurCapture: composeEventHandlers(_.onBlurCapture, _z.onBlurCapture),
+		onPointerDownCapture: composeEventHandlers(_.onPointerDownCapture, gz.onPointerDownCapture)
 	});
 });
 DismissableLayer.displayName = DISMISSABLE_LAYER_NAME;
@@ -1384,7 +1412,7 @@ function arrayRemove(n, _) {
 function removeLinks(n) {
 	return n.filter((n) => n.tagName !== "A");
 }
-var PORTAL_NAME$6 = "Portal", Portal = React$1.forwardRef((_, E) => {
+var PORTAL_NAME$7 = "Portal", Portal = React$1.forwardRef((_, E) => {
 	let { container: O, ...A } = _, [j, M] = React$1.useState(!1);
 	useLayoutEffect2(() => M(!0), []);
 	let N = O || j && globalThis?.document?.body;
@@ -1393,7 +1421,7 @@ var PORTAL_NAME$6 = "Portal", Portal = React$1.forwardRef((_, E) => {
 		ref: E
 	}), N) : null;
 });
-Portal.displayName = PORTAL_NAME$6;
+Portal.displayName = PORTAL_NAME$7;
 var count = 0;
 function useFocusGuards() {
 	React$1.useEffect(() => {
@@ -1546,7 +1574,7 @@ var effectCar = createSidecarMedium(), nothing = function() {}, RemoveScroll = R
 		onScrollCapture: nothing,
 		onWheelCapture: nothing,
 		onTouchMoveCapture: nothing
-	}), j = A[0], M = A[1], N = _.forwardProps, P = _.children, z = _.className, B = _.removeScrollBar, H = _.enabled, U = _.shards, W = _.sideCar, G = _.noRelative, Z = _.noIsolation, TL = _.inert, EL = _.allowPinchZoom, DL = _.as, OL = DL === void 0 ? "div" : DL, kL = _.gapMode, AL = __rest(_, [
+	}), j = A[0], M = A[1], N = _.forwardProps, P = _.children, z = _.className, B = _.removeScrollBar, H = _.enabled, U = _.shards, W = _.sideCar, G = _.noRelative, Z = _.noIsolation, uz = _.inert, dz = _.allowPinchZoom, fz = _.as, pz = fz === void 0 ? "div" : fz, mz = _.gapMode, hz = __rest(_, [
 		"forwardProps",
 		"children",
 		"className",
@@ -1560,21 +1588,21 @@ var effectCar = createSidecarMedium(), nothing = function() {}, RemoveScroll = R
 		"allowPinchZoom",
 		"as",
 		"gapMode"
-	]), jL = W, ML = useMergeRefs([O, E]), NL = __assign$2(__assign$2({}, AL), j);
-	return React$1.createElement(React$1.Fragment, null, H && React$1.createElement(jL, {
+	]), gz = W, _z = useMergeRefs([O, E]), vz = __assign$2(__assign$2({}, hz), j);
+	return React$1.createElement(React$1.Fragment, null, H && React$1.createElement(gz, {
 		sideCar: effectCar,
 		removeScrollBar: B,
 		shards: U,
 		noRelative: G,
 		noIsolation: Z,
-		inert: TL,
+		inert: uz,
 		setCallbacks: M,
-		allowPinchZoom: !!EL,
+		allowPinchZoom: !!dz,
 		lockRef: O,
-		gapMode: kL
-	}), N ? React$1.cloneElement(React$1.Children.only(P), __assign$2(__assign$2({}, NL), { ref: ML })) : React$1.createElement(OL, __assign$2({}, NL, {
+		gapMode: mz
+	}), N ? React$1.cloneElement(React$1.Children.only(P), __assign$2(__assign$2({}, vz), { ref: _z })) : React$1.createElement(pz, __assign$2({}, vz, {
 		className: z,
-		ref: ML
+		ref: _z
 	}), P));
 });
 RemoveScroll.defaultProps = {
@@ -1764,8 +1792,8 @@ var nonPassive = passiveSupported ? { passive: !1 } : !1, alwaysContainsScroll =
 		if (!N) break;
 		var W = getScrollVariables(n, N), G = W[0], Z = W[1] - W[2] - j * G;
 		(G || Z) && elementCouldBeScrolled(n, N) && (H += Z, U += G);
-		var TL = N.parentNode;
-		N = TL && TL.nodeType === Node.DOCUMENT_FRAGMENT_NODE ? TL.host : TL;
+		var uz = N.parentNode;
+		N = uz && uz.nodeType === Node.DOCUMENT_FRAGMENT_NODE ? uz.host : uz;
 	} while (!P && N !== document.body || P && (_.contains(N) || _ === N));
 	return (B && (A && Math.abs(H) < 1 || !A && M > H) || !B && (A && Math.abs(U) < 1 || !A && -M > U)) && (z = !0), z;
 }, getTouchXY = function(n) {
@@ -1944,8 +1972,8 @@ var Combination_default = ReactRemoveScroll, getDefaultParent = function(n) {
 	});
 };
 Dialog.displayName = DIALOG_NAME;
-var TRIGGER_NAME$5 = "DialogTrigger", DialogTrigger = React$1.forwardRef((n, _) => {
-	let { __scopeDialog: E, ...O } = n, A = useDialogContext(TRIGGER_NAME$5, E), j = useComposedRefs$1(_, A.triggerRef);
+var TRIGGER_NAME$6 = "DialogTrigger", DialogTrigger = React$1.forwardRef((n, _) => {
+	let { __scopeDialog: E, ...O } = n, A = useDialogContext(TRIGGER_NAME$6, E), j = useComposedRefs$1(_, A.triggerRef);
 	return /* @__PURE__ */ jsx(Primitive.button, {
 		type: "button",
 		"aria-haspopup": "dialog",
@@ -1957,9 +1985,9 @@ var TRIGGER_NAME$5 = "DialogTrigger", DialogTrigger = React$1.forwardRef((n, _) 
 		onClick: composeEventHandlers(n.onClick, A.onOpenToggle)
 	});
 });
-DialogTrigger.displayName = TRIGGER_NAME$5;
-var PORTAL_NAME$5 = "DialogPortal", [PortalProvider$3, usePortalContext$3] = createDialogContext(PORTAL_NAME$5, { forceMount: void 0 }), DialogPortal = (_) => {
-	let { __scopeDialog: E, forceMount: O, children: A, container: j } = _, M = useDialogContext(PORTAL_NAME$5, E);
+DialogTrigger.displayName = TRIGGER_NAME$6;
+var PORTAL_NAME$6 = "DialogPortal", [PortalProvider$3, usePortalContext$3] = createDialogContext(PORTAL_NAME$6, { forceMount: void 0 }), DialogPortal = (_) => {
+	let { __scopeDialog: E, forceMount: O, children: A, container: j } = _, M = useDialogContext(PORTAL_NAME$6, E);
 	return /* @__PURE__ */ jsx(PortalProvider$3, {
 		scope: E,
 		forceMount: O,
@@ -1973,7 +2001,7 @@ var PORTAL_NAME$5 = "DialogPortal", [PortalProvider$3, usePortalContext$3] = cre
 		}))
 	});
 };
-DialogPortal.displayName = PORTAL_NAME$5;
+DialogPortal.displayName = PORTAL_NAME$6;
 var OVERLAY_NAME = "DialogOverlay", DialogOverlay = React$1.forwardRef((n, _) => {
 	let E = usePortalContext$3(OVERLAY_NAME, n.__scopeDialog), { forceMount: O = E.forceMount, ...A } = n, j = useDialogContext(OVERLAY_NAME, n.__scopeDialog);
 	return j.modal ? /* @__PURE__ */ jsx(Presence, {
@@ -1985,10 +2013,10 @@ var OVERLAY_NAME = "DialogOverlay", DialogOverlay = React$1.forwardRef((n, _) =>
 	}) : null;
 });
 DialogOverlay.displayName = OVERLAY_NAME;
-var Slot$2 = /* @__PURE__ */ createSlot("DialogOverlay.RemoveScroll"), DialogOverlayImpl = React$1.forwardRef((n, _) => {
+var Slot$3 = /* @__PURE__ */ createSlot("DialogOverlay.RemoveScroll"), DialogOverlayImpl = React$1.forwardRef((n, _) => {
 	let { __scopeDialog: E, ...O } = n, A = useDialogContext(OVERLAY_NAME, E);
 	return /* @__PURE__ */ jsx(Combination_default, {
-		as: Slot$2,
+		as: Slot$3,
 		allowPinchZoom: !0,
 		shards: [A.contentRef],
 		children: /* @__PURE__ */ jsx(Primitive.div, {
@@ -2001,8 +2029,8 @@ var Slot$2 = /* @__PURE__ */ createSlot("DialogOverlay.RemoveScroll"), DialogOve
 			}
 		})
 	});
-}), CONTENT_NAME$7 = "DialogContent", DialogContent = React$1.forwardRef((n, _) => {
-	let E = usePortalContext$3(CONTENT_NAME$7, n.__scopeDialog), { forceMount: O = E.forceMount, ...A } = n, j = useDialogContext(CONTENT_NAME$7, n.__scopeDialog);
+}), CONTENT_NAME$8 = "DialogContent", DialogContent = React$1.forwardRef((n, _) => {
+	let E = usePortalContext$3(CONTENT_NAME$8, n.__scopeDialog), { forceMount: O = E.forceMount, ...A } = n, j = useDialogContext(CONTENT_NAME$8, n.__scopeDialog);
 	return /* @__PURE__ */ jsx(Presence, {
 		present: O || j.open,
 		children: j.modal ? /* @__PURE__ */ jsx(DialogContentModal, {
@@ -2014,9 +2042,9 @@ var Slot$2 = /* @__PURE__ */ createSlot("DialogOverlay.RemoveScroll"), DialogOve
 		})
 	});
 });
-DialogContent.displayName = CONTENT_NAME$7;
+DialogContent.displayName = CONTENT_NAME$8;
 var DialogContentModal = React$1.forwardRef((_, E) => {
-	let O = useDialogContext(CONTENT_NAME$7, _.__scopeDialog), A = React$1.useRef(null), j = useComposedRefs$1(E, O.contentRef, A);
+	let O = useDialogContext(CONTENT_NAME$8, _.__scopeDialog), A = React$1.useRef(null), j = useComposedRefs$1(E, O.contentRef, A);
 	return React$1.useEffect(() => {
 		let n = A.current;
 		if (n) return hideOthers(n);
@@ -2035,7 +2063,7 @@ var DialogContentModal = React$1.forwardRef((_, E) => {
 		onFocusOutside: composeEventHandlers(_.onFocusOutside, (n) => n.preventDefault())
 	});
 }), DialogContentNonModal = React$1.forwardRef((_, E) => {
-	let O = useDialogContext(CONTENT_NAME$7, _.__scopeDialog), A = React$1.useRef(!1), j = React$1.useRef(!1);
+	let O = useDialogContext(CONTENT_NAME$8, _.__scopeDialog), A = React$1.useRef(!1), j = React$1.useRef(!1);
 	return /* @__PURE__ */ jsx(DialogContentImpl, {
 		..._,
 		ref: E,
@@ -2051,7 +2079,7 @@ var DialogContentModal = React$1.forwardRef((_, E) => {
 		}
 	});
 }), DialogContentImpl = React$1.forwardRef((_, E) => {
-	let { __scopeDialog: O, trapFocus: A, onOpenAutoFocus: j, onCloseAutoFocus: M, ...N } = _, P = useDialogContext(CONTENT_NAME$7, O), z = React$1.useRef(null), B = useComposedRefs$1(E, z);
+	let { __scopeDialog: O, trapFocus: A, onOpenAutoFocus: j, onCloseAutoFocus: M, ...N } = _, P = useDialogContext(CONTENT_NAME$8, O), z = React$1.useRef(null), B = useComposedRefs$1(E, z);
 	return useFocusGuards(), /* @__PURE__ */ jsxs(Fragment$1, { children: [/* @__PURE__ */ jsx(FocusScope, {
 		asChild: !0,
 		loop: !0,
@@ -2104,7 +2132,7 @@ function getState$2(n) {
 	return n ? "open" : "closed";
 }
 var TITLE_WARNING_NAME = "DialogTitleWarning", [WarningProvider, useWarningContext] = createContext2(TITLE_WARNING_NAME, {
-	contentName: CONTENT_NAME$7,
+	contentName: CONTENT_NAME$8,
 	titleName: TITLE_NAME,
 	docsSlug: "dialog"
 }), TitleWarning = ({ titleId: _ }) => {
@@ -2126,7 +2154,7 @@ For more information, see https://radix-ui.com/primitives/docs/components/${E.do
 		_,
 		E
 	]), null;
-}, Root$5 = Dialog, Trigger$5 = DialogTrigger, Portal$4 = DialogPortal, Overlay = DialogOverlay, Content$2 = DialogContent, Title = DialogTitle, Description = DialogDescription, Close$1 = DialogClose;
+}, Root$5 = Dialog, Trigger$6 = DialogTrigger, Portal$5 = DialogPortal, Overlay = DialogOverlay, Content$2 = DialogContent, Title = DialogTitle, Description = DialogDescription, Close$1 = DialogClose;
 function usePrevious$1(_) {
 	let E = React$1.useRef({
 		value: _,
@@ -2312,25 +2340,25 @@ async function detectOverflow$1(n, _) {
 		boundary: P,
 		rootBoundary: z,
 		strategy: N
-	})), TL = B === "floating" ? {
+	})), uz = B === "floating" ? {
 		x: E,
 		y: O,
 		width: j.floating.width,
 		height: j.floating.height
-	} : j.reference, EL = await (A.getOffsetParent == null ? void 0 : A.getOffsetParent(M.floating)), DL = await (A.isElement == null ? void 0 : A.isElement(EL)) && await (A.getScale == null ? void 0 : A.getScale(EL)) || {
+	} : j.reference, dz = await (A.getOffsetParent == null ? void 0 : A.getOffsetParent(M.floating)), fz = await (A.isElement == null ? void 0 : A.isElement(dz)) && await (A.getScale == null ? void 0 : A.getScale(dz)) || {
 		x: 1,
 		y: 1
-	}, OL = rectToClientRect(A.convertOffsetParentRelativeRectToViewportRelativeRect ? await A.convertOffsetParentRelativeRectToViewportRelativeRect({
+	}, pz = rectToClientRect(A.convertOffsetParentRelativeRectToViewportRelativeRect ? await A.convertOffsetParentRelativeRectToViewportRelativeRect({
 		elements: M,
-		rect: TL,
-		offsetParent: EL,
+		rect: uz,
+		offsetParent: dz,
 		strategy: N
-	}) : TL);
+	}) : uz);
 	return {
-		top: (Z.top - OL.top + W.top) / DL.y,
-		bottom: (OL.bottom - Z.bottom + W.bottom) / DL.y,
-		left: (Z.left - OL.left + W.left) / DL.x,
-		right: (OL.right - Z.right + W.right) / DL.x
+		top: (Z.top - pz.top + W.top) / fz.y,
+		bottom: (pz.bottom - Z.bottom + W.bottom) / fz.y,
+		left: (Z.left - pz.left + W.left) / fz.x,
+		right: (pz.right - Z.right + W.right) / fz.x
 	};
 }
 var computePosition$1 = async (n, _, E) => {
@@ -2340,7 +2368,7 @@ var computePosition$1 = async (n, _, E) => {
 		strategy: A
 	}), { x: B, y: H } = computeCoordsFromPlacement(z, O, P), U = O, W = {}, G = 0;
 	for (let E = 0; E < N.length; E++) {
-		let { name: j, fn: Z } = N[E], { x: TL, y: EL, data: DL, reset: OL } = await Z({
+		let { name: j, fn: Z } = N[E], { x: uz, y: dz, data: fz, reset: pz } = await Z({
 			x: B,
 			y: H,
 			initialPlacement: O,
@@ -2357,17 +2385,17 @@ var computePosition$1 = async (n, _, E) => {
 				floating: _
 			}
 		});
-		B = TL ?? B, H = EL ?? H, W = {
+		B = uz ?? B, H = dz ?? H, W = {
 			...W,
 			[j]: {
 				...W[j],
-				...DL
+				...fz
 			}
-		}, OL && G <= 50 && (G++, typeof OL == "object" && (OL.placement && (U = OL.placement), OL.rects && (z = OL.rects === !0 ? await M.getElementRects({
+		}, pz && G <= 50 && (G++, typeof pz == "object" && (pz.placement && (U = pz.placement), pz.rects && (z = pz.rects === !0 ? await M.getElementRects({
 			reference: n,
 			floating: _,
 			strategy: A
-		}) : OL.rects), {x: B, y: H} = computeCoordsFromPlacement(z, U, P)), E = -1);
+		}) : pz.rects), {x: B, y: H} = computeCoordsFromPlacement(z, U, P)), E = -1);
 	}
 	return {
 		x: B,
@@ -2385,17 +2413,17 @@ var computePosition$1 = async (n, _, E) => {
 		let H = getPaddingObject(B), U = {
 			x: E,
 			y: O
-		}, W = getAlignmentAxis(A), G = getAxisLength(W), Z = await M.getDimensions(z), TL = W === "y", EL = TL ? "top" : "left", DL = TL ? "bottom" : "right", OL = TL ? "clientHeight" : "clientWidth", kL = j.reference[G] + j.reference[W] - U[W] - j.floating[G], AL = U[W] - j.reference[W], jL = await (M.getOffsetParent == null ? void 0 : M.getOffsetParent(z)), ML = jL ? jL[OL] : 0;
-		(!ML || !await (M.isElement == null ? void 0 : M.isElement(jL))) && (ML = N.floating[OL] || j.floating[G]);
-		let NL = kL / 2 - AL / 2, PL = ML / 2 - Z[G] / 2 - 1, FL = min(H[EL], PL), IL = min(H[DL], PL), LL = FL, RL = ML - Z[G] - IL, zL = ML / 2 - Z[G] / 2 + NL, BL = clamp$3(LL, zL, RL), VL = !P.arrow && getAlignment(A) != null && zL !== BL && j.reference[G] / 2 - (zL < LL ? FL : IL) - Z[G] / 2 < 0, HL = VL ? zL < LL ? zL - LL : zL - RL : 0;
+		}, W = getAlignmentAxis(A), G = getAxisLength(W), Z = await M.getDimensions(z), uz = W === "y", dz = uz ? "top" : "left", fz = uz ? "bottom" : "right", pz = uz ? "clientHeight" : "clientWidth", mz = j.reference[G] + j.reference[W] - U[W] - j.floating[G], hz = U[W] - j.reference[W], gz = await (M.getOffsetParent == null ? void 0 : M.getOffsetParent(z)), _z = gz ? gz[pz] : 0;
+		(!_z || !await (M.isElement == null ? void 0 : M.isElement(gz))) && (_z = N.floating[pz] || j.floating[G]);
+		let vz = mz / 2 - hz / 2, yz = _z / 2 - Z[G] / 2 - 1, bz = min(H[dz], yz), xz = min(H[fz], yz), Sz = bz, Cz = _z - Z[G] - xz, wz = _z / 2 - Z[G] / 2 + vz, Tz = clamp$3(Sz, wz, Cz), Ez = !P.arrow && getAlignment(A) != null && wz !== Tz && j.reference[G] / 2 - (wz < Sz ? bz : xz) - Z[G] / 2 < 0, Dz = Ez ? wz < Sz ? wz - Sz : wz - Cz : 0;
 		return {
-			[W]: U[W] + HL,
+			[W]: U[W] + Dz,
 			data: {
-				[W]: BL,
-				centerOffset: zL - BL - HL,
-				...VL && { alignmentOffset: HL }
+				[W]: Tz,
+				centerOffset: wz - Tz - Dz,
+				...Ez && { alignmentOffset: Dz }
 			},
-			reset: VL
+			reset: Ez
 		};
 	}
 }), flip$2 = function(n) {
@@ -2406,32 +2434,32 @@ var computePosition$1 = async (n, _, E) => {
 			var E;
 			let { placement: O, middlewareData: A, rects: j, initialPlacement: M, platform: N, elements: P } = _, { mainAxis: z = !0, crossAxis: B = !0, fallbackPlacements: H, fallbackStrategy: U = "bestFit", fallbackAxisSideDirection: W = "none", flipAlignment: G = !0, ...Z } = evaluate(n, _);
 			if ((E = A.arrow) != null && E.alignmentOffset) return {};
-			let TL = getSide(O), EL = getSideAxis(M), DL = getSide(M) === M, OL = await (N.isRTL == null ? void 0 : N.isRTL(P.floating)), kL = H || (DL || !G ? [getOppositePlacement(M)] : getExpandedPlacements(M)), AL = W !== "none";
-			!H && AL && kL.push(...getOppositeAxisPlacements(M, G, W, OL));
-			let jL = [M, ...kL], ML = await N.detectOverflow(_, Z), NL = [], PL = A.flip?.overflows || [];
-			if (z && NL.push(ML[TL]), B) {
-				let n = getAlignmentSides(O, j, OL);
-				NL.push(ML[n[0]], ML[n[1]]);
+			let uz = getSide(O), dz = getSideAxis(M), fz = getSide(M) === M, pz = await (N.isRTL == null ? void 0 : N.isRTL(P.floating)), mz = H || (fz || !G ? [getOppositePlacement(M)] : getExpandedPlacements(M)), hz = W !== "none";
+			!H && hz && mz.push(...getOppositeAxisPlacements(M, G, W, pz));
+			let gz = [M, ...mz], _z = await N.detectOverflow(_, Z), vz = [], yz = A.flip?.overflows || [];
+			if (z && vz.push(_z[uz]), B) {
+				let n = getAlignmentSides(O, j, pz);
+				vz.push(_z[n[0]], _z[n[1]]);
 			}
-			if (PL = [...PL, {
+			if (yz = [...yz, {
 				placement: O,
-				overflows: NL
-			}], !NL.every((n) => n <= 0)) {
-				let n = (A.flip?.index || 0) + 1, _ = jL[n];
-				if (_ && (!(B === "alignment" && EL !== getSideAxis(_)) || PL.every((n) => getSideAxis(n.placement) === EL ? n.overflows[0] > 0 : !0))) return {
+				overflows: vz
+			}], !vz.every((n) => n <= 0)) {
+				let n = (A.flip?.index || 0) + 1, _ = gz[n];
+				if (_ && (!(B === "alignment" && dz !== getSideAxis(_)) || yz.every((n) => getSideAxis(n.placement) === dz ? n.overflows[0] > 0 : !0))) return {
 					data: {
 						index: n,
-						overflows: PL
+						overflows: yz
 					},
 					reset: { placement: _ }
 				};
-				let E = PL.filter((n) => n.overflows[0] <= 0).sort((n, _) => n.overflows[1] - _.overflows[1])[0]?.placement;
+				let E = yz.filter((n) => n.overflows[0] <= 0).sort((n, _) => n.overflows[1] - _.overflows[1])[0]?.placement;
 				if (!E) switch (U) {
 					case "bestFit": {
-						let n = PL.filter((n) => {
-							if (AL) {
+						let n = yz.filter((n) => {
+							if (hz) {
 								let _ = getSideAxis(n.placement);
-								return _ === EL || _ === "y";
+								return _ === dz || _ === "y";
 							}
 							return !0;
 						}).map((n) => [n.placement, n.overflows.filter((n) => n > 0).reduce((n, _) => n + _, 0)]).sort((n, _) => n[1] - _[1])[0]?.[0];
@@ -2549,16 +2577,16 @@ var offset$2 = function(n) {
 				let n = U === "y" ? "top" : "left", _ = U === "y" ? "bottom" : "right", E = Z + H[n], O = Z - H[_];
 				Z = clamp$3(E, Z, O);
 			}
-			let TL = P.fn({
+			let uz = P.fn({
 				..._,
 				[W]: G,
 				[U]: Z
 			});
 			return {
-				...TL,
+				...uz,
 				data: {
-					x: TL.x - E,
-					y: TL.y - O,
+					x: uz.x - E,
+					y: uz.y - O,
 					enabled: {
 						[W]: M,
 						[U]: N
@@ -2574,7 +2602,7 @@ var offset$2 = function(n) {
 			let { x: E, y: O, placement: A, rects: j, middlewareData: M } = _, { offset: N = 0, mainAxis: P = !0, crossAxis: z = !0 } = evaluate(n, _), B = {
 				x: E,
 				y: O
-			}, H = getSideAxis(A), U = getOppositeAxis(H), W = B[U], G = B[H], Z = evaluate(N, _), TL = typeof Z == "number" ? {
+			}, H = getSideAxis(A), U = getOppositeAxis(H), W = B[U], G = B[H], Z = evaluate(N, _), uz = typeof Z == "number" ? {
 				mainAxis: Z,
 				crossAxis: 0
 			} : {
@@ -2583,11 +2611,11 @@ var offset$2 = function(n) {
 				...Z
 			};
 			if (P) {
-				let n = U === "y" ? "height" : "width", _ = j.reference[U] - j.floating[n] + TL.mainAxis, E = j.reference[U] + j.reference[n] - TL.mainAxis;
+				let n = U === "y" ? "height" : "width", _ = j.reference[U] - j.floating[n] + uz.mainAxis, E = j.reference[U] + j.reference[n] - uz.mainAxis;
 				W < _ ? W = _ : W > E && (W = E);
 			}
 			if (z) {
-				let n = U === "y" ? "width" : "height", _ = originSides.has(getSide(A)), E = j.reference[H] - j.floating[n] + (_ && M.offset?.[H] || 0) + (_ ? 0 : TL.crossAxis), O = j.reference[H] + j.reference[n] + (_ ? 0 : M.offset?.[H] || 0) - (_ ? TL.crossAxis : 0);
+				let n = U === "y" ? "width" : "height", _ = originSides.has(getSide(A)), E = j.reference[H] - j.floating[n] + (_ && M.offset?.[H] || 0) + (_ ? 0 : uz.crossAxis), O = j.reference[H] + j.reference[n] + (_ ? 0 : M.offset?.[H] || 0) - (_ ? uz.crossAxis : 0);
 				G < E ? G = E : G > O && (G = O);
 			}
 			return {
@@ -2602,20 +2630,20 @@ var offset$2 = function(n) {
 		options: n,
 		async fn(_) {
 			var E, O;
-			let { placement: A, rects: j, platform: M, elements: N } = _, { apply: P = () => {}, ...z } = evaluate(n, _), B = await M.detectOverflow(_, z), H = getSide(A), U = getAlignment(A), W = getSideAxis(A) === "y", { width: G, height: Z } = j.floating, TL, EL;
-			H === "top" || H === "bottom" ? (TL = H, EL = U === (await (M.isRTL == null ? void 0 : M.isRTL(N.floating)) ? "start" : "end") ? "left" : "right") : (EL = H, TL = U === "end" ? "top" : "bottom");
-			let DL = Z - B.top - B.bottom, OL = G - B.left - B.right, kL = min(Z - B[TL], DL), AL = min(G - B[EL], OL), jL = !_.middlewareData.shift, ML = kL, NL = AL;
-			if ((E = _.middlewareData.shift) != null && E.enabled.x && (NL = OL), (O = _.middlewareData.shift) != null && O.enabled.y && (ML = DL), jL && !U) {
+			let { placement: A, rects: j, platform: M, elements: N } = _, { apply: P = () => {}, ...z } = evaluate(n, _), B = await M.detectOverflow(_, z), H = getSide(A), U = getAlignment(A), W = getSideAxis(A) === "y", { width: G, height: Z } = j.floating, uz, dz;
+			H === "top" || H === "bottom" ? (uz = H, dz = U === (await (M.isRTL == null ? void 0 : M.isRTL(N.floating)) ? "start" : "end") ? "left" : "right") : (dz = H, uz = U === "end" ? "top" : "bottom");
+			let fz = Z - B.top - B.bottom, pz = G - B.left - B.right, mz = min(Z - B[uz], fz), hz = min(G - B[dz], pz), gz = !_.middlewareData.shift, _z = mz, vz = hz;
+			if ((E = _.middlewareData.shift) != null && E.enabled.x && (vz = pz), (O = _.middlewareData.shift) != null && O.enabled.y && (_z = fz), gz && !U) {
 				let n = max(B.left, 0), _ = max(B.right, 0), E = max(B.top, 0), O = max(B.bottom, 0);
-				W ? NL = G - 2 * (n !== 0 || _ !== 0 ? n + _ : max(B.left, B.right)) : ML = Z - 2 * (E !== 0 || O !== 0 ? E + O : max(B.top, B.bottom));
+				W ? vz = G - 2 * (n !== 0 || _ !== 0 ? n + _ : max(B.left, B.right)) : _z = Z - 2 * (E !== 0 || O !== 0 ? E + O : max(B.top, B.bottom));
 			}
 			await P({
 				..._,
-				availableWidth: NL,
-				availableHeight: ML
+				availableWidth: vz,
+				availableHeight: _z
 			});
-			let PL = await M.getDimensions(N.floating);
-			return G !== PL.width || Z !== PL.height ? { reset: { rects: !0 } } : {};
+			let yz = await M.getDimensions(N.floating);
+			return G !== yz.width || Z !== yz.height ? { reset: { rects: !0 } } : {};
 		}
 	};
 };
@@ -2999,27 +3027,27 @@ function observeMove(n, _) {
 		N === void 0 && (N = !1), P === void 0 && (P = 1), j();
 		let z = n.getBoundingClientRect(), { left: B, top: H, width: U, height: W } = z;
 		if (N || _(), !U || !W) return;
-		let G = floor(H), Z = floor(A.clientWidth - (B + U)), TL = floor(A.clientHeight - (H + W)), EL = floor(B), DL = {
-			rootMargin: -G + "px " + -Z + "px " + -TL + "px " + -EL + "px",
+		let G = floor(H), Z = floor(A.clientWidth - (B + U)), uz = floor(A.clientHeight - (H + W)), dz = floor(B), fz = {
+			rootMargin: -G + "px " + -Z + "px " + -uz + "px " + -dz + "px",
 			threshold: max(0, min(1, P)) || 1
-		}, OL = !0;
-		function kL(_) {
+		}, pz = !0;
+		function mz(_) {
 			let E = _[0].intersectionRatio;
 			if (E !== P) {
-				if (!OL) return M();
+				if (!pz) return M();
 				E ? M(!1, E) : O = setTimeout(() => {
 					M(!1, 1e-7);
 				}, 1e3);
 			}
-			E === 1 && !rectsAreEqual(z, n.getBoundingClientRect()) && M(), OL = !1;
+			E === 1 && !rectsAreEqual(z, n.getBoundingClientRect()) && M(), pz = !1;
 		}
 		try {
-			E = new IntersectionObserver(kL, {
-				...DL,
+			E = new IntersectionObserver(mz, {
+				...fz,
 				root: A.ownerDocument
 			});
 		} catch {
-			E = new IntersectionObserver(kL, DL);
+			E = new IntersectionObserver(mz, fz);
 		}
 		E.observe(n);
 	}
@@ -3040,10 +3068,10 @@ function autoUpdate(n, _, E, O) {
 		})), E();
 	}), z && !P && W.observe(z), W.observe(_));
 	let G, Z = P ? getBoundingClientRect(n) : null;
-	P && TL();
-	function TL() {
+	P && uz();
+	function uz() {
 		let _ = getBoundingClientRect(n);
-		Z && !rectsAreEqual(Z, _) && E(), Z = _, G = requestAnimationFrame(TL);
+		Z && !rectsAreEqual(Z, _) && E(), Z = _, G = requestAnimationFrame(uz);
 	}
 	return E(), () => {
 		var n;
@@ -3110,23 +3138,23 @@ function useFloating(_) {
 		isPositioned: !1
 	}), [W, G] = React$1.useState(A);
 	deepEqual(W, A) || G(A);
-	let [Z, TL] = React$1.useState(null), [EL, DL] = React$1.useState(null), OL = React$1.useCallback((n) => {
-		n !== NL.current && (NL.current = n, TL(n));
-	}, []), kL = React$1.useCallback((n) => {
-		n !== PL.current && (PL.current = n, DL(n));
-	}, []), AL = M || Z, jL = N || EL, NL = React$1.useRef(null), PL = React$1.useRef(null), FL = React$1.useRef(H), IL = z != null, LL = useLatestRef(z), RL = useLatestRef(j), zL = useLatestRef(B), BL = React$1.useCallback(() => {
-		if (!NL.current || !PL.current) return;
+	let [Z, uz] = React$1.useState(null), [dz, fz] = React$1.useState(null), pz = React$1.useCallback((n) => {
+		n !== vz.current && (vz.current = n, uz(n));
+	}, []), mz = React$1.useCallback((n) => {
+		n !== yz.current && (yz.current = n, fz(n));
+	}, []), hz = M || Z, gz = N || dz, vz = React$1.useRef(null), yz = React$1.useRef(null), bz = React$1.useRef(H), xz = z != null, Sz = useLatestRef(z), Cz = useLatestRef(j), wz = useLatestRef(B), Tz = React$1.useCallback(() => {
+		if (!vz.current || !yz.current) return;
 		let n = {
 			placement: E,
 			strategy: O,
 			middleware: W
 		};
-		RL.current && (n.platform = RL.current), computePosition(NL.current, PL.current, n).then((n) => {
+		Cz.current && (n.platform = Cz.current), computePosition(vz.current, yz.current, n).then((n) => {
 			let _ = {
 				...n,
-				isPositioned: zL.current !== !1
+				isPositioned: wz.current !== !1
 			};
-			VL.current && !deepEqual(FL.current, _) && (FL.current = _, ReactDOM$1.flushSync(() => {
+			Ez.current && !deepEqual(bz.current, _) && (bz.current = _, ReactDOM$1.flushSync(() => {
 				U(_);
 			}));
 		});
@@ -3134,50 +3162,50 @@ function useFloating(_) {
 		W,
 		E,
 		O,
-		RL,
-		zL
+		Cz,
+		wz
 	]);
 	index(() => {
-		B === !1 && FL.current.isPositioned && (FL.current.isPositioned = !1, U((n) => ({
+		B === !1 && bz.current.isPositioned && (bz.current.isPositioned = !1, U((n) => ({
 			...n,
 			isPositioned: !1
 		})));
 	}, [B]);
-	let VL = React$1.useRef(!1);
-	index(() => (VL.current = !0, () => {
-		VL.current = !1;
+	let Ez = React$1.useRef(!1);
+	index(() => (Ez.current = !0, () => {
+		Ez.current = !1;
 	}), []), index(() => {
-		if (AL && (NL.current = AL), jL && (PL.current = jL), AL && jL) {
-			if (LL.current) return LL.current(AL, jL, BL);
-			BL();
+		if (hz && (vz.current = hz), gz && (yz.current = gz), hz && gz) {
+			if (Sz.current) return Sz.current(hz, gz, Tz);
+			Tz();
 		}
 	}, [
-		AL,
-		jL,
-		BL,
-		LL,
-		IL
+		hz,
+		gz,
+		Tz,
+		Sz,
+		xz
 	]);
-	let HL = React$1.useMemo(() => ({
-		reference: NL,
-		floating: PL,
-		setReference: OL,
-		setFloating: kL
-	}), [OL, kL]), UL = React$1.useMemo(() => ({
-		reference: AL,
-		floating: jL
-	}), [AL, jL]), WL = React$1.useMemo(() => {
+	let Dz = React$1.useMemo(() => ({
+		reference: vz,
+		floating: yz,
+		setReference: pz,
+		setFloating: mz
+	}), [pz, mz]), Oz = React$1.useMemo(() => ({
+		reference: hz,
+		floating: gz
+	}), [hz, gz]), kz = React$1.useMemo(() => {
 		let n = {
 			position: O,
 			left: 0,
 			top: 0
 		};
-		if (!UL.floating) return n;
-		let _ = roundByDPR(UL.floating, H.x), E = roundByDPR(UL.floating, H.y);
+		if (!Oz.floating) return n;
+		let _ = roundByDPR(Oz.floating, H.x), E = roundByDPR(Oz.floating, H.y);
 		return P ? {
 			...n,
 			transform: "translate(" + _ + "px, " + E + "px)",
-			...getDPR(UL.floating) >= 1.5 && { willChange: "transform" }
+			...getDPR(Oz.floating) >= 1.5 && { willChange: "transform" }
 		} : {
 			position: O,
 			left: _,
@@ -3186,22 +3214,22 @@ function useFloating(_) {
 	}, [
 		O,
 		P,
-		UL.floating,
+		Oz.floating,
 		H.x,
 		H.y
 	]);
 	return React$1.useMemo(() => ({
 		...H,
-		update: BL,
-		refs: HL,
-		elements: UL,
-		floatingStyles: WL
+		update: Tz,
+		refs: Dz,
+		elements: Oz,
+		floatingStyles: kz
 	}), [
 		H,
-		BL,
-		HL,
-		UL,
-		WL
+		Tz,
+		Dz,
+		Oz,
+		kz
 	]);
 }
 var arrow$1$1 = (n) => {
@@ -3277,71 +3305,71 @@ var ANCHOR_NAME$2 = "PopperAnchor", PopperAnchor = React$1.forwardRef((_, E) => 
 	});
 });
 PopperAnchor.displayName = ANCHOR_NAME$2;
-var CONTENT_NAME$6 = "PopperContent", [PopperContentProvider, useContentContext] = createPopperContext(CONTENT_NAME$6), PopperContent = React$1.forwardRef((_, E) => {
-	let { __scopePopper: O, side: A = "bottom", sideOffset: j = 0, align: M = "center", alignOffset: N = 0, arrowPadding: P = 0, avoidCollisions: z = !0, collisionBoundary: B = [], collisionPadding: H = 0, sticky: U = "partial", hideWhenDetached: W = !1, updatePositionStrategy: G = "optimized", onPlaced: Z, ...TL } = _, EL = usePopperContext(CONTENT_NAME$6, O), [DL, OL] = React$1.useState(null), kL = useComposedRefs$1(E, (n) => OL(n)), [AL, jL] = React$1.useState(null), ML = useSize(AL), NL = ML?.width ?? 0, PL = ML?.height ?? 0, FL = A + (M === "center" ? "" : "-" + M), IL = typeof H == "number" ? H : {
+var CONTENT_NAME$7 = "PopperContent", [PopperContentProvider, useContentContext] = createPopperContext(CONTENT_NAME$7), PopperContent = React$1.forwardRef((_, E) => {
+	let { __scopePopper: O, side: A = "bottom", sideOffset: j = 0, align: M = "center", alignOffset: N = 0, arrowPadding: P = 0, avoidCollisions: z = !0, collisionBoundary: B = [], collisionPadding: H = 0, sticky: U = "partial", hideWhenDetached: W = !1, updatePositionStrategy: G = "optimized", onPlaced: Z, ...uz } = _, dz = usePopperContext(CONTENT_NAME$7, O), [fz, pz] = React$1.useState(null), mz = useComposedRefs$1(E, (n) => pz(n)), [hz, gz] = React$1.useState(null), _z = useSize(hz), vz = _z?.width ?? 0, yz = _z?.height ?? 0, bz = A + (M === "center" ? "" : "-" + M), xz = typeof H == "number" ? H : {
 		top: 0,
 		right: 0,
 		bottom: 0,
 		left: 0,
 		...H
-	}, LL = Array.isArray(B) ? B : [B], zL = LL.length > 0, BL = {
-		padding: IL,
-		boundary: LL.filter(isNotNull$2),
-		altBoundary: zL
-	}, { refs: VL, floatingStyles: HL, placement: UL, isPositioned: WL, middlewareData: GL } = useFloating({
+	}, Sz = Array.isArray(B) ? B : [B], wz = Sz.length > 0, Tz = {
+		padding: xz,
+		boundary: Sz.filter(isNotNull$2),
+		altBoundary: wz
+	}, { refs: Ez, floatingStyles: Dz, placement: Oz, isPositioned: kz, middlewareData: Az } = useFloating({
 		strategy: "fixed",
-		placement: FL,
+		placement: bz,
 		whileElementsMounted: (...n) => autoUpdate(...n, { animationFrame: G === "always" }),
-		elements: { reference: EL.anchor },
+		elements: { reference: dz.anchor },
 		middleware: [
 			offset({
-				mainAxis: j + PL,
+				mainAxis: j + yz,
 				alignmentAxis: N
 			}),
 			z && shift({
 				mainAxis: !0,
 				crossAxis: !1,
 				limiter: U === "partial" ? limitShift() : void 0,
-				...BL
+				...Tz
 			}),
-			z && flip({ ...BL }),
+			z && flip({ ...Tz }),
 			size({
-				...BL,
+				...Tz,
 				apply: ({ elements: n, rects: _, availableWidth: E, availableHeight: O }) => {
 					let { width: A, height: j } = _.reference, M = n.floating.style;
 					M.setProperty("--radix-popper-available-width", `${E}px`), M.setProperty("--radix-popper-available-height", `${O}px`), M.setProperty("--radix-popper-anchor-width", `${A}px`), M.setProperty("--radix-popper-anchor-height", `${j}px`);
 				}
 			}),
-			AL && arrow({
-				element: AL,
+			hz && arrow({
+				element: hz,
 				padding: P
 			}),
 			transformOrigin({
-				arrowWidth: NL,
-				arrowHeight: PL
+				arrowWidth: vz,
+				arrowHeight: yz
 			}),
 			W && hide({
 				strategy: "referenceHidden",
-				...BL
+				...Tz
 			})
 		]
-	}), [KL, qL] = getSideAndAlignFromPlacement(UL), JL = useCallbackRef(Z);
+	}), [jz, Mz] = getSideAndAlignFromPlacement(Oz), Nz = useCallbackRef(Z);
 	useLayoutEffect2(() => {
-		WL && JL?.();
-	}, [WL, JL]);
-	let YL = GL.arrow?.x, XL = GL.arrow?.y, ZL = GL.arrow?.centerOffset !== 0, [QL, $L] = React$1.useState();
+		kz && Nz?.();
+	}, [kz, Nz]);
+	let Pz = Az.arrow?.x, Fz = Az.arrow?.y, Iz = Az.arrow?.centerOffset !== 0, [Lz, Rz] = React$1.useState();
 	return useLayoutEffect2(() => {
-		DL && $L(window.getComputedStyle(DL).zIndex);
-	}, [DL]), /* @__PURE__ */ jsx("div", {
-		ref: VL.setFloating,
+		fz && Rz(window.getComputedStyle(fz).zIndex);
+	}, [fz]), /* @__PURE__ */ jsx("div", {
+		ref: Ez.setFloating,
 		"data-radix-popper-content-wrapper": "",
 		style: {
-			...HL,
-			transform: WL ? HL.transform : "translate(0, -200%)",
+			...Dz,
+			transform: kz ? Dz.transform : "translate(0, -200%)",
 			minWidth: "max-content",
-			zIndex: QL,
-			"--radix-popper-transform-origin": [GL.transformOrigin?.x, GL.transformOrigin?.y].join(" "),
-			...GL.hide?.referenceHidden && {
+			zIndex: Lz,
+			"--radix-popper-transform-origin": [Az.transformOrigin?.x, Az.transformOrigin?.y].join(" "),
+			...Az.hide?.referenceHidden && {
 				visibility: "hidden",
 				pointerEvents: "none"
 			}
@@ -3349,32 +3377,32 @@ var CONTENT_NAME$6 = "PopperContent", [PopperContentProvider, useContentContext]
 		dir: _.dir,
 		children: /* @__PURE__ */ jsx(PopperContentProvider, {
 			scope: O,
-			placedSide: KL,
-			onArrowChange: jL,
-			arrowX: YL,
-			arrowY: XL,
-			shouldHideArrow: ZL,
+			placedSide: jz,
+			onArrowChange: gz,
+			arrowX: Pz,
+			arrowY: Fz,
+			shouldHideArrow: Iz,
 			children: /* @__PURE__ */ jsx(Primitive.div, {
-				"data-side": KL,
-				"data-align": qL,
-				...TL,
-				ref: kL,
+				"data-side": jz,
+				"data-align": Mz,
+				...uz,
+				ref: mz,
 				style: {
-					...TL.style,
-					animation: WL ? void 0 : "none"
+					...uz.style,
+					animation: kz ? void 0 : "none"
 				}
 			})
 		})
 	});
 });
-PopperContent.displayName = CONTENT_NAME$6;
-var ARROW_NAME$5 = "PopperArrow", OPPOSITE_SIDE = {
+PopperContent.displayName = CONTENT_NAME$7;
+var ARROW_NAME$6 = "PopperArrow", OPPOSITE_SIDE = {
 	top: "bottom",
 	right: "left",
 	bottom: "top",
 	left: "right"
 }, PopperArrow = React$1.forwardRef(function(n, _) {
-	let { __scopePopper: E, ...O } = n, A = useContentContext(ARROW_NAME$5, E), j = OPPOSITE_SIDE[A.placedSide];
+	let { __scopePopper: E, ...O } = n, A = useContentContext(ARROW_NAME$6, E), j = OPPOSITE_SIDE[A.placedSide];
 	return /* @__PURE__ */ jsx("span", {
 		ref: A.onArrowChange,
 		style: {
@@ -3406,7 +3434,7 @@ var ARROW_NAME$5 = "PopperArrow", OPPOSITE_SIDE = {
 		})
 	});
 });
-PopperArrow.displayName = ARROW_NAME$5;
+PopperArrow.displayName = ARROW_NAME$6;
 function isNotNull$2(n) {
 	return n !== null;
 }
@@ -3429,12 +3457,12 @@ function getSideAndAlignFromPlacement(n) {
 	let [_, E = "center"] = n.split("-");
 	return [_, E];
 }
-var Root2$4 = Popper, Anchor = PopperAnchor, Content$1 = PopperContent, Arrow = PopperArrow, ENTRY_FOCUS = "rovingFocusGroup.onEntryFocus", EVENT_OPTIONS = {
+var Root2$5 = Popper, Anchor = PopperAnchor, Content$1 = PopperContent, Arrow = PopperArrow, ENTRY_FOCUS = "rovingFocusGroup.onEntryFocus", EVENT_OPTIONS = {
 	bubbles: !1,
 	cancelable: !0
-}, GROUP_NAME$3 = "RovingFocusGroup", [Collection$2, useCollection$2, createCollectionScope$2] = createCollection(GROUP_NAME$3), [createRovingFocusGroupContext, createRovingFocusGroupScope] = createContextScope(GROUP_NAME$3, [createCollectionScope$2]), [RovingFocusProvider, useRovingFocusContext] = createRovingFocusGroupContext(GROUP_NAME$3), RovingFocusGroup = React$1.forwardRef((n, _) => /* @__PURE__ */ jsx(Collection$2.Provider, {
+}, GROUP_NAME$4 = "RovingFocusGroup", [Collection$3, useCollection$3, createCollectionScope$3] = createCollection(GROUP_NAME$4), [createRovingFocusGroupContext, createRovingFocusGroupScope] = createContextScope(GROUP_NAME$4, [createCollectionScope$3]), [RovingFocusProvider, useRovingFocusContext] = createRovingFocusGroupContext(GROUP_NAME$4), RovingFocusGroup = React$1.forwardRef((n, _) => /* @__PURE__ */ jsx(Collection$3.Provider, {
 	scope: n.__scopeRovingFocusGroup,
-	children: /* @__PURE__ */ jsx(Collection$2.Slot, {
+	children: /* @__PURE__ */ jsx(Collection$3.Slot, {
 		scope: n.__scopeRovingFocusGroup,
 		children: /* @__PURE__ */ jsx(RovingFocusGroupImpl, {
 			...n,
@@ -3442,29 +3470,29 @@ var Root2$4 = Popper, Anchor = PopperAnchor, Content$1 = PopperContent, Arrow = 
 		})
 	})
 }));
-RovingFocusGroup.displayName = GROUP_NAME$3;
+RovingFocusGroup.displayName = GROUP_NAME$4;
 var RovingFocusGroupImpl = React$1.forwardRef((_, E) => {
-	let { __scopeRovingFocusGroup: O, orientation: A, loop: j = !1, dir: M, currentTabStopId: N, defaultCurrentTabStopId: P, onCurrentTabStopIdChange: z, onEntryFocus: B, preventScrollOnEntryFocus: H = !1, ...U } = _, W = React$1.useRef(null), G = useComposedRefs$1(E, W), Z = useDirection(M), [TL, EL] = useControllableState({
+	let { __scopeRovingFocusGroup: O, orientation: A, loop: j = !1, dir: M, currentTabStopId: N, defaultCurrentTabStopId: P, onCurrentTabStopIdChange: z, onEntryFocus: B, preventScrollOnEntryFocus: H = !1, ...U } = _, W = React$1.useRef(null), G = useComposedRefs$1(E, W), Z = useDirection(M), [uz, dz] = useControllableState({
 		prop: N,
 		defaultProp: P ?? null,
 		onChange: z,
-		caller: GROUP_NAME$3
-	}), [DL, OL] = React$1.useState(!1), kL = useCallbackRef(B), AL = useCollection$2(O), jL = React$1.useRef(!1), [ML, NL] = React$1.useState(0);
+		caller: GROUP_NAME$4
+	}), [fz, pz] = React$1.useState(!1), mz = useCallbackRef(B), hz = useCollection$3(O), gz = React$1.useRef(!1), [_z, vz] = React$1.useState(0);
 	return React$1.useEffect(() => {
 		let n = W.current;
-		if (n) return n.addEventListener(ENTRY_FOCUS, kL), () => n.removeEventListener(ENTRY_FOCUS, kL);
-	}, [kL]), /* @__PURE__ */ jsx(RovingFocusProvider, {
+		if (n) return n.addEventListener(ENTRY_FOCUS, mz), () => n.removeEventListener(ENTRY_FOCUS, mz);
+	}, [mz]), /* @__PURE__ */ jsx(RovingFocusProvider, {
 		scope: O,
 		orientation: A,
 		dir: Z,
 		loop: j,
-		currentTabStopId: TL,
-		onItemFocus: React$1.useCallback((n) => EL(n), [EL]),
-		onItemShiftTab: React$1.useCallback(() => OL(!0), []),
-		onFocusableItemAdd: React$1.useCallback(() => NL((n) => n + 1), []),
-		onFocusableItemRemove: React$1.useCallback(() => NL((n) => n - 1), []),
+		currentTabStopId: uz,
+		onItemFocus: React$1.useCallback((n) => dz(n), [dz]),
+		onItemShiftTab: React$1.useCallback(() => pz(!0), []),
+		onFocusableItemAdd: React$1.useCallback(() => vz((n) => n + 1), []),
+		onFocusableItemRemove: React$1.useCallback(() => vz((n) => n - 1), []),
 		children: /* @__PURE__ */ jsx(Primitive.div, {
-			tabIndex: DL || ML === 0 ? -1 : 0,
+			tabIndex: fz || _z === 0 ? -1 : 0,
 			"data-orientation": A,
 			...U,
 			ref: G,
@@ -3473,35 +3501,35 @@ var RovingFocusGroupImpl = React$1.forwardRef((_, E) => {
 				..._.style
 			},
 			onMouseDown: composeEventHandlers(_.onMouseDown, () => {
-				jL.current = !0;
+				gz.current = !0;
 			}),
 			onFocus: composeEventHandlers(_.onFocus, (n) => {
-				let _ = !jL.current;
-				if (n.target === n.currentTarget && _ && !DL) {
+				let _ = !gz.current;
+				if (n.target === n.currentTarget && _ && !fz) {
 					let _ = new CustomEvent(ENTRY_FOCUS, EVENT_OPTIONS);
 					if (n.currentTarget.dispatchEvent(_), !_.defaultPrevented) {
-						let n = AL().filter((n) => n.focusable);
+						let n = hz().filter((n) => n.focusable);
 						focusFirst$1([
 							n.find((n) => n.active),
-							n.find((n) => n.id === TL),
+							n.find((n) => n.id === uz),
 							...n
 						].filter(Boolean).map((n) => n.ref.current), H);
 					}
 				}
-				jL.current = !1;
+				gz.current = !1;
 			}),
-			onBlur: composeEventHandlers(_.onBlur, () => OL(!1))
+			onBlur: composeEventHandlers(_.onBlur, () => pz(!1))
 		})
 	});
-}), ITEM_NAME$3 = "RovingFocusGroupItem", RovingFocusGroupItem = React$1.forwardRef((_, E) => {
-	let { __scopeRovingFocusGroup: O, focusable: A = !0, active: j = !1, tabStopId: M, children: N, ...P } = _, z = useId$1(), B = M || z, H = useRovingFocusContext(ITEM_NAME$3, O), U = H.currentTabStopId === B, W = useCollection$2(O), { onFocusableItemAdd: G, onFocusableItemRemove: Z, currentTabStopId: TL } = H;
+}), ITEM_NAME$4 = "RovingFocusGroupItem", RovingFocusGroupItem = React$1.forwardRef((_, E) => {
+	let { __scopeRovingFocusGroup: O, focusable: A = !0, active: j = !1, tabStopId: M, children: N, ...P } = _, z = useId$1(), B = M || z, H = useRovingFocusContext(ITEM_NAME$4, O), U = H.currentTabStopId === B, W = useCollection$3(O), { onFocusableItemAdd: G, onFocusableItemRemove: Z, currentTabStopId: uz } = H;
 	return React$1.useEffect(() => {
 		if (A) return G(), () => Z();
 	}, [
 		A,
 		G,
 		Z
-	]), /* @__PURE__ */ jsx(Collection$2.ItemSlot, {
+	]), /* @__PURE__ */ jsx(Collection$3.ItemSlot, {
 		scope: O,
 		id: B,
 		focusable: A,
@@ -3530,19 +3558,19 @@ var RovingFocusGroupImpl = React$1.forwardRef((_, E) => {
 					else if (_ === "prev" || _ === "next") {
 						_ === "prev" && E.reverse();
 						let O = E.indexOf(n.currentTarget);
-						E = H.loop ? wrapArray$1(E, O + 1) : E.slice(O + 1);
+						E = H.loop ? wrapArray$2(E, O + 1) : E.slice(O + 1);
 					}
 					setTimeout(() => focusFirst$1(E));
 				}
 			}),
 			children: typeof N == "function" ? N({
 				isCurrentTabStop: U,
-				hasTabStop: TL != null
+				hasTabStop: uz != null
 			}) : N
 		})
 	});
 });
-RovingFocusGroupItem.displayName = ITEM_NAME$3;
+RovingFocusGroupItem.displayName = ITEM_NAME$4;
 var MAP_KEY_TO_FOCUS_INTENT = {
 	ArrowLeft: "prev",
 	ArrowUp: "prev",
@@ -3564,10 +3592,10 @@ function focusFirst$1(n, _ = !1) {
 	let E = document.activeElement;
 	for (let O of n) if (O === E || (O.focus({ preventScroll: _ }), document.activeElement !== E)) return;
 }
-function wrapArray$1(n, _) {
+function wrapArray$2(n, _) {
 	return n.map((E, O) => n[(_ + O) % n.length]);
 }
-var Root$3 = RovingFocusGroup, Item = RovingFocusGroupItem, SELECTION_KEYS = ["Enter", " "], FIRST_KEYS = [
+var Root$3 = RovingFocusGroup, Item$1 = RovingFocusGroupItem, SELECTION_KEYS$1 = ["Enter", " "], FIRST_KEYS = [
 	"ArrowDown",
 	"PageUp",
 	"Home"
@@ -3576,17 +3604,17 @@ var Root$3 = RovingFocusGroup, Item = RovingFocusGroupItem, SELECTION_KEYS = ["E
 	"PageDown",
 	"End"
 ], FIRST_LAST_KEYS = [...FIRST_KEYS, ...LAST_KEYS], SUB_OPEN_KEYS = {
-	ltr: [...SELECTION_KEYS, "ArrowRight"],
-	rtl: [...SELECTION_KEYS, "ArrowLeft"]
+	ltr: [...SELECTION_KEYS$1, "ArrowRight"],
+	rtl: [...SELECTION_KEYS$1, "ArrowLeft"]
 }, SUB_CLOSE_KEYS = {
 	ltr: ["ArrowLeft"],
 	rtl: ["ArrowRight"]
-}, MENU_NAME = "Menu", [Collection$1, useCollection$1, createCollectionScope$1] = createCollection(MENU_NAME), [createMenuContext, createMenuScope] = createContextScope(MENU_NAME, [
-	createCollectionScope$1,
+}, MENU_NAME = "Menu", [Collection$2, useCollection$2, createCollectionScope$2] = createCollection(MENU_NAME), [createMenuContext, createMenuScope] = createContextScope(MENU_NAME, [
+	createCollectionScope$2,
 	createPopperScope,
 	createRovingFocusGroupScope
-]), usePopperScope$2 = createPopperScope(), useRovingFocusGroupScope$1 = createRovingFocusGroupScope(), [MenuProvider, useMenuContext] = createMenuContext(MENU_NAME), [MenuRootProvider, useMenuRootContext] = createMenuContext(MENU_NAME), Menu = (_) => {
-	let { __scopeMenu: E, open: O = !1, children: A, dir: j, onOpenChange: M, modal: N = !0 } = _, P = usePopperScope$2(E), [z, B] = React$1.useState(null), H = React$1.useRef(!1), U = useCallbackRef(M), W = useDirection(j);
+]), usePopperScope$3 = createPopperScope(), useRovingFocusGroupScope$1 = createRovingFocusGroupScope(), [MenuProvider, useMenuContext] = createMenuContext(MENU_NAME), [MenuRootProvider, useMenuRootContext] = createMenuContext(MENU_NAME), Menu = (_) => {
+	let { __scopeMenu: E, open: O = !1, children: A, dir: j, onOpenChange: M, modal: N = !0 } = _, P = usePopperScope$3(E), [z, B] = React$1.useState(null), H = React$1.useRef(!1), U = useCallbackRef(M), W = useDirection(j);
 	return React$1.useEffect(() => {
 		let n = () => {
 			H.current = !0, document.addEventListener("pointerdown", _, {
@@ -3600,7 +3628,7 @@ var Root$3 = RovingFocusGroup, Item = RovingFocusGroupItem, SELECTION_KEYS = ["E
 		return document.addEventListener("keydown", n, { capture: !0 }), () => {
 			document.removeEventListener("keydown", n, { capture: !0 }), document.removeEventListener("pointerdown", _, { capture: !0 }), document.removeEventListener("pointermove", _, { capture: !0 });
 		};
-	}, []), /* @__PURE__ */ jsx(Root2$4, {
+	}, []), /* @__PURE__ */ jsx(Root2$5, {
 		...P,
 		children: /* @__PURE__ */ jsx(MenuProvider, {
 			scope: E,
@@ -3623,14 +3651,14 @@ Menu.displayName = MENU_NAME;
 var ANCHOR_NAME$1 = "MenuAnchor", MenuAnchor = React$1.forwardRef((n, _) => {
 	let { __scopeMenu: E, ...O } = n;
 	return /* @__PURE__ */ jsx(Anchor, {
-		...usePopperScope$2(E),
+		...usePopperScope$3(E),
 		...O,
 		ref: _
 	});
 });
 MenuAnchor.displayName = ANCHOR_NAME$1;
-var PORTAL_NAME$4 = "MenuPortal", [PortalProvider$2, usePortalContext$2] = createMenuContext(PORTAL_NAME$4, { forceMount: void 0 }), MenuPortal = (n) => {
-	let { __scopeMenu: _, forceMount: E, children: O, container: A } = n, j = useMenuContext(PORTAL_NAME$4, _);
+var PORTAL_NAME$5 = "MenuPortal", [PortalProvider$2, usePortalContext$2] = createMenuContext(PORTAL_NAME$5, { forceMount: void 0 }), MenuPortal = (n) => {
+	let { __scopeMenu: _, forceMount: E, children: O, container: A } = n, j = useMenuContext(PORTAL_NAME$5, _);
 	return /* @__PURE__ */ jsx(PortalProvider$2, {
 		scope: _,
 		forceMount: E,
@@ -3644,14 +3672,14 @@ var PORTAL_NAME$4 = "MenuPortal", [PortalProvider$2, usePortalContext$2] = creat
 		})
 	});
 };
-MenuPortal.displayName = PORTAL_NAME$4;
-var CONTENT_NAME$5 = "MenuContent", [MenuContentProvider, useMenuContentContext] = createMenuContext(CONTENT_NAME$5), MenuContent = React$1.forwardRef((n, _) => {
-	let E = usePortalContext$2(CONTENT_NAME$5, n.__scopeMenu), { forceMount: O = E.forceMount, ...A } = n, j = useMenuContext(CONTENT_NAME$5, n.__scopeMenu), M = useMenuRootContext(CONTENT_NAME$5, n.__scopeMenu);
-	return /* @__PURE__ */ jsx(Collection$1.Provider, {
+MenuPortal.displayName = PORTAL_NAME$5;
+var CONTENT_NAME$6 = "MenuContent", [MenuContentProvider, useMenuContentContext] = createMenuContext(CONTENT_NAME$6), MenuContent = React$1.forwardRef((n, _) => {
+	let E = usePortalContext$2(CONTENT_NAME$6, n.__scopeMenu), { forceMount: O = E.forceMount, ...A } = n, j = useMenuContext(CONTENT_NAME$6, n.__scopeMenu), M = useMenuRootContext(CONTENT_NAME$6, n.__scopeMenu);
+	return /* @__PURE__ */ jsx(Collection$2.Provider, {
 		scope: n.__scopeMenu,
 		children: /* @__PURE__ */ jsx(Presence, {
 			present: O || j.open,
-			children: /* @__PURE__ */ jsx(Collection$1.Slot, {
+			children: /* @__PURE__ */ jsx(Collection$2.Slot, {
 				scope: n.__scopeMenu,
 				children: M.modal ? /* @__PURE__ */ jsx(MenuRootContentModal, {
 					...A,
@@ -3664,7 +3692,7 @@ var CONTENT_NAME$5 = "MenuContent", [MenuContentProvider, useMenuContentContext]
 		})
 	});
 }), MenuRootContentModal = React$1.forwardRef((_, E) => {
-	let O = useMenuContext(CONTENT_NAME$5, _.__scopeMenu), A = React$1.useRef(null), j = useComposedRefs$1(E, A);
+	let O = useMenuContext(CONTENT_NAME$6, _.__scopeMenu), A = React$1.useRef(null), j = useComposedRefs$1(E, A);
 	return React$1.useEffect(() => {
 		let n = A.current;
 		if (n) return hideOthers(n);
@@ -3678,7 +3706,7 @@ var CONTENT_NAME$5 = "MenuContent", [MenuContentProvider, useMenuContentContext]
 		onDismiss: () => O.onOpenChange(!1)
 	});
 }), MenuRootContentNonModal = React$1.forwardRef((n, _) => {
-	let E = useMenuContext(CONTENT_NAME$5, n.__scopeMenu);
+	let E = useMenuContext(CONTENT_NAME$6, n.__scopeMenu);
 	return /* @__PURE__ */ jsx(MenuContentImpl, {
 		...n,
 		ref: _,
@@ -3687,41 +3715,41 @@ var CONTENT_NAME$5 = "MenuContent", [MenuContentProvider, useMenuContentContext]
 		disableOutsideScroll: !1,
 		onDismiss: () => E.onOpenChange(!1)
 	});
-}), Slot$1 = /* @__PURE__ */ createSlot("MenuContent.ScrollLock"), MenuContentImpl = React$1.forwardRef((_, E) => {
-	let { __scopeMenu: O, loop: A = !1, trapFocus: j, onOpenAutoFocus: M, onCloseAutoFocus: N, disableOutsidePointerEvents: P, onEntryFocus: z, onEscapeKeyDown: B, onPointerDownOutside: H, onFocusOutside: U, onInteractOutside: W, onDismiss: G, disableOutsideScroll: Z, ...TL } = _, EL = useMenuContext(CONTENT_NAME$5, O), DL = useMenuRootContext(CONTENT_NAME$5, O), OL = usePopperScope$2(O), kL = useRovingFocusGroupScope$1(O), AL = useCollection$1(O), [jL, ML] = React$1.useState(null), NL = React$1.useRef(null), PL = useComposedRefs$1(E, NL, EL.onContentChange), FL = React$1.useRef(0), IL = React$1.useRef(""), LL = React$1.useRef(0), zL = React$1.useRef(null), BL = React$1.useRef("right"), VL = React$1.useRef(0), HL = Z ? Combination_default : React$1.Fragment, UL = Z ? {
-		as: Slot$1,
+}), Slot$2 = /* @__PURE__ */ createSlot("MenuContent.ScrollLock"), MenuContentImpl = React$1.forwardRef((_, E) => {
+	let { __scopeMenu: O, loop: A = !1, trapFocus: j, onOpenAutoFocus: M, onCloseAutoFocus: N, disableOutsidePointerEvents: P, onEntryFocus: z, onEscapeKeyDown: B, onPointerDownOutside: H, onFocusOutside: U, onInteractOutside: W, onDismiss: G, disableOutsideScroll: Z, ...uz } = _, dz = useMenuContext(CONTENT_NAME$6, O), fz = useMenuRootContext(CONTENT_NAME$6, O), pz = usePopperScope$3(O), mz = useRovingFocusGroupScope$1(O), hz = useCollection$2(O), [gz, _z] = React$1.useState(null), vz = React$1.useRef(null), yz = useComposedRefs$1(E, vz, dz.onContentChange), bz = React$1.useRef(0), xz = React$1.useRef(""), Sz = React$1.useRef(0), wz = React$1.useRef(null), Tz = React$1.useRef("right"), Ez = React$1.useRef(0), Dz = Z ? Combination_default : React$1.Fragment, Oz = Z ? {
+		as: Slot$2,
 		allowPinchZoom: !0
-	} : void 0, WL = (n) => {
-		let _ = IL.current + n, E = AL().filter((n) => !n.disabled), O = document.activeElement, A = E.find((n) => n.ref.current === O)?.textValue, j = getNextMatch(E.map((n) => n.textValue), _, A), M = E.find((n) => n.textValue === j)?.ref.current;
+	} : void 0, kz = (n) => {
+		let _ = xz.current + n, E = hz().filter((n) => !n.disabled), O = document.activeElement, A = E.find((n) => n.ref.current === O)?.textValue, j = getNextMatch(E.map((n) => n.textValue), _, A), M = E.find((n) => n.textValue === j)?.ref.current;
 		(function n(_) {
-			IL.current = _, window.clearTimeout(FL.current), _ !== "" && (FL.current = window.setTimeout(() => n(""), 1e3));
+			xz.current = _, window.clearTimeout(bz.current), _ !== "" && (bz.current = window.setTimeout(() => n(""), 1e3));
 		})(_), M && setTimeout(() => M.focus());
 	};
-	React$1.useEffect(() => () => window.clearTimeout(FL.current), []), useFocusGuards();
-	let GL = React$1.useCallback((n) => BL.current === zL.current?.side && isPointerInGraceArea(n, zL.current?.area), []);
+	React$1.useEffect(() => () => window.clearTimeout(bz.current), []), useFocusGuards();
+	let Az = React$1.useCallback((n) => Tz.current === wz.current?.side && isPointerInGraceArea(n, wz.current?.area), []);
 	return /* @__PURE__ */ jsx(MenuContentProvider, {
 		scope: O,
-		searchRef: IL,
+		searchRef: xz,
 		onItemEnter: React$1.useCallback((n) => {
-			GL(n) && n.preventDefault();
-		}, [GL]),
+			Az(n) && n.preventDefault();
+		}, [Az]),
 		onItemLeave: React$1.useCallback((n) => {
-			GL(n) || (NL.current?.focus(), ML(null));
-		}, [GL]),
+			Az(n) || (vz.current?.focus(), _z(null));
+		}, [Az]),
 		onTriggerLeave: React$1.useCallback((n) => {
-			GL(n) && n.preventDefault();
-		}, [GL]),
-		pointerGraceTimerRef: LL,
+			Az(n) && n.preventDefault();
+		}, [Az]),
+		pointerGraceTimerRef: Sz,
 		onPointerGraceIntentChange: React$1.useCallback((n) => {
-			zL.current = n;
+			wz.current = n;
 		}, []),
-		children: /* @__PURE__ */ jsx(HL, {
-			...UL,
+		children: /* @__PURE__ */ jsx(Dz, {
+			...Oz,
 			children: /* @__PURE__ */ jsx(FocusScope, {
 				asChild: !0,
 				trapped: j,
 				onMountAutoFocus: composeEventHandlers(M, (n) => {
-					n.preventDefault(), NL.current?.focus({ preventScroll: !0 });
+					n.preventDefault(), vz.current?.focus({ preventScroll: !0 });
 				}),
 				onUnmountAutoFocus: N,
 				children: /* @__PURE__ */ jsx(DismissableLayer, {
@@ -3734,44 +3762,44 @@ var CONTENT_NAME$5 = "MenuContent", [MenuContentProvider, useMenuContentContext]
 					onDismiss: G,
 					children: /* @__PURE__ */ jsx(Root$3, {
 						asChild: !0,
-						...kL,
-						dir: DL.dir,
+						...mz,
+						dir: fz.dir,
 						orientation: "vertical",
 						loop: A,
-						currentTabStopId: jL,
-						onCurrentTabStopIdChange: ML,
+						currentTabStopId: gz,
+						onCurrentTabStopIdChange: _z,
 						onEntryFocus: composeEventHandlers(z, (n) => {
-							DL.isUsingKeyboardRef.current || n.preventDefault();
+							fz.isUsingKeyboardRef.current || n.preventDefault();
 						}),
 						preventScrollOnEntryFocus: !0,
 						children: /* @__PURE__ */ jsx(Content$1, {
 							role: "menu",
 							"aria-orientation": "vertical",
-							"data-state": getOpenState(EL.open),
+							"data-state": getOpenState(dz.open),
 							"data-radix-menu-content": "",
-							dir: DL.dir,
-							...OL,
-							...TL,
-							ref: PL,
+							dir: fz.dir,
+							...pz,
+							...uz,
+							ref: yz,
 							style: {
 								outline: "none",
-								...TL.style
+								...uz.style
 							},
-							onKeyDown: composeEventHandlers(TL.onKeyDown, (n) => {
+							onKeyDown: composeEventHandlers(uz.onKeyDown, (n) => {
 								let _ = n.target.closest("[data-radix-menu-content]") === n.currentTarget, E = n.ctrlKey || n.altKey || n.metaKey, O = n.key.length === 1;
-								_ && (n.key === "Tab" && n.preventDefault(), !E && O && WL(n.key));
-								let A = NL.current;
+								_ && (n.key === "Tab" && n.preventDefault(), !E && O && kz(n.key));
+								let A = vz.current;
 								if (n.target !== A || !FIRST_LAST_KEYS.includes(n.key)) return;
 								n.preventDefault();
-								let j = AL().filter((n) => !n.disabled).map((n) => n.ref.current);
+								let j = hz().filter((n) => !n.disabled).map((n) => n.ref.current);
 								LAST_KEYS.includes(n.key) && j.reverse(), focusFirst(j);
 							}),
 							onBlur: composeEventHandlers(_.onBlur, (n) => {
-								n.currentTarget.contains(n.target) || (window.clearTimeout(FL.current), IL.current = "");
+								n.currentTarget.contains(n.target) || (window.clearTimeout(bz.current), xz.current = "");
 							}),
 							onPointerMove: composeEventHandlers(_.onPointerMove, whenMouse((n) => {
-								let _ = n.target, E = VL.current !== n.clientX;
-								n.currentTarget.contains(_) && E && (BL.current = n.clientX > VL.current ? "right" : "left", VL.current = n.clientX);
+								let _ = n.target, E = Ez.current !== n.clientX;
+								n.currentTarget.contains(_) && E && (Tz.current = n.clientX > Ez.current ? "right" : "left", Ez.current = n.clientX);
 							}))
 						})
 					})
@@ -3780,8 +3808,8 @@ var CONTENT_NAME$5 = "MenuContent", [MenuContentProvider, useMenuContentContext]
 		})
 	});
 });
-MenuContent.displayName = CONTENT_NAME$5;
-var GROUP_NAME$2 = "MenuGroup", MenuGroup = React$1.forwardRef((n, _) => {
+MenuContent.displayName = CONTENT_NAME$6;
+var GROUP_NAME$3 = "MenuGroup", MenuGroup = React$1.forwardRef((n, _) => {
 	let { __scopeMenu: E, ...O } = n;
 	return /* @__PURE__ */ jsx(Primitive.div, {
 		role: "group",
@@ -3789,17 +3817,17 @@ var GROUP_NAME$2 = "MenuGroup", MenuGroup = React$1.forwardRef((n, _) => {
 		ref: _
 	});
 });
-MenuGroup.displayName = GROUP_NAME$2;
-var LABEL_NAME$2 = "MenuLabel", MenuLabel = React$1.forwardRef((n, _) => {
+MenuGroup.displayName = GROUP_NAME$3;
+var LABEL_NAME$3 = "MenuLabel", MenuLabel = React$1.forwardRef((n, _) => {
 	let { __scopeMenu: E, ...O } = n;
 	return /* @__PURE__ */ jsx(Primitive.div, {
 		...O,
 		ref: _
 	});
 });
-MenuLabel.displayName = LABEL_NAME$2;
-var ITEM_NAME$2 = "MenuItem", ITEM_SELECT = "menu.itemSelect", MenuItem = React$1.forwardRef((_, E) => {
-	let { disabled: O = !1, onSelect: A, ...j } = _, M = React$1.useRef(null), N = useMenuRootContext(ITEM_NAME$2, _.__scopeMenu), P = useMenuContentContext(ITEM_NAME$2, _.__scopeMenu), z = useComposedRefs$1(E, M), B = React$1.useRef(!1), H = () => {
+MenuLabel.displayName = LABEL_NAME$3;
+var ITEM_NAME$3 = "MenuItem", ITEM_SELECT = "menu.itemSelect", MenuItem = React$1.forwardRef((_, E) => {
+	let { disabled: O = !1, onSelect: A, ...j } = _, M = React$1.useRef(null), N = useMenuRootContext(ITEM_NAME$3, _.__scopeMenu), P = useMenuContentContext(ITEM_NAME$3, _.__scopeMenu), z = useComposedRefs$1(E, M), B = React$1.useRef(!1), H = () => {
 		let n = M.current;
 		if (!O && n) {
 			let _ = new CustomEvent(ITEM_SELECT, {
@@ -3822,21 +3850,21 @@ var ITEM_NAME$2 = "MenuItem", ITEM_SELECT = "menu.itemSelect", MenuItem = React$
 		}),
 		onKeyDown: composeEventHandlers(_.onKeyDown, (n) => {
 			let _ = P.searchRef.current !== "";
-			O || _ && n.key === " " || SELECTION_KEYS.includes(n.key) && (n.currentTarget.click(), n.preventDefault());
+			O || _ && n.key === " " || SELECTION_KEYS$1.includes(n.key) && (n.currentTarget.click(), n.preventDefault());
 		})
 	});
 });
-MenuItem.displayName = ITEM_NAME$2;
+MenuItem.displayName = ITEM_NAME$3;
 var MenuItemImpl = React$1.forwardRef((_, E) => {
-	let { __scopeMenu: O, disabled: A = !1, textValue: j, ...M } = _, N = useMenuContentContext(ITEM_NAME$2, O), P = useRovingFocusGroupScope$1(O), z = React$1.useRef(null), B = useComposedRefs$1(E, z), [H, U] = React$1.useState(!1), [W, G] = React$1.useState("");
+	let { __scopeMenu: O, disabled: A = !1, textValue: j, ...M } = _, N = useMenuContentContext(ITEM_NAME$3, O), P = useRovingFocusGroupScope$1(O), z = React$1.useRef(null), B = useComposedRefs$1(E, z), [H, U] = React$1.useState(!1), [W, G] = React$1.useState("");
 	return React$1.useEffect(() => {
 		let n = z.current;
 		n && G((n.textContent ?? "").trim());
-	}, [M.children]), /* @__PURE__ */ jsx(Collection$1.ItemSlot, {
+	}, [M.children]), /* @__PURE__ */ jsx(Collection$2.ItemSlot, {
 		scope: O,
 		disabled: A,
 		textValue: j ?? W,
-		children: /* @__PURE__ */ jsx(Item, {
+		children: /* @__PURE__ */ jsx(Item$1, {
 			asChild: !0,
 			...P,
 			focusable: !A,
@@ -3904,8 +3932,8 @@ var RADIO_ITEM_NAME$2 = "MenuRadioItem", MenuRadioItem = React$1.forwardRef((n, 
 	});
 });
 MenuRadioItem.displayName = RADIO_ITEM_NAME$2;
-var ITEM_INDICATOR_NAME = "MenuItemIndicator", [ItemIndicatorProvider, useItemIndicatorContext] = createMenuContext(ITEM_INDICATOR_NAME, { checked: !1 }), MenuItemIndicator = React$1.forwardRef((n, _) => {
-	let { __scopeMenu: E, forceMount: O, ...A } = n, j = useItemIndicatorContext(ITEM_INDICATOR_NAME, E);
+var ITEM_INDICATOR_NAME$1 = "MenuItemIndicator", [ItemIndicatorProvider, useItemIndicatorContext] = createMenuContext(ITEM_INDICATOR_NAME$1, { checked: !1 }), MenuItemIndicator = React$1.forwardRef((n, _) => {
+	let { __scopeMenu: E, forceMount: O, ...A } = n, j = useItemIndicatorContext(ITEM_INDICATOR_NAME$1, E);
 	return /* @__PURE__ */ jsx(Presence, {
 		present: O || isIndeterminate(j.checked) || j.checked === !0,
 		children: /* @__PURE__ */ jsx(Primitive.span, {
@@ -3915,8 +3943,8 @@ var ITEM_INDICATOR_NAME = "MenuItemIndicator", [ItemIndicatorProvider, useItemIn
 		})
 	});
 });
-MenuItemIndicator.displayName = ITEM_INDICATOR_NAME;
-var SEPARATOR_NAME$2 = "MenuSeparator", MenuSeparator = React$1.forwardRef((n, _) => {
+MenuItemIndicator.displayName = ITEM_INDICATOR_NAME$1;
+var SEPARATOR_NAME$3 = "MenuSeparator", MenuSeparator = React$1.forwardRef((n, _) => {
 	let { __scopeMenu: E, ...O } = n;
 	return /* @__PURE__ */ jsx(Primitive.div, {
 		role: "separator",
@@ -3925,19 +3953,19 @@ var SEPARATOR_NAME$2 = "MenuSeparator", MenuSeparator = React$1.forwardRef((n, _
 		ref: _
 	});
 });
-MenuSeparator.displayName = SEPARATOR_NAME$2;
-var ARROW_NAME$4 = "MenuArrow", MenuArrow = React$1.forwardRef((n, _) => {
+MenuSeparator.displayName = SEPARATOR_NAME$3;
+var ARROW_NAME$5 = "MenuArrow", MenuArrow = React$1.forwardRef((n, _) => {
 	let { __scopeMenu: E, ...O } = n;
 	return /* @__PURE__ */ jsx(Arrow, {
-		...usePopperScope$2(E),
+		...usePopperScope$3(E),
 		...O,
 		ref: _
 	});
 });
-MenuArrow.displayName = ARROW_NAME$4;
+MenuArrow.displayName = ARROW_NAME$5;
 var SUB_NAME$1 = "MenuSub", [MenuSubProvider, useMenuSubContext] = createMenuContext(SUB_NAME$1), MenuSub = (_) => {
-	let { __scopeMenu: E, children: O, open: A = !1, onOpenChange: j } = _, M = useMenuContext(SUB_NAME$1, E), N = usePopperScope$2(E), [P, z] = React$1.useState(null), [B, H] = React$1.useState(null), U = useCallbackRef(j);
-	return React$1.useEffect(() => (M.open === !1 && U(!1), () => U(!1)), [M.open, U]), /* @__PURE__ */ jsx(Root2$4, {
+	let { __scopeMenu: E, children: O, open: A = !1, onOpenChange: j } = _, M = useMenuContext(SUB_NAME$1, E), N = usePopperScope$3(E), [P, z] = React$1.useState(null), [B, H] = React$1.useState(null), U = useCallbackRef(j);
+	return React$1.useEffect(() => (M.open === !1 && U(!1), () => U(!1)), [M.open, U]), /* @__PURE__ */ jsx(Root2$5, {
 		...N,
 		children: /* @__PURE__ */ jsx(MenuProvider, {
 			scope: E,
@@ -4029,12 +4057,12 @@ var SUB_TRIGGER_NAME$2 = "MenuSubTrigger", MenuSubTrigger = React$1.forwardRef((
 });
 MenuSubTrigger.displayName = SUB_TRIGGER_NAME$2;
 var SUB_CONTENT_NAME$2 = "MenuSubContent", MenuSubContent = React$1.forwardRef((_, E) => {
-	let O = usePortalContext$2(CONTENT_NAME$5, _.__scopeMenu), { forceMount: A = O.forceMount, ...j } = _, M = useMenuContext(CONTENT_NAME$5, _.__scopeMenu), N = useMenuRootContext(CONTENT_NAME$5, _.__scopeMenu), P = useMenuSubContext(SUB_CONTENT_NAME$2, _.__scopeMenu), z = React$1.useRef(null), B = useComposedRefs$1(E, z);
-	return /* @__PURE__ */ jsx(Collection$1.Provider, {
+	let O = usePortalContext$2(CONTENT_NAME$6, _.__scopeMenu), { forceMount: A = O.forceMount, ...j } = _, M = useMenuContext(CONTENT_NAME$6, _.__scopeMenu), N = useMenuRootContext(CONTENT_NAME$6, _.__scopeMenu), P = useMenuSubContext(SUB_CONTENT_NAME$2, _.__scopeMenu), z = React$1.useRef(null), B = useComposedRefs$1(E, z);
+	return /* @__PURE__ */ jsx(Collection$2.Provider, {
 		scope: _.__scopeMenu,
 		children: /* @__PURE__ */ jsx(Presence, {
 			present: A || M.open,
-			children: /* @__PURE__ */ jsx(Collection$1.Slot, {
+			children: /* @__PURE__ */ jsx(Collection$2.Slot, {
 				scope: _.__scopeMenu,
 				children: /* @__PURE__ */ jsx(MenuContentImpl, {
 					id: P.contentId,
@@ -4079,11 +4107,11 @@ function focusFirst(n) {
 	let _ = document.activeElement;
 	for (let E of n) if (E === _ || (E.focus(), document.activeElement !== _)) return;
 }
-function wrapArray(n, _) {
+function wrapArray$1(n, _) {
 	return n.map((E, O) => n[(_ + O) % n.length]);
 }
 function getNextMatch(n, _, E) {
-	let O = _.length > 1 && Array.from(_).every((n) => n === _[0]) ? _[0] : _, A = E ? n.indexOf(E) : -1, j = wrapArray(n, Math.max(A, 0));
+	let O = _.length > 1 && Array.from(_).every((n) => n === _[0]) ? _[0] : _, A = E ? n.indexOf(E) : -1, j = wrapArray$1(n, Math.max(A, 0));
 	O.length === 1 && (j = j.filter((n) => n !== E));
 	let M = j.find((n) => n.toLowerCase().startsWith(O.toLowerCase()));
 	return M === E ? void 0 : M;
@@ -4105,7 +4133,7 @@ function isPointerInGraceArea(n, _) {
 function whenMouse(n) {
 	return (_) => _.pointerType === "mouse" ? n(_) : void 0;
 }
-var Root3$1 = Menu, Anchor2$1 = MenuAnchor, Portal$3 = MenuPortal, Content2$4 = MenuContent, Group = MenuGroup, Label = MenuLabel, Item2$2 = MenuItem, CheckboxItem = MenuCheckboxItem, RadioGroup = MenuRadioGroup, RadioItem = MenuRadioItem, ItemIndicator = MenuItemIndicator, Separator = MenuSeparator, Arrow2$1 = MenuArrow, Sub = MenuSub, SubTrigger = MenuSubTrigger, SubContent = MenuSubContent, CONTEXT_MENU_NAME = "ContextMenu", [createContextMenuContext, createContextMenuScope] = createContextScope(CONTEXT_MENU_NAME, [createMenuScope]), useMenuScope$1 = createMenuScope(), [ContextMenuProvider, useContextMenuContext] = createContextMenuContext(CONTEXT_MENU_NAME), ContextMenu = (_) => {
+var Root3$1 = Menu, Anchor2$1 = MenuAnchor, Portal$4 = MenuPortal, Content2$5 = MenuContent, Group$1 = MenuGroup, Label$1 = MenuLabel, Item2$2 = MenuItem, CheckboxItem = MenuCheckboxItem, RadioGroup = MenuRadioGroup, RadioItem = MenuRadioItem, ItemIndicator$1 = MenuItemIndicator, Separator$1 = MenuSeparator, Arrow2$1 = MenuArrow, Sub = MenuSub, SubTrigger = MenuSubTrigger, SubContent = MenuSubContent, CONTEXT_MENU_NAME = "ContextMenu", [createContextMenuContext, createContextMenuScope] = createContextScope(CONTEXT_MENU_NAME, [createMenuScope]), useMenuScope$1 = createMenuScope(), [ContextMenuProvider, useContextMenuContext] = createContextMenuContext(CONTEXT_MENU_NAME), ContextMenu = (_) => {
 	let { __scopeContextMenu: E, children: O, onOpenChange: A, dir: j, modal: M = !0 } = _, [N, P] = React$1.useState(!1), z = useMenuScope$1(E), B = useCallbackRef(A), H = React$1.useCallback((n) => {
 		P(n), B(n);
 	}, [B]);
@@ -4125,8 +4153,8 @@ var Root3$1 = Menu, Anchor2$1 = MenuAnchor, Portal$3 = MenuPortal, Content2$4 = 
 	});
 };
 ContextMenu.displayName = CONTEXT_MENU_NAME;
-var TRIGGER_NAME$4 = "ContextMenuTrigger", ContextMenuTrigger = React$1.forwardRef((_, E) => {
-	let { __scopeContextMenu: O, disabled: A = !1, ...j } = _, M = useContextMenuContext(TRIGGER_NAME$4, O), N = useMenuScope$1(O), P = React$1.useRef({
+var TRIGGER_NAME$5 = "ContextMenuTrigger", ContextMenuTrigger = React$1.forwardRef((_, E) => {
+	let { __scopeContextMenu: O, disabled: A = !1, ...j } = _, M = useContextMenuContext(TRIGGER_NAME$5, O), N = useMenuScope$1(O), P = React$1.useRef({
 		x: 0,
 		y: 0
 	}), z = React$1.useRef({ getBoundingClientRect: () => DOMRect.fromRect({
@@ -4162,18 +4190,18 @@ var TRIGGER_NAME$4 = "ContextMenuTrigger", ContextMenuTrigger = React$1.forwardR
 		onPointerUp: A ? _.onPointerUp : composeEventHandlers(_.onPointerUp, whenTouchOrPen(H))
 	})] });
 });
-ContextMenuTrigger.displayName = TRIGGER_NAME$4;
-var PORTAL_NAME$3 = "ContextMenuPortal", ContextMenuPortal = (n) => {
+ContextMenuTrigger.displayName = TRIGGER_NAME$5;
+var PORTAL_NAME$4 = "ContextMenuPortal", ContextMenuPortal = (n) => {
 	let { __scopeContextMenu: _, ...E } = n;
-	return /* @__PURE__ */ jsx(Portal$3, {
+	return /* @__PURE__ */ jsx(Portal$4, {
 		...useMenuScope$1(_),
 		...E
 	});
 };
-ContextMenuPortal.displayName = PORTAL_NAME$3;
-var CONTENT_NAME$4 = "ContextMenuContent", ContextMenuContent = React$1.forwardRef((_, E) => {
-	let { __scopeContextMenu: O, ...A } = _, j = useContextMenuContext(CONTENT_NAME$4, O), M = useMenuScope$1(O), N = React$1.useRef(!1);
-	return /* @__PURE__ */ jsx(Content2$4, {
+ContextMenuPortal.displayName = PORTAL_NAME$4;
+var CONTENT_NAME$5 = "ContextMenuContent", ContextMenuContent = React$1.forwardRef((_, E) => {
+	let { __scopeContextMenu: O, ...A } = _, j = useContextMenuContext(CONTENT_NAME$5, O), M = useMenuScope$1(O), N = React$1.useRef(!1);
+	return /* @__PURE__ */ jsx(Content2$5, {
 		...M,
 		...A,
 		ref: E,
@@ -4196,26 +4224,26 @@ var CONTENT_NAME$4 = "ContextMenuContent", ContextMenuContent = React$1.forwardR
 		}
 	});
 });
-ContextMenuContent.displayName = CONTENT_NAME$4;
-var GROUP_NAME$1 = "ContextMenuGroup", ContextMenuGroup = React$1.forwardRef((n, _) => {
+ContextMenuContent.displayName = CONTENT_NAME$5;
+var GROUP_NAME$2 = "ContextMenuGroup", ContextMenuGroup = React$1.forwardRef((n, _) => {
 	let { __scopeContextMenu: E, ...O } = n;
-	return /* @__PURE__ */ jsx(Group, {
+	return /* @__PURE__ */ jsx(Group$1, {
 		...useMenuScope$1(E),
 		...O,
 		ref: _
 	});
 });
-ContextMenuGroup.displayName = GROUP_NAME$1;
-var LABEL_NAME$1 = "ContextMenuLabel", ContextMenuLabel = React$1.forwardRef((n, _) => {
+ContextMenuGroup.displayName = GROUP_NAME$2;
+var LABEL_NAME$2 = "ContextMenuLabel", ContextMenuLabel = React$1.forwardRef((n, _) => {
 	let { __scopeContextMenu: E, ...O } = n;
-	return /* @__PURE__ */ jsx(Label, {
+	return /* @__PURE__ */ jsx(Label$1, {
 		...useMenuScope$1(E),
 		...O,
 		ref: _
 	});
 });
-ContextMenuLabel.displayName = LABEL_NAME$1;
-var ITEM_NAME$1 = "ContextMenuItem", ContextMenuItem = React$1.forwardRef((n, _) => {
+ContextMenuLabel.displayName = LABEL_NAME$2;
+var ITEM_NAME$2 = "ContextMenuItem", ContextMenuItem = React$1.forwardRef((n, _) => {
 	let { __scopeContextMenu: E, ...O } = n;
 	return /* @__PURE__ */ jsx(Item2$2, {
 		...useMenuScope$1(E),
@@ -4223,7 +4251,7 @@ var ITEM_NAME$1 = "ContextMenuItem", ContextMenuItem = React$1.forwardRef((n, _)
 		ref: _
 	});
 });
-ContextMenuItem.displayName = ITEM_NAME$1;
+ContextMenuItem.displayName = ITEM_NAME$2;
 var CHECKBOX_ITEM_NAME$1 = "ContextMenuCheckboxItem", ContextMenuCheckboxItem = React$1.forwardRef((n, _) => {
 	let { __scopeContextMenu: E, ...O } = n;
 	return /* @__PURE__ */ jsx(CheckboxItem, {
@@ -4253,23 +4281,23 @@ var RADIO_ITEM_NAME$1 = "ContextMenuRadioItem", ContextMenuRadioItem = React$1.f
 ContextMenuRadioItem.displayName = RADIO_ITEM_NAME$1;
 var INDICATOR_NAME$1 = "ContextMenuItemIndicator", ContextMenuItemIndicator = React$1.forwardRef((n, _) => {
 	let { __scopeContextMenu: E, ...O } = n;
-	return /* @__PURE__ */ jsx(ItemIndicator, {
+	return /* @__PURE__ */ jsx(ItemIndicator$1, {
 		...useMenuScope$1(E),
 		...O,
 		ref: _
 	});
 });
 ContextMenuItemIndicator.displayName = INDICATOR_NAME$1;
-var SEPARATOR_NAME$1 = "ContextMenuSeparator", ContextMenuSeparator = React$1.forwardRef((n, _) => {
+var SEPARATOR_NAME$2 = "ContextMenuSeparator", ContextMenuSeparator = React$1.forwardRef((n, _) => {
 	let { __scopeContextMenu: E, ...O } = n;
-	return /* @__PURE__ */ jsx(Separator, {
+	return /* @__PURE__ */ jsx(Separator$1, {
 		...useMenuScope$1(E),
 		...O,
 		ref: _
 	});
 });
-ContextMenuSeparator.displayName = SEPARATOR_NAME$1;
-var ARROW_NAME$3 = "ContextMenuArrow", ContextMenuArrow = React$1.forwardRef((n, _) => {
+ContextMenuSeparator.displayName = SEPARATOR_NAME$2;
+var ARROW_NAME$4 = "ContextMenuArrow", ContextMenuArrow = React$1.forwardRef((n, _) => {
 	let { __scopeContextMenu: E, ...O } = n;
 	return /* @__PURE__ */ jsx(Arrow2$1, {
 		...useMenuScope$1(E),
@@ -4277,7 +4305,7 @@ var ARROW_NAME$3 = "ContextMenuArrow", ContextMenuArrow = React$1.forwardRef((n,
 		ref: _
 	});
 });
-ContextMenuArrow.displayName = ARROW_NAME$3;
+ContextMenuArrow.displayName = ARROW_NAME$4;
 var SUB_NAME = "ContextMenuSub", ContextMenuSub = (n) => {
 	let { __scopeContextMenu: _, children: E, onOpenChange: O, open: A, defaultOpen: j } = n, M = useMenuScope$1(_), [N, P] = useControllableState({
 		prop: A,
@@ -4322,7 +4350,7 @@ ContextMenuSubContent.displayName = SUB_CONTENT_NAME$1;
 function whenTouchOrPen(n) {
 	return (_) => _.pointerType === "mouse" ? void 0 : n(_);
 }
-var Root2$3 = ContextMenu, Trigger$4 = ContextMenuTrigger, Portal2$1 = ContextMenuPortal, Content2$3 = ContextMenuContent, Item2$1 = ContextMenuItem, Separator2$1 = ContextMenuSeparator, Sub2$1 = ContextMenuSub, SubTrigger2$1 = ContextMenuSubTrigger, SubContent2$1 = ContextMenuSubContent, DROPDOWN_MENU_NAME = "DropdownMenu", [createDropdownMenuContext, createDropdownMenuScope] = createContextScope(DROPDOWN_MENU_NAME, [createMenuScope]), useMenuScope = createMenuScope(), [DropdownMenuProvider, useDropdownMenuContext] = createDropdownMenuContext(DROPDOWN_MENU_NAME), DropdownMenu = (_) => {
+var Root2$4 = ContextMenu, Trigger$5 = ContextMenuTrigger, Portal2$1 = ContextMenuPortal, Content2$4 = ContextMenuContent, Item2$1 = ContextMenuItem, Separator2$1 = ContextMenuSeparator, Sub2$1 = ContextMenuSub, SubTrigger2$1 = ContextMenuSubTrigger, SubContent2$1 = ContextMenuSubContent, DROPDOWN_MENU_NAME = "DropdownMenu", [createDropdownMenuContext, createDropdownMenuScope] = createContextScope(DROPDOWN_MENU_NAME, [createMenuScope]), useMenuScope = createMenuScope(), [DropdownMenuProvider, useDropdownMenuContext] = createDropdownMenuContext(DROPDOWN_MENU_NAME), DropdownMenu = (_) => {
 	let { __scopeDropdownMenu: E, children: O, dir: A, open: j, defaultOpen: M, onOpenChange: N, modal: P = !0 } = _, z = useMenuScope(E), B = React$1.useRef(null), [H, U] = useControllableState({
 		prop: j,
 		defaultProp: M ?? !1,
@@ -4349,8 +4377,8 @@ var Root2$3 = ContextMenu, Trigger$4 = ContextMenuTrigger, Portal2$1 = ContextMe
 	});
 };
 DropdownMenu.displayName = DROPDOWN_MENU_NAME;
-var TRIGGER_NAME$3 = "DropdownMenuTrigger", DropdownMenuTrigger = React$1.forwardRef((n, _) => {
-	let { __scopeDropdownMenu: E, disabled: O = !1, ...A } = n, j = useDropdownMenuContext(TRIGGER_NAME$3, E);
+var TRIGGER_NAME$4 = "DropdownMenuTrigger", DropdownMenuTrigger = React$1.forwardRef((n, _) => {
+	let { __scopeDropdownMenu: E, disabled: O = !1, ...A } = n, j = useDropdownMenuContext(TRIGGER_NAME$4, E);
 	return /* @__PURE__ */ jsx(Anchor2$1, {
 		asChild: !0,
 		...useMenuScope(E),
@@ -4378,18 +4406,18 @@ var TRIGGER_NAME$3 = "DropdownMenuTrigger", DropdownMenuTrigger = React$1.forwar
 		})
 	});
 });
-DropdownMenuTrigger.displayName = TRIGGER_NAME$3;
-var PORTAL_NAME$2 = "DropdownMenuPortal", DropdownMenuPortal = (n) => {
+DropdownMenuTrigger.displayName = TRIGGER_NAME$4;
+var PORTAL_NAME$3 = "DropdownMenuPortal", DropdownMenuPortal = (n) => {
 	let { __scopeDropdownMenu: _, ...E } = n;
-	return /* @__PURE__ */ jsx(Portal$3, {
+	return /* @__PURE__ */ jsx(Portal$4, {
 		...useMenuScope(_),
 		...E
 	});
 };
-DropdownMenuPortal.displayName = PORTAL_NAME$2;
-var CONTENT_NAME$3 = "DropdownMenuContent", DropdownMenuContent = React$1.forwardRef((_, E) => {
-	let { __scopeDropdownMenu: O, ...A } = _, j = useDropdownMenuContext(CONTENT_NAME$3, O), M = useMenuScope(O), N = React$1.useRef(!1);
-	return /* @__PURE__ */ jsx(Content2$4, {
+DropdownMenuPortal.displayName = PORTAL_NAME$3;
+var CONTENT_NAME$4 = "DropdownMenuContent", DropdownMenuContent = React$1.forwardRef((_, E) => {
+	let { __scopeDropdownMenu: O, ...A } = _, j = useDropdownMenuContext(CONTENT_NAME$4, O), M = useMenuScope(O), N = React$1.useRef(!1);
+	return /* @__PURE__ */ jsx(Content2$5, {
 		id: j.contentId,
 		"aria-labelledby": j.triggerId,
 		...M,
@@ -4412,26 +4440,26 @@ var CONTENT_NAME$3 = "DropdownMenuContent", DropdownMenuContent = React$1.forwar
 		}
 	});
 });
-DropdownMenuContent.displayName = CONTENT_NAME$3;
-var GROUP_NAME = "DropdownMenuGroup", DropdownMenuGroup = React$1.forwardRef((n, _) => {
+DropdownMenuContent.displayName = CONTENT_NAME$4;
+var GROUP_NAME$1 = "DropdownMenuGroup", DropdownMenuGroup = React$1.forwardRef((n, _) => {
 	let { __scopeDropdownMenu: E, ...O } = n;
-	return /* @__PURE__ */ jsx(Group, {
+	return /* @__PURE__ */ jsx(Group$1, {
 		...useMenuScope(E),
 		...O,
 		ref: _
 	});
 });
-DropdownMenuGroup.displayName = GROUP_NAME;
-var LABEL_NAME = "DropdownMenuLabel", DropdownMenuLabel = React$1.forwardRef((n, _) => {
+DropdownMenuGroup.displayName = GROUP_NAME$1;
+var LABEL_NAME$1 = "DropdownMenuLabel", DropdownMenuLabel = React$1.forwardRef((n, _) => {
 	let { __scopeDropdownMenu: E, ...O } = n;
-	return /* @__PURE__ */ jsx(Label, {
+	return /* @__PURE__ */ jsx(Label$1, {
 		...useMenuScope(E),
 		...O,
 		ref: _
 	});
 });
-DropdownMenuLabel.displayName = LABEL_NAME;
-var ITEM_NAME = "DropdownMenuItem", DropdownMenuItem = React$1.forwardRef((n, _) => {
+DropdownMenuLabel.displayName = LABEL_NAME$1;
+var ITEM_NAME$1 = "DropdownMenuItem", DropdownMenuItem = React$1.forwardRef((n, _) => {
 	let { __scopeDropdownMenu: E, ...O } = n;
 	return /* @__PURE__ */ jsx(Item2$2, {
 		...useMenuScope(E),
@@ -4439,7 +4467,7 @@ var ITEM_NAME = "DropdownMenuItem", DropdownMenuItem = React$1.forwardRef((n, _)
 		ref: _
 	});
 });
-DropdownMenuItem.displayName = ITEM_NAME;
+DropdownMenuItem.displayName = ITEM_NAME$1;
 var CHECKBOX_ITEM_NAME = "DropdownMenuCheckboxItem", DropdownMenuCheckboxItem = React$1.forwardRef((n, _) => {
 	let { __scopeDropdownMenu: E, ...O } = n;
 	return /* @__PURE__ */ jsx(CheckboxItem, {
@@ -4469,23 +4497,23 @@ var RADIO_ITEM_NAME = "DropdownMenuRadioItem", DropdownMenuRadioItem = React$1.f
 DropdownMenuRadioItem.displayName = RADIO_ITEM_NAME;
 var INDICATOR_NAME = "DropdownMenuItemIndicator", DropdownMenuItemIndicator = React$1.forwardRef((n, _) => {
 	let { __scopeDropdownMenu: E, ...O } = n;
-	return /* @__PURE__ */ jsx(ItemIndicator, {
+	return /* @__PURE__ */ jsx(ItemIndicator$1, {
 		...useMenuScope(E),
 		...O,
 		ref: _
 	});
 });
 DropdownMenuItemIndicator.displayName = INDICATOR_NAME;
-var SEPARATOR_NAME = "DropdownMenuSeparator", DropdownMenuSeparator = React$1.forwardRef((n, _) => {
+var SEPARATOR_NAME$1 = "DropdownMenuSeparator", DropdownMenuSeparator = React$1.forwardRef((n, _) => {
 	let { __scopeDropdownMenu: E, ...O } = n;
-	return /* @__PURE__ */ jsx(Separator, {
+	return /* @__PURE__ */ jsx(Separator$1, {
 		...useMenuScope(E),
 		...O,
 		ref: _
 	});
 });
-DropdownMenuSeparator.displayName = SEPARATOR_NAME;
-var ARROW_NAME$2 = "DropdownMenuArrow", DropdownMenuArrow = React$1.forwardRef((n, _) => {
+DropdownMenuSeparator.displayName = SEPARATOR_NAME$1;
+var ARROW_NAME$3 = "DropdownMenuArrow", DropdownMenuArrow = React$1.forwardRef((n, _) => {
 	let { __scopeDropdownMenu: E, ...O } = n;
 	return /* @__PURE__ */ jsx(Arrow2$1, {
 		...useMenuScope(E),
@@ -4493,7 +4521,7 @@ var ARROW_NAME$2 = "DropdownMenuArrow", DropdownMenuArrow = React$1.forwardRef((
 		ref: _
 	});
 });
-DropdownMenuArrow.displayName = ARROW_NAME$2;
+DropdownMenuArrow.displayName = ARROW_NAME$3;
 var DropdownMenuSub = (n) => {
 	let { __scopeDropdownMenu: _, children: E, open: O, onOpenChange: A, defaultOpen: j } = n, M = useMenuScope(_), [N, P] = useControllableState({
 		prop: O,
@@ -4533,18 +4561,18 @@ var SUB_CONTENT_NAME = "DropdownMenuSubContent", DropdownMenuSubContent = React$
 	});
 });
 DropdownMenuSubContent.displayName = SUB_CONTENT_NAME;
-var Root2$2 = DropdownMenu, Trigger$3 = DropdownMenuTrigger, Portal2 = DropdownMenuPortal, Content2$2 = DropdownMenuContent, Group2 = DropdownMenuGroup, Label2 = DropdownMenuLabel, Item2 = DropdownMenuItem, CheckboxItem2 = DropdownMenuCheckboxItem, RadioGroup2 = DropdownMenuRadioGroup, RadioItem2 = DropdownMenuRadioItem, ItemIndicator2 = DropdownMenuItemIndicator, Separator2 = DropdownMenuSeparator, Sub2 = DropdownMenuSub, SubTrigger2 = DropdownMenuSubTrigger, SubContent2 = DropdownMenuSubContent;
+var Root2$3 = DropdownMenu, Trigger$4 = DropdownMenuTrigger, Portal2 = DropdownMenuPortal, Content2$3 = DropdownMenuContent, Group2 = DropdownMenuGroup, Label2 = DropdownMenuLabel, Item2 = DropdownMenuItem, CheckboxItem2 = DropdownMenuCheckboxItem, RadioGroup2 = DropdownMenuRadioGroup, RadioItem2 = DropdownMenuRadioItem, ItemIndicator2 = DropdownMenuItemIndicator, Separator2 = DropdownMenuSeparator, Sub2 = DropdownMenuSub, SubTrigger2 = DropdownMenuSubTrigger, SubContent2 = DropdownMenuSubContent;
 function clamp$2(n, [_, E]) {
 	return Math.min(E, Math.max(_, n));
 }
-var POPOVER_NAME = "Popover", [createPopoverContext, createPopoverScope] = createContextScope(POPOVER_NAME, [createPopperScope]), usePopperScope$1 = createPopperScope(), [PopoverProvider, usePopoverContext] = createPopoverContext(POPOVER_NAME), Popover = (_) => {
-	let { __scopePopover: E, children: O, open: A, defaultOpen: j, onOpenChange: M, modal: N = !1 } = _, P = usePopperScope$1(E), z = React$1.useRef(null), [B, H] = React$1.useState(!1), [U, W] = useControllableState({
+var POPOVER_NAME = "Popover", [createPopoverContext, createPopoverScope] = createContextScope(POPOVER_NAME, [createPopperScope]), usePopperScope$2 = createPopperScope(), [PopoverProvider, usePopoverContext] = createPopoverContext(POPOVER_NAME), Popover = (_) => {
+	let { __scopePopover: E, children: O, open: A, defaultOpen: j, onOpenChange: M, modal: N = !1 } = _, P = usePopperScope$2(E), z = React$1.useRef(null), [B, H] = React$1.useState(!1), [U, W] = useControllableState({
 		prop: A,
 		defaultProp: j ?? !1,
 		onChange: M,
 		caller: POPOVER_NAME
 	});
-	return /* @__PURE__ */ jsx(Root2$4, {
+	return /* @__PURE__ */ jsx(Root2$5, {
 		...P,
 		children: /* @__PURE__ */ jsx(PopoverProvider, {
 			scope: E,
@@ -4563,7 +4591,7 @@ var POPOVER_NAME = "Popover", [createPopoverContext, createPopoverScope] = creat
 };
 Popover.displayName = POPOVER_NAME;
 var ANCHOR_NAME = "PopoverAnchor", PopoverAnchor = React$1.forwardRef((_, E) => {
-	let { __scopePopover: O, ...A } = _, j = usePopoverContext(ANCHOR_NAME, O), M = usePopperScope$1(O), { onCustomAnchorAdd: N, onCustomAnchorRemove: P } = j;
+	let { __scopePopover: O, ...A } = _, j = usePopoverContext(ANCHOR_NAME, O), M = usePopperScope$2(O), { onCustomAnchorAdd: N, onCustomAnchorRemove: P } = j;
 	return React$1.useEffect(() => (N(), () => P()), [N, P]), /* @__PURE__ */ jsx(Anchor, {
 		...M,
 		...A,
@@ -4571,8 +4599,8 @@ var ANCHOR_NAME = "PopoverAnchor", PopoverAnchor = React$1.forwardRef((_, E) => 
 	});
 });
 PopoverAnchor.displayName = ANCHOR_NAME;
-var TRIGGER_NAME$2 = "PopoverTrigger", PopoverTrigger = React$1.forwardRef((n, _) => {
-	let { __scopePopover: E, ...O } = n, A = usePopoverContext(TRIGGER_NAME$2, E), j = usePopperScope$1(E), M = useComposedRefs$1(_, A.triggerRef), N = /* @__PURE__ */ jsx(Primitive.button, {
+var TRIGGER_NAME$3 = "PopoverTrigger", PopoverTrigger = React$1.forwardRef((n, _) => {
+	let { __scopePopover: E, ...O } = n, A = usePopoverContext(TRIGGER_NAME$3, E), j = usePopperScope$2(E), M = useComposedRefs$1(_, A.triggerRef), N = /* @__PURE__ */ jsx(Primitive.button, {
 		type: "button",
 		"aria-haspopup": "dialog",
 		"aria-expanded": A.open,
@@ -4588,9 +4616,9 @@ var TRIGGER_NAME$2 = "PopoverTrigger", PopoverTrigger = React$1.forwardRef((n, _
 		children: N
 	});
 });
-PopoverTrigger.displayName = TRIGGER_NAME$2;
-var PORTAL_NAME$1 = "PopoverPortal", [PortalProvider$1, usePortalContext$1] = createPopoverContext(PORTAL_NAME$1, { forceMount: void 0 }), PopoverPortal = (n) => {
-	let { __scopePopover: _, forceMount: E, children: O, container: A } = n, j = usePopoverContext(PORTAL_NAME$1, _);
+PopoverTrigger.displayName = TRIGGER_NAME$3;
+var PORTAL_NAME$2 = "PopoverPortal", [PortalProvider$1, usePortalContext$1] = createPopoverContext(PORTAL_NAME$2, { forceMount: void 0 }), PopoverPortal = (n) => {
+	let { __scopePopover: _, forceMount: E, children: O, container: A } = n, j = usePopoverContext(PORTAL_NAME$2, _);
 	return /* @__PURE__ */ jsx(PortalProvider$1, {
 		scope: _,
 		forceMount: E,
@@ -4604,9 +4632,9 @@ var PORTAL_NAME$1 = "PopoverPortal", [PortalProvider$1, usePortalContext$1] = cr
 		})
 	});
 };
-PopoverPortal.displayName = PORTAL_NAME$1;
-var CONTENT_NAME$2 = "PopoverContent", PopoverContent = React$1.forwardRef((n, _) => {
-	let E = usePortalContext$1(CONTENT_NAME$2, n.__scopePopover), { forceMount: O = E.forceMount, ...A } = n, j = usePopoverContext(CONTENT_NAME$2, n.__scopePopover);
+PopoverPortal.displayName = PORTAL_NAME$2;
+var CONTENT_NAME$3 = "PopoverContent", PopoverContent = React$1.forwardRef((n, _) => {
+	let E = usePortalContext$1(CONTENT_NAME$3, n.__scopePopover), { forceMount: O = E.forceMount, ...A } = n, j = usePopoverContext(CONTENT_NAME$3, n.__scopePopover);
 	return /* @__PURE__ */ jsx(Presence, {
 		present: O || j.open,
 		children: j.modal ? /* @__PURE__ */ jsx(PopoverContentModal, {
@@ -4618,14 +4646,14 @@ var CONTENT_NAME$2 = "PopoverContent", PopoverContent = React$1.forwardRef((n, _
 		})
 	});
 });
-PopoverContent.displayName = CONTENT_NAME$2;
-var Slot = /* @__PURE__ */ createSlot("PopoverContent.RemoveScroll"), PopoverContentModal = React$1.forwardRef((_, E) => {
-	let O = usePopoverContext(CONTENT_NAME$2, _.__scopePopover), A = React$1.useRef(null), j = useComposedRefs$1(E, A), M = React$1.useRef(!1);
+PopoverContent.displayName = CONTENT_NAME$3;
+var Slot$1 = /* @__PURE__ */ createSlot("PopoverContent.RemoveScroll"), PopoverContentModal = React$1.forwardRef((_, E) => {
+	let O = usePopoverContext(CONTENT_NAME$3, _.__scopePopover), A = React$1.useRef(null), j = useComposedRefs$1(E, A), M = React$1.useRef(!1);
 	return React$1.useEffect(() => {
 		let n = A.current;
 		if (n) return hideOthers(n);
 	}, []), /* @__PURE__ */ jsx(Combination_default, {
-		as: Slot,
+		as: Slot$1,
 		allowPinchZoom: !0,
 		children: /* @__PURE__ */ jsx(PopoverContentImpl, {
 			..._,
@@ -4643,7 +4671,7 @@ var Slot = /* @__PURE__ */ createSlot("PopoverContent.RemoveScroll"), PopoverCon
 		})
 	});
 }), PopoverContentNonModal = React$1.forwardRef((_, E) => {
-	let O = usePopoverContext(CONTENT_NAME$2, _.__scopePopover), A = React$1.useRef(!1), j = React$1.useRef(!1);
+	let O = usePopoverContext(CONTENT_NAME$3, _.__scopePopover), A = React$1.useRef(!1), j = React$1.useRef(!1);
 	return /* @__PURE__ */ jsx(PopoverContentImpl, {
 		..._,
 		ref: E,
@@ -4659,7 +4687,7 @@ var Slot = /* @__PURE__ */ createSlot("PopoverContent.RemoveScroll"), PopoverCon
 		}
 	});
 }), PopoverContentImpl = React$1.forwardRef((n, _) => {
-	let { __scopePopover: E, trapFocus: O, onOpenAutoFocus: A, onCloseAutoFocus: j, disableOutsidePointerEvents: M, onEscapeKeyDown: N, onPointerDownOutside: P, onFocusOutside: z, onInteractOutside: B, ...H } = n, U = usePopoverContext(CONTENT_NAME$2, E), W = usePopperScope$1(E);
+	let { __scopePopover: E, trapFocus: O, onOpenAutoFocus: A, onCloseAutoFocus: j, disableOutsidePointerEvents: M, onEscapeKeyDown: N, onPointerDownOutside: P, onFocusOutside: z, onInteractOutside: B, ...H } = n, U = usePopoverContext(CONTENT_NAME$3, E), W = usePopperScope$2(E);
 	return useFocusGuards(), /* @__PURE__ */ jsx(FocusScope, {
 		asChild: !0,
 		loop: !0,
@@ -4702,28 +4730,28 @@ var Slot = /* @__PURE__ */ createSlot("PopoverContent.RemoveScroll"), PopoverCon
 	});
 });
 PopoverClose.displayName = CLOSE_NAME;
-var ARROW_NAME$1 = "PopoverArrow", PopoverArrow = React$1.forwardRef((n, _) => {
+var ARROW_NAME$2 = "PopoverArrow", PopoverArrow = React$1.forwardRef((n, _) => {
 	let { __scopePopover: E, ...O } = n;
 	return /* @__PURE__ */ jsx(Arrow, {
-		...usePopperScope$1(E),
+		...usePopperScope$2(E),
 		...O,
 		ref: _
 	});
 });
-PopoverArrow.displayName = ARROW_NAME$1;
+PopoverArrow.displayName = ARROW_NAME$2;
 function getState$1(n) {
 	return n ? "open" : "closed";
 }
-var Root2$1 = Popover, Anchor2 = PopoverAnchor, Trigger$2 = PopoverTrigger, Portal$2 = PopoverPortal, Content2$1 = PopoverContent, Close = PopoverClose;
+var Root2$2 = Popover, Anchor2 = PopoverAnchor, Trigger$3 = PopoverTrigger, Portal$3 = PopoverPortal, Content2$2 = PopoverContent, Close = PopoverClose;
 function useStateMachine(_, E) {
 	return React$1.useReducer((n, _) => E[n][_] ?? n, _);
 }
 var SCROLL_AREA_NAME = "ScrollArea", [createScrollAreaContext, createScrollAreaScope] = createContextScope(SCROLL_AREA_NAME), [ScrollAreaProvider, useScrollAreaContext] = createScrollAreaContext(SCROLL_AREA_NAME), ScrollArea = React$1.forwardRef((_, E) => {
-	let { __scopeScrollArea: O, type: A = "hover", dir: j, scrollHideDelay: M = 600, ...N } = _, [P, z] = React$1.useState(null), [B, H] = React$1.useState(null), [U, W] = React$1.useState(null), [G, Z] = React$1.useState(null), [TL, EL] = React$1.useState(null), [DL, OL] = React$1.useState(0), [kL, AL] = React$1.useState(0), [jL, ML] = React$1.useState(!1), [NL, PL] = React$1.useState(!1), FL = useComposedRefs$1(E, (n) => z(n)), IL = useDirection(j);
+	let { __scopeScrollArea: O, type: A = "hover", dir: j, scrollHideDelay: M = 600, ...N } = _, [P, z] = React$1.useState(null), [B, H] = React$1.useState(null), [U, W] = React$1.useState(null), [G, Z] = React$1.useState(null), [uz, dz] = React$1.useState(null), [fz, pz] = React$1.useState(0), [mz, hz] = React$1.useState(0), [gz, _z] = React$1.useState(!1), [vz, yz] = React$1.useState(!1), bz = useComposedRefs$1(E, (n) => z(n)), xz = useDirection(j);
 	return /* @__PURE__ */ jsx(ScrollAreaProvider, {
 		scope: O,
 		type: A,
-		dir: IL,
+		dir: xz,
 		scrollHideDelay: M,
 		scrollArea: P,
 		viewport: B,
@@ -4732,30 +4760,30 @@ var SCROLL_AREA_NAME = "ScrollArea", [createScrollAreaContext, createScrollAreaS
 		onContentChange: W,
 		scrollbarX: G,
 		onScrollbarXChange: Z,
-		scrollbarXEnabled: jL,
-		onScrollbarXEnabledChange: ML,
-		scrollbarY: TL,
-		onScrollbarYChange: EL,
-		scrollbarYEnabled: NL,
-		onScrollbarYEnabledChange: PL,
-		onCornerWidthChange: OL,
-		onCornerHeightChange: AL,
+		scrollbarXEnabled: gz,
+		onScrollbarXEnabledChange: _z,
+		scrollbarY: uz,
+		onScrollbarYChange: dz,
+		scrollbarYEnabled: vz,
+		onScrollbarYEnabledChange: yz,
+		onCornerWidthChange: pz,
+		onCornerHeightChange: hz,
 		children: /* @__PURE__ */ jsx(Primitive.div, {
-			dir: IL,
+			dir: xz,
 			...N,
-			ref: FL,
+			ref: bz,
 			style: {
 				position: "relative",
-				"--radix-scroll-area-corner-width": DL + "px",
-				"--radix-scroll-area-corner-height": kL + "px",
+				"--radix-scroll-area-corner-width": fz + "px",
+				"--radix-scroll-area-corner-height": mz + "px",
 				..._.style
 			}
 		})
 	});
 });
 ScrollArea.displayName = SCROLL_AREA_NAME;
-var VIEWPORT_NAME = "ScrollAreaViewport", ScrollAreaViewport = React$1.forwardRef((_, E) => {
-	let { __scopeScrollArea: O, children: A, nonce: j, ...M } = _, N = useScrollAreaContext(VIEWPORT_NAME, O), P = useComposedRefs$1(E, React$1.useRef(null), N.onViewportChange);
+var VIEWPORT_NAME$1 = "ScrollAreaViewport", ScrollAreaViewport = React$1.forwardRef((_, E) => {
+	let { __scopeScrollArea: O, children: A, nonce: j, ...M } = _, N = useScrollAreaContext(VIEWPORT_NAME$1, O), P = useComposedRefs$1(E, React$1.useRef(null), N.onViewportChange);
 	return /* @__PURE__ */ jsxs(Fragment$1, { children: [/* @__PURE__ */ jsx("style", {
 		dangerouslySetInnerHTML: { __html: "[data-radix-scroll-area-viewport]{scrollbar-width:none;-ms-overflow-style:none;-webkit-overflow-scrolling:touch;}[data-radix-scroll-area-viewport]::-webkit-scrollbar{display:none}" },
 		nonce: j
@@ -4778,7 +4806,7 @@ var VIEWPORT_NAME = "ScrollAreaViewport", ScrollAreaViewport = React$1.forwardRe
 		})
 	})] });
 });
-ScrollAreaViewport.displayName = VIEWPORT_NAME;
+ScrollAreaViewport.displayName = VIEWPORT_NAME$1;
 var SCROLLBAR_NAME = "ScrollAreaScrollbar", ScrollAreaScrollbar = React$1.forwardRef((_, E) => {
 	let { forceMount: O, ...A } = _, j = useScrollAreaContext(SCROLLBAR_NAME, _.__scopeScrollArea), { onScrollbarXEnabledChange: M, onScrollbarYEnabledChange: N } = j, P = _.orientation === "horizontal";
 	return React$1.useEffect(() => (P ? M(!0) : N(!0), () => {
@@ -5018,46 +5046,46 @@ var ScrollAreaScrollbarHover = React$1.forwardRef((_, E) => {
 		}
 	});
 }), [ScrollbarProvider, useScrollbarContext] = createScrollAreaContext(SCROLLBAR_NAME), ScrollAreaScrollbarImpl = React$1.forwardRef((_, E) => {
-	let { __scopeScrollArea: O, sizes: A, hasThumb: j, onThumbChange: M, onThumbPointerUp: N, onThumbPointerDown: P, onThumbPositionChange: z, onDragScroll: B, onWheelScroll: H, onResize: U, ...W } = _, G = useScrollAreaContext(SCROLLBAR_NAME, O), [Z, TL] = React$1.useState(null), EL = useComposedRefs$1(E, (n) => TL(n)), DL = React$1.useRef(null), OL = React$1.useRef(""), kL = G.viewport, AL = A.content - A.viewport, jL = useCallbackRef(H), ML = useCallbackRef(z), NL = useDebounceCallback(U, 10);
-	function PL(n) {
-		DL.current && B({
-			x: n.clientX - DL.current.left,
-			y: n.clientY - DL.current.top
+	let { __scopeScrollArea: O, sizes: A, hasThumb: j, onThumbChange: M, onThumbPointerUp: N, onThumbPointerDown: P, onThumbPositionChange: z, onDragScroll: B, onWheelScroll: H, onResize: U, ...W } = _, G = useScrollAreaContext(SCROLLBAR_NAME, O), [Z, uz] = React$1.useState(null), dz = useComposedRefs$1(E, (n) => uz(n)), fz = React$1.useRef(null), pz = React$1.useRef(""), mz = G.viewport, hz = A.content - A.viewport, gz = useCallbackRef(H), _z = useCallbackRef(z), vz = useDebounceCallback(U, 10);
+	function yz(n) {
+		fz.current && B({
+			x: n.clientX - fz.current.left,
+			y: n.clientY - fz.current.top
 		});
 	}
 	return React$1.useEffect(() => {
 		let n = (n) => {
 			let _ = n.target;
-			Z?.contains(_) && jL(n, AL);
+			Z?.contains(_) && gz(n, hz);
 		};
 		return document.addEventListener("wheel", n, { passive: !1 }), () => document.removeEventListener("wheel", n, { passive: !1 });
 	}, [
-		kL,
+		mz,
 		Z,
-		AL,
-		jL
-	]), React$1.useEffect(ML, [A, ML]), useResizeObserver$1(Z, NL), useResizeObserver$1(G.content, NL), /* @__PURE__ */ jsx(ScrollbarProvider, {
+		hz,
+		gz
+	]), React$1.useEffect(_z, [A, _z]), useResizeObserver$1(Z, vz), useResizeObserver$1(G.content, vz), /* @__PURE__ */ jsx(ScrollbarProvider, {
 		scope: O,
 		scrollbar: Z,
 		hasThumb: j,
 		onThumbChange: useCallbackRef(M),
 		onThumbPointerUp: useCallbackRef(N),
-		onThumbPositionChange: ML,
+		onThumbPositionChange: _z,
 		onThumbPointerDown: useCallbackRef(P),
 		children: /* @__PURE__ */ jsx(Primitive.div, {
 			...W,
-			ref: EL,
+			ref: dz,
 			style: {
 				position: "absolute",
 				...W.style
 			},
 			onPointerDown: composeEventHandlers(_.onPointerDown, (n) => {
-				n.button === 0 && (n.target.setPointerCapture(n.pointerId), DL.current = Z.getBoundingClientRect(), OL.current = document.body.style.webkitUserSelect, document.body.style.webkitUserSelect = "none", G.viewport && (G.viewport.style.scrollBehavior = "auto"), PL(n));
+				n.button === 0 && (n.target.setPointerCapture(n.pointerId), fz.current = Z.getBoundingClientRect(), pz.current = document.body.style.webkitUserSelect, document.body.style.webkitUserSelect = "none", G.viewport && (G.viewport.style.scrollBehavior = "auto"), yz(n));
 			}),
-			onPointerMove: composeEventHandlers(_.onPointerMove, PL),
+			onPointerMove: composeEventHandlers(_.onPointerMove, yz),
 			onPointerUp: composeEventHandlers(_.onPointerUp, (n) => {
 				let _ = n.target;
-				_.hasPointerCapture(n.pointerId) && _.releasePointerCapture(n.pointerId), document.body.style.webkitUserSelect = OL.current, G.viewport && (G.viewport.style.scrollBehavior = ""), DL.current = null;
+				_.hasPointerCapture(n.pointerId) && _.releasePointerCapture(n.pointerId), document.body.style.webkitUserSelect = pz.current, G.viewport && (G.viewport.style.scrollBehavior = ""), fz.current = null;
 			})
 		})
 	});
@@ -5198,7 +5226,666 @@ function useResizeObserver$1(n, _) {
 		}
 	}, [n, E]);
 }
-var Root$2 = ScrollArea, Viewport = ScrollAreaViewport, Scrollbar = ScrollAreaScrollbar, Thumb$2 = ScrollAreaThumb, Corner = ScrollAreaCorner, PAGE_KEYS = ["PageUp", "PageDown"], ARROW_KEYS = [
+var Root$2 = ScrollArea, Viewport$1 = ScrollAreaViewport, Scrollbar = ScrollAreaScrollbar, Thumb$2 = ScrollAreaThumb, Corner = ScrollAreaCorner, OPEN_KEYS = [
+	" ",
+	"Enter",
+	"ArrowUp",
+	"ArrowDown"
+], SELECTION_KEYS = [" ", "Enter"], SELECT_NAME = "Select", [Collection$1, useCollection$1, createCollectionScope$1] = createCollection(SELECT_NAME), [createSelectContext, createSelectScope] = createContextScope(SELECT_NAME, [createCollectionScope$1, createPopperScope]), usePopperScope$1 = createPopperScope(), [SelectProvider, useSelectContext] = createSelectContext(SELECT_NAME), [SelectNativeOptionsProvider, useSelectNativeOptionsContext] = createSelectContext(SELECT_NAME), Select = (_) => {
+	let { __scopeSelect: E, children: O, open: A, defaultOpen: j, onOpenChange: M, value: N, defaultValue: P, onValueChange: z, dir: B, name: H, autoComplete: U, disabled: W, required: G, form: Z } = _, uz = usePopperScope$1(E), [dz, fz] = React$1.useState(null), [pz, mz] = React$1.useState(null), [hz, gz] = React$1.useState(!1), _z = useDirection(B), [vz, yz] = useControllableState({
+		prop: A,
+		defaultProp: j ?? !1,
+		onChange: M,
+		caller: SELECT_NAME
+	}), [bz, xz] = useControllableState({
+		prop: N,
+		defaultProp: P,
+		onChange: z,
+		caller: SELECT_NAME
+	}), Sz = React$1.useRef(null), Tz = dz ? Z || !!dz.closest("form") : !0, [Ez, Dz] = React$1.useState(/* @__PURE__ */ new Set()), Oz = Array.from(Ez).map((n) => n.props.value).join(";");
+	return /* @__PURE__ */ jsx(Root2$5, {
+		...uz,
+		children: /* @__PURE__ */ jsxs(SelectProvider, {
+			required: G,
+			scope: E,
+			trigger: dz,
+			onTriggerChange: fz,
+			valueNode: pz,
+			onValueNodeChange: mz,
+			valueNodeHasChildren: hz,
+			onValueNodeHasChildrenChange: gz,
+			contentId: useId$1(),
+			value: bz,
+			onValueChange: xz,
+			open: vz,
+			onOpenChange: yz,
+			dir: _z,
+			triggerPointerDownPosRef: Sz,
+			disabled: W,
+			children: [/* @__PURE__ */ jsx(Collection$1.Provider, {
+				scope: E,
+				children: /* @__PURE__ */ jsx(SelectNativeOptionsProvider, {
+					scope: _.__scopeSelect,
+					onNativeOptionAdd: React$1.useCallback((n) => {
+						Dz((_) => new Set(_).add(n));
+					}, []),
+					onNativeOptionRemove: React$1.useCallback((n) => {
+						Dz((_) => {
+							let E = new Set(_);
+							return E.delete(n), E;
+						});
+					}, []),
+					children: O
+				})
+			}), Tz ? /* @__PURE__ */ jsxs(SelectBubbleInput, {
+				"aria-hidden": !0,
+				required: G,
+				tabIndex: -1,
+				name: H,
+				autoComplete: U,
+				value: bz,
+				onChange: (n) => xz(n.target.value),
+				disabled: W,
+				form: Z,
+				children: [bz === void 0 ? /* @__PURE__ */ jsx("option", { value: "" }) : null, Array.from(Ez)]
+			}, Oz) : null]
+		})
+	});
+};
+Select.displayName = SELECT_NAME;
+var TRIGGER_NAME$2 = "SelectTrigger", SelectTrigger = React$1.forwardRef((_, E) => {
+	let { __scopeSelect: O, disabled: A = !1, ...j } = _, M = usePopperScope$1(O), N = useSelectContext(TRIGGER_NAME$2, O), P = N.disabled || A, z = useComposedRefs$1(E, N.onTriggerChange), B = useCollection$1(O), H = React$1.useRef("touch"), [U, W, G] = useTypeaheadSearch((n) => {
+		let _ = B().filter((n) => !n.disabled), E = findNextItem(_, n, _.find((n) => n.value === N.value));
+		E !== void 0 && N.onValueChange(E.value);
+	}), Z = (n) => {
+		P || (N.onOpenChange(!0), G()), n && (N.triggerPointerDownPosRef.current = {
+			x: Math.round(n.pageX),
+			y: Math.round(n.pageY)
+		});
+	};
+	return /* @__PURE__ */ jsx(Anchor, {
+		asChild: !0,
+		...M,
+		children: /* @__PURE__ */ jsx(Primitive.button, {
+			type: "button",
+			role: "combobox",
+			"aria-controls": N.contentId,
+			"aria-expanded": N.open,
+			"aria-required": N.required,
+			"aria-autocomplete": "none",
+			dir: N.dir,
+			"data-state": N.open ? "open" : "closed",
+			disabled: P,
+			"data-disabled": P ? "" : void 0,
+			"data-placeholder": shouldShowPlaceholder(N.value) ? "" : void 0,
+			...j,
+			ref: z,
+			onClick: composeEventHandlers(j.onClick, (n) => {
+				n.currentTarget.focus(), H.current !== "mouse" && Z(n);
+			}),
+			onPointerDown: composeEventHandlers(j.onPointerDown, (n) => {
+				H.current = n.pointerType;
+				let _ = n.target;
+				_.hasPointerCapture(n.pointerId) && _.releasePointerCapture(n.pointerId), n.button === 0 && n.ctrlKey === !1 && n.pointerType === "mouse" && (Z(n), n.preventDefault());
+			}),
+			onKeyDown: composeEventHandlers(j.onKeyDown, (n) => {
+				let _ = U.current !== "";
+				!(n.ctrlKey || n.altKey || n.metaKey) && n.key.length === 1 && W(n.key), !(_ && n.key === " ") && OPEN_KEYS.includes(n.key) && (Z(), n.preventDefault());
+			})
+		})
+	});
+});
+SelectTrigger.displayName = TRIGGER_NAME$2;
+var VALUE_NAME = "SelectValue", SelectValue = React$1.forwardRef((n, _) => {
+	let { __scopeSelect: E, className: O, style: A, children: j, placeholder: M = "", ...N } = n, P = useSelectContext(VALUE_NAME, E), { onValueNodeHasChildrenChange: z } = P, B = j !== void 0, H = useComposedRefs$1(_, P.onValueNodeChange);
+	return useLayoutEffect2(() => {
+		z(B);
+	}, [z, B]), /* @__PURE__ */ jsx(Primitive.span, {
+		...N,
+		ref: H,
+		style: { pointerEvents: "none" },
+		children: shouldShowPlaceholder(P.value) ? /* @__PURE__ */ jsx(Fragment$1, { children: M }) : j
+	});
+});
+SelectValue.displayName = VALUE_NAME;
+var ICON_NAME = "SelectIcon", SelectIcon = React$1.forwardRef((n, _) => {
+	let { __scopeSelect: E, children: O, ...A } = n;
+	return /* @__PURE__ */ jsx(Primitive.span, {
+		"aria-hidden": !0,
+		...A,
+		ref: _,
+		children: O || "▼"
+	});
+});
+SelectIcon.displayName = ICON_NAME;
+var PORTAL_NAME$1 = "SelectPortal", SelectPortal = (n) => /* @__PURE__ */ jsx(Portal, {
+	asChild: !0,
+	...n
+});
+SelectPortal.displayName = PORTAL_NAME$1;
+var CONTENT_NAME$2 = "SelectContent", SelectContent = React$1.forwardRef((_, E) => {
+	let O = useSelectContext(CONTENT_NAME$2, _.__scopeSelect), [A, j] = React$1.useState();
+	if (useLayoutEffect2(() => {
+		j(new DocumentFragment());
+	}, []), !O.open) {
+		let n = A;
+		return n ? ReactDOM$1.createPortal(/* @__PURE__ */ jsx(SelectContentProvider, {
+			scope: _.__scopeSelect,
+			children: /* @__PURE__ */ jsx(Collection$1.Slot, {
+				scope: _.__scopeSelect,
+				children: /* @__PURE__ */ jsx("div", { children: _.children })
+			})
+		}), n) : null;
+	}
+	return /* @__PURE__ */ jsx(SelectContentImpl, {
+		..._,
+		ref: E
+	});
+});
+SelectContent.displayName = CONTENT_NAME$2;
+var CONTENT_MARGIN = 10, [SelectContentProvider, useSelectContentContext] = createSelectContext(CONTENT_NAME$2), CONTENT_IMPL_NAME = "SelectContentImpl", Slot = /* @__PURE__ */ createSlot("SelectContent.RemoveScroll"), SelectContentImpl = React$1.forwardRef((_, E) => {
+	let { __scopeSelect: O, position: A = "item-aligned", onCloseAutoFocus: j, onEscapeKeyDown: M, onPointerDownOutside: N, side: P, sideOffset: z, align: B, alignOffset: H, arrowPadding: U, collisionBoundary: W, collisionPadding: G, sticky: Z, hideWhenDetached: uz, avoidCollisions: dz, ...fz } = _, pz = useSelectContext(CONTENT_NAME$2, O), [mz, hz] = React$1.useState(null), [gz, _z] = React$1.useState(null), vz = useComposedRefs$1(E, (n) => hz(n)), [yz, bz] = React$1.useState(null), [xz, Sz] = React$1.useState(null), wz = useCollection$1(O), [Tz, Ez] = React$1.useState(!1), Dz = React$1.useRef(!1);
+	React$1.useEffect(() => {
+		if (mz) return hideOthers(mz);
+	}, [mz]), useFocusGuards();
+	let Oz = React$1.useCallback((n) => {
+		let [_, ...E] = wz().map((n) => n.ref.current), [O] = E.slice(-1), A = document.activeElement;
+		for (let E of n) if (E === A || (E?.scrollIntoView({ block: "nearest" }), E === _ && gz && (gz.scrollTop = 0), E === O && gz && (gz.scrollTop = gz.scrollHeight), E?.focus(), document.activeElement !== A)) return;
+	}, [wz, gz]), kz = React$1.useCallback(() => Oz([yz, mz]), [
+		Oz,
+		yz,
+		mz
+	]);
+	React$1.useEffect(() => {
+		Tz && kz();
+	}, [Tz, kz]);
+	let { onOpenChange: Az, triggerPointerDownPosRef: jz } = pz;
+	React$1.useEffect(() => {
+		if (mz) {
+			let n = {
+				x: 0,
+				y: 0
+			}, _ = (_) => {
+				n = {
+					x: Math.abs(Math.round(_.pageX) - (jz.current?.x ?? 0)),
+					y: Math.abs(Math.round(_.pageY) - (jz.current?.y ?? 0))
+				};
+			}, E = (E) => {
+				n.x <= 10 && n.y <= 10 ? E.preventDefault() : mz.contains(E.target) || Az(!1), document.removeEventListener("pointermove", _), jz.current = null;
+			};
+			return jz.current !== null && (document.addEventListener("pointermove", _), document.addEventListener("pointerup", E, {
+				capture: !0,
+				once: !0
+			})), () => {
+				document.removeEventListener("pointermove", _), document.removeEventListener("pointerup", E, { capture: !0 });
+			};
+		}
+	}, [
+		mz,
+		Az,
+		jz
+	]), React$1.useEffect(() => {
+		let n = () => Az(!1);
+		return window.addEventListener("blur", n), window.addEventListener("resize", n), () => {
+			window.removeEventListener("blur", n), window.removeEventListener("resize", n);
+		};
+	}, [Az]);
+	let [Mz, Nz] = useTypeaheadSearch((n) => {
+		let _ = wz().filter((n) => !n.disabled), E = findNextItem(_, n, _.find((n) => n.ref.current === document.activeElement));
+		E && setTimeout(() => E.ref.current.focus());
+	}), Pz = React$1.useCallback((n, _, E) => {
+		let O = !Dz.current && !E;
+		(pz.value !== void 0 && pz.value === _ || O) && (bz(n), O && (Dz.current = !0));
+	}, [pz.value]), Fz = React$1.useCallback(() => mz?.focus(), [mz]), Iz = React$1.useCallback((n, _, E) => {
+		let O = !Dz.current && !E;
+		(pz.value !== void 0 && pz.value === _ || O) && Sz(n);
+	}, [pz.value]), Lz = A === "popper" ? SelectPopperPosition : SelectItemAlignedPosition, Rz = Lz === SelectPopperPosition ? {
+		side: P,
+		sideOffset: z,
+		align: B,
+		alignOffset: H,
+		arrowPadding: U,
+		collisionBoundary: W,
+		collisionPadding: G,
+		sticky: Z,
+		hideWhenDetached: uz,
+		avoidCollisions: dz
+	} : {};
+	return /* @__PURE__ */ jsx(SelectContentProvider, {
+		scope: O,
+		content: mz,
+		viewport: gz,
+		onViewportChange: _z,
+		itemRefCallback: Pz,
+		selectedItem: yz,
+		onItemLeave: Fz,
+		itemTextRefCallback: Iz,
+		focusSelectedItem: kz,
+		selectedItemText: xz,
+		position: A,
+		isPositioned: Tz,
+		searchRef: Mz,
+		children: /* @__PURE__ */ jsx(Combination_default, {
+			as: Slot,
+			allowPinchZoom: !0,
+			children: /* @__PURE__ */ jsx(FocusScope, {
+				asChild: !0,
+				trapped: pz.open,
+				onMountAutoFocus: (n) => {
+					n.preventDefault();
+				},
+				onUnmountAutoFocus: composeEventHandlers(j, (n) => {
+					pz.trigger?.focus({ preventScroll: !0 }), n.preventDefault();
+				}),
+				children: /* @__PURE__ */ jsx(DismissableLayer, {
+					asChild: !0,
+					disableOutsidePointerEvents: !0,
+					onEscapeKeyDown: M,
+					onPointerDownOutside: N,
+					onFocusOutside: (n) => n.preventDefault(),
+					onDismiss: () => pz.onOpenChange(!1),
+					children: /* @__PURE__ */ jsx(Lz, {
+						role: "listbox",
+						id: pz.contentId,
+						"data-state": pz.open ? "open" : "closed",
+						dir: pz.dir,
+						onContextMenu: (n) => n.preventDefault(),
+						...fz,
+						...Rz,
+						onPlaced: () => Ez(!0),
+						ref: vz,
+						style: {
+							display: "flex",
+							flexDirection: "column",
+							outline: "none",
+							...fz.style
+						},
+						onKeyDown: composeEventHandlers(fz.onKeyDown, (n) => {
+							let _ = n.ctrlKey || n.altKey || n.metaKey;
+							if (n.key === "Tab" && n.preventDefault(), !_ && n.key.length === 1 && Nz(n.key), [
+								"ArrowUp",
+								"ArrowDown",
+								"Home",
+								"End"
+							].includes(n.key)) {
+								let _ = wz().filter((n) => !n.disabled).map((n) => n.ref.current);
+								if (["ArrowUp", "End"].includes(n.key) && (_ = _.slice().reverse()), ["ArrowUp", "ArrowDown"].includes(n.key)) {
+									let E = n.target, O = _.indexOf(E);
+									_ = _.slice(O + 1);
+								}
+								setTimeout(() => Oz(_)), n.preventDefault();
+							}
+						})
+					})
+				})
+			})
+		})
+	});
+});
+SelectContentImpl.displayName = CONTENT_IMPL_NAME;
+var ITEM_ALIGNED_POSITION_NAME = "SelectItemAlignedPosition", SelectItemAlignedPosition = React$1.forwardRef((_, E) => {
+	let { __scopeSelect: O, onPlaced: A, ...j } = _, M = useSelectContext(CONTENT_NAME$2, O), N = useSelectContentContext(CONTENT_NAME$2, O), [P, z] = React$1.useState(null), [B, H] = React$1.useState(null), U = useComposedRefs$1(E, (n) => H(n)), W = useCollection$1(O), G = React$1.useRef(!1), Z = React$1.useRef(!0), { viewport: uz, selectedItem: dz, selectedItemText: fz, focusSelectedItem: pz } = N, mz = React$1.useCallback(() => {
+		if (M.trigger && M.valueNode && P && B && uz && dz && fz) {
+			let n = M.trigger.getBoundingClientRect(), _ = B.getBoundingClientRect(), E = M.valueNode.getBoundingClientRect(), O = fz.getBoundingClientRect();
+			if (M.dir !== "rtl") {
+				let A = O.left - _.left, j = E.left - A, M = n.left - j, N = n.width + M, z = Math.max(N, _.width), B = window.innerWidth - CONTENT_MARGIN, H = clamp$2(j, [CONTENT_MARGIN, Math.max(CONTENT_MARGIN, B - z)]);
+				P.style.minWidth = N + "px", P.style.left = H + "px";
+			} else {
+				let A = _.right - O.right, j = window.innerWidth - E.right - A, M = window.innerWidth - n.right - j, N = n.width + M, z = Math.max(N, _.width), B = window.innerWidth - CONTENT_MARGIN, H = clamp$2(j, [CONTENT_MARGIN, Math.max(CONTENT_MARGIN, B - z)]);
+				P.style.minWidth = N + "px", P.style.right = H + "px";
+			}
+			let j = W(), N = window.innerHeight - CONTENT_MARGIN * 2, z = uz.scrollHeight, H = window.getComputedStyle(B), U = parseInt(H.borderTopWidth, 10), Z = parseInt(H.paddingTop, 10), pz = parseInt(H.borderBottomWidth, 10), mz = parseInt(H.paddingBottom, 10), hz = U + Z + z + mz + pz, gz = Math.min(dz.offsetHeight * 5, hz), _z = window.getComputedStyle(uz), vz = parseInt(_z.paddingTop, 10), yz = parseInt(_z.paddingBottom, 10), bz = n.top + n.height / 2 - CONTENT_MARGIN, xz = N - bz, Sz = dz.offsetHeight / 2, Cz = dz.offsetTop + Sz, wz = U + Z + Cz, Tz = hz - wz;
+			if (wz <= bz) {
+				let n = j.length > 0 && dz === j[j.length - 1].ref.current;
+				P.style.bottom = "0px";
+				let _ = B.clientHeight - uz.offsetTop - uz.offsetHeight, E = wz + Math.max(xz, Sz + (n ? yz : 0) + _ + pz);
+				P.style.height = E + "px";
+			} else {
+				let n = j.length > 0 && dz === j[0].ref.current;
+				P.style.top = "0px";
+				let _ = Math.max(bz, U + uz.offsetTop + (n ? vz : 0) + Sz) + Tz;
+				P.style.height = _ + "px", uz.scrollTop = wz - bz + uz.offsetTop;
+			}
+			P.style.margin = `${CONTENT_MARGIN}px 0`, P.style.minHeight = gz + "px", P.style.maxHeight = N + "px", A?.(), requestAnimationFrame(() => G.current = !0);
+		}
+	}, [
+		W,
+		M.trigger,
+		M.valueNode,
+		P,
+		B,
+		uz,
+		dz,
+		fz,
+		M.dir,
+		A
+	]);
+	useLayoutEffect2(() => mz(), [mz]);
+	let [hz, gz] = React$1.useState();
+	return useLayoutEffect2(() => {
+		B && gz(window.getComputedStyle(B).zIndex);
+	}, [B]), /* @__PURE__ */ jsx(SelectViewportProvider, {
+		scope: O,
+		contentWrapper: P,
+		shouldExpandOnScrollRef: G,
+		onScrollButtonChange: React$1.useCallback((n) => {
+			n && Z.current === !0 && (mz(), pz?.(), Z.current = !1);
+		}, [mz, pz]),
+		children: /* @__PURE__ */ jsx("div", {
+			ref: z,
+			style: {
+				display: "flex",
+				flexDirection: "column",
+				position: "fixed",
+				zIndex: hz
+			},
+			children: /* @__PURE__ */ jsx(Primitive.div, {
+				...j,
+				ref: U,
+				style: {
+					boxSizing: "border-box",
+					maxHeight: "100%",
+					...j.style
+				}
+			})
+		})
+	});
+});
+SelectItemAlignedPosition.displayName = ITEM_ALIGNED_POSITION_NAME;
+var POPPER_POSITION_NAME = "SelectPopperPosition", SelectPopperPosition = React$1.forwardRef((n, _) => {
+	let { __scopeSelect: E, align: O = "start", collisionPadding: A = CONTENT_MARGIN, ...j } = n;
+	return /* @__PURE__ */ jsx(Content$1, {
+		...usePopperScope$1(E),
+		...j,
+		ref: _,
+		align: O,
+		collisionPadding: A,
+		style: {
+			boxSizing: "border-box",
+			...j.style,
+			"--radix-select-content-transform-origin": "var(--radix-popper-transform-origin)",
+			"--radix-select-content-available-width": "var(--radix-popper-available-width)",
+			"--radix-select-content-available-height": "var(--radix-popper-available-height)",
+			"--radix-select-trigger-width": "var(--radix-popper-anchor-width)",
+			"--radix-select-trigger-height": "var(--radix-popper-anchor-height)"
+		}
+	});
+});
+SelectPopperPosition.displayName = POPPER_POSITION_NAME;
+var [SelectViewportProvider, useSelectViewportContext] = createSelectContext(CONTENT_NAME$2, {}), VIEWPORT_NAME = "SelectViewport", SelectViewport = React$1.forwardRef((_, E) => {
+	let { __scopeSelect: O, nonce: A, ...j } = _, M = useSelectContentContext(VIEWPORT_NAME, O), N = useSelectViewportContext(VIEWPORT_NAME, O), P = useComposedRefs$1(E, M.onViewportChange), z = React$1.useRef(0);
+	return /* @__PURE__ */ jsxs(Fragment$1, { children: [/* @__PURE__ */ jsx("style", {
+		dangerouslySetInnerHTML: { __html: "[data-radix-select-viewport]{scrollbar-width:none;-ms-overflow-style:none;-webkit-overflow-scrolling:touch;}[data-radix-select-viewport]::-webkit-scrollbar{display:none}" },
+		nonce: A
+	}), /* @__PURE__ */ jsx(Collection$1.Slot, {
+		scope: O,
+		children: /* @__PURE__ */ jsx(Primitive.div, {
+			"data-radix-select-viewport": "",
+			role: "presentation",
+			...j,
+			ref: P,
+			style: {
+				position: "relative",
+				flex: 1,
+				overflow: "hidden auto",
+				...j.style
+			},
+			onScroll: composeEventHandlers(j.onScroll, (n) => {
+				let _ = n.currentTarget, { contentWrapper: E, shouldExpandOnScrollRef: O } = N;
+				if (O?.current && E) {
+					let n = Math.abs(z.current - _.scrollTop);
+					if (n > 0) {
+						let O = window.innerHeight - CONTENT_MARGIN * 2, A = parseFloat(E.style.minHeight), j = parseFloat(E.style.height), M = Math.max(A, j);
+						if (M < O) {
+							let A = M + n, j = Math.min(O, A), N = A - j;
+							E.style.height = j + "px", E.style.bottom === "0px" && (_.scrollTop = N > 0 ? N : 0, E.style.justifyContent = "flex-end");
+						}
+					}
+				}
+				z.current = _.scrollTop;
+			})
+		})
+	})] });
+});
+SelectViewport.displayName = VIEWPORT_NAME;
+var GROUP_NAME = "SelectGroup", [SelectGroupContextProvider, useSelectGroupContext] = createSelectContext(GROUP_NAME), SelectGroup = React$1.forwardRef((n, _) => {
+	let { __scopeSelect: E, ...O } = n, A = useId$1();
+	return /* @__PURE__ */ jsx(SelectGroupContextProvider, {
+		scope: E,
+		id: A,
+		children: /* @__PURE__ */ jsx(Primitive.div, {
+			role: "group",
+			"aria-labelledby": A,
+			...O,
+			ref: _
+		})
+	});
+});
+SelectGroup.displayName = GROUP_NAME;
+var LABEL_NAME = "SelectLabel", SelectLabel = React$1.forwardRef((n, _) => {
+	let { __scopeSelect: E, ...O } = n, A = useSelectGroupContext(LABEL_NAME, E);
+	return /* @__PURE__ */ jsx(Primitive.div, {
+		id: A.id,
+		...O,
+		ref: _
+	});
+});
+SelectLabel.displayName = LABEL_NAME;
+var ITEM_NAME = "SelectItem", [SelectItemContextProvider, useSelectItemContext] = createSelectContext(ITEM_NAME), SelectItem = React$1.forwardRef((_, E) => {
+	let { __scopeSelect: O, value: A, disabled: j = !1, textValue: M, ...N } = _, P = useSelectContext(ITEM_NAME, O), z = useSelectContentContext(ITEM_NAME, O), B = P.value === A, [H, U] = React$1.useState(M ?? ""), [W, G] = React$1.useState(!1), Z = useComposedRefs$1(E, (n) => z.itemRefCallback?.(n, A, j)), uz = useId$1(), dz = React$1.useRef("touch"), fz = () => {
+		j || (P.onValueChange(A), P.onOpenChange(!1));
+	};
+	if (A === "") throw Error("A <Select.Item /> must have a value prop that is not an empty string. This is because the Select value can be set to an empty string to clear the selection and show the placeholder.");
+	return /* @__PURE__ */ jsx(SelectItemContextProvider, {
+		scope: O,
+		value: A,
+		disabled: j,
+		textId: uz,
+		isSelected: B,
+		onItemTextChange: React$1.useCallback((n) => {
+			U((_) => _ || (n?.textContent ?? "").trim());
+		}, []),
+		children: /* @__PURE__ */ jsx(Collection$1.ItemSlot, {
+			scope: O,
+			value: A,
+			disabled: j,
+			textValue: H,
+			children: /* @__PURE__ */ jsx(Primitive.div, {
+				role: "option",
+				"aria-labelledby": uz,
+				"data-highlighted": W ? "" : void 0,
+				"aria-selected": B && W,
+				"data-state": B ? "checked" : "unchecked",
+				"aria-disabled": j || void 0,
+				"data-disabled": j ? "" : void 0,
+				tabIndex: j ? void 0 : -1,
+				...N,
+				ref: Z,
+				onFocus: composeEventHandlers(N.onFocus, () => G(!0)),
+				onBlur: composeEventHandlers(N.onBlur, () => G(!1)),
+				onClick: composeEventHandlers(N.onClick, () => {
+					dz.current !== "mouse" && fz();
+				}),
+				onPointerUp: composeEventHandlers(N.onPointerUp, () => {
+					dz.current === "mouse" && fz();
+				}),
+				onPointerDown: composeEventHandlers(N.onPointerDown, (n) => {
+					dz.current = n.pointerType;
+				}),
+				onPointerMove: composeEventHandlers(N.onPointerMove, (n) => {
+					dz.current = n.pointerType, j ? z.onItemLeave?.() : dz.current === "mouse" && n.currentTarget.focus({ preventScroll: !0 });
+				}),
+				onPointerLeave: composeEventHandlers(N.onPointerLeave, (n) => {
+					n.currentTarget === document.activeElement && z.onItemLeave?.();
+				}),
+				onKeyDown: composeEventHandlers(N.onKeyDown, (n) => {
+					z.searchRef?.current !== "" && n.key === " " || (SELECTION_KEYS.includes(n.key) && fz(), n.key === " " && n.preventDefault());
+				})
+			})
+		})
+	});
+});
+SelectItem.displayName = ITEM_NAME;
+var ITEM_TEXT_NAME = "SelectItemText", SelectItemText = React$1.forwardRef((_, E) => {
+	let { __scopeSelect: O, className: A, style: j, ...M } = _, N = useSelectContext(ITEM_TEXT_NAME, O), P = useSelectContentContext(ITEM_TEXT_NAME, O), z = useSelectItemContext(ITEM_TEXT_NAME, O), B = useSelectNativeOptionsContext(ITEM_TEXT_NAME, O), [H, U] = React$1.useState(null), W = useComposedRefs$1(E, (n) => U(n), z.onItemTextChange, (n) => P.itemTextRefCallback?.(n, z.value, z.disabled)), G = H?.textContent, Z = React$1.useMemo(() => /* @__PURE__ */ jsx("option", {
+		value: z.value,
+		disabled: z.disabled,
+		children: G
+	}, z.value), [
+		z.disabled,
+		z.value,
+		G
+	]), { onNativeOptionAdd: uz, onNativeOptionRemove: dz } = B;
+	return useLayoutEffect2(() => (uz(Z), () => dz(Z)), [
+		uz,
+		dz,
+		Z
+	]), /* @__PURE__ */ jsxs(Fragment$1, { children: [/* @__PURE__ */ jsx(Primitive.span, {
+		id: z.textId,
+		...M,
+		ref: W
+	}), z.isSelected && N.valueNode && !N.valueNodeHasChildren ? ReactDOM$1.createPortal(M.children, N.valueNode) : null] });
+});
+SelectItemText.displayName = ITEM_TEXT_NAME;
+var ITEM_INDICATOR_NAME = "SelectItemIndicator", SelectItemIndicator = React$1.forwardRef((n, _) => {
+	let { __scopeSelect: E, ...O } = n;
+	return useSelectItemContext(ITEM_INDICATOR_NAME, E).isSelected ? /* @__PURE__ */ jsx(Primitive.span, {
+		"aria-hidden": !0,
+		...O,
+		ref: _
+	}) : null;
+});
+SelectItemIndicator.displayName = ITEM_INDICATOR_NAME;
+var SCROLL_UP_BUTTON_NAME = "SelectScrollUpButton", SelectScrollUpButton = React$1.forwardRef((_, E) => {
+	let O = useSelectContentContext(SCROLL_UP_BUTTON_NAME, _.__scopeSelect), A = useSelectViewportContext(SCROLL_UP_BUTTON_NAME, _.__scopeSelect), [j, M] = React$1.useState(!1), N = useComposedRefs$1(E, A.onScrollButtonChange);
+	return useLayoutEffect2(() => {
+		if (O.viewport && O.isPositioned) {
+			let n = function() {
+				M(_.scrollTop > 0);
+			}, _ = O.viewport;
+			return n(), _.addEventListener("scroll", n), () => _.removeEventListener("scroll", n);
+		}
+	}, [O.viewport, O.isPositioned]), j ? /* @__PURE__ */ jsx(SelectScrollButtonImpl, {
+		..._,
+		ref: N,
+		onAutoScroll: () => {
+			let { viewport: n, selectedItem: _ } = O;
+			n && _ && (n.scrollTop -= _.offsetHeight);
+		}
+	}) : null;
+});
+SelectScrollUpButton.displayName = SCROLL_UP_BUTTON_NAME;
+var SCROLL_DOWN_BUTTON_NAME = "SelectScrollDownButton", SelectScrollDownButton = React$1.forwardRef((_, E) => {
+	let O = useSelectContentContext(SCROLL_DOWN_BUTTON_NAME, _.__scopeSelect), A = useSelectViewportContext(SCROLL_DOWN_BUTTON_NAME, _.__scopeSelect), [j, M] = React$1.useState(!1), N = useComposedRefs$1(E, A.onScrollButtonChange);
+	return useLayoutEffect2(() => {
+		if (O.viewport && O.isPositioned) {
+			let n = function() {
+				let n = _.scrollHeight - _.clientHeight;
+				M(Math.ceil(_.scrollTop) < n);
+			}, _ = O.viewport;
+			return n(), _.addEventListener("scroll", n), () => _.removeEventListener("scroll", n);
+		}
+	}, [O.viewport, O.isPositioned]), j ? /* @__PURE__ */ jsx(SelectScrollButtonImpl, {
+		..._,
+		ref: N,
+		onAutoScroll: () => {
+			let { viewport: n, selectedItem: _ } = O;
+			n && _ && (n.scrollTop += _.offsetHeight);
+		}
+	}) : null;
+});
+SelectScrollDownButton.displayName = SCROLL_DOWN_BUTTON_NAME;
+var SelectScrollButtonImpl = React$1.forwardRef((_, E) => {
+	let { __scopeSelect: O, onAutoScroll: A, ...j } = _, M = useSelectContentContext("SelectScrollButton", O), N = React$1.useRef(null), P = useCollection$1(O), z = React$1.useCallback(() => {
+		N.current !== null && (window.clearInterval(N.current), N.current = null);
+	}, []);
+	return React$1.useEffect(() => () => z(), [z]), useLayoutEffect2(() => {
+		P().find((n) => n.ref.current === document.activeElement)?.ref.current?.scrollIntoView({ block: "nearest" });
+	}, [P]), /* @__PURE__ */ jsx(Primitive.div, {
+		"aria-hidden": !0,
+		...j,
+		ref: E,
+		style: {
+			flexShrink: 0,
+			...j.style
+		},
+		onPointerDown: composeEventHandlers(j.onPointerDown, () => {
+			N.current === null && (N.current = window.setInterval(A, 50));
+		}),
+		onPointerMove: composeEventHandlers(j.onPointerMove, () => {
+			M.onItemLeave?.(), N.current === null && (N.current = window.setInterval(A, 50));
+		}),
+		onPointerLeave: composeEventHandlers(j.onPointerLeave, () => {
+			z();
+		})
+	});
+}), SEPARATOR_NAME = "SelectSeparator", SelectSeparator = React$1.forwardRef((n, _) => {
+	let { __scopeSelect: E, ...O } = n;
+	return /* @__PURE__ */ jsx(Primitive.div, {
+		"aria-hidden": !0,
+		...O,
+		ref: _
+	});
+});
+SelectSeparator.displayName = SEPARATOR_NAME;
+var ARROW_NAME$1 = "SelectArrow", SelectArrow = React$1.forwardRef((n, _) => {
+	let { __scopeSelect: E, ...O } = n, A = usePopperScope$1(E), j = useSelectContext(ARROW_NAME$1, E), M = useSelectContentContext(ARROW_NAME$1, E);
+	return j.open && M.position === "popper" ? /* @__PURE__ */ jsx(Arrow, {
+		...A,
+		...O,
+		ref: _
+	}) : null;
+});
+SelectArrow.displayName = ARROW_NAME$1;
+var BUBBLE_INPUT_NAME$2 = "SelectBubbleInput", SelectBubbleInput = React$1.forwardRef(({ __scopeSelect: _, value: E, ...O }, A) => {
+	let j = React$1.useRef(null), M = useComposedRefs$1(A, j), N = usePrevious$1(E);
+	return React$1.useEffect(() => {
+		let n = j.current;
+		if (!n) return;
+		let _ = window.HTMLSelectElement.prototype, O = Object.getOwnPropertyDescriptor(_, "value").set;
+		if (N !== E && O) {
+			let _ = new Event("change", { bubbles: !0 });
+			O.call(n, E), n.dispatchEvent(_);
+		}
+	}, [N, E]), /* @__PURE__ */ jsx(Primitive.select, {
+		...O,
+		style: {
+			...VISUALLY_HIDDEN_STYLES,
+			...O.style
+		},
+		ref: M,
+		defaultValue: E
+	});
+});
+SelectBubbleInput.displayName = BUBBLE_INPUT_NAME$2;
+function shouldShowPlaceholder(n) {
+	return n === "" || n === void 0;
+}
+function useTypeaheadSearch(_) {
+	let E = useCallbackRef(_), O = React$1.useRef(""), A = React$1.useRef(0), j = React$1.useCallback((n) => {
+		let _ = O.current + n;
+		E(_), (function n(_) {
+			O.current = _, window.clearTimeout(A.current), _ !== "" && (A.current = window.setTimeout(() => n(""), 1e3));
+		})(_);
+	}, [E]), M = React$1.useCallback(() => {
+		O.current = "", window.clearTimeout(A.current);
+	}, []);
+	return React$1.useEffect(() => () => window.clearTimeout(A.current), []), [
+		O,
+		j,
+		M
+	];
+}
+function findNextItem(n, _, E) {
+	let O = _.length > 1 && Array.from(_).every((n) => n === _[0]) ? _[0] : _, A = E ? n.indexOf(E) : -1, j = wrapArray(n, Math.max(A, 0));
+	O.length === 1 && (j = j.filter((n) => n !== E));
+	let M = j.find((n) => n.textValue.toLowerCase().startsWith(O.toLowerCase()));
+	return M === E ? void 0 : M;
+}
+function wrapArray(n, _) {
+	return n.map((E, O) => n[(_ + O) % n.length]);
+}
+var Root2$1 = Select, Trigger$2 = SelectTrigger, Value = SelectValue, Icon = SelectIcon, Portal$2 = SelectPortal, Content2$1 = SelectContent, Viewport = SelectViewport, Group = SelectGroup, Label = SelectLabel, Item = SelectItem, ItemText = SelectItemText, ItemIndicator = SelectItemIndicator, Separator = SelectSeparator, PAGE_KEYS = ["PageUp", "PageDown"], ARROW_KEYS = [
 	"ArrowUp",
 	"ArrowDown",
 	"ArrowLeft",
@@ -5229,29 +5916,29 @@ var Root$2 = ScrollArea, Viewport = ScrollAreaViewport, Scrollbar = ScrollAreaSc
 		"ArrowLeft"
 	]
 }, SLIDER_NAME = "Slider", [Collection, useCollection, createCollectionScope] = createCollection(SLIDER_NAME), [createSliderContext, createSliderScope] = createContextScope(SLIDER_NAME, [createCollectionScope]), [SliderProvider, useSliderContext] = createSliderContext(SLIDER_NAME), Slider = React$1.forwardRef((_, E) => {
-	let { name: O, min: A = 0, max: j = 100, step: M = 1, orientation: N = "horizontal", disabled: P = !1, minStepsBetweenThumbs: z = 0, defaultValue: B = [A], value: H, onValueChange: U = () => {}, onValueCommit: W = () => {}, inverted: G = !1, form: Z, ...TL } = _, EL = React$1.useRef(/* @__PURE__ */ new Set()), DL = React$1.useRef(0), OL = N === "horizontal" ? SliderHorizontal : SliderVertical, [kL = [], AL] = useControllableState({
+	let { name: O, min: A = 0, max: j = 100, step: M = 1, orientation: N = "horizontal", disabled: P = !1, minStepsBetweenThumbs: z = 0, defaultValue: B = [A], value: H, onValueChange: U = () => {}, onValueCommit: W = () => {}, inverted: G = !1, form: Z, ...uz } = _, dz = React$1.useRef(/* @__PURE__ */ new Set()), fz = React$1.useRef(0), pz = N === "horizontal" ? SliderHorizontal : SliderVertical, [mz = [], hz] = useControllableState({
 		prop: H,
 		defaultProp: B,
 		onChange: (n) => {
-			[...EL.current][DL.current]?.focus(), U(n);
+			[...dz.current][fz.current]?.focus(), U(n);
 		}
-	}), jL = React$1.useRef(kL);
-	function ML(n) {
-		FL(n, getClosestValueIndex(kL, n));
+	}), gz = React$1.useRef(mz);
+	function _z(n) {
+		bz(n, getClosestValueIndex(mz, n));
 	}
-	function NL(n) {
-		FL(n, DL.current);
+	function vz(n) {
+		bz(n, fz.current);
 	}
-	function PL() {
-		let n = jL.current[DL.current];
-		kL[DL.current] !== n && W(kL);
+	function yz() {
+		let n = gz.current[fz.current];
+		mz[fz.current] !== n && W(mz);
 	}
-	function FL(n, _, { commit: E } = { commit: !1 }) {
+	function bz(n, _, { commit: E } = { commit: !1 }) {
 		let O = getDecimalCount(M), N = clamp$2(roundValue(Math.round((n - A) / M) * M + A, O), [A, j]);
-		AL((n = []) => {
+		hz((n = []) => {
 			let O = getNextSortedValues(n, N, _);
 			if (hasMinStepsBetweenValues(O, z * M)) {
-				DL.current = O.indexOf(N);
+				fz.current = O.indexOf(N);
 				let _ = String(O) !== String(n);
 				return _ && E && W(O), _ ? O : n;
 			} else return n;
@@ -5263,35 +5950,35 @@ var Root$2 = ScrollArea, Viewport = ScrollAreaViewport, Scrollbar = ScrollAreaSc
 		disabled: P,
 		min: A,
 		max: j,
-		valueIndexToChangeRef: DL,
-		thumbs: EL.current,
-		values: kL,
+		valueIndexToChangeRef: fz,
+		thumbs: dz.current,
+		values: mz,
 		orientation: N,
 		form: Z,
 		children: /* @__PURE__ */ jsx(Collection.Provider, {
 			scope: _.__scopeSlider,
 			children: /* @__PURE__ */ jsx(Collection.Slot, {
 				scope: _.__scopeSlider,
-				children: /* @__PURE__ */ jsx(OL, {
+				children: /* @__PURE__ */ jsx(pz, {
 					"aria-disabled": P,
 					"data-disabled": P ? "" : void 0,
-					...TL,
+					...uz,
 					ref: E,
-					onPointerDown: composeEventHandlers(TL.onPointerDown, () => {
-						P || (jL.current = kL);
+					onPointerDown: composeEventHandlers(uz.onPointerDown, () => {
+						P || (gz.current = mz);
 					}),
 					min: A,
 					max: j,
 					inverted: G,
-					onSlideStart: P ? void 0 : ML,
-					onSlideMove: P ? void 0 : NL,
-					onSlideEnd: P ? void 0 : PL,
-					onHomeKeyDown: () => !P && FL(A, 0, { commit: !0 }),
-					onEndKeyDown: () => !P && FL(j, kL.length - 1, { commit: !0 }),
+					onSlideStart: P ? void 0 : _z,
+					onSlideMove: P ? void 0 : vz,
+					onSlideEnd: P ? void 0 : yz,
+					onHomeKeyDown: () => !P && bz(A, 0, { commit: !0 }),
+					onEndKeyDown: () => !P && bz(j, mz.length - 1, { commit: !0 }),
 					onStepKeyDown: ({ event: n, direction: _ }) => {
 						if (!P) {
-							let E = PAGE_KEYS.includes(n.key) || n.shiftKey && ARROW_KEYS.includes(n.key) ? 10 : 1, O = DL.current, A = kL[O];
-							FL(A + M * E * _, O, { commit: !0 });
+							let E = PAGE_KEYS.includes(n.key) || n.shiftKey && ARROW_KEYS.includes(n.key) ? 10 : 1, O = fz.current, A = mz[O];
+							bz(A + M * E * _, O, { commit: !0 });
 						}
 					}
 				})
@@ -5306,19 +5993,19 @@ var [SliderOrientationProvider, useSliderOrientationContext] = createSliderConte
 	size: "width",
 	direction: 1
 }), SliderHorizontal = React$1.forwardRef((_, E) => {
-	let { min: O, max: A, dir: j, inverted: M, onSlideStart: N, onSlideMove: P, onSlideEnd: z, onStepKeyDown: B, ...H } = _, [U, W] = React$1.useState(null), G = useComposedRefs$1(E, (n) => W(n)), Z = React$1.useRef(void 0), TL = useDirection(j), EL = TL === "ltr", DL = EL && !M || !EL && M;
-	function OL(n) {
-		let _ = Z.current || U.getBoundingClientRect(), E = linearScale([0, _.width], DL ? [O, A] : [A, O]);
+	let { min: O, max: A, dir: j, inverted: M, onSlideStart: N, onSlideMove: P, onSlideEnd: z, onStepKeyDown: B, ...H } = _, [U, W] = React$1.useState(null), G = useComposedRefs$1(E, (n) => W(n)), Z = React$1.useRef(void 0), uz = useDirection(j), dz = uz === "ltr", fz = dz && !M || !dz && M;
+	function pz(n) {
+		let _ = Z.current || U.getBoundingClientRect(), E = linearScale([0, _.width], fz ? [O, A] : [A, O]);
 		return Z.current = _, E(n - _.left);
 	}
 	return /* @__PURE__ */ jsx(SliderOrientationProvider, {
 		scope: _.__scopeSlider,
-		startEdge: DL ? "left" : "right",
-		endEdge: DL ? "right" : "left",
-		direction: DL ? 1 : -1,
+		startEdge: fz ? "left" : "right",
+		endEdge: fz ? "right" : "left",
+		direction: fz ? 1 : -1,
 		size: "width",
 		children: /* @__PURE__ */ jsx(SliderImpl, {
-			dir: TL,
+			dir: uz,
 			"data-orientation": "horizontal",
 			...H,
 			ref: G,
@@ -5327,18 +6014,18 @@ var [SliderOrientationProvider, useSliderOrientationContext] = createSliderConte
 				"--radix-slider-thumb-transform": "translateX(-50%)"
 			},
 			onSlideStart: (n) => {
-				let _ = OL(n.clientX);
+				let _ = pz(n.clientX);
 				N?.(_);
 			},
 			onSlideMove: (n) => {
-				let _ = OL(n.clientX);
+				let _ = pz(n.clientX);
 				P?.(_);
 			},
 			onSlideEnd: () => {
 				Z.current = void 0, z?.();
 			},
 			onStepKeyDown: (n) => {
-				let _ = BACK_KEYS[DL ? "from-left" : "from-right"].includes(n.key);
+				let _ = BACK_KEYS[fz ? "from-left" : "from-right"].includes(n.key);
 				B?.({
 					event: n,
 					direction: _ ? -1 : 1
@@ -5439,7 +6126,7 @@ var THUMB_NAME$1 = "SliderThumb", SliderThumb = React$1.forwardRef((_, E) => {
 		index: N
 	});
 }), SliderThumbImpl = React$1.forwardRef((_, E) => {
-	let { __scopeSlider: O, index: A, name: j, ...M } = _, N = useSliderContext(THUMB_NAME$1, O), P = useSliderOrientationContext(THUMB_NAME$1, O), [z, B] = React$1.useState(null), H = useComposedRefs$1(E, (n) => B(n)), U = z ? N.form || !!z.closest("form") : !0, W = useSize(z), G = N.values[A], Z = G === void 0 ? 0 : convertValueToPercentage(G, N.min, N.max), TL = getLabel(A, N.values.length), EL = W?.[P.size], DL = EL ? getThumbInBoundsOffset(EL, Z, P.direction) : 0;
+	let { __scopeSlider: O, index: A, name: j, ...M } = _, N = useSliderContext(THUMB_NAME$1, O), P = useSliderOrientationContext(THUMB_NAME$1, O), [z, B] = React$1.useState(null), H = useComposedRefs$1(E, (n) => B(n)), U = z ? N.form || !!z.closest("form") : !0, W = useSize(z), G = N.values[A], Z = G === void 0 ? 0 : convertValueToPercentage(G, N.min, N.max), uz = getLabel(A, N.values.length), dz = W?.[P.size], fz = dz ? getThumbInBoundsOffset(dz, Z, P.direction) : 0;
 	return React$1.useEffect(() => {
 		if (z) return N.thumbs.add(z), () => {
 			N.thumbs.delete(z);
@@ -5448,13 +6135,13 @@ var THUMB_NAME$1 = "SliderThumb", SliderThumb = React$1.forwardRef((_, E) => {
 		style: {
 			transform: "var(--radix-slider-thumb-transform)",
 			position: "absolute",
-			[P.startEdge]: `calc(${Z}% + ${DL}px)`
+			[P.startEdge]: `calc(${Z}% + ${fz}px)`
 		},
 		children: [/* @__PURE__ */ jsx(Collection.ItemSlot, {
 			scope: _.__scopeSlider,
 			children: /* @__PURE__ */ jsx(Primitive.span, {
 				role: "slider",
-				"aria-label": _["aria-label"] || TL,
+				"aria-label": _["aria-label"] || uz,
 				"aria-valuemin": N.min,
 				"aria-valuenow": G,
 				"aria-valuemax": N.max,
@@ -5540,7 +6227,7 @@ function roundValue(n, _) {
 	return Math.round(n * E) / E;
 }
 var Root$1 = Slider, Track = SliderTrack, Range = SliderRange, Thumb$1 = SliderThumb, SWITCH_NAME = "Switch", [createSwitchContext, createSwitchScope] = createContextScope(SWITCH_NAME), [SwitchProvider, useSwitchContext] = createSwitchContext(SWITCH_NAME), Switch = React$1.forwardRef((_, E) => {
-	let { __scopeSwitch: O, name: A, checked: j, defaultChecked: M, required: N, disabled: P, value: z = "on", onCheckedChange: B, form: H, ...U } = _, [W, G] = React$1.useState(null), Z = useComposedRefs$1(E, (n) => G(n)), TL = React$1.useRef(!1), EL = W ? H || !!W.closest("form") : !0, [DL, OL] = useControllableState({
+	let { __scopeSwitch: O, name: A, checked: j, defaultChecked: M, required: N, disabled: P, value: z = "on", onCheckedChange: B, form: H, ...U } = _, [W, G] = React$1.useState(null), Z = useComposedRefs$1(E, (n) => G(n)), uz = React$1.useRef(!1), dz = W ? H || !!W.closest("form") : !0, [fz, pz] = useControllableState({
 		prop: j,
 		defaultProp: M ?? !1,
 		onChange: B,
@@ -5548,28 +6235,28 @@ var Root$1 = Slider, Track = SliderTrack, Range = SliderRange, Thumb$1 = SliderT
 	});
 	return /* @__PURE__ */ jsxs(SwitchProvider, {
 		scope: O,
-		checked: DL,
+		checked: fz,
 		disabled: P,
 		children: [/* @__PURE__ */ jsx(Primitive.button, {
 			type: "button",
 			role: "switch",
-			"aria-checked": DL,
+			"aria-checked": fz,
 			"aria-required": N,
-			"data-state": getState(DL),
+			"data-state": getState(fz),
 			"data-disabled": P ? "" : void 0,
 			disabled: P,
 			value: z,
 			...U,
 			ref: Z,
 			onClick: composeEventHandlers(_.onClick, (n) => {
-				OL((n) => !n), EL && (TL.current = n.isPropagationStopped(), TL.current || n.stopPropagation());
+				pz((n) => !n), dz && (uz.current = n.isPropagationStopped(), uz.current || n.stopPropagation());
 			})
-		}), EL && /* @__PURE__ */ jsx(SwitchBubbleInput, {
+		}), dz && /* @__PURE__ */ jsx(SwitchBubbleInput, {
 			control: W,
-			bubbles: !TL.current,
+			bubbles: !uz.current,
 			name: A,
 			value: z,
-			checked: DL,
+			checked: fz,
 			required: N,
 			disabled: P,
 			form: H,
@@ -5666,7 +6353,7 @@ var TAB_LIST_NAME = "TabsList", TabsList = React$1.forwardRef((n, _) => {
 TabsList.displayName = TAB_LIST_NAME;
 var TRIGGER_NAME$1 = "TabsTrigger", TabsTrigger = React$1.forwardRef((n, _) => {
 	let { __scopeTabs: E, value: O, disabled: A = !1, ...j } = n, M = useTabsContext(TRIGGER_NAME$1, E), N = useRovingFocusGroupScope(E), P = makeTriggerId(M.baseId, O), z = makeContentId(M.baseId, O), B = O === M.value;
-	return /* @__PURE__ */ jsx(Item, {
+	return /* @__PURE__ */ jsx(Item$1, {
 		asChild: !0,
 		...N,
 		focusable: !A,
@@ -5753,45 +6440,45 @@ var Root2 = Tabs, List = TabsList, Trigger$1 = TabsTrigger, Content = TabsConten
 };
 TooltipProvider.displayName = PROVIDER_NAME;
 var TOOLTIP_NAME = "Tooltip", [TooltipContextProvider, useTooltipContext] = createTooltipContext(TOOLTIP_NAME), Tooltip = (_) => {
-	let { __scopeTooltip: E, children: O, open: A, defaultOpen: j, onOpenChange: M, disableHoverableContent: N, delayDuration: P } = _, z = useTooltipProviderContext(TOOLTIP_NAME, _.__scopeTooltip), B = usePopperScope(E), [H, U] = React$1.useState(null), W = useId$1(), G = React$1.useRef(0), Z = N ?? z.disableHoverableContent, TL = P ?? z.delayDuration, EL = React$1.useRef(!1), [DL, OL] = useControllableState({
+	let { __scopeTooltip: E, children: O, open: A, defaultOpen: j, onOpenChange: M, disableHoverableContent: N, delayDuration: P } = _, z = useTooltipProviderContext(TOOLTIP_NAME, _.__scopeTooltip), B = usePopperScope(E), [H, U] = React$1.useState(null), W = useId$1(), G = React$1.useRef(0), Z = N ?? z.disableHoverableContent, uz = P ?? z.delayDuration, dz = React$1.useRef(!1), [fz, pz] = useControllableState({
 		prop: A,
 		defaultProp: j ?? !1,
 		onChange: (n) => {
 			n ? (z.onOpen(), document.dispatchEvent(new CustomEvent(TOOLTIP_OPEN))) : z.onClose(), M?.(n);
 		},
 		caller: TOOLTIP_NAME
-	}), kL = React$1.useMemo(() => DL ? EL.current ? "delayed-open" : "instant-open" : "closed", [DL]), AL = React$1.useCallback(() => {
-		window.clearTimeout(G.current), G.current = 0, EL.current = !1, OL(!0);
-	}, [OL]), jL = React$1.useCallback(() => {
-		window.clearTimeout(G.current), G.current = 0, OL(!1);
-	}, [OL]), ML = React$1.useCallback(() => {
+	}), mz = React$1.useMemo(() => fz ? dz.current ? "delayed-open" : "instant-open" : "closed", [fz]), hz = React$1.useCallback(() => {
+		window.clearTimeout(G.current), G.current = 0, dz.current = !1, pz(!0);
+	}, [pz]), gz = React$1.useCallback(() => {
+		window.clearTimeout(G.current), G.current = 0, pz(!1);
+	}, [pz]), _z = React$1.useCallback(() => {
 		window.clearTimeout(G.current), G.current = window.setTimeout(() => {
-			EL.current = !0, OL(!0), G.current = 0;
-		}, TL);
-	}, [TL, OL]);
+			dz.current = !0, pz(!0), G.current = 0;
+		}, uz);
+	}, [uz, pz]);
 	return React$1.useEffect(() => () => {
 		G.current &&= (window.clearTimeout(G.current), 0);
-	}, []), /* @__PURE__ */ jsx(Root2$4, {
+	}, []), /* @__PURE__ */ jsx(Root2$5, {
 		...B,
 		children: /* @__PURE__ */ jsx(TooltipContextProvider, {
 			scope: E,
 			contentId: W,
-			open: DL,
-			stateAttribute: kL,
+			open: fz,
+			stateAttribute: mz,
 			trigger: H,
 			onTriggerChange: U,
 			onTriggerEnter: React$1.useCallback(() => {
-				z.isOpenDelayedRef.current ? ML() : AL();
+				z.isOpenDelayedRef.current ? _z() : hz();
 			}, [
 				z.isOpenDelayedRef,
-				ML,
-				AL
+				_z,
+				hz
 			]),
 			onTriggerLeave: React$1.useCallback(() => {
-				Z ? jL() : (window.clearTimeout(G.current), G.current = 0);
-			}, [jL, Z]),
-			onOpen: AL,
-			onClose: jL,
+				Z ? gz() : (window.clearTimeout(G.current), G.current = 0);
+			}, [gz, Z]),
+			onOpen: hz,
+			onClose: gz,
 			disableHoverableContent: Z,
 			children: O
 		})
@@ -6086,7 +6773,7 @@ var Provider = TooltipProvider, Root3 = Tooltip, Trigger = TooltipTrigger, Porta
 			return E;
 		}) : window.classNames = E;
 	})();
-})), o$6 = { asChild: { type: "boolean" } }, t = {
+})), o$7 = { asChild: { type: "boolean" } }, t = {
 	width: {
 		type: "string",
 		className: "rt-r-w",
@@ -6130,7 +6817,7 @@ var Provider = TooltipProvider, Root3 = Tooltip, Trigger = TooltipTrigger, Porta
 	"3",
 	"4"
 ], s$4 = {
-	...o$6,
+	...o$7,
 	align: {
 		type: "enum",
 		className: "rt-r-align",
@@ -6151,7 +6838,7 @@ var Provider = TooltipProvider, Root3 = Tooltip, Trigger = TooltipTrigger, Porta
 		default: "600px"
 	},
 	...e$3
-}, o$11 = /* @__PURE__ */ "gray.gold.bronze.brown.yellow.amber.orange.tomato.red.ruby.crimson.pink.plum.purple.violet.iris.indigo.blue.cyan.teal.jade.green.grass.lime.mint.sky".split("."), e$11 = [
+}, o$12 = /* @__PURE__ */ "gray.gold.bronze.brown.yellow.amber.orange.tomato.red.ruby.crimson.pink.plum.purple.violet.iris.indigo.blue.cyan.teal.jade.green.grass.lime.mint.sky".split("."), e$11 = [
 	"auto",
 	"gray",
 	"mauve",
@@ -6161,11 +6848,11 @@ var Provider = TooltipProvider, Root3 = Tooltip, Trigger = TooltipTrigger, Porta
 	"sand"
 ], r$4 = { color: {
 	type: "enum",
-	values: o$11,
+	values: o$12,
 	default: void 0
 } }, s$12 = { color: {
 	type: "enum",
-	values: o$11,
+	values: o$12,
 	default: ""
 } }, o$5 = { highContrast: {
 	type: "boolean",
@@ -6236,7 +6923,7 @@ var Provider = TooltipProvider, Root3 = Tooltip, Trigger = TooltipTrigger, Porta
 		values: m$7,
 		default: "h1"
 	},
-	...o$6,
+	...o$7,
 	size: {
 		type: "enum",
 		className: "rt-r-size",
@@ -6262,11 +6949,11 @@ var Provider = TooltipProvider, Root3 = Tooltip, Trigger = TooltipTrigger, Porta
 function e$16(n, _) {
 	return Object.prototype.hasOwnProperty.call(n, _);
 }
-function i$10(n) {
+function i$12(n) {
 	return typeof n == "object" && Object.keys(n).some((n) => e$15.includes(n));
 }
 function R$4({ className: n, customProperties: _, ...E }) {
-	return [g$3({
+	return [g$4({
 		allowArbitraryValues: !0,
 		className: n,
 		...E
@@ -6275,11 +6962,11 @@ function R$4({ className: n, customProperties: _, ...E }) {
 		...E
 	})];
 }
-function g$3({ allowArbitraryValues: n, value: _, className: E, propValues: O, parseValue: A = (n) => n }) {
+function g$4({ allowArbitraryValues: n, value: _, className: E, propValues: O, parseValue: A = (n) => n }) {
 	let j = [];
 	if (_) {
 		if (typeof _ == "string" && O.includes(_)) return l$5(E, _, A);
-		if (i$10(_)) {
+		if (i$12(_)) {
 			let M = _;
 			for (let _ in M) {
 				if (!e$16(M, _) || !e$15.includes(_)) continue;
@@ -6306,7 +6993,7 @@ function l$5(n, _, E) {
 function m$6({ customProperties: n, value: _, propValues: E, parseValue: O = (n) => n }) {
 	let A = {};
 	if (!(!_ || typeof _ == "string" && E.includes(_))) {
-		if (typeof _ == "string" && (A = Object.fromEntries(n.map((n) => [n, _]))), i$10(_)) {
+		if (typeof _ == "string" && (A = Object.fromEntries(n.map((n) => [n, _]))), i$12(_)) {
 			let O = _;
 			for (let _ in O) {
 				if (!e$16(O, _) || !e$15.includes(_)) continue;
@@ -6332,7 +7019,7 @@ function l$1(...n) {
 	});
 	return Object.keys(_).length ? _ : void 0;
 }
-var import_classnames$25 = /* @__PURE__ */ __toESM(require_classnames());
+var import_classnames$26 = /* @__PURE__ */ __toESM(require_classnames());
 function N$2(...n) {
 	return Object.assign({}, ...n);
 }
@@ -6340,19 +7027,19 @@ function v$1(n, ..._) {
 	let E, O, A = { ...n }, j = N$2(..._);
 	for (let n in j) {
 		let _ = A[n], M = j[n];
-		if (M.default !== void 0 && _ === void 0 && (_ = M.default), M.type === "enum" && ![M.default, ...M.values].includes(_) && !i$10(_) && (_ = M.default), A[n] = _, "className" in M && M.className) {
+		if (M.default !== void 0 && _ === void 0 && (_ = M.default), M.type === "enum" && ![M.default, ...M.values].includes(_) && !i$12(_) && (_ = M.default), A[n] = _, "className" in M && M.className) {
 			delete A[n];
 			let j = "responsive" in M;
-			if (!_ || i$10(_) && !j) continue;
-			if (i$10(_) && (M.default !== void 0 && _.initial === void 0 && (_.initial = M.default), M.type === "enum" && ([M.default, ...M.values].includes(_.initial) || (_.initial = M.default))), M.type === "enum") {
-				let n = g$3({
+			if (!_ || i$12(_) && !j) continue;
+			if (i$12(_) && (M.default !== void 0 && _.initial === void 0 && (_.initial = M.default), M.type === "enum" && ([M.default, ...M.values].includes(_.initial) || (_.initial = M.default))), M.type === "enum") {
+				let n = g$4({
 					allowArbitraryValues: !1,
 					value: _,
 					className: M.className,
 					propValues: M.values,
 					parseValue: M.parseValue
 				});
-				E = (0, import_classnames$25.default)(E, n);
+				E = (0, import_classnames$26.default)(E, n);
 				continue;
 			}
 			if (M.type === "string" || M.type === "enum | string") {
@@ -6363,16 +7050,16 @@ function v$1(n, ..._) {
 					parseValue: M.parseValue,
 					value: _
 				});
-				O = l$1(O, j), E = (0, import_classnames$25.default)(E, A);
+				O = l$1(O, j), E = (0, import_classnames$26.default)(E, A);
 				continue;
 			}
 			if (M.type === "boolean" && _) {
-				E = (0, import_classnames$25.default)(E, M.className);
+				E = (0, import_classnames$26.default)(E, M.className);
 				continue;
 			}
 		}
 	}
-	return A.className = (0, import_classnames$25.default)(E, n.className), A.style = l$1(O, n.style), A;
+	return A.className = (0, import_classnames$26.default)(E, n.className), A.style = l$1(O, n.style), A;
 }
 var e$14 = [
 	"0",
@@ -6444,13 +7131,13 @@ var e$14 = [
 		className: "rt-r-ml",
 		customProperties: ["--ml"]
 	}
-}, import_classnames$24 = /* @__PURE__ */ __toESM(require_classnames()), r = React$1.forwardRef((_, E) => {
+}, import_classnames$25 = /* @__PURE__ */ __toESM(require_classnames()), r = React$1.forwardRef((_, E) => {
 	let { children: O, className: A, asChild: j, as: M = "h1", color: N, ...P } = v$1(_, n$10, r$3);
-	return React$1.createElement(Slot$3, {
+	return React$1.createElement(Slot$4, {
 		"data-accent-color": N,
 		...P,
 		ref: E,
-		className: (0, import_classnames$24.default)("rt-Heading", A)
+		className: (0, import_classnames$25.default)("rt-Heading", A)
 	}, j ? O : React$1.createElement(M, null, O));
 });
 r.displayName = "Heading";
@@ -6475,7 +7162,7 @@ var m$5 = [
 		values: m$5,
 		default: "span"
 	},
-	...o$6,
+	...o$7,
 	size: {
 		type: "enum",
 		className: "rt-r-size",
@@ -6489,13 +7176,13 @@ var m$5 = [
 	...r$17,
 	...r$4,
 	...o$5
-}, import_classnames$23 = /* @__PURE__ */ __toESM(require_classnames()), p$2 = React$1.forwardRef((_, E) => {
+}, import_classnames$24 = /* @__PURE__ */ __toESM(require_classnames()), p$2 = React$1.forwardRef((_, E) => {
 	let { children: O, className: A, asChild: j, as: M = "span", color: N, ...P } = v$1(_, n$9, r$3);
-	return React$1.createElement(Slot$3, {
+	return React$1.createElement(Slot$4, {
 		"data-accent-color": N,
 		...P,
 		ref: E,
-		className: (0, import_classnames$23.default)("rt-Text", A)
+		className: (0, import_classnames$24.default)("rt-Text", A)
 	}, j ? O : React$1.createElement(M, null, O));
 });
 p$2.displayName = "Text";
@@ -6539,7 +7226,7 @@ var e$12 = [
 	type: "enum",
 	values: e$12,
 	default: void 0
-} }, p$16 = [
+} }, p$17 = [
 	"inherit",
 	"light",
 	"dark"
@@ -6550,19 +7237,19 @@ var e$12 = [
 	"105%",
 	"110%"
 ], s$14 = {
-	...o$6,
+	...o$7,
 	hasBackground: {
 		type: "boolean",
 		default: !0
 	},
 	appearance: {
 		type: "enum",
-		values: p$16,
+		values: p$17,
 		default: "inherit"
 	},
 	accentColor: {
 		type: "enum",
-		values: o$11,
+		values: o$12,
 		default: "indigo"
 	},
 	grayColor: {
@@ -6585,13 +7272,13 @@ var e$12 = [
 		values: n$8,
 		default: "100%"
 	}
-}, import_classnames$22 = /* @__PURE__ */ __toESM(require_classnames()), d$6 = () => {}, P$3 = React$1.createContext(void 0);
+}, import_classnames$23 = /* @__PURE__ */ __toESM(require_classnames()), d$6 = () => {}, P$3 = React$1.createContext(void 0);
 function H$2() {
 	let _ = React$1.useContext(P$3);
 	if (_ === void 0) throw Error("`useThemeContext` must be used within a `Theme`");
 	return _;
 }
-var R = React$1.forwardRef((_, E) => React$1.useContext(P$3) === void 0 ? React$1.createElement(Provider, { delayDuration: 200 }, React$1.createElement(Provider$1, { dir: "ltr" }, React$1.createElement(I$3, {
+var R = React$1.forwardRef((_, E) => React$1.useContext(P$3) === void 0 ? React$1.createElement(Provider, { delayDuration: 200 }, React$1.createElement(Provider$1, { dir: "ltr" }, React$1.createElement(I$4, {
 	..._,
 	ref: E
 }))) : React$1.createElement(A$2, {
@@ -6599,19 +7286,19 @@ var R = React$1.forwardRef((_, E) => React$1.useContext(P$3) === void 0 ? React$
 	ref: E
 }));
 R.displayName = "Theme";
-var I$3 = React$1.forwardRef((_, E) => {
+var I$4 = React$1.forwardRef((_, E) => {
 	let { appearance: O = s$14.appearance.default, accentColor: A = s$14.accentColor.default, grayColor: j = s$14.grayColor.default, panelBackground: M = s$14.panelBackground.default, radius: N = s$14.radius.default, scaling: P = s$14.scaling.default, hasBackground: z = s$14.hasBackground.default, ...B } = _, [H, U] = React$1.useState(O);
 	React$1.useEffect(() => U(O), [O]);
 	let [W, G] = React$1.useState(A);
 	React$1.useEffect(() => G(A), [A]);
-	let [Z, TL] = React$1.useState(j);
-	React$1.useEffect(() => TL(j), [j]);
-	let [EL, DL] = React$1.useState(M);
-	React$1.useEffect(() => DL(M), [M]);
-	let [OL, kL] = React$1.useState(N);
-	React$1.useEffect(() => kL(N), [N]);
-	let [AL, jL] = React$1.useState(P);
-	return React$1.useEffect(() => jL(P), [P]), React$1.createElement(A$2, {
+	let [Z, uz] = React$1.useState(j);
+	React$1.useEffect(() => uz(j), [j]);
+	let [dz, fz] = React$1.useState(M);
+	React$1.useEffect(() => fz(M), [M]);
+	let [pz, mz] = React$1.useState(N);
+	React$1.useEffect(() => mz(N), [N]);
+	let [hz, gz] = React$1.useState(P);
+	return React$1.useEffect(() => gz(P), [P]), React$1.createElement(A$2, {
 		...B,
 		ref: E,
 		isRoot: !0,
@@ -6619,62 +7306,62 @@ var I$3 = React$1.forwardRef((_, E) => {
 		appearance: H,
 		accentColor: W,
 		grayColor: Z,
-		panelBackground: EL,
-		radius: OL,
-		scaling: AL,
+		panelBackground: dz,
+		radius: pz,
+		scaling: hz,
 		onAppearanceChange: U,
 		onAccentColorChange: G,
-		onGrayColorChange: TL,
-		onPanelBackgroundChange: DL,
-		onRadiusChange: kL,
-		onScalingChange: jL
+		onGrayColorChange: uz,
+		onPanelBackgroundChange: fz,
+		onRadiusChange: mz,
+		onScalingChange: gz
 	});
 });
-I$3.displayName = "ThemeRoot";
+I$4.displayName = "ThemeRoot";
 var A$2 = React$1.forwardRef((_, E) => {
-	let O = React$1.useContext(P$3), { asChild: A, isRoot: j, hasBackground: M, appearance: N = O?.appearance ?? s$14.appearance.default, accentColor: P = O?.accentColor ?? s$14.accentColor.default, grayColor: z = O?.resolvedGrayColor ?? s$14.grayColor.default, panelBackground: B = O?.panelBackground ?? s$14.panelBackground.default, radius: H = O?.radius ?? s$14.radius.default, scaling: U = O?.scaling ?? s$14.scaling.default, onAppearanceChange: W = d$6, onAccentColorChange: G = d$6, onGrayColorChange: Z = d$6, onPanelBackgroundChange: TL = d$6, onRadiusChange: EL = d$6, onScalingChange: DL = d$6, ...OL } = _, kL = A ? Slot$3 : "div", AL = z === "auto" ? a$14(P) : z, jL = _.appearance === "light" || _.appearance === "dark", ML = M === void 0 ? j || jL : M;
+	let O = React$1.useContext(P$3), { asChild: A, isRoot: j, hasBackground: M, appearance: N = O?.appearance ?? s$14.appearance.default, accentColor: P = O?.accentColor ?? s$14.accentColor.default, grayColor: z = O?.resolvedGrayColor ?? s$14.grayColor.default, panelBackground: B = O?.panelBackground ?? s$14.panelBackground.default, radius: H = O?.radius ?? s$14.radius.default, scaling: U = O?.scaling ?? s$14.scaling.default, onAppearanceChange: W = d$6, onAccentColorChange: G = d$6, onGrayColorChange: Z = d$6, onPanelBackgroundChange: uz = d$6, onRadiusChange: dz = d$6, onScalingChange: fz = d$6, ...pz } = _, mz = A ? Slot$4 : "div", hz = z === "auto" ? a$14(P) : z, gz = _.appearance === "light" || _.appearance === "dark", _z = M === void 0 ? j || gz : M;
 	return React$1.createElement(P$3.Provider, { value: React$1.useMemo(() => ({
 		appearance: N,
 		accentColor: P,
 		grayColor: z,
-		resolvedGrayColor: AL,
+		resolvedGrayColor: hz,
 		panelBackground: B,
 		radius: H,
 		scaling: U,
 		onAppearanceChange: W,
 		onAccentColorChange: G,
 		onGrayColorChange: Z,
-		onPanelBackgroundChange: TL,
-		onRadiusChange: EL,
-		onScalingChange: DL
+		onPanelBackgroundChange: uz,
+		onRadiusChange: dz,
+		onScalingChange: fz
 	}), [
 		N,
 		P,
 		z,
-		AL,
+		hz,
 		B,
 		H,
 		U,
 		W,
 		G,
 		Z,
-		TL,
-		EL,
-		DL
-	]) }, React$1.createElement(kL, {
+		uz,
+		dz,
+		fz
+	]) }, React$1.createElement(mz, {
 		"data-is-root-theme": j ? "true" : "false",
 		"data-accent-color": P,
-		"data-gray-color": AL,
-		"data-has-background": ML ? "true" : "false",
+		"data-gray-color": hz,
+		"data-has-background": _z ? "true" : "false",
 		"data-panel-background": B,
 		"data-radius": H,
 		"data-scaling": U,
 		ref: E,
-		...OL,
-		className: (0, import_classnames$22.default)("radix-themes", {
+		...pz,
+		className: (0, import_classnames$23.default)("radix-themes", {
 			light: N === "light",
 			dark: N === "dark"
-		}, OL.className)
+		}, pz.className)
 	}));
 });
 A$2.displayName = "ThemeImpl";
@@ -6697,8 +7384,8 @@ var t$6 = [
 	"soft",
 	"surface",
 	"outline"
-], p$15 = {
-	...o$6,
+], p$16 = {
+	...o$7,
 	size: {
 		type: "enum",
 		className: "rt-r-size",
@@ -6715,34 +7402,34 @@ var t$6 = [
 	...s$12,
 	...o$5,
 	...r$5
-}, import_classnames$21 = /* @__PURE__ */ __toESM(require_classnames()), e$1 = React$1.forwardRef((_, E) => {
-	let { asChild: O, className: A, color: j, radius: M, ...N } = v$1(_, p$15, r$3), P = O ? Slot$3 : "span";
+}, import_classnames$22 = /* @__PURE__ */ __toESM(require_classnames()), e$1 = React$1.forwardRef((_, E) => {
+	let { asChild: O, className: A, color: j, radius: M, ...N } = v$1(_, p$16, r$3), P = O ? Slot$4 : "span";
 	return React$1.createElement(P, {
 		"data-accent-color": j,
 		"data-radius": M,
 		...N,
 		ref: E,
-		className: (0, import_classnames$21.default)("rt-reset", "rt-Badge", A)
+		className: (0, import_classnames$22.default)("rt-reset", "rt-Badge", A)
 	});
 });
 e$1.displayName = "Badge";
-var e$5 = Slot$3, s$13 = ["div", "span"], o$10 = [
+var e$5 = Slot$4, s$13 = ["div", "span"], o$11 = [
 	"none",
 	"inline",
 	"inline-block",
 	"block",
 	"contents"
-], p$13 = {
+], p$14 = {
 	as: {
 		type: "enum",
 		values: s$13,
 		default: "div"
 	},
-	...o$6,
+	...o$7,
 	display: {
 		type: "enum",
 		className: "rt-r-display",
-		values: o$10,
+		values: o$11,
 		responsive: !0
 	}
 }, e$10 = [
@@ -6812,7 +7499,7 @@ var e$5 = Slot$3, s$13 = ["div", "span"], o$10 = [
 	"clip",
 	"scroll",
 	"auto"
-], i$9 = [
+], i$11 = [
 	"static",
 	"relative",
 	"absolute",
@@ -6838,14 +7525,14 @@ var e$5 = Slot$3, s$13 = ["div", "span"], o$10 = [
 	"-7",
 	"-8",
 	"-9"
-], p$14 = ["0", "1"], n$7 = ["0", "1"], u$3 = {
+], p$15 = ["0", "1"], n$7 = ["0", "1"], u$4 = {
 	...p$4,
 	...t,
 	...e$3,
 	position: {
 		type: "enum",
 		className: "rt-r-position",
-		values: i$9,
+		values: i$11,
 		responsive: !0
 	},
 	inset: {
@@ -6911,7 +7598,7 @@ var e$5 = Slot$3, s$13 = ["div", "span"], o$10 = [
 		type: "enum | string",
 		className: "rt-r-fs",
 		customProperties: ["--flex-shrink"],
-		values: p$14,
+		values: p$15,
 		responsive: !0
 	},
 	flexGrow: {
@@ -6963,12 +7650,12 @@ var e$5 = Slot$3, s$13 = ["div", "span"], o$10 = [
 		customProperties: ["--grid-row-end"],
 		responsive: !0
 	}
-}, import_classnames$20 = /* @__PURE__ */ __toESM(require_classnames()), p = React$1.forwardRef((_, E) => {
-	let { className: O, asChild: A, as: j = "div", ...M } = v$1(_, p$13, u$3, r$3);
+}, import_classnames$21 = /* @__PURE__ */ __toESM(require_classnames()), p = React$1.forwardRef((_, E) => {
+	let { className: O, asChild: A, as: j = "div", ...M } = v$1(_, p$14, u$4, r$3);
 	return React$1.createElement(A ? e$5 : j, {
 		...M,
 		ref: E,
-		className: (0, import_classnames$20.default)("rt-Box", O)
+		className: (0, import_classnames$21.default)("rt-Box", O)
 	});
 });
 p.displayName = "Box";
@@ -6984,8 +7671,8 @@ var t$5 = [
 	"surface",
 	"outline",
 	"ghost"
-], i$8 = {
-	...o$6,
+], i$10 = {
+	...o$7,
 	size: {
 		type: "enum",
 		className: "rt-r-size",
@@ -7018,7 +7705,7 @@ var t$5 = [
 	"7",
 	"8",
 	"9"
-], p$10 = {
+], p$11 = {
 	gap: {
 		type: "enum | string",
 		className: "rt-r-gap",
@@ -7040,7 +7727,7 @@ var t$5 = [
 		values: e$8,
 		responsive: !0
 	}
-}, t$4 = ["div", "span"], p$12 = [
+}, t$4 = ["div", "span"], p$13 = [
 	"none",
 	"inline-flex",
 	"flex"
@@ -7049,7 +7736,7 @@ var t$5 = [
 	"column",
 	"row-reverse",
 	"column-reverse"
-], o$9 = [
+], o$10 = [
 	"start",
 	"center",
 	"end",
@@ -7070,11 +7757,11 @@ var t$5 = [
 		values: t$4,
 		default: "div"
 	},
-	...o$6,
+	...o$7,
 	display: {
 		type: "enum",
 		className: "rt-r-display",
-		values: p$12,
+		values: p$13,
 		responsive: !0
 	},
 	direction: {
@@ -7086,14 +7773,14 @@ var t$5 = [
 	align: {
 		type: "enum",
 		className: "rt-r-ai",
-		values: o$9,
+		values: o$10,
 		responsive: !0
 	},
 	justify: {
 		type: "enum",
 		className: "rt-r-jc",
 		values: n$5,
-		parseValue: f$7,
+		parseValue: f$8,
 		responsive: !0
 	},
 	wrap: {
@@ -7102,17 +7789,17 @@ var t$5 = [
 		values: l$3,
 		responsive: !0
 	},
-	...p$10
+	...p$11
 };
-function f$7(n) {
+function f$8(n) {
 	return n === "between" ? "space-between" : n;
 }
-var import_classnames$19 = /* @__PURE__ */ __toESM(require_classnames()), p$1 = React$1.forwardRef((_, E) => {
-	let { className: O, asChild: A, as: j = "div", ...M } = v$1(_, u$2, u$3, r$3);
+var import_classnames$20 = /* @__PURE__ */ __toESM(require_classnames()), p$1 = React$1.forwardRef((_, E) => {
+	let { className: O, asChild: A, as: j = "div", ...M } = v$1(_, u$2, u$4, r$3);
 	return React$1.createElement(A ? e$5 : j, {
 		...M,
 		ref: E,
-		className: (0, import_classnames$19.default)("rt-Flex", O)
+		className: (0, import_classnames$20.default)("rt-Flex", O)
 	});
 });
 p$1.displayName = "Flex";
@@ -7132,13 +7819,13 @@ var s$11 = {
 		type: "boolean",
 		default: !0
 	}
-}, import_classnames$18 = /* @__PURE__ */ __toESM(require_classnames()), s$9 = React$1.forwardRef((_, E) => {
+}, import_classnames$19 = /* @__PURE__ */ __toESM(require_classnames()), s$9 = React$1.forwardRef((_, E) => {
 	let { className: O, children: A, loading: j, ...M } = v$1(_, s$11, r$3);
 	if (!j) return A;
 	let N = React$1.createElement("span", {
 		...M,
 		ref: E,
-		className: (0, import_classnames$18.default)("rt-Spinner", O)
+		className: (0, import_classnames$19.default)("rt-Spinner", O)
 	}, React$1.createElement("span", { className: "rt-SpinnerLeaf" }), React$1.createElement("span", { className: "rt-SpinnerLeaf" }), React$1.createElement("span", { className: "rt-SpinnerLeaf" }), React$1.createElement("span", { className: "rt-SpinnerLeaf" }), React$1.createElement("span", { className: "rt-SpinnerLeaf" }), React$1.createElement("span", { className: "rt-SpinnerLeaf" }), React$1.createElement("span", { className: "rt-SpinnerLeaf" }), React$1.createElement("span", { className: "rt-SpinnerLeaf" }));
 	return A === void 0 ? N : React$1.createElement(p$1, {
 		asChild: !0,
@@ -7173,15 +7860,15 @@ function r$13(n) {
 		case "4": return "3";
 	}
 }
-var import_classnames$17 = /* @__PURE__ */ __toESM(require_classnames()), n$1 = React$1.forwardRef((_, E) => {
-	let { size: O = i$8.size.default } = _, { className: A, children: j, asChild: M, color: N, radius: P, disabled: z = _.loading, ...B } = v$1(_, i$8, r$3), H = M ? Slot$3 : "button";
+var import_classnames$18 = /* @__PURE__ */ __toESM(require_classnames()), n$1 = React$1.forwardRef((_, E) => {
+	let { size: O = i$10.size.default } = _, { className: A, children: j, asChild: M, color: N, radius: P, disabled: z = _.loading, ...B } = v$1(_, i$10, r$3), H = M ? Slot$4 : "button";
 	return React$1.createElement(H, {
 		"data-disabled": z || void 0,
 		"data-accent-color": N,
 		"data-radius": P,
 		...B,
 		ref: E,
-		className: (0, import_classnames$17.default)("rt-reset", "rt-BaseButton", A),
+		className: (0, import_classnames$18.default)("rt-reset", "rt-BaseButton", A),
 		disabled: z
 	}, _.loading ? React$1.createElement(React$1.Fragment, null, React$1.createElement("span", {
 		style: {
@@ -7198,10 +7885,10 @@ var import_classnames$17 = /* @__PURE__ */ __toESM(require_classnames()), n$1 = 
 	}, React$1.createElement("span", null, React$1.createElement(s$9, { size: s$10(O, r$13) })))) : j);
 });
 n$1.displayName = "BaseButton";
-var import_classnames$16 = /* @__PURE__ */ __toESM(require_classnames()), o = React$1.forwardRef(({ className: _, ...E }, O) => React$1.createElement(n$1, {
+var import_classnames$17 = /* @__PURE__ */ __toESM(require_classnames()), o = React$1.forwardRef(({ className: _, ...E }, O) => React$1.createElement(n$1, {
 	...E,
 	ref: O,
-	className: (0, import_classnames$16.default)("rt-Button", _)
+	className: (0, import_classnames$17.default)("rt-Button", _)
 }));
 o.displayName = "Button";
 var e$6 = [
@@ -7215,7 +7902,7 @@ var e$6 = [
 	"classic",
 	"ghost"
 ], a$9 = {
-	...o$6,
+	...o$7,
 	size: {
 		type: "enum",
 		className: "rt-r-size",
@@ -7229,20 +7916,20 @@ var e$6 = [
 		values: r$12,
 		default: "surface"
 	}
-}, import_classnames$15 = /* @__PURE__ */ __toESM(require_classnames()), o$3 = React$1.forwardRef((_, E) => {
-	let { asChild: O, className: A, ...j } = v$1(_, a$9, r$3), M = O ? Slot$3 : "div";
+}, import_classnames$16 = /* @__PURE__ */ __toESM(require_classnames()), o$4 = React$1.forwardRef((_, E) => {
+	let { asChild: O, className: A, ...j } = v$1(_, a$9, r$3), M = O ? Slot$4 : "div";
 	return React$1.createElement(M, {
 		ref: E,
 		...j,
-		className: (0, import_classnames$15.default)("rt-reset", "rt-BaseCard", "rt-Card", A)
+		className: (0, import_classnames$16.default)("rt-reset", "rt-BaseCard", "rt-Card", A)
 	});
 });
-o$3.displayName = "Card";
+o$4.displayName = "Card";
 var a$8 = ["div", "span"], n$4 = [
 	"none",
 	"inline-grid",
 	"grid"
-], p$11 = [
+], p$12 = [
 	"1",
 	"2",
 	"3",
@@ -7252,7 +7939,7 @@ var a$8 = ["div", "span"], n$4 = [
 	"7",
 	"8",
 	"9"
-], u$4 = [
+], u$5 = [
 	"1",
 	"2",
 	"3",
@@ -7262,7 +7949,7 @@ var a$8 = ["div", "span"], n$4 = [
 	"7",
 	"8",
 	"9"
-], i$7 = [
+], i$9 = [
 	"row",
 	"column",
 	"dense",
@@ -7274,7 +7961,7 @@ var a$8 = ["div", "span"], n$4 = [
 	"end",
 	"baseline",
 	"stretch"
-], f$5 = [
+], f$6 = [
 	"start",
 	"center",
 	"end",
@@ -7285,7 +7972,7 @@ var a$8 = ["div", "span"], n$4 = [
 		values: a$8,
 		default: "div"
 	},
-	...o$6,
+	...o$7,
 	display: {
 		type: "enum",
 		className: "rt-r-display",
@@ -7302,7 +7989,7 @@ var a$8 = ["div", "span"], n$4 = [
 		type: "enum | string",
 		className: "rt-r-gtc",
 		customProperties: ["--grid-template-columns"],
-		values: p$11,
+		values: p$12,
 		parseValue: r$11,
 		responsive: !0
 	},
@@ -7310,14 +7997,14 @@ var a$8 = ["div", "span"], n$4 = [
 		type: "enum | string",
 		className: "rt-r-gtr",
 		customProperties: ["--grid-template-rows"],
-		values: u$4,
+		values: u$5,
 		parseValue: r$11,
 		responsive: !0
 	},
 	flow: {
 		type: "enum",
 		className: "rt-r-gaf",
-		values: i$7,
+		values: i$9,
 		responsive: !0
 	},
 	align: {
@@ -7329,11 +8016,11 @@ var a$8 = ["div", "span"], n$4 = [
 	justify: {
 		type: "enum",
 		className: "rt-r-jc",
-		values: f$5,
+		values: f$6,
 		parseValue: m$4,
 		responsive: !0
 	},
-	...p$10
+	...p$11
 };
 function r$11(n) {
 	return s$7.columns.values.includes(n) ? n : n?.match(/^\d+$/) ? `repeat(${n}, minmax(0, 1fr))` : n;
@@ -7341,12 +8028,12 @@ function r$11(n) {
 function m$4(n) {
 	return n === "between" ? "space-between" : n;
 }
-var import_classnames$14 = /* @__PURE__ */ __toESM(require_classnames()), o$1 = React$1.forwardRef((_, E) => {
-	let { className: O, asChild: A, as: j = "div", ...M } = v$1(_, s$7, u$3, r$3);
+var import_classnames$15 = /* @__PURE__ */ __toESM(require_classnames()), o$1 = React$1.forwardRef((_, E) => {
+	let { className: O, asChild: A, as: j = "div", ...M } = v$1(_, s$7, u$4, r$3);
 	return React$1.createElement(A ? e$5 : j, {
 		...M,
 		ref: E,
-		className: (0, import_classnames$14.default)("rt-Grid", O)
+		className: (0, import_classnames$15.default)("rt-Grid", O)
 	});
 });
 o$1.displayName = "Grid";
@@ -7378,7 +8065,7 @@ var t$2 = React.forwardRef((n, E) => React.createElement("svg", {
 	d: "M8.53547 0.62293C8.88226 0.849446 8.97976 1.3142 8.75325 1.66099L4.5083 8.1599C4.38833 8.34356 4.19397 8.4655 3.9764 8.49358C3.75883 8.52167 3.53987 8.45309 3.3772 8.30591L0.616113 5.80777C0.308959 5.52987 0.285246 5.05559 0.563148 4.74844C0.84105 4.44128 1.31533 4.41757 1.62249 4.69547L3.73256 6.60459L7.49741 0.840706C7.72393 0.493916 8.18868 0.396414 8.53547 0.62293Z"
 })));
 t$2.displayName = "ThickCheckIcon";
-var i$6 = React.forwardRef((n, E) => React.createElement("svg", {
+var i$5 = React.forwardRef((n, E) => React.createElement("svg", {
 	width: "9",
 	height: "9",
 	viewBox: "0 0 9 9",
@@ -7387,7 +8074,7 @@ var i$6 = React.forwardRef((n, E) => React.createElement("svg", {
 	...n,
 	ref: E
 }, React.createElement("path", { d: "M0.135232 3.15803C0.324102 2.95657 0.640521 2.94637 0.841971 3.13523L4.5 6.56464L8.158 3.13523C8.3595 2.94637 8.6759 2.95657 8.8648 3.15803C9.0536 3.35949 9.0434 3.67591 8.842 3.86477L4.84197 7.6148C4.64964 7.7951 4.35036 7.7951 4.15803 7.6148L0.158031 3.86477C-0.0434285 3.67591 -0.0536285 3.35949 0.135232 3.15803Z" })));
-i$6.displayName = "ChevronDownIcon";
+i$5.displayName = "ChevronDownIcon";
 var l = React.forwardRef((n, E) => React.createElement("svg", {
 	width: "9",
 	height: "9",
@@ -7406,12 +8093,12 @@ var r$9 = [
 	"1",
 	"2",
 	"3"
-], o$8 = [
+], o$9 = [
 	"vertical",
 	"horizontal",
 	"both"
 ], t$3 = {
-	...o$6,
+	...o$7,
 	size: {
 		type: "enum",
 		className: "rt-r-size",
@@ -7422,7 +8109,7 @@ var r$9 = [
 	...r$5,
 	scrollbars: {
 		type: "enum",
-		values: o$8,
+		values: o$9,
 		default: "both"
 	}
 };
@@ -7439,7 +8126,7 @@ function a$6(n) {
 		rest: P
 	};
 }
-var import_classnames$13 = /* @__PURE__ */ __toESM(require_classnames()), r$8 = r$3.m.values;
+var import_classnames$14 = /* @__PURE__ */ __toESM(require_classnames()), r$8 = r$3.m.values;
 function S$2(n) {
 	let [_, E] = R$4({
 		className: "rt-r-m",
@@ -7477,40 +8164,40 @@ function S$2(n) {
 		propValues: r$8,
 		value: n.ml
 	});
-	return [(0, import_classnames$13.default)(_, O, j, N, z, H, W), l$1(E, A, M, P, B, U, G)];
+	return [(0, import_classnames$14.default)(_, O, j, N, z, H, W), l$1(E, A, M, P, B, U, G)];
 }
-var import_classnames$12 = /* @__PURE__ */ __toESM(require_classnames()), c = React$1.forwardRef((_, E) => {
-	let { rest: O, ...A } = a$6(_), [j, M] = S$2(A), { asChild: N, children: P, className: z, style: B, type: H, scrollHideDelay: U = H === "scroll" ? void 0 : 0, dir: W, size: G = t$3.size.default, radius: Z = t$3.radius.default, scrollbars: TL = t$3.scrollbars.default, ...EL } = O;
+var import_classnames$13 = /* @__PURE__ */ __toESM(require_classnames()), c = React$1.forwardRef((_, E) => {
+	let { rest: O, ...A } = a$6(_), [j, M] = S$2(A), { asChild: N, children: P, className: z, style: B, type: H, scrollHideDelay: U = H === "scroll" ? void 0 : 0, dir: W, size: G = t$3.size.default, radius: Z = t$3.radius.default, scrollbars: uz = t$3.scrollbars.default, ...dz } = O;
 	return React$1.createElement(Root$2, {
 		type: H,
 		scrollHideDelay: U,
-		className: (0, import_classnames$12.default)("rt-ScrollAreaRoot", j, z),
+		className: (0, import_classnames$13.default)("rt-ScrollAreaRoot", j, z),
 		style: l$1(M, B),
 		asChild: N
 	}, d$3({
 		asChild: N,
 		children: P
-	}, (_) => React$1.createElement(React$1.Fragment, null, React$1.createElement(Viewport, {
-		...EL,
+	}, (_) => React$1.createElement(React$1.Fragment, null, React$1.createElement(Viewport$1, {
+		...dz,
 		ref: E,
 		className: "rt-ScrollAreaViewport"
-	}, _), React$1.createElement("div", { className: "rt-ScrollAreaViewportFocusRing" }), TL === "vertical" ? null : React$1.createElement(Scrollbar, {
+	}, _), React$1.createElement("div", { className: "rt-ScrollAreaViewportFocusRing" }), uz === "vertical" ? null : React$1.createElement(Scrollbar, {
 		"data-radius": Z,
 		orientation: "horizontal",
-		className: (0, import_classnames$12.default)("rt-ScrollAreaScrollbar", g$3({
+		className: (0, import_classnames$13.default)("rt-ScrollAreaScrollbar", g$4({
 			className: "rt-r-size",
 			value: G,
 			propValues: t$3.size.values
 		}))
-	}, React$1.createElement(Thumb$2, { className: "rt-ScrollAreaThumb" })), TL === "horizontal" ? null : React$1.createElement(Scrollbar, {
+	}, React$1.createElement(Thumb$2, { className: "rt-ScrollAreaThumb" })), uz === "horizontal" ? null : React$1.createElement(Scrollbar, {
 		"data-radius": Z,
 		orientation: "vertical",
-		className: (0, import_classnames$12.default)("rt-ScrollAreaScrollbar", g$3({
+		className: (0, import_classnames$13.default)("rt-ScrollAreaScrollbar", g$4({
 			className: "rt-r-size",
 			value: G,
 			propValues: t$3.size.values
 		}))
-	}, React$1.createElement(Thumb$2, { className: "rt-ScrollAreaThumb" })), TL === "both" ? React$1.createElement(Corner, { className: "rt-ScrollAreaCorner" }) : null)));
+	}, React$1.createElement(Thumb$2, { className: "rt-ScrollAreaThumb" })), uz === "both" ? React$1.createElement(Corner, { className: "rt-ScrollAreaCorner" }) : null)));
 });
 c.displayName = "ScrollArea";
 var n$2 = {
@@ -7530,36 +8217,36 @@ var n$2 = {
 	...r$4,
 	...o$5
 }, a$5 = {
-	...o$6,
+	...o$7,
 	...r$4,
 	shortcut: { type: "string" }
-}, i$5 = {
+}, i$8 = {
 	...r$4,
 	shortcut: { type: "string" }
-}, p$8 = { ...r$4 }, import_classnames$11 = /* @__PURE__ */ __toESM(require_classnames()), s$5 = (_) => React$1.createElement(Root$5, {
+}, p$9 = { ...r$4 }, import_classnames$12 = /* @__PURE__ */ __toESM(require_classnames()), s$5 = (_) => React$1.createElement(Root$5, {
 	..._,
 	modal: !0
 });
 s$5.displayName = "Dialog.Root";
-var n$3 = React$1.forwardRef(({ children: _, ...E }, O) => React$1.createElement(Trigger$5, {
+var n$3 = React$1.forwardRef(({ children: _, ...E }, O) => React$1.createElement(Trigger$6, {
 	...E,
 	ref: O,
 	asChild: !0
 }, a$4(_)));
 n$3.displayName = "Dialog.Trigger";
-var p$9 = React$1.forwardRef(({ align: _, ...E }, O) => {
+var p$10 = React$1.forwardRef(({ align: _, ...E }, O) => {
 	let { align: A, ...j } = s$4, { className: M } = v$1({ align: _ }, { align: A }), { className: N, forceMount: P, container: z, ...B } = v$1(E, j);
-	return React$1.createElement(Portal$4, {
+	return React$1.createElement(Portal$5, {
 		container: z,
 		forceMount: P
 	}, React$1.createElement(R, { asChild: !0 }, React$1.createElement(Overlay, { className: "rt-BaseDialogOverlay rt-DialogOverlay" }, React$1.createElement("div", { className: "rt-BaseDialogScroll rt-DialogScroll" }, React$1.createElement("div", { className: `rt-BaseDialogScrollPadding rt-DialogScrollPadding ${M}` }, React$1.createElement(Content$2, {
 		...B,
 		ref: O,
-		className: (0, import_classnames$11.default)("rt-BaseDialogContent", "rt-DialogContent", N)
+		className: (0, import_classnames$12.default)("rt-BaseDialogContent", "rt-DialogContent", N)
 	}))))));
 });
-p$9.displayName = "Dialog.Content";
-var g$2 = React$1.forwardRef((_, E) => React$1.createElement(Title, { asChild: !0 }, React$1.createElement(r, {
+p$10.displayName = "Dialog.Content";
+var g$3 = React$1.forwardRef((_, E) => React$1.createElement(Title, { asChild: !0 }, React$1.createElement(r, {
 	size: "5",
 	mb: "3",
 	trim: "start",
@@ -7567,7 +8254,7 @@ var g$2 = React$1.forwardRef((_, E) => React$1.createElement(Title, { asChild: !
 	asChild: !1,
 	ref: E
 })));
-g$2.displayName = "Dialog.Title";
+g$3.displayName = "Dialog.Title";
 var m$3 = React$1.forwardRef((_, E) => React$1.createElement(Description, { asChild: !0 }, React$1.createElement(p$2, {
 	as: "p",
 	size: "3",
@@ -7582,20 +8269,20 @@ var D$2 = React$1.forwardRef(({ children: _, ...E }, O) => React$1.createElement
 	asChild: !0
 }, a$4(_)));
 D$2.displayName = "Dialog.Close";
-var import_classnames$10 = /* @__PURE__ */ __toESM(require_classnames()), I$2 = (_) => React$1.createElement(Root2$2, { ..._ });
-I$2.displayName = "DropdownMenu.Root";
-var h$1 = React$1.forwardRef(({ children: _, ...E }, O) => React$1.createElement(Trigger$3, {
+var import_classnames$11 = /* @__PURE__ */ __toESM(require_classnames()), I$3 = (_) => React$1.createElement(Root2$3, { ..._ });
+I$3.displayName = "DropdownMenu.Root";
+var h$2 = React$1.forwardRef(({ children: _, ...E }, O) => React$1.createElement(Trigger$4, {
 	...E,
 	ref: O,
 	asChild: !0
 }, a$4(_)));
-h$1.displayName = "DropdownMenu.Trigger";
-var b$2 = React$1.createContext({}), g$1 = React$1.forwardRef((_, E) => {
+h$2.displayName = "DropdownMenu.Trigger";
+var b$2 = React$1.createContext({}), g$2 = React$1.forwardRef((_, E) => {
 	let O = H$2(), { size: A = n$2.size.default, variant: j = n$2.variant.default, highContrast: M = n$2.highContrast.default } = _, { className: N, children: P, color: z, container: B, forceMount: H, ...U } = v$1(_, n$2), W = z || O.accentColor;
 	return React$1.createElement(Portal2, {
 		container: B,
 		forceMount: H
-	}, React$1.createElement(R, { asChild: !0 }, React$1.createElement(Content2$2, {
+	}, React$1.createElement(R, { asChild: !0 }, React$1.createElement(Content2$3, {
 		"data-accent-color": W,
 		align: "start",
 		sideOffset: 4,
@@ -7603,8 +8290,8 @@ var b$2 = React$1.createContext({}), g$1 = React$1.forwardRef((_, E) => {
 		...U,
 		asChild: !1,
 		ref: E,
-		className: (0, import_classnames$10.default)("rt-PopperContent", "rt-BaseMenuContent", "rt-DropdownMenuContent", N)
-	}, React$1.createElement(c, { type: "auto" }, React$1.createElement("div", { className: (0, import_classnames$10.default)("rt-BaseMenuViewport", "rt-DropdownMenuViewport") }, React$1.createElement(b$2.Provider, { value: React$1.useMemo(() => ({
+		className: (0, import_classnames$11.default)("rt-PopperContent", "rt-BaseMenuContent", "rt-DropdownMenuContent", N)
+	}, React$1.createElement(c, { type: "auto" }, React$1.createElement("div", { className: (0, import_classnames$11.default)("rt-BaseMenuViewport", "rt-DropdownMenuViewport") }, React$1.createElement(b$2.Provider, { value: React$1.useMemo(() => ({
 		size: A,
 		variant: j,
 		color: W,
@@ -7616,57 +8303,57 @@ var b$2 = React$1.createContext({}), g$1 = React$1.forwardRef((_, E) => {
 		M
 	]) }, P))))));
 });
-g$1.displayName = "DropdownMenu.Content";
-var y$2 = React$1.forwardRef(({ className: _, ...E }, O) => React$1.createElement(Label2, {
+g$2.displayName = "DropdownMenu.Content";
+var y$3 = React$1.forwardRef(({ className: _, ...E }, O) => React$1.createElement(Label2, {
 	...E,
 	asChild: !1,
 	ref: O,
-	className: (0, import_classnames$10.default)("rt-BaseMenuLabel", "rt-DropdownMenuLabel", _)
+	className: (0, import_classnames$11.default)("rt-BaseMenuLabel", "rt-DropdownMenuLabel", _)
 }));
-y$2.displayName = "DropdownMenu.Label";
-var v$3 = React$1.forwardRef((_, E) => {
+y$3.displayName = "DropdownMenu.Label";
+var v$4 = React$1.forwardRef((_, E) => {
 	let { className: O, children: A, color: j = a$5.color.default, shortcut: M, ...N } = _;
 	return React$1.createElement(Item2, {
 		"data-accent-color": j,
 		...N,
 		ref: E,
-		className: (0, import_classnames$10.default)("rt-reset", "rt-BaseMenuItem", "rt-DropdownMenuItem", O)
+		className: (0, import_classnames$11.default)("rt-reset", "rt-BaseMenuItem", "rt-DropdownMenuItem", O)
 	}, React$1.createElement(Slottable$1, null, A), M && React$1.createElement("div", { className: "rt-BaseMenuShortcut rt-DropdownMenuShortcut" }, M));
 });
-v$3.displayName = "DropdownMenu.Item";
+v$4.displayName = "DropdownMenu.Item";
 var R$3 = React$1.forwardRef(({ className: _, ...E }, O) => React$1.createElement(Group2, {
 	...E,
 	asChild: !1,
 	ref: O,
-	className: (0, import_classnames$10.default)("rt-BaseMenuGroup", "rt-DropdownMenuGroup", _)
+	className: (0, import_classnames$11.default)("rt-BaseMenuGroup", "rt-DropdownMenuGroup", _)
 }));
 R$3.displayName = "DropdownMenu.Group";
 var S$1 = React$1.forwardRef(({ className: _, ...E }, O) => React$1.createElement(RadioGroup2, {
 	...E,
 	asChild: !1,
 	ref: O,
-	className: (0, import_classnames$10.default)("rt-BaseMenuRadioGroup", "rt-DropdownMenuRadioGroup", _)
+	className: (0, import_classnames$11.default)("rt-BaseMenuRadioGroup", "rt-DropdownMenuRadioGroup", _)
 }));
 S$1.displayName = "DropdownMenu.RadioGroup";
 var x$1 = React$1.forwardRef((_, E) => {
-	let { children: O, className: A, color: j = p$8.color.default, ...M } = _;
+	let { children: O, className: A, color: j = p$9.color.default, ...M } = _;
 	return React$1.createElement(RadioItem2, {
 		...M,
 		asChild: !1,
 		ref: E,
 		"data-accent-color": j,
-		className: (0, import_classnames$10.default)("rt-BaseMenuItem", "rt-BaseMenuRadioItem", "rt-DropdownMenuItem", "rt-DropdownMenuRadioItem", A)
+		className: (0, import_classnames$11.default)("rt-BaseMenuItem", "rt-BaseMenuRadioItem", "rt-DropdownMenuItem", "rt-DropdownMenuRadioItem", A)
 	}, O, React$1.createElement(ItemIndicator2, { className: "rt-BaseMenuItemIndicator rt-DropdownMenuItemIndicator" }, React$1.createElement(t$2, { className: "rt-BaseMenuItemIndicatorIcon rt-DropdownMenuItemIndicatorIcon" })));
 });
 x$1.displayName = "DropdownMenu.RadioItem";
 var T$2 = React$1.forwardRef((_, E) => {
-	let { children: O, className: A, shortcut: j, color: M = i$5.color.default, ...N } = _;
+	let { children: O, className: A, shortcut: j, color: M = i$8.color.default, ...N } = _;
 	return React$1.createElement(CheckboxItem2, {
 		...N,
 		asChild: !1,
 		ref: E,
 		"data-accent-color": M,
-		className: (0, import_classnames$10.default)("rt-BaseMenuItem", "rt-BaseMenuCheckboxItem", "rt-DropdownMenuItem", "rt-DropdownMenuCheckboxItem", A)
+		className: (0, import_classnames$11.default)("rt-BaseMenuItem", "rt-BaseMenuCheckboxItem", "rt-DropdownMenuItem", "rt-DropdownMenuCheckboxItem", A)
 	}, O, React$1.createElement(ItemIndicator2, { className: "rt-BaseMenuItemIndicator rt-DropdownMenuItemIndicator" }, React$1.createElement(t$2, { className: "rt-BaseMenuItemIndicatorIcon rt-ContextMenuItemIndicatorIcon" })), j && React$1.createElement("div", { className: "rt-BaseMenuShortcut rt-DropdownMenuShortcut" }, j));
 });
 T$2.displayName = "DropdownMenu.CheckboxItem";
@@ -7678,7 +8365,7 @@ var E$1 = React$1.forwardRef((_, E) => {
 		...j,
 		asChild: !1,
 		ref: E,
-		className: (0, import_classnames$10.default)("rt-BaseMenuItem", "rt-BaseMenuSubTrigger", "rt-DropdownMenuItem", "rt-DropdownMenuSubTrigger", O)
+		className: (0, import_classnames$11.default)("rt-BaseMenuItem", "rt-BaseMenuSubTrigger", "rt-DropdownMenuItem", "rt-DropdownMenuSubTrigger", O)
 	}, A, React$1.createElement("div", { className: "rt-BaseMenuShortcut rt-DropdownMenuShortcut" }, React$1.createElement(l, { className: "rt-BaseMenuSubTriggerIcon rt-DropdownMenuSubtriggerIcon" })));
 });
 E$1.displayName = "DropdownMenu.SubTrigger";
@@ -7701,21 +8388,21 @@ var G$2 = React$1.forwardRef((_, E) => {
 		...H,
 		asChild: !1,
 		ref: E,
-		className: (0, import_classnames$10.default)("rt-PopperContent", "rt-BaseMenuContent", "rt-BaseMenuSubContent", "rt-DropdownMenuContent", "rt-DropdownMenuSubContent", N)
-	}, React$1.createElement(c, { type: "auto" }, React$1.createElement("div", { className: (0, import_classnames$10.default)("rt-BaseMenuViewport", "rt-DropdownMenuViewport") }, P)))));
+		className: (0, import_classnames$11.default)("rt-PopperContent", "rt-BaseMenuContent", "rt-BaseMenuSubContent", "rt-DropdownMenuContent", "rt-DropdownMenuSubContent", N)
+	}, React$1.createElement(c, { type: "auto" }, React$1.createElement("div", { className: (0, import_classnames$11.default)("rt-BaseMenuViewport", "rt-DropdownMenuViewport") }, P)))));
 });
 G$2.displayName = "DropdownMenu.SubContent";
 var B$2 = React$1.forwardRef(({ className: _, ...E }, O) => React$1.createElement(Separator2, {
 	...E,
 	asChild: !1,
 	ref: O,
-	className: (0, import_classnames$10.default)("rt-BaseMenuSeparator", "rt-DropdownMenuSeparator", _)
+	className: (0, import_classnames$11.default)("rt-BaseMenuSeparator", "rt-DropdownMenuSeparator", _)
 }));
 B$2.displayName = "DropdownMenu.Separator";
-var import_classnames$9 = /* @__PURE__ */ __toESM(require_classnames()), o$2 = React$1.forwardRef(({ className: _, ...E }, O) => React$1.createElement(n$1, {
+var import_classnames$10 = /* @__PURE__ */ __toESM(require_classnames()), o$2 = React$1.forwardRef(({ className: _, ...E }, O) => React$1.createElement(n$1, {
 	...E,
 	ref: O,
-	className: (0, import_classnames$9.default)("rt-IconButton", _)
+	className: (0, import_classnames$10.default)("rt-IconButton", _)
 }));
 o$2.displayName = "IconButton";
 var e$4 = [
@@ -7728,34 +8415,34 @@ var e$4 = [
 	"7",
 	"8",
 	"9"
-], o$7 = {
-	...o$6,
+], o$8 = {
+	...o$7,
 	size: {
 		type: "enum",
 		className: "rt-r-size",
 		values: e$4,
 		responsive: !0
 	}
-}, import_classnames$8 = /* @__PURE__ */ __toESM(require_classnames()), r$2 = React$1.forwardRef((_, E) => {
-	let { asChild: O, className: A, ...j } = v$1(_, o$7, r$3), M = O ? Slot$3 : "kbd";
+}, import_classnames$9 = /* @__PURE__ */ __toESM(require_classnames()), r$2 = React$1.forwardRef((_, E) => {
+	let { asChild: O, className: A, ...j } = v$1(_, o$8, r$3), M = O ? Slot$4 : "kbd";
 	return React$1.createElement(M, {
 		...j,
 		ref: E,
-		className: (0, import_classnames$8.default)("rt-reset", "rt-Kbd", A)
+		className: (0, import_classnames$9.default)("rt-reset", "rt-Kbd", A)
 	});
 });
 r$2.displayName = "Kbd";
-var p$7 = [
+var p$8 = [
 	"1",
 	"2",
 	"3",
 	"4"
 ], r$7 = {
-	...o$6,
+	...o$7,
 	size: {
 		type: "enum",
 		className: "rt-r-size",
-		values: p$7,
+		values: p$8,
 		default: "2",
 		responsive: !0
 	},
@@ -7766,40 +8453,151 @@ var p$7 = [
 		default: "480px"
 	},
 	...e$3
-}, import_classnames$7 = /* @__PURE__ */ __toESM(require_classnames()), P$2 = (_) => React$1.createElement(Root2$1, { ..._ });
+}, import_classnames$8 = /* @__PURE__ */ __toESM(require_classnames()), P$2 = (_) => React$1.createElement(Root2$2, { ..._ });
 P$2.displayName = "Popover.Root";
-var s$2 = React$1.forwardRef(({ children: _, ...E }, O) => React$1.createElement(Trigger$2, {
+var s$2 = React$1.forwardRef(({ children: _, ...E }, O) => React$1.createElement(Trigger$3, {
 	...E,
 	ref: O,
 	asChild: !0
 }, a$4(_)));
 s$2.displayName = "Popover.Trigger";
-var i$4 = React$1.forwardRef((_, E) => {
+var i$7 = React$1.forwardRef((_, E) => {
 	let { className: O, forceMount: A, container: j, ...M } = v$1(_, r$7);
-	return React$1.createElement(Portal$2, {
+	return React$1.createElement(Portal$3, {
 		container: j,
 		forceMount: A
-	}, React$1.createElement(R, { asChild: !0 }, React$1.createElement(Content2$1, {
+	}, React$1.createElement(R, { asChild: !0 }, React$1.createElement(Content2$2, {
 		align: "start",
 		sideOffset: 8,
 		collisionPadding: 10,
 		...M,
 		ref: E,
-		className: (0, import_classnames$7.default)("rt-PopperContent", "rt-PopoverContent", O)
+		className: (0, import_classnames$8.default)("rt-PopperContent", "rt-PopoverContent", O)
 	})));
 });
-i$4.displayName = "Popover.Content";
-var v$2 = React$1.forwardRef(({ children: _, ...E }, O) => React$1.createElement(Close, {
+i$7.displayName = "Popover.Content";
+var v$3 = React$1.forwardRef(({ children: _, ...E }, O) => React$1.createElement(Close, {
 	...E,
 	ref: O,
 	asChild: !0
 }, a$4(_)));
-v$2.displayName = "Popover.Close";
+v$3.displayName = "Popover.Close";
 var m$2 = React$1.forwardRef(({ children: _, ...E }, O) => React$1.createElement(Anchor2, {
 	...E,
 	ref: O
 }));
 m$2.displayName = "Popover.Anchor";
+var o$6 = { size: {
+	type: "enum",
+	className: "rt-r-size",
+	values: [
+		"1",
+		"2",
+		"3"
+	],
+	default: "2",
+	responsive: !0
+} }, i$6 = {
+	variant: {
+		type: "enum",
+		className: "rt-variant",
+		values: [
+			"classic",
+			"surface",
+			"soft",
+			"ghost"
+		],
+		default: "surface"
+	},
+	...r$4,
+	...r$5,
+	placeholder: { type: "string" }
+}, p$7 = {
+	variant: {
+		type: "enum",
+		className: "rt-variant",
+		values: ["solid", "soft"],
+		default: "solid"
+	},
+	...r$4,
+	...o$5
+}, import_classnames$7 = /* @__PURE__ */ __toESM(require_classnames()), f$3 = React$1.createContext({}), C$1 = (_) => {
+	let { children: E, size: O = o$6.size.default, ...A } = _;
+	return React$1.createElement(Root2$1, { ...A }, React$1.createElement(f$3.Provider, { value: React$1.useMemo(() => ({ size: O }), [O]) }, E));
+};
+C$1.displayName = "Select.Root";
+var u$3 = React$1.forwardRef((_, E) => {
+	let { children: O, className: A, color: j, radius: M, placeholder: N, ...P } = v$1({
+		size: React$1.useContext(f$3)?.size,
+		..._
+	}, { size: o$6.size }, i$6, r$3);
+	return React$1.createElement(Trigger$2, { asChild: !0 }, React$1.createElement("button", {
+		"data-accent-color": j,
+		"data-radius": M,
+		...P,
+		ref: E,
+		className: (0, import_classnames$7.default)("rt-reset", "rt-SelectTrigger", A)
+	}, React$1.createElement("span", { className: "rt-SelectTriggerInner" }, React$1.createElement(Value, { placeholder: N }, O)), React$1.createElement(Icon, { asChild: !0 }, React$1.createElement(i$5, { className: "rt-SelectIcon" }))));
+});
+u$3.displayName = "Select.Trigger";
+var g$1 = React$1.forwardRef((_, E) => {
+	let { className: O, children: A, color: j, container: M, ...N } = v$1({
+		size: React$1.useContext(f$3)?.size,
+		..._
+	}, { size: o$6.size }, p$7), P = H$2(), z = j || P.accentColor;
+	return React$1.createElement(Portal$2, { container: M }, React$1.createElement(R, { asChild: !0 }, React$1.createElement(Content2$1, {
+		"data-accent-color": z,
+		sideOffset: 4,
+		...N,
+		asChild: !1,
+		ref: E,
+		className: (0, import_classnames$7.default)({ "rt-PopperContent": N.position === "popper" }, "rt-SelectContent", O)
+	}, React$1.createElement(Root$2, {
+		type: "auto",
+		className: "rt-ScrollAreaRoot"
+	}, React$1.createElement(Viewport, {
+		asChild: !0,
+		className: "rt-SelectViewport"
+	}, React$1.createElement(Viewport$1, {
+		className: "rt-ScrollAreaViewport",
+		style: { overflowY: void 0 }
+	}, A)), React$1.createElement(Scrollbar, {
+		className: "rt-ScrollAreaScrollbar rt-r-size-1",
+		orientation: "vertical"
+	}, React$1.createElement(Thumb$2, { className: "rt-ScrollAreaThumb" }))))));
+});
+g$1.displayName = "Select.Content";
+var v$2 = React$1.forwardRef((_, E) => {
+	let { className: O, children: A, ...j } = _;
+	return React$1.createElement(Item, {
+		...j,
+		asChild: !1,
+		ref: E,
+		className: (0, import_classnames$7.default)("rt-SelectItem", O)
+	}, React$1.createElement(ItemIndicator, { className: "rt-SelectItemIndicator" }, React$1.createElement(t$2, { className: "rt-SelectItemIndicatorIcon" })), React$1.createElement(ItemText, null, A));
+});
+v$2.displayName = "Select.Item";
+var y$2 = React$1.forwardRef(({ className: _, ...E }, O) => React$1.createElement(Group, {
+	...E,
+	asChild: !1,
+	ref: O,
+	className: (0, import_classnames$7.default)("rt-SelectGroup", _)
+}));
+y$2.displayName = "Select.Group";
+var h$1 = React$1.forwardRef(({ className: _, ...E }, O) => React$1.createElement(Label, {
+	...E,
+	asChild: !1,
+	ref: O,
+	className: (0, import_classnames$7.default)("rt-SelectLabel", _)
+}));
+h$1.displayName = "Select.Label";
+var I$2 = React$1.forwardRef(({ className: _, ...E }, O) => React$1.createElement(Separator, {
+	...E,
+	asChild: !1,
+	ref: O,
+	className: (0, import_classnames$7.default)("rt-SelectSeparator", _)
+}));
+I$2.displayName = "Select.Separator";
 var t$1 = {
 	orientation: {
 		type: "enum",
@@ -7828,7 +8626,7 @@ var t$1 = {
 		type: "boolean",
 		default: !0
 	}
-}, import_classnames$6 = /* @__PURE__ */ __toESM(require_classnames()), o$4 = React$1.forwardRef((_, E) => {
+}, import_classnames$6 = /* @__PURE__ */ __toESM(require_classnames()), o$3 = React$1.forwardRef((_, E) => {
 	let { className: O, color: A, decorative: j, ...M } = v$1(_, t$1, r$3);
 	return React$1.createElement("span", {
 		"data-accent-color": A,
@@ -7838,7 +8636,7 @@ var t$1 = {
 		className: (0, import_classnames$6.default)("rt-Separator", O)
 	});
 });
-o$4.displayName = "Separator";
+o$3.displayName = "Separator";
 var a$3 = {
 	size: {
 		type: "enum",
@@ -8820,17 +9618,17 @@ function $e({ document: n, event: _, hitRegions: E, initialLayoutMap: O, mounted
 	E.forEach((n) => {
 		let { group: E, groupSize: P } = n, { disableCursor: z, orientation: B, panels: H } = E, U = 0;
 		U = j ? B === "horizontal" ? (_.clientX - j.x) / P * 100 : (_.clientY - j.y) / P * 100 : B === "horizontal" ? _.clientX < 0 ? -100 : 100 : _.clientY < 0 ? -100 : 100;
-		let W = O.get(E), { defaultLayoutDeferred: G, derivedPanelConstraints: Z, layout: TL, separatorToPanels: EL } = A.get(E) ?? { defaultLayoutDeferred: !1 };
-		if (Z && W && TL && EL) {
+		let W = O.get(E), { defaultLayoutDeferred: G, derivedPanelConstraints: Z, layout: uz, separatorToPanels: dz } = A.get(E) ?? { defaultLayoutDeferred: !1 };
+		if (Z && W && uz && dz) {
 			let _ = Z$1({
 				delta: U,
 				initialLayout: W,
 				panelConstraints: Z,
 				pivotIndices: n.panels.map((n) => H.indexOf(n)),
-				prevLayout: TL,
+				prevLayout: uz,
 				trigger: "mouse-or-touch"
 			});
-			if (B$1(_, TL)) {
+			if (B$1(_, uz)) {
 				if (U !== 0 && !z) switch (B) {
 					case "horizontal":
 						M |= U < 0 ? De : Oe$1;
@@ -8844,7 +9642,7 @@ function $e({ document: n, event: _, hitRegions: E, initialLayoutMap: O, mounted
 					defaultLayoutDeferred: G,
 					derivedPanelConstraints: Z,
 					layout: _,
-					separatorToPanels: EL
+					separatorToPanels: dz
 				});
 				let E = n.group.panels.map(({ id: n }) => n).join(",");
 				n.group.inMemoryLayouts[E] = _;
@@ -9056,64 +9854,64 @@ function Pt(n, _) {
 function Rt({ children: n, className: _, defaultLayout: E, disableCursor: O, disabled: A, elementRef: j, groupRef: M, id: N, onLayoutChange: P, orientation: z = "horizontal", style: B, ...H }) {
 	let U = useRef({}), W = le$1((n) => {
 		B$1(U.current, n) || (U.current = n, P?.(n));
-	}), Z = ae$1(N), TL = useRef(null), [EL, DL] = useState(!1), [kL, ML] = useState(E ?? {}), [NL, PL] = wt(), FL = useRef({
+	}), Z = ae$1(N), uz = useRef(null), [dz, fz] = useState(!1), [mz, _z] = useState(E ?? {}), [vz, yz] = wt(), bz = useRef({
 		lastExpandedPanelSizes: {},
 		layouts: {},
 		panels: [],
 		separators: []
-	}), IL = ue$1(TL, j);
+	}), xz = ue$1(uz, j);
 	Pt(Z, M);
-	let LL = useMemo(() => ({
+	let Sz = useMemo(() => ({
 		id: Z,
 		orientation: z,
 		registerPanel: (n) => {
-			let _ = FL.current;
-			return _.panels = ie$1(z, [..._.panels, n]), PL(), () => {
-				_.panels = _.panels.filter((_) => _ !== n), PL();
+			let _ = bz.current;
+			return _.panels = ie$1(z, [..._.panels, n]), yz(), () => {
+				_.panels = _.panels.filter((_) => _ !== n), yz();
 			};
 		},
 		registerSeparator: (n) => {
-			let _ = FL.current;
-			return _.separators = ie$1(z, [..._.separators, n]), PL(), () => {
-				_.separators = _.separators.filter((_) => _ !== n), PL();
+			let _ = bz.current;
+			return _.separators = ie$1(z, [..._.separators, n]), yz(), () => {
+				_.separators = _.separators.filter((_) => _ !== n), yz();
 			};
 		}
 	}), [
 		Z,
-		PL,
+		yz,
 		z
-	]), zL = Lt({
+	]), wz = Lt({
 		defaultLayout: E,
 		disableCursor: O
-	}), BL = useRef(null);
+	}), Tz = useRef(null);
 	A$1(() => {
-		let n = TL.current;
+		let n = uz.current;
 		if (n === null) return;
-		let _ = FL.current, E = {
-			defaultLayout: zL.defaultLayout,
-			disableCursor: !!zL.disableCursor,
+		let _ = bz.current, E = {
+			defaultLayout: wz.defaultLayout,
+			disableCursor: !!wz.disableCursor,
 			disabled: !!A,
 			element: n,
 			id: Z,
-			inMemoryLastExpandedPanelSizes: FL.current.lastExpandedPanelSizes,
-			inMemoryLayouts: FL.current.layouts,
+			inMemoryLastExpandedPanelSizes: bz.current.lastExpandedPanelSizes,
+			inMemoryLayouts: bz.current.layouts,
 			orientation: z,
 			panels: _.panels,
 			separators: _.separators
 		};
-		BL.current = E;
+		Tz.current = E;
 		let O = bt(E), j = D$1().mountedGroups.get(E);
 		if (j) {
 			let { defaultLayoutDeferred: n, derivedPanelConstraints: _, layout: E } = j;
-			!n && _.length > 0 && (ML(E), W?.(E));
+			!n && _.length > 0 && (_z(E), W?.(E));
 		}
 		let M = T$1.addListener("interactionStateChange", (n) => {
 			switch (n.state) {
 				case "active":
-					DL(n.hitRegions.some((n) => n.group === E));
+					fz(n.hitRegions.some((n) => n.group === E));
 					break;
 				default:
-					DL(!1);
+					fz(!1);
 					break;
 			}
 		}), N = T$1.addListener("mountedGroupsChange", (n) => {
@@ -9121,30 +9919,30 @@ function Rt({ children: n, className: _, defaultLayout: E, disableCursor: O, dis
 			if (_) {
 				let { defaultLayoutDeferred: n, derivedPanelConstraints: E, layout: O } = _;
 				if (n || E.length === 0) return;
-				ML(O), W?.(O);
+				_z(O), W?.(O);
 			}
 		});
 		return () => {
-			BL.current = null, O(), M(), N();
+			Tz.current = null, O(), M(), N();
 		};
 	}, [
 		A,
 		Z,
 		W,
 		z,
-		NL,
-		zL
+		vz,
+		wz
 	]), useEffect(() => {
-		let n = BL.current;
+		let n = Tz.current;
 		n && (n.defaultLayout = E, n.disableCursor = !!O);
 	});
-	let VL = { [Fe]: EL ? "none" : void 0 };
-	for (let n in kL) {
+	let Ez = { [Fe]: dz ? "none" : void 0 };
+	for (let n in mz) {
 		let _ = Ve(Z, n);
-		VL[_] = kL[n];
+		Ez[_] = mz[n];
 	}
 	return /* @__PURE__ */ jsx(je.Provider, {
-		value: LL,
+		value: Sz,
 		children: /* @__PURE__ */ jsx("div", {
 			...H,
 			"aria-orientation": z,
@@ -9152,13 +9950,13 @@ function Rt({ children: n, className: _, defaultLayout: E, disableCursor: O, dis
 			"data-group": !0,
 			"data-testid": Z,
 			id: Z,
-			ref: IL,
+			ref: xz,
 			style: {
 				height: "100%",
 				width: "100%",
 				overflow: "hidden",
 				...B,
-				...VL,
+				...Ez,
 				display: "flex",
 				flexDirection: z === "horizontal" ? "row" : "column",
 				flexWrap: "nowrap"
@@ -9276,12 +10074,12 @@ function It(n, _) {
 	});
 }
 function kt({ children: n, className: _, collapsedSize: E = "0%", collapsible: O = !1, defaultSize: A, elementRef: j, id: M, maxSize: N = "100%", minSize: P = "0%", onResize: z, panelRef: B, style: H, ...U }) {
-	let W = !!M, G = ae$1(M), Z = useRef(null), TL = ue$1(Z, j), { id: EL, registerPanel: DL } = ce$1(), OL = z !== null, kL = le$1((n, _, E) => {
+	let W = !!M, G = ae$1(M), Z = useRef(null), uz = ue$1(Z, j), { id: dz, registerPanel: fz } = ce$1(), pz = z !== null, mz = le$1((n, _, E) => {
 		z?.(n, M, E);
 	});
 	A$1(() => {
 		let n = Z.current;
-		if (n !== null) return DL({
+		if (n !== null) return fz({
 			element: n,
 			id: G,
 			idIsStable: W,
@@ -9289,7 +10087,7 @@ function kt({ children: n, className: _, collapsedSize: E = "0%", collapsible: O
 				expandToSize: void 0,
 				prevSize: void 0
 			},
-			onResize: OL ? kL : void 0,
+			onResize: pz ? mz : void 0,
 			panelConstraints: {
 				collapsedSize: E,
 				collapsible: O,
@@ -9302,25 +10100,25 @@ function kt({ children: n, className: _, collapsedSize: E = "0%", collapsible: O
 		E,
 		O,
 		A,
-		OL,
+		pz,
 		G,
 		W,
 		N,
 		P,
-		kL,
-		DL
+		mz,
+		fz
 	]), It(G, B);
-	let jL = Ve(EL, G);
+	let gz = Ve(dz, G);
 	return /* @__PURE__ */ jsx("div", {
 		...U,
 		"data-panel": !0,
 		"data-testid": G,
 		id: G,
-		ref: TL,
+		ref: uz,
 		style: {
 			...Gt,
 			flexBasis: 0,
-			flexGrow: `var(${jL}, 1)`,
+			flexGrow: `var(${gz}, 1)`,
 			flexShrink: 1,
 			overflow: "hidden",
 			pointerEvents: `var(${Fe})`
@@ -9383,7 +10181,7 @@ function Dt({ layout: n, panelConstraints: _, panelId: E, panelIndex: O }) {
 	};
 }
 function Ot({ children: n, className: _, elementRef: E, id: O, style: A, ...j }) {
-	let M = ae$1(O), [N, P] = useState({}), [z, B] = useState("inactive"), H = useRef(null), U = ue$1(H, E), { id: W, orientation: G, registerSeparator: Z } = ce$1(), TL = G === "horizontal" ? "vertical" : "horizontal";
+	let M = ae$1(O), [N, P] = useState({}), [z, B] = useState("inactive"), H = useRef(null), U = ue$1(H, E), { id: W, orientation: G, registerSeparator: Z } = ce$1(), uz = G === "horizontal" ? "vertical" : "horizontal";
 	return A$1(() => {
 		let n = H.current;
 		if (n !== null) {
@@ -9419,7 +10217,7 @@ function Ot({ children: n, className: _, elementRef: E, id: O, style: A, ...j })
 	]), /* @__PURE__ */ jsx("div", {
 		...j,
 		"aria-controls": N.valueControls,
-		"aria-orientation": TL,
+		"aria-orientation": uz,
 		"aria-valuemax": N.valueMax,
 		"aria-valuemin": N.valueMin,
 		"aria-valuenow": N.valueNow,
@@ -9488,8 +10286,7 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 			y: 0
 		},
 		snapLines: [],
-		assets: [],
-		editorMode: "simple"
+		assets: []
 	});
 	React.useEffect(() => {
 		j.availableFonts.forEach((n) => {
@@ -9598,7 +10395,7 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 			historyIndex: n,
 			selectedElementIds: []
 		} : _);
-	}, []), TL = React.useCallback(() => {
+	}, []), uz = React.useCallback(() => {
 		M((n) => {
 			if (n.selectedElementIds.length > 0) {
 				let _ = n.elements.filter((_) => n.selectedElementIds.includes(_.id));
@@ -9609,7 +10406,7 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 			}
 			return n;
 		});
-	}, []), EL = React.useCallback(() => {
+	}, []), dz = React.useCallback(() => {
 		M((n) => {
 			if (n.clipboard.length > 0) {
 				let _ = n.clipboard.map((n) => ({
@@ -9618,17 +10415,20 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 					x: n.x + 20,
 					y: n.y + 20
 				})), E = [...n.elements, ..._], O = n.history.slice(0, n.historyIndex + 1);
-				return O.push(E), {
+				O.push(E);
+				let A = n.historyDescriptions.slice(0, n.historyIndex + 1);
+				return A.push("Colar Elementos"), {
 					...n,
 					elements: E,
 					history: O,
+					historyDescriptions: A,
 					historyIndex: O.length - 1,
 					selectedElementIds: _.map((n) => n.id)
 				};
 			}
 			return n;
 		});
-	}, []), DL = React.useCallback((n) => {
+	}, []), fz = React.useCallback((n) => {
 		let _ = {};
 		n.type === "box" && (_.backgroundColor = "var(--gray-4)"), n.type === "text-container" && (_.backgroundColor = "var(--gray-4)", _.border = "1px solid var(--gray-8)", _.padding = "8px", _.display = "flex", _.alignItems = "flex-start", _.justifyContent = "flex-start");
 		let E = {
@@ -9645,15 +10445,25 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 		};
 		M((n) => {
 			let _ = [...n.elements, E], O = n.history.slice(0, n.historyIndex + 1);
-			return O.push(_), {
+			O.push(_);
+			let A = n.historyDescriptions.slice(0, n.historyIndex + 1), j = {
+				text: "Texto",
+				image: "Imagem",
+				box: "Caixa",
+				group: "Grupo",
+				"text-container": "Texto em Caixa",
+				checkbox: "Caixa de Seleção"
+			}[E.type] || E.type;
+			return A.push(`Adicionou ${j}`), {
 				...n,
 				elements: _,
 				history: O,
+				historyDescriptions: A,
 				historyIndex: O.length - 1,
 				selectedElementIds: [E.id]
 			};
 		});
-	}, []), OL = React.useCallback((n) => {
+	}, []), pz = React.useCallback((n) => {
 		M((_) => {
 			let E = _.elements.filter((_) => _.id !== n), O = _.history.slice(0, _.historyIndex + 1);
 			O.push(E);
@@ -9667,7 +10477,7 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				historyIndex: O.length - 1
 			};
 		});
-	}, []), kL = React.useCallback(() => {
+	}, []), mz = React.useCallback(() => {
 		M((n) => {
 			if (n.selectedElementIds.length === 0) return n;
 			let _ = n.elements.filter((_) => !n.selectedElementIds.includes(_.id)), E = n.history.slice(0, n.historyIndex + 1);
@@ -9682,7 +10492,7 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				historyIndex: E.length - 1
 			};
 		});
-	}, []), AL = React.useCallback((n, _ = !1) => {
+	}, []), hz = React.useCallback((n, _ = !1) => {
 		M((E) => {
 			if (n === null) return {
 				...E,
@@ -9699,37 +10509,41 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				selectedElementIds: [n]
 			};
 		});
-	}, []), ML = React.useCallback((n) => {
+	}, []), _z = React.useCallback((n) => {
 		M((_) => ({
 			..._,
 			selectedElementIds: n
 		}));
-	}, []), NL = React.useCallback((n, _) => {
+	}, []), vz = React.useCallback((n, _) => {
 		M((E) => {
 			let O = [...E.elements], A = O[n];
 			O.splice(n, 1), O.splice(_, 0, A);
 			let j = E.history.slice(0, E.historyIndex + 1);
-			return j.push(O), {
+			j.push(O);
+			let M = E.historyDescriptions.slice(0, E.historyIndex + 1);
+			return M.push("Mover Elemento"), {
 				...E,
 				elements: O,
 				history: j,
+				historyDescriptions: M,
 				historyIndex: j.length - 1
 			};
 		});
-	}, []), PL = React.useCallback((n, _, E = !0) => {
+	}, []), yz = React.useCallback((n, _, E = !0) => {
 		M((O) => {
 			let A = O.elements.map((E) => E.id === n ? {
 				...E,
 				..._
-			} : E), j = O.history, M = O.historyIndex;
-			return E && (j = O.history.slice(0, O.historyIndex + 1), j.push(A), M = j.length - 1), {
+			} : E), j = O.history, M = O.historyIndex, N = O.historyDescriptions;
+			return E && (j = O.history.slice(0, O.historyIndex + 1), j.push(A), M = j.length - 1, N = O.historyDescriptions.slice(0, O.historyIndex + 1), N.push("Atualizar Elemento")), {
 				...O,
 				elements: A,
 				history: j,
+				historyDescriptions: N,
 				historyIndex: M
 			};
 		});
-	}, []), FL = React.useCallback((n, _ = !0) => {
+	}, []), bz = React.useCallback((n, _ = !0) => {
 		M((E) => {
 			let O = [...E.elements], A = [], j = /* @__PURE__ */ new Set();
 			n.forEach(({ id: n, changes: _ }) => {
@@ -9775,15 +10589,16 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 					..._
 				});
 			});
-			let N = E.history, P = E.historyIndex;
-			return _ && (N = E.history.slice(0, E.historyIndex + 1), N.push(O), P = N.length - 1), {
+			let N = E.history, P = E.historyIndex, z = E.historyDescriptions;
+			return _ && (N = E.history.slice(0, E.historyIndex + 1), N.push(O), P = N.length - 1, z = E.historyDescriptions.slice(0, E.historyIndex + 1), z.push("Atualizar Múltiplos Elementos")), {
 				...E,
 				elements: O,
 				history: N,
+				historyDescriptions: z,
 				historyIndex: P
 			};
 		});
-	}, []), IL = React.useCallback((n) => {
+	}, []), xz = React.useCallback((n) => {
 		M((_) => {
 			let E = _.elements.filter((_) => n.includes(_.id));
 			if (E.length === 0) return _;
@@ -9814,7 +10629,7 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				historyIndex: z.length - 1
 			};
 		});
-	}, []), LL = React.useCallback((n) => {
+	}, []), Sz = React.useCallback((n) => {
 		M((_) => {
 			let E = _.elements.find((_) => _.id === n);
 			if (!E || E.type !== "group") return _;
@@ -9833,7 +10648,7 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				historyIndex: j.length - 1
 			};
 		});
-	}, []), zL = React.useCallback((n, _) => {
+	}, []), wz = React.useCallback((n, _) => {
 		M((E) => {
 			let O = E.elements.map((E) => E.id === n ? {
 				...E,
@@ -9844,7 +10659,7 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				elements: O
 			};
 		});
-	}, []), BL = React.useCallback((n, _) => {
+	}, []), Tz = React.useCallback((n, _) => {
 		if (!n.find((n) => n.id === _ && n.type === "group")) return n;
 		let E = n.filter((n) => n.groupId === _);
 		if (E.length === 0) return n;
@@ -9856,7 +10671,7 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 			width: j - O,
 			height: M - A
 		} : n);
-	}, []), VL = React.useCallback((n, _) => {
+	}, []), Ez = React.useCallback((n, _) => {
 		M((E) => {
 			let O = E.elements.find((_) => _.id === n), A = E.elements.find((n) => n.id === _ && n.type === "group");
 			if (!O || !A) return E;
@@ -9864,7 +10679,7 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				...E,
 				groupId: _
 			} : E);
-			j = BL(j, _);
+			j = Tz(j, _);
 			let M = E.history.slice(0, E.historyIndex + 1);
 			M.push(j);
 			let N = E.historyDescriptions.slice(0, E.historyIndex + 1);
@@ -9876,7 +10691,7 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				historyIndex: M.length - 1
 			};
 		});
-	}, [BL]), HL = React.useCallback((n) => {
+	}, [Tz]), Dz = React.useCallback((n) => {
 		M((_) => {
 			let E = _.elements.find((_) => _.id === n);
 			if (!E || !E.groupId) return _;
@@ -9884,7 +10699,7 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				..._,
 				groupId: void 0
 			} : _);
-			A = BL(A, O);
+			A = Tz(A, O);
 			let j = _.history.slice(0, _.historyIndex + 1);
 			j.push(A);
 			let M = _.historyDescriptions.slice(0, _.historyIndex + 1);
@@ -9896,7 +10711,7 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				historyIndex: j.length - 1
 			};
 		});
-	}, [BL]), UL = React.useCallback((n, _, E) => {
+	}, [Tz]), Oz = React.useCallback((n, _, E) => {
 		M((O) => {
 			let A = O.elements.find((_) => _.id === n && _.type === "group");
 			if (!A) return O;
@@ -9928,13 +10743,13 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				historyIndex: B.length - 1
 			};
 		});
-	}, []), WL = React.useCallback((n, _) => {
+	}, []), kz = React.useCallback((n, _) => {
 		M((E) => ({
 			...E,
 			mockData: n,
 			singleMockData: _
 		}));
-	}, []), GL = React.useCallback((n) => {
+	}, []), Az = React.useCallback((n) => {
 		M((_) => ({
 			..._,
 			listSettings: {
@@ -9942,3190 +10757,88 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				...n
 			}
 		}));
-	}, []), KL = React.useCallback((n) => {
+	}, []), jz = React.useCallback((n) => {
 		M((_) => ({
 			..._,
 			assets: [..._.assets, n]
 		}));
-	}, []), qL = React.useCallback((n) => {
+	}, []), Mz = React.useCallback((n) => {
 		M((_) => ({
 			..._,
 			assets: _.assets.filter((_) => _.id !== n)
 		}));
-	}, []), JL = React.useCallback((n) => {
-		M((_) => ({
-			..._,
-			editorMode: n
-		}));
-	}, []), YL = React.useMemo(() => ({
-		state: j,
-		setEditorMode: JL,
-		addElement: DL,
-		removeElement: OL,
-		removeSelected: kL,
-		selectElement: AL,
-		setSelectedElements: ML,
-		moveElement: NL,
-		updateElement: PL,
-		updateElements: FL,
-		groupElements: IL,
-		ungroupElements: LL,
-		renameElement: zL,
-		addToGroup: VL,
-		removeFromGroup: HL,
-		resizeGroup: UL,
-		setMockData: WL,
-		updateListSettings: GL,
-		setCanvasHeight: N,
-		loadState: U,
-		undo: W,
-		redo: G,
-		jumpToHistory: Z,
-		copy: TL,
-		paste: EL,
-		setGridSize: P,
-		setZoom: z,
-		setPan: B,
-		setSnapLines: H,
-		addAsset: KL,
-		removeAsset: qL
-	}), [
-		j,
-		JL,
-		DL,
-		OL,
-		kL,
-		AL,
-		ML,
-		NL,
-		PL,
-		FL,
-		IL,
-		LL,
-		zL,
-		VL,
-		HL,
-		UL,
-		WL,
-		GL,
-		N,
-		U,
-		W,
-		G,
-		Z,
-		TL,
-		EL,
-		P,
-		z,
-		B,
-		H,
-		KL,
-		qL
-	]);
+	}, []);
 	return /* @__PURE__ */ jsx(EditorContext.Provider, {
-		value: YL,
+		value: React.useMemo(() => ({
+			state: j,
+			setGridSize: P,
+			setZoom: z,
+			setPan: B,
+			setSnapLines: H,
+			addElement: fz,
+			removeElement: pz,
+			removeSelected: mz,
+			selectElement: hz,
+			setSelectedElements: _z,
+			moveElement: vz,
+			updateElement: yz,
+			updateElements: bz,
+			groupElements: xz,
+			ungroupElements: Sz,
+			renameElement: wz,
+			addToGroup: Ez,
+			removeFromGroup: Dz,
+			resizeGroup: Oz,
+			setMockData: kz,
+			updateListSettings: Az,
+			setCanvasHeight: N,
+			loadState: U,
+			undo: W,
+			redo: G,
+			jumpToHistory: Z,
+			copy: uz,
+			paste: dz,
+			addAsset: jz,
+			removeAsset: Mz
+		}), [
+			j,
+			fz,
+			pz,
+			mz,
+			hz,
+			_z,
+			vz,
+			yz,
+			bz,
+			xz,
+			Sz,
+			wz,
+			Ez,
+			Dz,
+			Oz,
+			kz,
+			Az,
+			N,
+			U,
+			W,
+			G,
+			Z,
+			uz,
+			dz,
+			P,
+			z,
+			B,
+			H,
+			jz,
+			Mz
+		]),
 		children: n
 	});
 }, useEditor = () => {
 	let n = useContext(EditorContext);
 	if (!n) throw Error("useEditor must be used within an EditorProvider");
 	return n;
-}, EditorSettings = () => {
-	let { state: n, updateListSettings: _, setCanvasHeight: E, setGridSize: O } = useEditor(), [A, j] = useState(!1), [M, N] = useState(""), [P, z] = useState("asc"), [B, H] = useState("bottom"), [U, W] = useState("down"), [Z, TL] = useState("150"), [EL, DL] = useState(""), [OL, kL] = useState("0"), [AL, ML] = useState("slideIn"), [NL, PL] = useState(.3), [FL, IL] = useState("ease-out");
-	return useEffect(() => {
-		if (A) {
-			N(n.listSettings.sortProp || "__none__"), z(n.listSettings.sortOrder || "asc"), H(n.listSettings.newestPosition || "bottom"), W(n.listSettings.scrollDirection || "down"), DL(n.listSettings.containerHeight ? String(n.listSettings.containerHeight) : ""), TL(String(n.canvasHeight || 150)), kL(String(n.gridSize || 0));
-			let _ = n.listSettings.entryAnimation;
-			ML(_?.type || "slideIn"), PL(_?.duration || .3), IL(_?.timingFunction || "ease-out");
-		}
-	}, [A]), useEffect(() => {
-		if (!A) return;
-		let _ = parseInt(Z, 10);
-		!isNaN(_) && _ > 0 && n.canvasHeight !== _ && E(_);
-		let j = parseInt(OL, 10);
-		!isNaN(j) && j >= 0 && n.gridSize !== j && O(j);
-	}, [
-		Z,
-		OL,
-		A,
-		E,
-		O,
-		n.canvasHeight,
-		n.gridSize
-	]), /* @__PURE__ */ jsxs(s$5, {
-		open: A,
-		onOpenChange: j,
-		children: [/* @__PURE__ */ jsx(n$3, { children: /* @__PURE__ */ jsxs(o, {
-			variant: "soft",
-			color: "gray",
-			style: {
-				width: "100%",
-				justifyContent: "center",
-				cursor: "pointer"
-			},
-			children: [/* @__PURE__ */ jsx(GearIcon, {}), " Configurações"]
-		}) }), /* @__PURE__ */ jsxs(p$9, {
-			style: { maxWidth: 600 },
-			children: [
-				/* @__PURE__ */ jsx(g$2, { children: "Configurações do Editor" }),
-				/* @__PURE__ */ jsx(m$3, {
-					size: "2",
-					mb: "4",
-					children: "Configure o comportamento da lista."
-				}),
-				/* @__PURE__ */ jsx(p, {
-					pt: "3",
-					children: /* @__PURE__ */ jsxs(p$1, {
-						direction: "column",
-						gap: "3",
-						children: [
-							/* @__PURE__ */ jsx(p$2, {
-								size: "2",
-								weight: "bold",
-								children: "Ordenação"
-							}),
-							/* @__PURE__ */ jsxs(p$1, {
-								gap: "3",
-								align: "center",
-								children: [/* @__PURE__ */ jsxs(p, {
-									flexGrow: "1",
-									children: [/* @__PURE__ */ jsx(p$2, {
-										size: "1",
-										mb: "1",
-										as: "div",
-										children: "Propriedade para Ordenar (ex: data, id)"
-									}), /* @__PURE__ */ jsxs("select", {
-										value: M,
-										onChange: (n) => N(n.target.value),
-										style: {
-											width: "100%",
-											padding: "8px",
-											borderRadius: "4px",
-											border: "1px solid var(--gray-6)",
-											backgroundColor: "var(--gray-2)",
-											color: "var(--gray-12)",
-											fontSize: "14px",
-											outline: "none"
-										},
-										children: [/* @__PURE__ */ jsx("option", {
-											value: "__none__",
-											children: "(Nenhum)"
-										}), n.availableProps.map((n) => /* @__PURE__ */ jsx("option", {
-											value: n.dataName,
-											children: n.name
-										}, n.dataName))]
-									})]
-								}), /* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
-									size: "1",
-									mb: "1",
-									as: "div",
-									children: "Direção"
-								}), /* @__PURE__ */ jsxs("select", {
-									value: P,
-									onChange: (n) => z(n.target.value),
-									style: {
-										width: "150px",
-										padding: "8px",
-										borderRadius: "4px",
-										border: "1px solid var(--gray-6)",
-										backgroundColor: "var(--gray-2)",
-										color: "var(--gray-12)",
-										fontSize: "14px",
-										outline: "none"
-									},
-									children: [/* @__PURE__ */ jsx("option", {
-										value: "asc",
-										children: "Crescente (A-Z)"
-									}), /* @__PURE__ */ jsx("option", {
-										value: "desc",
-										children: "Decrescente (Z-A)"
-									})]
-								})] })]
-							}),
-							/* @__PURE__ */ jsxs(p$1, {
-								gap: "3",
-								align: "center",
-								children: [/* @__PURE__ */ jsxs(p, {
-									flexGrow: "1",
-									children: [/* @__PURE__ */ jsx(p$2, {
-										size: "1",
-										mb: "1",
-										as: "div",
-										children: "Posição do Recente"
-									}), /* @__PURE__ */ jsxs("select", {
-										value: B,
-										onChange: (n) => H(n.target.value),
-										style: {
-											width: "100%",
-											padding: "8px",
-											borderRadius: "4px",
-											border: "1px solid var(--gray-6)",
-											backgroundColor: "var(--gray-2)",
-											color: "var(--gray-12)",
-											fontSize: "14px",
-											outline: "none"
-										},
-										children: [/* @__PURE__ */ jsx("option", {
-											value: "top",
-											children: "Topo (Início)"
-										}), /* @__PURE__ */ jsx("option", {
-											value: "bottom",
-											children: "Base (Final)"
-										})]
-									})]
-								}), /* @__PURE__ */ jsxs(p, {
-									flexGrow: "1",
-									children: [/* @__PURE__ */ jsx(p$2, {
-										size: "1",
-										mb: "1",
-										as: "div",
-										children: "Comportamento de Rolagem"
-									}), /* @__PURE__ */ jsxs("select", {
-										value: U,
-										onChange: (n) => W(n.target.value),
-										style: {
-											width: "100%",
-											padding: "8px",
-											borderRadius: "4px",
-											border: "1px solid var(--gray-6)",
-											backgroundColor: "var(--gray-2)",
-											color: "var(--gray-12)",
-											fontSize: "14px",
-											outline: "none"
-										},
-										children: [/* @__PURE__ */ jsx("option", {
-											value: "down",
-											children: "Descer (Padrão)"
-										}), /* @__PURE__ */ jsx("option", {
-											value: "up",
-											children: "Subir (Chat)"
-										})]
-									})]
-								})]
-							}),
-							/* @__PURE__ */ jsx(p$2, {
-								size: "2",
-								weight: "bold",
-								mt: "2",
-								children: "Dimensões"
-							}),
-							/* @__PURE__ */ jsxs(p$1, {
-								gap: "3",
-								align: "center",
-								children: [/* @__PURE__ */ jsxs(p, {
-									flexGrow: "1",
-									children: [
-										/* @__PURE__ */ jsx(p$2, {
-											size: "1",
-											mb: "1",
-											as: "div",
-											children: "Altura do Item (Template) (px)"
-										}),
-										/* @__PURE__ */ jsx(u$1, {
-											type: "number",
-											min: "10",
-											value: Z,
-											onChange: (n) => TL(n.target.value)
-										}),
-										/* @__PURE__ */ jsx(p$2, {
-											size: "1",
-											color: "gray",
-											children: "Altura de cada item individual na lista."
-										})
-									]
-								}), /* @__PURE__ */ jsxs(p, {
-									flexGrow: "1",
-									children: [
-										/* @__PURE__ */ jsx(p$2, {
-											size: "1",
-											mb: "1",
-											as: "div",
-											children: "Altura da Lista (Container) (px)"
-										}),
-										/* @__PURE__ */ jsx(u$1, {
-											type: "number",
-											min: "0",
-											placeholder: "Auto (100%)",
-											value: EL,
-											onChange: (n) => DL(n.target.value)
-										}),
-										/* @__PURE__ */ jsx(p$2, {
-											size: "1",
-											color: "gray",
-											children: "Altura total da lista. Se exceder, rola. Vazio = 100%."
-										})
-									]
-								})]
-							}),
-							/* @__PURE__ */ jsx(p$2, {
-								size: "2",
-								weight: "bold",
-								mt: "2",
-								children: "Animação de Entrada na Lista"
-							}),
-							/* @__PURE__ */ jsxs(o$1, {
-								columns: "3",
-								gap: "3",
-								children: [
-									/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
-										size: "1",
-										mb: "1",
-										as: "div",
-										children: "Efeito"
-									}), /* @__PURE__ */ jsxs("select", {
-										value: AL,
-										onChange: (n) => ML(n.target.value),
-										style: {
-											width: "100%",
-											padding: "6px",
-											borderRadius: "4px",
-											border: "1px solid var(--gray-6)",
-											backgroundColor: "var(--gray-2)",
-											color: "var(--gray-12)",
-											fontSize: "14px"
-										},
-										children: [
-											/* @__PURE__ */ jsx("option", {
-												value: "none",
-												children: "Nenhum"
-											}),
-											/* @__PURE__ */ jsx("option", {
-												value: "slideIn",
-												children: "Slide (Padrão)"
-											}),
-											/* @__PURE__ */ jsx("option", {
-												value: "smoothSlideUp",
-												children: "Slide Suave (Up)"
-											}),
-											/* @__PURE__ */ jsx("option", {
-												value: "fadeIn",
-												children: "Fade In"
-											}),
-											/* @__PURE__ */ jsx("option", {
-												value: "popIn",
-												children: "Pop In"
-											}),
-											/* @__PURE__ */ jsx("option", {
-												value: "blurIn",
-												children: "Blur In"
-											}),
-											/* @__PURE__ */ jsx("option", {
-												value: "slideInLeft",
-												children: "Slide (Esq)"
-											}),
-											/* @__PURE__ */ jsx("option", {
-												value: "slideInRight",
-												children: "Slide (Dir)"
-											}),
-											/* @__PURE__ */ jsx("option", {
-												value: "zoomIn",
-												children: "Zoom In"
-											}),
-											/* @__PURE__ */ jsx("option", {
-												value: "bounceIn",
-												children: "Bounce"
-											})
-										]
-									})] }),
-									/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
-										size: "1",
-										mb: "1",
-										as: "div",
-										children: "Duração (s)"
-									}), /* @__PURE__ */ jsx(u$1, {
-										type: "number",
-										step: "0.1",
-										min: "0.1",
-										value: NL,
-										onChange: (n) => PL(parseFloat(n.target.value) || .3)
-									})] }),
-									/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
-										size: "1",
-										mb: "1",
-										as: "div",
-										children: "Curva (Easing)"
-									}), /* @__PURE__ */ jsxs("select", {
-										value: FL,
-										onChange: (n) => IL(n.target.value),
-										style: {
-											width: "100%",
-											padding: "6px",
-											borderRadius: "4px",
-											border: "1px solid var(--gray-6)",
-											backgroundColor: "var(--gray-2)",
-											color: "var(--gray-12)",
-											fontSize: "14px"
-										},
-										children: [
-											/* @__PURE__ */ jsx("option", {
-												value: "ease",
-												children: "Ease"
-											}),
-											/* @__PURE__ */ jsx("option", {
-												value: "ease-out",
-												children: "Ease Out"
-											}),
-											/* @__PURE__ */ jsx("option", {
-												value: "linear",
-												children: "Linear"
-											}),
-											/* @__PURE__ */ jsx("option", {
-												value: "bounce",
-												children: "Bounce"
-											})
-										]
-									})] })
-								]
-							}),
-							/* @__PURE__ */ jsx(p$2, {
-								size: "1",
-								color: "gray",
-								children: "Essa propriedade será usada para ordenar os itens no modo lista."
-							}),
-							/* @__PURE__ */ jsxs(p, {
-								mt: "2",
-								children: [/* @__PURE__ */ jsx(p$2, {
-									size: "2",
-									weight: "bold",
-									children: "Grid Snapping (Travar)"
-								}), /* @__PURE__ */ jsx(p$1, {
-									gap: "3",
-									align: "center",
-									mt: "2",
-									children: /* @__PURE__ */ jsxs(p, {
-										flexGrow: "1",
-										children: [/* @__PURE__ */ jsx(p$2, {
-											size: "1",
-											mb: "1",
-											as: "div",
-											children: "Tamanho do Grid (px) - 0 para desativar"
-										}), /* @__PURE__ */ jsx(u$1, {
-											type: "number",
-											value: OL,
-											onChange: (n) => kL(n.target.value),
-											placeholder: "0"
-										})]
-									})
-								})]
-							})
-						]
-					})
-				}),
-				/* @__PURE__ */ jsxs(p$1, {
-					gap: "3",
-					mt: "4",
-					justify: "end",
-					children: [/* @__PURE__ */ jsx(D$2, { children: /* @__PURE__ */ jsx(o, {
-						variant: "soft",
-						color: "gray",
-						children: "Cancelar"
-					}) }), /* @__PURE__ */ jsx(D$2, { children: /* @__PURE__ */ jsx(o, {
-						onClick: () => {
-							let n = parseInt(EL, 10), E = {
-								type: AL,
-								duration: Number(NL),
-								delay: 0,
-								timingFunction: FL
-							};
-							_({
-								sortProp: M === "__none__" ? "" : M,
-								sortOrder: P,
-								newestPosition: B,
-								scrollDirection: U,
-								containerHeight: !isNaN(n) && n > 0 ? n : void 0,
-								entryAnimation: E
-							}), j(!1);
-						},
-						children: "Salvar Alterações"
-					}) })]
-				})
-			]
-		})]
-	});
-}, HistoryPanel = () => {
-	let { state: n, jumpToHistory: _, undo: E, redo: O } = useEditor();
-	return /* @__PURE__ */ jsxs(p$1, {
-		direction: "column",
-		style: { width: "100%" },
-		children: [/* @__PURE__ */ jsxs(p$1, {
-			justify: "between",
-			align: "center",
-			p: "2",
-			style: { borderBottom: "1px solid var(--gray-5)" },
-			children: [/* @__PURE__ */ jsxs(p$1, {
-				align: "center",
-				gap: "2",
-				children: [/* @__PURE__ */ jsx(ResetIcon, {}), /* @__PURE__ */ jsx(p$2, {
-					size: "2",
-					weight: "bold",
-					children: "Histórico"
-				})]
-			}), /* @__PURE__ */ jsxs(p$1, {
-				gap: "2",
-				children: [/* @__PURE__ */ jsx(o, {
-					size: "1",
-					variant: "soft",
-					onClick: E,
-					disabled: n.historyIndex <= 0,
-					children: "Desfazer"
-				}), /* @__PURE__ */ jsx(o, {
-					size: "1",
-					variant: "soft",
-					onClick: O,
-					disabled: n.historyIndex >= n.history.length - 1,
-					children: "Refazer"
-				})]
-			})]
-		}), /* @__PURE__ */ jsx(p, {
-			p: "0",
-			children: n.history.map((E, O) => {
-				let A = O === n.historyIndex, j = O > n.historyIndex, M = n.historyDescriptions?.[O] || (O === 0 ? "Estado Inicial" : `Alteração ${O}`);
-				return /* @__PURE__ */ jsx(p, {
-					p: "2",
-					style: {
-						backgroundColor: A ? "var(--accent-3)" : "transparent",
-						opacity: j ? .5 : 1,
-						cursor: "pointer",
-						borderBottom: "1px solid var(--gray-3)"
-					},
-					onClick: () => _(O),
-					className: "history-item",
-					children: /* @__PURE__ */ jsxs(p$1, {
-						align: "center",
-						justify: "between",
-						children: [/* @__PURE__ */ jsx(p$2, {
-							size: "2",
-							weight: A ? "bold" : "regular",
-							children: M
-						}), A && /* @__PURE__ */ jsx(p$2, {
-							size: "1",
-							color: "blue",
-							children: "Atual"
-						})]
-					})
-				}, O);
-			})
-		})]
-	});
-};
-function useCombinedRefs() {
-	var n = [...arguments];
-	return useMemo(() => (_) => {
-		n.forEach((n) => n(_));
-	}, n);
-}
-var canUseDOM = typeof window < "u" && window.document !== void 0 && window.document.createElement !== void 0;
-function isWindow(n) {
-	let _ = Object.prototype.toString.call(n);
-	return _ === "[object Window]" || _ === "[object global]";
-}
-function isNode(n) {
-	return "nodeType" in n;
-}
-function getWindow(n) {
-	return n ? isWindow(n) ? n : isNode(n) ? n.ownerDocument?.defaultView ?? window : window : window;
-}
-function isDocument(n) {
-	let { Document: _ } = getWindow(n);
-	return n instanceof _;
-}
-function isHTMLElement$1(n) {
-	return isWindow(n) ? !1 : n instanceof getWindow(n).HTMLElement;
-}
-function isSVGElement$1(n) {
-	return n instanceof getWindow(n).SVGElement;
-}
-function getOwnerDocument(n) {
-	return n ? isWindow(n) ? n.document : isNode(n) ? isDocument(n) ? n : isHTMLElement$1(n) || isSVGElement$1(n) ? n.ownerDocument : document : document : document;
-}
-var useIsomorphicLayoutEffect$1 = canUseDOM ? useLayoutEffect : useEffect;
-function useEvent(n) {
-	let _ = useRef(n);
-	return useIsomorphicLayoutEffect$1(() => {
-		_.current = n;
-	}), useCallback(function() {
-		var n = [...arguments];
-		return _.current == null ? void 0 : _.current(...n);
-	}, []);
-}
-function useInterval() {
-	let n = useRef(null);
-	return [useCallback((_, E) => {
-		n.current = setInterval(_, E);
-	}, []), useCallback(() => {
-		n.current !== null && (clearInterval(n.current), n.current = null);
-	}, [])];
-}
-function useLatestValue(n, _) {
-	_ === void 0 && (_ = [n]);
-	let E = useRef(n);
-	return useIsomorphicLayoutEffect$1(() => {
-		E.current !== n && (E.current = n);
-	}, _), E;
-}
-function useLazyMemo(n, _) {
-	let E = useRef();
-	return useMemo(() => {
-		let _ = n(E.current);
-		return E.current = _, _;
-	}, [..._]);
-}
-function useNodeRef(n) {
-	let _ = useEvent(n), E = useRef(null);
-	return [E, useCallback((n) => {
-		n !== E.current && _?.(n, E.current), E.current = n;
-	}, [])];
-}
-function usePrevious(n) {
-	let _ = useRef();
-	return useEffect(() => {
-		_.current = n;
-	}, [n]), _.current;
-}
-var ids = {};
-function useUniqueId(n, _) {
-	return useMemo(() => {
-		if (_) return _;
-		let E = ids[n] == null ? 0 : ids[n] + 1;
-		return ids[n] = E, n + "-" + E;
-	}, [n, _]);
-}
-function createAdjustmentFn(n) {
-	return function(_) {
-		return [...arguments].slice(1).reduce((_, E) => {
-			let O = Object.entries(E);
-			for (let [E, A] of O) {
-				let O = _[E];
-				O != null && (_[E] = O + n * A);
-			}
-			return _;
-		}, { ..._ });
-	};
-}
-var add = /* @__PURE__ */ createAdjustmentFn(1), subtract = /* @__PURE__ */ createAdjustmentFn(-1);
-function hasViewportRelativeCoordinates(n) {
-	return "clientX" in n && "clientY" in n;
-}
-function isKeyboardEvent(n) {
-	if (!n) return !1;
-	let { KeyboardEvent: _ } = getWindow(n.target);
-	return _ && n instanceof _;
-}
-function isTouchEvent$1(n) {
-	if (!n) return !1;
-	let { TouchEvent: _ } = getWindow(n.target);
-	return _ && n instanceof _;
-}
-function getEventCoordinates(n) {
-	if (isTouchEvent$1(n)) {
-		if (n.touches && n.touches.length) {
-			let { clientX: _, clientY: E } = n.touches[0];
-			return {
-				x: _,
-				y: E
-			};
-		} else if (n.changedTouches && n.changedTouches.length) {
-			let { clientX: _, clientY: E } = n.changedTouches[0];
-			return {
-				x: _,
-				y: E
-			};
-		}
-	}
-	return hasViewportRelativeCoordinates(n) ? {
-		x: n.clientX,
-		y: n.clientY
-	} : null;
-}
-var CSS$1 = /* @__PURE__ */ Object.freeze({
-	Translate: { toString(n) {
-		if (!n) return;
-		let { x: _, y: E } = n;
-		return "translate3d(" + (_ ? Math.round(_) : 0) + "px, " + (E ? Math.round(E) : 0) + "px, 0)";
-	} },
-	Scale: { toString(n) {
-		if (!n) return;
-		let { scaleX: _, scaleY: E } = n;
-		return "scaleX(" + _ + ") scaleY(" + E + ")";
-	} },
-	Transform: { toString(n) {
-		if (n) return [CSS$1.Translate.toString(n), CSS$1.Scale.toString(n)].join(" ");
-	} },
-	Transition: { toString(n) {
-		let { property: _, duration: E, easing: O } = n;
-		return _ + " " + E + "ms " + O;
-	} }
-}), SELECTOR = "a,frame,iframe,input:not([type=hidden]):not(:disabled),select:not(:disabled),textarea:not(:disabled),button:not(:disabled),*[tabindex]";
-function findFirstFocusableNode(n) {
-	return n.matches(SELECTOR) ? n : n.querySelector(SELECTOR);
-}
-var hiddenStyles = { display: "none" };
-function HiddenText(n) {
-	let { id: E, value: O } = n;
-	return React.createElement("div", {
-		id: E,
-		style: hiddenStyles
-	}, O);
-}
-function LiveRegion(n) {
-	let { id: E, announcement: O, ariaLiveType: A = "assertive" } = n;
-	return React.createElement("div", {
-		id: E,
-		style: {
-			position: "fixed",
-			top: 0,
-			left: 0,
-			width: 1,
-			height: 1,
-			margin: -1,
-			border: 0,
-			padding: 0,
-			overflow: "hidden",
-			clip: "rect(0 0 0 0)",
-			clipPath: "inset(100%)",
-			whiteSpace: "nowrap"
-		},
-		role: "status",
-		"aria-live": A,
-		"aria-atomic": !0
-	}, O);
-}
-function useAnnouncement() {
-	let [n, _] = useState("");
-	return {
-		announce: useCallback((n) => {
-			n != null && _(n);
-		}, []),
-		announcement: n
-	};
-}
-var DndMonitorContext = /* @__PURE__ */ createContext(null);
-function useDndMonitor(n) {
-	let _ = useContext(DndMonitorContext);
-	useEffect(() => {
-		if (!_) throw Error("useDndMonitor must be used within a children of <DndContext>");
-		return _(n);
-	}, [n, _]);
-}
-function useDndMonitorProvider() {
-	let [n] = useState(() => /* @__PURE__ */ new Set()), _ = useCallback((_) => (n.add(_), () => n.delete(_)), [n]);
-	return [useCallback((_) => {
-		let { type: E, event: O } = _;
-		n.forEach((n) => n[E]?.call(n, O));
-	}, [n]), _];
-}
-var defaultScreenReaderInstructions = { draggable: "\n    To pick up a draggable item, press the space bar.\n    While dragging, use the arrow keys to move the item.\n    Press space again to drop the item in its new position, or press escape to cancel.\n  " }, defaultAnnouncements = {
-	onDragStart(n) {
-		let { active: _ } = n;
-		return "Picked up draggable item " + _.id + ".";
-	},
-	onDragOver(n) {
-		let { active: _, over: E } = n;
-		return E ? "Draggable item " + _.id + " was moved over droppable area " + E.id + "." : "Draggable item " + _.id + " is no longer over a droppable area.";
-	},
-	onDragEnd(n) {
-		let { active: _, over: E } = n;
-		return E ? "Draggable item " + _.id + " was dropped over droppable area " + E.id : "Draggable item " + _.id + " was dropped.";
-	},
-	onDragCancel(n) {
-		let { active: _ } = n;
-		return "Dragging was cancelled. Draggable item " + _.id + " was dropped.";
-	}
-};
-function Accessibility(n) {
-	let { announcements: E = defaultAnnouncements, container: O, hiddenTextDescribedById: A, screenReaderInstructions: j = defaultScreenReaderInstructions } = n, { announce: M, announcement: N } = useAnnouncement(), P = useUniqueId("DndLiveRegion"), [z, B] = useState(!1);
-	if (useEffect(() => {
-		B(!0);
-	}, []), useDndMonitor(useMemo(() => ({
-		onDragStart(n) {
-			let { active: _ } = n;
-			M(E.onDragStart({ active: _ }));
-		},
-		onDragMove(n) {
-			let { active: _, over: O } = n;
-			E.onDragMove && M(E.onDragMove({
-				active: _,
-				over: O
-			}));
-		},
-		onDragOver(n) {
-			let { active: _, over: O } = n;
-			M(E.onDragOver({
-				active: _,
-				over: O
-			}));
-		},
-		onDragEnd(n) {
-			let { active: _, over: O } = n;
-			M(E.onDragEnd({
-				active: _,
-				over: O
-			}));
-		},
-		onDragCancel(n) {
-			let { active: _, over: O } = n;
-			M(E.onDragCancel({
-				active: _,
-				over: O
-			}));
-		}
-	}), [M, E])), !z) return null;
-	let H = React.createElement(React.Fragment, null, React.createElement(HiddenText, {
-		id: A,
-		value: j.draggable
-	}), React.createElement(LiveRegion, {
-		id: P,
-		announcement: N
-	}));
-	return O ? createPortal(H, O) : H;
-}
-var Action;
-(function(n) {
-	n.DragStart = "dragStart", n.DragMove = "dragMove", n.DragEnd = "dragEnd", n.DragCancel = "dragCancel", n.DragOver = "dragOver", n.RegisterDroppable = "registerDroppable", n.SetDroppableDisabled = "setDroppableDisabled", n.UnregisterDroppable = "unregisterDroppable";
-})(Action ||= {});
-function noop$1() {}
-function useSensor(n, _) {
-	return useMemo(() => ({
-		sensor: n,
-		options: _ ?? {}
-	}), [n, _]);
-}
-function useSensors() {
-	var n = [...arguments];
-	return useMemo(() => [...n].filter((n) => n != null), [...n]);
-}
-var defaultCoordinates = /* @__PURE__ */ Object.freeze({
-	x: 0,
-	y: 0
-});
-function getRelativeTransformOrigin(n, _) {
-	let E = getEventCoordinates(n);
-	if (!E) return "0 0";
-	let O = {
-		x: (E.x - _.left) / _.width * 100,
-		y: (E.y - _.top) / _.height * 100
-	};
-	return O.x + "% " + O.y + "%";
-}
-function sortCollisionsDesc(n, _) {
-	let { data: { value: E } } = n, { data: { value: O } } = _;
-	return O - E;
-}
-function getFirstCollision(n, _) {
-	if (!n || n.length === 0) return null;
-	let [E] = n;
-	return _ ? E[_] : E;
-}
-function getIntersectionRatio(n, _) {
-	let E = Math.max(_.top, n.top), O = Math.max(_.left, n.left), A = Math.min(_.left + _.width, n.left + n.width), j = Math.min(_.top + _.height, n.top + n.height), M = A - O, N = j - E;
-	if (O < A && E < j) {
-		let E = _.width * _.height, O = n.width * n.height, A = M * N, j = A / (E + O - A);
-		return Number(j.toFixed(4));
-	}
-	return 0;
-}
-var rectIntersection = (n) => {
-	let { collisionRect: _, droppableRects: E, droppableContainers: O } = n, A = [];
-	for (let n of O) {
-		let { id: O } = n, j = E.get(O);
-		if (j) {
-			let E = getIntersectionRatio(j, _);
-			E > 0 && A.push({
-				id: O,
-				data: {
-					droppableContainer: n,
-					value: E
-				}
-			});
-		}
-	}
-	return A.sort(sortCollisionsDesc);
-};
-function adjustScale(n, _, E) {
-	return {
-		...n,
-		scaleX: _ && E ? _.width / E.width : 1,
-		scaleY: _ && E ? _.height / E.height : 1
-	};
-}
-function getRectDelta(n, _) {
-	return n && _ ? {
-		x: n.left - _.left,
-		y: n.top - _.top
-	} : defaultCoordinates;
-}
-function createRectAdjustmentFn(n) {
-	return function(_) {
-		return [...arguments].slice(1).reduce((_, E) => ({
-			..._,
-			top: _.top + n * E.y,
-			bottom: _.bottom + n * E.y,
-			left: _.left + n * E.x,
-			right: _.right + n * E.x
-		}), { ..._ });
-	};
-}
-var getAdjustedRect = /* @__PURE__ */ createRectAdjustmentFn(1);
-function parseTransform(n) {
-	if (n.startsWith("matrix3d(")) {
-		let _ = n.slice(9, -1).split(/, /);
-		return {
-			x: +_[12],
-			y: +_[13],
-			scaleX: +_[0],
-			scaleY: +_[5]
-		};
-	} else if (n.startsWith("matrix(")) {
-		let _ = n.slice(7, -1).split(/, /);
-		return {
-			x: +_[4],
-			y: +_[5],
-			scaleX: +_[0],
-			scaleY: +_[3]
-		};
-	}
-	return null;
-}
-function inverseTransform(n, _, E) {
-	let O = parseTransform(_);
-	if (!O) return n;
-	let { scaleX: A, scaleY: j, x: M, y: N } = O, P = n.left - M - (1 - A) * parseFloat(E), z = n.top - N - (1 - j) * parseFloat(E.slice(E.indexOf(" ") + 1)), B = A ? n.width / A : n.width, H = j ? n.height / j : n.height;
-	return {
-		width: B,
-		height: H,
-		top: z,
-		right: P + B,
-		bottom: z + H,
-		left: P
-	};
-}
-var defaultOptions = { ignoreTransform: !1 };
-function getClientRect(n, _) {
-	_ === void 0 && (_ = defaultOptions);
-	let E = n.getBoundingClientRect();
-	if (_.ignoreTransform) {
-		let { transform: _, transformOrigin: O } = getWindow(n).getComputedStyle(n);
-		_ && (E = inverseTransform(E, _, O));
-	}
-	let { top: O, left: A, width: j, height: M, bottom: N, right: P } = E;
-	return {
-		top: O,
-		left: A,
-		width: j,
-		height: M,
-		bottom: N,
-		right: P
-	};
-}
-function getTransformAgnosticClientRect(n) {
-	return getClientRect(n, { ignoreTransform: !0 });
-}
-function getWindowClientRect(n) {
-	let _ = n.innerWidth, E = n.innerHeight;
-	return {
-		top: 0,
-		left: 0,
-		right: _,
-		bottom: E,
-		width: _,
-		height: E
-	};
-}
-function isFixed(n, _) {
-	return _ === void 0 && (_ = getWindow(n).getComputedStyle(n)), _.position === "fixed";
-}
-function isScrollable(n, _) {
-	_ === void 0 && (_ = getWindow(n).getComputedStyle(n));
-	let E = /(auto|scroll|overlay)/;
-	return [
-		"overflow",
-		"overflowX",
-		"overflowY"
-	].some((n) => {
-		let O = _[n];
-		return typeof O == "string" ? E.test(O) : !1;
-	});
-}
-function getScrollableAncestors(n, _) {
-	let E = [];
-	function O(A) {
-		if (_ != null && E.length >= _ || !A) return E;
-		if (isDocument(A) && A.scrollingElement != null && !E.includes(A.scrollingElement)) return E.push(A.scrollingElement), E;
-		if (!isHTMLElement$1(A) || isSVGElement$1(A) || E.includes(A)) return E;
-		let j = getWindow(n).getComputedStyle(A);
-		return A !== n && isScrollable(A, j) && E.push(A), isFixed(A, j) ? E : O(A.parentNode);
-	}
-	return n ? O(n) : E;
-}
-function getFirstScrollableAncestor(n) {
-	let [_] = getScrollableAncestors(n, 1);
-	return _ ?? null;
-}
-function getScrollableElement(n) {
-	return !canUseDOM || !n ? null : isWindow(n) ? n : isNode(n) ? isDocument(n) || n === getOwnerDocument(n).scrollingElement ? window : isHTMLElement$1(n) ? n : null : null;
-}
-function getScrollXCoordinate(n) {
-	return isWindow(n) ? n.scrollX : n.scrollLeft;
-}
-function getScrollYCoordinate(n) {
-	return isWindow(n) ? n.scrollY : n.scrollTop;
-}
-function getScrollCoordinates(n) {
-	return {
-		x: getScrollXCoordinate(n),
-		y: getScrollYCoordinate(n)
-	};
-}
-var Direction;
-(function(n) {
-	n[n.Forward = 1] = "Forward", n[n.Backward = -1] = "Backward";
-})(Direction ||= {});
-function isDocumentScrollingElement(n) {
-	return !canUseDOM || !n ? !1 : n === document.scrollingElement;
-}
-function getScrollPosition(n) {
-	let _ = {
-		x: 0,
-		y: 0
-	}, E = isDocumentScrollingElement(n) ? {
-		height: window.innerHeight,
-		width: window.innerWidth
-	} : {
-		height: n.clientHeight,
-		width: n.clientWidth
-	}, O = {
-		x: n.scrollWidth - E.width,
-		y: n.scrollHeight - E.height
-	};
-	return {
-		isTop: n.scrollTop <= _.y,
-		isLeft: n.scrollLeft <= _.x,
-		isBottom: n.scrollTop >= O.y,
-		isRight: n.scrollLeft >= O.x,
-		maxScroll: O,
-		minScroll: _
-	};
-}
-var defaultThreshold = {
-	x: .2,
-	y: .2
-};
-function getScrollDirectionAndSpeed(n, _, E, O, A) {
-	let { top: j, left: M, right: N, bottom: P } = E;
-	O === void 0 && (O = 10), A === void 0 && (A = defaultThreshold);
-	let { isTop: z, isBottom: B, isLeft: H, isRight: U } = getScrollPosition(n), W = {
-		x: 0,
-		y: 0
-	}, G = {
-		x: 0,
-		y: 0
-	}, Z = {
-		height: _.height * A.y,
-		width: _.width * A.x
-	};
-	return !z && j <= _.top + Z.height ? (W.y = Direction.Backward, G.y = O * Math.abs((_.top + Z.height - j) / Z.height)) : !B && P >= _.bottom - Z.height && (W.y = Direction.Forward, G.y = O * Math.abs((_.bottom - Z.height - P) / Z.height)), !U && N >= _.right - Z.width ? (W.x = Direction.Forward, G.x = O * Math.abs((_.right - Z.width - N) / Z.width)) : !H && M <= _.left + Z.width && (W.x = Direction.Backward, G.x = O * Math.abs((_.left + Z.width - M) / Z.width)), {
-		direction: W,
-		speed: G
-	};
-}
-function getScrollElementRect(n) {
-	if (n === document.scrollingElement) {
-		let { innerWidth: n, innerHeight: _ } = window;
-		return {
-			top: 0,
-			left: 0,
-			right: n,
-			bottom: _,
-			width: n,
-			height: _
-		};
-	}
-	let { top: _, left: E, right: O, bottom: A } = n.getBoundingClientRect();
-	return {
-		top: _,
-		left: E,
-		right: O,
-		bottom: A,
-		width: n.clientWidth,
-		height: n.clientHeight
-	};
-}
-function getScrollOffsets(n) {
-	return n.reduce((n, _) => add(n, getScrollCoordinates(_)), defaultCoordinates);
-}
-function getScrollXOffset(n) {
-	return n.reduce((n, _) => n + getScrollXCoordinate(_), 0);
-}
-function getScrollYOffset(n) {
-	return n.reduce((n, _) => n + getScrollYCoordinate(_), 0);
-}
-function scrollIntoViewIfNeeded(n, _) {
-	if (_ === void 0 && (_ = getClientRect), !n) return;
-	let { top: E, left: O, bottom: A, right: j } = _(n);
-	getFirstScrollableAncestor(n) && (A <= 0 || j <= 0 || E >= window.innerHeight || O >= window.innerWidth) && n.scrollIntoView({
-		block: "center",
-		inline: "center"
-	});
-}
-var properties = [[
-	"x",
-	["left", "right"],
-	getScrollXOffset
-], [
-	"y",
-	["top", "bottom"],
-	getScrollYOffset
-]], Rect = class {
-	constructor(n, _) {
-		this.rect = void 0, this.width = void 0, this.height = void 0, this.top = void 0, this.bottom = void 0, this.right = void 0, this.left = void 0;
-		let E = getScrollableAncestors(_), O = getScrollOffsets(E);
-		this.rect = { ...n }, this.width = n.width, this.height = n.height;
-		for (let [n, _, A] of properties) for (let j of _) Object.defineProperty(this, j, {
-			get: () => {
-				let _ = A(E), M = O[n] - _;
-				return this.rect[j] + M;
-			},
-			enumerable: !0
-		});
-		Object.defineProperty(this, "rect", { enumerable: !1 });
-	}
-}, Listeners = class {
-	constructor(n) {
-		this.target = void 0, this.listeners = [], this.removeAll = () => {
-			this.listeners.forEach((n) => this.target?.removeEventListener(...n));
-		}, this.target = n;
-	}
-	add(n, _, E) {
-		var O;
-		(O = this.target) == null || O.addEventListener(n, _, E), this.listeners.push([
-			n,
-			_,
-			E
-		]);
-	}
-};
-function getEventListenerTarget(n) {
-	let { EventTarget: _ } = getWindow(n);
-	return n instanceof _ ? n : getOwnerDocument(n);
-}
-function hasExceededDistance(n, _) {
-	let E = Math.abs(n.x), O = Math.abs(n.y);
-	return typeof _ == "number" ? Math.sqrt(E ** 2 + O ** 2) > _ : "x" in _ && "y" in _ ? E > _.x && O > _.y : "x" in _ ? E > _.x : "y" in _ ? O > _.y : !1;
-}
-var EventName;
-(function(n) {
-	n.Click = "click", n.DragStart = "dragstart", n.Keydown = "keydown", n.ContextMenu = "contextmenu", n.Resize = "resize", n.SelectionChange = "selectionchange", n.VisibilityChange = "visibilitychange";
-})(EventName ||= {});
-function preventDefault(n) {
-	n.preventDefault();
-}
-function stopPropagation(n) {
-	n.stopPropagation();
-}
-var KeyboardCode;
-(function(n) {
-	n.Space = "Space", n.Down = "ArrowDown", n.Right = "ArrowRight", n.Left = "ArrowLeft", n.Up = "ArrowUp", n.Esc = "Escape", n.Enter = "Enter", n.Tab = "Tab";
-})(KeyboardCode ||= {});
-var defaultKeyboardCodes = {
-	start: [KeyboardCode.Space, KeyboardCode.Enter],
-	cancel: [KeyboardCode.Esc],
-	end: [
-		KeyboardCode.Space,
-		KeyboardCode.Enter,
-		KeyboardCode.Tab
-	]
-}, defaultKeyboardCoordinateGetter = (n, _) => {
-	let { currentCoordinates: E } = _;
-	switch (n.code) {
-		case KeyboardCode.Right: return {
-			...E,
-			x: E.x + 25
-		};
-		case KeyboardCode.Left: return {
-			...E,
-			x: E.x - 25
-		};
-		case KeyboardCode.Down: return {
-			...E,
-			y: E.y + 25
-		};
-		case KeyboardCode.Up: return {
-			...E,
-			y: E.y - 25
-		};
-	}
-}, KeyboardSensor = class {
-	constructor(n) {
-		this.props = void 0, this.autoScrollEnabled = !1, this.referenceCoordinates = void 0, this.listeners = void 0, this.windowListeners = void 0, this.props = n;
-		let { event: { target: _ } } = n;
-		this.props = n, this.listeners = new Listeners(getOwnerDocument(_)), this.windowListeners = new Listeners(getWindow(_)), this.handleKeyDown = this.handleKeyDown.bind(this), this.handleCancel = this.handleCancel.bind(this), this.attach();
-	}
-	attach() {
-		this.handleStart(), this.windowListeners.add(EventName.Resize, this.handleCancel), this.windowListeners.add(EventName.VisibilityChange, this.handleCancel), setTimeout(() => this.listeners.add(EventName.Keydown, this.handleKeyDown));
-	}
-	handleStart() {
-		let { activeNode: n, onStart: _ } = this.props, E = n.node.current;
-		E && scrollIntoViewIfNeeded(E), _(defaultCoordinates);
-	}
-	handleKeyDown(n) {
-		if (isKeyboardEvent(n)) {
-			let { active: _, context: E, options: O } = this.props, { keyboardCodes: A = defaultKeyboardCodes, coordinateGetter: j = defaultKeyboardCoordinateGetter, scrollBehavior: M = "smooth" } = O, { code: N } = n;
-			if (A.end.includes(N)) {
-				this.handleEnd(n);
-				return;
-			}
-			if (A.cancel.includes(N)) {
-				this.handleCancel(n);
-				return;
-			}
-			let { collisionRect: P } = E.current, z = P ? {
-				x: P.left,
-				y: P.top
-			} : defaultCoordinates;
-			this.referenceCoordinates ||= z;
-			let B = j(n, {
-				active: _,
-				context: E.current,
-				currentCoordinates: z
-			});
-			if (B) {
-				let _ = subtract(B, z), O = {
-					x: 0,
-					y: 0
-				}, { scrollableAncestors: A } = E.current;
-				for (let E of A) {
-					let A = n.code, { isTop: j, isRight: N, isLeft: P, isBottom: z, maxScroll: H, minScroll: U } = getScrollPosition(E), W = getScrollElementRect(E), G = {
-						x: Math.min(A === KeyboardCode.Right ? W.right - W.width / 2 : W.right, Math.max(A === KeyboardCode.Right ? W.left : W.left + W.width / 2, B.x)),
-						y: Math.min(A === KeyboardCode.Down ? W.bottom - W.height / 2 : W.bottom, Math.max(A === KeyboardCode.Down ? W.top : W.top + W.height / 2, B.y))
-					}, Z = A === KeyboardCode.Right && !N || A === KeyboardCode.Left && !P, TL = A === KeyboardCode.Down && !z || A === KeyboardCode.Up && !j;
-					if (Z && G.x !== B.x) {
-						let n = E.scrollLeft + _.x, j = A === KeyboardCode.Right && n <= H.x || A === KeyboardCode.Left && n >= U.x;
-						if (j && !_.y) {
-							E.scrollTo({
-								left: n,
-								behavior: M
-							});
-							return;
-						}
-						j ? O.x = E.scrollLeft - n : O.x = A === KeyboardCode.Right ? E.scrollLeft - H.x : E.scrollLeft - U.x, O.x && E.scrollBy({
-							left: -O.x,
-							behavior: M
-						});
-						break;
-					} else if (TL && G.y !== B.y) {
-						let n = E.scrollTop + _.y, j = A === KeyboardCode.Down && n <= H.y || A === KeyboardCode.Up && n >= U.y;
-						if (j && !_.x) {
-							E.scrollTo({
-								top: n,
-								behavior: M
-							});
-							return;
-						}
-						j ? O.y = E.scrollTop - n : O.y = A === KeyboardCode.Down ? E.scrollTop - H.y : E.scrollTop - U.y, O.y && E.scrollBy({
-							top: -O.y,
-							behavior: M
-						});
-						break;
-					}
-				}
-				this.handleMove(n, add(subtract(B, this.referenceCoordinates), O));
-			}
-		}
-	}
-	handleMove(n, _) {
-		let { onMove: E } = this.props;
-		n.preventDefault(), E(_);
-	}
-	handleEnd(n) {
-		let { onEnd: _ } = this.props;
-		n.preventDefault(), this.detach(), _();
-	}
-	handleCancel(n) {
-		let { onCancel: _ } = this.props;
-		n.preventDefault(), this.detach(), _();
-	}
-	detach() {
-		this.listeners.removeAll(), this.windowListeners.removeAll();
-	}
-};
-KeyboardSensor.activators = [{
-	eventName: "onKeyDown",
-	handler: (n, _, E) => {
-		let { keyboardCodes: O = defaultKeyboardCodes, onActivation: A } = _, { active: j } = E, { code: M } = n.nativeEvent;
-		if (O.start.includes(M)) {
-			let _ = j.activatorNode.current;
-			return _ && n.target !== _ ? !1 : (n.preventDefault(), A?.({ event: n.nativeEvent }), !0);
-		}
-		return !1;
-	}
-}];
-function isDistanceConstraint(n) {
-	return !!(n && "distance" in n);
-}
-function isDelayConstraint(n) {
-	return !!(n && "delay" in n);
-}
-var AbstractPointerSensor = class {
-	constructor(n, _, E) {
-		E === void 0 && (E = getEventListenerTarget(n.event.target)), this.props = void 0, this.events = void 0, this.autoScrollEnabled = !0, this.document = void 0, this.activated = !1, this.initialCoordinates = void 0, this.timeoutId = null, this.listeners = void 0, this.documentListeners = void 0, this.windowListeners = void 0, this.props = n, this.events = _;
-		let { event: O } = n, { target: A } = O;
-		this.props = n, this.events = _, this.document = getOwnerDocument(A), this.documentListeners = new Listeners(this.document), this.listeners = new Listeners(E), this.windowListeners = new Listeners(getWindow(A)), this.initialCoordinates = getEventCoordinates(O) ?? defaultCoordinates, this.handleStart = this.handleStart.bind(this), this.handleMove = this.handleMove.bind(this), this.handleEnd = this.handleEnd.bind(this), this.handleCancel = this.handleCancel.bind(this), this.handleKeydown = this.handleKeydown.bind(this), this.removeTextSelection = this.removeTextSelection.bind(this), this.attach();
-	}
-	attach() {
-		let { events: n, props: { options: { activationConstraint: _, bypassActivationConstraint: E } } } = this;
-		if (this.listeners.add(n.move.name, this.handleMove, { passive: !1 }), this.listeners.add(n.end.name, this.handleEnd), n.cancel && this.listeners.add(n.cancel.name, this.handleCancel), this.windowListeners.add(EventName.Resize, this.handleCancel), this.windowListeners.add(EventName.DragStart, preventDefault), this.windowListeners.add(EventName.VisibilityChange, this.handleCancel), this.windowListeners.add(EventName.ContextMenu, preventDefault), this.documentListeners.add(EventName.Keydown, this.handleKeydown), _) {
-			if (E != null && E({
-				event: this.props.event,
-				activeNode: this.props.activeNode,
-				options: this.props.options
-			})) return this.handleStart();
-			if (isDelayConstraint(_)) {
-				this.timeoutId = setTimeout(this.handleStart, _.delay), this.handlePending(_);
-				return;
-			}
-			if (isDistanceConstraint(_)) {
-				this.handlePending(_);
-				return;
-			}
-		}
-		this.handleStart();
-	}
-	detach() {
-		this.listeners.removeAll(), this.windowListeners.removeAll(), setTimeout(this.documentListeners.removeAll, 50), this.timeoutId !== null && (clearTimeout(this.timeoutId), this.timeoutId = null);
-	}
-	handlePending(n, _) {
-		let { active: E, onPending: O } = this.props;
-		O(E, n, this.initialCoordinates, _);
-	}
-	handleStart() {
-		let { initialCoordinates: n } = this, { onStart: _ } = this.props;
-		n && (this.activated = !0, this.documentListeners.add(EventName.Click, stopPropagation, { capture: !0 }), this.removeTextSelection(), this.documentListeners.add(EventName.SelectionChange, this.removeTextSelection), _(n));
-	}
-	handleMove(n) {
-		let { activated: _, initialCoordinates: E, props: O } = this, { onMove: A, options: { activationConstraint: j } } = O;
-		if (!E) return;
-		let M = getEventCoordinates(n) ?? defaultCoordinates, N = subtract(E, M);
-		if (!_ && j) {
-			if (isDistanceConstraint(j)) {
-				if (j.tolerance != null && hasExceededDistance(N, j.tolerance)) return this.handleCancel();
-				if (hasExceededDistance(N, j.distance)) return this.handleStart();
-			}
-			if (isDelayConstraint(j) && hasExceededDistance(N, j.tolerance)) return this.handleCancel();
-			this.handlePending(j, N);
-			return;
-		}
-		n.cancelable && n.preventDefault(), A(M);
-	}
-	handleEnd() {
-		let { onAbort: n, onEnd: _ } = this.props;
-		this.detach(), this.activated || n(this.props.active), _();
-	}
-	handleCancel() {
-		let { onAbort: n, onCancel: _ } = this.props;
-		this.detach(), this.activated || n(this.props.active), _();
-	}
-	handleKeydown(n) {
-		n.code === KeyboardCode.Esc && this.handleCancel();
-	}
-	removeTextSelection() {
-		var n;
-		(n = this.document.getSelection()) == null || n.removeAllRanges();
-	}
-}, events = {
-	cancel: { name: "pointercancel" },
-	move: { name: "pointermove" },
-	end: { name: "pointerup" }
-}, PointerSensor = class extends AbstractPointerSensor {
-	constructor(n) {
-		let { event: _ } = n, E = getOwnerDocument(_.target);
-		super(n, events, E);
-	}
-};
-PointerSensor.activators = [{
-	eventName: "onPointerDown",
-	handler: (n, _) => {
-		let { nativeEvent: E } = n, { onActivation: O } = _;
-		return !E.isPrimary || E.button !== 0 ? !1 : (O?.({ event: E }), !0);
-	}
-}];
-var events$1 = {
-	move: { name: "mousemove" },
-	end: { name: "mouseup" }
-}, MouseButton;
-(function(n) {
-	n[n.RightClick = 2] = "RightClick";
-})(MouseButton ||= {});
-var MouseSensor = class extends AbstractPointerSensor {
-	constructor(n) {
-		super(n, events$1, getOwnerDocument(n.event.target));
-	}
-};
-MouseSensor.activators = [{
-	eventName: "onMouseDown",
-	handler: (n, _) => {
-		let { nativeEvent: E } = n, { onActivation: O } = _;
-		return E.button === MouseButton.RightClick ? !1 : (O?.({ event: E }), !0);
-	}
-}];
-var events$2 = {
-	cancel: { name: "touchcancel" },
-	move: { name: "touchmove" },
-	end: { name: "touchend" }
-}, TouchSensor = class extends AbstractPointerSensor {
-	constructor(n) {
-		super(n, events$2);
-	}
-	static setup() {
-		return window.addEventListener(events$2.move.name, n, {
-			capture: !1,
-			passive: !1
-		}), function() {
-			window.removeEventListener(events$2.move.name, n);
-		};
-		function n() {}
-	}
-};
-TouchSensor.activators = [{
-	eventName: "onTouchStart",
-	handler: (n, _) => {
-		let { nativeEvent: E } = n, { onActivation: O } = _, { touches: A } = E;
-		return A.length > 1 ? !1 : (O?.({ event: E }), !0);
-	}
-}];
-var AutoScrollActivator;
-(function(n) {
-	n[n.Pointer = 0] = "Pointer", n[n.DraggableRect = 1] = "DraggableRect";
-})(AutoScrollActivator ||= {});
-var TraversalOrder;
-(function(n) {
-	n[n.TreeOrder = 0] = "TreeOrder", n[n.ReversedTreeOrder = 1] = "ReversedTreeOrder";
-})(TraversalOrder ||= {});
-function useAutoScroller(n) {
-	let { acceleration: _, activator: E = AutoScrollActivator.Pointer, canScroll: O, draggingRect: A, enabled: j, interval: M = 5, order: N = TraversalOrder.TreeOrder, pointerCoordinates: P, scrollableAncestors: z, scrollableAncestorRects: B, delta: H, threshold: W } = n, Z = useScrollIntent({
-		delta: H,
-		disabled: !j
-	}), [TL, EL] = useInterval(), DL = useRef({
-		x: 0,
-		y: 0
-	}), kL = useRef({
-		x: 0,
-		y: 0
-	}), jL = useMemo(() => {
-		switch (E) {
-			case AutoScrollActivator.Pointer: return P ? {
-				top: P.y,
-				bottom: P.y,
-				left: P.x,
-				right: P.x
-			} : null;
-			case AutoScrollActivator.DraggableRect: return A;
-		}
-	}, [
-		E,
-		A,
-		P
-	]), ML = useRef(null), NL = useCallback(() => {
-		let n = ML.current;
-		if (!n) return;
-		let _ = DL.current.x * kL.current.x, E = DL.current.y * kL.current.y;
-		n.scrollBy(_, E);
-	}, []), PL = useMemo(() => N === TraversalOrder.TreeOrder ? [...z].reverse() : z, [N, z]);
-	useEffect(() => {
-		if (!j || !z.length || !jL) {
-			EL();
-			return;
-		}
-		for (let n of PL) {
-			if (O?.(n) === !1) continue;
-			let E = B[z.indexOf(n)];
-			if (!E) continue;
-			let { direction: A, speed: j } = getScrollDirectionAndSpeed(n, E, jL, _, W);
-			for (let n of ["x", "y"]) Z[n][A[n]] || (j[n] = 0, A[n] = 0);
-			if (j.x > 0 || j.y > 0) {
-				EL(), ML.current = n, TL(NL, M), DL.current = j, kL.current = A;
-				return;
-			}
-		}
-		DL.current = {
-			x: 0,
-			y: 0
-		}, kL.current = {
-			x: 0,
-			y: 0
-		}, EL();
-	}, [
-		_,
-		NL,
-		O,
-		EL,
-		j,
-		M,
-		JSON.stringify(jL),
-		JSON.stringify(Z),
-		TL,
-		z,
-		PL,
-		B,
-		JSON.stringify(W)
-	]);
-}
-var defaultScrollIntent = {
-	x: {
-		[Direction.Backward]: !1,
-		[Direction.Forward]: !1
-	},
-	y: {
-		[Direction.Backward]: !1,
-		[Direction.Forward]: !1
-	}
-};
-function useScrollIntent(n) {
-	let { delta: _, disabled: E } = n, O = usePrevious(_);
-	return useLazyMemo((n) => {
-		if (E || !O || !n) return defaultScrollIntent;
-		let A = {
-			x: Math.sign(_.x - O.x),
-			y: Math.sign(_.y - O.y)
-		};
-		return {
-			x: {
-				[Direction.Backward]: n.x[Direction.Backward] || A.x === -1,
-				[Direction.Forward]: n.x[Direction.Forward] || A.x === 1
-			},
-			y: {
-				[Direction.Backward]: n.y[Direction.Backward] || A.y === -1,
-				[Direction.Forward]: n.y[Direction.Forward] || A.y === 1
-			}
-		};
-	}, [
-		E,
-		_,
-		O
-	]);
-}
-function useCachedNode(n, _) {
-	let E = _ == null ? void 0 : n.get(_), O = E ? E.node.current : null;
-	return useLazyMemo((n) => _ == null ? null : O ?? n ?? null, [O, _]);
-}
-function useCombineActivators(n, _) {
-	return useMemo(() => n.reduce((n, E) => {
-		let { sensor: O } = E, A = O.activators.map((n) => ({
-			eventName: n.eventName,
-			handler: _(n.handler, E)
-		}));
-		return [...n, ...A];
-	}, []), [n, _]);
-}
-var MeasuringStrategy;
-(function(n) {
-	n[n.Always = 0] = "Always", n[n.BeforeDragging = 1] = "BeforeDragging", n[n.WhileDragging = 2] = "WhileDragging";
-})(MeasuringStrategy ||= {});
-var MeasuringFrequency;
-(function(n) {
-	n.Optimized = "optimized";
-})(MeasuringFrequency ||= {});
-var defaultValue = /* @__PURE__ */ new Map();
-function useDroppableMeasuring(n, _) {
-	let { dragging: E, dependencies: O, config: A } = _, [j, M] = useState(null), { frequency: N, measure: P, strategy: z } = A, B = useRef(n), H = DL(), W = useLatestValue(H), Z = useCallback(function(n) {
-		n === void 0 && (n = []), !W.current && M((_) => _ === null ? n : _.concat(n.filter((n) => !_.includes(n))));
-	}, [W]), TL = useRef(null), EL = useLazyMemo((_) => {
-		if (H && !E) return defaultValue;
-		if (!_ || _ === defaultValue || B.current !== n || j != null) {
-			let _ = /* @__PURE__ */ new Map();
-			for (let E of n) {
-				if (!E) continue;
-				if (j && j.length > 0 && !j.includes(E.id) && E.rect.current) {
-					_.set(E.id, E.rect.current);
-					continue;
-				}
-				let n = E.node.current, O = n ? new Rect(P(n), n) : null;
-				E.rect.current = O, O && _.set(E.id, O);
-			}
-			return _;
-		}
-		return _;
-	}, [
-		n,
-		j,
-		E,
-		H,
-		P
-	]);
-	return useEffect(() => {
-		B.current = n;
-	}, [n]), useEffect(() => {
-		H || Z();
-	}, [E, H]), useEffect(() => {
-		j && j.length > 0 && M(null);
-	}, [JSON.stringify(j)]), useEffect(() => {
-		H || typeof N != "number" || TL.current !== null || (TL.current = setTimeout(() => {
-			Z(), TL.current = null;
-		}, N));
-	}, [
-		N,
-		H,
-		Z,
-		...O
-	]), {
-		droppableRects: EL,
-		measureDroppableContainers: Z,
-		measuringScheduled: j != null
-	};
-	function DL() {
-		switch (z) {
-			case MeasuringStrategy.Always: return !1;
-			case MeasuringStrategy.BeforeDragging: return E;
-			default: return !E;
-		}
-	}
-}
-function useInitialValue(n, _) {
-	return useLazyMemo((E) => n ? E || (typeof _ == "function" ? _(n) : n) : null, [_, n]);
-}
-function useInitialRect(n, _) {
-	return useInitialValue(n, _);
-}
-function useMutationObserver(n) {
-	let { callback: _, disabled: E } = n, O = useEvent(_), A = useMemo(() => {
-		if (E || typeof window > "u" || window.MutationObserver === void 0) return;
-		let { MutationObserver: n } = window;
-		return new n(O);
-	}, [O, E]);
-	return useEffect(() => () => A?.disconnect(), [A]), A;
-}
-function useResizeObserver(n) {
-	let { callback: _, disabled: E } = n, O = useEvent(_), A = useMemo(() => {
-		if (E || typeof window > "u" || window.ResizeObserver === void 0) return;
-		let { ResizeObserver: n } = window;
-		return new n(O);
-	}, [E]);
-	return useEffect(() => () => A?.disconnect(), [A]), A;
-}
-function defaultMeasure(n) {
-	return new Rect(getClientRect(n), n);
-}
-function useRect(n, _, E) {
-	_ === void 0 && (_ = defaultMeasure);
-	let [O, A] = useState(null);
-	function j() {
-		A((O) => {
-			if (!n) return null;
-			if (n.isConnected === !1) return O ?? E ?? null;
-			let A = _(n);
-			return JSON.stringify(O) === JSON.stringify(A) ? O : A;
-		});
-	}
-	let M = useMutationObserver({ callback(_) {
-		if (n) for (let E of _) {
-			let { type: _, target: O } = E;
-			if (_ === "childList" && O instanceof HTMLElement && O.contains(n)) {
-				j();
-				break;
-			}
-		}
-	} }), N = useResizeObserver({ callback: j });
-	return useIsomorphicLayoutEffect$1(() => {
-		j(), n ? (N?.observe(n), M?.observe(document.body, {
-			childList: !0,
-			subtree: !0
-		})) : (N?.disconnect(), M?.disconnect());
-	}, [n]), O;
-}
-function useRectDelta(n) {
-	return getRectDelta(n, useInitialValue(n));
-}
-var defaultValue$1 = [];
-function useScrollableAncestors(n) {
-	let _ = useRef(n), E = useLazyMemo((E) => n ? E && E !== defaultValue$1 && n && _.current && n.parentNode === _.current.parentNode ? E : getScrollableAncestors(n) : defaultValue$1, [n]);
-	return useEffect(() => {
-		_.current = n;
-	}, [n]), E;
-}
-function useScrollOffsets(n) {
-	let [_, E] = useState(null), O = useRef(n), A = useCallback((n) => {
-		let _ = getScrollableElement(n.target);
-		_ && E((n) => n ? (n.set(_, getScrollCoordinates(_)), new Map(n)) : null);
-	}, []);
-	return useEffect(() => {
-		let _ = O.current;
-		if (n !== _) {
-			j(_);
-			let M = n.map((n) => {
-				let _ = getScrollableElement(n);
-				return _ ? (_.addEventListener("scroll", A, { passive: !0 }), [_, getScrollCoordinates(_)]) : null;
-			}).filter((n) => n != null);
-			E(M.length ? new Map(M) : null), O.current = n;
-		}
-		return () => {
-			j(n), j(_);
-		};
-		function j(n) {
-			n.forEach((n) => {
-				getScrollableElement(n)?.removeEventListener("scroll", A);
-			});
-		}
-	}, [A, n]), useMemo(() => n.length ? _ ? Array.from(_.values()).reduce((n, _) => add(n, _), defaultCoordinates) : getScrollOffsets(n) : defaultCoordinates, [n, _]);
-}
-function useScrollOffsetsDelta(n, _) {
-	_ === void 0 && (_ = []);
-	let E = useRef(null);
-	return useEffect(() => {
-		E.current = null;
-	}, _), useEffect(() => {
-		let _ = n !== defaultCoordinates;
-		_ && !E.current && (E.current = n), !_ && E.current && (E.current = null);
-	}, [n]), E.current ? subtract(n, E.current) : defaultCoordinates;
-}
-function useSensorSetup(n) {
-	useEffect(() => {
-		if (!canUseDOM) return;
-		let _ = n.map((n) => {
-			let { sensor: _ } = n;
-			return _.setup == null ? void 0 : _.setup();
-		});
-		return () => {
-			for (let n of _) n?.();
-		};
-	}, n.map((n) => {
-		let { sensor: _ } = n;
-		return _;
-	}));
-}
-function useSyntheticListeners(n, _) {
-	return useMemo(() => n.reduce((n, E) => {
-		let { eventName: O, handler: A } = E;
-		return n[O] = (n) => {
-			A(n, _);
-		}, n;
-	}, {}), [n, _]);
-}
-function useWindowRect(n) {
-	return useMemo(() => n ? getWindowClientRect(n) : null, [n]);
-}
-var defaultValue$2 = [];
-function useRects(n, _) {
-	_ === void 0 && (_ = getClientRect);
-	let [E] = n, O = useWindowRect(E ? getWindow(E) : null), [A, j] = useState(defaultValue$2);
-	function M() {
-		j(() => n.length ? n.map((n) => isDocumentScrollingElement(n) ? O : new Rect(_(n), n)) : defaultValue$2);
-	}
-	let N = useResizeObserver({ callback: M });
-	return useIsomorphicLayoutEffect$1(() => {
-		N?.disconnect(), M(), n.forEach((n) => N?.observe(n));
-	}, [n]), A;
-}
-function getMeasurableNode(n) {
-	if (!n) return null;
-	if (n.children.length > 1) return n;
-	let _ = n.children[0];
-	return isHTMLElement$1(_) ? _ : n;
-}
-function useDragOverlayMeasuring(n) {
-	let { measure: _ } = n, [E, O] = useState(null), A = useResizeObserver({ callback: useCallback((n) => {
-		for (let { target: E } of n) if (isHTMLElement$1(E)) {
-			O((n) => {
-				let O = _(E);
-				return n ? {
-					...n,
-					width: O.width,
-					height: O.height
-				} : O;
-			});
-			break;
-		}
-	}, [_]) }), [j, M] = useNodeRef(useCallback((n) => {
-		let E = getMeasurableNode(n);
-		A?.disconnect(), E && A?.observe(E), O(E ? _(E) : null);
-	}, [_, A]));
-	return useMemo(() => ({
-		nodeRef: j,
-		rect: E,
-		setRef: M
-	}), [
-		E,
-		j,
-		M
-	]);
-}
-var defaultSensors = [{
-	sensor: PointerSensor,
-	options: {}
-}, {
-	sensor: KeyboardSensor,
-	options: {}
-}], defaultData = { current: {} }, defaultMeasuringConfiguration = {
-	draggable: { measure: getTransformAgnosticClientRect },
-	droppable: {
-		measure: getTransformAgnosticClientRect,
-		strategy: MeasuringStrategy.WhileDragging,
-		frequency: MeasuringFrequency.Optimized
-	},
-	dragOverlay: { measure: getClientRect }
-}, DroppableContainersMap = class extends Map {
-	get(n) {
-		return n == null ? void 0 : super.get(n) ?? void 0;
-	}
-	toArray() {
-		return Array.from(this.values());
-	}
-	getEnabled() {
-		return this.toArray().filter((n) => {
-			let { disabled: _ } = n;
-			return !_;
-		});
-	}
-	getNodeFor(n) {
-		return this.get(n)?.node.current ?? void 0;
-	}
-}, defaultPublicContext = {
-	activatorEvent: null,
-	active: null,
-	activeNode: null,
-	activeNodeRect: null,
-	collisions: null,
-	containerNodeRect: null,
-	draggableNodes: /* @__PURE__ */ new Map(),
-	droppableRects: /* @__PURE__ */ new Map(),
-	droppableContainers: /* @__PURE__ */ new DroppableContainersMap(),
-	over: null,
-	dragOverlay: {
-		nodeRef: { current: null },
-		rect: null,
-		setRef: noop$1
-	},
-	scrollableAncestors: [],
-	scrollableAncestorRects: [],
-	measuringConfiguration: defaultMeasuringConfiguration,
-	measureDroppableContainers: noop$1,
-	windowRect: null,
-	measuringScheduled: !1
-}, defaultInternalContext = {
-	activatorEvent: null,
-	activators: [],
-	active: null,
-	activeNodeRect: null,
-	ariaDescribedById: { draggable: "" },
-	dispatch: noop$1,
-	draggableNodes: /* @__PURE__ */ new Map(),
-	over: null,
-	measureDroppableContainers: noop$1
-}, InternalContext = /* @__PURE__ */ createContext(defaultInternalContext), PublicContext = /* @__PURE__ */ createContext(defaultPublicContext);
-function getInitialState() {
-	return {
-		draggable: {
-			active: null,
-			initialCoordinates: {
-				x: 0,
-				y: 0
-			},
-			nodes: /* @__PURE__ */ new Map(),
-			translate: {
-				x: 0,
-				y: 0
-			}
-		},
-		droppable: { containers: new DroppableContainersMap() }
-	};
-}
-function reducer(n, _) {
-	switch (_.type) {
-		case Action.DragStart: return {
-			...n,
-			draggable: {
-				...n.draggable,
-				initialCoordinates: _.initialCoordinates,
-				active: _.active
-			}
-		};
-		case Action.DragMove: return n.draggable.active == null ? n : {
-			...n,
-			draggable: {
-				...n.draggable,
-				translate: {
-					x: _.coordinates.x - n.draggable.initialCoordinates.x,
-					y: _.coordinates.y - n.draggable.initialCoordinates.y
-				}
-			}
-		};
-		case Action.DragEnd:
-		case Action.DragCancel: return {
-			...n,
-			draggable: {
-				...n.draggable,
-				active: null,
-				initialCoordinates: {
-					x: 0,
-					y: 0
-				},
-				translate: {
-					x: 0,
-					y: 0
-				}
-			}
-		};
-		case Action.RegisterDroppable: {
-			let { element: E } = _, { id: O } = E, A = new DroppableContainersMap(n.droppable.containers);
-			return A.set(O, E), {
-				...n,
-				droppable: {
-					...n.droppable,
-					containers: A
-				}
-			};
-		}
-		case Action.SetDroppableDisabled: {
-			let { id: E, key: O, disabled: A } = _, j = n.droppable.containers.get(E);
-			if (!j || O !== j.key) return n;
-			let M = new DroppableContainersMap(n.droppable.containers);
-			return M.set(E, {
-				...j,
-				disabled: A
-			}), {
-				...n,
-				droppable: {
-					...n.droppable,
-					containers: M
-				}
-			};
-		}
-		case Action.UnregisterDroppable: {
-			let { id: E, key: O } = _, A = n.droppable.containers.get(E);
-			if (!A || O !== A.key) return n;
-			let j = new DroppableContainersMap(n.droppable.containers);
-			return j.delete(E), {
-				...n,
-				droppable: {
-					...n.droppable,
-					containers: j
-				}
-			};
-		}
-		default: return n;
-	}
-}
-function RestoreFocus(n) {
-	let { disabled: _ } = n, { active: E, activatorEvent: O, draggableNodes: A } = useContext(InternalContext), j = usePrevious(O), M = usePrevious(E?.id);
-	return useEffect(() => {
-		if (!_ && !O && j && M != null) {
-			if (!isKeyboardEvent(j) || document.activeElement === j.target) return;
-			let n = A.get(M);
-			if (!n) return;
-			let { activatorNode: _, node: E } = n;
-			if (!_.current && !E.current) return;
-			requestAnimationFrame(() => {
-				for (let n of [_.current, E.current]) {
-					if (!n) continue;
-					let _ = findFirstFocusableNode(n);
-					if (_) {
-						_.focus();
-						break;
-					}
-				}
-			});
-		}
-	}, [
-		O,
-		_,
-		A,
-		M,
-		j
-	]), null;
-}
-function applyModifiers(n, _) {
-	let { transform: E, ...O } = _;
-	return n != null && n.length ? n.reduce((n, _) => _({
-		transform: n,
-		...O
-	}), E) : E;
-}
-function useMeasuringConfiguration(n) {
-	return useMemo(() => ({
-		draggable: {
-			...defaultMeasuringConfiguration.draggable,
-			...n?.draggable
-		},
-		droppable: {
-			...defaultMeasuringConfiguration.droppable,
-			...n?.droppable
-		},
-		dragOverlay: {
-			...defaultMeasuringConfiguration.dragOverlay,
-			...n?.dragOverlay
-		}
-	}), [
-		n?.draggable,
-		n?.droppable,
-		n?.dragOverlay
-	]);
-}
-function useLayoutShiftScrollCompensation(n) {
-	let { activeNode: _, measure: E, initialRect: O, config: A = !0 } = n, j = useRef(!1), { x: M, y: N } = typeof A == "boolean" ? {
-		x: A,
-		y: A
-	} : A;
-	useIsomorphicLayoutEffect$1(() => {
-		if (!M && !N || !_) {
-			j.current = !1;
-			return;
-		}
-		if (j.current || !O) return;
-		let n = _?.node.current;
-		if (!n || n.isConnected === !1) return;
-		let A = getRectDelta(E(n), O);
-		if (M || (A.x = 0), N || (A.y = 0), j.current = !0, Math.abs(A.x) > 0 || Math.abs(A.y) > 0) {
-			let _ = getFirstScrollableAncestor(n);
-			_ && _.scrollBy({
-				top: A.y,
-				left: A.x
-			});
-		}
-	}, [
-		_,
-		M,
-		N,
-		O,
-		E
-	]);
-}
-var ActiveDraggableContext = /* @__PURE__ */ createContext({
-	...defaultCoordinates,
-	scaleX: 1,
-	scaleY: 1
-}), Status;
-(function(n) {
-	n[n.Uninitialized = 0] = "Uninitialized", n[n.Initializing = 1] = "Initializing", n[n.Initialized = 2] = "Initialized";
-})(Status ||= {});
-var DndContext = /* @__PURE__ */ memo(function(n) {
-	let { id: E, accessibility: O, autoScroll: A = !0, children: j, sensors: M = defaultSensors, collisionDetection: N = rectIntersection, measuring: P, modifiers: z, ...B } = n, [H, W] = useReducer(reducer, void 0, getInitialState), [Z, TL] = useDndMonitorProvider(), [EL, DL] = useState(Status.Uninitialized), ML = EL === Status.Initialized, { draggable: { active: NL, nodes: PL, translate: FL }, droppable: { containers: LL } } = H, RL = NL == null ? null : PL.get(NL), zL = useRef({
-		initial: null,
-		translated: null
-	}), BL = useMemo(() => NL == null ? null : {
-		id: NL,
-		data: RL?.data ?? defaultData,
-		rect: zL
-	}, [NL, RL]), VL = useRef(null), [HL, UL] = useState(null), [WL, GL] = useState(null), KL = useLatestValue(B, Object.values(B)), qL = useUniqueId("DndDescribedBy", E), JL = useMemo(() => LL.getEnabled(), [LL]), YL = useMeasuringConfiguration(P), { droppableRects: XL, measureDroppableContainers: ZL, measuringScheduled: QL } = useDroppableMeasuring(JL, {
-		dragging: ML,
-		dependencies: [FL.x, FL.y],
-		config: YL.droppable
-	}), $L = useCachedNode(PL, NL), eR = useMemo(() => WL ? getEventCoordinates(WL) : null, [WL]), tR = MR(), nR = useInitialRect($L, YL.draggable.measure);
-	useLayoutShiftScrollCompensation({
-		activeNode: NL == null ? null : PL.get(NL),
-		config: tR.layoutShiftCompensation,
-		initialRect: nR,
-		measure: YL.draggable.measure
-	});
-	let rR = useRect($L, YL.draggable.measure, nR), iR = useRect($L ? $L.parentElement : null), aR = useRef({
-		activatorEvent: null,
-		active: null,
-		activeNode: $L,
-		collisionRect: null,
-		collisions: null,
-		droppableRects: XL,
-		draggableNodes: PL,
-		draggingNode: null,
-		draggingNodeRect: null,
-		droppableContainers: LL,
-		over: null,
-		scrollableAncestors: [],
-		scrollAdjustedTranslate: null
-	}), oR = LL.getNodeFor(aR.current.over?.id), sR = useDragOverlayMeasuring({ measure: YL.dragOverlay.measure }), cR = sR.nodeRef.current ?? $L, lR = ML ? sR.rect ?? rR : null, uR = !!(sR.nodeRef.current && sR.rect), dR = useRectDelta(uR ? null : rR), fR = useWindowRect(cR ? getWindow(cR) : null), pR = useScrollableAncestors(ML ? oR ?? $L : null), mR = useRects(pR), hR = applyModifiers(z, {
-		transform: {
-			x: FL.x - dR.x,
-			y: FL.y - dR.y,
-			scaleX: 1,
-			scaleY: 1
-		},
-		activatorEvent: WL,
-		active: BL,
-		activeNodeRect: rR,
-		containerNodeRect: iR,
-		draggingNodeRect: lR,
-		over: aR.current.over,
-		overlayNodeRect: sR.rect,
-		scrollableAncestors: pR,
-		scrollableAncestorRects: mR,
-		windowRect: fR
-	}), gR = eR ? add(eR, FL) : null, _R = useScrollOffsets(pR), vR = useScrollOffsetsDelta(_R), yR = useScrollOffsetsDelta(_R, [rR]), bR = add(hR, vR), xR = lR ? getAdjustedRect(lR, hR) : null, SR = BL && xR ? N({
-		active: BL,
-		collisionRect: xR,
-		droppableRects: XL,
-		droppableContainers: JL,
-		pointerCoordinates: gR
-	}) : null, CR = getFirstCollision(SR, "id"), [wR, TR] = useState(null), ER = adjustScale(uR ? hR : add(hR, yR), wR?.rect ?? null, rR), DR = useRef(null), OR = useCallback((n, _) => {
-		let { sensor: E, options: O } = _;
-		if (VL.current == null) return;
-		let A = PL.get(VL.current);
-		if (!A) return;
-		let j = n.nativeEvent;
-		DR.current = new E({
-			active: VL.current,
-			activeNode: A,
-			event: j,
-			options: O,
-			context: aR,
-			onAbort(n) {
-				if (!PL.get(n)) return;
-				let { onDragAbort: _ } = KL.current, E = { id: n };
-				_?.(E), Z({
-					type: "onDragAbort",
-					event: E
-				});
-			},
-			onPending(n, _, E, O) {
-				if (!PL.get(n)) return;
-				let { onDragPending: A } = KL.current, j = {
-					id: n,
-					constraint: _,
-					initialCoordinates: E,
-					offset: O
-				};
-				A?.(j), Z({
-					type: "onDragPending",
-					event: j
-				});
-			},
-			onStart(n) {
-				let _ = VL.current;
-				if (_ == null) return;
-				let E = PL.get(_);
-				if (!E) return;
-				let { onDragStart: O } = KL.current, A = {
-					activatorEvent: j,
-					active: {
-						id: _,
-						data: E.data,
-						rect: zL
-					}
-				};
-				unstable_batchedUpdates(() => {
-					O?.(A), DL(Status.Initializing), W({
-						type: Action.DragStart,
-						initialCoordinates: n,
-						active: _
-					}), Z({
-						type: "onDragStart",
-						event: A
-					}), UL(DR.current), GL(j);
-				});
-			},
-			onMove(n) {
-				W({
-					type: Action.DragMove,
-					coordinates: n
-				});
-			},
-			onEnd: M(Action.DragEnd),
-			onCancel: M(Action.DragCancel)
-		});
-		function M(n) {
-			return async function() {
-				let { active: _, collisions: E, over: O, scrollAdjustedTranslate: A } = aR.current, M = null;
-				if (_ && A) {
-					let { cancelDrop: N } = KL.current;
-					M = {
-						activatorEvent: j,
-						active: _,
-						collisions: E,
-						delta: A,
-						over: O
-					}, n === Action.DragEnd && typeof N == "function" && await Promise.resolve(N(M)) && (n = Action.DragCancel);
-				}
-				VL.current = null, unstable_batchedUpdates(() => {
-					W({ type: n }), DL(Status.Uninitialized), TR(null), UL(null), GL(null), DR.current = null;
-					let _ = n === Action.DragEnd ? "onDragEnd" : "onDragCancel";
-					if (M) {
-						let n = KL.current[_];
-						n?.(M), Z({
-							type: _,
-							event: M
-						});
-					}
-				});
-			};
-		}
-	}, [PL]), kR = useCombineActivators(M, useCallback((n, _) => (E, O) => {
-		let A = E.nativeEvent, j = PL.get(O);
-		if (VL.current !== null || !j || A.dndKit || A.defaultPrevented) return;
-		let M = { active: j };
-		n(E, _.options, M) === !0 && (A.dndKit = { capturedBy: _.sensor }, VL.current = O, OR(E, _));
-	}, [PL, OR]));
-	useSensorSetup(M), useIsomorphicLayoutEffect$1(() => {
-		rR && EL === Status.Initializing && DL(Status.Initialized);
-	}, [rR, EL]), useEffect(() => {
-		let { onDragMove: n } = KL.current, { active: _, activatorEvent: E, collisions: O, over: A } = aR.current;
-		if (!_ || !E) return;
-		let j = {
-			active: _,
-			activatorEvent: E,
-			collisions: O,
-			delta: {
-				x: bR.x,
-				y: bR.y
-			},
-			over: A
-		};
-		unstable_batchedUpdates(() => {
-			n?.(j), Z({
-				type: "onDragMove",
-				event: j
-			});
-		});
-	}, [bR.x, bR.y]), useEffect(() => {
-		let { active: n, activatorEvent: _, collisions: E, droppableContainers: O, scrollAdjustedTranslate: A } = aR.current;
-		if (!n || VL.current == null || !_ || !A) return;
-		let { onDragOver: j } = KL.current, M = O.get(CR), N = M && M.rect.current ? {
-			id: M.id,
-			rect: M.rect.current,
-			data: M.data,
-			disabled: M.disabled
-		} : null, P = {
-			active: n,
-			activatorEvent: _,
-			collisions: E,
-			delta: {
-				x: A.x,
-				y: A.y
-			},
-			over: N
-		};
-		unstable_batchedUpdates(() => {
-			TR(N), j?.(P), Z({
-				type: "onDragOver",
-				event: P
-			});
-		});
-	}, [CR]), useIsomorphicLayoutEffect$1(() => {
-		aR.current = {
-			activatorEvent: WL,
-			active: BL,
-			activeNode: $L,
-			collisionRect: xR,
-			collisions: SR,
-			droppableRects: XL,
-			draggableNodes: PL,
-			draggingNode: cR,
-			draggingNodeRect: lR,
-			droppableContainers: LL,
-			over: wR,
-			scrollableAncestors: pR,
-			scrollAdjustedTranslate: bR
-		}, zL.current = {
-			initial: lR,
-			translated: xR
-		};
-	}, [
-		BL,
-		$L,
-		SR,
-		xR,
-		PL,
-		cR,
-		lR,
-		XL,
-		LL,
-		wR,
-		pR,
-		bR
-	]), useAutoScroller({
-		...tR,
-		delta: FL,
-		draggingRect: xR,
-		pointerCoordinates: gR,
-		scrollableAncestors: pR,
-		scrollableAncestorRects: mR
-	});
-	let AR = useMemo(() => ({
-		active: BL,
-		activeNode: $L,
-		activeNodeRect: rR,
-		activatorEvent: WL,
-		collisions: SR,
-		containerNodeRect: iR,
-		dragOverlay: sR,
-		draggableNodes: PL,
-		droppableContainers: LL,
-		droppableRects: XL,
-		over: wR,
-		measureDroppableContainers: ZL,
-		scrollableAncestors: pR,
-		scrollableAncestorRects: mR,
-		measuringConfiguration: YL,
-		measuringScheduled: QL,
-		windowRect: fR
-	}), [
-		BL,
-		$L,
-		rR,
-		WL,
-		SR,
-		iR,
-		sR,
-		PL,
-		LL,
-		XL,
-		wR,
-		ZL,
-		pR,
-		mR,
-		YL,
-		QL,
-		fR
-	]), jR = useMemo(() => ({
-		activatorEvent: WL,
-		activators: kR,
-		active: BL,
-		activeNodeRect: rR,
-		ariaDescribedById: { draggable: qL },
-		dispatch: W,
-		draggableNodes: PL,
-		over: wR,
-		measureDroppableContainers: ZL
-	}), [
-		WL,
-		kR,
-		BL,
-		rR,
-		W,
-		qL,
-		PL,
-		wR,
-		ZL
-	]);
-	return React.createElement(DndMonitorContext.Provider, { value: TL }, React.createElement(InternalContext.Provider, { value: jR }, React.createElement(PublicContext.Provider, { value: AR }, React.createElement(ActiveDraggableContext.Provider, { value: ER }, j)), React.createElement(RestoreFocus, { disabled: O?.restoreFocus === !1 })), React.createElement(Accessibility, {
-		...O,
-		hiddenTextDescribedById: qL
-	}));
-	function MR() {
-		let n = HL?.autoScrollEnabled === !1, _ = typeof A == "object" ? A.enabled === !1 : A === !1, E = ML && !n && !_;
-		return typeof A == "object" ? {
-			...A,
-			enabled: E
-		} : { enabled: E };
-	}
-}), NullContext = /* @__PURE__ */ createContext(null), defaultRole = "button", ID_PREFIX$1 = "Draggable";
-function useDraggable(n) {
-	let { id: _, data: E, disabled: O = !1, attributes: A } = n, j = useUniqueId(ID_PREFIX$1), { activators: M, activatorEvent: N, active: P, activeNodeRect: z, ariaDescribedById: B, draggableNodes: H, over: U } = useContext(InternalContext), { role: G = defaultRole, roleDescription: Z = "draggable", tabIndex: TL = 0 } = A ?? {}, EL = P?.id === _, DL = useContext(EL ? ActiveDraggableContext : NullContext), [kL, AL] = useNodeRef(), [jL, ML] = useNodeRef(), NL = useSyntheticListeners(M, _), PL = useLatestValue(E);
-	return useIsomorphicLayoutEffect$1(() => (H.set(_, {
-		id: _,
-		key: j,
-		node: kL,
-		activatorNode: jL,
-		data: PL
-	}), () => {
-		let n = H.get(_);
-		n && n.key === j && H.delete(_);
-	}), [H, _]), {
-		active: P,
-		activatorEvent: N,
-		activeNodeRect: z,
-		attributes: useMemo(() => ({
-			role: G,
-			tabIndex: TL,
-			"aria-disabled": O,
-			"aria-pressed": EL && G === defaultRole ? !0 : void 0,
-			"aria-roledescription": Z,
-			"aria-describedby": B.draggable
-		}), [
-			O,
-			G,
-			TL,
-			EL,
-			Z,
-			B.draggable
-		]),
-		isDragging: EL,
-		listeners: O ? void 0 : NL,
-		node: kL,
-		over: U,
-		setNodeRef: AL,
-		setActivatorNodeRef: ML,
-		transform: DL
-	};
-}
-function useDndContext() {
-	return useContext(PublicContext);
-}
-var ID_PREFIX$1$1 = "Droppable", defaultResizeObserverConfig = { timeout: 25 };
-function useDroppable(n) {
-	let { data: _, disabled: E = !1, id: O, resizeObserverConfig: A } = n, j = useUniqueId(ID_PREFIX$1$1), { active: M, dispatch: N, over: P, measureDroppableContainers: z } = useContext(InternalContext), B = useRef({ disabled: E }), H = useRef(!1), Z = useRef(null), TL = useRef(null), { disabled: EL, updateMeasurementsFor: DL, timeout: OL } = {
-		...defaultResizeObserverConfig,
-		...A
-	}, kL = useLatestValue(DL ?? O), jL = useResizeObserver({
-		callback: useCallback(() => {
-			if (!H.current) {
-				H.current = !0;
-				return;
-			}
-			TL.current != null && clearTimeout(TL.current), TL.current = setTimeout(() => {
-				z(Array.isArray(kL.current) ? kL.current : [kL.current]), TL.current = null;
-			}, OL);
-		}, [OL]),
-		disabled: EL || !M
-	}), [ML, NL] = useNodeRef(useCallback((n, _) => {
-		jL && (_ && (jL.unobserve(_), H.current = !1), n && jL.observe(n));
-	}, [jL])), PL = useLatestValue(_);
-	return useEffect(() => {
-		!jL || !ML.current || (jL.disconnect(), H.current = !1, jL.observe(ML.current));
-	}, [ML, jL]), useEffect(() => (N({
-		type: Action.RegisterDroppable,
-		element: {
-			id: O,
-			key: j,
-			disabled: E,
-			node: ML,
-			rect: Z,
-			data: PL
-		}
-	}), () => N({
-		type: Action.UnregisterDroppable,
-		key: j,
-		id: O
-	})), [O]), useEffect(() => {
-		E !== B.current.disabled && (N({
-			type: Action.SetDroppableDisabled,
-			id: O,
-			key: j,
-			disabled: E
-		}), B.current.disabled = E);
-	}, [
-		O,
-		j,
-		E,
-		N
-	]), {
-		active: M,
-		rect: Z,
-		isOver: P?.id === O,
-		node: ML,
-		over: P,
-		setNodeRef: NL
-	};
-}
-function AnimationManager(n) {
-	let { animation: E, children: O } = n, [A, j] = useState(null), [N, P] = useState(null), z = usePrevious(O);
-	return !O && !A && z && j(z), useIsomorphicLayoutEffect$1(() => {
-		if (!N) return;
-		let n = A?.key, _ = A?.props.id;
-		if (n == null || _ == null) {
-			j(null);
-			return;
-		}
-		Promise.resolve(E(_, N)).then(() => {
-			j(null);
-		});
-	}, [
-		E,
-		A,
-		N
-	]), React.createElement(React.Fragment, null, O, A ? cloneElement(A, { ref: P }) : null);
-}
-var defaultTransform = {
-	x: 0,
-	y: 0,
-	scaleX: 1,
-	scaleY: 1
-};
-function NullifiedContextProvider(n) {
-	let { children: E } = n;
-	return React.createElement(InternalContext.Provider, { value: defaultInternalContext }, React.createElement(ActiveDraggableContext.Provider, { value: defaultTransform }, E));
-}
-var baseStyles = {
-	position: "fixed",
-	touchAction: "none"
-}, defaultTransition$1 = (n) => isKeyboardEvent(n) ? "transform 250ms ease" : void 0, PositionedOverlay = /* @__PURE__ */ forwardRef((n, E) => {
-	let { as: O, activatorEvent: A, adjustScale: j, children: M, className: N, rect: P, style: z, transform: B, transition: H = defaultTransition$1 } = n;
-	if (!P) return null;
-	let U = j ? B : {
-		...B,
-		scaleX: 1,
-		scaleY: 1
-	}, W = {
-		...baseStyles,
-		width: P.width,
-		height: P.height,
-		top: P.top,
-		left: P.left,
-		transform: CSS$1.Transform.toString(U),
-		transformOrigin: j && A ? getRelativeTransformOrigin(A, P) : void 0,
-		transition: typeof H == "function" ? H(A) : H,
-		...z
-	};
-	return React.createElement(O, {
-		className: N,
-		style: W,
-		ref: E
-	}, M);
-}), defaultDropAnimationConfiguration = {
-	duration: 250,
-	easing: "ease",
-	keyframes: (n) => {
-		let { transform: { initial: _, final: E } } = n;
-		return [{ transform: CSS$1.Transform.toString(_) }, { transform: CSS$1.Transform.toString(E) }];
-	},
-	sideEffects: /* @__PURE__ */ ((n) => (_) => {
-		let { active: E, dragOverlay: O } = _, A = {}, { styles: j, className: M } = n;
-		if (j != null && j.active) for (let [n, _] of Object.entries(j.active)) _ !== void 0 && (A[n] = E.node.style.getPropertyValue(n), E.node.style.setProperty(n, _));
-		if (j != null && j.dragOverlay) for (let [n, _] of Object.entries(j.dragOverlay)) _ !== void 0 && O.node.style.setProperty(n, _);
-		return M != null && M.active && E.node.classList.add(M.active), M != null && M.dragOverlay && O.node.classList.add(M.dragOverlay), function() {
-			for (let [n, _] of Object.entries(A)) E.node.style.setProperty(n, _);
-			M != null && M.active && E.node.classList.remove(M.active);
-		};
-	})({ styles: { active: { opacity: "0" } } })
-};
-function useDropAnimation(n) {
-	let { config: _, draggableNodes: E, droppableContainers: O, measuringConfiguration: A } = n;
-	return useEvent((n, j) => {
-		if (_ === null) return;
-		let M = E.get(n);
-		if (!M) return;
-		let N = M.node.current;
-		if (!N) return;
-		let P = getMeasurableNode(j);
-		if (!P) return;
-		let { transform: z } = getWindow(j).getComputedStyle(j), B = parseTransform(z);
-		if (!B) return;
-		let H = typeof _ == "function" ? _ : createDefaultDropAnimation(_);
-		return scrollIntoViewIfNeeded(N, A.draggable.measure), H({
-			active: {
-				id: n,
-				data: M.data,
-				node: N,
-				rect: A.draggable.measure(N)
-			},
-			draggableNodes: E,
-			dragOverlay: {
-				node: j,
-				rect: A.dragOverlay.measure(P)
-			},
-			droppableContainers: O,
-			measuringConfiguration: A,
-			transform: B
-		});
-	});
-}
-function createDefaultDropAnimation(n) {
-	let { duration: _, easing: E, sideEffects: O, keyframes: A } = {
-		...defaultDropAnimationConfiguration,
-		...n
-	};
-	return (n) => {
-		let { active: j, dragOverlay: M, transform: N, ...P } = n;
-		if (!_) return;
-		let z = {
-			x: M.rect.left - j.rect.left,
-			y: M.rect.top - j.rect.top
-		}, B = {
-			scaleX: N.scaleX === 1 ? 1 : j.rect.width * N.scaleX / M.rect.width,
-			scaleY: N.scaleY === 1 ? 1 : j.rect.height * N.scaleY / M.rect.height
-		}, H = {
-			x: N.x - z.x,
-			y: N.y - z.y,
-			...B
-		}, U = A({
-			...P,
-			active: j,
-			dragOverlay: M,
-			transform: {
-				initial: N,
-				final: H
-			}
-		}), [W] = U, G = U[U.length - 1];
-		if (JSON.stringify(W) === JSON.stringify(G)) return;
-		let Z = O?.({
-			active: j,
-			dragOverlay: M,
-			...P
-		}), TL = M.node.animate(U, {
-			duration: _,
-			easing: E,
-			fill: "forwards"
-		});
-		return new Promise((n) => {
-			TL.onfinish = () => {
-				Z?.(), n();
-			};
-		});
-	};
-}
-var key = 0;
-function useKey(n) {
-	return useMemo(() => {
-		if (n != null) return key++, key;
-	}, [n]);
-}
-var DragOverlay = /* @__PURE__ */ React.memo((n) => {
-	let { adjustScale: E = !1, children: O, dropAnimation: A, style: j, transition: M, modifiers: N, wrapperElement: P = "div", className: z, zIndex: B = 999 } = n, { activatorEvent: H, active: U, activeNodeRect: G, containerNodeRect: Z, draggableNodes: TL, droppableContainers: EL, dragOverlay: DL, over: OL, measuringConfiguration: kL, scrollableAncestors: AL, scrollableAncestorRects: jL, windowRect: ML } = useDndContext(), NL = useContext(ActiveDraggableContext), PL = useKey(U?.id), FL = applyModifiers(N, {
-		activatorEvent: H,
-		active: U,
-		activeNodeRect: G,
-		containerNodeRect: Z,
-		draggingNodeRect: DL.rect,
-		over: OL,
-		overlayNodeRect: DL.rect,
-		scrollableAncestors: AL,
-		scrollableAncestorRects: jL,
-		transform: NL,
-		windowRect: ML
-	}), IL = useInitialValue(G), LL = useDropAnimation({
-		config: A,
-		draggableNodes: TL,
-		droppableContainers: EL,
-		measuringConfiguration: kL
-	}), RL = IL ? DL.setRef : void 0;
-	return React.createElement(NullifiedContextProvider, null, React.createElement(AnimationManager, { animation: LL }, U && PL ? React.createElement(PositionedOverlay, {
-		key: PL,
-		id: U.id,
-		ref: RL,
-		as: P,
-		activatorEvent: H,
-		adjustScale: E,
-		className: z,
-		transition: M,
-		rect: IL,
-		style: {
-			zIndex: B,
-			...j
-		},
-		transform: FL
-	}, O) : null));
-});
-function arrayMove(n, _, E) {
-	let O = n.slice();
-	return O.splice(E < 0 ? O.length + E : E, 0, O.splice(_, 1)[0]), O;
-}
-function getSortedRects(n, _) {
-	return n.reduce((n, E, O) => {
-		let A = _.get(E);
-		return A && (n[O] = A), n;
-	}, Array(n.length));
-}
-function isValidIndex(n) {
-	return n !== null && n >= 0;
-}
-function itemsEqual(n, _) {
-	if (n === _) return !0;
-	if (n.length !== _.length) return !1;
-	for (let E = 0; E < n.length; E++) if (n[E] !== _[E]) return !1;
-	return !0;
-}
-function normalizeDisabled(n) {
-	return typeof n == "boolean" ? {
-		draggable: n,
-		droppable: n
-	} : n;
-}
-var rectSortingStrategy = (n) => {
-	let { rects: _, activeIndex: E, overIndex: O, index: A } = n, j = arrayMove(_, O, E), M = _[A], N = j[A];
-	return !N || !M ? null : {
-		x: N.left - M.left,
-		y: N.top - M.top,
-		scaleX: N.width / M.width,
-		scaleY: N.height / M.height
-	};
-}, defaultScale$1 = {
-	scaleX: 1,
-	scaleY: 1
-}, verticalListSortingStrategy = (n) => {
-	let { activeIndex: _, activeNodeRect: E, index: O, rects: A, overIndex: j } = n, M = A[_] ?? E;
-	if (!M) return null;
-	if (O === _) {
-		let n = A[j];
-		return n ? {
-			x: 0,
-			y: _ < j ? n.top + n.height - (M.top + M.height) : n.top - M.top,
-			...defaultScale$1
-		} : null;
-	}
-	let N = getItemGap$1(A, O, _);
-	return O > _ && O <= j ? {
-		x: 0,
-		y: -M.height - N,
-		...defaultScale$1
-	} : O < _ && O >= j ? {
-		x: 0,
-		y: M.height + N,
-		...defaultScale$1
-	} : {
-		x: 0,
-		y: 0,
-		...defaultScale$1
-	};
-};
-function getItemGap$1(n, _, E) {
-	let O = n[_], A = n[_ - 1], j = n[_ + 1];
-	return O ? E < _ ? A ? O.top - (A.top + A.height) : j ? j.top - (O.top + O.height) : 0 : j ? j.top - (O.top + O.height) : A ? O.top - (A.top + A.height) : 0 : 0;
-}
-var ID_PREFIX = "Sortable", Context = /* @__PURE__ */ React.createContext({
-	activeIndex: -1,
-	containerId: ID_PREFIX,
-	disableTransforms: !1,
-	items: [],
-	overIndex: -1,
-	useDragOverlay: !1,
-	sortedRects: [],
-	strategy: rectSortingStrategy,
-	disabled: {
-		draggable: !1,
-		droppable: !1
-	}
-});
-function SortableContext(n) {
-	let { children: E, id: O, items: A, strategy: j = rectSortingStrategy, disabled: M = !1 } = n, { active: N, dragOverlay: P, droppableRects: z, over: B, measureDroppableContainers: H } = useDndContext(), U = useUniqueId(ID_PREFIX, O), W = P.rect !== null, Z = useMemo(() => A.map((n) => typeof n == "object" && "id" in n ? n.id : n), [A]), TL = N != null, EL = N ? Z.indexOf(N.id) : -1, DL = B ? Z.indexOf(B.id) : -1, kL = useRef(Z), jL = !itemsEqual(Z, kL.current), ML = DL !== -1 && EL === -1 || jL, NL = normalizeDisabled(M);
-	useIsomorphicLayoutEffect$1(() => {
-		jL && TL && H(Z);
-	}, [
-		jL,
-		Z,
-		TL,
-		H
-	]), useEffect(() => {
-		kL.current = Z;
-	}, [Z]);
-	let PL = useMemo(() => ({
-		activeIndex: EL,
-		containerId: U,
-		disabled: NL,
-		disableTransforms: ML,
-		items: Z,
-		overIndex: DL,
-		useDragOverlay: W,
-		sortedRects: getSortedRects(Z, z),
-		strategy: j
-	}), [
-		EL,
-		U,
-		NL.draggable,
-		NL.droppable,
-		ML,
-		Z,
-		DL,
-		z,
-		W,
-		j
-	]);
-	return React.createElement(Context.Provider, { value: PL }, E);
-}
-var defaultNewIndexGetter = (n) => {
-	let { id: _, items: E, activeIndex: O, overIndex: A } = n;
-	return arrayMove(E, O, A).indexOf(_);
-}, defaultAnimateLayoutChanges = (n) => {
-	let { containerId: _, isSorting: E, wasDragging: O, index: A, items: j, newIndex: M, previousItems: N, previousContainerId: P, transition: z } = n;
-	return !z || !O || N !== j && A === M ? !1 : E ? !0 : M !== A && _ === P;
-}, defaultTransition = {
-	duration: 200,
-	easing: "ease"
-}, transitionProperty = "transform", disabledTransition = /* @__PURE__ */ CSS$1.Transition.toString({
-	property: transitionProperty,
-	duration: 0,
-	easing: "linear"
-}), defaultAttributes = { roleDescription: "sortable" };
-function useDerivedTransform(n) {
-	let { disabled: _, index: E, node: O, rect: A } = n, [j, M] = useState(null), N = useRef(E);
-	return useIsomorphicLayoutEffect$1(() => {
-		if (!_ && E !== N.current && O.current) {
-			let n = A.current;
-			if (n) {
-				let _ = getClientRect(O.current, { ignoreTransform: !0 }), E = {
-					x: n.left - _.left,
-					y: n.top - _.top,
-					scaleX: n.width / _.width,
-					scaleY: n.height / _.height
-				};
-				(E.x || E.y) && M(E);
-			}
-		}
-		E !== N.current && (N.current = E);
-	}, [
-		_,
-		E,
-		O,
-		A
-	]), useEffect(() => {
-		j && M(null);
-	}, [j]), j;
-}
-function useSortable(n) {
-	let { animateLayoutChanges: _ = defaultAnimateLayoutChanges, attributes: E, disabled: O, data: A, getNewIndex: j = defaultNewIndexGetter, id: M, strategy: N, resizeObserverConfig: P, transition: z = defaultTransition } = n, { items: B, containerId: H, activeIndex: U, disabled: Z, disableTransforms: TL, sortedRects: EL, overIndex: DL, useDragOverlay: kL, strategy: jL } = useContext(Context), ML = normalizeLocalDisabled(O, Z), NL = B.indexOf(M), PL = useMemo(() => ({
-		sortable: {
-			containerId: H,
-			index: NL,
-			items: B
-		},
-		...A
-	}), [
-		H,
-		A,
-		NL,
-		B
-	]), FL = useMemo(() => B.slice(B.indexOf(M)), [B, M]), { rect: IL, node: LL, isOver: RL, setNodeRef: zL } = useDroppable({
-		id: M,
-		data: PL,
-		disabled: ML.droppable,
-		resizeObserverConfig: {
-			updateMeasurementsFor: FL,
-			...P
-		}
-	}), { active: BL, activatorEvent: VL, activeNodeRect: HL, attributes: UL, setNodeRef: WL, listeners: GL, isDragging: KL, over: qL, setActivatorNodeRef: JL, transform: YL } = useDraggable({
-		id: M,
-		data: PL,
-		attributes: {
-			...defaultAttributes,
-			...E
-		},
-		disabled: ML.draggable
-	}), XL = useCombinedRefs(zL, WL), ZL = !!BL, QL = ZL && !TL && isValidIndex(U) && isValidIndex(DL), $L = !kL && KL, eR = QL ? ($L && QL ? YL : null) ?? (N ?? jL)({
-		rects: EL,
-		activeNodeRect: HL,
-		activeIndex: U,
-		overIndex: DL,
-		index: NL
-	}) : null, tR = isValidIndex(U) && isValidIndex(DL) ? j({
-		id: M,
-		items: B,
-		activeIndex: U,
-		overIndex: DL
-	}) : NL, nR = BL?.id, rR = useRef({
-		activeId: nR,
-		items: B,
-		newIndex: tR,
-		containerId: H
-	}), iR = B !== rR.current.items, aR = _({
-		active: BL,
-		containerId: H,
-		isDragging: KL,
-		isSorting: ZL,
-		id: M,
-		index: NL,
-		items: B,
-		newIndex: rR.current.newIndex,
-		previousItems: rR.current.items,
-		previousContainerId: rR.current.containerId,
-		transition: z,
-		wasDragging: rR.current.activeId != null
-	}), oR = useDerivedTransform({
-		disabled: !aR,
-		index: NL,
-		node: LL,
-		rect: IL
-	});
-	return useEffect(() => {
-		ZL && rR.current.newIndex !== tR && (rR.current.newIndex = tR), H !== rR.current.containerId && (rR.current.containerId = H), B !== rR.current.items && (rR.current.items = B);
-	}, [
-		ZL,
-		tR,
-		H,
-		B
-	]), useEffect(() => {
-		if (nR === rR.current.activeId) return;
-		if (nR != null && rR.current.activeId == null) {
-			rR.current.activeId = nR;
-			return;
-		}
-		let n = setTimeout(() => {
-			rR.current.activeId = nR;
-		}, 50);
-		return () => clearTimeout(n);
-	}, [nR]), {
-		active: BL,
-		activeIndex: U,
-		attributes: UL,
-		data: PL,
-		rect: IL,
-		index: NL,
-		newIndex: tR,
-		items: B,
-		isOver: RL,
-		isSorting: ZL,
-		isDragging: KL,
-		listeners: GL,
-		node: LL,
-		overIndex: DL,
-		over: qL,
-		setNodeRef: XL,
-		setActivatorNodeRef: JL,
-		setDroppableNodeRef: zL,
-		setDraggableNodeRef: WL,
-		transform: oR ?? eR,
-		transition: sR()
-	};
-	function sR() {
-		if (oR || iR && rR.current.newIndex === NL) return disabledTransition;
-		if (!($L && !isKeyboardEvent(VL) || !z) && (ZL || aR)) return CSS$1.Transition.toString({
-			...z,
-			property: transitionProperty
-		});
-	}
-}
-function normalizeLocalDisabled(n, _) {
-	return typeof n == "boolean" ? {
-		draggable: n,
-		droppable: !1
-	} : {
-		draggable: n?.draggable ?? _.draggable,
-		droppable: n?.droppable ?? _.droppable
-	};
-}
-KeyboardCode.Down, KeyboardCode.Right, KeyboardCode.Up, KeyboardCode.Left;
-var SortableLayerItem = ({ element: n, isSelected: _, onSelect: E, onToggleVisibility: O, onToggleLock: A, onOpenSettings: j, depth: M = 0 }) => {
-	let { attributes: N, listeners: P, setNodeRef: z, transform: B, transition: H, isDragging: U } = useSortable({ id: n.id });
-	return /* @__PURE__ */ jsx(p, {
-		ref: z,
-		style: {
-			transform: CSS$1.Transform.toString(B),
-			transition: H,
-			opacity: U ? .5 : 1,
-			paddingLeft: `${8 + M * 16}px`
-		},
-		className: `layer-item ${_ ? "selected" : ""}`,
-		children: /* @__PURE__ */ jsxs(p$1, {
-			align: "center",
-			justify: "between",
-			style: {
-				padding: "4px 8px",
-				backgroundColor: _ ? "var(--accent-a3)" : "transparent",
-				borderRadius: 4,
-				cursor: "pointer",
-				userSelect: "none"
-			},
-			onClick: (n) => E(n.shiftKey),
-			children: [/* @__PURE__ */ jsxs(p$1, {
-				align: "center",
-				gap: "2",
-				style: {
-					flex: 1,
-					overflow: "hidden"
-				},
-				children: [
-					/* @__PURE__ */ jsx(p, {
-						...N,
-						...P,
-						style: {
-							cursor: "grab",
-							color: "var(--gray-8)"
-						},
-						children: /* @__PURE__ */ jsx(DragHandleDots2Icon, {})
-					}),
-					/* @__PURE__ */ jsxs(p, {
-						style: { color: "var(--gray-10)" },
-						children: [
-							n.type === "text" && /* @__PURE__ */ jsx(TextIcon, {}),
-							n.type === "image" && /* @__PURE__ */ jsx(ImageIcon, {}),
-							n.type === "box" && /* @__PURE__ */ jsx(BoxIcon, {}),
-							n.type === "group" && /* @__PURE__ */ jsx(BoxIcon, {})
-						]
-					}),
-					/* @__PURE__ */ jsx(p$2, {
-						size: "2",
-						truncate: !0,
-						style: { flex: 1 },
-						children: n.name || (n.type === "text" ? n.content || "Texto Vazio" : n.type)
-					})
-				]
-			}), /* @__PURE__ */ jsxs(p$1, {
-				align: "center",
-				gap: "1",
-				className: "layer-actions",
-				children: [
-					/* @__PURE__ */ jsx(o$2, {
-						size: "1",
-						variant: "ghost",
-						color: n.locked ? "red" : "gray",
-						onClick: (n) => {
-							n.stopPropagation(), A();
-						},
-						children: n.locked ? /* @__PURE__ */ jsx(LockClosedIcon, {}) : /* @__PURE__ */ jsx(LockOpen1Icon, {})
-					}),
-					/* @__PURE__ */ jsx(o$2, {
-						size: "1",
-						variant: "ghost",
-						color: (n.hidden, "gray"),
-						onClick: (n) => {
-							n.stopPropagation(), O();
-						},
-						children: n.hidden ? /* @__PURE__ */ jsx(EyeNoneIcon, {}) : /* @__PURE__ */ jsx(EyeOpenIcon, {})
-					}),
-					j && /* @__PURE__ */ jsx(o$2, {
-						size: "1",
-						variant: "ghost",
-						color: "gray",
-						onClick: (n) => {
-							n.stopPropagation(), j();
-						},
-						children: /* @__PURE__ */ jsx(GearIcon, {})
-					})
-				]
-			})]
-		})
-	});
-};
-const LayersPanel = ({ onOpenSettings: n }) => {
-	let { state: _, selectElement: E, updateElement: O, moveElement: A } = useEditor(), { elements: j, selectedElementIds: M } = _, N = useMemo(() => [...j].reverse(), [j]), [P, z] = useState(null), B = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 5 } })), H = (n) => {
-		z(n.active.id);
-	}, U = (n) => {
-		let { active: _, over: E } = n;
-		if (z(null), E && _.id !== E.id) {
-			let n = N.findIndex((n) => n.id === _.id), O = N.findIndex((n) => n.id === E.id);
-			A(j.length - 1 - n, j.length - 1 - O);
-		}
-	}, W = (n, _) => {
-		O(n, { hidden: !_ });
-	}, G = (n, _) => {
-		O(n, { locked: !_ });
-	};
-	return /* @__PURE__ */ jsxs(p$1, {
-		direction: "column",
-		children: [/* @__PURE__ */ jsx(p, {
-			p: "3",
-			style: { borderBottom: "1px solid var(--gray-6)" },
-			children: /* @__PURE__ */ jsx(p$2, {
-				size: "2",
-				weight: "bold",
-				children: "Camadas"
-			})
-		}), /* @__PURE__ */ jsxs(p, {
-			style: { padding: 8 },
-			children: [N.length === 0 && /* @__PURE__ */ jsxs(p, {
-				style: {
-					backgroundColor: "var(--gray-2)",
-					border: "1px dashed var(--gray-5)",
-					borderRadius: 10,
-					padding: 12,
-					marginBottom: 8
-				},
-				children: [/* @__PURE__ */ jsx(p$2, {
-					size: "2",
-					weight: "bold",
-					children: "Nenhuma camada ainda"
-				}), /* @__PURE__ */ jsx(p$2, {
-					size: "1",
-					color: "gray",
-					children: "Adicione um elemento para começar. Ele vai aparecer aqui."
-				})]
-			}), /* @__PURE__ */ jsxs(DndContext, {
-				sensors: B,
-				onDragStart: H,
-				onDragEnd: U,
-				children: [/* @__PURE__ */ jsx(SortableContext, {
-					items: N.map((n) => n.id),
-					strategy: verticalListSortingStrategy,
-					children: /* @__PURE__ */ jsx(p$1, {
-						direction: "column",
-						gap: "1",
-						children: N.map((_) => /* @__PURE__ */ jsx(SortableLayerItem, {
-							element: _,
-							isSelected: M.includes(_.id),
-							onSelect: (n) => E(_.id, n),
-							onToggleVisibility: () => W(_.id, !!_.hidden),
-							onToggleLock: () => G(_.id, !!_.locked),
-							onOpenSettings: n ? () => n(_.id) : void 0
-						}, _.id))
-					})
-				}), /* @__PURE__ */ jsx(DragOverlay, { children: P ? /* @__PURE__ */ jsx(p, {
-					style: {
-						padding: "4px 8px",
-						backgroundColor: "var(--gray-4)",
-						borderRadius: 4,
-						boxShadow: "0 2px 10px rgba(0,0,0,0.1)"
-					},
-					children: /* @__PURE__ */ jsx(p$2, { children: "Movendo camada..." })
-				}) : null })]
-			})]
-		})]
-	});
-}, AdvancedSidebar = ({ layout: n, onOpenSettings: _ }) => /* @__PURE__ */ jsxs(p$1, {
-	direction: "column",
-	children: [/* @__PURE__ */ jsx(p, {
-		p: "4",
-		style: { borderBottom: "1px solid var(--gray-5)" },
-		children: /* @__PURE__ */ jsx(EditorSettings, {})
-	}), /* @__PURE__ */ jsx(p, {
-		p: "4",
-		children: /* @__PURE__ */ jsxs(m$1, {
-			defaultValue: "layers",
-			children: [/* @__PURE__ */ jsxs(b$1, { children: [
-				/* @__PURE__ */ jsx(P$1, {
-					value: "layers",
-					children: "Camadas"
-				}),
-				/* @__PURE__ */ jsx(P$1, {
-					value: "history",
-					children: "Histórico"
-				}),
-				/* @__PURE__ */ jsx(P$1, {
-					value: "vars",
-					children: "Variáveis"
-				})
-			] }), /* @__PURE__ */ jsxs(p, {
-				pt: "3",
-				children: [
-					/* @__PURE__ */ jsx(f$2, {
-						value: "layers",
-						children: /* @__PURE__ */ jsx(LayersPanel, { onOpenSettings: _ })
-					}),
-					/* @__PURE__ */ jsx(f$2, {
-						value: "history",
-						children: /* @__PURE__ */ jsx(HistoryPanel, {})
-					}),
-					/* @__PURE__ */ jsx(f$2, {
-						value: "vars",
-						children: /* @__PURE__ */ jsxs(p, { children: [
-							/* @__PURE__ */ jsx(p$2, {
-								size: "2",
-								weight: "bold",
-								mb: "2",
-								as: "div",
-								children: "Variáveis Disponíveis"
-							}),
-							/* @__PURE__ */ jsx(p$2, {
-								size: "1",
-								color: "gray",
-								mb: "2",
-								as: "div",
-								children: "Clique para copiar ou arraste"
-							}),
-							/* @__PURE__ */ jsxs(p$1, {
-								direction: "column",
-								gap: "2",
-								children: [n.props.map((n, _) => /* @__PURE__ */ jsxs(e$1, {
-									color: "blue",
-									variant: "soft",
-									size: "2",
-									style: {
-										padding: "8px",
-										justifyContent: "flex-start",
-										cursor: "grab"
-									},
-									title: `Clique para copiar {{${n.dataName}}}`,
-									draggable: !0,
-									onDragStart: (_) => {
-										_.dataTransfer.setData("application/x-editor-prop", n.dataName), _.dataTransfer.effectAllowed = "copy";
-									},
-									onClick: () => {
-										let _ = `{{${n.dataName}}}`;
-										navigator.clipboard.writeText(_);
-									},
-									children: [n.name, /* @__PURE__ */ jsx(p$2, {
-										color: "gray",
-										style: {
-											marginLeft: "auto",
-											fontSize: "10px"
-										},
-										children: `{{${n.dataName}}}`
-									})]
-								}, _)), n.props.length === 0 && /* @__PURE__ */ jsx(p$2, {
-									size: "1",
-									color: "gray",
-									style: { fontStyle: "italic" },
-									children: "Nenhuma variável configurada."
-								})]
-							})
-						] })
-					})
-				]
-			})]
-		})
-	})]
-}), AlignmentToolbar = () => {
+}, AlignmentToolbar = () => {
 	let { state: n, updateElements: _ } = useEditor(), { selectedElementIds: E, elements: O } = n;
 	if (E.length < 2) return null;
 	let A = () => O.filter((n) => E.includes(n.id));
@@ -13188,7 +10901,7 @@ const LayersPanel = ({ onOpenSettings: n }) => {
 				title: "Alinhar à Direita",
 				children: /* @__PURE__ */ jsx(AlignRightIcon, {})
 			}),
-			/* @__PURE__ */ jsx(o$4, { orientation: "vertical" }),
+			/* @__PURE__ */ jsx(o$3, { orientation: "vertical" }),
 			/* @__PURE__ */ jsx(o$2, {
 				variant: "ghost",
 				color: "gray",
@@ -13235,7 +10948,7 @@ const LayersPanel = ({ onOpenSettings: n }) => {
 				children: /* @__PURE__ */ jsx(AlignBottomIcon, {})
 			}),
 			E.length >= 3 && /* @__PURE__ */ jsxs(Fragment$1, { children: [
-				/* @__PURE__ */ jsx(o$4, { orientation: "vertical" }),
+				/* @__PURE__ */ jsx(o$3, { orientation: "vertical" }),
 				/* @__PURE__ */ jsx(o$2, {
 					variant: "ghost",
 					color: "gray",
@@ -13380,7 +11093,7 @@ var __assign$1 = function() {
 	return O * _ + E * (O - 1);
 }, hasDirection = function(n, _) {
 	return new RegExp(n, "i").test(_);
-}, isTouchEvent = function(n) {
+}, isTouchEvent$1 = function(n) {
 	return !!(n.touches && n.touches.length);
 }, isMouseEvent = function(n) {
 	return !!((n.clientX || n.clientX === 0) && (n.clientY || n.clientY === 0));
@@ -13563,16 +11276,16 @@ var __assign$1 = function() {
 			maxHeight: _
 		};
 	}, _.prototype.calculateNewSizeFromDirection = function(n, _) {
-		var E = this.props.scale || 1, O = normalizeToPair(this.props.resizeRatio || 1), A = O[0], j = O[1], M = this.state, N = M.direction, P = M.original, z = this.props, B = z.lockAspectRatio, H = z.lockAspectRatioExtraHeight, U = z.lockAspectRatioExtraWidth, W = P.width, G = P.height, Z = H || 0, TL = U || 0;
-		return hasDirection("right", N) && (W = P.width + (n - P.x) * A / E, B && (G = (W - TL) / this.ratio + Z)), hasDirection("left", N) && (W = P.width - (n - P.x) * A / E, B && (G = (W - TL) / this.ratio + Z)), hasDirection("bottom", N) && (G = P.height + (_ - P.y) * j / E, B && (W = (G - Z) * this.ratio + TL)), hasDirection("top", N) && (G = P.height - (_ - P.y) * j / E, B && (W = (G - Z) * this.ratio + TL)), {
+		var E = this.props.scale || 1, O = normalizeToPair(this.props.resizeRatio || 1), A = O[0], j = O[1], M = this.state, N = M.direction, P = M.original, z = this.props, B = z.lockAspectRatio, H = z.lockAspectRatioExtraHeight, U = z.lockAspectRatioExtraWidth, W = P.width, G = P.height, Z = H || 0, uz = U || 0;
+		return hasDirection("right", N) && (W = P.width + (n - P.x) * A / E, B && (G = (W - uz) / this.ratio + Z)), hasDirection("left", N) && (W = P.width - (n - P.x) * A / E, B && (G = (W - uz) / this.ratio + Z)), hasDirection("bottom", N) && (G = P.height + (_ - P.y) * j / E, B && (W = (G - Z) * this.ratio + uz)), hasDirection("top", N) && (G = P.height - (_ - P.y) * j / E, B && (W = (G - Z) * this.ratio + uz)), {
 			newWidth: W,
 			newHeight: G
 		};
 	}, _.prototype.calculateNewSizeFromAspectRatio = function(n, _, E, O) {
 		var A = this.props, j = A.lockAspectRatio, M = A.lockAspectRatioExtraHeight, N = A.lockAspectRatioExtraWidth, P = O.width === void 0 ? 10 : O.width, z = E.width === void 0 || E.width < 0 ? n : E.width, B = O.height === void 0 ? 10 : O.height, H = E.height === void 0 || E.height < 0 ? _ : E.height, U = M || 0, W = N || 0;
 		if (j) {
-			var G = (B - U) * this.ratio + W, Z = (H - U) * this.ratio + W, TL = (P - W) / this.ratio + U, EL = (z - W) / this.ratio + U, DL = Math.max(P, G), OL = Math.min(z, Z), kL = Math.max(B, TL), AL = Math.min(H, EL);
-			n = clamp$1(n, DL, OL), _ = clamp$1(_, kL, AL);
+			var G = (B - U) * this.ratio + W, Z = (H - U) * this.ratio + W, uz = (P - W) / this.ratio + U, dz = (z - W) / this.ratio + U, fz = Math.max(P, G), pz = Math.min(z, Z), mz = Math.max(B, uz), hz = Math.min(H, dz);
+			n = clamp$1(n, fz, pz), _ = clamp$1(_, mz, hz);
 		} else n = clamp$1(n, P, z), _ = clamp$1(_, B, H);
 		return {
 			newWidth: n,
@@ -13598,7 +11311,7 @@ var __assign$1 = function() {
 	}, _.prototype.onResizeStart = function(n, _) {
 		if (!(!this.resizable || !this.window)) {
 			var E = 0, O = 0;
-			if (n.nativeEvent && isMouseEvent(n.nativeEvent) ? (E = n.nativeEvent.clientX, O = n.nativeEvent.clientY) : n.nativeEvent && isTouchEvent(n.nativeEvent) && (E = n.nativeEvent.touches[0].clientX, O = n.nativeEvent.touches[0].clientY), !(this.props.onResizeStart && this.resizable && this.props.onResizeStart(n, _, this.resizable) === !1)) {
+			if (n.nativeEvent && isMouseEvent(n.nativeEvent) ? (E = n.nativeEvent.clientX, O = n.nativeEvent.clientY) : n.nativeEvent && isTouchEvent$1(n.nativeEvent) && (E = n.nativeEvent.touches[0].clientX, O = n.nativeEvent.touches[0].clientY), !(this.props.onResizeStart && this.resizable && this.props.onResizeStart(n, _, this.resizable) === !1)) {
 				this.props.size && (this.props.size.height !== void 0 && this.props.size.height !== this.state.height && this.setState({ height: this.props.size.height }), this.props.size.width !== void 0 && this.props.size.width !== this.state.width && this.setState({ width: this.props.size.width })), this.ratio = typeof this.props.lockAspectRatio == "number" ? this.props.lockAspectRatio : this.size.width / this.size.height;
 				var A, j = this.window.getComputedStyle(this.resizable);
 				if (j.flexBasis !== "auto") {
@@ -13624,61 +11337,61 @@ var __assign$1 = function() {
 	}, _.prototype.onMouseMove = function(n) {
 		var _ = this;
 		if (!(!this.state.isResizing || !this.resizable || !this.window)) {
-			if (this.window.TouchEvent && isTouchEvent(n)) try {
+			if (this.window.TouchEvent && isTouchEvent$1(n)) try {
 				n.preventDefault(), n.stopPropagation();
 			} catch {}
-			var E = this.props, O = E.maxWidth, A = E.maxHeight, j = E.minWidth, M = E.minHeight, N = isTouchEvent(n) ? n.touches[0].clientX : n.clientX, P = isTouchEvent(n) ? n.touches[0].clientY : n.clientY, z = this.state, B = z.direction, H = z.original, U = z.width, W = z.height, G = this.getParentSize(), Z = calculateNewMax(G, this.window.innerWidth, this.window.innerHeight, O, A, j, M);
+			var E = this.props, O = E.maxWidth, A = E.maxHeight, j = E.minWidth, M = E.minHeight, N = isTouchEvent$1(n) ? n.touches[0].clientX : n.clientX, P = isTouchEvent$1(n) ? n.touches[0].clientY : n.clientY, z = this.state, B = z.direction, H = z.original, U = z.width, W = z.height, G = this.getParentSize(), Z = calculateNewMax(G, this.window.innerWidth, this.window.innerHeight, O, A, j, M);
 			O = Z.maxWidth, A = Z.maxHeight, j = Z.minWidth, M = Z.minHeight;
-			var TL = this.calculateNewSizeFromDirection(N, P), EL = TL.newHeight, DL = TL.newWidth, OL = this.calculateNewMaxFromBoundary(O, A);
-			this.props.snap && this.props.snap.x && (DL = findClosestSnap(DL, this.props.snap.x, this.props.snapGap)), this.props.snap && this.props.snap.y && (EL = findClosestSnap(EL, this.props.snap.y, this.props.snapGap));
-			var kL = this.calculateNewSizeFromAspectRatio(DL, EL, {
-				width: OL.maxWidth,
-				height: OL.maxHeight
+			var uz = this.calculateNewSizeFromDirection(N, P), dz = uz.newHeight, fz = uz.newWidth, pz = this.calculateNewMaxFromBoundary(O, A);
+			this.props.snap && this.props.snap.x && (fz = findClosestSnap(fz, this.props.snap.x, this.props.snapGap)), this.props.snap && this.props.snap.y && (dz = findClosestSnap(dz, this.props.snap.y, this.props.snapGap));
+			var mz = this.calculateNewSizeFromAspectRatio(fz, dz, {
+				width: pz.maxWidth,
+				height: pz.maxHeight
 			}, {
 				width: j,
 				height: M
 			});
-			if (DL = kL.newWidth, EL = kL.newHeight, this.props.grid) {
-				var AL = snap(DL, this.props.grid[0], this.props.gridGap ? this.props.gridGap[0] : 0), jL = snap(EL, this.props.grid[1], this.props.gridGap ? this.props.gridGap[1] : 0), ML = this.props.snapGap || 0, NL = ML === 0 || Math.abs(AL - DL) <= ML ? AL : DL, PL = ML === 0 || Math.abs(jL - EL) <= ML ? jL : EL;
-				DL = NL, EL = PL;
+			if (fz = mz.newWidth, dz = mz.newHeight, this.props.grid) {
+				var hz = snap(fz, this.props.grid[0], this.props.gridGap ? this.props.gridGap[0] : 0), gz = snap(dz, this.props.grid[1], this.props.gridGap ? this.props.gridGap[1] : 0), _z = this.props.snapGap || 0, vz = _z === 0 || Math.abs(hz - fz) <= _z ? hz : fz, yz = _z === 0 || Math.abs(gz - dz) <= _z ? gz : dz;
+				fz = vz, dz = yz;
 			}
-			var IL = {
-				width: DL - H.width,
-				height: EL - H.height
+			var xz = {
+				width: fz - H.width,
+				height: dz - H.height
 			};
-			if (this.delta = IL, U && typeof U == "string") {
+			if (this.delta = xz, U && typeof U == "string") {
 				if (U.endsWith("%")) {
-					var LL = DL / G.width * 100;
-					DL = `${LL}%`;
+					var Sz = fz / G.width * 100;
+					fz = `${Sz}%`;
 				} else if (U.endsWith("vw")) {
-					var RL = DL / this.window.innerWidth * 100;
-					DL = `${RL}vw`;
+					var Cz = fz / this.window.innerWidth * 100;
+					fz = `${Cz}vw`;
 				} else if (U.endsWith("vh")) {
-					var zL = DL / this.window.innerHeight * 100;
-					DL = `${zL}vh`;
+					var wz = fz / this.window.innerHeight * 100;
+					fz = `${wz}vh`;
 				}
 			}
 			if (W && typeof W == "string") {
 				if (W.endsWith("%")) {
-					var LL = EL / G.height * 100;
-					EL = `${LL}%`;
+					var Sz = dz / G.height * 100;
+					dz = `${Sz}%`;
 				} else if (W.endsWith("vw")) {
-					var RL = EL / this.window.innerWidth * 100;
-					EL = `${RL}vw`;
+					var Cz = dz / this.window.innerWidth * 100;
+					dz = `${Cz}vw`;
 				} else if (W.endsWith("vh")) {
-					var zL = EL / this.window.innerHeight * 100;
-					EL = `${zL}vh`;
+					var wz = dz / this.window.innerHeight * 100;
+					dz = `${wz}vh`;
 				}
 			}
-			var BL = {
-				width: this.createSizeForCssProperty(DL, "width"),
-				height: this.createSizeForCssProperty(EL, "height")
+			var Tz = {
+				width: this.createSizeForCssProperty(fz, "width"),
+				height: this.createSizeForCssProperty(dz, "height")
 			};
-			this.flexDir === "row" ? BL.flexBasis = BL.width : this.flexDir === "column" && (BL.flexBasis = BL.height);
-			var VL = this.state.width !== BL.width, HL = this.state.height !== BL.height, UL = this.state.flexBasis !== BL.flexBasis, WL = VL || HL || UL;
-			WL && flushSync(function() {
-				_.setState(BL);
-			}), this.props.onResize && WL && this.props.onResize(n, B, this.resizable, IL);
+			this.flexDir === "row" ? Tz.flexBasis = Tz.width : this.flexDir === "column" && (Tz.flexBasis = Tz.height);
+			var Ez = this.state.width !== Tz.width, Dz = this.state.height !== Tz.height, Oz = this.state.flexBasis !== Tz.flexBasis, kz = Ez || Dz || Oz;
+			kz && flushSync(function() {
+				_.setState(Tz);
+			}), this.props.onResize && kz && this.props.onResize(n, B, this.resizable, xz);
 		}
 	}, _.prototype.onMouseUp = function(n) {
 		var _ = this.state, E = _.isResizing, O = _.direction;
@@ -14186,1038 +11899,41 @@ const ColorPickerContent = ({ color: n, onChange: _ }) => {
 		},
 		children: E || n || "Transparente"
 	})]
-}) }), /* @__PURE__ */ jsx(i$4, {
+}) }), /* @__PURE__ */ jsx(i$7, {
 	style: { width: 240 },
 	children: /* @__PURE__ */ jsx(ColorPickerContent, {
 		color: n,
 		onChange: _
 	})
-})] }), ElementAdvancedSettings = ({ elementId: n, open: _, onOpenChange: E, initialTab: O = "formatting" }) => {
-	let { state: A, updateElement: j } = useEditor(), M = A.elements.find((_) => _.id === n);
-	return M ? /* @__PURE__ */ jsx(s$5, {
-		open: _,
-		onOpenChange: E,
-		children: /* @__PURE__ */ jsxs(p$9, {
-			style: {
-				maxWidth: 600,
-				minHeight: 400
-			},
-			onPointerDown: (n) => n.stopPropagation(),
-			children: [
-				/* @__PURE__ */ jsx(g$2, { children: "Configurações Avançadas" }),
-				/* @__PURE__ */ jsxs(m$1, {
-					defaultValue: O,
-					children: [/* @__PURE__ */ jsxs(b$1, { children: [
-						/* @__PURE__ */ jsx(P$1, {
-							value: "formatting",
-							children: "Formatação"
-						}),
-						/* @__PURE__ */ jsx(P$1, {
-							value: "style",
-							children: "Estilo"
-						}),
-						/* @__PURE__ */ jsx(P$1, {
-							value: "conditional",
-							children: "Condicional"
-						}),
-						/* @__PURE__ */ jsx(P$1, {
-							value: "animation",
-							children: "Animação"
-						})
-					] }), /* @__PURE__ */ jsxs(p, {
-						pt: "3",
-						children: [
-							/* @__PURE__ */ jsx(f$2, {
-								value: "formatting",
-								children: /* @__PURE__ */ jsx(FormattingSettings, {
-									element: M,
-									updateElement: j
-								})
-							}),
-							/* @__PURE__ */ jsx(f$2, {
-								value: "style",
-								children: /* @__PURE__ */ jsx(StyleSettings, {
-									element: M,
-									updateElement: j
-								})
-							}),
-							/* @__PURE__ */ jsx(f$2, {
-								value: "conditional",
-								children: /* @__PURE__ */ jsx(ConditionalSettings, {
-									element: M,
-									updateElement: j,
-									availableProps: A.availableProps
-								})
-							}),
-							/* @__PURE__ */ jsx(f$2, {
-								value: "animation",
-								children: /* @__PURE__ */ jsx(AnimationSettings, {
-									element: M,
-									updateElement: j
-								})
-							})
-						]
-					})]
-				}),
-				/* @__PURE__ */ jsx(p$1, {
-					justify: "end",
-					mt: "4",
-					children: /* @__PURE__ */ jsx(D$2, { children: /* @__PURE__ */ jsx(o, {
-						variant: "soft",
-						color: "gray",
-						children: "Fechar"
-					}) })
-				})
-			]
-		})
-	}) : null;
-};
-var AnimationSettings = ({ element: n, updateElement: _ }) => {
-	let E = n.animation || {
-		type: "none",
-		duration: 1,
-		delay: 0
-	}, O = (O) => {
-		_(n.id, { animation: {
-			...E,
-			...O
-		} });
-	};
-	return /* @__PURE__ */ jsxs(p$1, {
-		direction: "column",
-		gap: "3",
-		children: [
-			/* @__PURE__ */ jsx(p$2, {
-				size: "2",
-				color: "gray",
-				children: "Configure animações de entrada para este elemento."
-			}),
-			/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
-				size: "1",
-				mb: "1",
-				as: "div",
-				children: "Tipo de Animação"
-			}), /* @__PURE__ */ jsxs("select", {
-				value: E.type,
-				onChange: (n) => O({ type: n.target.value }),
-				style: {
-					width: "100%",
-					padding: "6px",
-					borderRadius: "4px",
-					border: "1px solid var(--gray-6)",
-					backgroundColor: "var(--color-panel-solid)",
-					color: "var(--gray-12)",
-					fontSize: "14px"
-				},
-				children: [
-					/* @__PURE__ */ jsx("option", {
-						value: "none",
-						children: "Nenhuma"
-					}),
-					/* @__PURE__ */ jsx("option", {
-						value: "fadeIn",
-						children: "Fade In"
-					}),
-					/* @__PURE__ */ jsx("option", {
-						value: "smoothSlideUp",
-						children: "Slide Suave (Up)"
-					}),
-					/* @__PURE__ */ jsx("option", {
-						value: "popIn",
-						children: "Pop In"
-					}),
-					/* @__PURE__ */ jsx("option", {
-						value: "blurIn",
-						children: "Blur In"
-					}),
-					/* @__PURE__ */ jsx("option", {
-						value: "slideInLeft",
-						children: "Slide In (Esquerda)"
-					}),
-					/* @__PURE__ */ jsx("option", {
-						value: "slideInRight",
-						children: "Slide In (Direita)"
-					}),
-					/* @__PURE__ */ jsx("option", {
-						value: "slideInUp",
-						children: "Slide In (Cima)"
-					}),
-					/* @__PURE__ */ jsx("option", {
-						value: "slideInDown",
-						children: "Slide In (Baixo)"
-					}),
-					/* @__PURE__ */ jsx("option", {
-						value: "zoomIn",
-						children: "Zoom In"
-					}),
-					/* @__PURE__ */ jsx("option", {
-						value: "bounceIn",
-						children: "Bounce In"
-					}),
-					/* @__PURE__ */ jsx("option", {
-						value: "pulse",
-						children: "Pulse (Atenção)"
-					}),
-					/* @__PURE__ */ jsx("option", {
-						value: "shake",
-						children: "Shake (Atenção)"
-					}),
-					/* @__PURE__ */ jsx("option", {
-						value: "spin",
-						children: "Spin (Loop)"
-					})
-				]
-			})] }),
-			E.type !== "none" && /* @__PURE__ */ jsxs(Fragment$1, { children: [
-				/* @__PURE__ */ jsxs(o$1, {
-					columns: "2",
-					gap: "3",
-					children: [/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
-						size: "1",
-						mb: "1",
-						as: "div",
-						children: "Duração (s)"
-					}), /* @__PURE__ */ jsx(u$1, {
-						type: "number",
-						step: "0.1",
-						min: "0.1",
-						value: E.duration,
-						onChange: (n) => O({ duration: parseFloat(n.target.value) || .5 })
-					})] }), /* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
-						size: "1",
-						mb: "1",
-						as: "div",
-						children: "Atraso (s)"
-					}), /* @__PURE__ */ jsx(u$1, {
-						type: "number",
-						step: "0.1",
-						min: "0",
-						value: E.delay,
-						onChange: (n) => O({ delay: parseFloat(n.target.value) || 0 })
-					})] })]
-				}),
-				/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
-					size: "1",
-					mb: "1",
-					as: "div",
-					children: "Curva de Tempo (Easing)"
-				}), /* @__PURE__ */ jsxs("select", {
-					value: E.timingFunction || "ease",
-					onChange: (n) => O({ timingFunction: n.target.value }),
-					style: {
-						width: "100%",
-						padding: "6px",
-						borderRadius: "4px",
-						border: "1px solid var(--gray-6)",
-						backgroundColor: "var(--color-panel-solid)",
-						color: "var(--gray-12)",
-						fontSize: "14px"
-					},
-					children: [
-						/* @__PURE__ */ jsx("option", {
-							value: "linear",
-							children: "Linear"
-						}),
-						/* @__PURE__ */ jsx("option", {
-							value: "ease",
-							children: "Ease"
-						}),
-						/* @__PURE__ */ jsx("option", {
-							value: "ease-in",
-							children: "Ease In"
-						}),
-						/* @__PURE__ */ jsx("option", {
-							value: "ease-out",
-							children: "Ease Out"
-						}),
-						/* @__PURE__ */ jsx("option", {
-							value: "ease-in-out",
-							children: "Ease In Out"
-						})
-					]
-				})] }),
-				[
-					"pulse",
-					"shake",
-					"spin"
-				].includes(E.type) && /* @__PURE__ */ jsx(p, { children: /* @__PURE__ */ jsxs(p$1, {
-					align: "center",
-					gap: "2",
-					mt: "2",
-					children: [/* @__PURE__ */ jsx(i, {
-						checked: E.iterationCount === "infinite",
-						onCheckedChange: (n) => O({ iterationCount: n ? "infinite" : 1 })
-					}), /* @__PURE__ */ jsx(p$2, {
-						size: "2",
-						children: "Repetir Infinitamente"
-					})]
-				}) })
-			] })
-		]
-	});
-}, FormattingSettings = ({ element: n, updateElement: _ }) => {
-	let E = n.formatting || { type: "text" }, O = (O) => {
-		_(n.id, { formatting: {
-			...E,
-			...O
-		} });
-	};
-	return /* @__PURE__ */ jsxs(p$1, {
-		direction: "column",
-		gap: "3",
-		children: [
-			/* @__PURE__ */ jsx(p$2, {
-				size: "2",
-				color: "gray",
-				children: "Configure como os dados serão exibidos quando substituídos."
-			}),
-			(n.type === "text" || n.type === "text-container") && /* @__PURE__ */ jsxs(p, { children: [
-				/* @__PURE__ */ jsxs(p$1, {
-					align: "center",
-					gap: "2",
-					mb: "3",
-					children: [/* @__PURE__ */ jsx(i, {
-						checked: n.autoGrow || !1,
-						onCheckedChange: (E) => _(n.id, { autoGrow: E })
-					}), /* @__PURE__ */ jsx(p$2, {
-						size: "2",
-						children: n.type === "text-container" ? "Expandir container automaticamente" : "Expandir altura automaticamente (Multilinha)"
-					})]
-				}),
-				n.type === "text-container" && n.autoGrow && /* @__PURE__ */ jsxs(p, {
-					mb: "3",
-					ml: "4",
-					children: [/* @__PURE__ */ jsx(p$2, {
-						size: "1",
-						mb: "1",
-						as: "div",
-						children: "Direção de Expansão"
-					}), /* @__PURE__ */ jsxs("select", {
-						value: n.containerExpansion || "vertical",
-						onChange: (E) => _(n.id, { containerExpansion: E.target.value }),
-						style: {
-							width: "100%",
-							padding: "6px",
-							borderRadius: "4px",
-							border: "1px solid var(--gray-6)",
-							backgroundColor: "var(--color-panel-solid)",
-							color: "var(--gray-12)",
-							fontSize: "14px"
-						},
-						children: [/* @__PURE__ */ jsx("option", {
-							value: "vertical",
-							children: "Vertical (Altura Cresce)"
-						}), /* @__PURE__ */ jsx("option", {
-							value: "horizontal",
-							children: "Horizontal (Largura Cresce)"
-						})]
-					})]
-				}),
-				/* @__PURE__ */ jsx(o$4, {
-					size: "4",
-					mb: "3"
-				})
-			] }),
-			/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
-				size: "1",
-				mb: "1",
-				as: "div",
-				children: "Tipo de Formatação"
-			}), /* @__PURE__ */ jsxs("select", {
-				value: E.type,
-				onChange: (n) => O({ type: n.target.value }),
-				style: {
-					width: "100%",
-					padding: "6px",
-					borderRadius: "4px",
-					border: "1px solid var(--gray-6)",
-					backgroundColor: "var(--color-panel-solid)",
-					color: "var(--gray-12)",
-					fontSize: "14px"
-				},
-				children: [
-					/* @__PURE__ */ jsx("option", {
-						value: "text",
-						children: "Texto (Padrão)"
-					}),
-					/* @__PURE__ */ jsx("option", {
-						value: "boolean",
-						children: "Booleano (Sim/Não)"
-					}),
-					/* @__PURE__ */ jsx("option", {
-						value: "date",
-						children: "Data"
-					}),
-					/* @__PURE__ */ jsx("option", {
-						value: "number",
-						children: "Número / Moeda"
-					})
-				]
-			})] }),
-			E.type === "boolean" && /* @__PURE__ */ jsxs(o$1, {
-				columns: "2",
-				gap: "3",
-				children: [/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
-					size: "1",
-					mb: "1",
-					as: "div",
-					children: "Texto para Verdadeiro"
-				}), /* @__PURE__ */ jsx(u$1, {
-					placeholder: "Ex: Sim",
-					value: E.trueLabel || "",
-					onChange: (n) => O({ trueLabel: n.target.value })
-				})] }), /* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
-					size: "1",
-					mb: "1",
-					as: "div",
-					children: "Texto para Falso"
-				}), /* @__PURE__ */ jsx(u$1, {
-					placeholder: "Ex: Não",
-					value: E.falseLabel || "",
-					onChange: (n) => O({ falseLabel: n.target.value })
-				})] })]
-			}),
-			E.type === "date" && /* @__PURE__ */ jsxs(p, { children: [
-				/* @__PURE__ */ jsx(p$2, {
-					size: "1",
-					mb: "1",
-					as: "div",
-					children: "Formato da Data"
-				}),
-				/* @__PURE__ */ jsx(u$1, {
-					placeholder: "Ex: DD/MM/YYYY",
-					value: E.dateFormat || "",
-					onChange: (n) => O({ dateFormat: n.target.value })
-				}),
-				/* @__PURE__ */ jsx(p$2, {
-					size: "1",
-					color: "gray",
-					mt: "1",
-					children: "Use DD, MM, YYYY, HH, mm, ss."
-				})
-			] }),
-			E.type === "number" && /* @__PURE__ */ jsxs(p$1, {
-				direction: "column",
-				gap: "3",
-				children: [
-					/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
-						size: "1",
-						mb: "1",
-						as: "div",
-						children: "Estilo"
-					}), /* @__PURE__ */ jsxs("select", {
-						value: E.numberFormat || "decimal",
-						onChange: (n) => O({ numberFormat: n.target.value }),
-						style: {
-							width: "100%",
-							padding: "6px",
-							borderRadius: "4px",
-							border: "1px solid var(--gray-6)",
-							backgroundColor: "var(--color-panel-solid)",
-							color: "var(--gray-12)",
-							fontSize: "14px"
-						},
-						children: [
-							/* @__PURE__ */ jsx("option", {
-								value: "decimal",
-								children: "Decimal"
-							}),
-							/* @__PURE__ */ jsx("option", {
-								value: "currency",
-								children: "Moeda"
-							}),
-							/* @__PURE__ */ jsx("option", {
-								value: "percent",
-								children: "Porcentagem"
-							})
-						]
-					})] }),
-					E.numberFormat === "currency" && /* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
-						size: "1",
-						mb: "1",
-						as: "div",
-						children: "Símbolo da Moeda"
-					}), /* @__PURE__ */ jsx(u$1, {
-						placeholder: "Ex: R$",
-						value: E.currencySymbol || "",
-						onChange: (n) => O({ currencySymbol: n.target.value })
-					})] }),
-					/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
-						size: "1",
-						mb: "1",
-						as: "div",
-						children: "Casas Decimais"
-					}), /* @__PURE__ */ jsx(u$1, {
-						type: "number",
-						placeholder: "2",
-						value: E.decimalPlaces === void 0 ? "" : E.decimalPlaces,
-						onChange: (n) => O({ decimalPlaces: parseInt(n.target.value) || 0 })
-					})] })
-				]
-			})
-		]
-	});
-}, StyleSettings = ({ element: n, updateElement: _ }) => {
-	let E = n.style || {}, [O, A] = useState(E.borderTopLeftRadius !== void 0 || E.borderTopRightRadius !== void 0 || E.borderBottomRightRadius !== void 0 || E.borderBottomLeftRadius !== void 0), j = (O) => {
-		_(n.id, { style: {
-			...E,
-			...O
-		} });
-	}, M = (n, _) => {
-		let E = typeof n == "number" ? n : parseInt(n) || 0;
-		j({ [_]: E });
-	};
-	return /* @__PURE__ */ jsxs(p$1, {
-		direction: "column",
-		gap: "3",
-		children: [
-			/* @__PURE__ */ jsx(p$2, {
-				size: "2",
-				color: "gray",
-				children: "Personalize a aparência do elemento."
-			}),
-			/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsxs(p$1, {
-				align: "center",
-				justify: "between",
-				mb: "2",
-				children: [/* @__PURE__ */ jsx(p$2, {
-					size: "2",
-					weight: "bold",
-					children: "Arredondamento (Border Radius)"
-				}), /* @__PURE__ */ jsxs(p$1, {
-					align: "center",
-					gap: "2",
-					children: [/* @__PURE__ */ jsx(p$2, {
-						size: "1",
-						children: "Individual"
-					}), /* @__PURE__ */ jsx(i, {
-						checked: O,
-						onCheckedChange: (n) => {
-							if (A(n), !n) j({
-								borderRadius: E.borderTopLeftRadius || E.borderRadius || 0,
-								borderTopLeftRadius: void 0,
-								borderTopRightRadius: void 0,
-								borderBottomRightRadius: void 0,
-								borderBottomLeftRadius: void 0
-							});
-							else {
-								let n = E.borderRadius || 0;
-								j({
-									borderRadius: void 0,
-									borderTopLeftRadius: n,
-									borderTopRightRadius: n,
-									borderBottomRightRadius: n,
-									borderBottomLeftRadius: n
-								});
-							}
-						}
-					})]
-				})]
-			}), O ? /* @__PURE__ */ jsxs(o$1, {
-				columns: "2",
-				gap: "3",
-				children: [
-					/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
-						size: "1",
-						mb: "1",
-						as: "div",
-						children: "Superior Esq."
-					}), /* @__PURE__ */ jsx(u$1, {
-						type: "number",
-						min: "0",
-						value: parseInt(E.borderTopLeftRadius) || 0,
-						onChange: (n) => M(n.target.value, "borderTopLeftRadius")
-					})] }),
-					/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
-						size: "1",
-						mb: "1",
-						as: "div",
-						children: "Superior Dir."
-					}), /* @__PURE__ */ jsx(u$1, {
-						type: "number",
-						min: "0",
-						value: parseInt(E.borderTopRightRadius) || 0,
-						onChange: (n) => M(n.target.value, "borderTopRightRadius")
-					})] }),
-					/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
-						size: "1",
-						mb: "1",
-						as: "div",
-						children: "Inferior Esq."
-					}), /* @__PURE__ */ jsx(u$1, {
-						type: "number",
-						min: "0",
-						value: parseInt(E.borderBottomLeftRadius) || 0,
-						onChange: (n) => M(n.target.value, "borderBottomLeftRadius")
-					})] }),
-					/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
-						size: "1",
-						mb: "1",
-						as: "div",
-						children: "Inferior Dir."
-					}), /* @__PURE__ */ jsx(u$1, {
-						type: "number",
-						min: "0",
-						value: parseInt(E.borderBottomRightRadius) || 0,
-						onChange: (n) => M(n.target.value, "borderBottomRightRadius")
-					})] })
-				]
-			}) : /* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
-				size: "1",
-				mb: "1",
-				as: "div",
-				children: "Raio (Todos os cantos)"
-			}), /* @__PURE__ */ jsx(u$1, {
-				type: "number",
-				min: "0",
-				value: parseInt(E.borderRadius) || 0,
-				onChange: (n) => j({ borderRadius: parseInt(n.target.value) || 0 })
-			})] })] }),
-			/* @__PURE__ */ jsx(o$4, {
-				size: "4",
-				my: "2"
-			}),
-			/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
-				size: "2",
-				weight: "bold",
-				mb: "2",
-				children: "Espaçamento (Padding)"
-			}), /* @__PURE__ */ jsx(o$1, {
-				columns: "2",
-				gap: "3",
-				children: /* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
-					size: "1",
-					mb: "1",
-					as: "div",
-					children: "Tamanho (px)"
-				}), /* @__PURE__ */ jsx(u$1, {
-					type: "number",
-					min: "0",
-					value: parseInt(E.padding) || 0,
-					onChange: (n) => j({ padding: parseInt(n.target.value) || 0 })
-				})] })
-			})] })
-		]
-	});
-}, ConditionalSettings = ({ element: n, updateElement: _, availableProps: E }) => {
-	let O = n.conditions || [], A = n.styleBindings || {}, [j, M] = useState(null), N = [
-		{
-			label: "Cor do Texto",
-			value: "color"
-		},
-		{
-			label: "Cor de Fundo",
-			value: "backgroundColor"
-		},
-		{
-			label: "Cor da Borda",
-			value: "borderColor"
-		},
-		{
-			label: "Cor da Sombra",
-			value: "boxShadowColor"
-		}
-	], P = (E, O) => {
-		let j = { ...A };
-		O ? j[E] = O : delete j[E], _(n.id, { styleBindings: j });
-	}, z = () => {
-		let A = {
-			id: crypto.randomUUID(),
-			property: E.length > 0 ? E[0].dataName : "",
-			operator: "equals",
-			value: "",
-			style: { color: "#ff0000" }
-		};
-		_(n.id, { conditions: [...O, A] }), M(A.id);
-	}, B = (E) => {
-		_(n.id, { conditions: O.filter((n) => n.id !== E) }), j === E && M(null);
-	}, H = (E, A) => {
-		_(n.id, { conditions: O.map((n) => n.id === E ? {
-			...n,
-			...A
-		} : n) });
-	}, U = (n, _) => {
-		let E = O.find((_) => _.id === n);
-		E && H(n, { style: {
-			...E.style,
-			..._
-		} });
-	}, W = O.find((n) => n.id === j);
-	return /* @__PURE__ */ jsx(p$1, {
-		direction: "column",
-		gap: "3",
-		children: j ? /* @__PURE__ */ jsxs(p$1, {
-			direction: "column",
-			gap: "3",
-			children: [/* @__PURE__ */ jsxs(p$1, {
-				justify: "between",
-				align: "center",
-				children: [/* @__PURE__ */ jsx(p$2, {
-					weight: "bold",
-					children: "Editar Regra"
-				}), /* @__PURE__ */ jsx(o, {
-					variant: "ghost",
-					onClick: () => M(null),
-					children: "Voltar"
-				})]
-			}), W && /* @__PURE__ */ jsxs(Fragment$1, { children: [
-				/* @__PURE__ */ jsxs(p, { children: [
-					/* @__PURE__ */ jsx(p$2, {
-						size: "1",
-						mb: "1",
-						as: "div",
-						children: "Propriedade"
-					}),
-					/* @__PURE__ */ jsxs("select", {
-						value: W.property,
-						onChange: (n) => H(W.id, { property: n.target.value }),
-						style: {
-							width: "100%",
-							padding: "6px",
-							borderRadius: "4px",
-							border: "1px solid var(--gray-6)",
-							backgroundColor: "var(--color-panel-solid)",
-							color: "var(--gray-12)",
-							fontSize: "14px"
-						},
-						children: [E.map((n) => /* @__PURE__ */ jsx("option", {
-							value: n.dataName,
-							children: n.name
-						}, n.dataName)), /* @__PURE__ */ jsx("option", {
-							value: "__custom__",
-							children: "Outra..."
-						})]
-					}),
-					W.property === "__custom__" && /* @__PURE__ */ jsx(u$1, {
-						placeholder: "Nome da propriedade",
-						mt: "2",
-						onChange: (n) => H(W.id, { property: n.target.value })
-					})
-				] }),
-				/* @__PURE__ */ jsxs(p$1, {
-					gap: "2",
-					children: [/* @__PURE__ */ jsxs(p, {
-						flexGrow: "1",
-						children: [/* @__PURE__ */ jsx(p$2, {
-							size: "1",
-							mb: "1",
-							as: "div",
-							children: "Operador"
-						}), /* @__PURE__ */ jsxs("select", {
-							value: W.operator,
-							onChange: (n) => H(W.id, { operator: n.target.value }),
-							style: {
-								width: "100%",
-								padding: "6px",
-								borderRadius: "4px",
-								border: "1px solid var(--gray-6)",
-								backgroundColor: "var(--color-panel-solid)",
-								color: "var(--gray-12)",
-								fontSize: "14px"
-							},
-							children: [
-								/* @__PURE__ */ jsx("option", {
-									value: "equals",
-									children: "Igual a"
-								}),
-								/* @__PURE__ */ jsx("option", {
-									value: "notEquals",
-									children: "Diferente de"
-								}),
-								/* @__PURE__ */ jsx("option", {
-									value: "contains",
-									children: "Contém"
-								}),
-								/* @__PURE__ */ jsx("option", {
-									value: "greaterThan",
-									children: "Maior que"
-								}),
-								/* @__PURE__ */ jsx("option", {
-									value: "lessThan",
-									children: "Menor que"
-								}),
-								/* @__PURE__ */ jsx("option", {
-									value: "truthy",
-									children: "É Verdadeiro (Truthy)"
-								}),
-								/* @__PURE__ */ jsx("option", {
-									value: "falsy",
-									children: "É Falso (Falsy)"
-								})
-							]
-						})]
-					}), [
-						"equals",
-						"notEquals",
-						"contains",
-						"greaterThan",
-						"lessThan"
-					].includes(W.operator) && /* @__PURE__ */ jsxs(p, {
-						flexGrow: "1",
-						children: [/* @__PURE__ */ jsx(p$2, {
-							size: "1",
-							mb: "1",
-							as: "div",
-							children: "Valor"
-						}), /* @__PURE__ */ jsx(u$1, {
-							value: W.value,
-							onChange: (n) => H(W.id, { value: n.target.value })
-						})]
-					})]
-				}),
-				/* @__PURE__ */ jsx(p$1, {
-					gap: "2",
-					children: /* @__PURE__ */ jsxs(p, {
-						flexGrow: "1",
-						children: [/* @__PURE__ */ jsx(p$2, {
-							size: "1",
-							mb: "1",
-							as: "div",
-							children: "Ação"
-						}), /* @__PURE__ */ jsxs("select", {
-							value: W.style.display === "none" ? "hide" : "style",
-							onChange: (n) => {
-								n.target.value === "hide" ? U(W.id, { display: "none" }) : U(W.id, { display: void 0 });
-							},
-							style: {
-								width: "100%",
-								padding: "6px",
-								borderRadius: "4px",
-								border: "1px solid var(--gray-6)",
-								backgroundColor: "var(--color-panel-solid)",
-								color: "var(--gray-12)",
-								fontSize: "14px"
-							},
-							children: [/* @__PURE__ */ jsx("option", {
-								value: "style",
-								children: "Aplicar Estilo"
-							}), /* @__PURE__ */ jsx("option", {
-								value: "hide",
-								children: "Ocultar Elemento"
-							})]
-						})]
-					})
-				}),
-				/* @__PURE__ */ jsx(o$4, {
-					size: "4",
-					my: "2"
-				}),
-				W.style.display !== "none" && /* @__PURE__ */ jsxs(Fragment$1, { children: [
-					/* @__PURE__ */ jsx(p$2, {
-						size: "2",
-						weight: "bold",
-						children: "Aplicar Estilos"
-					}),
-					/* @__PURE__ */ jsxs(o$1, {
-						columns: "2",
-						gap: "3",
-						children: [/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
-							size: "1",
-							mb: "1",
-							as: "div",
-							children: "Cor do Texto"
-						}), /* @__PURE__ */ jsx(ColorInput, {
-							color: W.style.color || "#000000",
-							onChange: (n) => U(W.id, { color: n })
-						})] }), /* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
-							size: "1",
-							mb: "1",
-							as: "div",
-							children: "Cor de Fundo"
-						}), /* @__PURE__ */ jsxs(p$1, {
-							gap: "2",
-							children: [/* @__PURE__ */ jsx(p, {
-								flexGrow: "1",
-								children: /* @__PURE__ */ jsx(ColorInput, {
-									color: W.style.backgroundColor || "#ffffff",
-									onChange: (n) => U(W.id, { backgroundColor: n })
-								})
-							}), /* @__PURE__ */ jsx(o$2, {
-								variant: "outline",
-								onClick: () => U(W.id, { backgroundColor: void 0 }),
-								title: "Limpar fundo",
-								children: /* @__PURE__ */ jsx(Cross2Icon, {})
-							})]
-						})] })]
-					}),
-					/* @__PURE__ */ jsxs(p$1, {
-						gap: "3",
-						mt: "2",
-						children: [
-							/* @__PURE__ */ jsx(o, {
-								variant: W.style.fontWeight === "bold" ? "solid" : "outline",
-								onClick: () => U(W.id, { fontWeight: W.style.fontWeight === "bold" ? "normal" : "bold" }),
-								children: "Bold"
-							}),
-							/* @__PURE__ */ jsx(o, {
-								variant: W.style.fontStyle === "italic" ? "solid" : "outline",
-								onClick: () => U(W.id, { fontStyle: W.style.fontStyle === "italic" ? "normal" : "italic" }),
-								children: "Italic"
-							}),
-							/* @__PURE__ */ jsx(o, {
-								variant: W.style.textDecoration === "line-through" ? "solid" : "outline",
-								onClick: () => U(W.id, { textDecoration: W.style.textDecoration === "line-through" ? "none" : "line-through" }),
-								children: "Riscado"
-							})
-						]
-					})
-				] })
-			] })]
-		}) : /* @__PURE__ */ jsxs(Fragment$1, { children: [
-			/* @__PURE__ */ jsx(p$2, {
-				size: "2",
-				weight: "bold",
-				children: "Vínculos de Estilo (Data Binding)"
-			}),
-			/* @__PURE__ */ jsx(p$2, {
-				size: "2",
-				color: "gray",
-				children: "Vincule propriedades de estilo diretamente a variáveis."
-			}),
-			/* @__PURE__ */ jsx(p, {
-				style: {
-					border: "1px solid var(--gray-5)",
-					borderRadius: 4,
-					padding: 12
-				},
-				children: N.map((n) => /* @__PURE__ */ jsxs(p$1, {
-					align: "center",
-					justify: "between",
-					mb: "2",
-					style: { marginBottom: 8 },
-					children: [/* @__PURE__ */ jsx(p$2, {
-						size: "2",
-						children: n.label
-					}), /* @__PURE__ */ jsxs("select", {
-						value: A[n.value] || "",
-						onChange: (_) => P(n.value, _.target.value),
-						style: {
-							width: "200px",
-							padding: "6px",
-							borderRadius: "4px",
-							border: "1px solid var(--gray-6)",
-							backgroundColor: "var(--color-panel-solid)",
-							color: "var(--gray-12)",
-							fontSize: "13px"
-						},
-						children: [/* @__PURE__ */ jsx("option", {
-							value: "",
-							children: "(Nenhum)"
-						}), E.map((n) => /* @__PURE__ */ jsx("option", {
-							value: n.dataName,
-							children: n.name
-						}, n.dataName))]
-					})]
-				}, n.value))
-			}),
-			/* @__PURE__ */ jsx(o$4, {
-				size: "4",
-				my: "2"
-			}),
-			/* @__PURE__ */ jsx(p$2, {
-				size: "2",
-				weight: "bold",
-				children: "Regras Condicionais"
-			}),
-			/* @__PURE__ */ jsx(p$2, {
-				size: "2",
-				color: "gray",
-				children: "Adicione regras para alterar o estilo baseada no valor dos dados."
-			}),
-			/* @__PURE__ */ jsxs(p, {
-				style: {
-					maxHeight: 200,
-					overflowY: "auto",
-					border: "1px solid var(--gray-5)",
-					borderRadius: 4
-				},
-				children: [O.length === 0 && /* @__PURE__ */ jsx(p$1, {
-					align: "center",
-					justify: "center",
-					p: "4",
-					children: /* @__PURE__ */ jsx(p$2, {
-						color: "gray",
-						children: "Nenhuma regra definida."
-					})
-				}), O.map((n) => /* @__PURE__ */ jsxs(p$1, {
-					align: "center",
-					justify: "between",
-					p: "2",
-					style: { borderBottom: "1px solid var(--gray-4)" },
-					children: [/* @__PURE__ */ jsxs(p, {
-						onClick: () => M(n.id),
-						style: {
-							cursor: "pointer",
-							flexGrow: 1
-						},
-						children: [/* @__PURE__ */ jsxs(p$2, {
-							size: "1",
-							weight: "bold",
-							children: [
-								"Se ",
-								n.property,
-								" ",
-								n.operator,
-								" ",
-								n.value
-							]
-						}), /* @__PURE__ */ jsxs(p$1, {
-							gap: "2",
-							mt: "1",
-							children: [n.style.color && /* @__PURE__ */ jsx("div", { style: {
-								width: 12,
-								height: 12,
-								borderRadius: "50%",
-								backgroundColor: n.style.color
-							} }), n.style.backgroundColor && /* @__PURE__ */ jsx("div", { style: {
-								width: 12,
-								height: 12,
-								border: "1px solid #ccc",
-								backgroundColor: n.style.backgroundColor
-							} })]
-						})]
-					}), /* @__PURE__ */ jsx(o$2, {
-						variant: "ghost",
-						color: "red",
-						onClick: () => B(n.id),
-						children: /* @__PURE__ */ jsx(TrashIcon, {})
-					})]
-				}, n.id))]
-			}),
-			/* @__PURE__ */ jsxs(o, {
-				onClick: z,
-				children: [/* @__PURE__ */ jsx(PlusIcon, {}), " Adicionar Regra"]
-			})
-		] })
-	});
-}, stopProp = (n) => n.stopPropagation();
+})] });
+var stopProp = (n) => n.stopPropagation();
 const ElementContextMenu = ({ children: n, element: _ }) => {
-	let { updateElement: E, removeElement: O, removeSelected: A, addElement: j, moveElement: M, copy: N, paste: P, state: z, renameElement: B, groupElements: H, ungroupElements: U } = useEditor(), [W, G] = useState(!1), [Z, TL] = useState(!1), [EL, DL] = useState(!1), [OL, kL] = useState(!1), [ML, NL] = useState("formatting"), [PL, FL] = useState({
+	let { updateElement: E, removeElement: O, removeSelected: A, addElement: j, moveElement: M, copy: N, paste: P, state: z, renameElement: B, groupElements: H, ungroupElements: U } = useEditor(), [W, G] = useState(!1), [Z, uz] = useState(!1), [dz, fz] = useState(!1), [pz, mz] = useState({
 		open: !1,
 		prop: "",
 		value: ""
-	}), [IL, BL] = useState(!1), [VL, HL] = useState(""), [UL, WL] = useState(""), [GL, KL] = useState(_.content), [qL, JL] = useState(_.dataBinding || ""), YL = useRef(null), XL = useRef(null), ZL = (n) => {
-		let _ = YL.current;
+	}), [_z, vz] = useState(!1), [yz, bz] = useState(""), [xz, Tz] = useState(""), [Ez, Dz] = useState(_.content), [Oz, kz] = useState(_.dataBinding || ""), Az = useRef(null), jz = useRef(null), Mz = (n) => {
+		let _ = Az.current;
 		if (_) {
-			let E = _.selectionStart, O = _.selectionEnd, A = GL;
-			KL(A.substring(0, E) + `{{${n}}}` + A.substring(O)), setTimeout(() => {
+			let E = _.selectionStart, O = _.selectionEnd, A = Ez;
+			Dz(A.substring(0, E) + `{{${n}}}` + A.substring(O)), setTimeout(() => {
 				_.focus();
 				let O = E + n.length + 4;
 				_.setSelectionRange(O, O);
 			}, 0);
-		} else KL((_) => _ + `{{${n}}}`);
-	}, QL = (n) => {
+		} else Dz((_) => _ + `{{${n}}}`);
+	}, Nz = (n) => {
 		E(_.id, { style: {
 			..._.style,
 			...n
 		} });
-	}, $L = () => {
+	}, Pz = () => {
 		let n = z.elements.findIndex((n) => n.id === _.id);
 		n < z.elements.length - 1 && M(n, z.elements.length - 1);
-	}, eR = () => {
+	}, Fz = () => {
 		let n = z.elements.findIndex((n) => n.id === _.id);
 		n > 0 && M(n, 0);
-	}, tR = () => {
+	}, Iz = () => {
 		z.selectedElementIds.includes(_.id) && z.selectedElementIds.length > 1 ? (N(), P()) : j({
 			type: _.type,
 			content: _.content,
@@ -15227,7 +11943,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 			height: _.height,
 			style: _.style
 		});
-	}, nR = [
+	}, Lz = [
 		"#000000",
 		"#FFFFFF",
 		"#FF0000",
@@ -15237,18 +11953,18 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 		"#808080",
 		"#800080",
 		"transparent"
-	], rR = [
+	], Rz = [
 		0,
 		1,
 		2,
 		4,
 		8
-	], iR = [
+	], zz = [
 		"solid",
 		"dashed",
 		"dotted",
 		"double"
-	], aR = [
+	], Bz = [
 		{
 			label: "Sem Sombra",
 			value: "none"
@@ -15269,7 +11985,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 			label: "Brilho",
 			value: "0 0 16px rgba(0, 0, 0, 0.35)"
 		}
-	], oR = [
+	], Vz = [
 		{
 			label: "Cima",
 			x: 0,
@@ -15295,11 +12011,11 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 			x: 6,
 			y: 6
 		}
-	], sR = (n) => {
+	], Hz = (n) => {
 		if (!n || n === "none") return;
 		let _ = n.match(/(rgba?\([^)]+\)|#(?:[0-9a-fA-F]{3,8})|[a-zA-Z]+)\s*$/);
 		return _ ? _[1] : void 0;
-	}, cR = (n) => {
+	}, Uz = (n) => {
 		let _ = {
 			x: 0,
 			y: 4,
@@ -15308,7 +12024,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 			color: "rgba(0, 0, 0, 0.25)"
 		};
 		if (!n || n === "none") return _;
-		let E = (n.match(/-?\d+px/g) || []).map((n) => parseInt(n, 10)), O = sR(n) || _.color;
+		let E = (n.match(/-?\d+px/g) || []).map((n) => parseInt(n, 10)), O = Hz(n) || _.color;
 		return {
 			x: E[0] ?? _.x,
 			y: E[1] ?? _.y,
@@ -15316,33 +12032,33 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 			spread: E[3] ?? _.spread,
 			color: O
 		};
-	}, lR = (n) => `${n.x}px ${n.y}px ${n.blur}px ${n.spread}px ${n.color}`, uR = (n, _) => {
+	}, Wz = (n) => `${n.x}px ${n.y}px ${n.blur}px ${n.spread}px ${n.color}`, Gz = (n, _) => {
 		let E = /(rgba?\([^)]+\)|#(?:[0-9a-fA-F]{3,8})|[a-zA-Z]+)\s*$/;
-		return !n || n === "none" ? lR({
-			...cR(void 0),
+		return !n || n === "none" ? Wz({
+			...Uz(void 0),
 			color: _
 		}) : E.test(n) ? n.replace(E, _) : `${n} ${_}`;
-	}, dR = (n, _) => {
-		FL({
+	}, Kz = (n, _) => {
+		mz({
 			open: !0,
 			prop: n,
 			value: _
 		});
-	}, fR = () => {
-		if (PL.prop === "boxShadowColor") {
-			QL({ boxShadow: uR(_.style?.boxShadow, PL.value) }), FL((n) => ({
+	}, qz = () => {
+		if (pz.prop === "boxShadowColor") {
+			Nz({ boxShadow: Gz(_.style?.boxShadow, pz.value) }), mz((n) => ({
 				...n,
 				open: !1
 			}));
 			return;
 		}
-		QL({ [PL.prop]: PL.value }), FL((n) => ({
+		Nz({ [pz.prop]: pz.value }), mz((n) => ({
 			...n,
 			open: !1
 		}));
-	}, pR = (n) => {
+	}, Jz = (n) => {
 		if (n === 0) {
-			QL({
+			Nz({
 				border: "none",
 				borderWidth: "0px",
 				borderStyle: "none",
@@ -15350,36 +12066,36 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 			});
 			return;
 		}
-		QL({
+		Nz({
 			borderWidth: `${n}px`,
 			borderStyle: _.style?.borderStyle || "solid"
 		});
-	}, mR = (n) => {
+	}, Yz = (n) => {
 		if (!parseInt(_.style?.borderWidth || "0", 10)) {
-			QL({
+			Nz({
 				borderStyle: n,
 				borderWidth: "1px"
 			});
 			return;
 		}
-		QL({ borderStyle: n });
-	}, hR = (n) => {
+		Nz({ borderStyle: n });
+	}, Xz = (n) => {
 		if (!parseInt(_.style?.borderWidth || "0", 10)) {
-			QL({
+			Nz({
 				borderColor: n,
 				borderWidth: "1px",
 				borderStyle: _.style?.borderStyle || "solid"
 			});
 			return;
 		}
-		QL({ borderColor: n });
-	}, gR = (n) => {
-		QL({ boxShadow: n });
-	}, _R = (n) => {
-		QL({ boxShadow: uR(_.style?.boxShadow, n) });
-	}, vR = (n, E) => {
-		QL({ boxShadow: lR({
-			...cR(_.style?.boxShadow),
+		Nz({ borderColor: n });
+	}, Zz = (n) => {
+		Nz({ boxShadow: n });
+	}, Qz = (n) => {
+		Nz({ boxShadow: Gz(_.style?.boxShadow, n) });
+	}, $z = (n, E) => {
+		Nz({ boxShadow: Wz({
+			...Uz(_.style?.boxShadow),
 			x: n,
 			y: E
 		}) });
@@ -15388,15 +12104,15 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 		/* @__PURE__ */ jsx(s$5, {
 			open: W,
 			onOpenChange: G,
-			children: /* @__PURE__ */ jsxs(p$9, {
+			children: /* @__PURE__ */ jsxs(p$10, {
 				style: { maxWidth: 450 },
 				onPointerDown: stopProp,
-				children: [/* @__PURE__ */ jsx(g$2, { children: "Renomear Camada" }), /* @__PURE__ */ jsxs(p$1, {
+				children: [/* @__PURE__ */ jsx(g$3, { children: "Renomear Camada" }), /* @__PURE__ */ jsxs(p$1, {
 					direction: "column",
 					gap: "3",
 					children: [/* @__PURE__ */ jsx(u$1, {
-						value: UL,
-						onChange: (n) => WL(n.target.value),
+						value: xz,
+						onChange: (n) => Tz(n.target.value),
 						placeholder: "Nome da camada..."
 					}), /* @__PURE__ */ jsxs(p$1, {
 						gap: "3",
@@ -15407,7 +12123,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 							children: "Cancelar"
 						}) }), /* @__PURE__ */ jsx(o, {
 							onClick: () => {
-								B(_.id, UL), G(!1);
+								B(_.id, xz), G(!1);
 							},
 							children: "Salvar"
 						})]
@@ -15417,18 +12133,18 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 		}),
 		/* @__PURE__ */ jsx(s$5, {
 			open: Z,
-			onOpenChange: TL,
-			children: /* @__PURE__ */ jsxs(p$9, {
+			onOpenChange: uz,
+			children: /* @__PURE__ */ jsxs(p$10, {
 				style: { maxWidth: 450 },
 				onPointerDown: stopProp,
-				children: [/* @__PURE__ */ jsx(g$2, { children: "Editar Texto" }), /* @__PURE__ */ jsxs(p$1, {
+				children: [/* @__PURE__ */ jsx(g$3, { children: "Editar Texto" }), /* @__PURE__ */ jsxs(p$1, {
 					direction: "column",
 					gap: "3",
 					children: [
 						/* @__PURE__ */ jsx(r$1, {
-							ref: YL,
-							value: GL,
-							onChange: (n) => KL(n.target.value),
+							ref: Az,
+							value: Ez,
+							onChange: (n) => Dz(n.target.value),
 							placeholder: "Digite o novo texto...",
 							style: { height: 100 }
 						}),
@@ -15446,7 +12162,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 									color: "blue",
 									variant: "surface",
 									style: { cursor: "pointer" },
-									onClick: () => ZL(n.dataName),
+									onClick: () => Mz(n.dataName),
 									children: n.name
 								}, n.dataName))
 							})]
@@ -15460,7 +12176,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 								children: "Cancelar"
 							}) }), /* @__PURE__ */ jsx(o, {
 								onClick: () => {
-									E(_.id, { content: GL }), TL(!1);
+									E(_.id, { content: Ez }), uz(!1);
 								},
 								children: "Salvar"
 							})]
@@ -15470,12 +12186,12 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 			})
 		}),
 		/* @__PURE__ */ jsx(s$5, {
-			open: EL,
-			onOpenChange: DL,
-			children: /* @__PURE__ */ jsxs(p$9, {
+			open: dz,
+			onOpenChange: fz,
+			children: /* @__PURE__ */ jsxs(p$10, {
 				style: { maxWidth: 450 },
 				onPointerDown: stopProp,
-				children: [/* @__PURE__ */ jsx(g$2, { children: "Vincular Dados Manualmente" }), /* @__PURE__ */ jsxs(p$1, {
+				children: [/* @__PURE__ */ jsx(g$3, { children: "Vincular Dados Manualmente" }), /* @__PURE__ */ jsxs(p$1, {
 					direction: "column",
 					gap: "3",
 					children: [
@@ -15484,8 +12200,8 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 							children: "Nome da propriedade (ex: titulo, preco, imagem):"
 						}),
 						/* @__PURE__ */ jsx(u$1, {
-							value: qL,
-							onChange: (n) => JL(n.target.value),
+							value: Oz,
+							onChange: (n) => kz(n.target.value),
 							placeholder: "propriedade"
 						}),
 						/* @__PURE__ */ jsxs(p$1, {
@@ -15497,8 +12213,8 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 								children: "Cancelar"
 							}) }), /* @__PURE__ */ jsx(o, {
 								onClick: () => {
-									let n = qL, O = { dataBinding: n };
-									(_.type === "text" || _.type === "text-container") && (O.content = `{{${n}}}`), E(_.id, O), DL(!1);
+									let n = Oz, O = { dataBinding: n };
+									(_.type === "text" || _.type === "text-container") && (O.content = `{{${n}}}`), E(_.id, O), fz(!1);
 								},
 								children: "Vincular"
 							})]
@@ -15508,19 +12224,19 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 			})
 		}),
 		/* @__PURE__ */ jsx(s$5, {
-			open: PL.open,
-			onOpenChange: (n) => FL((_) => ({
+			open: pz.open,
+			onOpenChange: (n) => mz((_) => ({
 				..._,
 				open: n
 			})),
-			children: /* @__PURE__ */ jsxs(p$9, {
+			children: /* @__PURE__ */ jsxs(p$10, {
 				style: { maxWidth: 300 },
 				onPointerDown: stopProp,
 				children: [
-					/* @__PURE__ */ jsx(g$2, { children: "Selecionar Cor" }),
+					/* @__PURE__ */ jsx(g$3, { children: "Selecionar Cor" }),
 					/* @__PURE__ */ jsx(ColorPickerContent, {
-						color: PL.value,
-						onChange: (n) => FL((_) => ({
+						color: pz.value,
+						onChange: (n) => mz((_) => ({
 							..._,
 							value: n
 						}))
@@ -15534,31 +12250,25 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 							color: "gray",
 							children: "Cancelar"
 						}) }), /* @__PURE__ */ jsx(o, {
-							onClick: fR,
+							onClick: qz,
 							children: "Aplicar"
 						})]
 					})
 				]
 			})
 		}),
-		/* @__PURE__ */ jsx(ElementAdvancedSettings, {
-			elementId: _.id,
-			open: OL,
-			onOpenChange: kL,
-			initialTab: ML
-		}),
 		/* @__PURE__ */ jsx(s$5, {
-			open: IL,
-			onOpenChange: BL,
-			children: /* @__PURE__ */ jsxs(p$9, {
+			open: _z,
+			onOpenChange: vz,
+			children: /* @__PURE__ */ jsxs(p$10, {
 				style: { maxWidth: 450 },
 				onPointerDown: stopProp,
-				children: [/* @__PURE__ */ jsx(g$2, { children: "Inserir URL da Imagem" }), /* @__PURE__ */ jsxs(p$1, {
+				children: [/* @__PURE__ */ jsx(g$3, { children: "Inserir URL da Imagem" }), /* @__PURE__ */ jsxs(p$1, {
 					direction: "column",
 					gap: "3",
 					children: [/* @__PURE__ */ jsx(u$1, {
-						value: VL,
-						onChange: (n) => HL(n.target.value),
+						value: yz,
+						onChange: (n) => bz(n.target.value),
 						placeholder: "https://exemplo.com/imagem.png"
 					}), /* @__PURE__ */ jsxs(p$1, {
 						gap: "3",
@@ -15569,7 +12279,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 							children: "Cancelar"
 						}) }), /* @__PURE__ */ jsx(o, {
 							onClick: () => {
-								E(_.id, { content: VL }), BL(!1);
+								E(_.id, { content: yz }), vz(!1);
 							},
 							children: "Aplicar"
 						})]
@@ -15579,7 +12289,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 		}),
 		/* @__PURE__ */ jsx("input", {
 			type: "file",
-			ref: XL,
+			ref: jz,
 			style: { display: "none" },
 			accept: "image/*",
 			onChange: (n) => {
@@ -15592,13 +12302,13 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 				}
 			}
 		}),
-		/* @__PURE__ */ jsxs(Root2$3, { children: [/* @__PURE__ */ jsx(Trigger$4, {
+		/* @__PURE__ */ jsxs(Root2$4, { children: [/* @__PURE__ */ jsx(Trigger$5, {
 			asChild: !0,
 			children: /* @__PURE__ */ jsx("div", {
 				style: { display: "contents" },
 				children: n
 			})
-		}), /* @__PURE__ */ jsx(Portal2$1, { children: /* @__PURE__ */ jsxs(Content2$3, {
+		}), /* @__PURE__ */ jsx(Portal2$1, { children: /* @__PURE__ */ jsxs(Content2$4, {
 			className: "ContextMenuContent",
 			children: [
 				/* @__PURE__ */ jsxs(Item2$1, {
@@ -15667,7 +12377,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 							className: "ContextMenuItem",
 							onPointerDown: stopProp,
 							onSelect: () => {
-								JL(_.dataBinding || ""), DL(!0);
+								kz(_.dataBinding || ""), fz(!0);
 							},
 							children: "Outro / Manual..."
 						}),
@@ -15685,7 +12395,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 					className: "ContextMenuItem",
 					onPointerDown: stopProp,
 					onSelect: () => {
-						KL(_.content), TL(!0);
+						Dz(_.content), uz(!0);
 					},
 					children: "Editar Texto..."
 				}), /* @__PURE__ */ jsx(Separator2$1, { className: "ContextMenuSeparator" })] }),
@@ -15693,7 +12403,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 					className: "ContextMenuItem",
 					onPointerDown: stopProp,
 					onSelect: () => {
-						WL(_.name || (_.type === "group" ? "Grupo" : "Elemento")), G(!0);
+						Tz(_.name || (_.type === "group" ? "Grupo" : "Elemento")), G(!0);
 					},
 					children: "Renomear..."
 				}),
@@ -15713,14 +12423,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 				/* @__PURE__ */ jsx(Item2$1, {
 					className: "ContextMenuItem",
 					onPointerDown: stopProp,
-					onSelect: () => kL(!0),
-					children: "Configurações Avançadas..."
-				}),
-				/* @__PURE__ */ jsx(Separator2$1, { className: "ContextMenuSeparator" }),
-				/* @__PURE__ */ jsx(Item2$1, {
-					className: "ContextMenuItem",
-					onPointerDown: stopProp,
-					onSelect: tR,
+					onSelect: Iz,
 					children: z.selectedElementIds.includes(_.id) && z.selectedElementIds.length > 1 ? `Duplicar Selecionados (${z.selectedElementIds.length})` : "Duplicar"
 				}),
 				/* @__PURE__ */ jsx(Item2$1, {
@@ -15747,13 +12450,13 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 						children: [/* @__PURE__ */ jsx(Item2$1, {
 							className: "ContextMenuItem",
 							onPointerDown: stopProp,
-							onSelect: () => XL.current?.click(),
+							onSelect: () => jz.current?.click(),
 							children: "Carregar do Computador"
 						}), /* @__PURE__ */ jsx(Item2$1, {
 							className: "ContextMenuItem",
 							onPointerDown: stopProp,
 							onSelect: () => {
-								HL(typeof _.content == "string" ? _.content : ""), BL(!0);
+								bz(typeof _.content == "string" ? _.content : ""), vz(!0);
 							},
 							children: "Inserir URL"
 						})]
@@ -15773,19 +12476,19 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 							/* @__PURE__ */ jsx(Item2$1, {
 								className: "ContextMenuItem",
 								onPointerDown: stopProp,
-								onSelect: () => QL({ objectFit: "cover" }),
+								onSelect: () => Nz({ objectFit: "cover" }),
 								children: "Preencher (Cover)"
 							}),
 							/* @__PURE__ */ jsx(Item2$1, {
 								className: "ContextMenuItem",
 								onPointerDown: stopProp,
-								onSelect: () => QL({ objectFit: "contain" }),
+								onSelect: () => Nz({ objectFit: "contain" }),
 								children: "Ajustar (Contain)"
 							}),
 							/* @__PURE__ */ jsx(Item2$1, {
 								className: "ContextMenuItem",
 								onPointerDown: stopProp,
-								onSelect: () => QL({ objectFit: "fill" }),
+								onSelect: () => Nz({ objectFit: "fill" }),
 								children: "Esticar (Fill)"
 							})
 						]
@@ -15806,12 +12509,12 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 					children: [/* @__PURE__ */ jsx(Item2$1, {
 						className: "ContextMenuItem",
 						onPointerDown: stopProp,
-						onSelect: $L,
+						onSelect: Pz,
 						children: "Trazer para frente"
 					}), /* @__PURE__ */ jsx(Item2$1, {
 						className: "ContextMenuItem",
 						onPointerDown: stopProp,
-						onSelect: eR,
+						onSelect: Fz,
 						children: "Enviar para trás"
 					})]
 				}) })] }),
@@ -15831,7 +12534,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 						children: z.availableFonts && z.availableFonts.map((n) => /* @__PURE__ */ jsxs(Item2$1, {
 							className: "ContextMenuItem",
 							onPointerDown: stopProp,
-							onSelect: () => QL({ fontFamily: n }),
+							onSelect: () => Nz({ fontFamily: n }),
 							style: { fontFamily: n },
 							children: [n, _.style?.fontFamily === n && /* @__PURE__ */ jsx("div", {
 								className: "RightSlot",
@@ -15862,7 +12565,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 						].map((n) => /* @__PURE__ */ jsxs(Item2$1, {
 							className: "ContextMenuItem",
 							onPointerDown: stopProp,
-							onSelect: () => QL({ fontSize: `${n}px` }),
+							onSelect: () => Nz({ fontSize: `${n}px` }),
 							children: [n, "px"]
 						}, n))
 					}) })] }),
@@ -15878,10 +12581,10 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 						sideOffset: 2,
 						alignOffset: -5,
 						children: [
-							nR.filter((n) => n !== "transparent").map((n) => /* @__PURE__ */ jsxs(Item2$1, {
+							Lz.filter((n) => n !== "transparent").map((n) => /* @__PURE__ */ jsxs(Item2$1, {
 								className: "ContextMenuItem",
 								onPointerDown: stopProp,
-								onSelect: () => QL({ color: n }),
+								onSelect: () => Nz({ color: n }),
 								children: [/* @__PURE__ */ jsx("div", { style: {
 									width: 12,
 									height: 12,
@@ -15894,7 +12597,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 							/* @__PURE__ */ jsx(Item2$1, {
 								className: "ContextMenuItem",
 								onPointerDown: stopProp,
-								onSelect: () => dR("color", _.style?.color || "#000000"),
+								onSelect: () => Kz("color", _.style?.color || "#000000"),
 								children: "Outra Cor..."
 							})
 						]
@@ -15913,12 +12616,12 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 						children: [/* @__PURE__ */ jsx(Item2$1, {
 							className: "ContextMenuItem",
 							onPointerDown: stopProp,
-							onSelect: () => QL({ fontWeight: "normal" }),
+							onSelect: () => Nz({ fontWeight: "normal" }),
 							children: "Normal"
 						}), /* @__PURE__ */ jsx(Item2$1, {
 							className: "ContextMenuItem",
 							onPointerDown: stopProp,
-							onSelect: () => QL({ fontWeight: "bold" }),
+							onSelect: () => Nz({ fontWeight: "bold" }),
 							children: "Negrito"
 						})]
 					}) })] }),
@@ -15937,19 +12640,19 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 							/* @__PURE__ */ jsx(Item2$1, {
 								className: "ContextMenuItem",
 								onPointerDown: stopProp,
-								onSelect: () => QL({ textAlign: "left" }),
+								onSelect: () => Nz({ textAlign: "left" }),
 								children: "Esquerda"
 							}),
 							/* @__PURE__ */ jsx(Item2$1, {
 								className: "ContextMenuItem",
 								onPointerDown: stopProp,
-								onSelect: () => QL({ textAlign: "center" }),
+								onSelect: () => Nz({ textAlign: "center" }),
 								children: "Centro"
 							}),
 							/* @__PURE__ */ jsx(Item2$1, {
 								className: "ContextMenuItem",
 								onPointerDown: stopProp,
-								onSelect: () => QL({ textAlign: "right" }),
+								onSelect: () => Nz({ textAlign: "right" }),
 								children: "Direita"
 							})
 						]
@@ -15969,7 +12672,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 							/* @__PURE__ */ jsx(Item2$1, {
 								className: "ContextMenuItem",
 								onPointerDown: stopProp,
-								onSelect: () => QL({
+								onSelect: () => Nz({
 									display: "flex",
 									flexDirection: "column",
 									justifyContent: "flex-start"
@@ -15979,7 +12682,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 							/* @__PURE__ */ jsx(Item2$1, {
 								className: "ContextMenuItem",
 								onPointerDown: stopProp,
-								onSelect: () => QL({
+								onSelect: () => Nz({
 									display: "flex",
 									flexDirection: "column",
 									justifyContent: "center"
@@ -15989,7 +12692,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 							/* @__PURE__ */ jsx(Item2$1, {
 								className: "ContextMenuItem",
 								onPointerDown: stopProp,
-								onSelect: () => QL({
+								onSelect: () => Nz({
 									display: "flex",
 									flexDirection: "column",
 									justifyContent: "flex-end"
@@ -16011,10 +12714,10 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 					sideOffset: 2,
 					alignOffset: -5,
 					children: [
-						nR.map((n) => /* @__PURE__ */ jsxs(Item2$1, {
+						Lz.map((n) => /* @__PURE__ */ jsxs(Item2$1, {
 							className: "ContextMenuItem",
 							onPointerDown: stopProp,
-							onSelect: () => QL({ backgroundColor: n }),
+							onSelect: () => Nz({ backgroundColor: n }),
 							children: [/* @__PURE__ */ jsx("div", { style: {
 								width: 12,
 								height: 12,
@@ -16027,7 +12730,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 						/* @__PURE__ */ jsx(Item2$1, {
 							className: "ContextMenuItem",
 							onPointerDown: stopProp,
-							onSelect: () => dR("backgroundColor", _.style?.backgroundColor || "transparent"),
+							onSelect: () => Kz("backgroundColor", _.style?.backgroundColor || "transparent"),
 							children: "Outra Cor..."
 						})
 					]
@@ -16044,24 +12747,24 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 					sideOffset: 2,
 					alignOffset: -5,
 					children: [
-						aR.map((n) => /* @__PURE__ */ jsx(Item2$1, {
+						Bz.map((n) => /* @__PURE__ */ jsx(Item2$1, {
 							className: "ContextMenuItem",
 							onPointerDown: stopProp,
-							onSelect: () => gR(n.value),
+							onSelect: () => Zz(n.value),
 							children: n.label
 						}, n.label)),
 						/* @__PURE__ */ jsx(Separator2$1, { className: "ContextMenuSeparator" }),
-						oR.map((n) => /* @__PURE__ */ jsx(Item2$1, {
+						Vz.map((n) => /* @__PURE__ */ jsx(Item2$1, {
 							className: "ContextMenuItem",
 							onPointerDown: stopProp,
-							onSelect: () => vR(n.x, n.y),
+							onSelect: () => $z(n.x, n.y),
 							children: n.label
 						}, n.label)),
 						/* @__PURE__ */ jsx(Separator2$1, { className: "ContextMenuSeparator" }),
-						nR.filter((n) => n !== "transparent").map((n) => /* @__PURE__ */ jsxs(Item2$1, {
+						Lz.filter((n) => n !== "transparent").map((n) => /* @__PURE__ */ jsxs(Item2$1, {
 							className: "ContextMenuItem",
 							onPointerDown: stopProp,
-							onSelect: () => _R(n),
+							onSelect: () => Qz(n),
 							children: [/* @__PURE__ */ jsx("div", { style: {
 								width: 12,
 								height: 12,
@@ -16074,7 +12777,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 						/* @__PURE__ */ jsx(Item2$1, {
 							className: "ContextMenuItem",
 							onPointerDown: stopProp,
-							onSelect: () => dR("boxShadowColor", "#000000"),
+							onSelect: () => Kz("boxShadowColor", "#000000"),
 							children: "Outra Cor..."
 						})
 					]
@@ -16091,24 +12794,24 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 					sideOffset: 2,
 					alignOffset: -5,
 					children: [
-						rR.map((n) => /* @__PURE__ */ jsx(Item2$1, {
+						Rz.map((n) => /* @__PURE__ */ jsx(Item2$1, {
 							className: "ContextMenuItem",
 							onPointerDown: stopProp,
-							onSelect: () => pR(n),
+							onSelect: () => Jz(n),
 							children: n === 0 ? "Sem Borda" : `${n}px`
 						}, n)),
 						/* @__PURE__ */ jsx(Separator2$1, { className: "ContextMenuSeparator" }),
-						iR.map((n) => /* @__PURE__ */ jsx(Item2$1, {
+						zz.map((n) => /* @__PURE__ */ jsx(Item2$1, {
 							className: "ContextMenuItem",
 							onPointerDown: stopProp,
-							onSelect: () => mR(n),
+							onSelect: () => Yz(n),
 							children: n
 						}, n)),
 						/* @__PURE__ */ jsx(Separator2$1, { className: "ContextMenuSeparator" }),
-						nR.map((n) => /* @__PURE__ */ jsxs(Item2$1, {
+						Lz.map((n) => /* @__PURE__ */ jsxs(Item2$1, {
 							className: "ContextMenuItem",
 							onPointerDown: stopProp,
-							onSelect: () => hR(n),
+							onSelect: () => Xz(n),
 							children: [/* @__PURE__ */ jsx("div", { style: {
 								width: 12,
 								height: 12,
@@ -16121,7 +12824,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 						/* @__PURE__ */ jsx(Item2$1, {
 							className: "ContextMenuItem",
 							onPointerDown: stopProp,
-							onSelect: () => dR("borderColor", _.style?.borderColor || "#000000"),
+							onSelect: () => Kz("borderColor", _.style?.borderColor || "#000000"),
 							children: "Outra Cor..."
 						})
 					]
@@ -16133,35 +12836,24 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 						className: "RightSlot",
 						children: /* @__PURE__ */ jsx(ChevronRightIcon, {})
 					})]
-				}), /* @__PURE__ */ jsx(Portal2$1, { children: /* @__PURE__ */ jsxs(SubContent2$1, {
+				}), /* @__PURE__ */ jsx(Portal2$1, { children: /* @__PURE__ */ jsx(SubContent2$1, {
 					className: "ContextMenuSubContent",
 					sideOffset: 2,
 					alignOffset: -5,
 					children: [
-						[
-							0,
-							4,
-							8,
-							12,
-							16,
-							24,
-							"50%"
-						].map((n) => /* @__PURE__ */ jsx(Item2$1, {
-							className: "ContextMenuItem",
-							onPointerDown: stopProp,
-							onSelect: () => QL({ borderRadius: typeof n == "number" ? `${n}px` : n }),
-							children: n === "50%" ? "Círculo" : `${n}px`
-						}, n)),
-						/* @__PURE__ */ jsx(Separator2$1, { className: "ContextMenuSeparator" }),
-						/* @__PURE__ */ jsx(Item2$1, {
-							className: "ContextMenuItem",
-							onPointerDown: stopProp,
-							onSelect: () => {
-								NL("style"), kL(!0);
-							},
-							children: "Personalizar..."
-						})
-					]
+						0,
+						4,
+						8,
+						12,
+						16,
+						24,
+						"50%"
+					].map((n) => /* @__PURE__ */ jsx(Item2$1, {
+						className: "ContextMenuItem",
+						onPointerDown: stopProp,
+						onSelect: () => Nz({ borderRadius: typeof n == "number" ? `${n}px` : n }),
+						children: n === "50%" ? "Círculo" : `${n}px`
+					}, n))
 				}) })] }),
 				/* @__PURE__ */ jsxs(Sub2$1, { children: [/* @__PURE__ */ jsxs(SubTrigger2$1, {
 					className: "ContextMenuSubTrigger",
@@ -16170,98 +12862,87 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 						className: "RightSlot",
 						children: /* @__PURE__ */ jsx(ChevronRightIcon, {})
 					})]
-				}), /* @__PURE__ */ jsx(Portal2$1, { children: /* @__PURE__ */ jsxs(SubContent2$1, {
+				}), /* @__PURE__ */ jsx(Portal2$1, { children: /* @__PURE__ */ jsx(SubContent2$1, {
 					className: "ContextMenuSubContent",
 					sideOffset: 2,
 					alignOffset: -5,
 					children: [
-						[
-							0,
-							4,
-							8,
-							12,
-							16,
-							24,
-							32
-						].map((n) => /* @__PURE__ */ jsxs(Item2$1, {
-							className: "ContextMenuItem",
-							onPointerDown: stopProp,
-							onSelect: () => QL({ padding: `${n}px` }),
-							children: [n, "px"]
-						}, n)),
-						/* @__PURE__ */ jsx(Separator2$1, { className: "ContextMenuSeparator" }),
-						/* @__PURE__ */ jsx(Item2$1, {
-							className: "ContextMenuItem",
-							onPointerDown: stopProp,
-							onSelect: () => {
-								NL("style"), kL(!0);
-							},
-							children: "Personalizar..."
-						})
-					]
+						0,
+						4,
+						8,
+						12,
+						16,
+						24,
+						32
+					].map((n) => /* @__PURE__ */ jsxs(Item2$1, {
+						className: "ContextMenuItem",
+						onPointerDown: stopProp,
+						onSelect: () => Nz({ padding: `${n}px` }),
+						children: [n, "px"]
+					}, n))
 				}) })] })
 			]
 		}) })] })
 	] });
 }, DraggableElement = React.memo(({ element: n, isSelected: _ }) => {
-	let { selectElement: E, updateElement: O, updateElements: A, state: j, resizeGroup: M, setSnapLines: N } = useEditor(), [P, z] = useState(!1), [B, H] = useState(!1), [U, W] = useState(!1), Z = useRef(null), TL = useRef({
+	let { selectElement: E, updateElement: O, updateElements: A, state: j, resizeGroup: M, setSnapLines: N } = useEditor(), [P, z] = useState(!1), [B, H] = useState(!1), [U, W] = useState(!1), Z = useRef(null), uz = useRef({
 		x: 0,
 		y: 0
-	}), EL = useRef({}), DL = useRef(!1), OL = useRef(!1), kL = useRef(0), ML = useRef(0), NL = useRef({
+	}), dz = useRef({}), fz = useRef(!1), pz = useRef(!1), mz = useRef(0), _z = useRef(0), vz = useRef({
 		x: 0,
 		y: 0
-	}), PL = useRef(!1), FL = j.canvasHeight || 150, IL = j.isList ? j.mockData.length > 0 ? j.mockData[0] : null : j.singleMockData, LL = n.content, BL = {}, VL = (n, _) => {
+	}), yz = useRef(!1), bz = j.canvasHeight || 150, xz = j.isList ? j.mockData.length > 0 ? j.mockData[0] : null : j.singleMockData, Sz = n.content, Tz = {}, Ez = (n, _) => {
 		let E = /(rgba?\([^)]+\)|#(?:[0-9a-fA-F]{3,8})|[a-zA-Z]+)\s*$/;
 		return !n || n === "none" ? `0 4px 12px 0 ${_}` : E.test(n) ? n.replace(E, _) : `${n} ${_}`;
 	};
-	if (IL) {
-		if (n.type === "text" || n.type === "text-container") LL = LL.replace(/\{\{(.*?)\}\}/g, (_, E) => {
-			let O = IL[E.trim()];
+	if (xz) {
+		if (n.type === "text" || n.type === "text-container") Sz = Sz.replace(/\{\{(.*?)\}\}/g, (_, E) => {
+			let O = xz[E.trim()];
 			return O == null ? _ : n.formatting ? formatValue$1(O, n.formatting) : String(O);
 		});
 		else if (n.type === "image") if (n.dataBinding) {
-			let _ = IL[n.dataBinding];
-			_ != null && (LL = String(_));
-		} else LL = LL.replace(/\{\{(.*?)\}\}/g, (n, _) => {
-			let E = IL[_.trim()];
+			let _ = xz[n.dataBinding];
+			_ != null && (Sz = String(_));
+		} else Sz = Sz.replace(/\{\{(.*?)\}\}/g, (n, _) => {
+			let E = xz[_.trim()];
 			return E == null ? n : String(E);
 		});
 		n.styleBindings && Object.entries(n.styleBindings).forEach(([_, E]) => {
-			let O = IL[E];
+			let O = xz[E];
 			if (O != null) if (_ === "boxShadowColor") {
-				let _ = BL.boxShadow || n.style?.boxShadow;
-				BL = {
-					...BL,
-					boxShadow: VL(_, String(O))
+				let _ = Tz.boxShadow || n.style?.boxShadow;
+				Tz = {
+					...Tz,
+					boxShadow: Ez(_, String(O))
 				};
-			} else BL = {
-				...BL,
+			} else Tz = {
+				...Tz,
 				[_]: String(O)
 			};
 		}), n.conditions && n.conditions.forEach((n) => {
-			let _ = IL[n.property];
-			checkCondition$1(_, n.operator, n.value) && (BL = {
-				...BL,
+			let _ = xz[n.property];
+			checkCondition$1(_, n.operator, n.value) && (Tz = {
+				...Tz,
 				...n.style
 			});
 		});
 	}
-	let HL = BL.display === "none";
-	if (HL && _) {
-		let { display: n, ..._ } = BL;
-		BL = _;
+	let Dz = Tz.display === "none";
+	if (Dz && _) {
+		let { display: n, ..._ } = Tz;
+		Tz = _;
 	}
-	let UL = (_) => {
-		_.stopPropagation(), !DL.current && !OL.current && !P && (_.shiftKey ? E(n.id, !0) : E(n.id, !1));
-	}, WL = (O) => {
+	let Oz = (_) => {
+		_.stopPropagation(), !fz.current && !pz.current && !P && (_.shiftKey ? E(n.id, !0) : E(n.id, !1));
+	}, kz = (O) => {
 		if (n.locked || O.button !== 0) return;
 		O.stopPropagation();
 		let A = O.shiftKey;
-		if (DL.current = !1, OL.current = !1, n.groupId && !_) {
+		if (fz.current = !1, pz.current = !1, n.groupId && !_) {
 			E(n.groupId, A);
 			return;
 		}
-		_ || (E(n.id, A), OL.current = !0), z(!0), TL.current = {
+		_ || (E(n.id, A), pz.current = !0), z(!0), uz.current = {
 			x: O.clientX,
 			y: O.clientY
 		}, O.currentTarget.setPointerCapture(O.pointerId);
@@ -16273,17 +12954,17 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 				x: n.x,
 				y: n.y
 			});
-		}), EL.current = N;
-	}, GL = (_) => {
+		}), dz.current = N;
+	}, Az = (_) => {
 		if (P) {
-			let E = j.zoom || 1, O = (_.clientX - TL.current.x) / E, M = (_.clientY - TL.current.y) / E;
-			(Math.abs(O) > 2 || Math.abs(M) > 2) && (DL.current = !0);
-			let P = 5 / E, z = [], B = Object.entries(EL.current).map(([_, E]) => {
+			let E = j.zoom || 1, O = (_.clientX - uz.current.x) / E, M = (_.clientY - uz.current.y) / E;
+			(Math.abs(O) > 2 || Math.abs(M) > 2) && (fz.current = !0);
+			let P = 5 / E, z = [], B = Object.entries(dz.current).map(([_, E]) => {
 				let A = E.x + O, N = E.y + M;
 				if (j.gridSize > 0) A = Math.round(A / j.gridSize) * j.gridSize, N = Math.round(N / j.gridSize) * j.gridSize;
 				else {
 					let E = !1, O = !1, M = n.width ?? 100, B = n.height ?? 100;
-					Object.keys(EL.current).length === 1 && j.elements.forEach((n) => {
+					Object.keys(dz.current).length === 1 && j.elements.forEach((n) => {
 						if (n.id === _) return;
 						let j = n.width ?? 100, H = n.height ?? 100;
 						E || (Math.abs(A - n.x) < P ? (A = n.x, E = !0, z.push({
@@ -16316,7 +12997,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 				if (A = Math.max(0, A), j.isList) {
 					N = Math.max(0, N);
 					let _ = n.height ?? 100;
-					FL > 0 && (N = Math.min(N, FL - _)), N = Math.max(0, N);
+					bz > 0 && (N = Math.min(N, bz - _)), N = Math.max(0, N);
 				}
 				return {
 					id: _,
@@ -16328,25 +13009,25 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 			});
 			N && N(z), A(B, !1);
 		}
-	}, KL = (n) => {
+	}, jz = (n) => {
 		P && (z(!1), n.currentTarget.releasePointerCapture(n.pointerId), A([], !0), N && N([]));
-	}, qL = (_) => {
+	}, Mz = (_) => {
 		_.stopPropagation(), _.preventDefault(), W(!0);
 		let E = _.target.closest(".resizable-element");
 		if (E) {
 			let O = E.getBoundingClientRect();
-			NL.current = {
+			vz.current = {
 				x: O.left + O.width / 2,
 				y: O.top + O.height / 2
 			};
-			let A = _.clientX - NL.current.x, j = _.clientY - NL.current.y;
-			kL.current = Math.atan2(j, A) * (180 / Math.PI), ML.current = n.rotation || 0;
+			let A = _.clientX - vz.current.x, j = _.clientY - vz.current.y;
+			mz.current = Math.atan2(j, A) * (180 / Math.PI), _z.current = n.rotation || 0;
 		}
 	};
 	useEffect(() => {
 		let _ = (_) => {
 			if (U) {
-				let E = _.clientX - NL.current.x, A = _.clientY - NL.current.y, j = Math.atan2(A, E) * (180 / Math.PI) - kL.current, M = (ML.current + j) % 360;
+				let E = _.clientX - vz.current.x, A = _.clientY - vz.current.y, j = Math.atan2(A, E) * (180 / Math.PI) - mz.current, M = (_z.current + j) % 360;
 				O(n.id, { rotation: M }, !1);
 			}
 		}, E = () => {
@@ -16368,7 +13049,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 			}
 		});
 	}, [
-		LL,
+		Sz,
 		n.autoGrow,
 		n.containerExpansion,
 		n.style,
@@ -16378,7 +13059,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 		n.id,
 		n.type
 	]);
-	let JL = {
+	let Nz = {
 		position: "relative",
 		left: 0,
 		top: 0,
@@ -16396,7 +13077,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 		userSelect: "none",
 		boxSizing: "border-box",
 		...n.style,
-		...BL
+		...Tz
 	};
 	return /* @__PURE__ */ jsx(Resizable, {
 		className: "resizable-element",
@@ -16404,9 +13085,9 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 			width: n.width ?? 100,
 			height: n.autoGrow ? "auto" : n.height ?? 100
 		},
-		maxHeight: j.isList ? Math.max(10, FL - n.y) : void 0,
+		maxHeight: j.isList ? Math.max(10, bz - n.y) : void 0,
 		onResizeStart: (n) => {
-			H(!0), PL.current = !!n.shiftKey;
+			H(!0), yz.current = !!n.shiftKey;
 		},
 		onResizeStop: (_, E, A, j) => {
 			H(!1);
@@ -16541,8 +13222,8 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 			position: "absolute",
 			transform: `translate(${n.x ?? 0}px, ${n.y ?? 0}px) rotate(${n.rotation || 0}deg)`,
 			height: n.autoGrow ? "auto" : void 0,
-			display: HL && !_ ? "none" : void 0,
-			opacity: HL && _ ? .4 : 1,
+			display: Dz && !_ ? "none" : void 0,
+			opacity: Dz && _ ? .4 : 1,
 			zIndex: _ ? 1e3 : void 0,
 			outline: "none",
 			overflow: "visible"
@@ -16557,7 +13238,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 			bottomLeft: !1,
 			topLeft: !1
 		} : void 0,
-		lockAspectRatio: PL.current,
+		lockAspectRatio: yz.current,
 		grid: j.gridSize > 0 ? [j.gridSize, j.gridSize] : void 0,
 		children: /* @__PURE__ */ jsx(ElementContextMenu, {
 			element: n,
@@ -16570,18 +13251,18 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 				children: [/* @__PURE__ */ jsxs(p, {
 					ref: Z,
 					style: {
-						...JL,
-						whiteSpace: n.type === "text-container" && n.autoGrow && n.containerExpansion === "horizontal" ? "nowrap" : JL.whiteSpace,
+						...Nz,
+						whiteSpace: n.type === "text-container" && n.autoGrow && n.containerExpansion === "horizontal" ? "nowrap" : Nz.whiteSpace,
 						width: n.type === "text-container" && n.autoGrow && n.containerExpansion === "horizontal" ? "max-content" : "100%",
 						height: n.type === "text-container" && n.autoGrow && n.containerExpansion === "vertical" ? "auto" : "100%"
 					},
-					onPointerDown: WL,
-					onPointerMove: GL,
-					onPointerUp: KL,
+					onPointerDown: kz,
+					onPointerMove: Az,
+					onPointerUp: jz,
 					onMouseDown: (n) => {
 						n.button === 0 && n.stopPropagation();
 					},
-					onClick: UL,
+					onClick: Oz,
 					title: n.name,
 					onMouseEnter: (n) => {
 						_ || (n.currentTarget.style.borderColor = "var(--gray-6)");
@@ -16612,7 +13293,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 								width: "100%",
 								height: "100%"
 							},
-							children: LL
+							children: Sz
 						}),
 						n.type === "text-container" && /* @__PURE__ */ jsx(p$2, {
 							style: {
@@ -16620,10 +13301,10 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 								height: "100%",
 								display: "block"
 							},
-							children: LL
+							children: Sz
 						}),
-						n.type === "image" && (LL ? /* @__PURE__ */ jsx("img", {
-							src: LL,
+						n.type === "image" && (Sz ? /* @__PURE__ */ jsx("img", {
+							src: Sz,
 							alt: "Element",
 							style: {
 								width: "100%",
@@ -16689,7 +13370,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 						zIndex: 50,
 						boxShadow: "0 0 0 2px white"
 					},
-					onMouseDown: qL,
+					onMouseDown: Mz,
 					onPointerDown: (n) => n.stopPropagation(),
 					children: /* @__PURE__ */ jsx(p, { style: {
 						position: "absolute",
@@ -16719,74 +13400,74 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 		borderTop: n.orientation === "horizontal" ? "1px dashed #ff0000" : "none"
 	} }, _)) });
 }, Canvas = () => {
-	let { state: n, selectElement: _, setSelectedElements: E, addElement: O, setZoom: A, setPan: j, undo: M, redo: N, copy: P, paste: z, removeSelected: B, updateElements: H } = useEditor(), W = useRef(null), [Z, TL] = useState(null), EL = useRef(!1), DL = useRef(!1), OL = useRef(!1), kL = useRef({
+	let { state: n, selectElement: _, setSelectedElements: E, addElement: O, setZoom: A, setPan: j, undo: M, redo: N, copy: P, paste: z, removeSelected: B, updateElements: H } = useEditor(), W = useRef(null), [Z, uz] = useState(null), dz = useRef(!1), fz = useRef(!1), pz = useRef(!1), mz = useRef({
 		x: 0,
 		y: 0
-	}), ML = useRef({
+	}), _z = useRef({
 		x: 0,
 		y: 0
-	}), NL = useRef([]), PL = useRef([]), FL = useRef(n), IL = useRef(0);
+	}), vz = useRef([]), yz = useRef([]), bz = useRef(n), xz = useRef(0);
 	useEffect(() => {
-		FL.current = n;
+		bz.current = n;
 	}, [n]);
-	let LL = n.elements.length === 0, BL = n.editorMode === "simple", VL = useCallback((n) => {
+	let Sz = useCallback((n) => {
 		if (!W.current) return;
-		let _ = FL.current;
-		if (DL.current) {
-			let E = n.clientX - ML.current.x, O = n.clientY - ML.current.y;
+		let _ = bz.current;
+		if (fz.current) {
+			let E = n.clientX - _z.current.x, O = n.clientY - _z.current.y;
 			j({
 				x: _.pan.x + E,
 				y: _.pan.y + O
-			}), ML.current = {
+			}), _z.current = {
 				x: n.clientX,
 				y: n.clientY
 			};
 			return;
 		}
-		if (!EL.current) return;
-		let O = W.current.getBoundingClientRect(), A = (n.clientX - O.left - _.pan.x) / _.zoom, M = (n.clientY - O.top - _.pan.y) / _.zoom, N = Math.min(kL.current.x, A), P = Math.min(kL.current.y, M), z = Math.abs(A - kL.current.x), B = Math.abs(M - kL.current.y);
-		TL({
+		if (!dz.current) return;
+		let O = W.current.getBoundingClientRect(), A = (n.clientX - O.left - _.pan.x) / _.zoom, M = (n.clientY - O.top - _.pan.y) / _.zoom, N = Math.min(mz.current.x, A), P = Math.min(mz.current.y, M), z = Math.abs(A - mz.current.x), B = Math.abs(M - mz.current.y);
+		uz({
 			x: N,
 			y: P,
 			width: z,
 			height: B
 		});
 		let H = Date.now();
-		if (!(H - IL.current < 50) && (z > 0 || B > 0)) {
+		if (!(H - xz.current < 50) && (z > 0 || B > 0)) {
 			let n = [];
 			_.elements.forEach((_) => {
 				let E = _.x ?? 0, O = _.y ?? 0, A = _.width ?? 100, j = _.height ?? 100, M = E + A, H = O + j, U = N + z, W = P + B;
 				E < U && M > N && O < W && H > P && n.push(_.id);
 			});
-			let O = Array.from(new Set([...NL.current, ...n])), A = PL.current;
-			A.length === O.length && A.every((n) => O.includes(n)) || (E(O), PL.current = O, IL.current = H);
+			let O = Array.from(new Set([...vz.current, ...n])), A = yz.current;
+			A.length === O.length && A.every((n) => O.includes(n)) || (E(O), yz.current = O, xz.current = H);
 		}
-	}, [E, j]), HL = useCallback((n) => {
-		(EL.current || DL.current) && n.target.releasePointerCapture(n.pointerId), EL.current = !1, DL.current = !1, TL(null);
-	}, []), UL = (E) => {
+	}, [E, j]), Tz = useCallback((n) => {
+		(dz.current || fz.current) && n.target.releasePointerCapture(n.pointerId), dz.current = !1, fz.current = !1, uz(null);
+	}, []), Ez = (E) => {
 		if (E.button === 2) return;
 		let O = E.target;
 		if (O.closest(".resize-handle") || O.closest(".rotate-handle")) return;
-		if (E.currentTarget.setPointerCapture(E.pointerId), E.button === 1 || E.button === 0 && OL.current || E.pointerType === "touch") {
-			E.preventDefault(), DL.current = !0, ML.current = {
+		if (E.currentTarget.setPointerCapture(E.pointerId), E.button === 1 || E.button === 0 && pz.current || E.pointerType === "touch") {
+			E.preventDefault(), fz.current = !0, _z.current = {
 				x: E.clientX,
 				y: E.clientY
 			};
 			return;
 		}
-		EL.current = E.shiftKey;
+		dz.current = E.shiftKey;
 		let A = W.current?.getBoundingClientRect();
 		if (!A) return;
 		let j = A.left, M = A.top;
-		kL.current = {
+		mz.current = {
 			x: (E.clientX - j - n.pan.x) / n.zoom,
 			y: (E.clientY - M - n.pan.y) / n.zoom
-		}, NL.current = n.selectedElementIds, PL.current = n.selectedElementIds, E.shiftKey || (_(null), NL.current = [], PL.current = []);
+		}, vz.current = n.selectedElementIds, yz.current = n.selectedElementIds, E.shiftKey || (_(null), vz.current = [], yz.current = []);
 	};
 	useEffect(() => {
 		let n = (n) => {
 			n.preventDefault();
-			let _ = FL.current;
+			let _ = bz.current;
 			if (n.ctrlKey || n.metaKey) A(Math.min(Math.max(.1, _.zoom - n.deltaY * .001), 5));
 			else {
 				let E = n.shiftKey ? n.deltaY : n.deltaX, O = n.shiftKey ? n.deltaX : n.deltaY;
@@ -16801,7 +13482,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 		};
 	}, [A, j]), useEffect(() => {
 		let _ = (_) => {
-			if (_.code === "Space" && !_.repeat && !(_.target instanceof HTMLInputElement || _.target instanceof HTMLTextAreaElement) && (OL.current = !0, W.current && (W.current.style.cursor = "grab")), !(_.target instanceof HTMLInputElement || _.target instanceof HTMLTextAreaElement) && ((_.ctrlKey || _.metaKey) && _.key.toLowerCase() === "z" && (_.preventDefault(), _.shiftKey ? N() : M()), (_.ctrlKey || _.metaKey) && _.key.toLowerCase() === "y" && (_.preventDefault(), N()), (_.ctrlKey || _.metaKey) && _.key.toLowerCase() === "c" && (_.preventDefault(), P()), (_.ctrlKey || _.metaKey) && _.key.toLowerCase() === "v" && (_.preventDefault(), z()), (_.key === "Delete" || _.key === "Backspace") && (_.preventDefault(), B()), [
+			if (_.code === "Space" && !_.repeat && !(_.target instanceof HTMLInputElement || _.target instanceof HTMLTextAreaElement) && (pz.current = !0, W.current && (W.current.style.cursor = "grab")), !(_.target instanceof HTMLInputElement || _.target instanceof HTMLTextAreaElement) && ((_.ctrlKey || _.metaKey) && _.key.toLowerCase() === "z" && (_.preventDefault(), _.shiftKey ? N() : M()), (_.ctrlKey || _.metaKey) && _.key.toLowerCase() === "y" && (_.preventDefault(), N()), (_.ctrlKey || _.metaKey) && _.key.toLowerCase() === "c" && (_.preventDefault(), P()), (_.ctrlKey || _.metaKey) && _.key.toLowerCase() === "v" && (_.preventDefault(), z()), (_.key === "Delete" || _.key === "Backspace") && (_.preventDefault(), B()), [
 				"ArrowUp",
 				"ArrowDown",
 				"ArrowLeft",
@@ -16829,7 +13510,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 				}), O.length > 0 && H(O);
 			}
 		}, E = (n) => {
-			n.code === "Space" && (OL.current = !1, W.current && !DL.current && (W.current.style.cursor = "default"));
+			n.code === "Space" && (pz.current = !1, W.current && !fz.current && (W.current.style.cursor = "default"));
 		};
 		return window.addEventListener("keydown", _), window.addEventListener("keyup", E), () => {
 			window.removeEventListener("keydown", _), window.removeEventListener("keyup", E);
@@ -16844,21 +13525,21 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 		n.selectedElementIds,
 		n.elements
 	]);
-	let WL = useRef(!1), { setCanvasHeight: GL } = useEditor(), KL = (n) => {
-		n.stopPropagation(), n.preventDefault(), WL.current = !0, window.addEventListener("mousemove", qL), window.addEventListener("mouseup", JL);
-	}, qL = useCallback((n) => {
-		if (!WL.current || !W.current) return;
+	let Dz = useRef(!1), { setCanvasHeight: Oz } = useEditor(), kz = (n) => {
+		n.stopPropagation(), n.preventDefault(), Dz.current = !0, window.addEventListener("mousemove", Az), window.addEventListener("mouseup", jz);
+	}, Az = useCallback((n) => {
+		if (!Dz.current || !W.current) return;
 		let _ = W.current.getBoundingClientRect(), E = n.clientY - _.top, O = Math.max(50, Math.min(E, 2e3));
-		GL(Math.round(O));
-	}, [GL]), JL = useCallback(() => {
-		WL.current = !1, window.removeEventListener("mousemove", qL), window.removeEventListener("mouseup", JL);
-	}, [qL]);
+		Oz(Math.round(O));
+	}, [Oz]), jz = useCallback(() => {
+		Dz.current = !1, window.removeEventListener("mousemove", Az), window.removeEventListener("mouseup", jz);
+	}, [Az]);
 	useEffect(() => () => {
-		window.removeEventListener("mousemove", qL), window.removeEventListener("mouseup", JL);
-	}, [qL, JL]);
-	let YL = (n) => {
+		window.removeEventListener("mousemove", Az), window.removeEventListener("mouseup", jz);
+	}, [Az, jz]);
+	let Mz = (n) => {
 		n.preventDefault(), n.dataTransfer.dropEffect = "copy";
-	}, XL = (_) => {
+	}, Nz = (_) => {
 		_.preventDefault();
 		let E = _.currentTarget.getBoundingClientRect(), A = (_.clientX - E.left - n.pan.x) / n.zoom, j = (_.clientY - E.top - n.pan.y) / n.zoom, M = _.dataTransfer.getData("application/x-editor-prop");
 		if (M) {
@@ -16888,25 +13569,25 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 		} catch (n) {
 			console.error("Failed to parse asset", n);
 		}
-	}, ZL = n.canvasHeight || 150;
+	}, Pz = n.canvasHeight || 150;
 	return /* @__PURE__ */ jsxs(p, {
 		ref: W,
-		onPointerDown: UL,
+		onPointerDown: Ez,
 		onPointerMove: (n) => {
-			(EL.current || DL.current) && VL(n.nativeEvent);
+			(dz.current || fz.current) && Sz(n.nativeEvent);
 		},
 		onPointerUp: (n) => {
-			(EL.current || DL.current) && HL(n.nativeEvent);
+			(dz.current || fz.current) && Tz(n.nativeEvent);
 		},
-		onDragOver: YL,
-		onDrop: XL,
+		onDragOver: Mz,
+		onDrop: Nz,
 		style: {
 			width: "100%",
 			height: "100%",
 			position: "relative",
 			overflow: "hidden",
 			backgroundColor: "var(--gray-1)",
-			cursor: DL.current ? "grabbing" : "default",
+			cursor: fz.current ? "grabbing" : "default",
 			backgroundImage: "radial-gradient(var(--gray-5) 1px, transparent 1px)",
 			backgroundSize: `${20 * n.zoom}px ${20 * n.zoom}px`,
 			backgroundPosition: `${n.pan.x}px ${n.pan.y}px`
@@ -16924,45 +13605,6 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 					pointerEvents: "none"
 				},
 				children: [
-					LL && BL && /* @__PURE__ */ jsxs(p$1, {
-						direction: "column",
-						align: "center",
-						justify: "center",
-						style: {
-							position: "absolute",
-							top: "50%",
-							left: "50%",
-							transform: "translate(-50%, -50%)",
-							opacity: .5,
-							pointerEvents: "none"
-						},
-						gap: "4",
-						children: [/* @__PURE__ */ jsx(p, {
-							style: {
-								width: 120,
-								height: 120,
-								border: "2px dashed var(--gray-8)",
-								borderRadius: 12,
-								display: "flex",
-								alignItems: "center",
-								justifyContent: "center"
-							},
-							children: /* @__PURE__ */ jsx(p$2, {
-								size: "8",
-								color: "gray",
-								children: "+"
-							})
-						}), /* @__PURE__ */ jsxs(p$2, {
-							size: "3",
-							color: "gray",
-							align: "center",
-							children: [
-								"Seu layout está vazio.",
-								/* @__PURE__ */ jsx("br", {}),
-								"Escolha um template ou adicione blocos na barra lateral."
-							]
-						})]
-					}),
 					/* @__PURE__ */ jsx("div", {
 						style: {
 							position: "absolute",
@@ -17009,7 +13651,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 					n.isList && /* @__PURE__ */ jsxs("div", {
 						style: {
 							position: "absolute",
-							top: ZL,
+							top: Pz,
 							left: 0,
 							right: 0,
 							height: "10px",
@@ -17020,7 +13662,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 							alignItems: "center",
 							justifyContent: "center"
 						},
-						onMouseDown: KL,
+						onMouseDown: kz,
 						children: [/* @__PURE__ */ jsx("div", { style: {
 							width: "100%",
 							height: "2px",
@@ -17044,7 +13686,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 							},
 							children: [
 								"Altura do Item: ",
-								ZL,
+								Pz,
 								"px"
 							]
 						})]
@@ -17103,18 +13745,18 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 			} })
 		]
 	});
-}, GlobalHeader = ({ onSave: n, templates: _, setIsTemplatesOpen: E, onFinish: O }) => {
-	let { state: A, setEditorMode: j, loadState: M, addElement: N } = useEditor(), P = useRef(null), z = () => {
+}, GlobalHeader = ({ onSave: n, templates: _, setIsTemplatesOpen: E, onFinish: O, onToggleSidebar: A }) => {
+	let { state: j, loadState: M, addElement: N } = useEditor(), P = useRef(null), z = () => {
 		let n = {
-			elements: A.elements,
-			isList: A.isList,
-			mockData: A.mockData,
-			singleMockData: A.singleMockData,
-			listSettings: A.listSettings,
-			canvasHeight: A.canvasHeight,
-			gridSize: A.gridSize
-		}, _ = JSON.stringify(n, null, 2), E = new Blob([_], { type: "application/json" }), O = URL.createObjectURL(E), j = document.createElement("a");
-		j.href = O, j.download = `layout-${(/* @__PURE__ */ new Date()).toISOString().slice(0, 10)}.json`, document.body.appendChild(j), j.click(), document.body.removeChild(j), URL.revokeObjectURL(O);
+			elements: j.elements,
+			isList: j.isList,
+			mockData: j.mockData,
+			singleMockData: j.singleMockData,
+			listSettings: j.listSettings,
+			canvasHeight: j.canvasHeight,
+			gridSize: j.gridSize
+		}, _ = JSON.stringify(n, null, 2), E = new Blob([_], { type: "application/json" }), O = URL.createObjectURL(E), A = document.createElement("a");
+		A.href = O, A.download = `layout-${(/* @__PURE__ */ new Date()).toISOString().slice(0, 10)}.json`, document.body.appendChild(A), A.click(), document.body.removeChild(A), URL.revokeObjectURL(O);
 	}, B = () => {
 		P.current?.click();
 	}, H = (n) => {
@@ -17132,12 +13774,12 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 	}, U = () => {
 		if (n) {
 			let _ = {
-				elements: A.elements,
-				isList: A.isList,
-				mockData: A.mockData,
-				singleMockData: A.singleMockData,
-				listSettings: A.listSettings,
-				canvasHeight: A.canvasHeight
+				elements: j.elements,
+				isList: j.isList,
+				mockData: j.mockData,
+				singleMockData: j.singleMockData,
+				listSettings: j.listSettings,
+				canvasHeight: j.canvasHeight
 			};
 			n(JSON.stringify(_, null, 2));
 		}
@@ -17161,59 +13803,48 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 		children: [/* @__PURE__ */ jsxs(p$1, {
 			gap: "4",
 			align: "center",
-			children: [/* @__PURE__ */ jsx(p$2, {
+			children: [A && /* @__PURE__ */ jsx(p, {
+				display: {
+					initial: "block",
+					md: "none"
+				},
+				children: /* @__PURE__ */ jsx(o$2, {
+					variant: "ghost",
+					color: "gray",
+					onClick: A,
+					children: /* @__PURE__ */ jsx(ListBulletIcon, {
+						width: "24",
+						height: "24"
+					})
+				})
+			}), /* @__PURE__ */ jsx(p$2, {
 				size: "3",
 				weight: "bold",
 				children: "Editor de Layout"
-			}), /* @__PURE__ */ jsxs(p$1, {
-				align: "center",
-				gap: "2",
-				style: {
-					backgroundColor: "var(--gray-3)",
-					padding: "4px 8px",
-					borderRadius: "6px"
-				},
-				children: [
-					/* @__PURE__ */ jsx(p$2, {
-						size: "1",
-						weight: A.editorMode === "simple" ? "bold" : "regular",
-						children: "Simples"
-					}),
-					/* @__PURE__ */ jsx(i, {
-						size: "1",
-						checked: A.editorMode === "advanced",
-						onCheckedChange: (n) => j(n ? "advanced" : "simple")
-					}),
-					/* @__PURE__ */ jsx(p$2, {
-						size: "1",
-						weight: A.editorMode === "advanced" ? "bold" : "regular",
-						children: "Avançado"
-					})
-				]
 			})]
 		}), /* @__PURE__ */ jsxs(p$1, {
 			gap: "3",
 			align: "center",
 			children: [
-				/* @__PURE__ */ jsxs(I$2, { children: [/* @__PURE__ */ jsx(h$1, { children: /* @__PURE__ */ jsxs(o, {
+				/* @__PURE__ */ jsxs(I$3, { children: [/* @__PURE__ */ jsx(h$2, { children: /* @__PURE__ */ jsxs(o, {
 					variant: "solid",
 					color: "green",
 					style: { cursor: "pointer" },
 					children: [/* @__PURE__ */ jsx(PlusIcon, {}), " Adicionar"]
-				}) }), /* @__PURE__ */ jsxs(g$1, { children: [
-					/* @__PURE__ */ jsx(v$3, {
+				}) }), /* @__PURE__ */ jsxs(g$2, { children: [
+					/* @__PURE__ */ jsx(v$4, {
 						onSelect: () => W("text"),
 						children: "Texto"
 					}),
-					/* @__PURE__ */ jsx(v$3, {
+					/* @__PURE__ */ jsx(v$4, {
 						onSelect: () => W("image"),
 						children: "Imagem"
 					}),
-					/* @__PURE__ */ jsx(v$3, {
+					/* @__PURE__ */ jsx(v$4, {
 						onSelect: () => W("box"),
 						children: "Container / Grupo"
 					}),
-					/* @__PURE__ */ jsx(v$3, {
+					/* @__PURE__ */ jsx(v$4, {
 						onSelect: () => W("text-container"),
 						children: "Container com Texto"
 					})
@@ -17246,7 +13877,7 @@ const ElementContextMenu = ({ children: n, element: _ }) => {
 					style: { cursor: "pointer" },
 					children: [/* @__PURE__ */ jsx(FileTextIcon, {}), " Templates"]
 				}),
-				A.editorMode === "simple" && O && /* @__PURE__ */ jsxs(o, {
+				O && /* @__PURE__ */ jsxs(o, {
 					id: "finish-button",
 					variant: "solid",
 					color: "green",
@@ -17400,7 +14031,7 @@ const OnboardingTour = ({ isOpen: n, onClose: _ }) => {
 			zIndex: 9999,
 			pointerEvents: "none"
 		},
-		children: /* @__PURE__ */ jsx(o$3, {
+		children: /* @__PURE__ */ jsx(o$4, {
 			style: {
 				position: "absolute",
 				top: A.top,
@@ -17475,7 +14106,7 @@ function useConstant(n) {
 	let _ = useRef(null);
 	return _.current === null && (_.current = n()), _.current;
 }
-var isBrowser = typeof window < "u", useIsomorphicLayoutEffect = isBrowser ? useLayoutEffect : useEffect, PresenceContext = /* @__PURE__ */ createContext(null);
+var isBrowser = typeof window < "u", useIsomorphicLayoutEffect$1 = isBrowser ? useLayoutEffect : useEffect, PresenceContext = /* @__PURE__ */ createContext(null);
 function addUniqueItem(n, _) {
 	n.indexOf(_) === -1 && n.push(_);
 }
@@ -17503,7 +14134,7 @@ function memo$1(n) {
 	let _;
 	return () => (_ === void 0 && (_ = n()), _);
 }
-var noop = /* @__NO_SIDE_EFFECTS__ */ (n) => n, combineFunctions = (n, _) => (E) => _(n(E)), pipe = (...n) => n.reduce(combineFunctions), progress = /* @__NO_SIDE_EFFECTS__ */ (n, _, E) => {
+var noop$1 = /* @__NO_SIDE_EFFECTS__ */ (n) => n, combineFunctions = (n, _) => (E) => _(n(E)), pipe = (...n) => n.reduce(combineFunctions), progress = /* @__NO_SIDE_EFFECTS__ */ (n, _, E) => {
 	let O = _ - n;
 	return O === 0 ? 1 : (E - n) / O;
 }, SubscriptionManager = class {
@@ -17544,12 +14175,12 @@ function binarySubdivide(n, _, E, O, A) {
 	return M;
 }
 function cubicBezier(n, _, E, O) {
-	if (n === _ && E === O) return noop;
+	if (n === _ && E === O) return noop$1;
 	let A = (_) => binarySubdivide(_, 0, 1, n, E);
 	return (n) => n === 0 || n === 1 ? n : calcBezier(A(n), _, O);
 }
 var mirrorEasing = (n) => (_) => _ <= .5 ? n(2 * _) / 2 : (2 - n(2 * (1 - _))) / 2, reverseEasing = (n) => (_) => 1 - n(1 - _), backOut = /* @__PURE__ */ cubicBezier(.33, 1.53, .69, .99), backIn = /* @__PURE__ */ reverseEasing(backOut), backInOut = /* @__PURE__ */ mirrorEasing(backIn), anticipate = (n) => (n *= 2) < 1 ? .5 * backIn(n) : .5 * (2 - 2 ** (-10 * (n - 1))), circIn = (n) => 1 - Math.sin(Math.acos(n)), circOut = reverseEasing(circIn), circInOut = mirrorEasing(circIn), easeIn = /* @__PURE__ */ cubicBezier(.42, 0, 1, 1), easeOut = /* @__PURE__ */ cubicBezier(0, 0, .58, 1), easeInOut = /* @__PURE__ */ cubicBezier(.42, 0, .58, 1), isEasingArray = (n) => Array.isArray(n) && typeof n[0] != "number", isBezierDefinition = (n) => Array.isArray(n) && typeof n[0] == "number", easingLookup = {
-	linear: noop,
+	linear: noop$1,
 	easeIn,
 	easeInOut,
 	easeOut,
@@ -17616,13 +14247,13 @@ function createRenderBatcher(n, _) {
 	}, j = () => E = !0, M = stepsOrder.reduce((n, E) => (n[E] = createRenderStep(j, _ ? E : void 0), n), {}), { setup: N, read: P, resolveKeyframes: z, preUpdate: B, update: H, preRender: U, render: W, postRender: G } = M, Z = () => {
 		let j = MotionGlobalConfig.useManualTiming ? A.timestamp : performance.now();
 		E = !1, MotionGlobalConfig.useManualTiming || (A.delta = O ? 1e3 / 60 : Math.max(Math.min(j - A.timestamp, maxElapsed), 1)), A.timestamp = j, A.isProcessing = !0, N.process(A), P.process(A), z.process(A), B.process(A), H.process(A), U.process(A), W.process(A), G.process(A), A.isProcessing = !1, E && _ && (O = !1, n(Z));
-	}, TL = () => {
+	}, uz = () => {
 		E = !0, O = !0, A.isProcessing || n(Z);
 	};
 	return {
 		schedule: stepsOrder.reduce((n, _) => {
 			let O = M[_];
-			return n[_] = (n, _ = !1, A = !1) => (E || TL(), O.schedule(n, _, A)), n;
+			return n[_] = (n, _ = !1, A = !1) => (E || uz(), O.schedule(n, _, A)), n;
 		}, {}),
 		cancel: (n) => {
 			for (let _ = 0; _ < stepsOrder.length; _++) M[stepsOrder[_]].cancel(n);
@@ -17631,7 +14262,7 @@ function createRenderBatcher(n, _) {
 		steps: M
 	};
 }
-var { schedule: frame, cancel: cancelFrame, state: frameData, steps: frameSteps } = /* @__PURE__ */ createRenderBatcher(typeof requestAnimationFrame < "u" ? requestAnimationFrame : noop, !0), now;
+var { schedule: frame, cancel: cancelFrame, state: frameData, steps: frameSteps } = /* @__PURE__ */ createRenderBatcher(typeof requestAnimationFrame < "u" ? requestAnimationFrame : noop$1, !0), now;
 function clearTime() {
 	now = void 0;
 }
@@ -17980,40 +14611,40 @@ function spring(n = springDefaults.visualDuration, _ = springDefaults.bounce) {
 	}, { stiffness: P, damping: z, mass: B, duration: H, velocity: U, isResolvedFromDuration: W } = getSpringOptions({
 		...E,
 		velocity: -/* @__PURE__ */ millisecondsToSeconds(E.velocity || 0)
-	}), G = U || 0, Z = z / (2 * Math.sqrt(P * B)), TL = M - j, EL = /* @__PURE__ */ millisecondsToSeconds(Math.sqrt(P / B)), DL = Math.abs(TL) < 5;
-	O ||= DL ? springDefaults.restSpeed.granular : springDefaults.restSpeed.default, A ||= DL ? springDefaults.restDelta.granular : springDefaults.restDelta.default;
-	let OL;
+	}), G = U || 0, Z = z / (2 * Math.sqrt(P * B)), uz = M - j, dz = /* @__PURE__ */ millisecondsToSeconds(Math.sqrt(P / B)), fz = Math.abs(uz) < 5;
+	O ||= fz ? springDefaults.restSpeed.granular : springDefaults.restSpeed.default, A ||= fz ? springDefaults.restDelta.granular : springDefaults.restDelta.default;
+	let pz;
 	if (Z < 1) {
-		let n = calcAngularFreq(EL, Z);
-		OL = (_) => M - Math.exp(-Z * EL * _) * ((G + Z * EL * TL) / n * Math.sin(n * _) + TL * Math.cos(n * _));
-	} else if (Z === 1) OL = (n) => M - Math.exp(-EL * n) * (TL + (G + EL * TL) * n);
+		let n = calcAngularFreq(dz, Z);
+		pz = (_) => M - Math.exp(-Z * dz * _) * ((G + Z * dz * uz) / n * Math.sin(n * _) + uz * Math.cos(n * _));
+	} else if (Z === 1) pz = (n) => M - Math.exp(-dz * n) * (uz + (G + dz * uz) * n);
 	else {
-		let n = EL * Math.sqrt(Z * Z - 1);
-		OL = (_) => {
-			let E = Math.exp(-Z * EL * _), O = Math.min(n * _, 300);
-			return M - E * ((G + Z * EL * TL) * Math.sinh(O) + n * TL * Math.cosh(O)) / n;
+		let n = dz * Math.sqrt(Z * Z - 1);
+		pz = (_) => {
+			let E = Math.exp(-Z * dz * _), O = Math.min(n * _, 300);
+			return M - E * ((G + Z * dz * uz) * Math.sinh(O) + n * uz * Math.cosh(O)) / n;
 		};
 	}
-	let kL = {
+	let mz = {
 		calculatedDuration: W && H || null,
 		next: (n) => {
-			let _ = OL(n);
+			let _ = pz(n);
 			if (W) N.done = n >= H;
 			else {
 				let E = n === 0 ? G : 0;
-				Z < 1 && (E = n === 0 ? /* @__PURE__ */ secondsToMilliseconds(G) : calcGeneratorVelocity(OL, n, _));
+				Z < 1 && (E = n === 0 ? /* @__PURE__ */ secondsToMilliseconds(G) : calcGeneratorVelocity(pz, n, _));
 				let j = Math.abs(E) <= O, P = Math.abs(M - _) <= A;
 				N.done = j && P;
 			}
 			return N.value = N.done ? M : _, N;
 		},
 		toString: () => {
-			let n = Math.min(calcGeneratorDuration(kL), maxGeneratorDuration), _ = generateLinearEasing((_) => kL.next(n * _).value, n, 30);
+			let n = Math.min(calcGeneratorDuration(mz), maxGeneratorDuration), _ = generateLinearEasing((_) => mz.next(n * _).value, n, 30);
 			return n + "ms " + _;
 		},
 		toTransition: () => {}
 	};
-	return kL;
+	return mz;
 }
 spring.applyToOptions = (n) => {
 	let _ = createGeneratorEasing(n, 100, spring);
@@ -18023,26 +14654,26 @@ function inertia({ keyframes: n, velocity: _ = 0, power: E = .8, timeConstant: O
 	let H = n[0], U = {
 		done: !1,
 		value: H
-	}, W = (n) => N !== void 0 && n < N || P !== void 0 && n > P, G = (n) => N === void 0 ? P : P === void 0 || Math.abs(N - n) < Math.abs(P - n) ? N : P, Z = E * _, TL = H + Z, EL = M === void 0 ? TL : M(TL);
-	EL !== TL && (Z = EL - H);
-	let DL = (n) => -Z * Math.exp(-n / O), OL = (n) => EL + DL(n), kL = (n) => {
-		let _ = DL(n), E = OL(n);
-		U.done = Math.abs(_) <= z, U.value = U.done ? EL : E;
-	}, AL, jL, ML = (n) => {
-		W(U.value) && (AL = n, jL = spring({
+	}, W = (n) => N !== void 0 && n < N || P !== void 0 && n > P, G = (n) => N === void 0 ? P : P === void 0 || Math.abs(N - n) < Math.abs(P - n) ? N : P, Z = E * _, uz = H + Z, dz = M === void 0 ? uz : M(uz);
+	dz !== uz && (Z = dz - H);
+	let fz = (n) => -Z * Math.exp(-n / O), pz = (n) => dz + fz(n), mz = (n) => {
+		let _ = fz(n), E = pz(n);
+		U.done = Math.abs(_) <= z, U.value = U.done ? dz : E;
+	}, hz, gz, _z = (n) => {
+		W(U.value) && (hz = n, gz = spring({
 			keyframes: [U.value, G(U.value)],
-			velocity: calcGeneratorVelocity(OL, n, U.value),
+			velocity: calcGeneratorVelocity(pz, n, U.value),
 			damping: A,
 			stiffness: j,
 			restDelta: z,
 			restSpeed: B
 		}));
 	};
-	return ML(0), {
+	return _z(0), {
 		calculatedDuration: null,
 		next: (n) => {
 			let _ = !1;
-			return !jL && AL === void 0 && (_ = !0, kL(n), ML(n)), AL !== void 0 && n >= AL ? jL.next(n - AL) : (!_ && kL(n), U);
+			return !gz && hz === void 0 && (_ = !0, mz(n), _z(n)), hz !== void 0 && n >= hz ? gz.next(n - hz) : (!_ && mz(n), U);
 		}
 	};
 }
@@ -18050,7 +14681,7 @@ function createMixers(n, _, E) {
 	let O = [], A = E || MotionGlobalConfig.mix || mix, j = n.length - 1;
 	for (let E = 0; E < j; E++) {
 		let j = A(n[E], n[E + 1]);
-		_ && (j = pipe(Array.isArray(_) ? _[E] || noop : _, j)), O.push(j);
+		_ && (j = pipe(Array.isArray(_) ? _[E] || noop$1 : _, j)), O.push(j);
 	}
 	return O;
 }
@@ -18162,22 +14793,22 @@ var WithPromise = class {
 		if (this.startTime === null) return E.next(0);
 		let { delay: P = 0, keyframes: z, repeat: B, repeatType: H, repeatDelay: U, type: W, onUpdate: G, finalKeyframe: Z } = this.options;
 		this.speed > 0 ? this.startTime = Math.min(this.startTime, n) : this.speed < 0 && (this.startTime = Math.min(n - O / this.speed, this.startTime)), _ ? this.currentTime = n : this.updateTime(n);
-		let TL = this.currentTime - P * (this.playbackSpeed >= 0 ? 1 : -1), EL = this.playbackSpeed >= 0 ? TL < 0 : TL > O;
-		this.currentTime = Math.max(TL, 0), this.state === "finished" && this.holdTime === null && (this.currentTime = O);
-		let DL = this.currentTime, OL = E;
+		let uz = this.currentTime - P * (this.playbackSpeed >= 0 ? 1 : -1), dz = this.playbackSpeed >= 0 ? uz < 0 : uz > O;
+		this.currentTime = Math.max(uz, 0), this.state === "finished" && this.holdTime === null && (this.currentTime = O);
+		let fz = this.currentTime, pz = E;
 		if (B) {
 			let n = Math.min(this.currentTime, O) / M, _ = Math.floor(n), E = n % 1;
-			!E && n >= 1 && (E = 1), E === 1 && _--, _ = Math.min(_, B + 1), _ % 2 && (H === "reverse" ? (E = 1 - E, U && (E -= U / M)) : H === "mirror" && (OL = j)), DL = clamp(0, 1, E) * M;
+			!E && n >= 1 && (E = 1), E === 1 && _--, _ = Math.min(_, B + 1), _ % 2 && (H === "reverse" ? (E = 1 - E, U && (E -= U / M)) : H === "mirror" && (pz = j)), fz = clamp(0, 1, E) * M;
 		}
-		let kL = EL ? {
+		let mz = dz ? {
 			done: !1,
 			value: z[0]
-		} : OL.next(DL);
-		A && (kL.value = A(kL.value));
-		let { done: AL } = kL;
-		!EL && N !== null && (AL = this.playbackSpeed >= 0 ? this.currentTime >= O : this.currentTime <= 0);
-		let jL = this.holdTime === null && (this.state === "finished" || this.state === "running" && AL);
-		return jL && W !== inertia && (kL.value = getFinalKeyframe$1(z, this.options, Z, this.speed)), G && G(kL.value), jL && this.finish(), kL;
+		} : pz.next(fz);
+		A && (mz.value = A(mz.value));
+		let { done: hz } = mz;
+		!dz && N !== null && (hz = this.playbackSpeed >= 0 ? this.currentTime >= O : this.currentTime <= 0);
+		let gz = this.holdTime === null && (this.state === "finished" || this.state === "running" && hz);
+		return gz && W !== inertia && (mz.value = getFinalKeyframe$1(z, this.options, Z, this.speed)), G && G(mz.value), gz && this.finish(), mz;
 	}
 	then(n, _) {
 		return this.finished.then(n, _);
@@ -18534,7 +15165,7 @@ var NativeAnimation = class extends WithPromise {
 		this.manualStartTime = this.animation.startTime = n;
 	}
 	attachTimeline({ timeline: n, observe: _ }) {
-		return this.allowFlatten && this.animation.effect?.updateTiming({ easing: "linear" }), this.animation.onfinish = null, n && supportsScrollTimeline() ? (this.animation.timeline = n, noop) : _(this);
+		return this.allowFlatten && this.animation.effect?.updateTiming({ easing: "linear" }), this.animation.onfinish = null, n && supportsScrollTimeline() ? (this.animation.timeline = n, noop$1) : _(this);
 	}
 }, unsupportedEasingFunctions = {
 	anticipate,
@@ -18624,7 +15255,7 @@ var MAX_RESOLVE_DELAY = 40, AsyncMotionValueAnimation = class extends WithPromis
 			...B,
 			element: B.motionValue.owner.current
 		}) : new JSAnimation(B);
-		H.finished.then(() => this.notifyFinished()).catch(noop), this.pendingTimeline &&= (this.stopTimeline = H.attachTimeline(this.pendingTimeline), void 0), this._animation = H;
+		H.finished.then(() => this.notifyFinished()).catch(noop$1), this.pendingTimeline &&= (this.stopTimeline = H.attachTimeline(this.pendingTimeline), void 0), this._animation = H;
 	}
 	get finished() {
 		return this._animation ? this.animation.finished : this._finished;
@@ -18914,7 +15545,7 @@ function resolveElements(n, _, E) {
 	return Array.from(n);
 }
 var getValueAsType = (n, _) => _ && typeof n == "number" ? _.transform(n) : n;
-function isHTMLElement(n) {
+function isHTMLElement$1(n) {
 	return isObject(n) && "offsetHeight" in n;
 }
 var MAX_VELOCITY_DELTA = 30, isFloat = (n) => !isNaN(parseFloat(n)), collectMotionValues = { current: void 0 }, MotionValue = class {
@@ -19097,14 +15728,14 @@ function press(n, _, E = {}) {
 		window.addEventListener("pointerup", N, A), window.addEventListener("pointercancel", P, A);
 	};
 	return O.forEach((n) => {
-		(E.useGlobalTarget ? window : n).addEventListener("pointerdown", M, A), isHTMLElement(n) && (n.addEventListener("focus", (n) => enableKeyboardPress(n, A)), !isElementKeyboardAccessible(n) && !n.hasAttribute("tabindex") && (n.tabIndex = 0));
+		(E.useGlobalTarget ? window : n).addEventListener("pointerdown", M, A), isHTMLElement$1(n) && (n.addEventListener("focus", (n) => enableKeyboardPress(n, A)), !isElementKeyboardAccessible(n) && !n.hasAttribute("tabindex") && (n.tabIndex = 0));
 	}), j;
 }
-function isSVGElement(n) {
+function isSVGElement$1(n) {
 	return isObject(n) && "ownerSVGElement" in n;
 }
 function isSVGSVGElement(n) {
-	return isSVGElement(n) && n.tagName === "svg";
+	return isSVGElement$1(n) && n.tagName === "svg";
 }
 var isMotionValue = (n) => !!(n && n.getVelocity), valueTypes = [
 	...dimensionValueTypes,
@@ -19140,7 +15771,7 @@ var PopChildMeasure = class extends React$1.Component {
 	getSnapshotBeforeUpdate(n) {
 		let _ = this.props.childRef.current;
 		if (_ && n.isPresent && !this.props.isPresent) {
-			let n = _.offsetParent, E = isHTMLElement(n) && n.offsetWidth || 0, O = this.props.sizeRef.current;
+			let n = _.offsetParent, E = isHTMLElement$1(n) && n.offsetWidth || 0, O = this.props.sizeRef.current;
 			O.height = _.offsetHeight || 0, O.width = _.offsetWidth || 0, O.top = _.offsetTop, O.left = _.offsetLeft, O.right = E - O.width - O.left;
 		}
 		return null;
@@ -19240,46 +15871,46 @@ function onlyElements(n) {
 	}), _;
 }
 var AnimatePresence = ({ children: n, custom: _, initial: E = !0, onExitComplete: O, presenceAffectsLayout: A = !0, mode: j = "sync", propagate: M = !1, anchorX: N = "left", root: P }) => {
-	let [z, B] = usePresence(M), H = useMemo(() => onlyElements(n), [n]), U = M && !z ? [] : H.map(getChildKey), G = useRef(!0), Z = useRef(H), TL = useConstant(() => /* @__PURE__ */ new Map()), EL = useRef(/* @__PURE__ */ new Set()), [DL, kL] = useState(H), [ML, NL] = useState(H);
-	useIsomorphicLayoutEffect(() => {
+	let [z, B] = usePresence(M), H = useMemo(() => onlyElements(n), [n]), U = M && !z ? [] : H.map(getChildKey), G = useRef(!0), Z = useRef(H), uz = useConstant(() => /* @__PURE__ */ new Map()), dz = useRef(/* @__PURE__ */ new Set()), [fz, mz] = useState(H), [_z, vz] = useState(H);
+	useIsomorphicLayoutEffect$1(() => {
 		G.current = !1, Z.current = H;
-		for (let n = 0; n < ML.length; n++) {
-			let _ = getChildKey(ML[n]);
-			U.includes(_) ? (TL.delete(_), EL.current.delete(_)) : TL.get(_) !== !0 && TL.set(_, !1);
+		for (let n = 0; n < _z.length; n++) {
+			let _ = getChildKey(_z[n]);
+			U.includes(_) ? (uz.delete(_), dz.current.delete(_)) : uz.get(_) !== !0 && uz.set(_, !1);
 		}
 	}, [
-		ML,
+		_z,
 		U.length,
 		U.join("-")
 	]);
-	let PL = [];
-	if (H !== DL) {
+	let yz = [];
+	if (H !== fz) {
 		let n = [...H];
-		for (let _ = 0; _ < ML.length; _++) {
-			let E = ML[_], O = getChildKey(E);
-			U.includes(O) || (n.splice(_, 0, E), PL.push(E));
+		for (let _ = 0; _ < _z.length; _++) {
+			let E = _z[_], O = getChildKey(E);
+			U.includes(O) || (n.splice(_, 0, E), yz.push(E));
 		}
-		return j === "wait" && PL.length && (n = PL), NL(onlyElements(n)), kL(H), null;
+		return j === "wait" && yz.length && (n = yz), vz(onlyElements(n)), mz(H), null;
 	}
-	process.env.NODE_ENV !== "production" && j === "wait" && ML.length > 1 && console.warn("You're attempting to animate multiple children within AnimatePresence, but its mode is set to \"wait\". This will lead to odd visual behaviour.");
-	let { forceRender: FL } = useContext(LayoutGroupContext);
-	return jsx(Fragment$1, { children: ML.map((n) => {
-		let W = getChildKey(n), DL = M && !z ? !1 : H === ML || U.includes(W);
+	process.env.NODE_ENV !== "production" && j === "wait" && _z.length > 1 && console.warn("You're attempting to animate multiple children within AnimatePresence, but its mode is set to \"wait\". This will lead to odd visual behaviour.");
+	let { forceRender: bz } = useContext(LayoutGroupContext);
+	return jsx(Fragment$1, { children: _z.map((n) => {
+		let W = getChildKey(n), fz = M && !z ? !1 : H === _z || U.includes(W);
 		return jsx(PresenceChild, {
-			isPresent: DL,
+			isPresent: fz,
 			initial: !G.current || E ? void 0 : !1,
 			custom: _,
 			presenceAffectsLayout: A,
 			mode: j,
 			root: P,
-			onExitComplete: DL ? void 0 : () => {
-				if (EL.current.has(W)) return;
-				if (EL.current.add(W), TL.has(W)) TL.set(W, !0);
+			onExitComplete: fz ? void 0 : () => {
+				if (dz.current.has(W)) return;
+				if (dz.current.add(W), uz.has(W)) uz.set(W, !0);
 				else return;
 				let n = !0;
-				TL.forEach((_) => {
+				uz.forEach((_) => {
 					_ || (n = !1);
-				}), n && (FL?.(), NL(Z.current), M && B?.(), O && O());
+				}), n && (bz?.(), vz(Z.current), M && B?.(), O && O());
 			},
 			anchorX: N,
 			children: n
@@ -19708,12 +16339,12 @@ function useVisualElement(n, _, E, O, A, j) {
 	useInsertionEffect(() => {
 		H && Z.current && H.update(E, P);
 	});
-	let TL = E[optimizedAppearDataAttribute], DL = useRef(!!TL && !window.MotionHandoffIsComplete?.(TL) && window.MotionHasOptimisedAnimation?.(TL));
-	return useIsomorphicLayoutEffect(() => {
-		H && (Z.current = !0, window.MotionIsMounted = !0, H.updateFeatures(), H.scheduleRenderMicrotask(), DL.current && H.animationState && H.animationState.animateChanges());
+	let uz = E[optimizedAppearDataAttribute], fz = useRef(!!uz && !window.MotionHandoffIsComplete?.(uz) && window.MotionHasOptimisedAnimation?.(uz));
+	return useIsomorphicLayoutEffect$1(() => {
+		H && (Z.current = !0, window.MotionIsMounted = !0, H.updateFeatures(), H.scheduleRenderMicrotask(), fz.current && H.animationState && H.animationState.animateChanges());
 	}), useEffect(() => {
-		H && (!DL.current && H.animationState && H.animationState.animateChanges(), DL.current &&= (queueMicrotask(() => {
-			window.MotionHandoffMarkAsComplete?.(TL);
+		H && (!fz.current && H.animationState && H.animationState.animateChanges(), fz.current &&= (queueMicrotask(() => {
+			window.MotionHandoffMarkAsComplete?.(uz);
 		}), !1), H.enteringChildren = void 0);
 	}), H;
 }
@@ -20391,34 +17022,34 @@ function createAnimationState(n) {
 	function M(j) {
 		let { props: M } = n, N = getVariantContext(n.parent) || {}, P = [], z = /* @__PURE__ */ new Set(), B = {}, H = Infinity;
 		for (let _ = 0; _ < numAnimationTypes; _++) {
-			let U = reversePriorityOrder[_], W = E[U], G = M[U] === void 0 ? N[U] : M[U], Z = isVariantLabel(G), TL = U === j ? W.isActive : null;
-			TL === !1 && (H = _);
-			let EL = G === N[U] && G !== M[U] && Z;
-			if (EL && O && n.manuallyAnimateOnMount && (EL = !1), W.protectedKeys = { ...B }, !W.isActive && TL === null || !G && !W.prevProp || isAnimationControls(G) || typeof G == "boolean") continue;
-			let DL = checkVariantsDidChange(W.prevProp, G), OL = DL || U === j && W.isActive && !EL && Z || _ > H && Z, kL = !1, AL = Array.isArray(G) ? G : [G], jL = AL.reduce(A(U), {});
-			TL === !1 && (jL = {});
-			let { prevResolvedValues: ML = {} } = W, NL = {
-				...ML,
-				...jL
-			}, PL = (_) => {
-				OL = !0, z.has(_) && (kL = !0, z.delete(_)), W.needsAnimating[_] = !0;
+			let U = reversePriorityOrder[_], W = E[U], G = M[U] === void 0 ? N[U] : M[U], Z = isVariantLabel(G), uz = U === j ? W.isActive : null;
+			uz === !1 && (H = _);
+			let dz = G === N[U] && G !== M[U] && Z;
+			if (dz && O && n.manuallyAnimateOnMount && (dz = !1), W.protectedKeys = { ...B }, !W.isActive && uz === null || !G && !W.prevProp || isAnimationControls(G) || typeof G == "boolean") continue;
+			let fz = checkVariantsDidChange(W.prevProp, G), pz = fz || U === j && W.isActive && !dz && Z || _ > H && Z, mz = !1, hz = Array.isArray(G) ? G : [G], gz = hz.reduce(A(U), {});
+			uz === !1 && (gz = {});
+			let { prevResolvedValues: _z = {} } = W, vz = {
+				..._z,
+				...gz
+			}, yz = (_) => {
+				pz = !0, z.has(_) && (mz = !0, z.delete(_)), W.needsAnimating[_] = !0;
 				let E = n.getValue(_);
 				E && (E.liveStyle = !1);
 			};
-			for (let n in NL) {
-				let _ = jL[n], E = ML[n];
+			for (let n in vz) {
+				let _ = gz[n], E = _z[n];
 				if (B.hasOwnProperty(n)) continue;
 				let O = !1;
-				O = isKeyframesTarget(_) && isKeyframesTarget(E) ? !shallowCompare(_, E) : _ !== E, O ? _ == null ? z.add(n) : PL(n) : _ !== void 0 && z.has(n) ? PL(n) : W.protectedKeys[n] = !0;
+				O = isKeyframesTarget(_) && isKeyframesTarget(E) ? !shallowCompare(_, E) : _ !== E, O ? _ == null ? z.add(n) : yz(n) : _ !== void 0 && z.has(n) ? yz(n) : W.protectedKeys[n] = !0;
 			}
-			W.prevProp = G, W.prevResolvedValues = jL, W.isActive && (B = {
+			W.prevProp = G, W.prevResolvedValues = gz, W.isActive && (B = {
 				...B,
-				...jL
-			}), O && n.blockInitialAnimation && (OL = !1);
-			let FL = EL && DL;
-			OL && (!FL || kL) && P.push(...AL.map((_) => {
+				...gz
+			}), O && n.blockInitialAnimation && (pz = !1);
+			let bz = dz && fz;
+			pz && (!bz || mz) && P.push(...hz.map((_) => {
 				let E = { type: U };
-				if (typeof _ == "string" && O && !FL && n.manuallyAnimateOnMount && n.parent) {
+				if (typeof _ == "string" && O && !bz && n.manuallyAnimateOnMount && n.parent) {
 					let { parent: O } = n, A = resolveVariant(O, _);
 					if (O.enteringChildren && A) {
 						let { delayChildren: _ } = A.transition || {};
@@ -20968,11 +17599,11 @@ function getCurrentDirection(n, _ = 10) {
 }
 var DragGesture = class extends Feature {
 	constructor(n) {
-		super(n), this.removeGroupControls = noop, this.removeListeners = noop, this.controls = new VisualElementDragControls(n);
+		super(n), this.removeGroupControls = noop$1, this.removeListeners = noop$1, this.controls = new VisualElementDragControls(n);
 	}
 	mount() {
 		let { dragControls: n } = this.node.getProps();
-		n && (this.removeGroupControls = n.subscribe(this.controls)), this.removeListeners = this.controls.addListeners() || noop;
+		n && (this.removeGroupControls = n.subscribe(this.controls)), this.removeListeners = this.controls.addListeners() || noop$1;
 	}
 	update() {
 		let { dragControls: n } = this.node.getProps(), { dragControls: _ } = this.node.prevProps || {};
@@ -20985,7 +17616,7 @@ var DragGesture = class extends Feature {
 	n && frame.postRender(() => n(_, E));
 }, PanGesture = class extends Feature {
 	constructor() {
-		super(...arguments), this.removePointerDownListener = noop;
+		super(...arguments), this.removePointerDownListener = noop$1;
 	}
 	onPointerDown(n) {
 		this.session = new PanSession(n, this.createPanHandlers(), {
@@ -21103,7 +17734,7 @@ function mixValues(n, _, E, O, A, j) {
 function getRadius(n, _) {
 	return n[_] === void 0 ? n.borderRadius : n[_];
 }
-var easeCrossfadeIn = /* @__PURE__ */ compress(0, .5, circOut), easeCrossfadeOut = /* @__PURE__ */ compress(.5, .95, noop);
+var easeCrossfadeIn = /* @__PURE__ */ compress(0, .5, circOut), easeCrossfadeOut = /* @__PURE__ */ compress(.5, .95, noop$1);
 function compress(n, _, E) {
 	return (O) => O < n ? 0 : O > _ ? 1 : E(/* @__PURE__ */ progress(n, _, O));
 }
@@ -21273,7 +17904,7 @@ function createProjectionNode({ attachResizeListener: n, defaultParent: _, measu
 		}
 		mount(_) {
 			if (this.instance) return;
-			this.isSVG = isSVGElement(_) && !isSVGSVGElement(_), this.instance = _;
+			this.isSVG = isSVGElement$1(_) && !isSVGSVGElement(_), this.instance = _;
 			let { layoutId: E, layout: O, visualElement: A } = this.options;
 			if (A && !A.current && A.mount(_), this.root.nodes.add(this), this.parent && this.parent.children.add(this), this.root.hasTreeAnimated && (O || E) && (this.isLayoutDirty = !0), n) {
 				let E, O = 0, A = () => this.root.updateBlockedByResize = !1;
@@ -21753,7 +18384,7 @@ var defaultLayoutTransition = {
 		.1,
 		1
 	]
-}, userAgentContains = (n) => typeof navigator < "u" && navigator.userAgent && navigator.userAgent.toLowerCase().includes(n), roundPoint = userAgentContains("applewebkit/") && !userAgentContains("chrome/") ? Math.round : noop;
+}, userAgentContains = (n) => typeof navigator < "u" && navigator.userAgent && navigator.userAgent.toLowerCase().includes(n), roundPoint = userAgentContains("applewebkit/") && !userAgentContains("chrome/") ? Math.round : noop$1;
 function roundAxis(n) {
 	n.min = roundPoint(n.min), n.max = roundPoint(n.max);
 }
@@ -22484,11 +19115,11 @@ const ShortcutsDialog = () => /* @__PURE__ */ jsxs(s$5, { children: [/* @__PURE_
 		width: "18",
 		height: "18"
 	}), "Ajuda"]
-}) }), /* @__PURE__ */ jsxs(p$9, {
+}) }), /* @__PURE__ */ jsxs(p$10, {
 	style: { maxWidth: 700 },
 	onPointerDown: (n) => n.stopPropagation(),
 	children: [
-		/* @__PURE__ */ jsx(g$2, { children: "Atalhos de Teclado" }),
+		/* @__PURE__ */ jsx(g$3, { children: "Atalhos de Teclado" }),
 		/* @__PURE__ */ jsx(p$2, {
 			size: "2",
 			color: "gray",
@@ -22510,7 +19141,7 @@ const ShortcutsDialog = () => /* @__PURE__ */ jsxs(s$5, { children: [/* @__PURE_
 					color: "blue",
 					children: "Edição Básica"
 				}),
-				/* @__PURE__ */ jsx(o$4, {
+				/* @__PURE__ */ jsx(o$3, {
 					size: "4",
 					mb: "2"
 				}),
@@ -22547,7 +19178,7 @@ const ShortcutsDialog = () => /* @__PURE__ */ jsxs(s$5, { children: [/* @__PURE_
 					color: "blue",
 					children: "Navegação e Seleção"
 				}),
-				/* @__PURE__ */ jsx(o$4, {
+				/* @__PURE__ */ jsx(o$3, {
 					size: "4",
 					mb: "2"
 				}),
@@ -22588,7 +19219,2784 @@ const ShortcutsDialog = () => /* @__PURE__ */ jsxs(s$5, { children: [/* @__PURE_
 			}) })
 		})
 	]
-})] });
+})] }), EditorSettings = () => {
+	let { state: n, updateListSettings: _, setCanvasHeight: E, setGridSize: O } = useEditor(), [A, j] = useState(!1), [M, N] = useState(""), [P, z] = useState("asc"), [B, H] = useState("bottom"), [U, W] = useState("down"), [Z, uz] = useState("150"), [dz, fz] = useState(""), [pz, mz] = useState("0"), [hz, _z] = useState("slideIn"), [vz, yz] = useState(.3), [bz, xz] = useState("ease-out");
+	return useEffect(() => {
+		if (A) {
+			N(n.listSettings.sortProp || "__none__"), z(n.listSettings.sortOrder || "asc"), H(n.listSettings.newestPosition || "bottom"), W(n.listSettings.scrollDirection || "down"), fz(n.listSettings.containerHeight ? String(n.listSettings.containerHeight) : ""), uz(String(n.canvasHeight || 150)), mz(String(n.gridSize || 0));
+			let _ = n.listSettings.entryAnimation;
+			_z(_?.type || "slideIn"), yz(_?.duration || .3), xz(_?.timingFunction || "ease-out");
+		}
+	}, [A]), useEffect(() => {
+		if (!A) return;
+		let _ = parseInt(Z, 10);
+		!isNaN(_) && _ > 0 && n.canvasHeight !== _ && E(_);
+		let j = parseInt(pz, 10);
+		!isNaN(j) && j >= 0 && n.gridSize !== j && O(j);
+	}, [
+		Z,
+		pz,
+		A,
+		E,
+		O,
+		n.canvasHeight,
+		n.gridSize
+	]), /* @__PURE__ */ jsxs(s$5, {
+		open: A,
+		onOpenChange: j,
+		children: [/* @__PURE__ */ jsx(n$3, { children: /* @__PURE__ */ jsxs(o, {
+			variant: "soft",
+			color: "gray",
+			style: {
+				width: "100%",
+				justifyContent: "center",
+				cursor: "pointer"
+			},
+			children: [/* @__PURE__ */ jsx(GearIcon, {}), " Configurações"]
+		}) }), /* @__PURE__ */ jsxs(p$10, {
+			style: { maxWidth: 600 },
+			children: [
+				/* @__PURE__ */ jsx(g$3, { children: "Configurações do Editor" }),
+				/* @__PURE__ */ jsx(m$3, {
+					size: "2",
+					mb: "4",
+					children: "Configure o comportamento da lista."
+				}),
+				/* @__PURE__ */ jsx(p, {
+					pt: "3",
+					children: /* @__PURE__ */ jsxs(p$1, {
+						direction: "column",
+						gap: "3",
+						children: [
+							/* @__PURE__ */ jsx(p$2, {
+								size: "2",
+								weight: "bold",
+								children: "Ordenação"
+							}),
+							/* @__PURE__ */ jsxs(p$1, {
+								gap: "3",
+								align: "center",
+								children: [/* @__PURE__ */ jsxs(p, {
+									flexGrow: "1",
+									children: [/* @__PURE__ */ jsx(p$2, {
+										size: "1",
+										mb: "1",
+										as: "div",
+										children: "Propriedade para Ordenar"
+									}), /* @__PURE__ */ jsxs(C$1, {
+										value: M,
+										onValueChange: N,
+										children: [/* @__PURE__ */ jsx(u$3, {
+											placeholder: "Selecione...",
+											style: { width: "100%" }
+										}), /* @__PURE__ */ jsxs(g$1, { children: [/* @__PURE__ */ jsx(v$2, {
+											value: "__none__",
+											children: "(Nenhum)"
+										}), n.availableProps.map((n) => /* @__PURE__ */ jsx(v$2, {
+											value: n.dataName,
+											children: n.name
+										}, n.dataName))] })]
+									})]
+								}), /* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
+									size: "1",
+									mb: "1",
+									as: "div",
+									children: "Direção"
+								}), /* @__PURE__ */ jsxs(C$1, {
+									value: P,
+									onValueChange: (n) => z(n),
+									children: [/* @__PURE__ */ jsx(u$3, { style: { width: "150px" } }), /* @__PURE__ */ jsxs(g$1, { children: [/* @__PURE__ */ jsx(v$2, {
+										value: "asc",
+										children: "Crescente (A-Z)"
+									}), /* @__PURE__ */ jsx(v$2, {
+										value: "desc",
+										children: "Decrescente (Z-A)"
+									})] })]
+								})] })]
+							}),
+							/* @__PURE__ */ jsxs(p$1, {
+								gap: "3",
+								align: "center",
+								children: [/* @__PURE__ */ jsxs(p, {
+									flexGrow: "1",
+									children: [/* @__PURE__ */ jsx(p$2, {
+										size: "1",
+										mb: "1",
+										as: "div",
+										children: "Posição do Recente"
+									}), /* @__PURE__ */ jsxs(C$1, {
+										value: B,
+										onValueChange: (n) => H(n),
+										children: [/* @__PURE__ */ jsx(u$3, { style: { width: "100%" } }), /* @__PURE__ */ jsxs(g$1, { children: [/* @__PURE__ */ jsx(v$2, {
+											value: "top",
+											children: "Topo (Início)"
+										}), /* @__PURE__ */ jsx(v$2, {
+											value: "bottom",
+											children: "Base (Final)"
+										})] })]
+									})]
+								}), /* @__PURE__ */ jsxs(p, {
+									flexGrow: "1",
+									children: [/* @__PURE__ */ jsx(p$2, {
+										size: "1",
+										mb: "1",
+										as: "div",
+										children: "Comportamento de Rolagem"
+									}), /* @__PURE__ */ jsxs(C$1, {
+										value: U,
+										onValueChange: (n) => W(n),
+										children: [/* @__PURE__ */ jsx(u$3, { style: { width: "100%" } }), /* @__PURE__ */ jsxs(g$1, { children: [/* @__PURE__ */ jsx(v$2, {
+											value: "down",
+											children: "Descer (Padrão)"
+										}), /* @__PURE__ */ jsx(v$2, {
+											value: "up",
+											children: "Subir (Chat)"
+										})] })]
+									})]
+								})]
+							}),
+							/* @__PURE__ */ jsx(p$2, {
+								size: "2",
+								weight: "bold",
+								mt: "2",
+								children: "Dimensões"
+							}),
+							/* @__PURE__ */ jsxs(p$1, {
+								gap: "3",
+								align: "center",
+								children: [/* @__PURE__ */ jsxs(p, {
+									flexGrow: "1",
+									children: [
+										/* @__PURE__ */ jsx(p$2, {
+											size: "1",
+											mb: "1",
+											as: "div",
+											children: "Altura do Item (Template) (px)"
+										}),
+										/* @__PURE__ */ jsx(u$1, {
+											type: "number",
+											min: "10",
+											value: Z,
+											onChange: (n) => uz(n.target.value)
+										}),
+										/* @__PURE__ */ jsx(p$2, {
+											size: "1",
+											color: "gray",
+											children: "Altura de cada item individual na lista."
+										})
+									]
+								}), /* @__PURE__ */ jsxs(p, {
+									flexGrow: "1",
+									children: [
+										/* @__PURE__ */ jsx(p$2, {
+											size: "1",
+											mb: "1",
+											as: "div",
+											children: "Altura da Lista (Container) (px)"
+										}),
+										/* @__PURE__ */ jsx(u$1, {
+											type: "number",
+											min: "0",
+											placeholder: "Auto (100%)",
+											value: dz,
+											onChange: (n) => fz(n.target.value)
+										}),
+										/* @__PURE__ */ jsx(p$2, {
+											size: "1",
+											color: "gray",
+											children: "Altura total da lista. Se exceder, rola. Vazio = 100%."
+										})
+									]
+								})]
+							}),
+							/* @__PURE__ */ jsx(p$2, {
+								size: "2",
+								weight: "bold",
+								mt: "2",
+								children: "Animação de Entrada na Lista"
+							}),
+							/* @__PURE__ */ jsxs(o$1, {
+								columns: "3",
+								gap: "3",
+								children: [
+									/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
+										size: "1",
+										mb: "1",
+										as: "div",
+										children: "Efeito"
+									}), /* @__PURE__ */ jsxs(C$1, {
+										value: hz,
+										onValueChange: (n) => _z(n),
+										children: [/* @__PURE__ */ jsx(u$3, { style: { width: "100%" } }), /* @__PURE__ */ jsxs(g$1, { children: [
+											/* @__PURE__ */ jsx(v$2, {
+												value: "none",
+												children: "Nenhum"
+											}),
+											/* @__PURE__ */ jsx(v$2, {
+												value: "slideIn",
+												children: "Slide (Padrão)"
+											}),
+											/* @__PURE__ */ jsx(v$2, {
+												value: "smoothSlideUp",
+												children: "Slide Suave (Up)"
+											}),
+											/* @__PURE__ */ jsx(v$2, {
+												value: "fadeIn",
+												children: "Fade In"
+											}),
+											/* @__PURE__ */ jsx(v$2, {
+												value: "popIn",
+												children: "Pop In"
+											}),
+											/* @__PURE__ */ jsx(v$2, {
+												value: "blurIn",
+												children: "Blur In"
+											}),
+											/* @__PURE__ */ jsx(v$2, {
+												value: "slideInLeft",
+												children: "Slide (Esq)"
+											}),
+											/* @__PURE__ */ jsx(v$2, {
+												value: "slideInRight",
+												children: "Slide (Dir)"
+											}),
+											/* @__PURE__ */ jsx(v$2, {
+												value: "zoomIn",
+												children: "Zoom In"
+											}),
+											/* @__PURE__ */ jsx(v$2, {
+												value: "bounceIn",
+												children: "Bounce"
+											})
+										] })]
+									})] }),
+									/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
+										size: "1",
+										mb: "1",
+										as: "div",
+										children: "Duração (s)"
+									}), /* @__PURE__ */ jsx(u$1, {
+										type: "number",
+										step: "0.1",
+										min: "0.1",
+										value: vz,
+										onChange: (n) => yz(parseFloat(n.target.value) || .3)
+									})] }),
+									/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
+										size: "1",
+										mb: "1",
+										as: "div",
+										children: "Curva (Easing)"
+									}), /* @__PURE__ */ jsxs(C$1, {
+										value: bz,
+										onValueChange: (n) => xz(n),
+										children: [/* @__PURE__ */ jsx(u$3, { style: { width: "100%" } }), /* @__PURE__ */ jsxs(g$1, { children: [
+											/* @__PURE__ */ jsx(v$2, {
+												value: "ease",
+												children: "Ease"
+											}),
+											/* @__PURE__ */ jsx(v$2, {
+												value: "ease-out",
+												children: "Ease Out"
+											}),
+											/* @__PURE__ */ jsx(v$2, {
+												value: "linear",
+												children: "Linear"
+											}),
+											/* @__PURE__ */ jsx(v$2, {
+												value: "bounce",
+												children: "Bounce"
+											})
+										] })]
+									})] })
+								]
+							}),
+							/* @__PURE__ */ jsxs(p, {
+								mt: "2",
+								children: [/* @__PURE__ */ jsx(p$2, {
+									size: "2",
+									weight: "bold",
+									children: "Grid Snapping (Travar)"
+								}), /* @__PURE__ */ jsx(p$1, {
+									gap: "3",
+									align: "center",
+									mt: "2",
+									children: /* @__PURE__ */ jsxs(p, {
+										flexGrow: "1",
+										children: [/* @__PURE__ */ jsx(p$2, {
+											size: "1",
+											mb: "1",
+											as: "div",
+											children: "Tamanho do Grid (px) - 0 para desativar"
+										}), /* @__PURE__ */ jsx(u$1, {
+											type: "number",
+											value: pz,
+											onChange: (n) => mz(n.target.value),
+											placeholder: "0"
+										})]
+									})
+								})]
+							})
+						]
+					})
+				}),
+				/* @__PURE__ */ jsxs(p$1, {
+					gap: "3",
+					mt: "4",
+					justify: "end",
+					children: [/* @__PURE__ */ jsx(D$2, { children: /* @__PURE__ */ jsx(o, {
+						variant: "soft",
+						color: "gray",
+						children: "Cancelar"
+					}) }), /* @__PURE__ */ jsx(D$2, { children: /* @__PURE__ */ jsx(o, {
+						onClick: () => {
+							let n = parseInt(dz, 10), E = {
+								type: hz,
+								duration: Number(vz),
+								delay: 0,
+								timingFunction: bz
+							};
+							_({
+								sortProp: M === "__none__" ? "" : M,
+								sortOrder: P,
+								newestPosition: B,
+								scrollDirection: U,
+								containerHeight: !isNaN(n) && n > 0 ? n : void 0,
+								entryAnimation: E
+							}), j(!1);
+						},
+						children: "Salvar Alterações"
+					}) })]
+				})
+			]
+		})]
+	});
+}, HistoryPanel = ({ onClose: n }) => {
+	let { state: _, jumpToHistory: E, undo: O, redo: A } = useEditor(), j = (_) => {
+		E(_), n && n();
+	};
+	return /* @__PURE__ */ jsxs(p$1, {
+		direction: "column",
+		style: { width: "100%" },
+		children: [/* @__PURE__ */ jsxs(p$1, {
+			justify: "between",
+			align: "center",
+			p: "2",
+			style: { borderBottom: "1px solid var(--gray-5)" },
+			children: [/* @__PURE__ */ jsxs(p$1, {
+				align: "center",
+				gap: "2",
+				children: [/* @__PURE__ */ jsx(ResetIcon, {}), /* @__PURE__ */ jsx(p$2, {
+					size: "2",
+					weight: "bold",
+					children: "Histórico"
+				})]
+			}), /* @__PURE__ */ jsxs(p$1, {
+				gap: "2",
+				children: [/* @__PURE__ */ jsx(o, {
+					size: "1",
+					variant: "soft",
+					onClick: O,
+					disabled: _.historyIndex <= 0,
+					children: "Desfazer"
+				}), /* @__PURE__ */ jsx(o, {
+					size: "1",
+					variant: "soft",
+					onClick: A,
+					disabled: _.historyIndex >= _.history.length - 1,
+					children: "Refazer"
+				})]
+			})]
+		}), /* @__PURE__ */ jsx(p, {
+			p: "0",
+			children: _.history.map((n, E) => {
+				let O = E === _.historyIndex, A = E > _.historyIndex, M = _.historyDescriptions?.[E] || (E === 0 ? "Estado Inicial" : `Alteração ${E}`);
+				return /* @__PURE__ */ jsx(p, {
+					p: "2",
+					style: {
+						backgroundColor: O ? "var(--accent-3)" : "transparent",
+						opacity: A ? .5 : 1,
+						cursor: "pointer",
+						borderBottom: "1px solid var(--gray-3)"
+					},
+					onClick: () => j(E),
+					className: "history-item",
+					children: /* @__PURE__ */ jsxs(p$1, {
+						align: "center",
+						justify: "between",
+						children: [/* @__PURE__ */ jsx(p$2, {
+							size: "2",
+							weight: O ? "bold" : "regular",
+							children: M
+						}), O && /* @__PURE__ */ jsx(p$2, {
+							size: "1",
+							color: "blue",
+							children: "Atual"
+						})]
+					})
+				}, E);
+			})
+		})]
+	});
+};
+function useCombinedRefs() {
+	var n = [...arguments];
+	return useMemo(() => (_) => {
+		n.forEach((n) => n(_));
+	}, n);
+}
+var canUseDOM = typeof window < "u" && window.document !== void 0 && window.document.createElement !== void 0;
+function isWindow(n) {
+	let _ = Object.prototype.toString.call(n);
+	return _ === "[object Window]" || _ === "[object global]";
+}
+function isNode(n) {
+	return "nodeType" in n;
+}
+function getWindow(n) {
+	return n ? isWindow(n) ? n : isNode(n) ? n.ownerDocument?.defaultView ?? window : window : window;
+}
+function isDocument(n) {
+	let { Document: _ } = getWindow(n);
+	return n instanceof _;
+}
+function isHTMLElement(n) {
+	return isWindow(n) ? !1 : n instanceof getWindow(n).HTMLElement;
+}
+function isSVGElement(n) {
+	return n instanceof getWindow(n).SVGElement;
+}
+function getOwnerDocument(n) {
+	return n ? isWindow(n) ? n.document : isNode(n) ? isDocument(n) ? n : isHTMLElement(n) || isSVGElement(n) ? n.ownerDocument : document : document : document;
+}
+var useIsomorphicLayoutEffect = canUseDOM ? useLayoutEffect : useEffect;
+function useEvent(n) {
+	let _ = useRef(n);
+	return useIsomorphicLayoutEffect(() => {
+		_.current = n;
+	}), useCallback(function() {
+		var n = [...arguments];
+		return _.current == null ? void 0 : _.current(...n);
+	}, []);
+}
+function useInterval() {
+	let n = useRef(null);
+	return [useCallback((_, E) => {
+		n.current = setInterval(_, E);
+	}, []), useCallback(() => {
+		n.current !== null && (clearInterval(n.current), n.current = null);
+	}, [])];
+}
+function useLatestValue(n, _) {
+	_ === void 0 && (_ = [n]);
+	let E = useRef(n);
+	return useIsomorphicLayoutEffect(() => {
+		E.current !== n && (E.current = n);
+	}, _), E;
+}
+function useLazyMemo(n, _) {
+	let E = useRef();
+	return useMemo(() => {
+		let _ = n(E.current);
+		return E.current = _, _;
+	}, [..._]);
+}
+function useNodeRef(n) {
+	let _ = useEvent(n), E = useRef(null);
+	return [E, useCallback((n) => {
+		n !== E.current && _?.(n, E.current), E.current = n;
+	}, [])];
+}
+function usePrevious(n) {
+	let _ = useRef();
+	return useEffect(() => {
+		_.current = n;
+	}, [n]), _.current;
+}
+var ids = {};
+function useUniqueId(n, _) {
+	return useMemo(() => {
+		if (_) return _;
+		let E = ids[n] == null ? 0 : ids[n] + 1;
+		return ids[n] = E, n + "-" + E;
+	}, [n, _]);
+}
+function createAdjustmentFn(n) {
+	return function(_) {
+		return [...arguments].slice(1).reduce((_, E) => {
+			let O = Object.entries(E);
+			for (let [E, A] of O) {
+				let O = _[E];
+				O != null && (_[E] = O + n * A);
+			}
+			return _;
+		}, { ..._ });
+	};
+}
+var add = /* @__PURE__ */ createAdjustmentFn(1), subtract = /* @__PURE__ */ createAdjustmentFn(-1);
+function hasViewportRelativeCoordinates(n) {
+	return "clientX" in n && "clientY" in n;
+}
+function isKeyboardEvent(n) {
+	if (!n) return !1;
+	let { KeyboardEvent: _ } = getWindow(n.target);
+	return _ && n instanceof _;
+}
+function isTouchEvent(n) {
+	if (!n) return !1;
+	let { TouchEvent: _ } = getWindow(n.target);
+	return _ && n instanceof _;
+}
+function getEventCoordinates(n) {
+	if (isTouchEvent(n)) {
+		if (n.touches && n.touches.length) {
+			let { clientX: _, clientY: E } = n.touches[0];
+			return {
+				x: _,
+				y: E
+			};
+		} else if (n.changedTouches && n.changedTouches.length) {
+			let { clientX: _, clientY: E } = n.changedTouches[0];
+			return {
+				x: _,
+				y: E
+			};
+		}
+	}
+	return hasViewportRelativeCoordinates(n) ? {
+		x: n.clientX,
+		y: n.clientY
+	} : null;
+}
+var CSS$1 = /* @__PURE__ */ Object.freeze({
+	Translate: { toString(n) {
+		if (!n) return;
+		let { x: _, y: E } = n;
+		return "translate3d(" + (_ ? Math.round(_) : 0) + "px, " + (E ? Math.round(E) : 0) + "px, 0)";
+	} },
+	Scale: { toString(n) {
+		if (!n) return;
+		let { scaleX: _, scaleY: E } = n;
+		return "scaleX(" + _ + ") scaleY(" + E + ")";
+	} },
+	Transform: { toString(n) {
+		if (n) return [CSS$1.Translate.toString(n), CSS$1.Scale.toString(n)].join(" ");
+	} },
+	Transition: { toString(n) {
+		let { property: _, duration: E, easing: O } = n;
+		return _ + " " + E + "ms " + O;
+	} }
+}), SELECTOR = "a,frame,iframe,input:not([type=hidden]):not(:disabled),select:not(:disabled),textarea:not(:disabled),button:not(:disabled),*[tabindex]";
+function findFirstFocusableNode(n) {
+	return n.matches(SELECTOR) ? n : n.querySelector(SELECTOR);
+}
+var hiddenStyles = { display: "none" };
+function HiddenText(n) {
+	let { id: E, value: O } = n;
+	return React.createElement("div", {
+		id: E,
+		style: hiddenStyles
+	}, O);
+}
+function LiveRegion(n) {
+	let { id: E, announcement: O, ariaLiveType: A = "assertive" } = n;
+	return React.createElement("div", {
+		id: E,
+		style: {
+			position: "fixed",
+			top: 0,
+			left: 0,
+			width: 1,
+			height: 1,
+			margin: -1,
+			border: 0,
+			padding: 0,
+			overflow: "hidden",
+			clip: "rect(0 0 0 0)",
+			clipPath: "inset(100%)",
+			whiteSpace: "nowrap"
+		},
+		role: "status",
+		"aria-live": A,
+		"aria-atomic": !0
+	}, O);
+}
+function useAnnouncement() {
+	let [n, _] = useState("");
+	return {
+		announce: useCallback((n) => {
+			n != null && _(n);
+		}, []),
+		announcement: n
+	};
+}
+var DndMonitorContext = /* @__PURE__ */ createContext(null);
+function useDndMonitor(n) {
+	let _ = useContext(DndMonitorContext);
+	useEffect(() => {
+		if (!_) throw Error("useDndMonitor must be used within a children of <DndContext>");
+		return _(n);
+	}, [n, _]);
+}
+function useDndMonitorProvider() {
+	let [n] = useState(() => /* @__PURE__ */ new Set()), _ = useCallback((_) => (n.add(_), () => n.delete(_)), [n]);
+	return [useCallback((_) => {
+		let { type: E, event: O } = _;
+		n.forEach((n) => n[E]?.call(n, O));
+	}, [n]), _];
+}
+var defaultScreenReaderInstructions = { draggable: "\n    To pick up a draggable item, press the space bar.\n    While dragging, use the arrow keys to move the item.\n    Press space again to drop the item in its new position, or press escape to cancel.\n  " }, defaultAnnouncements = {
+	onDragStart(n) {
+		let { active: _ } = n;
+		return "Picked up draggable item " + _.id + ".";
+	},
+	onDragOver(n) {
+		let { active: _, over: E } = n;
+		return E ? "Draggable item " + _.id + " was moved over droppable area " + E.id + "." : "Draggable item " + _.id + " is no longer over a droppable area.";
+	},
+	onDragEnd(n) {
+		let { active: _, over: E } = n;
+		return E ? "Draggable item " + _.id + " was dropped over droppable area " + E.id : "Draggable item " + _.id + " was dropped.";
+	},
+	onDragCancel(n) {
+		let { active: _ } = n;
+		return "Dragging was cancelled. Draggable item " + _.id + " was dropped.";
+	}
+};
+function Accessibility(n) {
+	let { announcements: E = defaultAnnouncements, container: O, hiddenTextDescribedById: A, screenReaderInstructions: j = defaultScreenReaderInstructions } = n, { announce: M, announcement: N } = useAnnouncement(), P = useUniqueId("DndLiveRegion"), [z, B] = useState(!1);
+	if (useEffect(() => {
+		B(!0);
+	}, []), useDndMonitor(useMemo(() => ({
+		onDragStart(n) {
+			let { active: _ } = n;
+			M(E.onDragStart({ active: _ }));
+		},
+		onDragMove(n) {
+			let { active: _, over: O } = n;
+			E.onDragMove && M(E.onDragMove({
+				active: _,
+				over: O
+			}));
+		},
+		onDragOver(n) {
+			let { active: _, over: O } = n;
+			M(E.onDragOver({
+				active: _,
+				over: O
+			}));
+		},
+		onDragEnd(n) {
+			let { active: _, over: O } = n;
+			M(E.onDragEnd({
+				active: _,
+				over: O
+			}));
+		},
+		onDragCancel(n) {
+			let { active: _, over: O } = n;
+			M(E.onDragCancel({
+				active: _,
+				over: O
+			}));
+		}
+	}), [M, E])), !z) return null;
+	let H = React.createElement(React.Fragment, null, React.createElement(HiddenText, {
+		id: A,
+		value: j.draggable
+	}), React.createElement(LiveRegion, {
+		id: P,
+		announcement: N
+	}));
+	return O ? createPortal(H, O) : H;
+}
+var Action;
+(function(n) {
+	n.DragStart = "dragStart", n.DragMove = "dragMove", n.DragEnd = "dragEnd", n.DragCancel = "dragCancel", n.DragOver = "dragOver", n.RegisterDroppable = "registerDroppable", n.SetDroppableDisabled = "setDroppableDisabled", n.UnregisterDroppable = "unregisterDroppable";
+})(Action ||= {});
+function noop() {}
+function useSensor(n, _) {
+	return useMemo(() => ({
+		sensor: n,
+		options: _ ?? {}
+	}), [n, _]);
+}
+function useSensors() {
+	var n = [...arguments];
+	return useMemo(() => [...n].filter((n) => n != null), [...n]);
+}
+var defaultCoordinates = /* @__PURE__ */ Object.freeze({
+	x: 0,
+	y: 0
+});
+function getRelativeTransformOrigin(n, _) {
+	let E = getEventCoordinates(n);
+	if (!E) return "0 0";
+	let O = {
+		x: (E.x - _.left) / _.width * 100,
+		y: (E.y - _.top) / _.height * 100
+	};
+	return O.x + "% " + O.y + "%";
+}
+function sortCollisionsDesc(n, _) {
+	let { data: { value: E } } = n, { data: { value: O } } = _;
+	return O - E;
+}
+function getFirstCollision(n, _) {
+	if (!n || n.length === 0) return null;
+	let [E] = n;
+	return _ ? E[_] : E;
+}
+function getIntersectionRatio(n, _) {
+	let E = Math.max(_.top, n.top), O = Math.max(_.left, n.left), A = Math.min(_.left + _.width, n.left + n.width), j = Math.min(_.top + _.height, n.top + n.height), M = A - O, N = j - E;
+	if (O < A && E < j) {
+		let E = _.width * _.height, O = n.width * n.height, A = M * N, j = A / (E + O - A);
+		return Number(j.toFixed(4));
+	}
+	return 0;
+}
+var rectIntersection = (n) => {
+	let { collisionRect: _, droppableRects: E, droppableContainers: O } = n, A = [];
+	for (let n of O) {
+		let { id: O } = n, j = E.get(O);
+		if (j) {
+			let E = getIntersectionRatio(j, _);
+			E > 0 && A.push({
+				id: O,
+				data: {
+					droppableContainer: n,
+					value: E
+				}
+			});
+		}
+	}
+	return A.sort(sortCollisionsDesc);
+};
+function adjustScale(n, _, E) {
+	return {
+		...n,
+		scaleX: _ && E ? _.width / E.width : 1,
+		scaleY: _ && E ? _.height / E.height : 1
+	};
+}
+function getRectDelta(n, _) {
+	return n && _ ? {
+		x: n.left - _.left,
+		y: n.top - _.top
+	} : defaultCoordinates;
+}
+function createRectAdjustmentFn(n) {
+	return function(_) {
+		return [...arguments].slice(1).reduce((_, E) => ({
+			..._,
+			top: _.top + n * E.y,
+			bottom: _.bottom + n * E.y,
+			left: _.left + n * E.x,
+			right: _.right + n * E.x
+		}), { ..._ });
+	};
+}
+var getAdjustedRect = /* @__PURE__ */ createRectAdjustmentFn(1);
+function parseTransform(n) {
+	if (n.startsWith("matrix3d(")) {
+		let _ = n.slice(9, -1).split(/, /);
+		return {
+			x: +_[12],
+			y: +_[13],
+			scaleX: +_[0],
+			scaleY: +_[5]
+		};
+	} else if (n.startsWith("matrix(")) {
+		let _ = n.slice(7, -1).split(/, /);
+		return {
+			x: +_[4],
+			y: +_[5],
+			scaleX: +_[0],
+			scaleY: +_[3]
+		};
+	}
+	return null;
+}
+function inverseTransform(n, _, E) {
+	let O = parseTransform(_);
+	if (!O) return n;
+	let { scaleX: A, scaleY: j, x: M, y: N } = O, P = n.left - M - (1 - A) * parseFloat(E), z = n.top - N - (1 - j) * parseFloat(E.slice(E.indexOf(" ") + 1)), B = A ? n.width / A : n.width, H = j ? n.height / j : n.height;
+	return {
+		width: B,
+		height: H,
+		top: z,
+		right: P + B,
+		bottom: z + H,
+		left: P
+	};
+}
+var defaultOptions = { ignoreTransform: !1 };
+function getClientRect(n, _) {
+	_ === void 0 && (_ = defaultOptions);
+	let E = n.getBoundingClientRect();
+	if (_.ignoreTransform) {
+		let { transform: _, transformOrigin: O } = getWindow(n).getComputedStyle(n);
+		_ && (E = inverseTransform(E, _, O));
+	}
+	let { top: O, left: A, width: j, height: M, bottom: N, right: P } = E;
+	return {
+		top: O,
+		left: A,
+		width: j,
+		height: M,
+		bottom: N,
+		right: P
+	};
+}
+function getTransformAgnosticClientRect(n) {
+	return getClientRect(n, { ignoreTransform: !0 });
+}
+function getWindowClientRect(n) {
+	let _ = n.innerWidth, E = n.innerHeight;
+	return {
+		top: 0,
+		left: 0,
+		right: _,
+		bottom: E,
+		width: _,
+		height: E
+	};
+}
+function isFixed(n, _) {
+	return _ === void 0 && (_ = getWindow(n).getComputedStyle(n)), _.position === "fixed";
+}
+function isScrollable(n, _) {
+	_ === void 0 && (_ = getWindow(n).getComputedStyle(n));
+	let E = /(auto|scroll|overlay)/;
+	return [
+		"overflow",
+		"overflowX",
+		"overflowY"
+	].some((n) => {
+		let O = _[n];
+		return typeof O == "string" ? E.test(O) : !1;
+	});
+}
+function getScrollableAncestors(n, _) {
+	let E = [];
+	function O(A) {
+		if (_ != null && E.length >= _ || !A) return E;
+		if (isDocument(A) && A.scrollingElement != null && !E.includes(A.scrollingElement)) return E.push(A.scrollingElement), E;
+		if (!isHTMLElement(A) || isSVGElement(A) || E.includes(A)) return E;
+		let j = getWindow(n).getComputedStyle(A);
+		return A !== n && isScrollable(A, j) && E.push(A), isFixed(A, j) ? E : O(A.parentNode);
+	}
+	return n ? O(n) : E;
+}
+function getFirstScrollableAncestor(n) {
+	let [_] = getScrollableAncestors(n, 1);
+	return _ ?? null;
+}
+function getScrollableElement(n) {
+	return !canUseDOM || !n ? null : isWindow(n) ? n : isNode(n) ? isDocument(n) || n === getOwnerDocument(n).scrollingElement ? window : isHTMLElement(n) ? n : null : null;
+}
+function getScrollXCoordinate(n) {
+	return isWindow(n) ? n.scrollX : n.scrollLeft;
+}
+function getScrollYCoordinate(n) {
+	return isWindow(n) ? n.scrollY : n.scrollTop;
+}
+function getScrollCoordinates(n) {
+	return {
+		x: getScrollXCoordinate(n),
+		y: getScrollYCoordinate(n)
+	};
+}
+var Direction;
+(function(n) {
+	n[n.Forward = 1] = "Forward", n[n.Backward = -1] = "Backward";
+})(Direction ||= {});
+function isDocumentScrollingElement(n) {
+	return !canUseDOM || !n ? !1 : n === document.scrollingElement;
+}
+function getScrollPosition(n) {
+	let _ = {
+		x: 0,
+		y: 0
+	}, E = isDocumentScrollingElement(n) ? {
+		height: window.innerHeight,
+		width: window.innerWidth
+	} : {
+		height: n.clientHeight,
+		width: n.clientWidth
+	}, O = {
+		x: n.scrollWidth - E.width,
+		y: n.scrollHeight - E.height
+	};
+	return {
+		isTop: n.scrollTop <= _.y,
+		isLeft: n.scrollLeft <= _.x,
+		isBottom: n.scrollTop >= O.y,
+		isRight: n.scrollLeft >= O.x,
+		maxScroll: O,
+		minScroll: _
+	};
+}
+var defaultThreshold = {
+	x: .2,
+	y: .2
+};
+function getScrollDirectionAndSpeed(n, _, E, O, A) {
+	let { top: j, left: M, right: N, bottom: P } = E;
+	O === void 0 && (O = 10), A === void 0 && (A = defaultThreshold);
+	let { isTop: z, isBottom: B, isLeft: H, isRight: U } = getScrollPosition(n), W = {
+		x: 0,
+		y: 0
+	}, G = {
+		x: 0,
+		y: 0
+	}, Z = {
+		height: _.height * A.y,
+		width: _.width * A.x
+	};
+	return !z && j <= _.top + Z.height ? (W.y = Direction.Backward, G.y = O * Math.abs((_.top + Z.height - j) / Z.height)) : !B && P >= _.bottom - Z.height && (W.y = Direction.Forward, G.y = O * Math.abs((_.bottom - Z.height - P) / Z.height)), !U && N >= _.right - Z.width ? (W.x = Direction.Forward, G.x = O * Math.abs((_.right - Z.width - N) / Z.width)) : !H && M <= _.left + Z.width && (W.x = Direction.Backward, G.x = O * Math.abs((_.left + Z.width - M) / Z.width)), {
+		direction: W,
+		speed: G
+	};
+}
+function getScrollElementRect(n) {
+	if (n === document.scrollingElement) {
+		let { innerWidth: n, innerHeight: _ } = window;
+		return {
+			top: 0,
+			left: 0,
+			right: n,
+			bottom: _,
+			width: n,
+			height: _
+		};
+	}
+	let { top: _, left: E, right: O, bottom: A } = n.getBoundingClientRect();
+	return {
+		top: _,
+		left: E,
+		right: O,
+		bottom: A,
+		width: n.clientWidth,
+		height: n.clientHeight
+	};
+}
+function getScrollOffsets(n) {
+	return n.reduce((n, _) => add(n, getScrollCoordinates(_)), defaultCoordinates);
+}
+function getScrollXOffset(n) {
+	return n.reduce((n, _) => n + getScrollXCoordinate(_), 0);
+}
+function getScrollYOffset(n) {
+	return n.reduce((n, _) => n + getScrollYCoordinate(_), 0);
+}
+function scrollIntoViewIfNeeded(n, _) {
+	if (_ === void 0 && (_ = getClientRect), !n) return;
+	let { top: E, left: O, bottom: A, right: j } = _(n);
+	getFirstScrollableAncestor(n) && (A <= 0 || j <= 0 || E >= window.innerHeight || O >= window.innerWidth) && n.scrollIntoView({
+		block: "center",
+		inline: "center"
+	});
+}
+var properties = [[
+	"x",
+	["left", "right"],
+	getScrollXOffset
+], [
+	"y",
+	["top", "bottom"],
+	getScrollYOffset
+]], Rect = class {
+	constructor(n, _) {
+		this.rect = void 0, this.width = void 0, this.height = void 0, this.top = void 0, this.bottom = void 0, this.right = void 0, this.left = void 0;
+		let E = getScrollableAncestors(_), O = getScrollOffsets(E);
+		this.rect = { ...n }, this.width = n.width, this.height = n.height;
+		for (let [n, _, A] of properties) for (let j of _) Object.defineProperty(this, j, {
+			get: () => {
+				let _ = A(E), M = O[n] - _;
+				return this.rect[j] + M;
+			},
+			enumerable: !0
+		});
+		Object.defineProperty(this, "rect", { enumerable: !1 });
+	}
+}, Listeners = class {
+	constructor(n) {
+		this.target = void 0, this.listeners = [], this.removeAll = () => {
+			this.listeners.forEach((n) => this.target?.removeEventListener(...n));
+		}, this.target = n;
+	}
+	add(n, _, E) {
+		var O;
+		(O = this.target) == null || O.addEventListener(n, _, E), this.listeners.push([
+			n,
+			_,
+			E
+		]);
+	}
+};
+function getEventListenerTarget(n) {
+	let { EventTarget: _ } = getWindow(n);
+	return n instanceof _ ? n : getOwnerDocument(n);
+}
+function hasExceededDistance(n, _) {
+	let E = Math.abs(n.x), O = Math.abs(n.y);
+	return typeof _ == "number" ? Math.sqrt(E ** 2 + O ** 2) > _ : "x" in _ && "y" in _ ? E > _.x && O > _.y : "x" in _ ? E > _.x : "y" in _ ? O > _.y : !1;
+}
+var EventName;
+(function(n) {
+	n.Click = "click", n.DragStart = "dragstart", n.Keydown = "keydown", n.ContextMenu = "contextmenu", n.Resize = "resize", n.SelectionChange = "selectionchange", n.VisibilityChange = "visibilitychange";
+})(EventName ||= {});
+function preventDefault(n) {
+	n.preventDefault();
+}
+function stopPropagation(n) {
+	n.stopPropagation();
+}
+var KeyboardCode;
+(function(n) {
+	n.Space = "Space", n.Down = "ArrowDown", n.Right = "ArrowRight", n.Left = "ArrowLeft", n.Up = "ArrowUp", n.Esc = "Escape", n.Enter = "Enter", n.Tab = "Tab";
+})(KeyboardCode ||= {});
+var defaultKeyboardCodes = {
+	start: [KeyboardCode.Space, KeyboardCode.Enter],
+	cancel: [KeyboardCode.Esc],
+	end: [
+		KeyboardCode.Space,
+		KeyboardCode.Enter,
+		KeyboardCode.Tab
+	]
+}, defaultKeyboardCoordinateGetter = (n, _) => {
+	let { currentCoordinates: E } = _;
+	switch (n.code) {
+		case KeyboardCode.Right: return {
+			...E,
+			x: E.x + 25
+		};
+		case KeyboardCode.Left: return {
+			...E,
+			x: E.x - 25
+		};
+		case KeyboardCode.Down: return {
+			...E,
+			y: E.y + 25
+		};
+		case KeyboardCode.Up: return {
+			...E,
+			y: E.y - 25
+		};
+	}
+}, KeyboardSensor = class {
+	constructor(n) {
+		this.props = void 0, this.autoScrollEnabled = !1, this.referenceCoordinates = void 0, this.listeners = void 0, this.windowListeners = void 0, this.props = n;
+		let { event: { target: _ } } = n;
+		this.props = n, this.listeners = new Listeners(getOwnerDocument(_)), this.windowListeners = new Listeners(getWindow(_)), this.handleKeyDown = this.handleKeyDown.bind(this), this.handleCancel = this.handleCancel.bind(this), this.attach();
+	}
+	attach() {
+		this.handleStart(), this.windowListeners.add(EventName.Resize, this.handleCancel), this.windowListeners.add(EventName.VisibilityChange, this.handleCancel), setTimeout(() => this.listeners.add(EventName.Keydown, this.handleKeyDown));
+	}
+	handleStart() {
+		let { activeNode: n, onStart: _ } = this.props, E = n.node.current;
+		E && scrollIntoViewIfNeeded(E), _(defaultCoordinates);
+	}
+	handleKeyDown(n) {
+		if (isKeyboardEvent(n)) {
+			let { active: _, context: E, options: O } = this.props, { keyboardCodes: A = defaultKeyboardCodes, coordinateGetter: j = defaultKeyboardCoordinateGetter, scrollBehavior: M = "smooth" } = O, { code: N } = n;
+			if (A.end.includes(N)) {
+				this.handleEnd(n);
+				return;
+			}
+			if (A.cancel.includes(N)) {
+				this.handleCancel(n);
+				return;
+			}
+			let { collisionRect: P } = E.current, z = P ? {
+				x: P.left,
+				y: P.top
+			} : defaultCoordinates;
+			this.referenceCoordinates ||= z;
+			let B = j(n, {
+				active: _,
+				context: E.current,
+				currentCoordinates: z
+			});
+			if (B) {
+				let _ = subtract(B, z), O = {
+					x: 0,
+					y: 0
+				}, { scrollableAncestors: A } = E.current;
+				for (let E of A) {
+					let A = n.code, { isTop: j, isRight: N, isLeft: P, isBottom: z, maxScroll: H, minScroll: U } = getScrollPosition(E), W = getScrollElementRect(E), G = {
+						x: Math.min(A === KeyboardCode.Right ? W.right - W.width / 2 : W.right, Math.max(A === KeyboardCode.Right ? W.left : W.left + W.width / 2, B.x)),
+						y: Math.min(A === KeyboardCode.Down ? W.bottom - W.height / 2 : W.bottom, Math.max(A === KeyboardCode.Down ? W.top : W.top + W.height / 2, B.y))
+					}, Z = A === KeyboardCode.Right && !N || A === KeyboardCode.Left && !P, uz = A === KeyboardCode.Down && !z || A === KeyboardCode.Up && !j;
+					if (Z && G.x !== B.x) {
+						let n = E.scrollLeft + _.x, j = A === KeyboardCode.Right && n <= H.x || A === KeyboardCode.Left && n >= U.x;
+						if (j && !_.y) {
+							E.scrollTo({
+								left: n,
+								behavior: M
+							});
+							return;
+						}
+						j ? O.x = E.scrollLeft - n : O.x = A === KeyboardCode.Right ? E.scrollLeft - H.x : E.scrollLeft - U.x, O.x && E.scrollBy({
+							left: -O.x,
+							behavior: M
+						});
+						break;
+					} else if (uz && G.y !== B.y) {
+						let n = E.scrollTop + _.y, j = A === KeyboardCode.Down && n <= H.y || A === KeyboardCode.Up && n >= U.y;
+						if (j && !_.x) {
+							E.scrollTo({
+								top: n,
+								behavior: M
+							});
+							return;
+						}
+						j ? O.y = E.scrollTop - n : O.y = A === KeyboardCode.Down ? E.scrollTop - H.y : E.scrollTop - U.y, O.y && E.scrollBy({
+							top: -O.y,
+							behavior: M
+						});
+						break;
+					}
+				}
+				this.handleMove(n, add(subtract(B, this.referenceCoordinates), O));
+			}
+		}
+	}
+	handleMove(n, _) {
+		let { onMove: E } = this.props;
+		n.preventDefault(), E(_);
+	}
+	handleEnd(n) {
+		let { onEnd: _ } = this.props;
+		n.preventDefault(), this.detach(), _();
+	}
+	handleCancel(n) {
+		let { onCancel: _ } = this.props;
+		n.preventDefault(), this.detach(), _();
+	}
+	detach() {
+		this.listeners.removeAll(), this.windowListeners.removeAll();
+	}
+};
+KeyboardSensor.activators = [{
+	eventName: "onKeyDown",
+	handler: (n, _, E) => {
+		let { keyboardCodes: O = defaultKeyboardCodes, onActivation: A } = _, { active: j } = E, { code: M } = n.nativeEvent;
+		if (O.start.includes(M)) {
+			let _ = j.activatorNode.current;
+			return _ && n.target !== _ ? !1 : (n.preventDefault(), A?.({ event: n.nativeEvent }), !0);
+		}
+		return !1;
+	}
+}];
+function isDistanceConstraint(n) {
+	return !!(n && "distance" in n);
+}
+function isDelayConstraint(n) {
+	return !!(n && "delay" in n);
+}
+var AbstractPointerSensor = class {
+	constructor(n, _, E) {
+		E === void 0 && (E = getEventListenerTarget(n.event.target)), this.props = void 0, this.events = void 0, this.autoScrollEnabled = !0, this.document = void 0, this.activated = !1, this.initialCoordinates = void 0, this.timeoutId = null, this.listeners = void 0, this.documentListeners = void 0, this.windowListeners = void 0, this.props = n, this.events = _;
+		let { event: O } = n, { target: A } = O;
+		this.props = n, this.events = _, this.document = getOwnerDocument(A), this.documentListeners = new Listeners(this.document), this.listeners = new Listeners(E), this.windowListeners = new Listeners(getWindow(A)), this.initialCoordinates = getEventCoordinates(O) ?? defaultCoordinates, this.handleStart = this.handleStart.bind(this), this.handleMove = this.handleMove.bind(this), this.handleEnd = this.handleEnd.bind(this), this.handleCancel = this.handleCancel.bind(this), this.handleKeydown = this.handleKeydown.bind(this), this.removeTextSelection = this.removeTextSelection.bind(this), this.attach();
+	}
+	attach() {
+		let { events: n, props: { options: { activationConstraint: _, bypassActivationConstraint: E } } } = this;
+		if (this.listeners.add(n.move.name, this.handleMove, { passive: !1 }), this.listeners.add(n.end.name, this.handleEnd), n.cancel && this.listeners.add(n.cancel.name, this.handleCancel), this.windowListeners.add(EventName.Resize, this.handleCancel), this.windowListeners.add(EventName.DragStart, preventDefault), this.windowListeners.add(EventName.VisibilityChange, this.handleCancel), this.windowListeners.add(EventName.ContextMenu, preventDefault), this.documentListeners.add(EventName.Keydown, this.handleKeydown), _) {
+			if (E != null && E({
+				event: this.props.event,
+				activeNode: this.props.activeNode,
+				options: this.props.options
+			})) return this.handleStart();
+			if (isDelayConstraint(_)) {
+				this.timeoutId = setTimeout(this.handleStart, _.delay), this.handlePending(_);
+				return;
+			}
+			if (isDistanceConstraint(_)) {
+				this.handlePending(_);
+				return;
+			}
+		}
+		this.handleStart();
+	}
+	detach() {
+		this.listeners.removeAll(), this.windowListeners.removeAll(), setTimeout(this.documentListeners.removeAll, 50), this.timeoutId !== null && (clearTimeout(this.timeoutId), this.timeoutId = null);
+	}
+	handlePending(n, _) {
+		let { active: E, onPending: O } = this.props;
+		O(E, n, this.initialCoordinates, _);
+	}
+	handleStart() {
+		let { initialCoordinates: n } = this, { onStart: _ } = this.props;
+		n && (this.activated = !0, this.documentListeners.add(EventName.Click, stopPropagation, { capture: !0 }), this.removeTextSelection(), this.documentListeners.add(EventName.SelectionChange, this.removeTextSelection), _(n));
+	}
+	handleMove(n) {
+		let { activated: _, initialCoordinates: E, props: O } = this, { onMove: A, options: { activationConstraint: j } } = O;
+		if (!E) return;
+		let M = getEventCoordinates(n) ?? defaultCoordinates, N = subtract(E, M);
+		if (!_ && j) {
+			if (isDistanceConstraint(j)) {
+				if (j.tolerance != null && hasExceededDistance(N, j.tolerance)) return this.handleCancel();
+				if (hasExceededDistance(N, j.distance)) return this.handleStart();
+			}
+			if (isDelayConstraint(j) && hasExceededDistance(N, j.tolerance)) return this.handleCancel();
+			this.handlePending(j, N);
+			return;
+		}
+		n.cancelable && n.preventDefault(), A(M);
+	}
+	handleEnd() {
+		let { onAbort: n, onEnd: _ } = this.props;
+		this.detach(), this.activated || n(this.props.active), _();
+	}
+	handleCancel() {
+		let { onAbort: n, onCancel: _ } = this.props;
+		this.detach(), this.activated || n(this.props.active), _();
+	}
+	handleKeydown(n) {
+		n.code === KeyboardCode.Esc && this.handleCancel();
+	}
+	removeTextSelection() {
+		var n;
+		(n = this.document.getSelection()) == null || n.removeAllRanges();
+	}
+}, events = {
+	cancel: { name: "pointercancel" },
+	move: { name: "pointermove" },
+	end: { name: "pointerup" }
+}, PointerSensor = class extends AbstractPointerSensor {
+	constructor(n) {
+		let { event: _ } = n, E = getOwnerDocument(_.target);
+		super(n, events, E);
+	}
+};
+PointerSensor.activators = [{
+	eventName: "onPointerDown",
+	handler: (n, _) => {
+		let { nativeEvent: E } = n, { onActivation: O } = _;
+		return !E.isPrimary || E.button !== 0 ? !1 : (O?.({ event: E }), !0);
+	}
+}];
+var events$1 = {
+	move: { name: "mousemove" },
+	end: { name: "mouseup" }
+}, MouseButton;
+(function(n) {
+	n[n.RightClick = 2] = "RightClick";
+})(MouseButton ||= {});
+var MouseSensor = class extends AbstractPointerSensor {
+	constructor(n) {
+		super(n, events$1, getOwnerDocument(n.event.target));
+	}
+};
+MouseSensor.activators = [{
+	eventName: "onMouseDown",
+	handler: (n, _) => {
+		let { nativeEvent: E } = n, { onActivation: O } = _;
+		return E.button === MouseButton.RightClick ? !1 : (O?.({ event: E }), !0);
+	}
+}];
+var events$2 = {
+	cancel: { name: "touchcancel" },
+	move: { name: "touchmove" },
+	end: { name: "touchend" }
+}, TouchSensor = class extends AbstractPointerSensor {
+	constructor(n) {
+		super(n, events$2);
+	}
+	static setup() {
+		return window.addEventListener(events$2.move.name, n, {
+			capture: !1,
+			passive: !1
+		}), function() {
+			window.removeEventListener(events$2.move.name, n);
+		};
+		function n() {}
+	}
+};
+TouchSensor.activators = [{
+	eventName: "onTouchStart",
+	handler: (n, _) => {
+		let { nativeEvent: E } = n, { onActivation: O } = _, { touches: A } = E;
+		return A.length > 1 ? !1 : (O?.({ event: E }), !0);
+	}
+}];
+var AutoScrollActivator;
+(function(n) {
+	n[n.Pointer = 0] = "Pointer", n[n.DraggableRect = 1] = "DraggableRect";
+})(AutoScrollActivator ||= {});
+var TraversalOrder;
+(function(n) {
+	n[n.TreeOrder = 0] = "TreeOrder", n[n.ReversedTreeOrder = 1] = "ReversedTreeOrder";
+})(TraversalOrder ||= {});
+function useAutoScroller(n) {
+	let { acceleration: _, activator: E = AutoScrollActivator.Pointer, canScroll: O, draggingRect: A, enabled: j, interval: M = 5, order: N = TraversalOrder.TreeOrder, pointerCoordinates: P, scrollableAncestors: z, scrollableAncestorRects: B, delta: H, threshold: W } = n, Z = useScrollIntent({
+		delta: H,
+		disabled: !j
+	}), [uz, dz] = useInterval(), fz = useRef({
+		x: 0,
+		y: 0
+	}), mz = useRef({
+		x: 0,
+		y: 0
+	}), gz = useMemo(() => {
+		switch (E) {
+			case AutoScrollActivator.Pointer: return P ? {
+				top: P.y,
+				bottom: P.y,
+				left: P.x,
+				right: P.x
+			} : null;
+			case AutoScrollActivator.DraggableRect: return A;
+		}
+	}, [
+		E,
+		A,
+		P
+	]), _z = useRef(null), vz = useCallback(() => {
+		let n = _z.current;
+		if (!n) return;
+		let _ = fz.current.x * mz.current.x, E = fz.current.y * mz.current.y;
+		n.scrollBy(_, E);
+	}, []), yz = useMemo(() => N === TraversalOrder.TreeOrder ? [...z].reverse() : z, [N, z]);
+	useEffect(() => {
+		if (!j || !z.length || !gz) {
+			dz();
+			return;
+		}
+		for (let n of yz) {
+			if (O?.(n) === !1) continue;
+			let E = B[z.indexOf(n)];
+			if (!E) continue;
+			let { direction: A, speed: j } = getScrollDirectionAndSpeed(n, E, gz, _, W);
+			for (let n of ["x", "y"]) Z[n][A[n]] || (j[n] = 0, A[n] = 0);
+			if (j.x > 0 || j.y > 0) {
+				dz(), _z.current = n, uz(vz, M), fz.current = j, mz.current = A;
+				return;
+			}
+		}
+		fz.current = {
+			x: 0,
+			y: 0
+		}, mz.current = {
+			x: 0,
+			y: 0
+		}, dz();
+	}, [
+		_,
+		vz,
+		O,
+		dz,
+		j,
+		M,
+		JSON.stringify(gz),
+		JSON.stringify(Z),
+		uz,
+		z,
+		yz,
+		B,
+		JSON.stringify(W)
+	]);
+}
+var defaultScrollIntent = {
+	x: {
+		[Direction.Backward]: !1,
+		[Direction.Forward]: !1
+	},
+	y: {
+		[Direction.Backward]: !1,
+		[Direction.Forward]: !1
+	}
+};
+function useScrollIntent(n) {
+	let { delta: _, disabled: E } = n, O = usePrevious(_);
+	return useLazyMemo((n) => {
+		if (E || !O || !n) return defaultScrollIntent;
+		let A = {
+			x: Math.sign(_.x - O.x),
+			y: Math.sign(_.y - O.y)
+		};
+		return {
+			x: {
+				[Direction.Backward]: n.x[Direction.Backward] || A.x === -1,
+				[Direction.Forward]: n.x[Direction.Forward] || A.x === 1
+			},
+			y: {
+				[Direction.Backward]: n.y[Direction.Backward] || A.y === -1,
+				[Direction.Forward]: n.y[Direction.Forward] || A.y === 1
+			}
+		};
+	}, [
+		E,
+		_,
+		O
+	]);
+}
+function useCachedNode(n, _) {
+	let E = _ == null ? void 0 : n.get(_), O = E ? E.node.current : null;
+	return useLazyMemo((n) => _ == null ? null : O ?? n ?? null, [O, _]);
+}
+function useCombineActivators(n, _) {
+	return useMemo(() => n.reduce((n, E) => {
+		let { sensor: O } = E, A = O.activators.map((n) => ({
+			eventName: n.eventName,
+			handler: _(n.handler, E)
+		}));
+		return [...n, ...A];
+	}, []), [n, _]);
+}
+var MeasuringStrategy;
+(function(n) {
+	n[n.Always = 0] = "Always", n[n.BeforeDragging = 1] = "BeforeDragging", n[n.WhileDragging = 2] = "WhileDragging";
+})(MeasuringStrategy ||= {});
+var MeasuringFrequency;
+(function(n) {
+	n.Optimized = "optimized";
+})(MeasuringFrequency ||= {});
+var defaultValue = /* @__PURE__ */ new Map();
+function useDroppableMeasuring(n, _) {
+	let { dragging: E, dependencies: O, config: A } = _, [j, M] = useState(null), { frequency: N, measure: P, strategy: z } = A, B = useRef(n), H = fz(), W = useLatestValue(H), Z = useCallback(function(n) {
+		n === void 0 && (n = []), !W.current && M((_) => _ === null ? n : _.concat(n.filter((n) => !_.includes(n))));
+	}, [W]), uz = useRef(null), dz = useLazyMemo((_) => {
+		if (H && !E) return defaultValue;
+		if (!_ || _ === defaultValue || B.current !== n || j != null) {
+			let _ = /* @__PURE__ */ new Map();
+			for (let E of n) {
+				if (!E) continue;
+				if (j && j.length > 0 && !j.includes(E.id) && E.rect.current) {
+					_.set(E.id, E.rect.current);
+					continue;
+				}
+				let n = E.node.current, O = n ? new Rect(P(n), n) : null;
+				E.rect.current = O, O && _.set(E.id, O);
+			}
+			return _;
+		}
+		return _;
+	}, [
+		n,
+		j,
+		E,
+		H,
+		P
+	]);
+	return useEffect(() => {
+		B.current = n;
+	}, [n]), useEffect(() => {
+		H || Z();
+	}, [E, H]), useEffect(() => {
+		j && j.length > 0 && M(null);
+	}, [JSON.stringify(j)]), useEffect(() => {
+		H || typeof N != "number" || uz.current !== null || (uz.current = setTimeout(() => {
+			Z(), uz.current = null;
+		}, N));
+	}, [
+		N,
+		H,
+		Z,
+		...O
+	]), {
+		droppableRects: dz,
+		measureDroppableContainers: Z,
+		measuringScheduled: j != null
+	};
+	function fz() {
+		switch (z) {
+			case MeasuringStrategy.Always: return !1;
+			case MeasuringStrategy.BeforeDragging: return E;
+			default: return !E;
+		}
+	}
+}
+function useInitialValue(n, _) {
+	return useLazyMemo((E) => n ? E || (typeof _ == "function" ? _(n) : n) : null, [_, n]);
+}
+function useInitialRect(n, _) {
+	return useInitialValue(n, _);
+}
+function useMutationObserver(n) {
+	let { callback: _, disabled: E } = n, O = useEvent(_), A = useMemo(() => {
+		if (E || typeof window > "u" || window.MutationObserver === void 0) return;
+		let { MutationObserver: n } = window;
+		return new n(O);
+	}, [O, E]);
+	return useEffect(() => () => A?.disconnect(), [A]), A;
+}
+function useResizeObserver(n) {
+	let { callback: _, disabled: E } = n, O = useEvent(_), A = useMemo(() => {
+		if (E || typeof window > "u" || window.ResizeObserver === void 0) return;
+		let { ResizeObserver: n } = window;
+		return new n(O);
+	}, [E]);
+	return useEffect(() => () => A?.disconnect(), [A]), A;
+}
+function defaultMeasure(n) {
+	return new Rect(getClientRect(n), n);
+}
+function useRect(n, _, E) {
+	_ === void 0 && (_ = defaultMeasure);
+	let [O, A] = useState(null);
+	function j() {
+		A((O) => {
+			if (!n) return null;
+			if (n.isConnected === !1) return O ?? E ?? null;
+			let A = _(n);
+			return JSON.stringify(O) === JSON.stringify(A) ? O : A;
+		});
+	}
+	let M = useMutationObserver({ callback(_) {
+		if (n) for (let E of _) {
+			let { type: _, target: O } = E;
+			if (_ === "childList" && O instanceof HTMLElement && O.contains(n)) {
+				j();
+				break;
+			}
+		}
+	} }), N = useResizeObserver({ callback: j });
+	return useIsomorphicLayoutEffect(() => {
+		j(), n ? (N?.observe(n), M?.observe(document.body, {
+			childList: !0,
+			subtree: !0
+		})) : (N?.disconnect(), M?.disconnect());
+	}, [n]), O;
+}
+function useRectDelta(n) {
+	return getRectDelta(n, useInitialValue(n));
+}
+var defaultValue$1 = [];
+function useScrollableAncestors(n) {
+	let _ = useRef(n), E = useLazyMemo((E) => n ? E && E !== defaultValue$1 && n && _.current && n.parentNode === _.current.parentNode ? E : getScrollableAncestors(n) : defaultValue$1, [n]);
+	return useEffect(() => {
+		_.current = n;
+	}, [n]), E;
+}
+function useScrollOffsets(n) {
+	let [_, E] = useState(null), O = useRef(n), A = useCallback((n) => {
+		let _ = getScrollableElement(n.target);
+		_ && E((n) => n ? (n.set(_, getScrollCoordinates(_)), new Map(n)) : null);
+	}, []);
+	return useEffect(() => {
+		let _ = O.current;
+		if (n !== _) {
+			j(_);
+			let M = n.map((n) => {
+				let _ = getScrollableElement(n);
+				return _ ? (_.addEventListener("scroll", A, { passive: !0 }), [_, getScrollCoordinates(_)]) : null;
+			}).filter((n) => n != null);
+			E(M.length ? new Map(M) : null), O.current = n;
+		}
+		return () => {
+			j(n), j(_);
+		};
+		function j(n) {
+			n.forEach((n) => {
+				getScrollableElement(n)?.removeEventListener("scroll", A);
+			});
+		}
+	}, [A, n]), useMemo(() => n.length ? _ ? Array.from(_.values()).reduce((n, _) => add(n, _), defaultCoordinates) : getScrollOffsets(n) : defaultCoordinates, [n, _]);
+}
+function useScrollOffsetsDelta(n, _) {
+	_ === void 0 && (_ = []);
+	let E = useRef(null);
+	return useEffect(() => {
+		E.current = null;
+	}, _), useEffect(() => {
+		let _ = n !== defaultCoordinates;
+		_ && !E.current && (E.current = n), !_ && E.current && (E.current = null);
+	}, [n]), E.current ? subtract(n, E.current) : defaultCoordinates;
+}
+function useSensorSetup(n) {
+	useEffect(() => {
+		if (!canUseDOM) return;
+		let _ = n.map((n) => {
+			let { sensor: _ } = n;
+			return _.setup == null ? void 0 : _.setup();
+		});
+		return () => {
+			for (let n of _) n?.();
+		};
+	}, n.map((n) => {
+		let { sensor: _ } = n;
+		return _;
+	}));
+}
+function useSyntheticListeners(n, _) {
+	return useMemo(() => n.reduce((n, E) => {
+		let { eventName: O, handler: A } = E;
+		return n[O] = (n) => {
+			A(n, _);
+		}, n;
+	}, {}), [n, _]);
+}
+function useWindowRect(n) {
+	return useMemo(() => n ? getWindowClientRect(n) : null, [n]);
+}
+var defaultValue$2 = [];
+function useRects(n, _) {
+	_ === void 0 && (_ = getClientRect);
+	let [E] = n, O = useWindowRect(E ? getWindow(E) : null), [A, j] = useState(defaultValue$2);
+	function M() {
+		j(() => n.length ? n.map((n) => isDocumentScrollingElement(n) ? O : new Rect(_(n), n)) : defaultValue$2);
+	}
+	let N = useResizeObserver({ callback: M });
+	return useIsomorphicLayoutEffect(() => {
+		N?.disconnect(), M(), n.forEach((n) => N?.observe(n));
+	}, [n]), A;
+}
+function getMeasurableNode(n) {
+	if (!n) return null;
+	if (n.children.length > 1) return n;
+	let _ = n.children[0];
+	return isHTMLElement(_) ? _ : n;
+}
+function useDragOverlayMeasuring(n) {
+	let { measure: _ } = n, [E, O] = useState(null), A = useResizeObserver({ callback: useCallback((n) => {
+		for (let { target: E } of n) if (isHTMLElement(E)) {
+			O((n) => {
+				let O = _(E);
+				return n ? {
+					...n,
+					width: O.width,
+					height: O.height
+				} : O;
+			});
+			break;
+		}
+	}, [_]) }), [j, M] = useNodeRef(useCallback((n) => {
+		let E = getMeasurableNode(n);
+		A?.disconnect(), E && A?.observe(E), O(E ? _(E) : null);
+	}, [_, A]));
+	return useMemo(() => ({
+		nodeRef: j,
+		rect: E,
+		setRef: M
+	}), [
+		E,
+		j,
+		M
+	]);
+}
+var defaultSensors = [{
+	sensor: PointerSensor,
+	options: {}
+}, {
+	sensor: KeyboardSensor,
+	options: {}
+}], defaultData = { current: {} }, defaultMeasuringConfiguration = {
+	draggable: { measure: getTransformAgnosticClientRect },
+	droppable: {
+		measure: getTransformAgnosticClientRect,
+		strategy: MeasuringStrategy.WhileDragging,
+		frequency: MeasuringFrequency.Optimized
+	},
+	dragOverlay: { measure: getClientRect }
+}, DroppableContainersMap = class extends Map {
+	get(n) {
+		return n == null ? void 0 : super.get(n) ?? void 0;
+	}
+	toArray() {
+		return Array.from(this.values());
+	}
+	getEnabled() {
+		return this.toArray().filter((n) => {
+			let { disabled: _ } = n;
+			return !_;
+		});
+	}
+	getNodeFor(n) {
+		return this.get(n)?.node.current ?? void 0;
+	}
+}, defaultPublicContext = {
+	activatorEvent: null,
+	active: null,
+	activeNode: null,
+	activeNodeRect: null,
+	collisions: null,
+	containerNodeRect: null,
+	draggableNodes: /* @__PURE__ */ new Map(),
+	droppableRects: /* @__PURE__ */ new Map(),
+	droppableContainers: /* @__PURE__ */ new DroppableContainersMap(),
+	over: null,
+	dragOverlay: {
+		nodeRef: { current: null },
+		rect: null,
+		setRef: noop
+	},
+	scrollableAncestors: [],
+	scrollableAncestorRects: [],
+	measuringConfiguration: defaultMeasuringConfiguration,
+	measureDroppableContainers: noop,
+	windowRect: null,
+	measuringScheduled: !1
+}, defaultInternalContext = {
+	activatorEvent: null,
+	activators: [],
+	active: null,
+	activeNodeRect: null,
+	ariaDescribedById: { draggable: "" },
+	dispatch: noop,
+	draggableNodes: /* @__PURE__ */ new Map(),
+	over: null,
+	measureDroppableContainers: noop
+}, InternalContext = /* @__PURE__ */ createContext(defaultInternalContext), PublicContext = /* @__PURE__ */ createContext(defaultPublicContext);
+function getInitialState() {
+	return {
+		draggable: {
+			active: null,
+			initialCoordinates: {
+				x: 0,
+				y: 0
+			},
+			nodes: /* @__PURE__ */ new Map(),
+			translate: {
+				x: 0,
+				y: 0
+			}
+		},
+		droppable: { containers: new DroppableContainersMap() }
+	};
+}
+function reducer(n, _) {
+	switch (_.type) {
+		case Action.DragStart: return {
+			...n,
+			draggable: {
+				...n.draggable,
+				initialCoordinates: _.initialCoordinates,
+				active: _.active
+			}
+		};
+		case Action.DragMove: return n.draggable.active == null ? n : {
+			...n,
+			draggable: {
+				...n.draggable,
+				translate: {
+					x: _.coordinates.x - n.draggable.initialCoordinates.x,
+					y: _.coordinates.y - n.draggable.initialCoordinates.y
+				}
+			}
+		};
+		case Action.DragEnd:
+		case Action.DragCancel: return {
+			...n,
+			draggable: {
+				...n.draggable,
+				active: null,
+				initialCoordinates: {
+					x: 0,
+					y: 0
+				},
+				translate: {
+					x: 0,
+					y: 0
+				}
+			}
+		};
+		case Action.RegisterDroppable: {
+			let { element: E } = _, { id: O } = E, A = new DroppableContainersMap(n.droppable.containers);
+			return A.set(O, E), {
+				...n,
+				droppable: {
+					...n.droppable,
+					containers: A
+				}
+			};
+		}
+		case Action.SetDroppableDisabled: {
+			let { id: E, key: O, disabled: A } = _, j = n.droppable.containers.get(E);
+			if (!j || O !== j.key) return n;
+			let M = new DroppableContainersMap(n.droppable.containers);
+			return M.set(E, {
+				...j,
+				disabled: A
+			}), {
+				...n,
+				droppable: {
+					...n.droppable,
+					containers: M
+				}
+			};
+		}
+		case Action.UnregisterDroppable: {
+			let { id: E, key: O } = _, A = n.droppable.containers.get(E);
+			if (!A || O !== A.key) return n;
+			let j = new DroppableContainersMap(n.droppable.containers);
+			return j.delete(E), {
+				...n,
+				droppable: {
+					...n.droppable,
+					containers: j
+				}
+			};
+		}
+		default: return n;
+	}
+}
+function RestoreFocus(n) {
+	let { disabled: _ } = n, { active: E, activatorEvent: O, draggableNodes: A } = useContext(InternalContext), j = usePrevious(O), M = usePrevious(E?.id);
+	return useEffect(() => {
+		if (!_ && !O && j && M != null) {
+			if (!isKeyboardEvent(j) || document.activeElement === j.target) return;
+			let n = A.get(M);
+			if (!n) return;
+			let { activatorNode: _, node: E } = n;
+			if (!_.current && !E.current) return;
+			requestAnimationFrame(() => {
+				for (let n of [_.current, E.current]) {
+					if (!n) continue;
+					let _ = findFirstFocusableNode(n);
+					if (_) {
+						_.focus();
+						break;
+					}
+				}
+			});
+		}
+	}, [
+		O,
+		_,
+		A,
+		M,
+		j
+	]), null;
+}
+function applyModifiers(n, _) {
+	let { transform: E, ...O } = _;
+	return n != null && n.length ? n.reduce((n, _) => _({
+		transform: n,
+		...O
+	}), E) : E;
+}
+function useMeasuringConfiguration(n) {
+	return useMemo(() => ({
+		draggable: {
+			...defaultMeasuringConfiguration.draggable,
+			...n?.draggable
+		},
+		droppable: {
+			...defaultMeasuringConfiguration.droppable,
+			...n?.droppable
+		},
+		dragOverlay: {
+			...defaultMeasuringConfiguration.dragOverlay,
+			...n?.dragOverlay
+		}
+	}), [
+		n?.draggable,
+		n?.droppable,
+		n?.dragOverlay
+	]);
+}
+function useLayoutShiftScrollCompensation(n) {
+	let { activeNode: _, measure: E, initialRect: O, config: A = !0 } = n, j = useRef(!1), { x: M, y: N } = typeof A == "boolean" ? {
+		x: A,
+		y: A
+	} : A;
+	useIsomorphicLayoutEffect(() => {
+		if (!M && !N || !_) {
+			j.current = !1;
+			return;
+		}
+		if (j.current || !O) return;
+		let n = _?.node.current;
+		if (!n || n.isConnected === !1) return;
+		let A = getRectDelta(E(n), O);
+		if (M || (A.x = 0), N || (A.y = 0), j.current = !0, Math.abs(A.x) > 0 || Math.abs(A.y) > 0) {
+			let _ = getFirstScrollableAncestor(n);
+			_ && _.scrollBy({
+				top: A.y,
+				left: A.x
+			});
+		}
+	}, [
+		_,
+		M,
+		N,
+		O,
+		E
+	]);
+}
+var ActiveDraggableContext = /* @__PURE__ */ createContext({
+	...defaultCoordinates,
+	scaleX: 1,
+	scaleY: 1
+}), Status;
+(function(n) {
+	n[n.Uninitialized = 0] = "Uninitialized", n[n.Initializing = 1] = "Initializing", n[n.Initialized = 2] = "Initialized";
+})(Status ||= {});
+var DndContext = /* @__PURE__ */ memo(function(n) {
+	let { id: E, accessibility: O, autoScroll: A = !0, children: j, sensors: M = defaultSensors, collisionDetection: N = rectIntersection, measuring: P, modifiers: z, ...B } = n, [H, W] = useReducer(reducer, void 0, getInitialState), [Z, uz] = useDndMonitorProvider(), [dz, fz] = useState(Status.Uninitialized), _z = dz === Status.Initialized, { draggable: { active: vz, nodes: yz, translate: bz }, droppable: { containers: Sz } } = H, Cz = vz == null ? null : yz.get(vz), wz = useRef({
+		initial: null,
+		translated: null
+	}), Tz = useMemo(() => vz == null ? null : {
+		id: vz,
+		data: Cz?.data ?? defaultData,
+		rect: wz
+	}, [vz, Cz]), Ez = useRef(null), [Dz, Oz] = useState(null), [kz, Az] = useState(null), jz = useLatestValue(B, Object.values(B)), Mz = useUniqueId("DndDescribedBy", E), Nz = useMemo(() => Sz.getEnabled(), [Sz]), Pz = useMeasuringConfiguration(P), { droppableRects: Fz, measureDroppableContainers: Iz, measuringScheduled: Lz } = useDroppableMeasuring(Nz, {
+		dragging: _z,
+		dependencies: [bz.x, bz.y],
+		config: Pz.droppable
+	}), Rz = useCachedNode(yz, vz), zz = useMemo(() => kz ? getEventCoordinates(kz) : null, [kz]), Bz = _B(), Vz = useInitialRect(Rz, Pz.draggable.measure);
+	useLayoutShiftScrollCompensation({
+		activeNode: vz == null ? null : yz.get(vz),
+		config: Bz.layoutShiftCompensation,
+		initialRect: Vz,
+		measure: Pz.draggable.measure
+	});
+	let Hz = useRect(Rz, Pz.draggable.measure, Vz), Uz = useRect(Rz ? Rz.parentElement : null), Wz = useRef({
+		activatorEvent: null,
+		active: null,
+		activeNode: Rz,
+		collisionRect: null,
+		collisions: null,
+		droppableRects: Fz,
+		draggableNodes: yz,
+		draggingNode: null,
+		draggingNodeRect: null,
+		droppableContainers: Sz,
+		over: null,
+		scrollableAncestors: [],
+		scrollAdjustedTranslate: null
+	}), Gz = Sz.getNodeFor(Wz.current.over?.id), Kz = useDragOverlayMeasuring({ measure: Pz.dragOverlay.measure }), qz = Kz.nodeRef.current ?? Rz, Jz = _z ? Kz.rect ?? Hz : null, Yz = !!(Kz.nodeRef.current && Kz.rect), Xz = useRectDelta(Yz ? null : Hz), Zz = useWindowRect(qz ? getWindow(qz) : null), Qz = useScrollableAncestors(_z ? Gz ?? Rz : null), $z = useRects(Qz), eB = applyModifiers(z, {
+		transform: {
+			x: bz.x - Xz.x,
+			y: bz.y - Xz.y,
+			scaleX: 1,
+			scaleY: 1
+		},
+		activatorEvent: kz,
+		active: Tz,
+		activeNodeRect: Hz,
+		containerNodeRect: Uz,
+		draggingNodeRect: Jz,
+		over: Wz.current.over,
+		overlayNodeRect: Kz.rect,
+		scrollableAncestors: Qz,
+		scrollableAncestorRects: $z,
+		windowRect: Zz
+	}), tB = zz ? add(zz, bz) : null, nB = useScrollOffsets(Qz), rB = useScrollOffsetsDelta(nB), iB = useScrollOffsetsDelta(nB, [Hz]), aB = add(eB, rB), oB = Jz ? getAdjustedRect(Jz, eB) : null, sB = Tz && oB ? N({
+		active: Tz,
+		collisionRect: oB,
+		droppableRects: Fz,
+		droppableContainers: Nz,
+		pointerCoordinates: tB
+	}) : null, cB = getFirstCollision(sB, "id"), [lB, uB] = useState(null), dB = adjustScale(Yz ? eB : add(eB, iB), lB?.rect ?? null, Hz), fB = useRef(null), pB = useCallback((n, _) => {
+		let { sensor: E, options: O } = _;
+		if (Ez.current == null) return;
+		let A = yz.get(Ez.current);
+		if (!A) return;
+		let j = n.nativeEvent;
+		fB.current = new E({
+			active: Ez.current,
+			activeNode: A,
+			event: j,
+			options: O,
+			context: Wz,
+			onAbort(n) {
+				if (!yz.get(n)) return;
+				let { onDragAbort: _ } = jz.current, E = { id: n };
+				_?.(E), Z({
+					type: "onDragAbort",
+					event: E
+				});
+			},
+			onPending(n, _, E, O) {
+				if (!yz.get(n)) return;
+				let { onDragPending: A } = jz.current, j = {
+					id: n,
+					constraint: _,
+					initialCoordinates: E,
+					offset: O
+				};
+				A?.(j), Z({
+					type: "onDragPending",
+					event: j
+				});
+			},
+			onStart(n) {
+				let _ = Ez.current;
+				if (_ == null) return;
+				let E = yz.get(_);
+				if (!E) return;
+				let { onDragStart: O } = jz.current, A = {
+					activatorEvent: j,
+					active: {
+						id: _,
+						data: E.data,
+						rect: wz
+					}
+				};
+				unstable_batchedUpdates(() => {
+					O?.(A), fz(Status.Initializing), W({
+						type: Action.DragStart,
+						initialCoordinates: n,
+						active: _
+					}), Z({
+						type: "onDragStart",
+						event: A
+					}), Oz(fB.current), Az(j);
+				});
+			},
+			onMove(n) {
+				W({
+					type: Action.DragMove,
+					coordinates: n
+				});
+			},
+			onEnd: M(Action.DragEnd),
+			onCancel: M(Action.DragCancel)
+		});
+		function M(n) {
+			return async function() {
+				let { active: _, collisions: E, over: O, scrollAdjustedTranslate: A } = Wz.current, M = null;
+				if (_ && A) {
+					let { cancelDrop: N } = jz.current;
+					M = {
+						activatorEvent: j,
+						active: _,
+						collisions: E,
+						delta: A,
+						over: O
+					}, n === Action.DragEnd && typeof N == "function" && await Promise.resolve(N(M)) && (n = Action.DragCancel);
+				}
+				Ez.current = null, unstable_batchedUpdates(() => {
+					W({ type: n }), fz(Status.Uninitialized), uB(null), Oz(null), Az(null), fB.current = null;
+					let _ = n === Action.DragEnd ? "onDragEnd" : "onDragCancel";
+					if (M) {
+						let n = jz.current[_];
+						n?.(M), Z({
+							type: _,
+							event: M
+						});
+					}
+				});
+			};
+		}
+	}, [yz]), mB = useCombineActivators(M, useCallback((n, _) => (E, O) => {
+		let A = E.nativeEvent, j = yz.get(O);
+		if (Ez.current !== null || !j || A.dndKit || A.defaultPrevented) return;
+		let M = { active: j };
+		n(E, _.options, M) === !0 && (A.dndKit = { capturedBy: _.sensor }, Ez.current = O, pB(E, _));
+	}, [yz, pB]));
+	useSensorSetup(M), useIsomorphicLayoutEffect(() => {
+		Hz && dz === Status.Initializing && fz(Status.Initialized);
+	}, [Hz, dz]), useEffect(() => {
+		let { onDragMove: n } = jz.current, { active: _, activatorEvent: E, collisions: O, over: A } = Wz.current;
+		if (!_ || !E) return;
+		let j = {
+			active: _,
+			activatorEvent: E,
+			collisions: O,
+			delta: {
+				x: aB.x,
+				y: aB.y
+			},
+			over: A
+		};
+		unstable_batchedUpdates(() => {
+			n?.(j), Z({
+				type: "onDragMove",
+				event: j
+			});
+		});
+	}, [aB.x, aB.y]), useEffect(() => {
+		let { active: n, activatorEvent: _, collisions: E, droppableContainers: O, scrollAdjustedTranslate: A } = Wz.current;
+		if (!n || Ez.current == null || !_ || !A) return;
+		let { onDragOver: j } = jz.current, M = O.get(cB), N = M && M.rect.current ? {
+			id: M.id,
+			rect: M.rect.current,
+			data: M.data,
+			disabled: M.disabled
+		} : null, P = {
+			active: n,
+			activatorEvent: _,
+			collisions: E,
+			delta: {
+				x: A.x,
+				y: A.y
+			},
+			over: N
+		};
+		unstable_batchedUpdates(() => {
+			uB(N), j?.(P), Z({
+				type: "onDragOver",
+				event: P
+			});
+		});
+	}, [cB]), useIsomorphicLayoutEffect(() => {
+		Wz.current = {
+			activatorEvent: kz,
+			active: Tz,
+			activeNode: Rz,
+			collisionRect: oB,
+			collisions: sB,
+			droppableRects: Fz,
+			draggableNodes: yz,
+			draggingNode: qz,
+			draggingNodeRect: Jz,
+			droppableContainers: Sz,
+			over: lB,
+			scrollableAncestors: Qz,
+			scrollAdjustedTranslate: aB
+		}, wz.current = {
+			initial: Jz,
+			translated: oB
+		};
+	}, [
+		Tz,
+		Rz,
+		sB,
+		oB,
+		yz,
+		qz,
+		Jz,
+		Fz,
+		Sz,
+		lB,
+		Qz,
+		aB
+	]), useAutoScroller({
+		...Bz,
+		delta: bz,
+		draggingRect: oB,
+		pointerCoordinates: tB,
+		scrollableAncestors: Qz,
+		scrollableAncestorRects: $z
+	});
+	let hB = useMemo(() => ({
+		active: Tz,
+		activeNode: Rz,
+		activeNodeRect: Hz,
+		activatorEvent: kz,
+		collisions: sB,
+		containerNodeRect: Uz,
+		dragOverlay: Kz,
+		draggableNodes: yz,
+		droppableContainers: Sz,
+		droppableRects: Fz,
+		over: lB,
+		measureDroppableContainers: Iz,
+		scrollableAncestors: Qz,
+		scrollableAncestorRects: $z,
+		measuringConfiguration: Pz,
+		measuringScheduled: Lz,
+		windowRect: Zz
+	}), [
+		Tz,
+		Rz,
+		Hz,
+		kz,
+		sB,
+		Uz,
+		Kz,
+		yz,
+		Sz,
+		Fz,
+		lB,
+		Iz,
+		Qz,
+		$z,
+		Pz,
+		Lz,
+		Zz
+	]), gB = useMemo(() => ({
+		activatorEvent: kz,
+		activators: mB,
+		active: Tz,
+		activeNodeRect: Hz,
+		ariaDescribedById: { draggable: Mz },
+		dispatch: W,
+		draggableNodes: yz,
+		over: lB,
+		measureDroppableContainers: Iz
+	}), [
+		kz,
+		mB,
+		Tz,
+		Hz,
+		W,
+		Mz,
+		yz,
+		lB,
+		Iz
+	]);
+	return React.createElement(DndMonitorContext.Provider, { value: uz }, React.createElement(InternalContext.Provider, { value: gB }, React.createElement(PublicContext.Provider, { value: hB }, React.createElement(ActiveDraggableContext.Provider, { value: dB }, j)), React.createElement(RestoreFocus, { disabled: O?.restoreFocus === !1 })), React.createElement(Accessibility, {
+		...O,
+		hiddenTextDescribedById: Mz
+	}));
+	function _B() {
+		let n = Dz?.autoScrollEnabled === !1, _ = typeof A == "object" ? A.enabled === !1 : A === !1, E = _z && !n && !_;
+		return typeof A == "object" ? {
+			...A,
+			enabled: E
+		} : { enabled: E };
+	}
+}), NullContext = /* @__PURE__ */ createContext(null), defaultRole = "button", ID_PREFIX$1 = "Draggable";
+function useDraggable(n) {
+	let { id: _, data: E, disabled: O = !1, attributes: A } = n, j = useUniqueId(ID_PREFIX$1), { activators: M, activatorEvent: N, active: P, activeNodeRect: z, ariaDescribedById: B, draggableNodes: H, over: U } = useContext(InternalContext), { role: G = defaultRole, roleDescription: Z = "draggable", tabIndex: uz = 0 } = A ?? {}, dz = P?.id === _, fz = useContext(dz ? ActiveDraggableContext : NullContext), [mz, hz] = useNodeRef(), [gz, _z] = useNodeRef(), vz = useSyntheticListeners(M, _), yz = useLatestValue(E);
+	return useIsomorphicLayoutEffect(() => (H.set(_, {
+		id: _,
+		key: j,
+		node: mz,
+		activatorNode: gz,
+		data: yz
+	}), () => {
+		let n = H.get(_);
+		n && n.key === j && H.delete(_);
+	}), [H, _]), {
+		active: P,
+		activatorEvent: N,
+		activeNodeRect: z,
+		attributes: useMemo(() => ({
+			role: G,
+			tabIndex: uz,
+			"aria-disabled": O,
+			"aria-pressed": dz && G === defaultRole ? !0 : void 0,
+			"aria-roledescription": Z,
+			"aria-describedby": B.draggable
+		}), [
+			O,
+			G,
+			uz,
+			dz,
+			Z,
+			B.draggable
+		]),
+		isDragging: dz,
+		listeners: O ? void 0 : vz,
+		node: mz,
+		over: U,
+		setNodeRef: hz,
+		setActivatorNodeRef: _z,
+		transform: fz
+	};
+}
+function useDndContext() {
+	return useContext(PublicContext);
+}
+var ID_PREFIX$1$1 = "Droppable", defaultResizeObserverConfig = { timeout: 25 };
+function useDroppable(n) {
+	let { data: _, disabled: E = !1, id: O, resizeObserverConfig: A } = n, j = useUniqueId(ID_PREFIX$1$1), { active: M, dispatch: N, over: P, measureDroppableContainers: z } = useContext(InternalContext), B = useRef({ disabled: E }), H = useRef(!1), Z = useRef(null), uz = useRef(null), { disabled: dz, updateMeasurementsFor: fz, timeout: pz } = {
+		...defaultResizeObserverConfig,
+		...A
+	}, mz = useLatestValue(fz ?? O), gz = useResizeObserver({
+		callback: useCallback(() => {
+			if (!H.current) {
+				H.current = !0;
+				return;
+			}
+			uz.current != null && clearTimeout(uz.current), uz.current = setTimeout(() => {
+				z(Array.isArray(mz.current) ? mz.current : [mz.current]), uz.current = null;
+			}, pz);
+		}, [pz]),
+		disabled: dz || !M
+	}), [_z, vz] = useNodeRef(useCallback((n, _) => {
+		gz && (_ && (gz.unobserve(_), H.current = !1), n && gz.observe(n));
+	}, [gz])), yz = useLatestValue(_);
+	return useEffect(() => {
+		!gz || !_z.current || (gz.disconnect(), H.current = !1, gz.observe(_z.current));
+	}, [_z, gz]), useEffect(() => (N({
+		type: Action.RegisterDroppable,
+		element: {
+			id: O,
+			key: j,
+			disabled: E,
+			node: _z,
+			rect: Z,
+			data: yz
+		}
+	}), () => N({
+		type: Action.UnregisterDroppable,
+		key: j,
+		id: O
+	})), [O]), useEffect(() => {
+		E !== B.current.disabled && (N({
+			type: Action.SetDroppableDisabled,
+			id: O,
+			key: j,
+			disabled: E
+		}), B.current.disabled = E);
+	}, [
+		O,
+		j,
+		E,
+		N
+	]), {
+		active: M,
+		rect: Z,
+		isOver: P?.id === O,
+		node: _z,
+		over: P,
+		setNodeRef: vz
+	};
+}
+function AnimationManager(n) {
+	let { animation: E, children: O } = n, [A, j] = useState(null), [N, P] = useState(null), z = usePrevious(O);
+	return !O && !A && z && j(z), useIsomorphicLayoutEffect(() => {
+		if (!N) return;
+		let n = A?.key, _ = A?.props.id;
+		if (n == null || _ == null) {
+			j(null);
+			return;
+		}
+		Promise.resolve(E(_, N)).then(() => {
+			j(null);
+		});
+	}, [
+		E,
+		A,
+		N
+	]), React.createElement(React.Fragment, null, O, A ? cloneElement(A, { ref: P }) : null);
+}
+var defaultTransform = {
+	x: 0,
+	y: 0,
+	scaleX: 1,
+	scaleY: 1
+};
+function NullifiedContextProvider(n) {
+	let { children: E } = n;
+	return React.createElement(InternalContext.Provider, { value: defaultInternalContext }, React.createElement(ActiveDraggableContext.Provider, { value: defaultTransform }, E));
+}
+var baseStyles = {
+	position: "fixed",
+	touchAction: "none"
+}, defaultTransition$1 = (n) => isKeyboardEvent(n) ? "transform 250ms ease" : void 0, PositionedOverlay = /* @__PURE__ */ forwardRef((n, E) => {
+	let { as: O, activatorEvent: A, adjustScale: j, children: M, className: N, rect: P, style: z, transform: B, transition: H = defaultTransition$1 } = n;
+	if (!P) return null;
+	let U = j ? B : {
+		...B,
+		scaleX: 1,
+		scaleY: 1
+	}, W = {
+		...baseStyles,
+		width: P.width,
+		height: P.height,
+		top: P.top,
+		left: P.left,
+		transform: CSS$1.Transform.toString(U),
+		transformOrigin: j && A ? getRelativeTransformOrigin(A, P) : void 0,
+		transition: typeof H == "function" ? H(A) : H,
+		...z
+	};
+	return React.createElement(O, {
+		className: N,
+		style: W,
+		ref: E
+	}, M);
+}), defaultDropAnimationConfiguration = {
+	duration: 250,
+	easing: "ease",
+	keyframes: (n) => {
+		let { transform: { initial: _, final: E } } = n;
+		return [{ transform: CSS$1.Transform.toString(_) }, { transform: CSS$1.Transform.toString(E) }];
+	},
+	sideEffects: /* @__PURE__ */ ((n) => (_) => {
+		let { active: E, dragOverlay: O } = _, A = {}, { styles: j, className: M } = n;
+		if (j != null && j.active) for (let [n, _] of Object.entries(j.active)) _ !== void 0 && (A[n] = E.node.style.getPropertyValue(n), E.node.style.setProperty(n, _));
+		if (j != null && j.dragOverlay) for (let [n, _] of Object.entries(j.dragOverlay)) _ !== void 0 && O.node.style.setProperty(n, _);
+		return M != null && M.active && E.node.classList.add(M.active), M != null && M.dragOverlay && O.node.classList.add(M.dragOverlay), function() {
+			for (let [n, _] of Object.entries(A)) E.node.style.setProperty(n, _);
+			M != null && M.active && E.node.classList.remove(M.active);
+		};
+	})({ styles: { active: { opacity: "0" } } })
+};
+function useDropAnimation(n) {
+	let { config: _, draggableNodes: E, droppableContainers: O, measuringConfiguration: A } = n;
+	return useEvent((n, j) => {
+		if (_ === null) return;
+		let M = E.get(n);
+		if (!M) return;
+		let N = M.node.current;
+		if (!N) return;
+		let P = getMeasurableNode(j);
+		if (!P) return;
+		let { transform: z } = getWindow(j).getComputedStyle(j), B = parseTransform(z);
+		if (!B) return;
+		let H = typeof _ == "function" ? _ : createDefaultDropAnimation(_);
+		return scrollIntoViewIfNeeded(N, A.draggable.measure), H({
+			active: {
+				id: n,
+				data: M.data,
+				node: N,
+				rect: A.draggable.measure(N)
+			},
+			draggableNodes: E,
+			dragOverlay: {
+				node: j,
+				rect: A.dragOverlay.measure(P)
+			},
+			droppableContainers: O,
+			measuringConfiguration: A,
+			transform: B
+		});
+	});
+}
+function createDefaultDropAnimation(n) {
+	let { duration: _, easing: E, sideEffects: O, keyframes: A } = {
+		...defaultDropAnimationConfiguration,
+		...n
+	};
+	return (n) => {
+		let { active: j, dragOverlay: M, transform: N, ...P } = n;
+		if (!_) return;
+		let z = {
+			x: M.rect.left - j.rect.left,
+			y: M.rect.top - j.rect.top
+		}, B = {
+			scaleX: N.scaleX === 1 ? 1 : j.rect.width * N.scaleX / M.rect.width,
+			scaleY: N.scaleY === 1 ? 1 : j.rect.height * N.scaleY / M.rect.height
+		}, H = {
+			x: N.x - z.x,
+			y: N.y - z.y,
+			...B
+		}, U = A({
+			...P,
+			active: j,
+			dragOverlay: M,
+			transform: {
+				initial: N,
+				final: H
+			}
+		}), [W] = U, G = U[U.length - 1];
+		if (JSON.stringify(W) === JSON.stringify(G)) return;
+		let Z = O?.({
+			active: j,
+			dragOverlay: M,
+			...P
+		}), uz = M.node.animate(U, {
+			duration: _,
+			easing: E,
+			fill: "forwards"
+		});
+		return new Promise((n) => {
+			uz.onfinish = () => {
+				Z?.(), n();
+			};
+		});
+	};
+}
+var key = 0;
+function useKey(n) {
+	return useMemo(() => {
+		if (n != null) return key++, key;
+	}, [n]);
+}
+var DragOverlay = /* @__PURE__ */ React.memo((n) => {
+	let { adjustScale: E = !1, children: O, dropAnimation: A, style: j, transition: M, modifiers: N, wrapperElement: P = "div", className: z, zIndex: B = 999 } = n, { activatorEvent: H, active: U, activeNodeRect: G, containerNodeRect: Z, draggableNodes: uz, droppableContainers: dz, dragOverlay: fz, over: pz, measuringConfiguration: mz, scrollableAncestors: hz, scrollableAncestorRects: gz, windowRect: _z } = useDndContext(), vz = useContext(ActiveDraggableContext), yz = useKey(U?.id), bz = applyModifiers(N, {
+		activatorEvent: H,
+		active: U,
+		activeNodeRect: G,
+		containerNodeRect: Z,
+		draggingNodeRect: fz.rect,
+		over: pz,
+		overlayNodeRect: fz.rect,
+		scrollableAncestors: hz,
+		scrollableAncestorRects: gz,
+		transform: vz,
+		windowRect: _z
+	}), xz = useInitialValue(G), Sz = useDropAnimation({
+		config: A,
+		draggableNodes: uz,
+		droppableContainers: dz,
+		measuringConfiguration: mz
+	}), Cz = xz ? fz.setRef : void 0;
+	return React.createElement(NullifiedContextProvider, null, React.createElement(AnimationManager, { animation: Sz }, U && yz ? React.createElement(PositionedOverlay, {
+		key: yz,
+		id: U.id,
+		ref: Cz,
+		as: P,
+		activatorEvent: H,
+		adjustScale: E,
+		className: z,
+		transition: M,
+		rect: xz,
+		style: {
+			zIndex: B,
+			...j
+		},
+		transform: bz
+	}, O) : null));
+});
+function arrayMove(n, _, E) {
+	let O = n.slice();
+	return O.splice(E < 0 ? O.length + E : E, 0, O.splice(_, 1)[0]), O;
+}
+function getSortedRects(n, _) {
+	return n.reduce((n, E, O) => {
+		let A = _.get(E);
+		return A && (n[O] = A), n;
+	}, Array(n.length));
+}
+function isValidIndex(n) {
+	return n !== null && n >= 0;
+}
+function itemsEqual(n, _) {
+	if (n === _) return !0;
+	if (n.length !== _.length) return !1;
+	for (let E = 0; E < n.length; E++) if (n[E] !== _[E]) return !1;
+	return !0;
+}
+function normalizeDisabled(n) {
+	return typeof n == "boolean" ? {
+		draggable: n,
+		droppable: n
+	} : n;
+}
+var rectSortingStrategy = (n) => {
+	let { rects: _, activeIndex: E, overIndex: O, index: A } = n, j = arrayMove(_, O, E), M = _[A], N = j[A];
+	return !N || !M ? null : {
+		x: N.left - M.left,
+		y: N.top - M.top,
+		scaleX: N.width / M.width,
+		scaleY: N.height / M.height
+	};
+}, defaultScale$1 = {
+	scaleX: 1,
+	scaleY: 1
+}, verticalListSortingStrategy = (n) => {
+	let { activeIndex: _, activeNodeRect: E, index: O, rects: A, overIndex: j } = n, M = A[_] ?? E;
+	if (!M) return null;
+	if (O === _) {
+		let n = A[j];
+		return n ? {
+			x: 0,
+			y: _ < j ? n.top + n.height - (M.top + M.height) : n.top - M.top,
+			...defaultScale$1
+		} : null;
+	}
+	let N = getItemGap$1(A, O, _);
+	return O > _ && O <= j ? {
+		x: 0,
+		y: -M.height - N,
+		...defaultScale$1
+	} : O < _ && O >= j ? {
+		x: 0,
+		y: M.height + N,
+		...defaultScale$1
+	} : {
+		x: 0,
+		y: 0,
+		...defaultScale$1
+	};
+};
+function getItemGap$1(n, _, E) {
+	let O = n[_], A = n[_ - 1], j = n[_ + 1];
+	return O ? E < _ ? A ? O.top - (A.top + A.height) : j ? j.top - (O.top + O.height) : 0 : j ? j.top - (O.top + O.height) : A ? O.top - (A.top + A.height) : 0 : 0;
+}
+var ID_PREFIX = "Sortable", Context = /* @__PURE__ */ React.createContext({
+	activeIndex: -1,
+	containerId: ID_PREFIX,
+	disableTransforms: !1,
+	items: [],
+	overIndex: -1,
+	useDragOverlay: !1,
+	sortedRects: [],
+	strategy: rectSortingStrategy,
+	disabled: {
+		draggable: !1,
+		droppable: !1
+	}
+});
+function SortableContext(n) {
+	let { children: E, id: O, items: A, strategy: j = rectSortingStrategy, disabled: M = !1 } = n, { active: N, dragOverlay: P, droppableRects: z, over: B, measureDroppableContainers: H } = useDndContext(), U = useUniqueId(ID_PREFIX, O), W = P.rect !== null, Z = useMemo(() => A.map((n) => typeof n == "object" && "id" in n ? n.id : n), [A]), uz = N != null, dz = N ? Z.indexOf(N.id) : -1, fz = B ? Z.indexOf(B.id) : -1, mz = useRef(Z), gz = !itemsEqual(Z, mz.current), _z = fz !== -1 && dz === -1 || gz, vz = normalizeDisabled(M);
+	useIsomorphicLayoutEffect(() => {
+		gz && uz && H(Z);
+	}, [
+		gz,
+		Z,
+		uz,
+		H
+	]), useEffect(() => {
+		mz.current = Z;
+	}, [Z]);
+	let yz = useMemo(() => ({
+		activeIndex: dz,
+		containerId: U,
+		disabled: vz,
+		disableTransforms: _z,
+		items: Z,
+		overIndex: fz,
+		useDragOverlay: W,
+		sortedRects: getSortedRects(Z, z),
+		strategy: j
+	}), [
+		dz,
+		U,
+		vz.draggable,
+		vz.droppable,
+		_z,
+		Z,
+		fz,
+		z,
+		W,
+		j
+	]);
+	return React.createElement(Context.Provider, { value: yz }, E);
+}
+var defaultNewIndexGetter = (n) => {
+	let { id: _, items: E, activeIndex: O, overIndex: A } = n;
+	return arrayMove(E, O, A).indexOf(_);
+}, defaultAnimateLayoutChanges = (n) => {
+	let { containerId: _, isSorting: E, wasDragging: O, index: A, items: j, newIndex: M, previousItems: N, previousContainerId: P, transition: z } = n;
+	return !z || !O || N !== j && A === M ? !1 : E ? !0 : M !== A && _ === P;
+}, defaultTransition = {
+	duration: 200,
+	easing: "ease"
+}, transitionProperty = "transform", disabledTransition = /* @__PURE__ */ CSS$1.Transition.toString({
+	property: transitionProperty,
+	duration: 0,
+	easing: "linear"
+}), defaultAttributes = { roleDescription: "sortable" };
+function useDerivedTransform(n) {
+	let { disabled: _, index: E, node: O, rect: A } = n, [j, M] = useState(null), N = useRef(E);
+	return useIsomorphicLayoutEffect(() => {
+		if (!_ && E !== N.current && O.current) {
+			let n = A.current;
+			if (n) {
+				let _ = getClientRect(O.current, { ignoreTransform: !0 }), E = {
+					x: n.left - _.left,
+					y: n.top - _.top,
+					scaleX: n.width / _.width,
+					scaleY: n.height / _.height
+				};
+				(E.x || E.y) && M(E);
+			}
+		}
+		E !== N.current && (N.current = E);
+	}, [
+		_,
+		E,
+		O,
+		A
+	]), useEffect(() => {
+		j && M(null);
+	}, [j]), j;
+}
+function useSortable(n) {
+	let { animateLayoutChanges: _ = defaultAnimateLayoutChanges, attributes: E, disabled: O, data: A, getNewIndex: j = defaultNewIndexGetter, id: M, strategy: N, resizeObserverConfig: P, transition: z = defaultTransition } = n, { items: B, containerId: H, activeIndex: U, disabled: Z, disableTransforms: uz, sortedRects: dz, overIndex: fz, useDragOverlay: mz, strategy: gz } = useContext(Context), _z = normalizeLocalDisabled(O, Z), vz = B.indexOf(M), yz = useMemo(() => ({
+		sortable: {
+			containerId: H,
+			index: vz,
+			items: B
+		},
+		...A
+	}), [
+		H,
+		A,
+		vz,
+		B
+	]), bz = useMemo(() => B.slice(B.indexOf(M)), [B, M]), { rect: xz, node: Sz, isOver: Cz, setNodeRef: wz } = useDroppable({
+		id: M,
+		data: yz,
+		disabled: _z.droppable,
+		resizeObserverConfig: {
+			updateMeasurementsFor: bz,
+			...P
+		}
+	}), { active: Tz, activatorEvent: Ez, activeNodeRect: Dz, attributes: Oz, setNodeRef: kz, listeners: Az, isDragging: jz, over: Mz, setActivatorNodeRef: Nz, transform: Pz } = useDraggable({
+		id: M,
+		data: yz,
+		attributes: {
+			...defaultAttributes,
+			...E
+		},
+		disabled: _z.draggable
+	}), Fz = useCombinedRefs(wz, kz), Iz = !!Tz, Lz = Iz && !uz && isValidIndex(U) && isValidIndex(fz), Rz = !mz && jz, zz = Lz ? (Rz && Lz ? Pz : null) ?? (N ?? gz)({
+		rects: dz,
+		activeNodeRect: Dz,
+		activeIndex: U,
+		overIndex: fz,
+		index: vz
+	}) : null, Bz = isValidIndex(U) && isValidIndex(fz) ? j({
+		id: M,
+		items: B,
+		activeIndex: U,
+		overIndex: fz
+	}) : vz, Vz = Tz?.id, Hz = useRef({
+		activeId: Vz,
+		items: B,
+		newIndex: Bz,
+		containerId: H
+	}), Uz = B !== Hz.current.items, Wz = _({
+		active: Tz,
+		containerId: H,
+		isDragging: jz,
+		isSorting: Iz,
+		id: M,
+		index: vz,
+		items: B,
+		newIndex: Hz.current.newIndex,
+		previousItems: Hz.current.items,
+		previousContainerId: Hz.current.containerId,
+		transition: z,
+		wasDragging: Hz.current.activeId != null
+	}), Gz = useDerivedTransform({
+		disabled: !Wz,
+		index: vz,
+		node: Sz,
+		rect: xz
+	});
+	return useEffect(() => {
+		Iz && Hz.current.newIndex !== Bz && (Hz.current.newIndex = Bz), H !== Hz.current.containerId && (Hz.current.containerId = H), B !== Hz.current.items && (Hz.current.items = B);
+	}, [
+		Iz,
+		Bz,
+		H,
+		B
+	]), useEffect(() => {
+		if (Vz === Hz.current.activeId) return;
+		if (Vz != null && Hz.current.activeId == null) {
+			Hz.current.activeId = Vz;
+			return;
+		}
+		let n = setTimeout(() => {
+			Hz.current.activeId = Vz;
+		}, 50);
+		return () => clearTimeout(n);
+	}, [Vz]), {
+		active: Tz,
+		activeIndex: U,
+		attributes: Oz,
+		data: yz,
+		rect: xz,
+		index: vz,
+		newIndex: Bz,
+		items: B,
+		isOver: Cz,
+		isSorting: Iz,
+		isDragging: jz,
+		listeners: Az,
+		node: Sz,
+		overIndex: fz,
+		over: Mz,
+		setNodeRef: Fz,
+		setActivatorNodeRef: Nz,
+		setDroppableNodeRef: wz,
+		setDraggableNodeRef: kz,
+		transform: Gz ?? zz,
+		transition: Kz()
+	};
+	function Kz() {
+		if (Gz || Uz && Hz.current.newIndex === vz) return disabledTransition;
+		if (!(Rz && !isKeyboardEvent(Ez) || !z) && (Iz || Wz)) return CSS$1.Transition.toString({
+			...z,
+			property: transitionProperty
+		});
+	}
+}
+function normalizeLocalDisabled(n, _) {
+	return typeof n == "boolean" ? {
+		draggable: n,
+		droppable: !1
+	} : {
+		draggable: n?.draggable ?? _.draggable,
+		droppable: n?.droppable ?? _.droppable
+	};
+}
+KeyboardCode.Down, KeyboardCode.Right, KeyboardCode.Up, KeyboardCode.Left;
 var TYPE_NAMES = {
 	text: "Texto",
 	image: "Imagem",
@@ -22596,14 +22004,14 @@ var TYPE_NAMES = {
 	"text-container": "Texto em Caixa",
 	group: "Grupo",
 	checkbox: "Caixa de Seleção"
-}, SimpleLayerItem = ({ element: n, isSelected: _, onSelect: E }) => {
-	let { attributes: O, listeners: A, setNodeRef: j, transform: M, transition: N, isDragging: P } = useSortable({ id: n.id });
+}, SimpleLayerItem = ({ element: n, isSelected: _, onSelect: E, onToggleLock: O, onToggleHide: A }) => {
+	let { attributes: j, listeners: M, setNodeRef: N, transform: P, transition: z, isDragging: B } = useSortable({ id: n.id });
 	return /* @__PURE__ */ jsx(p, {
-		ref: j,
+		ref: N,
 		style: {
-			transform: CSS$1.Transform.toString(M),
-			transition: N,
-			opacity: P ? .5 : 1,
+			transform: CSS$1.Transform.toString(P),
+			transition: z,
+			opacity: B ? .5 : 1,
 			touchAction: "none"
 		},
 		children: /* @__PURE__ */ jsxs(p$1, {
@@ -22619,8 +22027,8 @@ var TYPE_NAMES = {
 			onClick: (n) => E(n.shiftKey),
 			children: [
 				/* @__PURE__ */ jsx(p, {
-					...O,
-					...A,
+					...j,
+					...M,
 					style: {
 						cursor: "grab",
 						color: "var(--gray-8)",
@@ -22642,36 +22050,59 @@ var TYPE_NAMES = {
 				/* @__PURE__ */ jsx(p$2, {
 					size: "2",
 					weight: _ ? "bold" : "regular",
+					style: { flex: 1 },
+					truncate: !0,
 					children: n.name || TYPE_NAMES[n.type] || n.type
+				}),
+				/* @__PURE__ */ jsxs(p$1, {
+					gap: "1",
+					onClick: (n) => n.stopPropagation(),
+					children: [/* @__PURE__ */ jsx(o$2, {
+						size: "1",
+						variant: "ghost",
+						color: n.locked ? "orange" : "gray",
+						onClick: O,
+						title: n.locked ? "Desbloquear" : "Bloquear",
+						children: n.locked ? /* @__PURE__ */ jsx(LockClosedIcon, {}) : /* @__PURE__ */ jsx(LockOpen1Icon, {})
+					}), /* @__PURE__ */ jsx(o$2, {
+						size: "1",
+						variant: "ghost",
+						color: n.hidden ? "red" : "gray",
+						onClick: A,
+						title: n.hidden ? "Mostrar" : "Ocultar",
+						children: n.hidden ? /* @__PURE__ */ jsx(EyeNoneIcon, {}) : /* @__PURE__ */ jsx(EyeOpenIcon, {})
+					})]
 				})
 			]
 		})
 	});
 };
 const SimpleLayers = () => {
-	let { state: n, selectElement: _, moveElement: E } = useEditor(), { elements: O, selectedElementIds: A } = n, j = useMemo(() => [...O].reverse(), [O]), [M, N] = useState(null);
+	let { state: n, selectElement: _, moveElement: E, updateElement: O } = useEditor(), { elements: A, selectedElementIds: j } = n, M = useMemo(() => [...A].reverse(), [A]), [N, P] = useState(null);
 	return /* @__PURE__ */ jsx(p, { children: /* @__PURE__ */ jsxs(DndContext, {
 		sensors: useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 5 } })),
 		onDragStart: (n) => {
-			N(n.active.id);
+			P(n.active.id);
 		},
 		onDragEnd: (n) => {
-			let { active: _, over: A } = n;
-			if (N(null), A && _.id !== A.id) {
-				let n = j.findIndex((n) => n.id === _.id), M = j.findIndex((n) => n.id === A.id);
-				E(O.length - 1 - n, O.length - 1 - M);
+			let { active: _, over: O } = n;
+			if (P(null), O && _.id !== O.id) {
+				let n = M.findIndex((n) => n.id === _.id), j = M.findIndex((n) => n.id === O.id);
+				E(A.length - 1 - n, A.length - 1 - j);
 			}
 		},
 		children: [/* @__PURE__ */ jsx(SortableContext, {
-			items: j.map((n) => n.id),
+			items: M.map((n) => n.id),
 			strategy: verticalListSortingStrategy,
 			children: /* @__PURE__ */ jsxs(p$1, {
 				direction: "column",
-				children: [j.map((n) => /* @__PURE__ */ jsx(SimpleLayerItem, {
+				children: [M.map((n) => /* @__PURE__ */ jsx(SimpleLayerItem, {
 					element: n,
-					isSelected: A.includes(n.id),
-					onSelect: (E) => _(n.id, E)
-				}, n.id)), j.length === 0 && /* @__PURE__ */ jsx(p$2, {
+					isSelected: j.includes(n.id),
+					onSelect: (E) => _(n.id, E),
+					onToggleLock: () => O(n.id, { locked: !n.locked }),
+					onToggleHide: () => O(n.id, { hidden: !n.hidden })
+				}, n.id)), M.length === 0 && /* @__PURE__ */ jsx(p$2, {
 					size: "2",
 					color: "gray",
 					align: "center",
@@ -22679,7 +22110,7 @@ const SimpleLayers = () => {
 					children: "Adicione itens para ver a lista aqui."
 				})]
 			})
-		}), /* @__PURE__ */ jsx(DragOverlay, { children: M ? /* @__PURE__ */ jsx(p, {
+		}), /* @__PURE__ */ jsx(DragOverlay, { children: N ? /* @__PURE__ */ jsx(p, {
 			style: {
 				padding: "8px 12px",
 				backgroundColor: "var(--gray-4)",
@@ -22689,17 +22120,694 @@ const SimpleLayers = () => {
 			children: /* @__PURE__ */ jsx(p$2, { children: "Movendo..." })
 		}) : null })]
 	}) });
-}, SimpleProperties = () => {
-	let { state: n, updateElement: _, removeSelected: E, copy: O } = useEditor(), A = n.selectedElementIds[0], j = n.elements.find((n) => n.id === A);
-	if (!j) return null;
-	let M = (n) => {
-		_(j.id, n);
-	}, N = (n) => {
-		M({ style: {
-			...j.style,
+}, AdvancedPropertiesPanel = ({ elementId: n }) => {
+	let { state: _, updateElement: E } = useEditor(), O = _.elements.find((_) => _.id === n);
+	return O ? /* @__PURE__ */ jsx(p, {
+		pt: "2",
+		children: /* @__PURE__ */ jsxs(m$1, {
+			defaultValue: "formatting",
+			children: [/* @__PURE__ */ jsxs(b$1, { children: [
+				/* @__PURE__ */ jsx(P$1, {
+					value: "formatting",
+					style: { flex: 1 },
+					children: "Formatação"
+				}),
+				/* @__PURE__ */ jsx(P$1, {
+					value: "style",
+					style: { flex: 1 },
+					children: "Estilo"
+				}),
+				/* @__PURE__ */ jsx(P$1, {
+					value: "conditional",
+					style: { flex: 1 },
+					children: "Regras"
+				}),
+				/* @__PURE__ */ jsx(P$1, {
+					value: "animation",
+					style: { flex: 1 },
+					children: "Anim"
+				})
+			] }), /* @__PURE__ */ jsxs(p, {
+				pt: "3",
+				children: [
+					/* @__PURE__ */ jsx(f$2, {
+						value: "formatting",
+						children: /* @__PURE__ */ jsx(FormattingSettings, {
+							element: O,
+							updateElement: E
+						})
+					}),
+					/* @__PURE__ */ jsx(f$2, {
+						value: "style",
+						children: /* @__PURE__ */ jsx(StyleSettings, {
+							element: O,
+							updateElement: E
+						})
+					}),
+					/* @__PURE__ */ jsx(f$2, {
+						value: "conditional",
+						children: /* @__PURE__ */ jsx(ConditionalSettings, {
+							element: O,
+							updateElement: E,
+							availableProps: _.availableProps || []
+						})
+					}),
+					/* @__PURE__ */ jsx(f$2, {
+						value: "animation",
+						children: /* @__PURE__ */ jsx(AnimationSettings, {
+							element: O,
+							updateElement: E
+						})
+					})
+				]
+			})]
+		})
+	}) : null;
+};
+var AnimationSettings = ({ element: n, updateElement: _ }) => {
+	let E = n.animation || {
+		type: "none",
+		duration: 1,
+		delay: 0
+	}, O = (O) => {
+		_(n.id, { animation: {
+			...E,
+			...O
+		} });
+	};
+	return /* @__PURE__ */ jsxs(p$1, {
+		direction: "column",
+		gap: "3",
+		children: [/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
+			size: "1",
+			mb: "1",
+			as: "div",
+			color: "gray",
+			children: "Tipo de Animação"
+		}), /* @__PURE__ */ jsxs(C$1, {
+			value: E.type,
+			onValueChange: (n) => O({ type: n }),
+			children: [/* @__PURE__ */ jsx(u$3, { style: { width: "100%" } }), /* @__PURE__ */ jsxs(g$1, { children: [
+				/* @__PURE__ */ jsx(v$2, {
+					value: "none",
+					children: "Nenhuma"
+				}),
+				/* @__PURE__ */ jsx(v$2, {
+					value: "fadeIn",
+					children: "Fade In"
+				}),
+				/* @__PURE__ */ jsx(v$2, {
+					value: "smoothSlideUp",
+					children: "Slide Suave (Up)"
+				}),
+				/* @__PURE__ */ jsx(v$2, {
+					value: "popIn",
+					children: "Pop In"
+				}),
+				/* @__PURE__ */ jsx(v$2, {
+					value: "blurIn",
+					children: "Blur In"
+				}),
+				/* @__PURE__ */ jsx(v$2, {
+					value: "slideInLeft",
+					children: "Slide In (Esquerda)"
+				}),
+				/* @__PURE__ */ jsx(v$2, {
+					value: "slideInRight",
+					children: "Slide In (Direita)"
+				}),
+				/* @__PURE__ */ jsx(v$2, {
+					value: "slideInUp",
+					children: "Slide In (Cima)"
+				}),
+				/* @__PURE__ */ jsx(v$2, {
+					value: "slideInDown",
+					children: "Slide In (Baixo)"
+				}),
+				/* @__PURE__ */ jsx(v$2, {
+					value: "zoomIn",
+					children: "Zoom In"
+				}),
+				/* @__PURE__ */ jsx(v$2, {
+					value: "bounceIn",
+					children: "Bounce In"
+				}),
+				/* @__PURE__ */ jsx(v$2, {
+					value: "pulse",
+					children: "Pulse (Atenção)"
+				}),
+				/* @__PURE__ */ jsx(v$2, {
+					value: "shake",
+					children: "Shake (Atenção)"
+				}),
+				/* @__PURE__ */ jsx(v$2, {
+					value: "spin",
+					children: "Spin (Loop)"
+				})
+			] })]
+		})] }), E.type !== "none" && /* @__PURE__ */ jsxs(Fragment$1, { children: [
+			/* @__PURE__ */ jsxs(o$1, {
+				columns: "2",
+				gap: "3",
+				children: [/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
+					size: "1",
+					mb: "1",
+					as: "div",
+					color: "gray",
+					children: "Duração (s)"
+				}), /* @__PURE__ */ jsx(u$1, {
+					type: "number",
+					step: "0.1",
+					min: "0.1",
+					value: E.duration,
+					onChange: (n) => O({ duration: parseFloat(n.target.value) || .5 })
+				})] }), /* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
+					size: "1",
+					mb: "1",
+					as: "div",
+					color: "gray",
+					children: "Atraso (s)"
+				}), /* @__PURE__ */ jsx(u$1, {
+					type: "number",
+					step: "0.1",
+					min: "0",
+					value: E.delay,
+					onChange: (n) => O({ delay: parseFloat(n.target.value) || 0 })
+				})] })]
+			}),
+			/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
+				size: "1",
+				mb: "1",
+				as: "div",
+				color: "gray",
+				children: "Curva de Tempo"
+			}), /* @__PURE__ */ jsxs(C$1, {
+				value: E.timingFunction || "ease",
+				onValueChange: (n) => O({ timingFunction: n }),
+				children: [/* @__PURE__ */ jsx(u$3, { style: { width: "100%" } }), /* @__PURE__ */ jsxs(g$1, { children: [
+					/* @__PURE__ */ jsx(v$2, {
+						value: "linear",
+						children: "Linear"
+					}),
+					/* @__PURE__ */ jsx(v$2, {
+						value: "ease",
+						children: "Ease"
+					}),
+					/* @__PURE__ */ jsx(v$2, {
+						value: "ease-in",
+						children: "Ease In"
+					}),
+					/* @__PURE__ */ jsx(v$2, {
+						value: "ease-out",
+						children: "Ease Out"
+					}),
+					/* @__PURE__ */ jsx(v$2, {
+						value: "ease-in-out",
+						children: "Ease In Out"
+					})
+				] })]
+			})] }),
+			[
+				"pulse",
+				"shake",
+				"spin"
+			].includes(E.type) && /* @__PURE__ */ jsx(p, { children: /* @__PURE__ */ jsxs(p$1, {
+				align: "center",
+				gap: "2",
+				mt: "2",
+				children: [/* @__PURE__ */ jsx(i, {
+					checked: E.iterationCount === "infinite",
+					onCheckedChange: (n) => O({ iterationCount: n ? "infinite" : 1 })
+				}), /* @__PURE__ */ jsx(p$2, {
+					size: "2",
+					children: "Repetir Infinitamente"
+				})]
+			}) })
+		] })]
+	});
+}, FormattingSettings = ({ element: n, updateElement: _ }) => {
+	let E = n.formatting || { type: "text" }, O = (O) => {
+		_(n.id, { formatting: {
+			...E,
+			...O
+		} });
+	};
+	return /* @__PURE__ */ jsxs(p$1, {
+		direction: "column",
+		gap: "3",
+		children: [
+			(n.type === "text" || n.type === "text-container") && /* @__PURE__ */ jsxs(p, { children: [
+				/* @__PURE__ */ jsxs(p$1, {
+					align: "center",
+					gap: "2",
+					mb: "3",
+					children: [/* @__PURE__ */ jsx(i, {
+						checked: n.autoGrow || !1,
+						onCheckedChange: (E) => _(n.id, { autoGrow: E })
+					}), /* @__PURE__ */ jsx(p$2, {
+						size: "2",
+						children: n.type === "text-container" ? "Expandir container automaticamente" : "Expandir altura automaticamente"
+					})]
+				}),
+				n.type === "text-container" && n.autoGrow && /* @__PURE__ */ jsxs(p, {
+					mb: "3",
+					ml: "4",
+					children: [/* @__PURE__ */ jsx(p$2, {
+						size: "1",
+						mb: "1",
+						as: "div",
+						color: "gray",
+						children: "Direção de Expansão"
+					}), /* @__PURE__ */ jsxs(C$1, {
+						value: n.containerExpansion || "vertical",
+						onValueChange: (E) => _(n.id, { containerExpansion: E }),
+						children: [/* @__PURE__ */ jsx(u$3, { style: { width: "100%" } }), /* @__PURE__ */ jsxs(g$1, { children: [/* @__PURE__ */ jsx(v$2, {
+							value: "vertical",
+							children: "Vertical (Altura Cresce)"
+						}), /* @__PURE__ */ jsx(v$2, {
+							value: "horizontal",
+							children: "Horizontal (Largura Cresce)"
+						})] })]
+					})]
+				}),
+				/* @__PURE__ */ jsx(o$3, {
+					size: "4",
+					mb: "2"
+				})
+			] }),
+			/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
+				size: "1",
+				mb: "1",
+				as: "div",
+				color: "gray",
+				children: "Tipo de Formatação"
+			}), /* @__PURE__ */ jsxs(C$1, {
+				value: E.type,
+				onValueChange: (n) => O({ type: n }),
+				children: [/* @__PURE__ */ jsx(u$3, { style: { width: "100%" } }), /* @__PURE__ */ jsxs(g$1, { children: [
+					/* @__PURE__ */ jsx(v$2, {
+						value: "text",
+						children: "Texto (Padrão)"
+					}),
+					/* @__PURE__ */ jsx(v$2, {
+						value: "boolean",
+						children: "Booleano (Sim/Não)"
+					}),
+					/* @__PURE__ */ jsx(v$2, {
+						value: "date",
+						children: "Data"
+					}),
+					/* @__PURE__ */ jsx(v$2, {
+						value: "number",
+						children: "Número / Moeda"
+					})
+				] })]
+			})] }),
+			E.type === "boolean" && /* @__PURE__ */ jsxs(o$1, {
+				columns: "2",
+				gap: "3",
+				children: [/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
+					size: "1",
+					mb: "1",
+					as: "div",
+					color: "gray",
+					children: "Texto para Verdadeiro"
+				}), /* @__PURE__ */ jsx(u$1, {
+					placeholder: "Ex: Sim",
+					value: E.trueLabel || "",
+					onChange: (n) => O({ trueLabel: n.target.value })
+				})] }), /* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
+					size: "1",
+					mb: "1",
+					as: "div",
+					color: "gray",
+					children: "Texto para Falso"
+				}), /* @__PURE__ */ jsx(u$1, {
+					placeholder: "Ex: Não",
+					value: E.falseLabel || "",
+					onChange: (n) => O({ falseLabel: n.target.value })
+				})] })]
+			}),
+			E.type === "date" && /* @__PURE__ */ jsxs(p, { children: [
+				/* @__PURE__ */ jsx(p$2, {
+					size: "1",
+					mb: "1",
+					as: "div",
+					color: "gray",
+					children: "Formato da Data"
+				}),
+				/* @__PURE__ */ jsx(u$1, {
+					placeholder: "Ex: DD/MM/YYYY",
+					value: E.dateFormat || "",
+					onChange: (n) => O({ dateFormat: n.target.value })
+				}),
+				/* @__PURE__ */ jsx(p$2, {
+					size: "1",
+					color: "gray",
+					mt: "1",
+					style: { fontSize: 10 },
+					children: "Use DD, MM, YYYY, HH, mm, ss."
+				})
+			] }),
+			E.type === "number" && /* @__PURE__ */ jsxs(p$1, {
+				direction: "column",
+				gap: "3",
+				children: [
+					/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
+						size: "1",
+						mb: "1",
+						as: "div",
+						color: "gray",
+						children: "Estilo"
+					}), /* @__PURE__ */ jsxs(C$1, {
+						value: E.numberFormat || "decimal",
+						onValueChange: (n) => O({ numberFormat: n }),
+						children: [/* @__PURE__ */ jsx(u$3, { style: { width: "100%" } }), /* @__PURE__ */ jsxs(g$1, { children: [
+							/* @__PURE__ */ jsx(v$2, {
+								value: "decimal",
+								children: "Decimal"
+							}),
+							/* @__PURE__ */ jsx(v$2, {
+								value: "currency",
+								children: "Moeda"
+							}),
+							/* @__PURE__ */ jsx(v$2, {
+								value: "percent",
+								children: "Porcentagem"
+							})
+						] })]
+					})] }),
+					E.numberFormat === "currency" && /* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
+						size: "1",
+						mb: "1",
+						as: "div",
+						color: "gray",
+						children: "Símbolo da Moeda"
+					}), /* @__PURE__ */ jsx(u$1, {
+						placeholder: "Ex: R$",
+						value: E.currencySymbol || "",
+						onChange: (n) => O({ currencySymbol: n.target.value })
+					})] }),
+					/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
+						size: "1",
+						mb: "1",
+						as: "div",
+						color: "gray",
+						children: "Casas Decimais"
+					}), /* @__PURE__ */ jsx(u$1, {
+						type: "number",
+						placeholder: "2",
+						value: E.decimalPlaces === void 0 ? "" : E.decimalPlaces,
+						onChange: (n) => O({ decimalPlaces: parseInt(n.target.value) || 0 })
+					})] })
+				]
+			})
+		]
+	});
+}, StyleSettings = ({ element: n, updateElement: _ }) => {
+	let E = n.style || {}, [O, A] = useState(E.borderTopLeftRadius !== void 0 || E.borderTopRightRadius !== void 0 || E.borderBottomRightRadius !== void 0 || E.borderBottomLeftRadius !== void 0), j = (O) => {
+		_(n.id, { style: {
+			...E,
+			...O
+		} });
+	}, M = (n, _) => {
+		let E = typeof n == "number" ? n : parseInt(n) || 0;
+		j({ [_]: E });
+	};
+	return /* @__PURE__ */ jsxs(p$1, {
+		direction: "column",
+		gap: "3",
+		children: [
+			/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsxs(p$1, {
+				align: "center",
+				justify: "between",
+				mb: "2",
+				children: [/* @__PURE__ */ jsx(p$2, {
+					size: "2",
+					weight: "bold",
+					children: "Arredondamento"
+				}), /* @__PURE__ */ jsxs(p$1, {
+					align: "center",
+					gap: "2",
+					children: [/* @__PURE__ */ jsx(p$2, {
+						size: "1",
+						children: "Individual"
+					}), /* @__PURE__ */ jsx(i, {
+						checked: O,
+						onCheckedChange: (n) => {
+							if (A(n), !n) j({
+								borderRadius: E.borderTopLeftRadius || E.borderRadius || 0,
+								borderTopLeftRadius: void 0,
+								borderTopRightRadius: void 0,
+								borderBottomRightRadius: void 0,
+								borderBottomLeftRadius: void 0
+							});
+							else {
+								let n = E.borderRadius || 0;
+								j({
+									borderRadius: void 0,
+									borderTopLeftRadius: n,
+									borderTopRightRadius: n,
+									borderBottomRightRadius: n,
+									borderBottomLeftRadius: n
+								});
+							}
+						}
+					})]
+				})]
+			}), O ? /* @__PURE__ */ jsxs(o$1, {
+				columns: "2",
+				gap: "3",
+				children: [
+					/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
+						size: "1",
+						mb: "1",
+						as: "div",
+						color: "gray",
+						children: "Sup. Esq."
+					}), /* @__PURE__ */ jsx(u$1, {
+						type: "number",
+						min: "0",
+						value: parseInt(E.borderTopLeftRadius) || 0,
+						onChange: (n) => M(n.target.value, "borderTopLeftRadius")
+					})] }),
+					/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
+						size: "1",
+						mb: "1",
+						as: "div",
+						color: "gray",
+						children: "Sup. Dir."
+					}), /* @__PURE__ */ jsx(u$1, {
+						type: "number",
+						min: "0",
+						value: parseInt(E.borderTopRightRadius) || 0,
+						onChange: (n) => M(n.target.value, "borderTopRightRadius")
+					})] }),
+					/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
+						size: "1",
+						mb: "1",
+						as: "div",
+						color: "gray",
+						children: "Inf. Esq."
+					}), /* @__PURE__ */ jsx(u$1, {
+						type: "number",
+						min: "0",
+						value: parseInt(E.borderBottomLeftRadius) || 0,
+						onChange: (n) => M(n.target.value, "borderBottomLeftRadius")
+					})] }),
+					/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
+						size: "1",
+						mb: "1",
+						as: "div",
+						color: "gray",
+						children: "Inf. Dir."
+					}), /* @__PURE__ */ jsx(u$1, {
+						type: "number",
+						min: "0",
+						value: parseInt(E.borderBottomRightRadius) || 0,
+						onChange: (n) => M(n.target.value, "borderBottomRightRadius")
+					})] })
+				]
+			}) : /* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
+				size: "1",
+				mb: "1",
+				as: "div",
+				color: "gray",
+				children: "Raio (Todos os cantos)"
+			}), /* @__PURE__ */ jsx(u$1, {
+				type: "number",
+				min: "0",
+				value: parseInt(E.borderRadius) || 0,
+				onChange: (n) => j({ borderRadius: parseInt(n.target.value) || 0 })
+			})] })] }),
+			/* @__PURE__ */ jsx(o$3, {
+				size: "4",
+				my: "2"
+			}),
+			/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
+				size: "2",
+				weight: "bold",
+				mb: "2",
+				children: "Espaçamento Interno"
+			}), /* @__PURE__ */ jsx(o$1, {
+				columns: "2",
+				gap: "3",
+				children: /* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
+					size: "1",
+					mb: "1",
+					as: "div",
+					color: "gray",
+					children: "Tamanho (px)"
+				}), /* @__PURE__ */ jsx(u$1, {
+					type: "number",
+					min: "0",
+					value: parseInt(E.padding) || 0,
+					onChange: (n) => j({ padding: parseInt(n.target.value) || 0 })
+				})] })
+			})] })
+		]
+	});
+}, ConditionalSettings = ({ element: n, updateElement: _, availableProps: E }) => {
+	let O = n.conditions || [], A = () => {
+		let A = {
+			id: crypto.randomUUID(),
+			property: E.length > 0 ? E[0].dataName : "",
+			operator: "equals",
+			value: "",
+			style: { color: "#ff0000" }
+		};
+		_(n.id, { conditions: [...O, A] });
+	}, j = (E) => {
+		_(n.id, { conditions: O.filter((n) => n.id !== E) });
+	}, M = (E, A) => {
+		_(n.id, { conditions: O.map((n) => n.id === E ? {
+			...n,
+			...A
+		} : n) });
+	};
+	return /* @__PURE__ */ jsxs(p$1, {
+		direction: "column",
+		gap: "3",
+		children: [/* @__PURE__ */ jsxs(p$1, {
+			justify: "between",
+			align: "center",
+			children: [/* @__PURE__ */ jsx(p$2, {
+				size: "2",
+				color: "gray",
+				children: "Regras de Exibição"
+			}), /* @__PURE__ */ jsxs(o, {
+				size: "1",
+				variant: "soft",
+				onClick: A,
+				children: [/* @__PURE__ */ jsx(PlusIcon, {}), " Nova Regra"]
+			})]
+		}), O.length === 0 ? /* @__PURE__ */ jsx(p$2, {
+			size: "1",
+			color: "gray",
+			style: { fontStyle: "italic" },
+			children: "Nenhuma regra condicional definida."
+		}) : /* @__PURE__ */ jsx(p$1, {
+			direction: "column",
+			gap: "2",
+			children: O.map((n) => /* @__PURE__ */ jsxs(p, {
+				style: {
+					border: "1px solid var(--gray-6)",
+					borderRadius: 4,
+					padding: 8
+				},
+				children: [
+					/* @__PURE__ */ jsxs(p$1, {
+						justify: "between",
+						align: "center",
+						mb: "2",
+						children: [/* @__PURE__ */ jsxs(p$2, {
+							size: "1",
+							weight: "bold",
+							children: [
+								"Se ",
+								n.property,
+								"..."
+							]
+						}), /* @__PURE__ */ jsx(o$2, {
+							size: "1",
+							color: "red",
+							variant: "ghost",
+							onClick: () => j(n.id),
+							children: /* @__PURE__ */ jsx(TrashIcon, {})
+						})]
+					}),
+					/* @__PURE__ */ jsxs(o$1, {
+						columns: "2",
+						gap: "2",
+						mb: "2",
+						children: [/* @__PURE__ */ jsxs(C$1, {
+							value: n.property,
+							onValueChange: (_) => M(n.id, { property: _ }),
+							children: [/* @__PURE__ */ jsx(u$3, {
+								style: { width: "100%" },
+								placeholder: "Propriedade"
+							}), /* @__PURE__ */ jsx(g$1, { children: E.map((n) => /* @__PURE__ */ jsx(v$2, {
+								value: n.dataName,
+								children: n.name
+							}, n.dataName)) })]
+						}), /* @__PURE__ */ jsxs(C$1, {
+							value: n.operator,
+							onValueChange: (_) => M(n.id, { operator: _ }),
+							children: [/* @__PURE__ */ jsx(u$3, { style: { width: "100%" } }), /* @__PURE__ */ jsxs(g$1, { children: [
+								/* @__PURE__ */ jsx(v$2, {
+									value: "equals",
+									children: "Igual a"
+								}),
+								/* @__PURE__ */ jsx(v$2, {
+									value: "notEquals",
+									children: "Diferente de"
+								}),
+								/* @__PURE__ */ jsx(v$2, {
+									value: "contains",
+									children: "Contém"
+								}),
+								/* @__PURE__ */ jsx(v$2, {
+									value: "greaterThan",
+									children: "Maior que"
+								}),
+								/* @__PURE__ */ jsx(v$2, {
+									value: "lessThan",
+									children: "Menor que"
+								})
+							] })]
+						})]
+					}),
+					/* @__PURE__ */ jsx(u$1, {
+						size: "1",
+						placeholder: "Valor",
+						value: n.value,
+						onChange: (_) => M(n.id, { value: _.target.value })
+					})
+				]
+			}, n.id))
+		})]
+	});
+};
+const SimpleProperties = () => {
+	let { state: n, updateElement: _, removeSelected: E, copy: O } = useEditor(), [A, j] = useState(!1), M = n.selectedElementIds[0], N = n.elements.find((n) => n.id === M);
+	if (!N) return null;
+	let P = (n) => {
+		_(N.id, n);
+	}, z = (n) => {
+		P({ style: {
+			...N.style,
 			...n
 		} });
-	}, P = j.style?.textAlign || "left", z = parseInt(j.style?.fontSize || "14", 10), B = parseInt(j.style?.borderWidth || "0", 10), H = parseInt(j.style?.padding || "0", 10);
+	}, B = N.style?.textAlign || "left", H = parseInt(N.style?.fontSize || "14", 10), U = parseInt(N.style?.borderWidth || "0", 10), W = parseInt(N.style?.padding || "0", 10), G = N.style?.fontFamily || "Arial", Z = N.style?.fontWeight || "normal", uz = n.availableFonts || [
+		"Arial",
+		"Helvetica",
+		"Times New Roman",
+		"Courier New",
+		"Verdana",
+		"Georgia",
+		"Tahoma",
+		"Trebuchet MS"
+	];
 	return /* @__PURE__ */ jsxs(p$1, {
 		direction: "column",
 		gap: "4",
@@ -22710,46 +22818,64 @@ const SimpleLayers = () => {
 				children: [/* @__PURE__ */ jsx(p$2, {
 					size: "3",
 					weight: "bold",
-					children: getElementLabel(j.type)
+					children: getElementLabel(N.type)
 				}), /* @__PURE__ */ jsxs(p$1, {
 					gap: "2",
-					children: [/* @__PURE__ */ jsx(o$2, {
-						variant: "soft",
-						color: "gray",
-						onClick: O,
-						title: "Copiar",
-						children: /* @__PURE__ */ jsx(CopyIcon, {})
-					}), /* @__PURE__ */ jsx(o$2, {
-						variant: "soft",
-						color: "red",
-						onClick: E,
-						title: "Excluir",
-						children: /* @__PURE__ */ jsx(TrashIcon, {})
-					})]
+					children: [
+						/* @__PURE__ */ jsx(o$2, {
+							variant: "soft",
+							color: N.locked ? "orange" : "gray",
+							onClick: () => P({ locked: !N.locked }),
+							title: N.locked ? "Desbloquear" : "Bloquear",
+							children: N.locked ? /* @__PURE__ */ jsx(LockClosedIcon, {}) : /* @__PURE__ */ jsx(LockOpen1Icon, {})
+						}),
+						/* @__PURE__ */ jsx(o$2, {
+							variant: "soft",
+							color: N.hidden ? "blue" : "gray",
+							onClick: () => P({ hidden: !N.hidden }),
+							title: N.hidden ? "Mostrar" : "Ocultar",
+							children: N.hidden ? /* @__PURE__ */ jsx(EyeNoneIcon, {}) : /* @__PURE__ */ jsx(EyeOpenIcon, {})
+						}),
+						/* @__PURE__ */ jsx(o$3, { orientation: "vertical" }),
+						/* @__PURE__ */ jsx(o$2, {
+							variant: "soft",
+							color: "gray",
+							onClick: O,
+							title: "Copiar",
+							children: /* @__PURE__ */ jsx(CopyIcon, {})
+						}),
+						/* @__PURE__ */ jsx(o$2, {
+							variant: "soft",
+							color: "red",
+							onClick: E,
+							title: "Excluir",
+							children: /* @__PURE__ */ jsx(TrashIcon, {})
+						})
+					]
 				})]
 			}),
-			/* @__PURE__ */ jsx(o$4, { size: "4" }),
-			(j.type === "text" || j.type === "text-container") && /* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
+			/* @__PURE__ */ jsx(o$3, { size: "4" }),
+			(N.type === "text" || N.type === "text-container") && /* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
 				size: "2",
 				weight: "bold",
 				mb: "2",
 				as: "div",
 				children: "Conteúdo"
 			}), /* @__PURE__ */ jsx(r$1, {
-				value: j.content,
-				onChange: (n) => M({ content: n.target.value }),
+				value: N.content,
+				onChange: (n) => P({ content: n.target.value }),
 				rows: 3,
 				placeholder: "Digite o texto aqui..."
 			})] }),
-			j.type === "image" && /* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
+			N.type === "image" && /* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
 				size: "2",
 				weight: "bold",
 				mb: "2",
 				as: "div",
 				children: "Imagem URL"
 			}), /* @__PURE__ */ jsx(u$1, {
-				value: j.content,
-				onChange: (n) => M({ content: n.target.value }),
+				value: N.content,
+				onChange: (n) => P({ content: n.target.value }),
 				placeholder: "https://..."
 			})] }),
 			/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
@@ -22762,51 +22888,104 @@ const SimpleLayers = () => {
 				direction: "column",
 				gap: "3",
 				children: [
-					(j.type === "text" || j.type === "text-container") && /* @__PURE__ */ jsxs(Fragment$1, { children: [/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsxs(p$1, {
-						justify: "between",
-						mb: "1",
-						children: [/* @__PURE__ */ jsx(p$2, {
+					(N.type === "text" || N.type === "text-container") && /* @__PURE__ */ jsxs(Fragment$1, { children: [
+						/* @__PURE__ */ jsxs(o$1, {
+							columns: "2",
+							gap: "3",
+							children: [/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
+								size: "1",
+								color: "gray",
+								mb: "1",
+								as: "div",
+								children: "Fonte"
+							}), /* @__PURE__ */ jsxs(C$1, {
+								value: G,
+								onValueChange: (n) => z({ fontFamily: n }),
+								children: [/* @__PURE__ */ jsx(u$3, { style: { width: "100%" } }), /* @__PURE__ */ jsx(g$1, { children: /* @__PURE__ */ jsxs(y$2, { children: [/* @__PURE__ */ jsx(h$1, { children: "Fontes" }), uz.map((n) => /* @__PURE__ */ jsx(v$2, {
+									value: n,
+									style: { fontFamily: n },
+									children: n
+								}, n))] }) })]
+							})] }), /* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
+								size: "1",
+								color: "gray",
+								mb: "1",
+								as: "div",
+								children: "Peso"
+							}), /* @__PURE__ */ jsxs(C$1, {
+								value: Z,
+								onValueChange: (n) => z({ fontWeight: n }),
+								children: [/* @__PURE__ */ jsx(u$3, { style: { width: "100%" } }), /* @__PURE__ */ jsxs(g$1, { children: [
+									/* @__PURE__ */ jsx(v$2, {
+										value: "normal",
+										children: "Normal"
+									}),
+									/* @__PURE__ */ jsx(v$2, {
+										value: "bold",
+										children: "Negrito"
+									}),
+									/* @__PURE__ */ jsx(v$2, {
+										value: "100",
+										children: "Fina"
+									}),
+									/* @__PURE__ */ jsx(v$2, {
+										value: "300",
+										children: "Leve"
+									}),
+									/* @__PURE__ */ jsx(v$2, {
+										value: "900",
+										children: "Pesada"
+									})
+								] })]
+							})] })]
+						}),
+						/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsxs(p$1, {
+							justify: "between",
+							mb: "1",
+							children: [/* @__PURE__ */ jsx(p$2, {
+								size: "1",
+								color: "gray",
+								children: "Tamanho do Texto"
+							}), /* @__PURE__ */ jsxs(p$2, {
+								size: "1",
+								children: [H, "px"]
+							})]
+						}), /* @__PURE__ */ jsx(s, {
+							min: 8,
+							max: 72,
+							value: [H],
+							onValueChange: (n) => z({ fontSize: `${n[0]}px` })
+						})] }),
+						/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
 							size: "1",
 							color: "gray",
-							children: "Tamanho do Texto"
-						}), /* @__PURE__ */ jsxs(p$2, {
-							size: "1",
-							children: [z, "px"]
-						})]
-					}), /* @__PURE__ */ jsx(s, {
-						min: 8,
-						max: 72,
-						value: [z],
-						onValueChange: (n) => N({ fontSize: `${n[0]}px` })
-					})] }), /* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
-						size: "1",
-						color: "gray",
-						mb: "1",
-						as: "div",
-						children: "Alinhamento"
-					}), /* @__PURE__ */ jsxs(p$1, {
-						gap: "2",
-						children: [
-							/* @__PURE__ */ jsx(o$2, {
-								variant: P === "left" ? "solid" : "soft",
-								color: "gray",
-								onClick: () => N({ textAlign: "left" }),
-								children: /* @__PURE__ */ jsx(TextAlignLeftIcon, {})
-							}),
-							/* @__PURE__ */ jsx(o$2, {
-								variant: P === "center" ? "solid" : "soft",
-								color: "gray",
-								onClick: () => N({ textAlign: "center" }),
-								children: /* @__PURE__ */ jsx(TextAlignCenterIcon, {})
-							}),
-							/* @__PURE__ */ jsx(o$2, {
-								variant: P === "right" ? "solid" : "soft",
-								color: "gray",
-								onClick: () => N({ textAlign: "right" }),
-								children: /* @__PURE__ */ jsx(TextAlignRightIcon, {})
-							})
-						]
-					})] })] }),
+							mb: "1",
+							as: "div",
+							children: "Alinhamento"
+						}), /* @__PURE__ */ jsxs(p$1, {
+							gap: "2",
+							children: [
+								/* @__PURE__ */ jsx(o$2, {
+									variant: B === "left" ? "solid" : "soft",
+									color: "gray",
+									onClick: () => z({ textAlign: "left" }),
+									children: /* @__PURE__ */ jsx(TextAlignLeftIcon, {})
+								}),
+								/* @__PURE__ */ jsx(o$2, {
+									variant: B === "center" ? "solid" : "soft",
+									color: "gray",
+									onClick: () => z({ textAlign: "center" }),
+									children: /* @__PURE__ */ jsx(TextAlignCenterIcon, {})
+								}),
+								/* @__PURE__ */ jsx(o$2, {
+									variant: B === "right" ? "solid" : "soft",
+									color: "gray",
+									onClick: () => z({ textAlign: "right" }),
+									children: /* @__PURE__ */ jsx(TextAlignRightIcon, {})
+								})
+							]
+						})] })
+					] }),
 					/* @__PURE__ */ jsxs(o$1, {
 						columns: "2",
 						gap: "3",
@@ -22817,17 +22996,17 @@ const SimpleLayers = () => {
 							as: "div",
 							children: "Cor de Fundo"
 						}), /* @__PURE__ */ jsx(ColorInput, {
-							color: j.style?.backgroundColor || "transparent",
-							onChange: (n) => N({ backgroundColor: n })
-						})] }), (j.type === "text" || j.type === "text-container") && /* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
+							color: N.style?.backgroundColor || "transparent",
+							onChange: (n) => z({ backgroundColor: n })
+						})] }), (N.type === "text" || N.type === "text-container") && /* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
 							size: "1",
 							color: "gray",
 							mb: "1",
 							as: "div",
 							children: "Cor do Texto"
 						}), /* @__PURE__ */ jsx(ColorInput, {
-							color: j.style?.color || "#000000",
-							onChange: (n) => N({ color: n })
+							color: N.style?.color || "#000000",
+							onChange: (n) => z({ color: n })
 						})] })]
 					}),
 					/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsxs(p$1, {
@@ -22839,16 +23018,16 @@ const SimpleLayers = () => {
 							children: "Borda (Espessura)"
 						}), /* @__PURE__ */ jsxs(p$2, {
 							size: "1",
-							children: [B, "px"]
+							children: [U, "px"]
 						})]
 					}), /* @__PURE__ */ jsx(s, {
 						min: 0,
 						max: 10,
-						value: [B],
-						onValueChange: (n) => N({
+						value: [U],
+						onValueChange: (n) => z({
 							borderWidth: `${n[0]}px`,
 							borderStyle: n[0] > 0 ? "solid" : "none",
-							borderColor: j.style?.borderColor || "#000000"
+							borderColor: N.style?.borderColor || "#000000"
 						})
 					})] }),
 					/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsxs(p$1, {
@@ -22860,16 +23039,43 @@ const SimpleLayers = () => {
 							children: "Espaçamento Interno (Padding)"
 						}), /* @__PURE__ */ jsxs(p$2, {
 							size: "1",
-							children: [H, "px"]
+							children: [W, "px"]
 						})]
 					}), /* @__PURE__ */ jsx(s, {
 						min: 0,
 						max: 40,
-						value: [H],
-						onValueChange: (n) => N({ padding: `${n[0]}px` })
+						value: [W],
+						onValueChange: (n) => z({ padding: `${n[0]}px` })
 					})] })
 				]
-			})] })
+			})] }),
+			/* @__PURE__ */ jsxs(p, {
+				mt: "2",
+				pt: "2",
+				style: { borderTop: "1px solid var(--gray-5)" },
+				children: [/* @__PURE__ */ jsxs(o, {
+					variant: "ghost",
+					onClick: () => j(!A),
+					style: {
+						width: "100%",
+						justifyContent: "space-between",
+						color: "var(--gray-11)",
+						cursor: "pointer"
+					},
+					children: [/* @__PURE__ */ jsx(p$1, {
+						align: "center",
+						gap: "2",
+						children: /* @__PURE__ */ jsx(p$2, {
+							size: "2",
+							children: "Mais opções"
+						})
+					}), jsx(A ? ChevronDownIcon : ChevronRightIcon, {})]
+				}), A && /* @__PURE__ */ jsx(p, {
+					mt: "3",
+					className: "advanced-properties-content",
+					children: /* @__PURE__ */ jsx(AdvancedPropertiesPanel, { elementId: N.id })
+				})]
+			})
 		]
 	});
 };
@@ -22882,9 +23088,9 @@ var getElementLabel = (n) => {
 		default: return "Elemento";
 	}
 };
-const SimpleSidebar = ({ layout: n }) => {
-	let { state: _, addElement: E, groupElements: O } = useEditor(), A = _.selectedElementIds.length > 0, j = (n) => {
-		let _ = {
+const SimpleSidebar = ({ onClose: n }) => {
+	let { state: _, addElement: E, groupElements: O } = useEditor(), A = _.selectedElementIds.length > 0, j = (_) => {
+		let A = {
 			id: `el-${(/* @__PURE__ */ new Date()).toISOString()}`,
 			x: 20,
 			y: 20,
@@ -22892,10 +23098,10 @@ const SimpleSidebar = ({ layout: n }) => {
 			height: 40,
 			style: {}
 		};
-		switch (n) {
+		switch (_) {
 			case "text":
 				E({
-					..._,
+					...A,
 					type: "text",
 					content: "Novo Texto",
 					width: 120,
@@ -22904,7 +23110,7 @@ const SimpleSidebar = ({ layout: n }) => {
 				break;
 			case "image":
 				E({
-					..._,
+					...A,
 					type: "image",
 					content: "https://via.placeholder.com/150",
 					width: 150,
@@ -22913,7 +23119,7 @@ const SimpleSidebar = ({ layout: n }) => {
 				break;
 			case "box":
 				E({
-					..._,
+					...A,
 					type: "box",
 					content: "",
 					width: 200,
@@ -22923,7 +23129,7 @@ const SimpleSidebar = ({ layout: n }) => {
 				break;
 			case "text-container":
 				E({
-					..._,
+					...A,
 					type: "text-container",
 					content: "Texto em Caixa",
 					width: 150,
@@ -22936,7 +23142,7 @@ const SimpleSidebar = ({ layout: n }) => {
 				break;
 			case "separator":
 				E({
-					..._,
+					...A,
 					type: "box",
 					content: "",
 					width: 300,
@@ -22946,7 +23152,7 @@ const SimpleSidebar = ({ layout: n }) => {
 				break;
 			case "timestamp":
 				E({
-					..._,
+					...A,
 					type: "text",
 					content: "{{timestamp}}",
 					width: 150,
@@ -22959,7 +23165,7 @@ const SimpleSidebar = ({ layout: n }) => {
 				break;
 			case "badge":
 				E({
-					..._,
+					...A,
 					type: "text-container",
 					content: "Badge",
 					width: 80,
@@ -22974,7 +23180,7 @@ const SimpleSidebar = ({ layout: n }) => {
 				});
 				break;
 			case "list-item":
-				let n = crypto.randomUUID(), A = crypto.randomUUID(), j = crypto.randomUUID(), M = crypto.randomUUID();
+				let n = crypto.randomUUID(), _ = crypto.randomUUID(), j = crypto.randomUUID(), M = crypto.randomUUID();
 				E({
 					id: n,
 					type: "box",
@@ -22989,7 +23195,7 @@ const SimpleSidebar = ({ layout: n }) => {
 						boxShadow: "0 2px 4px rgba(0,0,0,0.05)"
 					}
 				}), E({
-					id: A,
+					id: _,
 					type: "image",
 					content: "https://via.placeholder.com/80",
 					x: 35,
@@ -23025,13 +23231,14 @@ const SimpleSidebar = ({ layout: n }) => {
 				}), setTimeout(() => {
 					O([
 						n,
-						A,
+						_,
 						j,
 						M
 					]);
 				}, 100);
 				break;
 		}
+		n && n();
 	};
 	return /* @__PURE__ */ jsxs(p$1, {
 		direction: "column",
@@ -23041,8 +23248,7 @@ const SimpleSidebar = ({ layout: n }) => {
 			style: {
 				borderBottom: "1px solid var(--gray-5)",
 				minHeight: "180px",
-				flexShrink: 0,
-				overflowY: "auto"
+				flexShrink: 0
 			},
 			children: A ? /* @__PURE__ */ jsx(SimpleProperties, {}) : /* @__PURE__ */ jsxs(p$1, {
 				direction: "column",
@@ -23068,15 +23274,19 @@ const SimpleSidebar = ({ layout: n }) => {
 					children: "Dica: Clique no desenho"
 				})]
 			})
-		}), /* @__PURE__ */ jsx(p, {
-			p: "4",
+		}), /* @__PURE__ */ jsxs(m$1, {
+			defaultValue: "blocks",
 			style: {
-				flexGrow: 1,
-				overflowY: "auto"
+				display: "flex",
+				flexDirection: "column",
+				flex: 1,
+				overflow: "hidden"
 			},
-			children: /* @__PURE__ */ jsxs(m$1, {
-				defaultValue: "blocks",
-				children: [/* @__PURE__ */ jsxs(b$1, { children: [
+			children: [/* @__PURE__ */ jsx(p, {
+				px: "4",
+				pt: "4",
+				style: { flexShrink: 0 },
+				children: /* @__PURE__ */ jsxs(b$1, { children: [
 					/* @__PURE__ */ jsx(P$1, {
 						value: "blocks",
 						children: "Blocos"
@@ -23086,11 +23296,16 @@ const SimpleSidebar = ({ layout: n }) => {
 						children: "Conteúdo"
 					}),
 					/* @__PURE__ */ jsx(P$1, {
-						value: "data",
-						children: "Dados"
+						value: "history",
+						children: "Histórico"
 					})
-				] }), /* @__PURE__ */ jsxs(p, {
-					pt: "3",
+				] })
+			}), /* @__PURE__ */ jsx(c, {
+				type: "auto",
+				scrollbars: "vertical",
+				style: { flex: 1 },
+				children: /* @__PURE__ */ jsxs(p, {
+					p: "4",
 					children: [
 						/* @__PURE__ */ jsxs(f$2, {
 							value: "blocks",
@@ -23170,6 +23385,10 @@ const SimpleSidebar = ({ layout: n }) => {
 											onClick: () => j("badge")
 										})
 									]
+								}),
+								/* @__PURE__ */ jsx(p, {
+									mt: "4",
+									children: /* @__PURE__ */ jsx(EditorSettings, {})
 								})
 							]
 						}),
@@ -23178,60 +23397,16 @@ const SimpleSidebar = ({ layout: n }) => {
 							children: /* @__PURE__ */ jsx(SimpleLayers, {})
 						}),
 						/* @__PURE__ */ jsx(f$2, {
-							value: "data",
-							children: /* @__PURE__ */ jsxs(p, { children: [
-								/* @__PURE__ */ jsx(p$2, {
-									size: "2",
-									weight: "bold",
-									mb: "2",
-									as: "div",
-									children: "Campos Disponíveis"
-								}),
-								/* @__PURE__ */ jsx(p$2, {
-									size: "1",
-									color: "gray",
-									mb: "2",
-									as: "div",
-									children: "Arraste para o desenho"
-								}),
-								/* @__PURE__ */ jsxs(p$1, {
-									direction: "column",
-									gap: "2",
-									children: [n.props.map((n, _) => /* @__PURE__ */ jsx(e$1, {
-										color: "green",
-										variant: "soft",
-										size: "2",
-										style: {
-											padding: "8px",
-											justifyContent: "flex-start",
-											cursor: "grab"
-										},
-										title: `Campo: ${n.name}`,
-										draggable: !0,
-										onDragStart: (_) => {
-											_.dataTransfer.setData("application/x-editor-prop", n.dataName), _.dataTransfer.effectAllowed = "copy";
-										},
-										onClick: () => {
-											let _ = `{{${n.dataName}}}`;
-											navigator.clipboard.writeText(_);
-										},
-										children: n.name
-									}, _)), n.props.length === 0 && /* @__PURE__ */ jsx(p$2, {
-										size: "1",
-										color: "gray",
-										style: { fontStyle: "italic" },
-										children: "Nenhum dado configurado."
-									})]
-								})
-							] })
+							value: "history",
+							children: /* @__PURE__ */ jsx(HistoryPanel, { onClose: n })
 						})
 					]
-				})]
-			})
+				})
+			})]
 		})]
 	});
 };
-var BlockCard = ({ icon: n, label: _, onClick: E }) => /* @__PURE__ */ jsx(o$3, {
+var BlockCard = ({ icon: n, label: _, onClick: E }) => /* @__PURE__ */ jsx(o$4, {
 	style: {
 		cursor: "pointer",
 		transition: "all 0.2s"
@@ -23295,7 +23470,7 @@ const ViewToolbar = () => {
 					children: /* @__PURE__ */ jsx(PlusIcon, {})
 				})
 			}),
-			/* @__PURE__ */ jsx(o$4, {
+			/* @__PURE__ */ jsx(o$3, {
 				orientation: "vertical",
 				style: { height: 16 }
 			}),
@@ -23323,10 +23498,10 @@ const ViewToolbar = () => {
 						});
 						let N = j - n + 100, P = M - O + 100, z = window.innerWidth < 768 ? 0 : 300, B = window.innerWidth - z, H = window.innerHeight - 100, U = B / N, W = H / P, G = Math.min(U, W);
 						G = Math.min(Math.max(G, .1), 5), _(G);
-						let Z = (n + j) / 2, TL = (O + M) / 2, EL = B / 2, DL = H / 2;
+						let Z = (n + j) / 2, uz = (O + M) / 2, dz = B / 2, fz = H / 2;
 						E({
-							x: EL - Z * G,
-							y: DL - TL * G
+							x: dz - Z * G,
+							y: fz - uz * G
 						});
 					},
 					children: /* @__PURE__ */ jsx(AspectRatioIcon, {})
@@ -23345,7 +23520,7 @@ const ViewToolbar = () => {
 	return /* @__PURE__ */ jsx(s$5, {
 		open: n,
 		onOpenChange: E,
-		children: /* @__PURE__ */ jsx(p$9, {
+		children: /* @__PURE__ */ jsx(p$10, {
 			style: { maxWidth: 800 },
 			children: /* @__PURE__ */ jsxs(p$1, {
 				direction: "column",
@@ -23353,7 +23528,7 @@ const ViewToolbar = () => {
 				children: [/* @__PURE__ */ jsxs(p$1, {
 					justify: "between",
 					align: "center",
-					children: [/* @__PURE__ */ jsx(g$2, { children: /* @__PURE__ */ jsxs(p$1, {
+					children: [/* @__PURE__ */ jsx(g$3, { children: /* @__PURE__ */ jsxs(p$1, {
 						align: "center",
 						gap: "2",
 						children: [/* @__PURE__ */ jsx(MagicWandIcon, {}), " Assistente de Criação"]
@@ -23381,7 +23556,7 @@ const ViewToolbar = () => {
 							/* @__PURE__ */ jsxs(o$1, {
 								columns: "3",
 								gap: "3",
-								children: [O.map((n) => /* @__PURE__ */ jsx(o$3, {
+								children: [O.map((n) => /* @__PURE__ */ jsx(o$4, {
 									variant: B === n.id ? "surface" : "classic",
 									style: {
 										cursor: "pointer",
@@ -23424,7 +23599,7 @@ const ViewToolbar = () => {
 											})
 										]
 									})
-								}, n.id)), /* @__PURE__ */ jsx(o$3, {
+								}, n.id)), /* @__PURE__ */ jsx(o$4, {
 									variant: B === "blank" ? "surface" : "classic",
 									style: {
 										cursor: "pointer",
@@ -23503,7 +23678,7 @@ const ViewToolbar = () => {
 							/* @__PURE__ */ jsxs(o$1, {
 								columns: "2",
 								gap: "4",
-								children: [/* @__PURE__ */ jsx(o$3, {
+								children: [/* @__PURE__ */ jsx(o$4, {
 									variant: "surface",
 									children: /* @__PURE__ */ jsxs(p$1, {
 										gap: "3",
@@ -23530,7 +23705,7 @@ const ViewToolbar = () => {
 											children: "Clique duas vezes em qualquer texto ou imagem para editar suas propriedades."
 										})] })]
 									})
-								}), /* @__PURE__ */ jsx(o$3, {
+								}), /* @__PURE__ */ jsx(o$4, {
 									variant: "surface",
 									children: /* @__PURE__ */ jsxs(p$1, {
 										gap: "3",
@@ -23569,7 +23744,7 @@ const ViewToolbar = () => {
 									onClick: () => z(1),
 									children: [/* @__PURE__ */ jsx(ArrowRightIcon, { style: { transform: "rotate(180deg)" } }), " Voltar"]
 								}), /* @__PURE__ */ jsxs(o, {
-									onClick: E,
+									onClick: U,
 									children: ["Começar a Editar ", /* @__PURE__ */ jsx(ArrowRightIcon, {})]
 								})]
 							})
@@ -23588,7 +23763,7 @@ const ViewToolbar = () => {
 								size: "2",
 								children: "Seu layout está pronto? Teste com dados diferentes e exporte o resultado."
 							}),
-							/* @__PURE__ */ jsx(o$3, {
+							/* @__PURE__ */ jsx(o$4, {
 								variant: "surface",
 								style: { padding: 20 },
 								children: /* @__PURE__ */ jsxs(p$1, {
@@ -23663,26 +23838,26 @@ var StepIndicator = ({ current: n, total: _ }) => /* @__PURE__ */ jsx(p$1, {
 			backgroundColor: "var(--gray-4)"
 		} })]
 	}, E))
-}), EditorContent = ({ layout: n, initialState: E, onSave: O, theme: A = "light", templates: j, activeTemplateId: M, onTemplateChange: N }) => {
-	let [P, z] = useState(!0), [B, H] = useState(!0), [U, W] = useState(null), [G, Z] = useState(!1), [TL, EL] = useState(!1), [DL, OL] = useState(!1), [kL, AL] = useState(j && j.length > 0 ? j[0].id : null), ML = React.useRef(null), [NL, PL] = useState(!1), [FL, IL] = useState(1), [LL, BL] = useState(!1), { addElement: VL, loadState: HL, state: UL, undo: WL, redo: GL, copy: KL, paste: qL, removeSelected: JL, updateElements: YL } = useEditor();
+}), EditorContent = ({ initialState: n, onSave: E, theme: O = "light", templates: A, activeTemplateId: j, onTemplateChange: M }) => {
+	let [N, P] = useState(!0), [z, B] = useState(!0), [H, U] = useState(!1), [W, G] = useState(!1), [Z, uz] = useState(A && A.length > 0 ? A[0].id : null), dz = React.useRef(null), [fz, pz] = useState(!1), [mz, hz] = useState(1), [_z, vz] = useState(!1), { addElement: yz, loadState: bz, state: xz, undo: Sz, redo: Tz, copy: Ez, paste: Dz, removeSelected: Oz, updateElements: kz } = useEditor();
 	React.useEffect(() => {
-		UL.editorMode === "simple" && UL.elements.length === 0 && (IL(1), PL(!0));
-	}, [UL.editorMode]), React.useEffect(() => {
+		xz.elements.length === 0 && (hz(1), pz(!0));
+	}, []), React.useEffect(() => {
 		let n = () => {
 			let n = window.innerWidth < 768;
-			OL(n), n && (H(!1), z(!1));
+			G(n), n && (B(!1), P(!1));
 		};
 		return n(), window.addEventListener("resize", n), () => window.removeEventListener("resize", n);
 	}, []);
-	let XL = () => {
+	let Az = () => {
 		let n = {
-			elements: UL.elements,
-			isList: UL.isList,
-			mockData: UL.mockData,
-			singleMockData: UL.singleMockData,
-			listSettings: UL.listSettings,
-			canvasHeight: UL.canvasHeight,
-			gridSize: UL.gridSize
+			elements: xz.elements,
+			isList: xz.isList,
+			mockData: xz.mockData,
+			singleMockData: xz.singleMockData,
+			listSettings: xz.listSettings,
+			canvasHeight: xz.canvasHeight,
+			gridSize: xz.gridSize
 		}, _ = JSON.stringify(n, null, 2), E = new Blob([_], { type: "application/json" }), O = URL.createObjectURL(E), A = document.createElement("a");
 		A.href = O, A.download = `layout-${(/* @__PURE__ */ new Date()).toISOString().slice(0, 10)}.json`, document.body.appendChild(A), A.click(), document.body.removeChild(A), URL.revokeObjectURL(O);
 	};
@@ -23698,7 +23873,7 @@ var StepIndicator = ({ current: n, total: _ }) => /* @__PURE__ */ jsx(p$1, {
 						let n = new FileReader();
 						n.onload = (n) => {
 							let _ = n.target?.result;
-							VL({
+							yz({
 								type: "image",
 								content: _,
 								width: 200,
@@ -23710,24 +23885,24 @@ var StepIndicator = ({ current: n, total: _ }) => /* @__PURE__ */ jsx(p$1, {
 			}
 		};
 		return window.addEventListener("paste", n), () => window.removeEventListener("paste", n);
-	}, [VL]), React.useEffect(() => {
+	}, [yz]), React.useEffect(() => {
 		let n = (n) => {
 			if (!(document.activeElement?.tagName === "INPUT" || document.activeElement?.tagName === "TEXTAREA" || document.activeElement?.isContentEditable)) {
-				if ((n.ctrlKey || n.metaKey) && n.key === "z") n.shiftKey ? (n.preventDefault(), GL()) : (n.preventDefault(), WL());
-				else if ((n.ctrlKey || n.metaKey) && n.key === "y") n.preventDefault(), GL();
-				else if ((n.ctrlKey || n.metaKey) && n.key === "c") n.preventDefault(), KL();
-				else if ((n.ctrlKey || n.metaKey) && n.key === "v") n.preventDefault(), qL();
-				else if (n.key === "Delete" || n.key === "Backspace") UL.selectedElementIds.length > 0 && (n.preventDefault(), JL());
+				if ((n.ctrlKey || n.metaKey) && n.key === "z") n.shiftKey ? (n.preventDefault(), Tz()) : (n.preventDefault(), Sz());
+				else if ((n.ctrlKey || n.metaKey) && n.key === "y") n.preventDefault(), Tz();
+				else if ((n.ctrlKey || n.metaKey) && n.key === "c") n.preventDefault(), Ez();
+				else if ((n.ctrlKey || n.metaKey) && n.key === "v") n.preventDefault(), Dz();
+				else if (n.key === "Delete" || n.key === "Backspace") xz.selectedElementIds.length > 0 && (n.preventDefault(), Oz());
 				else if ([
 					"ArrowUp",
 					"ArrowDown",
 					"ArrowLeft",
 					"ArrowRight"
-				].includes(n.key) && UL.selectedElementIds.length > 0) {
+				].includes(n.key) && xz.selectedElementIds.length > 0) {
 					n.preventDefault();
 					let _ = n.shiftKey ? 10 : 1, E = [];
-					UL.selectedElementIds.forEach((O) => {
-						let A = UL.elements.find((n) => n.id === O);
+					xz.selectedElementIds.forEach((O) => {
+						let A = xz.elements.find((n) => n.id === O);
 						if (A) {
 							let j = {};
 							n.key === "ArrowUp" && (j.y = A.y - _), n.key === "ArrowDown" && (j.y = A.y + _), n.key === "ArrowLeft" && (j.x = A.x - _), n.key === "ArrowRight" && (j.x = A.x + _), E.push({
@@ -23735,65 +23910,65 @@ var StepIndicator = ({ current: n, total: _ }) => /* @__PURE__ */ jsx(p$1, {
 								changes: j
 							});
 						}
-					}), E.length > 0 && YL(E);
+					}), E.length > 0 && kz(E);
 				}
 			}
 		};
 		return window.addEventListener("keydown", n), () => window.removeEventListener("keydown", n);
 	}, [
-		WL,
-		GL,
-		KL,
-		qL,
-		JL,
-		UL.selectedElementIds,
-		UL.elements,
-		YL
+		Sz,
+		Tz,
+		Ez,
+		Dz,
+		Oz,
+		xz.selectedElementIds,
+		xz.elements,
+		kz
 	]), React.useEffect(() => {
-		if (E) try {
-			let n = typeof E == "string" ? JSON.parse(E) : E;
-			Array.isArray(n) ? HL({ elements: n }) : n.elements && HL(n);
+		if (n) try {
+			let _ = typeof n == "string" ? JSON.parse(n) : n;
+			Array.isArray(_) ? bz({ elements: _ }) : _.elements && bz(_);
 		} catch (n) {
 			console.error("Failed to load initial state", n);
 		}
-	}, [E, HL]), React.useEffect(() => {
-		if (!(!j || j.length === 0)) {
-			if (M) {
-				AL(M);
+	}, [n, bz]), React.useEffect(() => {
+		if (!(!A || A.length === 0)) {
+			if (j) {
+				uz(j);
 				return;
 			}
-			kL || AL(j[0].id);
+			Z || uz(A[0].id);
 		}
 	}, [
-		M,
-		kL,
-		j
+		j,
+		Z,
+		A
 	]);
-	let ZL = React.useCallback((n) => {
+	let jz = React.useCallback((n) => {
 		if (n) try {
 			let _ = typeof n == "string" ? JSON.parse(n) : n;
 			if (Array.isArray(_)) {
-				HL({ elements: _ });
+				bz({ elements: _ });
 				return;
 			}
 			if (_ && typeof _ == "object" && "elements" in _) {
-				HL(_);
+				bz(_);
 				return;
 			}
 		} catch (n) {
 			console.error("Failed to apply template", n);
 		}
-	}, [HL]);
+	}, [bz]);
 	return React.useEffect(() => {
-		if (!j || j.length === 0 || !M || ML.current === M) return;
-		let n = j.find((n) => n.id === M);
-		n && (ZL(n.state), ML.current = M);
+		if (!A || A.length === 0 || !j || dz.current === j) return;
+		let n = A.find((n) => n.id === j);
+		n && (jz(n.state), dz.current = j);
 	}, [
-		M,
-		ZL,
-		j
+		j,
+		jz,
+		A
 	]), /* @__PURE__ */ jsx(R, {
-		appearance: A,
+		appearance: O,
 		accentColor: "blue",
 		grayColor: "slate",
 		radius: "large",
@@ -23808,12 +23983,13 @@ var StepIndicator = ({ current: n, total: _ }) => /* @__PURE__ */ jsx(p$1, {
 			},
 			children: [
 				/* @__PURE__ */ jsx(GlobalHeader, {
-					onSave: O,
-					templates: j,
-					setIsTemplatesOpen: EL,
+					onSave: E,
+					templates: A,
+					setIsTemplatesOpen: U,
 					onFinish: () => {
-						IL(3), PL(!0);
-					}
+						hz(3), pz(!0);
+					},
+					onToggleSidebar: () => B(!z)
 				}),
 				/* @__PURE__ */ jsxs(p$1, {
 					direction: "row",
@@ -23821,216 +23997,214 @@ var StepIndicator = ({ current: n, total: _ }) => /* @__PURE__ */ jsx(p$1, {
 						flexGrow: 1,
 						overflow: "hidden"
 					},
-					children: [B && /* @__PURE__ */ jsxs(p$1, {
-						id: "sidebar-area",
-						direction: "column",
-						width: DL ? "100%" : "300px",
-						style: {
-							borderRight: "1px solid var(--gray-5)",
-							backgroundColor: "var(--gray-1)",
-							flexShrink: 0,
-							height: "100%",
-							boxShadow: "1px 0 0 var(--gray-4)",
-							overflow: "hidden",
-							position: DL ? "absolute" : "relative",
-							zIndex: DL ? 100 : "auto",
-							top: 0,
-							left: 0
-						},
-						children: [DL && /* @__PURE__ */ jsx(p$1, {
-							justify: "end",
-							p: "2",
-							children: /* @__PURE__ */ jsx(o$2, {
-								variant: "ghost",
-								color: "gray",
-								onClick: () => H(!1),
-								children: /* @__PURE__ */ jsx(DoubleArrowLeftIcon, {})
-							})
-						}), /* @__PURE__ */ jsx(c, {
-							type: "auto",
-							scrollbars: "vertical",
-							style: { height: "100%" },
-							children: /* @__PURE__ */ jsx(p$1, {
-								direction: "column",
-								style: { height: "100%" },
-								children: UL.editorMode === "simple" ? /* @__PURE__ */ jsx(SimpleSidebar, { layout: n }) : /* @__PURE__ */ jsx(AdvancedSidebar, {
-									layout: n,
-									onOpenSettings: (n) => {
-										W(n), Z(!0);
-									}
-								})
-							})
-						})]
-					}), /* @__PURE__ */ jsxs(p$1, {
-						direction: "column",
-						style: {
-							flex: 1,
-							height: "100%",
-							overflow: "hidden"
-						},
-						children: [/* @__PURE__ */ jsxs(p$1, {
-							justify: "between",
-							align: "center",
-							px: "3",
-							py: "2",
+					children: [
+						W && z && /* @__PURE__ */ jsx("div", {
 							style: {
-								borderBottom: "1px solid var(--gray-6)",
+								position: "absolute",
+								top: 0,
+								left: 0,
+								width: "100%",
+								height: "100%",
+								backgroundColor: "rgba(0,0,0,0.5)",
+								zIndex: 90
+							},
+							onClick: () => B(!1)
+						}),
+						z && /* @__PURE__ */ jsxs(p$1, {
+							id: "sidebar-area",
+							direction: "column",
+							width: W ? "100%" : "300px",
+							style: {
+								borderRight: "1px solid var(--gray-5)",
 								backgroundColor: "var(--gray-1)",
 								flexShrink: 0,
-								zIndex: 10
+								height: "100%",
+								boxShadow: "1px 0 0 var(--gray-4)",
+								overflow: "hidden",
+								position: W ? "absolute" : "relative",
+								zIndex: W ? 100 : "auto",
+								top: 0,
+								left: 0
 							},
-							children: [/* @__PURE__ */ jsx(p$1, {
-								gap: "3",
-								align: "center",
+							children: [W && /* @__PURE__ */ jsx(p$1, {
+								justify: "end",
+								p: "2",
 								children: /* @__PURE__ */ jsx(o$2, {
-									size: "2",
 									variant: "ghost",
 									color: "gray",
-									onClick: () => H(!B),
-									title: B ? "Ocultar Barra Lateral" : "Mostrar Barra Lateral",
-									style: { cursor: "pointer" },
-									children: jsx(B ? DoubleArrowLeftIcon : DoubleArrowRightIcon, {})
+									onClick: () => B(!1),
+									children: /* @__PURE__ */ jsx(Cross2Icon, {})
 								})
-							}), /* @__PURE__ */ jsxs(p$1, {
-								gap: "3",
-								align: "center",
-								children: [/* @__PURE__ */ jsx(ShortcutsDialog, {}), /* @__PURE__ */ jsx(o$2, {
-									size: "2",
-									variant: "ghost",
-									color: P ? "blue" : "gray",
-									onClick: () => z(!P),
-									title: P ? "Ocultar Preview" : "Mostrar Preview",
-									style: { cursor: "pointer" },
-									children: jsx(P ? EyeOpenIcon : EyeNoneIcon, {})
-								})]
-							})]
-						}), /* @__PURE__ */ jsx(p, {
+							}), /* @__PURE__ */ jsx(SimpleSidebar, { onClose: () => {
+								W && B(!1);
+							} })]
+						}),
+						/* @__PURE__ */ jsxs(p$1, {
+							direction: "column",
 							style: {
 								flex: 1,
-								position: "relative",
+								height: "100%",
 								overflow: "hidden"
 							},
-							children: /* @__PURE__ */ jsxs(Rt, {
-								orientation: "horizontal",
+							children: [/* @__PURE__ */ jsxs(p$1, {
+								justify: "between",
+								align: "center",
+								px: "3",
+								py: "2",
 								style: {
-									height: "100%",
-									width: "100%"
+									borderBottom: "1px solid var(--gray-6)",
+									backgroundColor: "var(--gray-1)",
+									flexShrink: 0,
+									zIndex: 10
 								},
-								children: [
-									(!DL || !P) && /* @__PURE__ */ jsx(kt, {
-										defaultSize: 50,
-										minSize: 20,
-										children: /* @__PURE__ */ jsxs(o$1, {
-											columns: "20px 1fr",
-											rows: "20px 1fr",
-											style: {
-												height: "100%",
-												width: "100%",
-												backgroundColor: "var(--color-background)"
-											},
-											children: [
-												/* @__PURE__ */ jsx(p, { style: {
-													backgroundColor: "var(--gray-2)",
-													borderRight: "1px solid var(--gray-6)",
-													borderBottom: "1px solid var(--gray-6)",
-													zIndex: 30
-												} }),
-												/* @__PURE__ */ jsx(p, {
-													style: {
-														backgroundColor: "var(--gray-2)",
-														borderBottom: "1px solid var(--gray-6)",
-														overflow: "hidden",
-														zIndex: 30
-													},
-													children: /* @__PURE__ */ jsx(Ruler, { orientation: "horizontal" })
-												}),
-												/* @__PURE__ */ jsx(p, {
-													style: {
+								children: [/* @__PURE__ */ jsx(p$1, {
+									gap: "3",
+									align: "center",
+									children: /* @__PURE__ */ jsx(o$2, {
+										size: "2",
+										variant: "ghost",
+										color: "gray",
+										onClick: () => B(!z),
+										title: z ? "Ocultar Barra Lateral" : "Mostrar Barra Lateral",
+										style: { cursor: "pointer" },
+										children: jsx(W ? ListBulletIcon : z ? DoubleArrowLeftIcon : DoubleArrowRightIcon, {})
+									})
+								}), /* @__PURE__ */ jsxs(p$1, {
+									gap: "3",
+									align: "center",
+									children: [/* @__PURE__ */ jsx(ShortcutsDialog, {}), /* @__PURE__ */ jsx(o$2, {
+										size: "2",
+										variant: "ghost",
+										color: N ? "blue" : "gray",
+										onClick: () => P(!N),
+										title: N ? "Ocultar Preview" : "Mostrar Preview",
+										style: { cursor: "pointer" },
+										children: jsx(N ? EyeOpenIcon : EyeNoneIcon, {})
+									})]
+								})]
+							}), /* @__PURE__ */ jsx(p, {
+								style: {
+									flex: 1,
+									position: "relative",
+									overflow: "hidden"
+								},
+								children: /* @__PURE__ */ jsxs(Rt, {
+									orientation: "horizontal",
+									style: {
+										height: "100%",
+										width: "100%"
+									},
+									children: [
+										(!W || !N) && /* @__PURE__ */ jsx(kt, {
+											defaultSize: 50,
+											minSize: 20,
+											children: /* @__PURE__ */ jsxs(o$1, {
+												columns: "20px 1fr",
+												rows: "20px 1fr",
+												style: {
+													height: "100%",
+													width: "100%",
+													backgroundColor: "var(--color-background)"
+												},
+												children: [
+													/* @__PURE__ */ jsx(p, { style: {
 														backgroundColor: "var(--gray-2)",
 														borderRight: "1px solid var(--gray-6)",
-														overflow: "hidden",
+														borderBottom: "1px solid var(--gray-6)",
 														zIndex: 30
-													},
-													children: /* @__PURE__ */ jsx(Ruler, { orientation: "vertical" })
-												}),
-												/* @__PURE__ */ jsxs(p, {
-													style: {
-														position: "relative",
-														overflow: "hidden",
-														width: "100%",
-														height: "100%"
-													},
-													id: "canvas-area",
-													children: [
-														/* @__PURE__ */ jsx(p, {
-															style: {
-																position: "absolute",
-																top: 16,
-																left: "50%",
-																transform: "translateX(-50%)",
-																zIndex: 20
-															},
-															children: /* @__PURE__ */ jsx(AlignmentToolbar, {})
-														}),
-														/* @__PURE__ */ jsx(p, {
-															style: {
-																position: "absolute",
-																bottom: 16,
-																right: 16,
-																zIndex: 20
-															},
-															children: /* @__PURE__ */ jsx(ViewToolbar, {})
-														}),
-														/* @__PURE__ */ jsx(Canvas, {}),
-														/* @__PURE__ */ jsx(Minimap, {})
-													]
-												})
-											]
+													} }),
+													/* @__PURE__ */ jsx(p, {
+														style: {
+															backgroundColor: "var(--gray-2)",
+															borderBottom: "1px solid var(--gray-6)",
+															overflow: "hidden",
+															zIndex: 30
+														},
+														children: /* @__PURE__ */ jsx(Ruler, { orientation: "horizontal" })
+													}),
+													/* @__PURE__ */ jsx(p, {
+														style: {
+															backgroundColor: "var(--gray-2)",
+															borderRight: "1px solid var(--gray-6)",
+															overflow: "hidden",
+															zIndex: 30
+														},
+														children: /* @__PURE__ */ jsx(Ruler, { orientation: "vertical" })
+													}),
+													/* @__PURE__ */ jsxs(p, {
+														style: {
+															position: "relative",
+															overflow: "hidden",
+															width: "100%",
+															height: "100%"
+														},
+														id: "canvas-area",
+														children: [
+															/* @__PURE__ */ jsx(p, {
+																style: {
+																	position: "absolute",
+																	top: 16,
+																	left: "50%",
+																	transform: "translateX(-50%)",
+																	zIndex: 20
+																},
+																children: /* @__PURE__ */ jsx(AlignmentToolbar, {})
+															}),
+															/* @__PURE__ */ jsx(p, {
+																style: {
+																	position: "absolute",
+																	bottom: 16,
+																	right: 16,
+																	zIndex: 20
+																},
+																children: /* @__PURE__ */ jsx(ViewToolbar, {})
+															}),
+															/* @__PURE__ */ jsx(Canvas, {}),
+															/* @__PURE__ */ jsx(Minimap, {})
+														]
+													})
+												]
+											})
+										}),
+										!W && N && /* @__PURE__ */ jsx(o$3, { style: {
+											width: "4px",
+											backgroundColor: "var(--gray-6)",
+											cursor: "col-resize",
+											transition: "background-color 0.2s"
+										} }),
+										N && /* @__PURE__ */ jsx(kt, {
+											defaultSize: 50,
+											minSize: 20,
+											children: /* @__PURE__ */ jsx(p, {
+												id: "preview-area",
+												style: {
+													height: "100%",
+													width: "100%",
+													backgroundColor: "var(--gray-3)",
+													borderLeft: "1px solid var(--gray-5)"
+												},
+												children: /* @__PURE__ */ jsx(Preview, {})
+											})
 										})
-									}),
-									!DL && P && /* @__PURE__ */ jsx(Ot, { style: {
-										width: "4px",
-										backgroundColor: "var(--gray-6)",
-										cursor: "col-resize",
-										transition: "background-color 0.2s"
-									} }),
-									P && /* @__PURE__ */ jsx(kt, {
-										defaultSize: 50,
-										minSize: 20,
-										children: /* @__PURE__ */ jsx(p, {
-											id: "preview-area",
-											style: {
-												height: "100%",
-												width: "100%",
-												backgroundColor: "var(--gray-3)",
-												borderLeft: "1px solid var(--gray-5)"
-											},
-											children: /* @__PURE__ */ jsx(Preview, {})
-										})
-									})
-								]
-							})
-						})]
-					})]
-				}),
-				U && /* @__PURE__ */ jsx(ElementAdvancedSettings, {
-					elementId: U,
-					open: G,
-					onOpenChange: Z
+									]
+								})
+							})]
+						})
+					]
 				}),
 				/* @__PURE__ */ jsx(s$5, {
-					open: TL,
-					onOpenChange: EL,
-					children: /* @__PURE__ */ jsxs(p$9, {
+					open: H,
+					onOpenChange: U,
+					children: /* @__PURE__ */ jsxs(p$10, {
 						style: { maxWidth: 450 },
 						children: [
-							/* @__PURE__ */ jsx(g$2, { children: "Galeria de Templates" }),
+							/* @__PURE__ */ jsx(g$3, { children: "Galeria de Templates" }),
 							/* @__PURE__ */ jsx(m$3, {
 								size: "2",
 								mb: "4",
 								children: "Escolha um layout pré-definido para começar."
 							}),
-							j && j.length > 0 ? /* @__PURE__ */ jsxs(p$1, {
+							A && A.length > 0 ? /* @__PURE__ */ jsxs(p$1, {
 								direction: "column",
 								gap: "3",
 								children: [
@@ -24040,25 +24214,18 @@ var StepIndicator = ({ current: n, total: _ }) => /* @__PURE__ */ jsx(p$1, {
 										as: "div",
 										mb: "1",
 										children: "Selecione o Template"
-									}), /* @__PURE__ */ jsx("select", {
-										value: kL || "",
-										onChange: (n) => AL(n.target.value),
-										style: {
-											width: "100%",
-											padding: "8px",
-											borderRadius: "6px",
-											border: "1px solid var(--gray-6)",
-											backgroundColor: "var(--gray-1)",
-											color: "var(--gray-12)",
-											fontSize: "14px",
-											outline: "none"
-										},
-										children: j.map((n) => /* @__PURE__ */ jsx("option", {
+									}), /* @__PURE__ */ jsxs(C$1, {
+										value: Z || "",
+										onValueChange: uz,
+										children: [/* @__PURE__ */ jsx(u$3, {
+											style: { width: "100%" },
+											placeholder: "Selecione um template..."
+										}), /* @__PURE__ */ jsx(g$1, { children: A.map((n) => /* @__PURE__ */ jsx(v$2, {
 											value: n.id,
 											children: n.name
-										}, n.id))
+										}, n.id)) })]
 									})] }),
-									kL && j.find((n) => n.id === kL)?.description && /* @__PURE__ */ jsx(p, {
+									Z && A.find((n) => n.id === Z)?.description && /* @__PURE__ */ jsx(p, {
 										p: "3",
 										style: {
 											backgroundColor: "var(--gray-2)",
@@ -24067,7 +24234,7 @@ var StepIndicator = ({ current: n, total: _ }) => /* @__PURE__ */ jsx(p$1, {
 										children: /* @__PURE__ */ jsx(p$2, {
 											size: "2",
 											color: "gray",
-											children: j.find((n) => n.id === kL)?.description
+											children: A.find((n) => n.id === Z)?.description
 										})
 									}),
 									/* @__PURE__ */ jsxs(p$1, {
@@ -24080,13 +24247,13 @@ var StepIndicator = ({ current: n, total: _ }) => /* @__PURE__ */ jsx(p$1, {
 											children: "Cancelar"
 										}) }), /* @__PURE__ */ jsx(D$2, { children: /* @__PURE__ */ jsx(o, {
 											onClick: () => {
-												if (!kL) return;
-												if (N) {
-													N(kL);
+												if (!Z) return;
+												if (M) {
+													M(Z);
 													return;
 												}
-												let n = j.find((n) => n.id === kL);
-												n && (ZL(n.state), ML.current = kL);
+												let n = A.find((n) => n.id === Z);
+												n && (jz(n.state), dz.current = Z);
 											},
 											children: "Aplicar"
 										}) })]
@@ -24097,21 +24264,21 @@ var StepIndicator = ({ current: n, total: _ }) => /* @__PURE__ */ jsx(p$1, {
 					})
 				}),
 				/* @__PURE__ */ jsx(WizardDialog, {
-					isOpen: NL,
-					onClose: () => PL(!1),
-					templates: j || [],
+					isOpen: fz,
+					onClose: () => pz(!1),
+					templates: A || [],
 					onSelectTemplate: (n) => {
-						n && ZL(n.state);
+						n && jz(n.state);
 					},
-					onStartTour: () => BL(!0),
-					initialStep: FL,
+					onStartTour: () => vz(!0),
+					initialStep: mz,
 					onFinishWizard: () => {
-						XL(), alert("Layout finalizado e exportado com sucesso!");
+						Az(), alert("Layout finalizado e exportado com sucesso!");
 					}
 				}),
 				/* @__PURE__ */ jsx(OnboardingTour, {
-					isOpen: LL,
-					onClose: () => BL(!1)
+					isOpen: _z,
+					onClose: () => vz(!1)
 				})
 			]
 		})
@@ -24267,8 +24434,8 @@ var camelToKebab = (n) => n.replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, "$1-$2").toL
 				} else _ = measureTextHeight(M, B, z, P);
 				let U = _ + N * 2;
 				(!H || H && !_) && (U += 4);
-				let W = parseInt(String(n.style && n.style.minHeight || 0)), G = Math.max(U, W), Z = n.height, TL = G - Z;
-				if (Math.abs(TL) > 1) {
+				let W = parseInt(String(n.style && n.style.minHeight || 0)), G = Math.max(U, W), Z = n.height, uz = G - Z;
+				if (Math.abs(uz) > 1) {
 					n.height = G, n.content = M;
 					let _ = [], N = O.get(n.id);
 					N && E.forEach((E) => {
@@ -24278,10 +24445,10 @@ var camelToKebab = (n) => n.replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, "$1-$2").toL
 					});
 					let P = new Set([n.id]);
 					_.forEach((n) => {
-						n.height += TL, P.add(n.id);
+						n.height += uz, P.add(n.id);
 					}), A.push({
 						triggerY: n.y + Z,
-						delta: TL,
+						delta: uz,
 						ignoreIds: P
 					});
 				}

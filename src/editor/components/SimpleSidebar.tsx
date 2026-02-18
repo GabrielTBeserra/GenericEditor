@@ -1,16 +1,17 @@
 import { DividerHorizontalIcon, FileTextIcon, ImageIcon, SquareIcon, StarIcon, TimerIcon, ViewVerticalIcon } from '@radix-ui/react-icons';
-import { Badge, Box, Card, Flex, Grid, Tabs, Text } from '@radix-ui/themes';
+import { Badge, Box, Card, Flex, Grid, ScrollArea, Tabs, Text } from '@radix-ui/themes';
 import React from 'react';
 import { useEditor } from '../context';
-import type { ILayout } from '../types';
+import { EditorSettings } from './EditorSettings';
+import { HistoryPanel } from './HistoryPanel';
 import { SimpleLayers } from './SimpleLayers';
 import { SimpleProperties } from './SimpleProperties';
 
 interface SimpleSidebarProps {
-    layout: ILayout;
+    onClose?: () => void;
 }
 
-export const SimpleSidebar: React.FC<SimpleSidebarProps> = ({ layout }) => {
+export const SimpleSidebar: React.FC<SimpleSidebarProps> = ({ onClose }) => {
     const { state, addElement, groupElements } = useEditor();
     const hasSelection = state.selectedElementIds.length > 0;
 
@@ -116,12 +117,16 @@ export const SimpleSidebar: React.FC<SimpleSidebarProps> = ({ layout }) => {
                 }, 100);
                 break;
         }
+
+        if (onClose) {
+            onClose();
+        }
     };
 
     return (
         <Flex direction="column" style={{ height: '100%' }}>
             {/* Top Section: Properties or Helper */}
-            <Box p="4" style={{ borderBottom: '1px solid var(--gray-5)', minHeight: '180px', flexShrink: 0, overflowY: 'auto' }}>
+            <Box p="4" style={{ borderBottom: '1px solid var(--gray-5)', minHeight: '180px', flexShrink: 0 }}>
                 {hasSelection ? (
                     <SimpleProperties />
                 ) : (
@@ -135,15 +140,17 @@ export const SimpleSidebar: React.FC<SimpleSidebarProps> = ({ layout }) => {
             </Box>
 
             {/* Bottom Section: Tabs */}
-            <Box p="4" style={{ flexGrow: 1, overflowY: 'auto' }}>
-                <Tabs.Root defaultValue="blocks">
+            <Tabs.Root defaultValue="blocks" style={{ display: 'flex', flexDirection: 'column', flex: 1, overflow: 'hidden' }}>
+                <Box px="4" pt="4" style={{ flexShrink: 0 }}>
                     <Tabs.List>
                         <Tabs.Trigger value="blocks">Blocos</Tabs.Trigger>
                         <Tabs.Trigger value="layers">Conteúdo</Tabs.Trigger>
-                        <Tabs.Trigger value="data">Dados</Tabs.Trigger>
+                        <Tabs.Trigger value="history">Histórico</Tabs.Trigger>
                     </Tabs.List>
+                </Box>
 
-                    <Box pt="3">
+                <ScrollArea type="auto" scrollbars="vertical" style={{ flex: 1 }}>
+                    <Box p="4">
                         {/* Block Library */}
                         <Tabs.Content value="blocks">
                             <Text size="2" weight="bold" mb="2" as="div">Adicionar Elemento</Text>
@@ -186,6 +193,10 @@ export const SimpleSidebar: React.FC<SimpleSidebarProps> = ({ layout }) => {
                                     onClick={() => handleAddBlock('badge')}
                                 />
                             </Grid>
+
+                            <Box mt="4">
+                                <EditorSettings />
+                            </Box>
                         </Tabs.Content>
 
                         {/* Layers (Simplified) */}
@@ -193,44 +204,13 @@ export const SimpleSidebar: React.FC<SimpleSidebarProps> = ({ layout }) => {
                             <SimpleLayers />
                         </Tabs.Content>
 
-                        {/* Data (Variables) */}
-                        <Tabs.Content value="data">
-                            <Box>
-                                <Text size="2" weight="bold" mb="2" as="div">Campos Disponíveis</Text>
-                                <Text size="1" color="gray" mb="2" as="div">Arraste para o desenho</Text>
-                                <Flex direction="column" gap="2">
-                                    {layout.props.map((prop, index) => (
-                                        <Badge
-                                            key={index}
-                                            color="green"
-                                            variant="soft"
-                                            size="2"
-                                            style={{ padding: '8px', justifyContent: 'flex-start', cursor: 'grab' }}
-                                            title={`Campo: ${prop.name}`}
-                                            draggable
-                                            onDragStart={(e) => {
-                                                e.dataTransfer.setData('application/x-editor-prop', prop.dataName);
-                                                e.dataTransfer.effectAllowed = 'copy';
-                                            }}
-                                            onClick={() => {
-                                                const text = `{{${prop.dataName}}}`;
-                                                navigator.clipboard.writeText(text);
-                                            }}
-                                        >
-                                            {prop.name}
-                                        </Badge>
-                                    ))}
-                                    {layout.props.length === 0 && (
-                                        <Text size="1" color="gray" style={{ fontStyle: 'italic' }}>
-                                            Nenhum dado configurado.
-                                        </Text>
-                                    )}
-                                </Flex>
-                            </Box>
+                        {/* History */}
+                        <Tabs.Content value="history">
+                            <HistoryPanel onClose={onClose} />
                         </Tabs.Content>
                     </Box>
-                </Tabs.Root>
-            </Box>
+                </ScrollArea>
+            </Tabs.Root>
         </Flex>
     );
 };

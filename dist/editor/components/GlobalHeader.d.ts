@@ -5,6 +5,7 @@ interface GlobalHeaderProps {
     templates?: ITemplate[];
     setIsTemplatesOpen: (isOpen: boolean) => void;
     onFinish?: () => void;
+    onToggleSidebar?: () => void;
 }
 export declare const GlobalHeader: React.FC<GlobalHeaderProps>;
 export {};

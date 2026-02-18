@@ -2,8 +2,8 @@ import type { DragEndEvent, DragStartEvent } from '@dnd-kit/core';
 import { DndContext, DragOverlay, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
 import { SortableContext, useSortable, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { BoxIcon, DragHandleDots2Icon, ImageIcon, TextIcon } from '@radix-ui/react-icons';
-import { Box, Flex, Text } from '@radix-ui/themes';
+import { BoxIcon, DragHandleDots2Icon, EyeNoneIcon, EyeOpenIcon, ImageIcon, LockClosedIcon, LockOpen1Icon, TextIcon } from '@radix-ui/react-icons';
+import { Box, Flex, IconButton, Text } from '@radix-ui/themes';
 import React, { useMemo, useState } from 'react';
 import type { IElement } from '../context';
 import { useEditor } from '../context';
@@ -21,9 +21,11 @@ interface SimpleLayerItemProps {
     element: IElement;
     isSelected: boolean;
     onSelect: (multi: boolean) => void;
+    onToggleLock: () => void;
+    onToggleHide: () => void;
 }
 
-const SimpleLayerItem = ({ element, isSelected, onSelect }: SimpleLayerItemProps) => {
+const SimpleLayerItem = ({ element, isSelected, onSelect, onToggleLock, onToggleHide }: SimpleLayerItemProps) => {
     const {
         attributes,
         listeners,
@@ -67,16 +69,37 @@ const SimpleLayerItem = ({ element, isSelected, onSelect }: SimpleLayerItemProps
                     {(element.type === 'box' || element.type === 'group') && <BoxIcon />}
                 </Box>
 
-                <Text size="2" weight={isSelected ? 'bold' : 'regular'}>
+                <Text size="2" weight={isSelected ? 'bold' : 'regular'} style={{ flex: 1 }} truncate>
                     {element.name || TYPE_NAMES[element.type] || element.type}
                 </Text>
+
+                <Flex gap="1" onClick={(e) => e.stopPropagation()}>
+                    <IconButton
+                        size="1"
+                        variant="ghost"
+                        color={element.locked ? 'orange' : 'gray'}
+                        onClick={onToggleLock}
+                        title={element.locked ? "Desbloquear" : "Bloquear"}
+                    >
+                        {element.locked ? <LockClosedIcon /> : <LockOpen1Icon />}
+                    </IconButton>
+                    <IconButton
+                        size="1"
+                        variant="ghost"
+                        color={element.hidden ? 'red' : 'gray'}
+                        onClick={onToggleHide}
+                        title={element.hidden ? "Mostrar" : "Ocultar"}
+                    >
+                        {element.hidden ? <EyeNoneIcon /> : <EyeOpenIcon />}
+                    </IconButton>
+                </Flex>
             </Flex>
         </Box>
     );
 };
 
 export const SimpleLayers: React.FC = () => {
-    const { state, selectElement, moveElement } = useEditor();
+    const { state, selectElement, moveElement, updateElement } = useEditor();
     const { elements, selectedElementIds } = state;
 
     // Reverse for display (top layer first)
@@ -129,16 +152,18 @@ export const SimpleLayers: React.FC = () => {
                                 element={el}
                                 isSelected={selectedElementIds.includes(el.id)}
                                 onSelect={(multi) => selectElement(el.id, multi)}
+                                onToggleLock={() => updateElement(el.id, { locked: !el.locked })}
+                                onToggleHide={() => updateElement(el.id, { hidden: !el.hidden })}
                             />
                         ))}
                         {displayElements.length === 0 && (
-                             <Text size="2" color="gray" align="center" style={{ padding: 20 }}>
-                                 Adicione itens para ver a lista aqui.
-                             </Text>
+                            <Text size="2" color="gray" align="center" style={{ padding: 20 }}>
+                                Adicione itens para ver a lista aqui.
+                            </Text>
                         )}
                     </Flex>
                 </SortableContext>
-                 <DragOverlay>
+                <DragOverlay>
                     {activeId ? (
                         <Box style={{
                             padding: '8px 12px',
@@ -146,7 +171,7 @@ export const SimpleLayers: React.FC = () => {
                             borderRadius: 6,
                             boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
                         }}>
-                             <Text>Movendo...</Text>
+                            <Text>Movendo...</Text>
                         </Box>
                     ) : null}
                 </DragOverlay>

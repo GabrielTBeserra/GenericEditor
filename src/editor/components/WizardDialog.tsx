@@ -148,7 +148,7 @@ export const WizardDialog: React.FC<WizardDialogProps> = ({ isOpen, onClose, tem
                                     <Button variant="soft" color="gray" onClick={() => setStep(1)}>
                                         <ArrowRightIcon style={{ transform: 'rotate(180deg)' }} /> Voltar
                                     </Button>
-                                    <Button onClick={onClose}>
+                                    <Button onClick={handleNext}>
                                         Começar a Editar <ArrowRightIcon />
                                     </Button>
                                 </Flex>

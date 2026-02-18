@@ -1,12 +1,10 @@
-import { DoubleArrowLeftIcon, DoubleArrowRightIcon, EyeNoneIcon, EyeOpenIcon } from '@radix-ui/react-icons';
-import { Box, Button, Dialog, Flex, Grid, IconButton, ScrollArea, Text, Theme } from '@radix-ui/themes';
+import { Cross2Icon, DoubleArrowLeftIcon, DoubleArrowRightIcon, EyeNoneIcon, EyeOpenIcon, ListBulletIcon } from '@radix-ui/react-icons';
+import { Box, Button, Dialog, Flex, Grid, IconButton, Select, Separator, Text, Theme } from '@radix-ui/themes';
 import '@radix-ui/themes/styles.css';
 import React, { useState } from 'react';
-import { Group, Panel, Separator } from 'react-resizable-panels';
-import { AdvancedSidebar } from './components/AdvancedSidebar';
+import { Group, Panel } from 'react-resizable-panels';
 import { AlignmentToolbar } from './components/AlignmentToolbar';
 import { Canvas } from './components/Canvas';
-import { ElementAdvancedSettings } from './components/ElementAdvancedSettings';
 import { GlobalHeader } from './components/GlobalHeader';
 import { Minimap } from './components/Minimap';
 import { OnboardingTour } from './components/OnboardingTour';
@@ -28,11 +26,9 @@ export interface EditorProps {
     onTemplateChange?: (templateId: string) => void;
 }
 
-const EditorContent: React.FC<EditorProps> = ({ layout, initialState, onSave, theme = 'light', templates, activeTemplateId, onTemplateChange }) => {
+const EditorContent: React.FC<EditorProps> = ({ initialState, onSave, theme = 'light', templates, activeTemplateId, onTemplateChange }) => {
     const [isPreviewVisible, setIsPreviewVisible] = useState(true);
     const [isSidebarVisible, setIsSidebarVisible] = useState(true);
-    const [settingsElementId, setSettingsElementId] = useState<string | null>(null);
-    const [isSettingsOpen, setIsSettingsOpen] = useState(false);
     const [isTemplatesOpen, setIsTemplatesOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
     const [localTemplateId, setLocalTemplateId] = useState<string | null>(templates && templates.length > 0 ? templates[0].id : null);
@@ -42,13 +38,13 @@ const EditorContent: React.FC<EditorProps> = ({ layout, initialState, onSave, th
     const [isTourOpen, setIsTourOpen] = useState(false);
     const { addElement, loadState, state, undo, redo, copy, paste, removeSelected, updateElements } = useEditor();
 
-    // Auto-open Wizard on Simple Mode if empty
+    // Auto-open Wizard if empty
     React.useEffect(() => {
-        if (state.editorMode === 'simple' && state.elements.length === 0) {
+        if (state.elements.length === 0) {
             setWizardStep(1);
             setIsWizardOpen(true);
         }
-    }, [state.editorMode]);
+    }, []); // Only run on mount
 
     React.useEffect(() => {
         const checkMobile = () => {
@@ -247,8 +243,25 @@ const EditorContent: React.FC<EditorProps> = ({ layout, initialState, onSave, th
                         setWizardStep(3);
                         setIsWizardOpen(true);
                     }}
+                    onToggleSidebar={() => setIsSidebarVisible(!isSidebarVisible)}
                 />
                 <Flex direction="row" style={{ flexGrow: 1, overflow: 'hidden' }}>
+                    {/* Mobile Backdrop */}
+                    {isMobile && isSidebarVisible && (
+                        <div
+                            style={{
+                                position: 'absolute',
+                                top: 0,
+                                left: 0,
+                                width: '100%',
+                                height: '100%',
+                                backgroundColor: 'rgba(0,0,0,0.5)',
+                                zIndex: 90 // Below sidebar (100)
+                            }}
+                            onClick={() => setIsSidebarVisible(false)}
+                        />
+                    )}
+
                     {/* Sidebar */}
                     {isSidebarVisible && (
                         <Flex
@@ -271,22 +284,11 @@ const EditorContent: React.FC<EditorProps> = ({ layout, initialState, onSave, th
                             {isMobile && (
                                 <Flex justify="end" p="2">
                                     <IconButton variant="ghost" color="gray" onClick={() => setIsSidebarVisible(false)}>
-                                        <DoubleArrowLeftIcon />
+                                        <Cross2Icon />
                                     </IconButton>
                                 </Flex>
                             )}
-                            <ScrollArea type="auto" scrollbars="vertical" style={{ height: '100%' }}>
-                                <Flex direction="column" style={{ height: '100%' }}>
-                                    {state.editorMode === 'simple' ? (
-                                        <SimpleSidebar layout={layout} />
-                                    ) : (
-                                        <AdvancedSidebar
-                                            layout={layout}
-                                            onOpenSettings={(id: string) => { setSettingsElementId(id); setIsSettingsOpen(true); }}
-                                        />
-                                    )}
-                                </Flex>
-                            </ScrollArea>
+                            <SimpleSidebar onClose={() => { if (isMobile) setIsSidebarVisible(false); }} />
                         </Flex>
                     )}
 
@@ -315,7 +317,11 @@ const EditorContent: React.FC<EditorProps> = ({ layout, initialState, onSave, th
                                     title={isSidebarVisible ? "Ocultar Barra Lateral" : "Mostrar Barra Lateral"}
                                     style={{ cursor: 'pointer' }}
                                 >
-                                    {isSidebarVisible ? <DoubleArrowLeftIcon /> : <DoubleArrowRightIcon />}
+                                    {isMobile ? (
+                                        <ListBulletIcon />
+                                    ) : (
+                                        isSidebarVisible ? <DoubleArrowLeftIcon /> : <DoubleArrowRightIcon />
+                                    )}
                                 </IconButton>
                             </Flex>
 
@@ -420,14 +426,6 @@ const EditorContent: React.FC<EditorProps> = ({ layout, initialState, onSave, th
                     </Flex>
                 </Flex>
 
-                {settingsElementId && (
-                    <ElementAdvancedSettings
-                        elementId={settingsElementId}
-                        open={isSettingsOpen}
-                        onOpenChange={setIsSettingsOpen}
-                    />
-                )}
-
                 {/* Templates Modal */}
                 <Dialog.Root open={isTemplatesOpen} onOpenChange={setIsTemplatesOpen}>
                     <Dialog.Content style={{ maxWidth: 450 }}>
@@ -440,26 +438,16 @@ const EditorContent: React.FC<EditorProps> = ({ layout, initialState, onSave, th
                             <Flex direction="column" gap="3">
                                 <Box>
                                     <Text size="2" weight="bold" as="div" mb="1">Selecione o Template</Text>
-                                    <select
-                                        value={localTemplateId || ''}
-                                        onChange={(e) => setLocalTemplateId(e.target.value)}
-                                        style={{
-                                            width: '100%',
-                                            padding: '8px',
-                                            borderRadius: '6px',
-                                            border: '1px solid var(--gray-6)',
-                                            backgroundColor: 'var(--gray-1)',
-                                            color: 'var(--gray-12)',
-                                            fontSize: '14px',
-                                            outline: 'none'
-                                        }}
-                                    >
-                                        {templates.map(template => (
-                                            <option key={template.id} value={template.id}>
-                                                {template.name}
-                                            </option>
-                                        ))}
-                                    </select>
+                                    <Select.Root value={localTemplateId || ''} onValueChange={setLocalTemplateId}>
+                                        <Select.Trigger style={{ width: '100%' }} placeholder="Selecione um template..." />
+                                        <Select.Content>
+                                            {templates.map(template => (
+                                                <Select.Item key={template.id} value={template.id}>
+                                                    {template.name}
+                                                </Select.Item>
+                                            ))}
+                                        </Select.Content>
+                                    </Select.Root>
                                 </Box>
 
                                 {localTemplateId && templates.find(t => t.id === localTemplateId)?.description && (
@@ -499,7 +487,7 @@ const EditorContent: React.FC<EditorProps> = ({ layout, initialState, onSave, th
                     isOpen={isWizardOpen}
                     onClose={() => setIsWizardOpen(false)}
                     templates={templates || []}
-                    onSelectTemplate={(template) => {
+                    onSelectTemplate={(template: ITemplate | null) => {
                         if (template) {
                             applyTemplateState(template.state);
                         }
