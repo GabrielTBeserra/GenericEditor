@@ -84,6 +84,7 @@ interface IEditorState {
     pan: { x: number, y: number };
     snapLines: { orientation: 'horizontal' | 'vertical', position: number }[];
     assets: IAsset[];
+    editorMode: 'simple' | 'advanced';
 }
 
 export interface IAsset {
@@ -125,6 +126,7 @@ export interface IEditorContext {
     paste: () => void;
     addAsset: (asset: IAsset) => void;
     removeAsset: (id: string) => void;
+    setEditorMode: (mode: 'simple' | 'advanced') => void;
 }
 
 export interface ISnapGuide {
@@ -168,7 +170,8 @@ export const EditorProvider: React.FC<{ children: ReactNode; isList?: boolean; a
         zoom: 1,
         pan: { x: 0, y: 0 },
         snapLines: [],
-        assets: []
+        assets: [],
+        editorMode: 'simple'
     });
 
     // Load fonts
@@ -807,8 +810,13 @@ export const EditorProvider: React.FC<{ children: ReactNode; isList?: boolean; a
         }));
     }, []);
 
+    const setEditorMode = React.useCallback((mode: 'simple' | 'advanced') => {
+        setState(prev => ({ ...prev, editorMode: mode }));
+    }, []);
+
     const contextValue = React.useMemo(() => ({
         state,
+        setEditorMode,
         addElement,
         removeElement,
         removeSelected,
@@ -838,7 +846,7 @@ export const EditorProvider: React.FC<{ children: ReactNode; isList?: boolean; a
         setSnapLines,
         addAsset,
         removeAsset
-    }), [state, addElement, removeElement, removeSelected, selectElement, setSelectedElements, moveElement, updateElement, updateElements, groupElements, ungroupElements, renameElement, addToGroup, removeFromGroup, resizeGroup, setMockData, updateListSettings, setCanvasHeight, loadState, undo, redo, jumpToHistory, copy, paste, setGridSize, setZoom, setPan, setSnapLines, addAsset, removeAsset]);
+    }), [state, setEditorMode, addElement, removeElement, removeSelected, selectElement, setSelectedElements, moveElement, updateElement, updateElements, groupElements, ungroupElements, renameElement, addToGroup, removeFromGroup, resizeGroup, setMockData, updateListSettings, setCanvasHeight, loadState, undo, redo, jumpToHistory, copy, paste, setGridSize, setZoom, setPan, setSnapLines, addAsset, removeAsset]);
 
     return (
         <EditorContext.Provider value={contextValue}>

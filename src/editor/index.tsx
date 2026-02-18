@@ -1,20 +1,21 @@
-import { DoubleArrowLeftIcon, DoubleArrowRightIcon, DownloadIcon, EyeNoneIcon, EyeOpenIcon, FileTextIcon, Share1Icon, UploadIcon } from '@radix-ui/react-icons';
-import { Badge, Box, Button, Dialog, DropdownMenu, Flex, Grid, IconButton, ScrollArea, Tabs, Text, Theme } from '@radix-ui/themes';
+import { DoubleArrowLeftIcon, DoubleArrowRightIcon, EyeNoneIcon, EyeOpenIcon } from '@radix-ui/react-icons';
+import { Box, Button, Dialog, Flex, Grid, IconButton, ScrollArea, Text, Theme } from '@radix-ui/themes';
 import '@radix-ui/themes/styles.css';
 import React, { useState } from 'react';
 import { Group, Panel, Separator } from 'react-resizable-panels';
-import pkg from '../../package.json';
+import { AdvancedSidebar } from './components/AdvancedSidebar';
 import { AlignmentToolbar } from './components/AlignmentToolbar';
 import { Canvas } from './components/Canvas';
-import { EditorSettings } from './components/EditorSettings';
 import { ElementAdvancedSettings } from './components/ElementAdvancedSettings';
-import { HistoryPanel } from './components/HistoryPanel';
-import { LayersPanel } from './components/LayersPanel';
+import { GlobalHeader } from './components/GlobalHeader';
 import { Minimap } from './components/Minimap';
+import { OnboardingTour } from './components/OnboardingTour';
 import { Preview } from './components/Preview';
 import { Ruler } from './components/Ruler';
 import { ShortcutsDialog } from './components/ShortcutsDialog';
+import { SimpleSidebar } from './components/SimpleSidebar';
 import { ViewToolbar } from './components/ViewToolbar';
+import { WizardDialog } from './components/WizardDialog';
 import { EditorProvider, useEditor, type IElement } from './context';
 import type { ILayout, ITemplate } from './types';
 export interface EditorProps {
@@ -36,8 +37,18 @@ const EditorContent: React.FC<EditorProps> = ({ layout, initialState, onSave, th
     const [isMobile, setIsMobile] = useState(false);
     const [localTemplateId, setLocalTemplateId] = useState<string | null>(templates && templates.length > 0 ? templates[0].id : null);
     const lastAppliedTemplateIdRef = React.useRef<string | null>(null);
+    const [isWizardOpen, setIsWizardOpen] = useState(false);
+    const [wizardStep, setWizardStep] = useState(1);
+    const [isTourOpen, setIsTourOpen] = useState(false);
     const { addElement, loadState, state, undo, redo, copy, paste, removeSelected, updateElements } = useEditor();
-    const fileInputRef = React.useRef<HTMLInputElement>(null);
+
+    // Auto-open Wizard on Simple Mode if empty
+    React.useEffect(() => {
+        if (state.editorMode === 'simple' && state.elements.length === 0) {
+            setWizardStep(1);
+            setIsWizardOpen(true);
+        }
+    }, [state.editorMode]);
 
     React.useEffect(() => {
         const checkMobile = () => {
@@ -73,29 +84,6 @@ const EditorContent: React.FC<EditorProps> = ({ layout, initialState, onSave, th
         a.click();
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
-    };
-
-    const handleImportClick = () => {
-        fileInputRef.current?.click();
-    };
-
-    const handleImportFile = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0];
-        if (!file) return;
-
-        const reader = new FileReader();
-        reader.onload = (event) => {
-            try {
-                const json = event.target?.result as string;
-                const parsedState = JSON.parse(json);
-                loadState(parsedState);
-            } catch (error) {
-                console.error("Failed to import layout", error);
-                alert("Erro ao importar layout. Arquivo inválido.");
-            }
-        };
-        reader.readAsText(file);
-        e.target.value = '';
     };
 
     // Global Paste Handler for Images
@@ -248,394 +236,287 @@ const EditorContent: React.FC<EditorProps> = ({ layout, initialState, onSave, th
         lastAppliedTemplateIdRef.current = activeTemplateId;
     }, [activeTemplateId, applyTemplateState, templates]);
 
-    const handleAddElement = (type: string) => {
-        console.log(`Adding element of type: ${type}`);
-        addElement({ type: type as IElement['type'], content: `New ${type}` });
-    };
-
-    const handleSave = () => {
-        if (onSave) {
-            const stateToSave = {
-                elements: state.elements,
-                isList: state.isList,
-                mockData: state.mockData,
-                singleMockData: state.singleMockData,
-                listSettings: state.listSettings,
-                canvasHeight: state.canvasHeight
-            };
-            onSave(JSON.stringify(stateToSave, null, 2));
-        }
-    };
-
     return (
         <Theme appearance={theme} accentColor="blue" grayColor="slate" radius="large" scaling="105%">
-            <Flex direction="row" style={{ height: '100vh', width: '100%', overflow: 'hidden', backgroundColor: 'var(--gray-1)' }}>
-                {/* Toolbar */}
-                {isSidebarVisible && (
-                    <Flex
-                        direction="column"
-                        width={isMobile ? "100%" : "300px"}
-                        style={{
-                            borderRight: '1px solid var(--gray-5)',
-                            backgroundColor: 'var(--gray-1)',
-                            flexShrink: 0,
-                            height: '100%',
-                            boxShadow: '1px 0 0 var(--gray-4)',
-                            overflow: 'hidden',
-                            position: isMobile ? 'absolute' : 'relative',
-                            zIndex: isMobile ? 100 : 'auto',
-                            top: 0,
-                            left: 0
-                        }}
-                    >
-                        {isMobile && (
-                            <Flex justify="end" p="2">
-                                <IconButton variant="ghost" color="gray" onClick={() => setIsSidebarVisible(false)}>
-                                    <DoubleArrowLeftIcon />
+            <Flex direction="column" style={{ height: '100vh', width: '100%', overflow: 'hidden', backgroundColor: 'var(--gray-1)' }}>
+                <GlobalHeader
+                    onSave={onSave}
+                    templates={templates}
+                    setIsTemplatesOpen={setIsTemplatesOpen}
+                    onFinish={() => {
+                        setWizardStep(3);
+                        setIsWizardOpen(true);
+                    }}
+                />
+                <Flex direction="row" style={{ flexGrow: 1, overflow: 'hidden' }}>
+                    {/* Sidebar */}
+                    {isSidebarVisible && (
+                        <Flex
+                            id="sidebar-area"
+                            direction="column"
+                            width={isMobile ? "100%" : "300px"}
+                            style={{
+                                borderRight: '1px solid var(--gray-5)',
+                                backgroundColor: 'var(--gray-1)',
+                                flexShrink: 0,
+                                height: '100%',
+                                boxShadow: '1px 0 0 var(--gray-4)',
+                                overflow: 'hidden',
+                                position: isMobile ? 'absolute' : 'relative',
+                                zIndex: isMobile ? 100 : 'auto',
+                                top: 0,
+                                left: 0
+                            }}
+                        >
+                            {isMobile && (
+                                <Flex justify="end" p="2">
+                                    <IconButton variant="ghost" color="gray" onClick={() => setIsSidebarVisible(false)}>
+                                        <DoubleArrowLeftIcon />
+                                    </IconButton>
+                                </Flex>
+                            )}
+                            <ScrollArea type="auto" scrollbars="vertical" style={{ height: '100%' }}>
+                                <Flex direction="column" style={{ height: '100%' }}>
+                                    {state.editorMode === 'simple' ? (
+                                        <SimpleSidebar layout={layout} />
+                                    ) : (
+                                        <AdvancedSidebar
+                                            layout={layout}
+                                            onOpenSettings={(id: string) => { setSettingsElementId(id); setIsSettingsOpen(true); }}
+                                        />
+                                    )}
+                                </Flex>
+                            </ScrollArea>
+                        </Flex>
+                    )}
+
+                    {/* Main Content Area (Resizable Split) */}
+                    <Flex direction="column" style={{ flex: 1, height: '100%', overflow: 'hidden' }}>
+                        {/* Toolbar Superior */}
+                        <Flex
+                            justify="between"
+                            align="center"
+                            px="3"
+                            py="2"
+                            style={{
+                                borderBottom: '1px solid var(--gray-6)',
+                                backgroundColor: 'var(--gray-1)',
+                                flexShrink: 0,
+                                zIndex: 10
+                            }}
+                        >
+                            {/* Left Controls */}
+                            <Flex gap="3" align="center">
+                                <IconButton
+                                    size="2"
+                                    variant="ghost"
+                                    color="gray"
+                                    onClick={() => setIsSidebarVisible(!isSidebarVisible)}
+                                    title={isSidebarVisible ? "Ocultar Barra Lateral" : "Mostrar Barra Lateral"}
+                                    style={{ cursor: 'pointer' }}
+                                >
+                                    {isSidebarVisible ? <DoubleArrowLeftIcon /> : <DoubleArrowRightIcon />}
                                 </IconButton>
                             </Flex>
-                        )}
-                        <ScrollArea type="auto" scrollbars="vertical" style={{ height: '100%' }}>
-                            <Flex direction="column">
-                                {/* Fixed Controls Header */}
-                                <Box p="4" style={{ borderBottom: '1px solid var(--gray-5)', backgroundColor: 'var(--gray-1)' }}>
-                                    <Flex direction="column" gap="3">
-                                        <Box>
-                                            <Flex justify="between" align="center" mb="2">
-                                                <Text size="2" weight="bold">Editor</Text>
-                                                <Badge color="gray" variant="soft" radius="full">v{pkg.version}</Badge>
-                                            </Flex>
 
-                                            <DropdownMenu.Root>
-                                                <DropdownMenu.Trigger>
-                                                    <Button variant="solid" color="green" size="3" style={{ width: '100%', cursor: 'pointer', justifyContent: 'center', marginBottom: '8px' }}>
-                                                        Adicionar elemento
-                                                    </Button>
-                                                </DropdownMenu.Trigger>
-                                                <DropdownMenu.Content style={{ width: '240px' }}>
-                                                    <DropdownMenu.Item onSelect={() => handleAddElement('text')}>Texto</DropdownMenu.Item>
-                                                    <DropdownMenu.Item onSelect={() => handleAddElement('image')}>Imagem</DropdownMenu.Item>
-                                                    <DropdownMenu.Item onSelect={() => handleAddElement('box')}>Caixa (Container)</DropdownMenu.Item>
-                                                    <DropdownMenu.Item onSelect={() => handleAddElement('text-container')}>Container com Texto</DropdownMenu.Item>
-                                                </DropdownMenu.Content>
-                                            </DropdownMenu.Root>
+                            {/* Right Controls */}
+                            <Flex gap="3" align="center">
+                                <ShortcutsDialog />
 
-                                            <Button
-                                                variant="soft"
-                                                color="blue"
-                                                style={{ width: '100%', justifyContent: 'center', cursor: 'pointer' }}
-                                                onClick={handleSave}
-                                            >
-                                                <Share1Icon /> Salvar Alterações
-                                            </Button>
-
-                                            <Flex gap="2" mt="2">
-                                                <Button
-                                                    variant="soft"
-                                                    color="gray"
-                                                    style={{ flex: 1, cursor: 'pointer', justifyContent: 'center' }}
-                                                    onClick={handleExport}
-                                                >
-                                                    <DownloadIcon /> Exportar
-                                                </Button>
-                                                <Button
-                                                    variant="soft"
-                                                    color="gray"
-                                                    style={{ flex: 1, cursor: 'pointer', justifyContent: 'center' }}
-                                                    onClick={handleImportClick}
-                                                >
-                                                    <UploadIcon /> Importar
-                                                </Button>
-                                            </Flex>
-                                            <input
-                                                type="file"
-                                                ref={fileInputRef}
-                                                style={{ display: 'none' }}
-                                                accept=".json"
-                                                onChange={handleImportFile}
-                                            />
-
-
-
-                                            {templates && templates.length > 0 && (
-                                                <Button
-                                                    variant="soft"
-                                                    color="gray"
-                                                    style={{ width: '100%', justifyContent: 'center', cursor: 'pointer', marginTop: '8px' }}
-                                                    onClick={() => setIsTemplatesOpen(true)}
-                                                >
-                                                    <FileTextIcon /> Templates
-                                                </Button>
-                                            )}
-
-                                            <Box mt="3">
-                                                <EditorSettings />
-                                            </Box>
-                                        </Box>
-                                    </Flex>
-                                </Box>
-
-                                <Box p="4">
-                                    <Tabs.Root defaultValue="layers">
-                                        <Tabs.List>
-                                            <Tabs.Trigger value="layers">Camadas</Tabs.Trigger>
-                                            <Tabs.Trigger value="history">Histórico</Tabs.Trigger>
-                                            <Tabs.Trigger value="vars">Variáveis</Tabs.Trigger>
-                                        </Tabs.List>
-
-                                        <Box pt="3">
-                                            <Tabs.Content value="layers">
-                                                <LayersPanel onOpenSettings={(id) => { setSettingsElementId(id); setIsSettingsOpen(true); }} />
-                                            </Tabs.Content>
-
-                                            <Tabs.Content value="history">
-                                                <HistoryPanel />
-                                            </Tabs.Content>
-
-                                            <Tabs.Content value="vars">
-                                                <Box>
-                                                    <Text size="2" weight="bold" mb="2" as="div">Variáveis Disponíveis</Text>
-                                                    <Text size="1" color="gray" mb="2" as="div">Clique para copiar ou arraste</Text>
-                                                    <Flex direction="column" gap="2">
-                                                        {layout.props.map((prop, index) => (
-                                                            <Badge
-                                                                key={index}
-                                                                color="blue"
-                                                                variant="soft"
-                                                                size="2"
-                                                                style={{ padding: '8px', justifyContent: 'flex-start', cursor: 'grab' }}
-                                                                title={`Clique para copiar {{${prop.dataName}}}`}
-                                                                draggable
-                                                                onDragStart={(e) => {
-                                                                    e.dataTransfer.setData('application/x-editor-prop', prop.dataName);
-                                                                    e.dataTransfer.effectAllowed = 'copy';
-                                                                }}
-                                                                onClick={() => {
-                                                                    const text = `{{${prop.dataName}}}`;
-                                                                    navigator.clipboard.writeText(text);
-                                                                }}
-                                                            >
-                                                                {prop.name}
-                                                                <Text color="gray" style={{ marginLeft: 'auto', fontSize: '10px' }}>{`{{${prop.dataName}}}`}</Text>
-                                                            </Badge>
-                                                        ))}
-                                                        {layout.props.length === 0 && (
-                                                            <Text size="1" color="gray" style={{ fontStyle: 'italic' }}>
-                                                                Nenhuma variável configurada.
-                                                            </Text>
-                                                        )}
-                                                    </Flex>
-                                                </Box>
-                                            </Tabs.Content>
-                                        </Box>
-                                    </Tabs.Root>
-                                </Box>
+                                <IconButton
+                                    size="2"
+                                    variant="ghost"
+                                    color={isPreviewVisible ? 'blue' : 'gray'}
+                                    onClick={() => setIsPreviewVisible(!isPreviewVisible)}
+                                    title={isPreviewVisible ? "Ocultar Preview" : "Mostrar Preview"}
+                                    style={{ cursor: 'pointer' }}
+                                >
+                                    {isPreviewVisible ? <EyeOpenIcon /> : <EyeNoneIcon />}
+                                </IconButton>
                             </Flex>
-                        </ScrollArea>
+                        </Flex>
+
+                        <Box style={{ flex: 1, position: 'relative', overflow: 'hidden' }}>
+                            <Group orientation="horizontal" style={{ height: '100%', width: '100%' }}>
+                                {/* Editor Canvas Area */}
+                                {(!isMobile || !isPreviewVisible) && (
+                                    <Panel defaultSize={50} minSize={20}>
+                                        <Grid
+                                            columns="20px 1fr"
+                                            rows="20px 1fr"
+                                            style={{
+                                                height: '100%',
+                                                width: '100%',
+                                                backgroundColor: 'var(--color-background)'
+                                            }}
+                                        >
+                                            {/* Top Left Corner */}
+                                            <Box style={{ backgroundColor: 'var(--gray-2)', borderRight: '1px solid var(--gray-6)', borderBottom: '1px solid var(--gray-6)', zIndex: 30 }} />
+
+                                            {/* Top Ruler */}
+                                            <Box style={{ backgroundColor: 'var(--gray-2)', borderBottom: '1px solid var(--gray-6)', overflow: 'hidden', zIndex: 30 }}>
+                                                <Ruler orientation="horizontal" />
+                                            </Box>
+
+                                            {/* Left Ruler */}
+                                            <Box style={{ backgroundColor: 'var(--gray-2)', borderRight: '1px solid var(--gray-6)', overflow: 'hidden', zIndex: 30 }}>
+                                                <Ruler orientation="vertical" />
+                                            </Box>
+
+                                            {/* Canvas Area */}
+                                            <Box style={{ position: 'relative', overflow: 'hidden', width: '100%', height: '100%' }} id="canvas-area">
+                                                <Box style={{
+                                                    position: 'absolute',
+                                                    top: 16,
+                                                    left: '50%',
+                                                    transform: 'translateX(-50%)',
+                                                    zIndex: 20
+                                                }}>
+                                                    <AlignmentToolbar />
+                                                </Box>
+                                                <Box style={{
+                                                    position: 'absolute',
+                                                    bottom: 16,
+                                                    right: 16,
+                                                    zIndex: 20
+                                                }}>
+                                                    <ViewToolbar />
+                                                </Box>
+                                                <Canvas />
+                                                <Minimap />
+                                            </Box>
+                                        </Grid>
+                                    </Panel>
+                                )}
+
+                                {/* Resize Handle */}
+                                {(!isMobile && isPreviewVisible) && (
+                                    <Separator style={{
+                                        width: '4px',
+                                        backgroundColor: 'var(--gray-6)',
+                                        cursor: 'col-resize',
+                                        transition: 'background-color 0.2s'
+                                    }} />
+                                )}
+
+                                {/* Preview Area */}
+                                {isPreviewVisible && (
+                                    <Panel defaultSize={50} minSize={20}>
+                                        <Box
+                                            id="preview-area"
+                                            style={{
+                                                height: '100%',
+                                                width: '100%',
+                                                backgroundColor: 'var(--gray-3)',
+                                                borderLeft: '1px solid var(--gray-5)'
+                                            }}
+                                        >
+                                            <Preview />
+                                        </Box>
+                                    </Panel>
+                                )}
+                            </Group>
+                        </Box>
                     </Flex>
+                </Flex>
+
+                {settingsElementId && (
+                    <ElementAdvancedSettings
+                        elementId={settingsElementId}
+                        open={isSettingsOpen}
+                        onOpenChange={setIsSettingsOpen}
+                    />
                 )}
 
-                {/* Main Content Area (Resizable Split) */}
-                <Flex direction="column" style={{ flex: 1, height: '100%', overflow: 'hidden' }}>
-                    {/* Toolbar Superior */}
-                    <Flex
-                        justify="between"
-                        align="center"
-                        px="3"
-                        py="2"
-                        style={{
-                            borderBottom: '1px solid var(--gray-6)',
-                            backgroundColor: 'var(--gray-1)',
-                            flexShrink: 0,
-                            zIndex: 10
-                        }}
-                    >
-                        {/* Left Controls */}
-                        <Flex gap="3" align="center">
-                            <IconButton
-                                size="2"
-                                variant="ghost"
-                                color="gray"
-                                onClick={() => setIsSidebarVisible(!isSidebarVisible)}
-                                title={isSidebarVisible ? "Ocultar Barra Lateral" : "Mostrar Barra Lateral"}
-                                style={{ cursor: 'pointer' }}
-                            >
-                                {isSidebarVisible ? <DoubleArrowLeftIcon /> : <DoubleArrowRightIcon />}
-                            </IconButton>
-                        </Flex>
+                {/* Templates Modal */}
+                <Dialog.Root open={isTemplatesOpen} onOpenChange={setIsTemplatesOpen}>
+                    <Dialog.Content style={{ maxWidth: 450 }}>
+                        <Dialog.Title>Galeria de Templates</Dialog.Title>
+                        <Dialog.Description size="2" mb="4">
+                            Escolha um layout pré-definido para começar.
+                        </Dialog.Description>
 
-                        {/* Right Controls */}
-                        <Flex gap="3" align="center">
-                            <ShortcutsDialog />
-
-                            <IconButton
-                                size="2"
-                                variant="ghost"
-                                color={isPreviewVisible ? 'blue' : 'gray'}
-                                onClick={() => setIsPreviewVisible(!isPreviewVisible)}
-                                title={isPreviewVisible ? "Ocultar Preview" : "Mostrar Preview"}
-                                style={{ cursor: 'pointer' }}
-                            >
-                                {isPreviewVisible ? <EyeOpenIcon /> : <EyeNoneIcon />}
-                            </IconButton>
-                        </Flex>
-                    </Flex>
-
-                    <Box style={{ flex: 1, position: 'relative', overflow: 'hidden' }}>
-                        <Group orientation="horizontal" style={{ height: '100%', width: '100%' }}>
-                            {/* Editor Canvas Area */}
-                            {(!isMobile || !isPreviewVisible) && (
-                                <Panel defaultSize={50} minSize={20}>
-                                    <Grid
-                                        columns="20px 1fr"
-                                        rows="20px 1fr"
+                        {templates && templates.length > 0 ? (
+                            <Flex direction="column" gap="3">
+                                <Box>
+                                    <Text size="2" weight="bold" as="div" mb="1">Selecione o Template</Text>
+                                    <select
+                                        value={localTemplateId || ''}
+                                        onChange={(e) => setLocalTemplateId(e.target.value)}
                                         style={{
-                                            height: '100%',
                                             width: '100%',
-                                            backgroundColor: 'var(--color-background)'
+                                            padding: '8px',
+                                            borderRadius: '6px',
+                                            border: '1px solid var(--gray-6)',
+                                            backgroundColor: 'var(--gray-1)',
+                                            color: 'var(--gray-12)',
+                                            fontSize: '14px',
+                                            outline: 'none'
                                         }}
                                     >
-                                        {/* Top Left Corner */}
-                                        <Box style={{ backgroundColor: 'var(--gray-2)', borderRight: '1px solid var(--gray-6)', borderBottom: '1px solid var(--gray-6)', zIndex: 30 }} />
-
-                                        {/* Top Ruler */}
-                                        <Box style={{ backgroundColor: 'var(--gray-2)', borderBottom: '1px solid var(--gray-6)', overflow: 'hidden', zIndex: 30 }}>
-                                            <Ruler orientation="horizontal" />
-                                        </Box>
-
-                                        {/* Left Ruler */}
-                                        <Box style={{ backgroundColor: 'var(--gray-2)', borderRight: '1px solid var(--gray-6)', overflow: 'hidden', zIndex: 30 }}>
-                                            <Ruler orientation="vertical" />
-                                        </Box>
-
-                                        {/* Canvas Area */}
-                                        <Box style={{ position: 'relative', overflow: 'hidden', width: '100%', height: '100%' }}>
-                                            <Box style={{
-                                                position: 'absolute',
-                                                top: 16,
-                                                left: '50%',
-                                                transform: 'translateX(-50%)',
-                                                zIndex: 20
-                                            }}>
-                                                <AlignmentToolbar />
-                                            </Box>
-                                            <Box style={{
-                                                position: 'absolute',
-                                                bottom: 16,
-                                                right: 16,
-                                                zIndex: 20
-                                            }}>
-                                                <ViewToolbar />
-                                            </Box>
-                                            <Canvas />
-                                            <Minimap />
-                                        </Box>
-                                    </Grid>
-                                </Panel>
-                            )}
-
-                            {/* Resize Handle */}
-                            {(!isMobile && isPreviewVisible) && (
-                                <Separator style={{
-                                    width: '4px',
-                                    backgroundColor: 'var(--gray-6)',
-                                    cursor: 'col-resize',
-                                    transition: 'background-color 0.2s'
-                                }} />
-                            )}
-
-                            {/* Preview Area */}
-                            {isPreviewVisible && (
-                                <Panel defaultSize={50} minSize={20}>
-                                    <Box style={{
-                                        height: '100%',
-                                        width: '100%',
-                                        backgroundColor: 'var(--gray-3)',
-                                        borderLeft: '1px solid var(--gray-5)'
-                                    }}>
-                                        <Preview />
-                                    </Box>
-                                </Panel>
-                            )}
-                        </Group>
-                    </Box>
-                </Flex>
-            </Flex>
-
-            {settingsElementId && (
-                <ElementAdvancedSettings
-                    elementId={settingsElementId}
-                    open={isSettingsOpen}
-                    onOpenChange={setIsSettingsOpen}
-                />
-            )}
-
-            {/* Templates Modal */}
-            <Dialog.Root open={isTemplatesOpen} onOpenChange={setIsTemplatesOpen}>
-                <Dialog.Content style={{ maxWidth: 450 }}>
-                    <Dialog.Title>Galeria de Templates</Dialog.Title>
-                    <Dialog.Description size="2" mb="4">
-                        Escolha um layout pré-definido para começar.
-                    </Dialog.Description>
-
-                    {templates && templates.length > 0 ? (
-                        <Flex direction="column" gap="3">
-                            <Box>
-                                <Text size="2" weight="bold" as="div" mb="1">Selecione o Template</Text>
-                                <select
-                                    value={localTemplateId || ''}
-                                    onChange={(e) => setLocalTemplateId(e.target.value)}
-                                    style={{
-                                        width: '100%',
-                                        padding: '8px',
-                                        borderRadius: '6px',
-                                        border: '1px solid var(--gray-6)',
-                                        backgroundColor: 'var(--gray-1)',
-                                        color: 'var(--gray-12)',
-                                        fontSize: '14px',
-                                        outline: 'none'
-                                    }}
-                                >
-                                    {templates.map(template => (
-                                        <option key={template.id} value={template.id}>
-                                            {template.name}
-                                        </option>
-                                    ))}
-                                </select>
-                            </Box>
-
-                            {localTemplateId && templates.find(t => t.id === localTemplateId)?.description && (
-                                <Box p="3" style={{ backgroundColor: 'var(--gray-2)', borderRadius: 8 }}>
-                                    <Text size="2" color="gray">
-                                        {templates.find(t => t.id === localTemplateId)?.description}
-                                    </Text>
+                                        {templates.map(template => (
+                                            <option key={template.id} value={template.id}>
+                                                {template.name}
+                                            </option>
+                                        ))}
+                                    </select>
                                 </Box>
-                            )}
 
-                            <Flex gap="3" mt="4" justify="end">
-                                <Dialog.Close>
-                                    <Button variant="soft" color="gray">Cancelar</Button>
-                                </Dialog.Close>
-                                <Dialog.Close>
-                                    <Button onClick={() => {
-                                        if (!localTemplateId) return;
-                                        if (onTemplateChange) {
-                                            onTemplateChange(localTemplateId);
-                                            return;
-                                        }
-                                        const template = templates.find(item => item.id === localTemplateId);
-                                        if (!template) return;
-                                        applyTemplateState(template.state);
-                                        lastAppliedTemplateIdRef.current = localTemplateId;
-                                    }}>Aplicar</Button>
-                                </Dialog.Close>
+                                {localTemplateId && templates.find(t => t.id === localTemplateId)?.description && (
+                                    <Box p="3" style={{ backgroundColor: 'var(--gray-2)', borderRadius: 8 }}>
+                                        <Text size="2" color="gray">
+                                            {templates.find(t => t.id === localTemplateId)?.description}
+                                        </Text>
+                                    </Box>
+                                )}
+
+                                <Flex gap="3" mt="4" justify="end">
+                                    <Dialog.Close>
+                                        <Button variant="soft" color="gray">Cancelar</Button>
+                                    </Dialog.Close>
+                                    <Dialog.Close>
+                                        <Button onClick={() => {
+                                            if (!localTemplateId) return;
+                                            if (onTemplateChange) {
+                                                onTemplateChange(localTemplateId);
+                                                return;
+                                            }
+                                            const template = templates.find(item => item.id === localTemplateId);
+                                            if (!template) return;
+                                            applyTemplateState(template.state);
+                                            lastAppliedTemplateIdRef.current = localTemplateId;
+                                        }}>Aplicar</Button>
+                                    </Dialog.Close>
+                                </Flex>
                             </Flex>
-                        </Flex>
-                    ) : (
-                        <Text>Nenhum template disponível.</Text>
-                    )}
-                </Dialog.Content>
-            </Dialog.Root>
+                        ) : (
+                            <Text>Nenhum template disponível.</Text>
+                        )}
+                    </Dialog.Content>
+                </Dialog.Root>
+
+                <WizardDialog
+                    isOpen={isWizardOpen}
+                    onClose={() => setIsWizardOpen(false)}
+                    templates={templates || []}
+                    onSelectTemplate={(template) => {
+                        if (template) {
+                            applyTemplateState(template.state);
+                        }
+                    }}
+                    onStartTour={() => setIsTourOpen(true)}
+                    initialStep={wizardStep}
+                    onFinishWizard={() => {
+                        handleExport();
+                        alert("Layout finalizado e exportado com sucesso!");
+                    }}
+                />
+
+                <OnboardingTour
+                    isOpen={isTourOpen}
+                    onClose={() => setIsTourOpen(false)}
+                />
+            </Flex>
         </Theme>
     );
 };

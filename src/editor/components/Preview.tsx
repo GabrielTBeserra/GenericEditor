@@ -102,7 +102,7 @@ const getAnimationTransition = (anim: IElementAnimation | undefined, variants: V
     return repeat !== undefined ? { ...baseTransition, repeat } : baseTransition;
 };
 
-const PreviewElementRenderer: React.FC<{ element: IElement; offsetY?: number; dataContext?: GenericData }> = ({ element, offsetY = 0, dataContext }) => {
+const PreviewElementRenderer: React.FC<{ element: IElement; offsetY?: number; dataContext?: GenericData; onSelect?: (id: string) => void; isSelected?: boolean }> = ({ element, offsetY = 0, dataContext, onSelect, isSelected }) => {
     // Resolve content based on data binding
     let content = element.content;
     if (dataContext) {
@@ -143,6 +143,9 @@ const PreviewElementRenderer: React.FC<{ element: IElement; offsetY?: number; da
         overflow: element.autoGrow ? 'visible' : 'hidden',
         whiteSpace: (element.type === 'text-container' && element.autoGrow && element.containerExpansion === 'horizontal') ? 'nowrap' : (element.autoGrow ? 'pre-wrap' : undefined),
         wordBreak: element.autoGrow ? 'break-word' : undefined,
+        outline: isSelected ? '2px solid var(--blue-9)' : undefined,
+        zIndex: isSelected ? 10 : undefined,
+        cursor: onSelect ? 'pointer' : undefined,
         ...element.style
     };
 
@@ -195,6 +198,7 @@ const PreviewElementRenderer: React.FC<{ element: IElement; offsetY?: number; da
                 animate="animate"
                 transition={elementTransition}
                 style={commonStyles}
+                onClick={(e) => { e.stopPropagation(); onSelect?.(element.id); }}
             >
                 {contentNode}
             </motion.div>
@@ -202,7 +206,7 @@ const PreviewElementRenderer: React.FC<{ element: IElement; offsetY?: number; da
     }
 
     return (
-        <Box style={commonStyles}>
+        <Box style={commonStyles} onClick={(e) => { e.stopPropagation(); onSelect?.(element.id); }}>
             {contentNode}
         </Box>
     );
@@ -211,7 +215,7 @@ const PreviewElementRenderer: React.FC<{ element: IElement; offsetY?: number; da
 import type { GenericData } from '../types';
 import { processLayout } from '../utils/layoutEngine';
 
-const ListItem: React.FC<{ item: GenericData; elements: IElement[]; animation?: IElementAnimation }> = ({ item, elements, animation }) => {
+const ListItem: React.FC<{ item: GenericData; elements: IElement[]; animation?: IElementAnimation; onSelect?: (id: string) => void; selectedElementIds?: string[] }> = ({ item, elements, animation, onSelect, selectedElementIds }) => {
     // Calculate layout for this specific item
     const { elements: processedElements, totalHeight } = React.useMemo(() => {
         return processLayout(elements, item);
@@ -256,6 +260,8 @@ const ListItem: React.FC<{ item: GenericData; elements: IElement[]; animation?: 
                     element={el}
                     offsetY={0}
                     dataContext={item}
+                    onSelect={onSelect}
+                    isSelected={selectedElementIds?.includes(el.id)}
                 />
             ))}
         </motion.div>
@@ -263,7 +269,7 @@ const ListItem: React.FC<{ item: GenericData; elements: IElement[]; animation?: 
 };
 
 export const Preview: React.FC = () => {
-    const { state } = useEditor();
+    const { state, setSelectedElements } = useEditor();
     const [isSimulating, setIsSimulating] = React.useState(false);
     const [simulationItems, setSimulationItems] = React.useState<GenericData[]>([]);
 
@@ -350,6 +356,8 @@ export const Preview: React.FC = () => {
                                 item={item}
                                 elements={state.elements}
                                 animation={state.listSettings.entryAnimation}
+                                onSelect={(id) => setSelectedElements([id])}
+                                selectedElementIds={state.selectedElementIds}
                             />
                         ))}
                     </AnimatePresence>
@@ -358,13 +366,19 @@ export const Preview: React.FC = () => {
         }
 
         // Non-list mode (Single Item)
-        return state.elements.map((el) => (
-            <PreviewElementRenderer
-                key={el.id}
-                element={el}
-                dataContext={state.singleMockData}
-            />
-        ));
+        return (
+            <>
+                {state.elements.map((el) => (
+                    <PreviewElementRenderer
+                        key={el.id}
+                        element={el}
+                        dataContext={state.singleMockData}
+                        onSelect={(id) => setSelectedElements([id])}
+                        isSelected={state.selectedElementIds.includes(el.id)}
+                    />
+                ))}
+            </>
+        );
     };
 
     return (
