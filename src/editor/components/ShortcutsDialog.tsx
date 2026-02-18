@@ -10,6 +10,7 @@ import {
 } from '@radix-ui/react-icons';
 import { Box, Button, Dialog, Flex, Grid, Kbd, Separator, Text } from '@radix-ui/themes';
 import React from 'react';
+import { useEditor } from '../context';
 
 const ShortcutRow = ({ icon: Icon, label, keys }: { icon: React.ElementType, label: string, keys: string[] }) => (
     <Flex align="center" justify="between" py="2">
@@ -31,6 +32,7 @@ const ShortcutRow = ({ icon: Icon, label, keys }: { icon: React.ElementType, lab
 );
 
 export const ShortcutsDialog: React.FC = () => {
+    const { portalContainer } = useEditor();
     return (
         <Dialog.Root>
             <Dialog.Trigger>
@@ -50,7 +52,7 @@ export const ShortcutsDialog: React.FC = () => {
                 </Button>
             </Dialog.Trigger>
 
-            <Dialog.Content style={{ maxWidth: 700 }} onPointerDown={(e) => e.stopPropagation()}>
+            <Dialog.Content {...(portalContainer && { container: portalContainer })} style={{ maxWidth: 700 }} onPointerDown={(e) => e.stopPropagation()}>
                 <Dialog.Title>Atalhos de Teclado</Dialog.Title>
                 <Text size="2" color="gray" mb="4" as="p">
                     Agilize seu fluxo de trabalho com estes atalhos.

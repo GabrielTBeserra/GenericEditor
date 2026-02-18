@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useEditor, type IElementAnimation } from '../context';
 
 export const EditorSettings: React.FC = () => {
-    const { state, updateListSettings, setCanvasHeight, setGridSize } = useEditor();
+    const { state, portalContainer, updateListSettings, setCanvasHeight, setGridSize } = useEditor();
     const [open, setOpen] = useState(false);
     const [localSortProp, setLocalSortProp] = useState('');
     const [localSortOrder, setLocalSortOrder] = useState<'asc' | 'desc'>('asc');
@@ -89,7 +89,7 @@ export const EditorSettings: React.FC = () => {
                 </Button>
             </Dialog.Trigger>
 
-            <Dialog.Content style={{ maxWidth: 600 }}>
+            <Dialog.Content {...(portalContainer && { container: portalContainer })} style={{ maxWidth: 600 }}>
                 <Dialog.Title>Configurações do Editor</Dialog.Title>
                 <Dialog.Description size="2" mb="4">
                     Configure o comportamento da lista.
@@ -108,7 +108,7 @@ export const EditorSettings: React.FC = () => {
                                             <ChevronDownIcon />
                                         </Button>
                                     </DropdownMenu.Trigger>
-                                    <DropdownMenu.Content style={{ zIndex: 100000 }}>
+                                    <DropdownMenu.Content {...(portalContainer && { container: portalContainer })} style={{ zIndex: 100000 }}>
                                         <DropdownMenu.Item onSelect={() => setLocalSortProp('__none__')}>(Nenhum)</DropdownMenu.Item>
                                         {state.availableProps.map(prop => (
                                             <DropdownMenu.Item key={prop.dataName} onSelect={() => setLocalSortProp(prop.dataName)}>
@@ -127,7 +127,7 @@ export const EditorSettings: React.FC = () => {
                                             <ChevronDownIcon />
                                         </Button>
                                     </DropdownMenu.Trigger>
-                                    <DropdownMenu.Content style={{ zIndex: 100000 }}>
+                                    <DropdownMenu.Content {...(portalContainer && { container: portalContainer })} style={{ zIndex: 100000 }}>
                                         <DropdownMenu.Item onSelect={() => setLocalSortOrder('asc')}>Crescente (A-Z)</DropdownMenu.Item>
                                         <DropdownMenu.Item onSelect={() => setLocalSortOrder('desc')}>Decrescente (Z-A)</DropdownMenu.Item>
                                     </DropdownMenu.Content>
@@ -145,7 +145,7 @@ export const EditorSettings: React.FC = () => {
                                             <ChevronDownIcon />
                                         </Button>
                                     </DropdownMenu.Trigger>
-                                    <DropdownMenu.Content style={{ zIndex: 100000 }}>
+                                    <DropdownMenu.Content {...(portalContainer && { container: portalContainer })} style={{ zIndex: 100000 }}>
                                         <DropdownMenu.Item onSelect={() => setLocalNewestPosition('top')}>Topo (Início)</DropdownMenu.Item>
                                         <DropdownMenu.Item onSelect={() => setLocalNewestPosition('bottom')}>Base (Final)</DropdownMenu.Item>
                                     </DropdownMenu.Content>
@@ -160,7 +160,7 @@ export const EditorSettings: React.FC = () => {
                                             <ChevronDownIcon />
                                         </Button>
                                     </DropdownMenu.Trigger>
-                                    <DropdownMenu.Content style={{ zIndex: 100000 }}>
+                                    <DropdownMenu.Content {...(portalContainer && { container: portalContainer })} style={{ zIndex: 100000 }}>
                                         <DropdownMenu.Item onSelect={() => setLocalScrollDirection('down')}>Descer (Padrão)</DropdownMenu.Item>
                                         <DropdownMenu.Item onSelect={() => setLocalScrollDirection('up')}>Subir (Chat)</DropdownMenu.Item>
                                     </DropdownMenu.Content>
@@ -208,7 +208,7 @@ export const EditorSettings: React.FC = () => {
                                             <ChevronDownIcon />
                                         </Button>
                                     </DropdownMenu.Trigger>
-                                    <DropdownMenu.Content style={{ zIndex: 100000 }}>
+                                    <DropdownMenu.Content {...(portalContainer && { container: portalContainer })} style={{ zIndex: 100000 }}>
                                         <DropdownMenu.Item onSelect={() => setLocalEntryAnimType('none')}>Nenhum</DropdownMenu.Item>
                                         <DropdownMenu.Item onSelect={() => setLocalEntryAnimType('slideIn')}>Slide (Padrão)</DropdownMenu.Item>
                                         <DropdownMenu.Item onSelect={() => setLocalEntryAnimType('smoothSlideUp')}>Slide Suave (Up)</DropdownMenu.Item>
@@ -241,7 +241,7 @@ export const EditorSettings: React.FC = () => {
                                             <ChevronDownIcon />
                                         </Button>
                                     </DropdownMenu.Trigger>
-                                    <DropdownMenu.Content style={{ zIndex: 100000 }}>
+                                    <DropdownMenu.Content {...(portalContainer && { container: portalContainer })} style={{ zIndex: 100000 }}>
                                         <DropdownMenu.Item onSelect={() => setLocalEntryAnimTiming('ease')}>Ease</DropdownMenu.Item>
                                         <DropdownMenu.Item onSelect={() => setLocalEntryAnimTiming('ease-out')}>Ease Out</DropdownMenu.Item>
                                         <DropdownMenu.Item onSelect={() => setLocalEntryAnimTiming('linear')}>Linear</DropdownMenu.Item>

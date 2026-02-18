@@ -11211,8 +11211,8 @@ var SAFE_FONTS = [
 	"Arial Black",
 	"Impact"
 ];
-const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], theme: A = "light" }) => {
-	let [j, M] = useState({
+const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], theme: A = "light", portalContainer: j = null }) => {
+	let [M, N] = useState({
 		elements: [],
 		selectedElementIds: [],
 		isList: E,
@@ -11247,7 +11247,7 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 		isPropertiesPanelOpen: !1
 	});
 	React.useEffect(() => {
-		j.availableFonts.forEach((n) => {
+		M.availableFonts.forEach((n) => {
 			if (SAFE_FONTS.includes(n)) return;
 			let _ = `font-${n.replace(/\s+/g, "-").toLowerCase()}`;
 			if (!document.getElementById(_)) {
@@ -11255,8 +11255,8 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				E.id = _, E.href = `https://fonts.googleapis.com/css2?family=${n.replace(/ /g, "+")}&display=swap`, E.rel = "stylesheet", document.head.appendChild(E);
 			}
 		});
-	}, [j.availableFonts]), React.useEffect(() => {
-		M((n) => ({
+	}, [M.availableFonts]), React.useEffect(() => {
+		N((n) => ({
 			...n,
 			isList: E,
 			availableProps: O,
@@ -11267,38 +11267,38 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 		O,
 		A
 	]);
-	let N = React.useCallback((n) => {
-		M((_) => ({
+	let P = React.useCallback((n) => {
+		N((_) => ({
 			..._,
 			isPropertiesPanelOpen: n
 		}));
-	}, []), P = React.useCallback((n) => {
-		M((_) => ({
+	}, []), z = React.useCallback((n) => {
+		N((_) => ({
 			..._,
 			canvasHeight: n
 		}));
-	}, []), z = React.useCallback((n) => {
-		M((_) => ({
+	}, []), B = React.useCallback((n) => {
+		N((_) => ({
 			..._,
 			gridSize: n
 		}));
-	}, []), B = React.useCallback((n) => {
-		M((_) => ({
+	}, []), H = React.useCallback((n) => {
+		N((_) => ({
 			..._,
 			zoom: n
 		}));
-	}, []), H = React.useCallback((n) => {
-		M((_) => ({
+	}, []), U = React.useCallback((n) => {
+		N((_) => ({
 			..._,
 			pan: n
 		}));
-	}, []), U = React.useCallback((n) => {
-		M((_) => ({
+	}, []), W = React.useCallback((n) => {
+		N((_) => ({
 			..._,
 			snapLines: n
 		}));
-	}, []), W = React.useCallback((n) => {
-		M((_) => {
+	}, []), G = React.useCallback((n) => {
+		N((_) => {
 			let E = n.elements || _.elements, O = [], A = /* @__PURE__ */ new Set();
 			return E.forEach((n) => {
 				let _ = n.id;
@@ -11325,8 +11325,8 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				clipboard: []
 			};
 		});
-	}, []), G = React.useCallback(() => {
-		M((n) => {
+	}, []), Z = React.useCallback(() => {
+		N((n) => {
 			if (n.historyIndex > 0) {
 				let _ = n.historyIndex - 1;
 				return {
@@ -11338,8 +11338,8 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 			}
 			return n;
 		});
-	}, []), Z = React.useCallback(() => {
-		M((n) => {
+	}, []), Az = React.useCallback(() => {
+		N((n) => {
 			if (n.historyIndex < n.history.length - 1) {
 				let _ = n.historyIndex + 1;
 				return {
@@ -11351,15 +11351,15 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 			}
 			return n;
 		});
-	}, []), Az = React.useCallback((n) => {
-		M((_) => n >= 0 && n < _.history.length ? {
+	}, []), jz = React.useCallback((n) => {
+		N((_) => n >= 0 && n < _.history.length ? {
 			..._,
 			elements: _.history[n],
 			historyIndex: n,
 			selectedElementIds: []
 		} : _);
-	}, []), jz = React.useCallback(() => {
-		M((n) => {
+	}, []), Mz = React.useCallback(() => {
+		N((n) => {
 			if (n.selectedElementIds.length > 0) {
 				let _ = n.elements.filter((_) => n.selectedElementIds.includes(_.id));
 				return {
@@ -11369,8 +11369,8 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 			}
 			return n;
 		});
-	}, []), Mz = React.useCallback(() => {
-		M((n) => {
+	}, []), Nz = React.useCallback(() => {
+		N((n) => {
 			if (n.clipboard.length > 0) {
 				let _ = n.clipboard.map((n) => ({
 					...n,
@@ -11391,7 +11391,7 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 			}
 			return n;
 		});
-	}, []), Nz = React.useCallback((n) => {
+	}, []), Pz = React.useCallback((n) => {
 		let _ = {};
 		n.type === "box" && (_.backgroundColor = "var(--gray-4)"), n.type === "text-container" && (_.backgroundColor = "var(--gray-4)", _.border = "1px solid var(--gray-8)", _.padding = "8px", _.display = "flex", _.alignItems = "flex-start", _.justifyContent = "flex-start");
 		let E = {
@@ -11406,7 +11406,7 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				...n.style || {}
 			}
 		};
-		M((n) => {
+		N((n) => {
 			let _ = [...n.elements, E], O = n.history.slice(0, n.historyIndex + 1);
 			O.push(_);
 			let A = n.historyDescriptions.slice(0, n.historyIndex + 1), j = {
@@ -11426,8 +11426,8 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				selectedElementIds: [E.id]
 			};
 		});
-	}, []), Pz = React.useCallback((n) => {
-		M((_) => {
+	}, []), Fz = React.useCallback((n) => {
+		N((_) => {
 			let E = _.elements.filter((_) => _.id !== n), O = _.history.slice(0, _.historyIndex + 1);
 			O.push(E);
 			let A = _.historyDescriptions.slice(0, _.historyIndex + 1);
@@ -11440,8 +11440,8 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				historyIndex: O.length - 1
 			};
 		});
-	}, []), Fz = React.useCallback(() => {
-		M((n) => {
+	}, []), Lz = React.useCallback(() => {
+		N((n) => {
 			if (n.selectedElementIds.length === 0) return n;
 			let _ = n.elements.filter((_) => !n.selectedElementIds.includes(_.id)), E = n.history.slice(0, n.historyIndex + 1);
 			E.push(_);
@@ -11455,8 +11455,8 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				historyIndex: E.length - 1
 			};
 		});
-	}, []), Lz = React.useCallback((n, _ = !1) => {
-		M((E) => {
+	}, []), Rz = React.useCallback((n, _ = !1) => {
+		N((E) => {
 			if (n === null) return {
 				...E,
 				selectedElementIds: []
@@ -11472,13 +11472,13 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				selectedElementIds: [n]
 			};
 		});
-	}, []), Rz = React.useCallback((n) => {
-		M((_) => ({
+	}, []), zz = React.useCallback((n) => {
+		N((_) => ({
 			..._,
 			selectedElementIds: n
 		}));
-	}, []), zz = React.useCallback((n, _) => {
-		M((E) => {
+	}, []), Bz = React.useCallback((n, _) => {
+		N((E) => {
 			let O = [...E.elements], A = O[n];
 			O.splice(n, 1), O.splice(_, 0, A);
 			let j = E.history.slice(0, E.historyIndex + 1);
@@ -11492,8 +11492,8 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				historyIndex: j.length - 1
 			};
 		});
-	}, []), Bz = React.useCallback((n, _, E = !0) => {
-		M((O) => {
+	}, []), Vz = React.useCallback((n, _, E = !0) => {
+		N((O) => {
 			let A = O.elements.map((E) => E.id === n ? {
 				...E,
 				..._
@@ -11506,8 +11506,8 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				historyIndex: M
 			};
 		});
-	}, []), Vz = React.useCallback((n, _ = !0) => {
-		M((E) => {
+	}, []), Hz = React.useCallback((n, _ = !0) => {
+		N((E) => {
 			let O = [...E.elements], A = [], j = /* @__PURE__ */ new Set();
 			n.forEach(({ id: n, changes: _ }) => {
 				let O = E.elements.find((_) => _.id === n);
@@ -11561,8 +11561,8 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				historyIndex: P
 			};
 		});
-	}, []), Hz = React.useCallback((n) => {
-		M((_) => {
+	}, []), Wz = React.useCallback((n) => {
+		N((_) => {
 			let E = _.elements.filter((_) => n.includes(_.id));
 			if (E.length === 0) return _;
 			let O = Math.min(...E.map((n) => n.x)), A = Math.min(...E.map((n) => n.y)), j = Math.max(...E.map((n) => n.x + n.width)), M = Math.max(...E.map((n) => n.y + n.height)), N = {
@@ -11592,8 +11592,8 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				historyIndex: z.length - 1
 			};
 		});
-	}, []), Wz = React.useCallback((n) => {
-		M((_) => {
+	}, []), Gz = React.useCallback((n) => {
+		N((_) => {
 			let E = _.elements.find((_) => _.id === n);
 			if (!E || E.type !== "group") return _;
 			let O = [], A = _.elements.filter((_) => _.id !== n).map((_) => _.groupId === n ? (O.push(_.id), {
@@ -11611,8 +11611,8 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				historyIndex: j.length - 1
 			};
 		});
-	}, []), Gz = React.useCallback((n, _) => {
-		M((E) => {
+	}, []), Kz = React.useCallback((n, _) => {
+		N((E) => {
 			let O = E.elements.map((E) => E.id === n ? {
 				...E,
 				name: _
@@ -11622,7 +11622,7 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				elements: O
 			};
 		});
-	}, []), Kz = React.useCallback((n, _) => {
+	}, []), qz = React.useCallback((n, _) => {
 		if (!n.find((n) => n.id === _ && n.type === "group")) return n;
 		let E = n.filter((n) => n.groupId === _);
 		if (E.length === 0) return n;
@@ -11634,15 +11634,15 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 			width: j - O,
 			height: M - A
 		} : n);
-	}, []), qz = React.useCallback((n, _) => {
-		M((E) => {
+	}, []), Jz = React.useCallback((n, _) => {
+		N((E) => {
 			let O = E.elements.find((_) => _.id === n), A = E.elements.find((n) => n.id === _ && n.type === "group");
 			if (!O || !A) return E;
 			let j = E.elements.map((E) => E.id === n ? {
 				...E,
 				groupId: _
 			} : E);
-			j = Kz(j, _);
+			j = qz(j, _);
 			let M = E.history.slice(0, E.historyIndex + 1);
 			M.push(j);
 			let N = E.historyDescriptions.slice(0, E.historyIndex + 1);
@@ -11654,15 +11654,15 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				historyIndex: M.length - 1
 			};
 		});
-	}, [Kz]), Jz = React.useCallback((n) => {
-		M((_) => {
+	}, [qz]), Yz = React.useCallback((n) => {
+		N((_) => {
 			let E = _.elements.find((_) => _.id === n);
 			if (!E || !E.groupId) return _;
 			let O = E.groupId, A = _.elements.map((_) => _.id === n ? {
 				..._,
 				groupId: void 0
 			} : _);
-			A = Kz(A, O);
+			A = qz(A, O);
 			let j = _.history.slice(0, _.historyIndex + 1);
 			j.push(A);
 			let M = _.historyDescriptions.slice(0, _.historyIndex + 1);
@@ -11674,8 +11674,8 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				historyIndex: j.length - 1
 			};
 		});
-	}, [Kz]), Yz = React.useCallback((n, _, E) => {
-		M((O) => {
+	}, [qz]), Xz = React.useCallback((n, _, E) => {
+		N((O) => {
 			let A = O.elements.find((_) => _.id === n && _.type === "group");
 			if (!A) return O;
 			let j = _ / A.width, M = E / A.height, N = A.x, P = A.y, z = O.elements.map((O) => {
@@ -11706,67 +11706,68 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 				historyIndex: B.length - 1
 			};
 		});
-	}, []), Xz = React.useCallback((n, _) => {
-		M((E) => ({
+	}, []), Zz = React.useCallback((n, _) => {
+		N((E) => ({
 			...E,
 			mockData: n,
 			singleMockData: _
 		}));
-	}, []), Zz = React.useCallback((n) => {
-		M((_) => ({
+	}, []), Qz = React.useCallback((n) => {
+		N((_) => ({
 			..._,
 			listSettings: {
 				..._.listSettings,
 				...n
 			}
 		}));
-	}, []), Qz = React.useCallback((n) => {
-		M((_) => ({
+	}, []), $z = React.useCallback((n) => {
+		N((_) => ({
 			..._,
 			assets: [..._.assets, n]
 		}));
-	}, []), $z = React.useCallback((n) => {
-		M((_) => ({
+	}, []), eB = React.useCallback((n) => {
+		N((_) => ({
 			..._,
 			assets: _.assets.filter((_) => _.id !== n)
 		}));
 	}, []);
 	return /* @__PURE__ */ jsx(EditorContext.Provider, {
 		value: React.useMemo(() => ({
-			state: j,
-			setGridSize: z,
-			setZoom: B,
-			setPan: H,
-			setSnapLines: U,
-			addElement: Nz,
-			removeElement: Pz,
-			removeSelected: Fz,
-			selectElement: Lz,
-			setSelectedElements: Rz,
-			moveElement: zz,
-			updateElement: Bz,
-			updateElements: Vz,
-			groupElements: Hz,
-			ungroupElements: Wz,
-			renameElement: Gz,
-			addToGroup: qz,
-			removeFromGroup: Jz,
-			resizeGroup: Yz,
-			setMockData: Xz,
-			updateListSettings: Zz,
-			setCanvasHeight: P,
-			loadState: W,
-			undo: G,
-			redo: Z,
-			jumpToHistory: Az,
-			copy: jz,
-			paste: Mz,
-			setPropertiesPanelOpen: N,
-			addAsset: Qz,
-			removeAsset: $z
+			state: M,
+			portalContainer: j,
+			setGridSize: B,
+			setZoom: H,
+			setPan: U,
+			setSnapLines: W,
+			addElement: Pz,
+			removeElement: Fz,
+			removeSelected: Lz,
+			selectElement: Rz,
+			setSelectedElements: zz,
+			moveElement: Bz,
+			updateElement: Vz,
+			updateElements: Hz,
+			groupElements: Wz,
+			ungroupElements: Gz,
+			renameElement: Kz,
+			addToGroup: Jz,
+			removeFromGroup: Yz,
+			resizeGroup: Xz,
+			setMockData: Zz,
+			updateListSettings: Qz,
+			setCanvasHeight: z,
+			loadState: G,
+			undo: Z,
+			redo: Az,
+			jumpToHistory: jz,
+			copy: Mz,
+			paste: Nz,
+			setPropertiesPanelOpen: P,
+			addAsset: $z,
+			removeAsset: eB
 		}), [
+			M,
 			j,
-			Nz,
 			Pz,
 			Fz,
 			Lz,
@@ -11777,25 +11778,26 @@ const EditorProvider = ({ children: n, isList: E = !1, availableProps: O = [], t
 			Hz,
 			Wz,
 			Gz,
-			qz,
+			Kz,
 			Jz,
 			Yz,
 			Xz,
 			Zz,
-			P,
-			W,
+			Qz,
+			z,
 			G,
 			Z,
 			Az,
 			jz,
 			Mz,
-			z,
+			Nz,
 			B,
 			H,
 			U,
-			Qz,
+			W,
 			$z,
-			N
+			eB,
+			P
 		]),
 		children: n
 	});
@@ -13375,7 +13377,7 @@ const FONT_WEIGHT_OPTIONS = [
 		]
 	});
 }, GlobalHeader = ({ onSave: n, templates: _, setIsTemplatesOpen: E, onFinish: O, onToggleSidebar: A }) => {
-	let { state: j, loadState: M, addElement: N } = useEditor(), P = useRef(null), z = () => {
+	let { state: j, portalContainer: M, loadState: N, addElement: P } = useEditor(), z = useRef(null), B = () => {
 		let n = {
 			elements: j.elements,
 			isList: j.isList,
@@ -13386,21 +13388,21 @@ const FONT_WEIGHT_OPTIONS = [
 			gridSize: j.gridSize
 		}, _ = JSON.stringify(n, null, 2), E = new Blob([_], { type: "application/json" }), O = URL.createObjectURL(E), A = document.createElement("a");
 		A.href = O, A.download = `layout-${(/* @__PURE__ */ new Date()).toISOString().slice(0, 10)}.json`, document.body.appendChild(A), A.click(), document.body.removeChild(A), URL.revokeObjectURL(O);
-	}, B = () => {
-		P.current?.click();
-	}, H = (n) => {
+	}, H = () => {
+		z.current?.click();
+	}, U = (n) => {
 		let _ = n.target.files?.[0];
 		if (!_) return;
 		let E = new FileReader();
 		E.onload = (n) => {
 			try {
 				let _ = n.target?.result;
-				M(JSON.parse(_));
+				N(JSON.parse(_));
 			} catch (n) {
 				console.error("Failed to import layout", n), alert("Erro ao importar layout. Arquivo inválido.");
 			}
 		}, E.readAsText(_), n.target.value = "";
-	}, U = () => {
+	}, W = () => {
 		if (n) {
 			let _ = {
 				elements: j.elements,
@@ -13412,8 +13414,8 @@ const FONT_WEIGHT_OPTIONS = [
 			};
 			n(JSON.stringify(_, null, 2));
 		}
-	}, W = (n) => {
-		N({
+	}, G = (n) => {
+		P({
 			type: n,
 			content: `New ${n}`
 		});
@@ -13460,42 +13462,45 @@ const FONT_WEIGHT_OPTIONS = [
 					color: "green",
 					style: { cursor: "pointer" },
 					children: [/* @__PURE__ */ jsx(PlusIcon, {}), " Adicionar"]
-				}) }), /* @__PURE__ */ jsxs(g$2, { children: [
-					/* @__PURE__ */ jsx(v$4, {
-						onSelect: () => W("text"),
-						children: "Texto"
-					}),
-					/* @__PURE__ */ jsx(v$4, {
-						onSelect: () => W("image"),
-						children: "Imagem"
-					}),
-					/* @__PURE__ */ jsx(v$4, {
-						onSelect: () => W("box"),
-						children: "Container / Grupo"
-					}),
-					/* @__PURE__ */ jsx(v$4, {
-						onSelect: () => W("text-container"),
-						children: "Container com Texto"
-					})
-				] })] }),
+				}) }), /* @__PURE__ */ jsxs(g$2, {
+					...M && { container: M },
+					children: [
+						/* @__PURE__ */ jsx(v$4, {
+							onSelect: () => G("text"),
+							children: "Texto"
+						}),
+						/* @__PURE__ */ jsx(v$4, {
+							onSelect: () => G("image"),
+							children: "Imagem"
+						}),
+						/* @__PURE__ */ jsx(v$4, {
+							onSelect: () => G("box"),
+							children: "Container / Grupo"
+						}),
+						/* @__PURE__ */ jsx(v$4, {
+							onSelect: () => G("text-container"),
+							children: "Container com Texto"
+						})
+					]
+				})] }),
 				/* @__PURE__ */ jsxs(o, {
 					variant: "soft",
 					color: "gray",
-					onClick: B,
+					onClick: H,
 					style: { cursor: "pointer" },
 					children: [/* @__PURE__ */ jsx(UploadIcon, {}), " Importar"]
 				}),
 				/* @__PURE__ */ jsx("input", {
 					type: "file",
-					ref: P,
+					ref: z,
 					style: { display: "none" },
 					accept: ".json",
-					onChange: H
+					onChange: U
 				}),
 				/* @__PURE__ */ jsxs(o, {
 					variant: "soft",
 					color: "gray",
-					onClick: z,
+					onClick: B,
 					style: { cursor: "pointer" },
 					children: [/* @__PURE__ */ jsx(DownloadIcon, {}), " Exportar"]
 				}),
@@ -13520,7 +13525,7 @@ const FONT_WEIGHT_OPTIONS = [
 				/* @__PURE__ */ jsxs(o, {
 					variant: "solid",
 					color: "blue",
-					onClick: U,
+					onClick: W,
 					style: { cursor: "pointer" },
 					children: [/* @__PURE__ */ jsx(Share1Icon, {}), " Salvar"]
 				})
@@ -19177,14 +19182,14 @@ const toHex = (n) => {
 		})
 	}) : null;
 }, AnimationSettings = ({ element: n, updateElement: _ }) => {
-	let E = n.animation || {
+	let { portalContainer: E } = useEditor(), O = n.animation || {
 		type: "none",
 		duration: 1,
 		delay: 0
-	}, O = (O) => {
+	}, A = (E) => {
 		_(n.id, { animation: {
-			...E,
-			...O
+			...O,
+			...E
 		} });
 	};
 	return /* @__PURE__ */ jsxs(p$1, {
@@ -19203,72 +19208,73 @@ const toHex = (n) => {
 				width: "100%",
 				justifyContent: "space-between"
 			},
-			children: [E.type === "none" ? "Nenhuma" : E.type === "slideIn" ? "Slide In (Padrão)" : E.type === "fadeIn" ? "Fade In" : E.type === "smoothSlideUp" ? "Slide Suave (Up)" : E.type === "popIn" ? "Pop In" : E.type === "blurIn" ? "Blur In" : E.type === "slideInLeft" ? "Slide In (Esquerda)" : E.type === "slideInRight" ? "Slide In (Direita)" : E.type === "slideInUp" ? "Slide In (Cima)" : E.type === "slideInDown" ? "Slide In (Baixo)" : E.type === "zoomIn" ? "Zoom In" : E.type === "bounceIn" ? "Bounce In" : E.type === "pulse" ? "Pulse (Atenção)" : E.type === "shake" ? "Shake (Atenção)" : "Spin (Loop)", /* @__PURE__ */ jsx(ChevronDownIcon, {})]
+			children: [O.type === "none" ? "Nenhuma" : O.type === "slideIn" ? "Slide In (Padrão)" : O.type === "fadeIn" ? "Fade In" : O.type === "smoothSlideUp" ? "Slide Suave (Up)" : O.type === "popIn" ? "Pop In" : O.type === "blurIn" ? "Blur In" : O.type === "slideInLeft" ? "Slide In (Esquerda)" : O.type === "slideInRight" ? "Slide In (Direita)" : O.type === "slideInUp" ? "Slide In (Cima)" : O.type === "slideInDown" ? "Slide In (Baixo)" : O.type === "zoomIn" ? "Zoom In" : O.type === "bounceIn" ? "Bounce In" : O.type === "pulse" ? "Pulse (Atenção)" : O.type === "shake" ? "Shake (Atenção)" : "Spin (Loop)", /* @__PURE__ */ jsx(ChevronDownIcon, {})]
 		}) }), /* @__PURE__ */ jsxs(g$2, {
+			...E && { container: E },
 			style: { zIndex: 1e5 },
 			children: [
 				/* @__PURE__ */ jsx(v$4, {
-					onSelect: () => O({ type: "none" }),
+					onSelect: () => A({ type: "none" }),
 					children: "Nenhuma"
 				}),
 				/* @__PURE__ */ jsx(v$4, {
-					onSelect: () => O({ type: "slideIn" }),
+					onSelect: () => A({ type: "slideIn" }),
 					children: "Slide In (Padrão)"
 				}),
 				/* @__PURE__ */ jsx(v$4, {
-					onSelect: () => O({ type: "fadeIn" }),
+					onSelect: () => A({ type: "fadeIn" }),
 					children: "Fade In"
 				}),
 				/* @__PURE__ */ jsx(v$4, {
-					onSelect: () => O({ type: "smoothSlideUp" }),
+					onSelect: () => A({ type: "smoothSlideUp" }),
 					children: "Slide Suave (Up)"
 				}),
 				/* @__PURE__ */ jsx(v$4, {
-					onSelect: () => O({ type: "popIn" }),
+					onSelect: () => A({ type: "popIn" }),
 					children: "Pop In"
 				}),
 				/* @__PURE__ */ jsx(v$4, {
-					onSelect: () => O({ type: "blurIn" }),
+					onSelect: () => A({ type: "blurIn" }),
 					children: "Blur In"
 				}),
 				/* @__PURE__ */ jsx(v$4, {
-					onSelect: () => O({ type: "slideInLeft" }),
+					onSelect: () => A({ type: "slideInLeft" }),
 					children: "Slide In (Esquerda)"
 				}),
 				/* @__PURE__ */ jsx(v$4, {
-					onSelect: () => O({ type: "slideInRight" }),
+					onSelect: () => A({ type: "slideInRight" }),
 					children: "Slide In (Direita)"
 				}),
 				/* @__PURE__ */ jsx(v$4, {
-					onSelect: () => O({ type: "slideInUp" }),
+					onSelect: () => A({ type: "slideInUp" }),
 					children: "Slide In (Cima)"
 				}),
 				/* @__PURE__ */ jsx(v$4, {
-					onSelect: () => O({ type: "slideInDown" }),
+					onSelect: () => A({ type: "slideInDown" }),
 					children: "Slide In (Baixo)"
 				}),
 				/* @__PURE__ */ jsx(v$4, {
-					onSelect: () => O({ type: "zoomIn" }),
+					onSelect: () => A({ type: "zoomIn" }),
 					children: "Zoom In"
 				}),
 				/* @__PURE__ */ jsx(v$4, {
-					onSelect: () => O({ type: "bounceIn" }),
+					onSelect: () => A({ type: "bounceIn" }),
 					children: "Bounce In"
 				}),
 				/* @__PURE__ */ jsx(v$4, {
-					onSelect: () => O({ type: "pulse" }),
+					onSelect: () => A({ type: "pulse" }),
 					children: "Pulse (Atenção)"
 				}),
 				/* @__PURE__ */ jsx(v$4, {
-					onSelect: () => O({ type: "shake" }),
+					onSelect: () => A({ type: "shake" }),
 					children: "Shake (Atenção)"
 				}),
 				/* @__PURE__ */ jsx(v$4, {
-					onSelect: () => O({ type: "spin" }),
+					onSelect: () => A({ type: "spin" }),
 					children: "Spin (Loop)"
 				})
 			]
-		})] })] }), E.type !== "none" && /* @__PURE__ */ jsxs(Fragment$1, { children: [
+		})] })] }), O.type !== "none" && /* @__PURE__ */ jsxs(Fragment$1, { children: [
 			/* @__PURE__ */ jsxs(o$1, {
 				columns: "2",
 				gap: "3",
@@ -19282,8 +19288,8 @@ const toHex = (n) => {
 					type: "number",
 					step: "0.1",
 					min: "0.1",
-					value: E.duration,
-					onChange: (n) => O({ duration: parseFloat(n.target.value) || .5 })
+					value: O.duration,
+					onChange: (n) => A({ duration: parseFloat(n.target.value) || .5 })
 				})] }), /* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
 					size: "1",
 					mb: "1",
@@ -19294,8 +19300,8 @@ const toHex = (n) => {
 					type: "number",
 					step: "0.1",
 					min: "0",
-					value: E.delay,
-					onChange: (n) => O({ delay: parseFloat(n.target.value) || 0 })
+					value: O.delay,
+					onChange: (n) => A({ delay: parseFloat(n.target.value) || 0 })
 				})] })]
 			}),
 			/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
@@ -19311,32 +19317,33 @@ const toHex = (n) => {
 					width: "100%",
 					justifyContent: "space-between"
 				},
-				children: [(E.timingFunction || "ease") === "linear" ? "Linear" : (E.timingFunction || "ease") === "ease-in" ? "Ease In" : (E.timingFunction || "ease") === "ease-out" ? "Ease Out" : (E.timingFunction || "ease") === "ease-in-out" ? "Ease In Out" : (E.timingFunction || "ease") === "bounce" ? "Bounce" : "Ease", /* @__PURE__ */ jsx(ChevronDownIcon, {})]
+				children: [(O.timingFunction || "ease") === "linear" ? "Linear" : (O.timingFunction || "ease") === "ease-in" ? "Ease In" : (O.timingFunction || "ease") === "ease-out" ? "Ease Out" : (O.timingFunction || "ease") === "ease-in-out" ? "Ease In Out" : (O.timingFunction || "ease") === "bounce" ? "Bounce" : "Ease", /* @__PURE__ */ jsx(ChevronDownIcon, {})]
 			}) }), /* @__PURE__ */ jsxs(g$2, {
+				...E && { container: E },
 				style: { zIndex: 1e5 },
 				children: [
 					/* @__PURE__ */ jsx(v$4, {
-						onSelect: () => O({ timingFunction: "linear" }),
+						onSelect: () => A({ timingFunction: "linear" }),
 						children: "Linear"
 					}),
 					/* @__PURE__ */ jsx(v$4, {
-						onSelect: () => O({ timingFunction: "ease" }),
+						onSelect: () => A({ timingFunction: "ease" }),
 						children: "Ease"
 					}),
 					/* @__PURE__ */ jsx(v$4, {
-						onSelect: () => O({ timingFunction: "ease-in" }),
+						onSelect: () => A({ timingFunction: "ease-in" }),
 						children: "Ease In"
 					}),
 					/* @__PURE__ */ jsx(v$4, {
-						onSelect: () => O({ timingFunction: "ease-out" }),
+						onSelect: () => A({ timingFunction: "ease-out" }),
 						children: "Ease Out"
 					}),
 					/* @__PURE__ */ jsx(v$4, {
-						onSelect: () => O({ timingFunction: "ease-in-out" }),
+						onSelect: () => A({ timingFunction: "ease-in-out" }),
 						children: "Ease In Out"
 					}),
 					/* @__PURE__ */ jsx(v$4, {
-						onSelect: () => O({ timingFunction: "bounce" }),
+						onSelect: () => A({ timingFunction: "bounce" }),
 						children: "Bounce"
 					})
 				]
@@ -19345,13 +19352,13 @@ const toHex = (n) => {
 				"pulse",
 				"shake",
 				"spin"
-			].includes(E.type) && /* @__PURE__ */ jsx(p, { children: /* @__PURE__ */ jsxs(p$1, {
+			].includes(O.type) && /* @__PURE__ */ jsx(p, { children: /* @__PURE__ */ jsxs(p$1, {
 				align: "center",
 				gap: "2",
 				mt: "2",
 				children: [/* @__PURE__ */ jsx(i, {
-					checked: E.iterationCount === "infinite",
-					onCheckedChange: (n) => O({ iterationCount: n ? "infinite" : 1 })
+					checked: O.iterationCount === "infinite",
+					onCheckedChange: (n) => A({ iterationCount: n ? "infinite" : 1 })
 				}), /* @__PURE__ */ jsx(p$2, {
 					size: "2",
 					children: "Repetir Infinitamente"
@@ -19360,10 +19367,10 @@ const toHex = (n) => {
 		] })]
 	});
 }, FormattingSettings = ({ element: n, updateElement: _ }) => {
-	let E = n.formatting || { type: "text" }, O = (O) => {
+	let { portalContainer: E } = useEditor(), O = n.formatting || { type: "text" }, A = (E) => {
 		_(n.id, { formatting: {
-			...E,
-			...O
+			...O,
+			...E
 		} });
 	};
 	return /* @__PURE__ */ jsxs(p$1, {
@@ -19401,6 +19408,7 @@ const toHex = (n) => {
 						},
 						children: [(n.containerExpansion || "vertical") === "vertical" ? "Vertical (Altura Cresce)" : "Horizontal (Largura Cresce)", /* @__PURE__ */ jsx(ChevronDownIcon, {})]
 					}) }), /* @__PURE__ */ jsxs(g$2, {
+						...E && { container: E },
 						style: { zIndex: 1e5 },
 						children: [/* @__PURE__ */ jsx(v$4, {
 							onSelect: () => _(n.id, { containerExpansion: "vertical" }),
@@ -19423,28 +19431,31 @@ const toHex = (n) => {
 				color: "gray",
 				children: "Tipo de Formatação"
 			}), /* @__PURE__ */ jsxs(C$1, {
-				value: E.type,
-				onValueChange: (n) => O({ type: n }),
-				children: [/* @__PURE__ */ jsx(u$3, { style: { width: "100%" } }), /* @__PURE__ */ jsxs(g$1, { children: [
-					/* @__PURE__ */ jsx(v$2, {
-						value: "text",
-						children: "Texto (Padrão)"
-					}),
-					/* @__PURE__ */ jsx(v$2, {
-						value: "boolean",
-						children: "Booleano (Sim/Não)"
-					}),
-					/* @__PURE__ */ jsx(v$2, {
-						value: "date",
-						children: "Data"
-					}),
-					/* @__PURE__ */ jsx(v$2, {
-						value: "number",
-						children: "Número / Moeda"
-					})
-				] })]
+				value: O.type,
+				onValueChange: (n) => A({ type: n }),
+				children: [/* @__PURE__ */ jsx(u$3, { style: { width: "100%" } }), /* @__PURE__ */ jsxs(g$1, {
+					...E && { container: E },
+					children: [
+						/* @__PURE__ */ jsx(v$2, {
+							value: "text",
+							children: "Texto (Padrão)"
+						}),
+						/* @__PURE__ */ jsx(v$2, {
+							value: "boolean",
+							children: "Booleano (Sim/Não)"
+						}),
+						/* @__PURE__ */ jsx(v$2, {
+							value: "date",
+							children: "Data"
+						}),
+						/* @__PURE__ */ jsx(v$2, {
+							value: "number",
+							children: "Número / Moeda"
+						})
+					]
+				})]
 			})] }),
-			E.type === "boolean" && /* @__PURE__ */ jsxs(o$1, {
+			O.type === "boolean" && /* @__PURE__ */ jsxs(o$1, {
 				columns: "2",
 				gap: "3",
 				children: [/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
@@ -19455,8 +19466,8 @@ const toHex = (n) => {
 					children: "Texto para Verdadeiro"
 				}), /* @__PURE__ */ jsx(u$1, {
 					placeholder: "Ex: Sim",
-					value: E.trueLabel || "",
-					onChange: (n) => O({ trueLabel: n.target.value })
+					value: O.trueLabel || "",
+					onChange: (n) => A({ trueLabel: n.target.value })
 				})] }), /* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
 					size: "1",
 					mb: "1",
@@ -19465,11 +19476,11 @@ const toHex = (n) => {
 					children: "Texto para Falso"
 				}), /* @__PURE__ */ jsx(u$1, {
 					placeholder: "Ex: Não",
-					value: E.falseLabel || "",
-					onChange: (n) => O({ falseLabel: n.target.value })
+					value: O.falseLabel || "",
+					onChange: (n) => A({ falseLabel: n.target.value })
 				})] })]
 			}),
-			E.type === "date" && /* @__PURE__ */ jsxs(p, { children: [
+			O.type === "date" && /* @__PURE__ */ jsxs(p, { children: [
 				/* @__PURE__ */ jsx(p$2, {
 					size: "1",
 					mb: "1",
@@ -19479,8 +19490,8 @@ const toHex = (n) => {
 				}),
 				/* @__PURE__ */ jsx(u$1, {
 					placeholder: "Ex: DD/MM/YYYY",
-					value: E.dateFormat || "",
-					onChange: (n) => O({ dateFormat: n.target.value })
+					value: O.dateFormat || "",
+					onChange: (n) => A({ dateFormat: n.target.value })
 				}),
 				/* @__PURE__ */ jsx(p$2, {
 					size: "1",
@@ -19490,7 +19501,7 @@ const toHex = (n) => {
 					children: "Use DD, MM, YYYY, HH, mm, ss."
 				})
 			] }),
-			E.type === "number" && /* @__PURE__ */ jsxs(p$1, {
+			O.type === "number" && /* @__PURE__ */ jsxs(p$1, {
 				direction: "column",
 				gap: "3",
 				children: [
@@ -19501,24 +19512,27 @@ const toHex = (n) => {
 						color: "gray",
 						children: "Estilo"
 					}), /* @__PURE__ */ jsxs(C$1, {
-						value: E.numberFormat || "decimal",
-						onValueChange: (n) => O({ numberFormat: n }),
-						children: [/* @__PURE__ */ jsx(u$3, { style: { width: "100%" } }), /* @__PURE__ */ jsxs(g$1, { children: [
-							/* @__PURE__ */ jsx(v$2, {
-								value: "decimal",
-								children: "Decimal"
-							}),
-							/* @__PURE__ */ jsx(v$2, {
-								value: "currency",
-								children: "Moeda"
-							}),
-							/* @__PURE__ */ jsx(v$2, {
-								value: "percent",
-								children: "Porcentagem"
-							})
-						] })]
+						value: O.numberFormat || "decimal",
+						onValueChange: (n) => A({ numberFormat: n }),
+						children: [/* @__PURE__ */ jsx(u$3, { style: { width: "100%" } }), /* @__PURE__ */ jsxs(g$1, {
+							...E && { container: E },
+							children: [
+								/* @__PURE__ */ jsx(v$2, {
+									value: "decimal",
+									children: "Decimal"
+								}),
+								/* @__PURE__ */ jsx(v$2, {
+									value: "currency",
+									children: "Moeda"
+								}),
+								/* @__PURE__ */ jsx(v$2, {
+									value: "percent",
+									children: "Porcentagem"
+								})
+							]
+						})]
 					})] }),
-					E.numberFormat === "currency" && /* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
+					O.numberFormat === "currency" && /* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
 						size: "1",
 						mb: "1",
 						as: "div",
@@ -19526,8 +19540,8 @@ const toHex = (n) => {
 						children: "Símbolo da Moeda"
 					}), /* @__PURE__ */ jsx(u$1, {
 						placeholder: "Ex: R$",
-						value: E.currencySymbol || "",
-						onChange: (n) => O({ currencySymbol: n.target.value })
+						value: O.currencySymbol || "",
+						onChange: (n) => A({ currencySymbol: n.target.value })
 					})] }),
 					/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
 						size: "1",
@@ -19538,8 +19552,8 @@ const toHex = (n) => {
 					}), /* @__PURE__ */ jsx(u$1, {
 						type: "number",
 						placeholder: "2",
-						value: E.decimalPlaces === void 0 ? "" : E.decimalPlaces,
-						onChange: (n) => O({ decimalPlaces: parseInt(n.target.value) || 0 })
+						value: O.decimalPlaces === void 0 ? "" : O.decimalPlaces,
+						onChange: (n) => A({ decimalPlaces: parseInt(n.target.value) || 0 })
 					})] })
 				]
 			})
@@ -19797,9 +19811,9 @@ var parseBoxShadowColor = (n) => {
 	}
 ];
 const StyleBindingsSettings = ({ element: n, updateElement: _, availableProps: E }) => {
-	let O = n.styleBindings || {}, A = (E, A) => {
-		let j = { ...O };
-		A ? j[E] = A : delete j[E], _(n.id, { styleBindings: Object.keys(j).length > 0 ? j : void 0 });
+	let { portalContainer: O } = useEditor(), A = n.styleBindings || {}, j = (E, O) => {
+		let j = { ...A };
+		O ? j[E] = O : delete j[E], _(n.id, { styleBindings: Object.keys(j).length > 0 ? j : void 0 });
 	};
 	return /* @__PURE__ */ jsxs(p$1, {
 		direction: "column",
@@ -19830,16 +19844,17 @@ const StyleBindingsSettings = ({ element: n, updateElement: _, availableProps: E
 					width: "100%",
 					justifyContent: "space-between"
 				},
-				children: [O[n] ? E.find((_) => _.dataName === O[n])?.name || O[n] : "Nenhum", /* @__PURE__ */ jsx(ChevronDownIcon, {})]
+				children: [A[n] ? E.find((_) => _.dataName === A[n])?.name || A[n] : "Nenhum", /* @__PURE__ */ jsx(ChevronDownIcon, {})]
 			}) }), /* @__PURE__ */ jsxs(g$2, {
+				...O && { container: O },
 				style: { zIndex: 1e5 },
 				children: [
 					/* @__PURE__ */ jsx(v$4, {
-						onSelect: () => A(n, null),
+						onSelect: () => j(n, null),
 						children: "Nenhum"
 					}),
 					E.map((_) => /* @__PURE__ */ jsx(v$4, {
-						onSelect: () => A(n, _.dataName),
+						onSelect: () => j(n, _.dataName),
 						children: _.name
 					}, _.dataName)),
 					E.length === 0 && /* @__PURE__ */ jsx(v$4, {
@@ -19851,21 +19866,21 @@ const StyleBindingsSettings = ({ element: n, updateElement: _, availableProps: E
 		]
 	});
 }, ConditionalSettings = ({ element: n, updateElement: _, availableProps: E }) => {
-	let O = n.conditions || [], A = () => {
-		let A = {
+	let { portalContainer: O } = useEditor(), A = n.conditions || [], j = () => {
+		let O = {
 			id: crypto.randomUUID(),
 			property: E.length > 0 ? E[0].dataName : "",
 			operator: "equals",
 			value: "",
 			style: { color: "#ff0000" }
 		};
-		_(n.id, { conditions: [...O, A] });
-	}, j = (E) => {
-		_(n.id, { conditions: O.filter((n) => n.id !== E) });
-	}, M = (E, A) => {
-		_(n.id, { conditions: O.map((n) => n.id === E ? {
+		_(n.id, { conditions: [...A, O] });
+	}, M = (E) => {
+		_(n.id, { conditions: A.filter((n) => n.id !== E) });
+	}, N = (E, O) => {
+		_(n.id, { conditions: A.map((n) => n.id === E ? {
 			...n,
-			...A
+			...O
 		} : n) });
 	};
 	return /* @__PURE__ */ jsxs(p$1, {
@@ -19881,10 +19896,10 @@ const StyleBindingsSettings = ({ element: n, updateElement: _, availableProps: E
 			}), /* @__PURE__ */ jsxs(o, {
 				size: "1",
 				variant: "soft",
-				onClick: A,
+				onClick: j,
 				children: [/* @__PURE__ */ jsx(PlusIcon, {}), " Nova Regra"]
 			})]
-		}), O.length === 0 ? /* @__PURE__ */ jsx(p$2, {
+		}), A.length === 0 ? /* @__PURE__ */ jsx(p$2, {
 			size: "1",
 			color: "gray",
 			style: { fontStyle: "italic" },
@@ -19892,7 +19907,7 @@ const StyleBindingsSettings = ({ element: n, updateElement: _, availableProps: E
 		}) : /* @__PURE__ */ jsx(p$1, {
 			direction: "column",
 			gap: "2",
-			children: O.map((n) => /* @__PURE__ */ jsxs(p, {
+			children: A.map((n) => /* @__PURE__ */ jsxs(p, {
 				style: {
 					border: "1px solid var(--gray-6)",
 					borderRadius: 4,
@@ -19915,7 +19930,7 @@ const StyleBindingsSettings = ({ element: n, updateElement: _, availableProps: E
 							size: "1",
 							color: "red",
 							variant: "ghost",
-							onClick: () => j(n.id),
+							onClick: () => M(n.id),
 							children: /* @__PURE__ */ jsx(TrashIcon, {})
 						})]
 					}),
@@ -19933,9 +19948,10 @@ const StyleBindingsSettings = ({ element: n, updateElement: _, availableProps: E
 							},
 							children: [E.find((_) => _.dataName === n.property)?.name || n.property || "Propriedade", /* @__PURE__ */ jsx(ChevronDownIcon, {})]
 						}) }), /* @__PURE__ */ jsxs(g$2, {
+							...O && { container: O },
 							style: { zIndex: 1e5 },
 							children: [E.map((_) => /* @__PURE__ */ jsx(v$4, {
-								onSelect: () => M(n.id, { property: _.dataName }),
+								onSelect: () => N(n.id, { property: _.dataName }),
 								children: _.name
 							}, _.dataName)), E.length === 0 && /* @__PURE__ */ jsx(v$4, {
 								disabled: !0,
@@ -19951,26 +19967,27 @@ const StyleBindingsSettings = ({ element: n, updateElement: _, availableProps: E
 							},
 							children: [n.operator === "equals" ? "Igual a" : n.operator === "notEquals" ? "Diferente de" : n.operator === "contains" ? "Contém" : n.operator === "greaterThan" ? "Maior que" : "Menor que", /* @__PURE__ */ jsx(ChevronDownIcon, {})]
 						}) }), /* @__PURE__ */ jsxs(g$2, {
+							...O && { container: O },
 							style: { zIndex: 1e5 },
 							children: [
 								/* @__PURE__ */ jsx(v$4, {
-									onSelect: () => M(n.id, { operator: "equals" }),
+									onSelect: () => N(n.id, { operator: "equals" }),
 									children: "Igual a"
 								}),
 								/* @__PURE__ */ jsx(v$4, {
-									onSelect: () => M(n.id, { operator: "notEquals" }),
+									onSelect: () => N(n.id, { operator: "notEquals" }),
 									children: "Diferente de"
 								}),
 								/* @__PURE__ */ jsx(v$4, {
-									onSelect: () => M(n.id, { operator: "contains" }),
+									onSelect: () => N(n.id, { operator: "contains" }),
 									children: "Contém"
 								}),
 								/* @__PURE__ */ jsx(v$4, {
-									onSelect: () => M(n.id, { operator: "greaterThan" }),
+									onSelect: () => N(n.id, { operator: "greaterThan" }),
 									children: "Maior que"
 								}),
 								/* @__PURE__ */ jsx(v$4, {
-									onSelect: () => M(n.id, { operator: "lessThan" }),
+									onSelect: () => N(n.id, { operator: "lessThan" }),
 									children: "Menor que"
 								})
 							]
@@ -19980,7 +19997,7 @@ const StyleBindingsSettings = ({ element: n, updateElement: _, availableProps: E
 						size: "1",
 						placeholder: "Valor",
 						value: n.value,
-						onChange: (_) => M(n.id, { value: _.target.value })
+						onChange: (_) => N(n.id, { value: _.target.value })
 					}),
 					/* @__PURE__ */ jsxs(p, {
 						mt: "2",
@@ -19992,7 +20009,7 @@ const StyleBindingsSettings = ({ element: n, updateElement: _, availableProps: E
 							children: "Cor quando verdadeiro"
 						}), /* @__PURE__ */ jsx(ColorInput, {
 							color: n.style?.color || "#ff0000",
-							onChange: (_) => M(n.id, { style: {
+							onChange: (_) => N(n.id, { style: {
 								...n.style,
 								color: _
 							} })
@@ -20049,8 +20066,8 @@ var AccordionItem = ({ title: n, isOpen: _, onToggle: E, children: O, onReset: A
 	"rem",
 	"vw",
 	"vh"
-], min: O, max: A, placeholder: j, label: M }) => {
-	let N = (n) => n === "" ? EMPTY_UNIT : n, P = (n) => n === EMPTY_UNIT ? "" : n, z = (n) => {
+], min: O, max: A, placeholder: j, label: M, portalContainer: N }) => {
+	let P = (n) => n === "" ? EMPTY_UNIT : n, z = (n) => n === EMPTY_UNIT ? "" : n, B = (n) => {
 		if (n == null || n === "") return {
 			num: "",
 			unit: E[0]
@@ -20063,11 +20080,11 @@ var AccordionItem = ({ title: n, isOpen: _, onToggle: E, children: O, onReset: A
 			num: "",
 			unit: E[0]
 		};
-	}, [B, H] = useState(z(n));
+	}, [H, U] = useState(B(n));
 	useEffect(() => {
-		H(z(n));
+		U(B(n));
 	}, [n]);
-	let U = (n, E) => {
+	let W = (n, E) => {
 		if (n === "") {
 			_("");
 			return;
@@ -20082,13 +20099,13 @@ var AccordionItem = ({ title: n, isOpen: _, onToggle: E, children: O, onReset: A
 		children: M
 	}), /* @__PURE__ */ jsxs(p$1, { children: [/* @__PURE__ */ jsx(u$1, {
 		type: "number",
-		value: B.num,
+		value: H.num,
 		onChange: (n) => {
 			let _ = n.target.value;
-			H({
-				...B,
+			U({
+				...H,
 				num: _
-			}), U(_, B.unit);
+			}), W(_, H.unit);
 		},
 		placeholder: j,
 		style: {
@@ -20099,33 +20116,36 @@ var AccordionItem = ({ title: n, isOpen: _, onToggle: E, children: O, onReset: A
 		min: O,
 		max: A
 	}), /* @__PURE__ */ jsxs(C$1, {
-		value: N(B.unit),
+		value: P(H.unit),
 		onValueChange: (n) => {
-			let _ = P(n);
-			H({
-				...B,
+			let _ = z(n);
+			U({
+				...H,
 				unit: _
-			}), U(B.num, _);
+			}), W(H.num, _);
 		},
 		children: [/* @__PURE__ */ jsx(u$3, { style: {
 			width: 60,
 			borderTopLeftRadius: 0,
 			borderBottomLeftRadius: 0,
 			marginLeft: -1
-		} }), /* @__PURE__ */ jsx(g$1, { children: E.map((n) => /* @__PURE__ */ jsx(v$2, {
-			value: N(n),
-			children: n || j || "—"
-		}, n || EMPTY_UNIT)) })]
+		} }), /* @__PURE__ */ jsx(g$1, {
+			...N && { container: N },
+			children: E.map((n) => /* @__PURE__ */ jsx(v$2, {
+				value: P(n),
+				children: n || j || "—"
+			}, n || EMPTY_UNIT))
+		})]
 	})] })] });
-}, SideInput = ({ values: n, onChange: _, label: E }) => {
-	let [O, A] = useState(!0), j = (n) => {
+}, SideInput = ({ values: n, onChange: _, label: E, portalContainer: O }) => {
+	let [A, j] = useState(!0), M = (n) => {
 		_({
 			top: n,
 			right: n,
 			bottom: n,
 			left: n
 		});
-	}, M = (E, O) => {
+	}, N = (E, O) => {
 		_({
 			...n,
 			[E]: O
@@ -20140,41 +20160,46 @@ var AccordionItem = ({ title: n, isOpen: _, onToggle: E, children: O, onReset: A
 			color: "gray",
 			children: E
 		}), /* @__PURE__ */ jsx(e, {
-			content: O ? "Desvincular lados" : "Vincular lados",
+			content: A ? "Desvincular lados" : "Vincular lados",
 			children: /* @__PURE__ */ jsx(o$2, {
 				size: "1",
 				variant: "ghost",
-				color: O ? "blue" : "gray",
-				onClick: () => A(!O),
-				children: jsx(O ? LinkIcon : UnlinkIcon, {})
+				color: A ? "blue" : "gray",
+				onClick: () => j(!A),
+				children: jsx(A ? LinkIcon : UnlinkIcon, {})
 			})
 		})]
-	}), O ? /* @__PURE__ */ jsx(UnitInput, {
+	}), A ? /* @__PURE__ */ jsx(UnitInput, {
+		portalContainer: O,
 		value: n.top || "",
-		onChange: j,
+		onChange: M,
 		placeholder: "Todos"
 	}) : /* @__PURE__ */ jsxs(o$1, {
 		columns: "2",
 		gap: "2",
 		children: [
 			/* @__PURE__ */ jsx(UnitInput, {
+				portalContainer: O,
 				value: n.top,
-				onChange: (n) => M("top", n),
+				onChange: (n) => N("top", n),
 				label: "Top"
 			}),
 			/* @__PURE__ */ jsx(UnitInput, {
+				portalContainer: O,
 				value: n.right,
-				onChange: (n) => M("right", n),
+				onChange: (n) => N("right", n),
 				label: "Right"
 			}),
 			/* @__PURE__ */ jsx(UnitInput, {
+				portalContainer: O,
 				value: n.bottom,
-				onChange: (n) => M("bottom", n),
+				onChange: (n) => N("bottom", n),
 				label: "Bottom"
 			}),
 			/* @__PURE__ */ jsx(UnitInput, {
+				portalContainer: O,
 				value: n.left,
-				onChange: (n) => M("left", n),
+				onChange: (n) => N("left", n),
 				label: "Left"
 			})
 		]
@@ -20201,7 +20226,7 @@ var AccordionItem = ({ title: n, isOpen: _, onToggle: E, children: O, onReset: A
 	})
 });
 const PropertiesDialog = () => {
-	let { state: n, setPropertiesPanelOpen: _, updateElement: E, updateElements: O, removeSelected: A, copy: j, paste: M, addElement: N } = useEditor(), { isPropertiesPanelOpen: P, selectedElementIds: z, elements: B } = n, H = useMemo(() => B.filter((n) => z.includes(n.id)), [B, z]), U = H[0], W = H.length > 1, [Z, Az] = useState({
+	let { state: n, portalContainer: _, setPropertiesPanelOpen: E, updateElement: O, updateElements: A, removeSelected: j, copy: M, paste: N, addElement: P } = useEditor(), { isPropertiesPanelOpen: z, selectedElementIds: B, elements: H } = n, U = useMemo(() => H.filter((n) => B.includes(n.id)), [H, B]), W = U[0], Z = U.length > 1, [Az, jz] = useState({
 		content: !0,
 		layout: !0,
 		typography: !0,
@@ -20213,76 +20238,76 @@ const PropertiesDialog = () => {
 		conditions: !1,
 		formatting: !1,
 		spacing: !1
-	}), [jz, Mz] = useState(""), [Pz, Fz] = useState({});
+	}), [Mz, Pz] = useState(""), [Fz, Lz] = useState({});
 	useEffect(() => {
 		let n = localStorage.getItem("editor-presets");
 		if (n) try {
-			Fz(JSON.parse(n));
+			Lz(JSON.parse(n));
 		} catch (n) {
 			console.error("Failed to load presets", n);
 		}
 	}, []);
-	let Lz = (n) => {
-		if (!U) return;
+	let Rz = (n) => {
+		if (!W) return;
 		let _ = {
-			...Pz,
-			[n]: { style: U.style }
+			...Fz,
+			[n]: { style: W.style }
 		};
-		Fz(_), localStorage.setItem("editor-presets", JSON.stringify(_));
-	}, Rz = (n) => {
-		let _ = Pz[n];
-		_ && _.style && Gz(_.style);
+		Lz(_), localStorage.setItem("editor-presets", JSON.stringify(_));
+	}, zz = (n) => {
+		let _ = Fz[n];
+		_ && _.style && Kz(_.style);
 	};
-	if (!P || !U) return null;
-	let zz = (n) => {
-		Az((_) => ({
+	if (!z || !W) return null;
+	let Bz = (n) => {
+		jz((_) => ({
 			..._,
 			[n]: !_[n]
 		}));
-	}, Bz = (n) => {
-		W ? O(z.map((_) => ({
+	}, Vz = (n) => {
+		Z ? A(B.map((_) => ({
 			id: _,
 			changes: n
-		}))) : E(U.id, n);
-	}, Vz = () => {
-		if (W) j(), M();
+		}))) : O(W.id, n);
+	}, Gz = () => {
+		if (Z) M(), N();
 		else {
-			let { id: n, ..._ } = U;
-			N({
+			let { id: n, ..._ } = W;
+			P({
 				..._,
-				x: U.x + 20,
-				y: U.y + 20
+				x: W.x + 20,
+				y: W.y + 20
 			});
 		}
-	}, Gz = (n) => {
-		W ? O(H.map((_) => ({
+	}, Kz = (n) => {
+		Z ? A(U.map((_) => ({
 			id: _.id,
 			changes: { style: {
 				..._.style,
 				...n
 			} }
-		}))) : E(U.id, { style: {
-			...U.style,
+		}))) : O(W.id, { style: {
+			...W.style,
 			...n
 		} });
-	}, Kz = (n) => {
+	}, qz = (n) => {
 		let _ = {};
-		n.forEach((n) => _[n] = void 0), Gz(_);
-	}, qz = (n, _) => {
-		if (!jz) return !0;
-		let E = jz.toLowerCase();
+		n.forEach((n) => _[n] = void 0), Kz(_);
+	}, Jz = (n, _) => {
+		if (!Mz) return !0;
+		let E = Mz.toLowerCase();
 		return n.toLowerCase().includes(E) || _.some((n) => n.toLowerCase().includes(E));
-	}, Jz = (n) => {
-		if (!W) return n(U);
-		let _ = n(U);
-		return H.every((E) => n(E) === _) ? _ : "Mixed";
-	}, Yz = (n, _ = "") => {
-		let E = Jz((_) => _.style?.[n]);
+	}, Yz = (n) => {
+		if (!Z) return n(W);
+		let _ = n(W);
+		return U.every((E) => n(E) === _) ? _ : "Mixed";
+	}, Xz = (n, _ = "") => {
+		let E = Yz((_) => _.style?.[n]);
 		return E === "Mixed" ? "Mixed" : E === void 0 ? _ : E;
-	}, Xz = String(Yz("fontFamily", "Arial")), Zz = ensureFontInOptions(Xz, n.availableFonts || ["Arial"]), Qz = () => {
-		let n = Yz("fontWeight", "normal");
+	}, Zz = String(Xz("fontFamily", "Arial")), Qz = ensureFontInOptions(Zz, n.availableFonts || ["Arial"]), $z = () => {
+		let n = Xz("fontWeight", "normal");
 		return n === "Mixed" ? "400" : normalizeFontWeightForSelect(n, FONT_WEIGHT_OPTIONS_FULL);
-	}, $z = (n) => {
+	}, eB = (n) => {
 		let _ = {
 			x: 0,
 			y: 4,
@@ -20301,17 +20326,18 @@ const PropertiesDialog = () => {
 			color: A.replace(j[0], "").trim() || _.color,
 			inset: O
 		} : _;
-	}, eB = $z(U.style?.boxShadow), tB = (n) => {
+	}, tB = eB(W.style?.boxShadow), nB = (n) => {
 		let _ = {
-			...eB,
+			...tB,
 			...n
 		};
-		Gz({ boxShadow: `${_.inset ? "inset " : ""}${_.x}px ${_.y}px ${_.blur}px ${_.spread}px ${_.color}` });
+		Kz({ boxShadow: `${_.inset ? "inset " : ""}${_.x}px ${_.y}px ${_.blur}px ${_.spread}px ${_.color}` });
 	};
 	return /* @__PURE__ */ jsx(s$5, {
-		open: P,
-		onOpenChange: _,
+		open: z,
+		onOpenChange: E,
 		children: /* @__PURE__ */ jsxs(p$11, {
+			..._ && { container: _ },
 			style: {
 				maxWidth: 500,
 				width: "100%",
@@ -20336,37 +20362,40 @@ const PropertiesDialog = () => {
 						}), /* @__PURE__ */ jsx(m$3, {
 							size: "1",
 							color: "gray",
-							children: W ? `${H.length} selecionados` : U.name || "Elemento"
+							children: Z ? `${U.length} selecionados` : W.name || "Elemento"
 						})] }), /* @__PURE__ */ jsxs(p$1, {
 							gap: "2",
 							children: [/* @__PURE__ */ jsxs(I$3, { children: [/* @__PURE__ */ jsx(h$2, { children: /* @__PURE__ */ jsx(o$2, {
 								variant: "ghost",
 								color: "gray",
 								children: /* @__PURE__ */ jsx(BookmarkIcon, {})
-							}) }), /* @__PURE__ */ jsxs(g$2, { children: [
-								/* @__PURE__ */ jsx(y$3, { children: "Presets" }),
-								Object.keys(Pz).length === 0 && /* @__PURE__ */ jsx(v$4, {
-									disabled: !0,
-									children: "Nenhum preset salvo"
-								}),
-								Object.keys(Pz).map((n) => /* @__PURE__ */ jsx(v$4, {
-									onSelect: (_) => {
-										_.preventDefault(), Rz(n);
-									},
-									onClick: () => Rz(n),
-									style: { cursor: "pointer" },
-									children: n
-								}, n)),
-								/* @__PURE__ */ jsx(B$2, {}),
-								/* @__PURE__ */ jsxs(v$4, {
-									onSelect: (n) => {
-										n.preventDefault();
-										let _ = prompt("Nome do novo preset:");
-										_ && Lz(_);
-									},
-									children: [/* @__PURE__ */ jsx(PlusIcon, { style: { marginRight: 8 } }), " Salvar Atual"]
-								})
-							] })] }), /* @__PURE__ */ jsx(D$2, { children: /* @__PURE__ */ jsx(o$2, {
+							}) }), /* @__PURE__ */ jsxs(g$2, {
+								..._ && { container: _ },
+								children: [
+									/* @__PURE__ */ jsx(y$3, { children: "Presets" }),
+									Object.keys(Fz).length === 0 && /* @__PURE__ */ jsx(v$4, {
+										disabled: !0,
+										children: "Nenhum preset salvo"
+									}),
+									Object.keys(Fz).map((n) => /* @__PURE__ */ jsx(v$4, {
+										onSelect: (_) => {
+											_.preventDefault(), zz(n);
+										},
+										onClick: () => zz(n),
+										style: { cursor: "pointer" },
+										children: n
+									}, n)),
+									/* @__PURE__ */ jsx(B$2, {}),
+									/* @__PURE__ */ jsxs(v$4, {
+										onSelect: (n) => {
+											n.preventDefault();
+											let _ = prompt("Nome do novo preset:");
+											_ && Rz(_);
+										},
+										children: [/* @__PURE__ */ jsx(PlusIcon, { style: { marginRight: 8 } }), " Salvar Atual"]
+									})
+								]
+							})] }), /* @__PURE__ */ jsx(D$2, { children: /* @__PURE__ */ jsx(o$2, {
 								variant: "ghost",
 								color: "gray",
 								children: /* @__PURE__ */ jsx(Cross2Icon, {})
@@ -20381,18 +20410,18 @@ const PropertiesDialog = () => {
 								content: "Bloquear",
 								children: /* @__PURE__ */ jsx(o$2, {
 									variant: "soft",
-									color: U.locked ? "orange" : "gray",
-									onClick: () => Bz({ locked: !U.locked }),
-									children: U.locked ? /* @__PURE__ */ jsx(LockClosedIcon, {}) : /* @__PURE__ */ jsx(LockOpen1Icon, {})
+									color: W.locked ? "orange" : "gray",
+									onClick: () => Vz({ locked: !W.locked }),
+									children: W.locked ? /* @__PURE__ */ jsx(LockClosedIcon, {}) : /* @__PURE__ */ jsx(LockOpen1Icon, {})
 								})
 							}),
 							/* @__PURE__ */ jsx(e, {
 								content: "Ocultar",
 								children: /* @__PURE__ */ jsx(o$2, {
 									variant: "soft",
-									color: U.hidden ? "blue" : "gray",
-									onClick: () => Bz({ hidden: !U.hidden }),
-									children: U.hidden ? /* @__PURE__ */ jsx(EyeNoneIcon, {}) : /* @__PURE__ */ jsx(EyeOpenIcon, {})
+									color: W.hidden ? "blue" : "gray",
+									onClick: () => Vz({ hidden: !W.hidden }),
+									children: W.hidden ? /* @__PURE__ */ jsx(EyeNoneIcon, {}) : /* @__PURE__ */ jsx(EyeOpenIcon, {})
 								})
 							}),
 							/* @__PURE__ */ jsx(e, {
@@ -20400,7 +20429,7 @@ const PropertiesDialog = () => {
 								children: /* @__PURE__ */ jsx(o$2, {
 									variant: "soft",
 									color: "gray",
-									onClick: Vz,
+									onClick: Gz,
 									children: /* @__PURE__ */ jsx(CopyIcon, {})
 								})
 							}),
@@ -20411,7 +20440,7 @@ const PropertiesDialog = () => {
 									variant: "soft",
 									color: "red",
 									onClick: () => {
-										A(), _(!1);
+										j(), E(!1);
 									},
 									children: /* @__PURE__ */ jsx(TrashIcon, {})
 								})
@@ -20427,8 +20456,8 @@ const PropertiesDialog = () => {
 					},
 					children: /* @__PURE__ */ jsx(u$1, {
 						placeholder: "Buscar...",
-						value: jz,
-						onChange: (n) => Mz(n.target.value),
+						value: Mz,
+						onChange: (n) => Pz(n.target.value),
 						children: /* @__PURE__ */ jsx(c$2, { children: /* @__PURE__ */ jsx(MagnifyingGlassIcon, {
 							height: "16",
 							width: "16"
@@ -20442,28 +20471,28 @@ const PropertiesDialog = () => {
 						overflowX: "hidden"
 					},
 					children: [
-						qz("Conteúdo", [
+						Jz("Conteúdo", [
 							"text",
 							"image",
 							"url",
 							"value",
 							"content"
-						]) && (U.type === "text" || U.type === "text-container" || U.type === "image") && /* @__PURE__ */ jsx(AccordionItem, {
+						]) && (W.type === "text" || W.type === "text-container" || W.type === "image") && /* @__PURE__ */ jsx(AccordionItem, {
 							title: "Conteúdo",
-							isOpen: Z.content,
-							onToggle: () => zz("content"),
-							children: /* @__PURE__ */ jsxs(p, { children: [(U.type === "text" || U.type === "text-container") && /* @__PURE__ */ jsxs(Fragment$1, { children: [/* @__PURE__ */ jsx(p$2, {
+							isOpen: Az.content,
+							onToggle: () => Bz("content"),
+							children: /* @__PURE__ */ jsxs(p, { children: [(W.type === "text" || W.type === "text-container") && /* @__PURE__ */ jsxs(Fragment$1, { children: [/* @__PURE__ */ jsx(p$2, {
 								size: "1",
 								color: "gray",
 								mb: "1",
 								as: "div",
 								children: "Texto"
 							}), /* @__PURE__ */ jsx(r$1, {
-								value: U.content || "",
-								onChange: (n) => Bz({ content: n.target.value }),
+								value: W.content || "",
+								onChange: (n) => Vz({ content: n.target.value }),
 								rows: 4,
 								placeholder: "Texto ou {{variavel}}..."
-							})] }), U.type === "image" && /* @__PURE__ */ jsxs(Fragment$1, { children: [
+							})] }), W.type === "image" && /* @__PURE__ */ jsxs(Fragment$1, { children: [
 								/* @__PURE__ */ jsx(p$2, {
 									size: "1",
 									color: "gray",
@@ -20480,14 +20509,15 @@ const PropertiesDialog = () => {
 										justifyContent: "space-between",
 										marginBottom: 8
 									},
-									children: [U.dataBinding ? n.availableProps.find((n) => n.dataName === U.dataBinding)?.name || U.dataBinding : "Nenhum (URL fixa)", /* @__PURE__ */ jsx(CaretDownIcon, {})]
+									children: [W.dataBinding ? n.availableProps.find((n) => n.dataName === W.dataBinding)?.name || W.dataBinding : "Nenhum (URL fixa)", /* @__PURE__ */ jsx(CaretDownIcon, {})]
 								}) }), /* @__PURE__ */ jsxs(g$2, {
+									..._ && { container: _ },
 									style: { zIndex: 1e5 },
 									children: [/* @__PURE__ */ jsx(v$4, {
-										onSelect: () => Bz({ dataBinding: void 0 }),
+										onSelect: () => Vz({ dataBinding: void 0 }),
 										children: "Nenhum (URL fixa)"
 									}), (n.availableProps || []).map((n) => /* @__PURE__ */ jsx(v$4, {
-										onSelect: () => Bz({
+										onSelect: () => Vz({
 											dataBinding: n.dataName,
 											content: `{{${n.dataName}}}`
 										}),
@@ -20502,13 +20532,13 @@ const PropertiesDialog = () => {
 									children: ["URL ou ", "{{variável}}"]
 								}),
 								/* @__PURE__ */ jsx(u$1, {
-									value: U.content || "",
-									onChange: (n) => Bz({ content: n.target.value }),
+									value: W.content || "",
+									onChange: (n) => Vz({ content: n.target.value }),
 									placeholder: "https://... ou {{profilePicture}}"
 								})
 							] })] })
 						}),
-						qz("Tipografia", [
+						Jz("Tipografia", [
 							"font",
 							"text",
 							"color",
@@ -20519,9 +20549,9 @@ const PropertiesDialog = () => {
 							"decoration"
 						]) && /* @__PURE__ */ jsx(AccordionItem, {
 							title: "Tipografia",
-							isOpen: Z.typography,
-							onToggle: () => zz("typography"),
-							onReset: () => Kz([
+							isOpen: Az.typography,
+							onToggle: () => Bz("typography"),
+							onReset: () => qz([
 								"fontFamily",
 								"fontSize",
 								"fontWeight",
@@ -20546,14 +20576,15 @@ const PropertiesDialog = () => {
 											as: "div",
 											children: "Família da Fonte"
 										}), /* @__PURE__ */ jsxs(C$1, {
-											value: Xz,
-											onValueChange: (n) => Gz({ fontFamily: n }),
+											value: Zz,
+											onValueChange: (n) => Kz({ fontFamily: n }),
 											children: [/* @__PURE__ */ jsx(u$3, {
 												style: { width: "100%" },
 												placeholder: "Selecione..."
 											}), /* @__PURE__ */ jsx(g$1, {
+												..._ && { container: _ },
 												style: { zIndex: 1e5 },
-												children: Zz.map((n) => /* @__PURE__ */ jsx(v$2, {
+												children: Qz.map((n) => /* @__PURE__ */ jsx(v$2, {
 													value: n,
 													children: n
 												}, n))
@@ -20561,14 +20592,16 @@ const PropertiesDialog = () => {
 										})]
 									}),
 									/* @__PURE__ */ jsx(UnitInput, {
+										portalContainer: _,
 										label: "Tamanho",
-										value: Yz("fontSize", "16px"),
-										onChange: (n) => Gz({ fontSize: n })
+										value: Xz("fontSize", "16px"),
+										onChange: (n) => Kz({ fontSize: n })
 									}),
 									/* @__PURE__ */ jsx(UnitInput, {
+										portalContainer: _,
 										label: "Altura da Linha",
-										value: Yz("lineHeight", "normal"),
-										onChange: (n) => Gz({ lineHeight: n }),
+										value: Xz("lineHeight", "normal"),
+										onChange: (n) => Kz({ lineHeight: n }),
 										units: [
 											"",
 											"px",
@@ -20578,9 +20611,10 @@ const PropertiesDialog = () => {
 										placeholder: "Normal"
 									}),
 									/* @__PURE__ */ jsx(UnitInput, {
+										portalContainer: _,
 										label: "Espaçamento",
-										value: Yz("letterSpacing", "normal"),
-										onChange: (n) => Gz({ letterSpacing: n }),
+										value: Xz("letterSpacing", "normal"),
+										onChange: (n) => Kz({ letterSpacing: n }),
 										units: ["px", "em"],
 										placeholder: "Normal"
 									}),
@@ -20591,12 +20625,13 @@ const PropertiesDialog = () => {
 										as: "div",
 										children: "Peso"
 									}), /* @__PURE__ */ jsxs(C$1, {
-										value: Qz(),
-										onValueChange: (n) => Gz({ fontWeight: n }),
+										value: $z(),
+										onValueChange: (n) => Kz({ fontWeight: n }),
 										children: [/* @__PURE__ */ jsx(u$3, {
 											style: { width: "100%" },
 											placeholder: "Normal"
 										}), /* @__PURE__ */ jsxs(g$1, {
+											..._ && { container: _ },
 											style: { zIndex: 1e5 },
 											children: [
 												/* @__PURE__ */ jsx(v$2, {
@@ -20653,18 +20688,18 @@ const PropertiesDialog = () => {
 												gap: "1",
 												children: [
 													/* @__PURE__ */ jsx(o$2, {
-														variant: Yz("fontStyle") === "italic" ? "solid" : "soft",
-														onClick: () => Gz({ fontStyle: Yz("fontStyle") === "italic" ? "normal" : "italic" }),
+														variant: Xz("fontStyle") === "italic" ? "solid" : "soft",
+														onClick: () => Kz({ fontStyle: Xz("fontStyle") === "italic" ? "normal" : "italic" }),
 														children: /* @__PURE__ */ jsx(FontItalicIcon, {})
 													}),
 													/* @__PURE__ */ jsx(o$2, {
-														variant: Yz("textDecoration") === "underline" ? "solid" : "soft",
-														onClick: () => Gz({ textDecoration: Yz("textDecoration") === "underline" ? "none" : "underline" }),
+														variant: Xz("textDecoration") === "underline" ? "solid" : "soft",
+														onClick: () => Kz({ textDecoration: Xz("textDecoration") === "underline" ? "none" : "underline" }),
 														children: /* @__PURE__ */ jsx(UnderlineIcon, {})
 													}),
 													/* @__PURE__ */ jsx(o$2, {
-														variant: Yz("textDecoration") === "line-through" ? "solid" : "soft",
-														onClick: () => Gz({ textDecoration: Yz("textDecoration") === "line-through" ? "none" : "line-through" }),
+														variant: Xz("textDecoration") === "line-through" ? "solid" : "soft",
+														onClick: () => Kz({ textDecoration: Xz("textDecoration") === "line-through" ? "none" : "line-through" }),
 														children: /* @__PURE__ */ jsx(StrikethroughIcon, {})
 													})
 												]
@@ -20675,26 +20710,29 @@ const PropertiesDialog = () => {
 												as: "div",
 												children: "Transformação"
 											}), /* @__PURE__ */ jsxs(C$1, {
-												value: Yz("textTransform", "none"),
-												onValueChange: (n) => Gz({ textTransform: n }),
-												children: [/* @__PURE__ */ jsx(u$3, { style: { width: 100 } }), /* @__PURE__ */ jsxs(g$1, { children: [
-													/* @__PURE__ */ jsx(v$2, {
-														value: "none",
-														children: "Nenhum"
-													}),
-													/* @__PURE__ */ jsx(v$2, {
-														value: "uppercase",
-														children: "MAIÚSCULA"
-													}),
-													/* @__PURE__ */ jsx(v$2, {
-														value: "lowercase",
-														children: "minúscula"
-													}),
-													/* @__PURE__ */ jsx(v$2, {
-														value: "capitalize",
-														children: "Capitalizada"
-													})
-												] })]
+												value: Xz("textTransform", "none"),
+												onValueChange: (n) => Kz({ textTransform: n }),
+												children: [/* @__PURE__ */ jsx(u$3, { style: { width: 100 } }), /* @__PURE__ */ jsxs(g$1, {
+													..._ && { container: _ },
+													children: [
+														/* @__PURE__ */ jsx(v$2, {
+															value: "none",
+															children: "Nenhum"
+														}),
+														/* @__PURE__ */ jsx(v$2, {
+															value: "uppercase",
+															children: "MAIÚSCULA"
+														}),
+														/* @__PURE__ */ jsx(v$2, {
+															value: "lowercase",
+															children: "minúscula"
+														}),
+														/* @__PURE__ */ jsx(v$2, {
+															value: "capitalize",
+															children: "Capitalizada"
+														})
+													]
+												})]
 											})] })]
 										})
 									}),
@@ -20707,8 +20745,8 @@ const PropertiesDialog = () => {
 											as: "div",
 											children: "Alinhamento"
 										}), /* @__PURE__ */ jsxs(p$8, {
-											value: Yz("textAlign", "left"),
-											onValueChange: (n) => Gz({ textAlign: n }),
+											value: Xz("textAlign", "left"),
+											onValueChange: (n) => Kz({ textAlign: n }),
 											children: [
 												/* @__PURE__ */ jsx(l, {
 													value: "left",
@@ -20738,23 +20776,23 @@ const PropertiesDialog = () => {
 											as: "div",
 											children: "Cor do Texto"
 										}), /* @__PURE__ */ jsx(ColorInput, {
-											color: Yz("color", "#000000"),
-											onChange: (n) => Gz({ color: n })
+											color: Xz("color", "#000000"),
+											onChange: (n) => Kz({ color: n })
 										})]
 									})
 								]
 							})
 						}),
-						qz("Aparência", [
+						Jz("Aparência", [
 							"background",
 							"opacity",
 							"blend",
 							"cursor"
 						]) && /* @__PURE__ */ jsxs(AccordionItem, {
 							title: "Aparência",
-							isOpen: Z.appearance,
-							onToggle: () => zz("appearance"),
-							onReset: () => Kz([
+							isOpen: Az.appearance,
+							onToggle: () => Bz("appearance"),
+							onReset: () => qz([
 								"backgroundColor",
 								"backgroundImage",
 								"backgroundSize",
@@ -20790,8 +20828,8 @@ const PropertiesDialog = () => {
 													as: "div",
 													children: "Cor de Fundo"
 												}), /* @__PURE__ */ jsx(ColorInput, {
-													color: Yz("backgroundColor", "transparent"),
-													onChange: (n) => Gz({
+													color: Xz("backgroundColor", "transparent"),
+													onChange: (n) => Kz({
 														backgroundColor: n,
 														backgroundImage: "none"
 													})
@@ -20806,8 +20844,8 @@ const PropertiesDialog = () => {
 													as: "div",
 													children: "CSS Gradient"
 												}), /* @__PURE__ */ jsx(r$1, {
-													value: Yz("backgroundImage", ""),
-													onChange: (n) => Gz({ backgroundImage: n.target.value }),
+													value: Xz("backgroundImage", ""),
+													onChange: (n) => Kz({ backgroundImage: n.target.value }),
 													placeholder: "linear-gradient(to right, red, blue)",
 													rows: 3
 												})]
@@ -20823,8 +20861,8 @@ const PropertiesDialog = () => {
 														children: "URL da Imagem"
 													}),
 													/* @__PURE__ */ jsx(u$1, {
-														value: Yz("backgroundImage", "").replace(/url\(['"]?(.*?)['"]?\)/, "$1"),
-														onChange: (n) => Gz({ backgroundImage: `url('${n.target.value}')` }),
+														value: Xz("backgroundImage", "").replace(/url\(['"]?(.*?)['"]?\)/, "$1"),
+														onChange: (n) => Kz({ backgroundImage: `url('${n.target.value}')` }),
 														placeholder: "https://...",
 														mb: "2"
 													}),
@@ -20838,26 +20876,29 @@ const PropertiesDialog = () => {
 															as: "div",
 															children: "Tamanho"
 														}), /* @__PURE__ */ jsxs(C$1, {
-															value: Yz("backgroundSize", "auto"),
-															onValueChange: (n) => Gz({ backgroundSize: n }),
-															children: [/* @__PURE__ */ jsx(u$3, { style: { width: "100%" } }), /* @__PURE__ */ jsxs(g$1, { children: [
-																/* @__PURE__ */ jsx(v$2, {
-																	value: "auto",
-																	children: "Auto"
-																}),
-																/* @__PURE__ */ jsx(v$2, {
-																	value: "cover",
-																	children: "Cobrir (Cover)"
-																}),
-																/* @__PURE__ */ jsx(v$2, {
-																	value: "contain",
-																	children: "Conter (Contain)"
-																}),
-																/* @__PURE__ */ jsx(v$2, {
-																	value: "100% 100%",
-																	children: "Esticar"
-																})
-															] })]
+															value: Xz("backgroundSize", "auto"),
+															onValueChange: (n) => Kz({ backgroundSize: n }),
+															children: [/* @__PURE__ */ jsx(u$3, { style: { width: "100%" } }), /* @__PURE__ */ jsxs(g$1, {
+																..._ && { container: _ },
+																children: [
+																	/* @__PURE__ */ jsx(v$2, {
+																		value: "auto",
+																		children: "Auto"
+																	}),
+																	/* @__PURE__ */ jsx(v$2, {
+																		value: "cover",
+																		children: "Cobrir (Cover)"
+																	}),
+																	/* @__PURE__ */ jsx(v$2, {
+																		value: "contain",
+																		children: "Conter (Contain)"
+																	}),
+																	/* @__PURE__ */ jsx(v$2, {
+																		value: "100% 100%",
+																		children: "Esticar"
+																	})
+																]
+															})]
 														})] }), /* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
 															size: "1",
 															color: "gray",
@@ -20865,26 +20906,29 @@ const PropertiesDialog = () => {
 															as: "div",
 															children: "Repetição"
 														}), /* @__PURE__ */ jsxs(C$1, {
-															value: Yz("backgroundRepeat", "repeat"),
-															onValueChange: (n) => Gz({ backgroundRepeat: n }),
-															children: [/* @__PURE__ */ jsx(u$3, { style: { width: "100%" } }), /* @__PURE__ */ jsxs(g$1, { children: [
-																/* @__PURE__ */ jsx(v$2, {
-																	value: "repeat",
-																	children: "Repetir"
-																}),
-																/* @__PURE__ */ jsx(v$2, {
-																	value: "no-repeat",
-																	children: "Não Repetir"
-																}),
-																/* @__PURE__ */ jsx(v$2, {
-																	value: "repeat-x",
-																	children: "Horizontal"
-																}),
-																/* @__PURE__ */ jsx(v$2, {
-																	value: "repeat-y",
-																	children: "Vertical"
-																})
-															] })]
+															value: Xz("backgroundRepeat", "repeat"),
+															onValueChange: (n) => Kz({ backgroundRepeat: n }),
+															children: [/* @__PURE__ */ jsx(u$3, { style: { width: "100%" } }), /* @__PURE__ */ jsxs(g$1, {
+																..._ && { container: _ },
+																children: [
+																	/* @__PURE__ */ jsx(v$2, {
+																		value: "repeat",
+																		children: "Repetir"
+																	}),
+																	/* @__PURE__ */ jsx(v$2, {
+																		value: "no-repeat",
+																		children: "Não Repetir"
+																	}),
+																	/* @__PURE__ */ jsx(v$2, {
+																		value: "repeat-x",
+																		children: "Horizontal"
+																	}),
+																	/* @__PURE__ */ jsx(v$2, {
+																		value: "repeat-y",
+																		children: "Vertical"
+																	})
+																]
+															})]
 														})] })]
 													})
 												]
@@ -20907,12 +20951,12 @@ const PropertiesDialog = () => {
 											min: 0,
 											max: 1,
 											step: .05,
-											value: [parseFloat(Yz("opacity", "1"))],
-											onValueChange: ([n]) => Gz({ opacity: n }),
+											value: [parseFloat(Xz("opacity", "1"))],
+											onValueChange: ([n]) => Kz({ opacity: n }),
 											style: { flex: 1 }
 										}), /* @__PURE__ */ jsxs(p$2, {
 											size: "1",
-											children: [Math.round(parseFloat(Yz("opacity", "1")) * 100), "%"]
+											children: [Math.round(parseFloat(Xz("opacity", "1")) * 100), "%"]
 										})]
 									})]
 								}),
@@ -20927,34 +20971,37 @@ const PropertiesDialog = () => {
 										as: "div",
 										children: "Blend Mode"
 									}), /* @__PURE__ */ jsxs(C$1, {
-										value: Yz("mixBlendMode", "normal"),
-										onValueChange: (n) => Gz({ mixBlendMode: n }),
-										children: [/* @__PURE__ */ jsx(u$3, { style: { width: "100%" } }), /* @__PURE__ */ jsxs(g$1, { children: [
-											/* @__PURE__ */ jsx(v$2, {
-												value: "normal",
-												children: "Normal"
-											}),
-											/* @__PURE__ */ jsx(v$2, {
-												value: "multiply",
-												children: "Multiply"
-											}),
-											/* @__PURE__ */ jsx(v$2, {
-												value: "screen",
-												children: "Screen"
-											}),
-											/* @__PURE__ */ jsx(v$2, {
-												value: "overlay",
-												children: "Overlay"
-											}),
-											/* @__PURE__ */ jsx(v$2, {
-												value: "darken",
-												children: "Darken"
-											}),
-											/* @__PURE__ */ jsx(v$2, {
-												value: "lighten",
-												children: "Lighten"
-											})
-										] })]
+										value: Xz("mixBlendMode", "normal"),
+										onValueChange: (n) => Kz({ mixBlendMode: n }),
+										children: [/* @__PURE__ */ jsx(u$3, { style: { width: "100%" } }), /* @__PURE__ */ jsxs(g$1, {
+											..._ && { container: _ },
+											children: [
+												/* @__PURE__ */ jsx(v$2, {
+													value: "normal",
+													children: "Normal"
+												}),
+												/* @__PURE__ */ jsx(v$2, {
+													value: "multiply",
+													children: "Multiply"
+												}),
+												/* @__PURE__ */ jsx(v$2, {
+													value: "screen",
+													children: "Screen"
+												}),
+												/* @__PURE__ */ jsx(v$2, {
+													value: "overlay",
+													children: "Overlay"
+												}),
+												/* @__PURE__ */ jsx(v$2, {
+													value: "darken",
+													children: "Darken"
+												}),
+												/* @__PURE__ */ jsx(v$2, {
+													value: "lighten",
+													children: "Lighten"
+												})
+											]
+										})]
 									})] }), /* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
 										size: "1",
 										color: "gray",
@@ -20962,39 +21009,42 @@ const PropertiesDialog = () => {
 										as: "div",
 										children: "Cursor"
 									}), /* @__PURE__ */ jsxs(C$1, {
-										value: Yz("cursor", "auto"),
-										onValueChange: (n) => Gz({ cursor: n }),
-										children: [/* @__PURE__ */ jsx(u$3, { style: { width: "100%" } }), /* @__PURE__ */ jsxs(g$1, { children: [
-											/* @__PURE__ */ jsx(v$2, {
-												value: "auto",
-												children: "Auto"
-											}),
-											/* @__PURE__ */ jsx(v$2, {
-												value: "default",
-												children: "Padrão"
-											}),
-											/* @__PURE__ */ jsx(v$2, {
-												value: "pointer",
-												children: "Mãozinha"
-											}),
-											/* @__PURE__ */ jsx(v$2, {
-												value: "text",
-												children: "Texto"
-											}),
-											/* @__PURE__ */ jsx(v$2, {
-												value: "move",
-												children: "Mover"
-											}),
-											/* @__PURE__ */ jsx(v$2, {
-												value: "not-allowed",
-												children: "Bloqueado"
-											})
-										] })]
+										value: Xz("cursor", "auto"),
+										onValueChange: (n) => Kz({ cursor: n }),
+										children: [/* @__PURE__ */ jsx(u$3, { style: { width: "100%" } }), /* @__PURE__ */ jsxs(g$1, {
+											..._ && { container: _ },
+											children: [
+												/* @__PURE__ */ jsx(v$2, {
+													value: "auto",
+													children: "Auto"
+												}),
+												/* @__PURE__ */ jsx(v$2, {
+													value: "default",
+													children: "Padrão"
+												}),
+												/* @__PURE__ */ jsx(v$2, {
+													value: "pointer",
+													children: "Mãozinha"
+												}),
+												/* @__PURE__ */ jsx(v$2, {
+													value: "text",
+													children: "Texto"
+												}),
+												/* @__PURE__ */ jsx(v$2, {
+													value: "move",
+													children: "Mover"
+												}),
+												/* @__PURE__ */ jsx(v$2, {
+													value: "not-allowed",
+													children: "Bloqueado"
+												})
+											]
+										})]
 									})] })]
 								})
 							]
 						}),
-						qz("Layout", [
+						Jz("Layout", [
 							"width",
 							"height",
 							"x",
@@ -21003,15 +21053,15 @@ const PropertiesDialog = () => {
 							"overflow"
 						]) && /* @__PURE__ */ jsx(AccordionItem, {
 							title: "Layout & Dimensões",
-							isOpen: Z.layout,
-							onToggle: () => zz("layout"),
-							onReset: () => Bz({
+							isOpen: Az.layout,
+							onToggle: () => Bz("layout"),
+							onReset: () => Vz({
 								width: 100,
 								height: 100,
 								x: 0,
 								y: 0,
 								style: {
-									...U.style,
+									...W.style,
 									zIndex: void 0,
 									overflow: void 0
 								}
@@ -21021,33 +21071,38 @@ const PropertiesDialog = () => {
 								gap: "3",
 								children: [
 									/* @__PURE__ */ jsx(UnitInput, {
+										portalContainer: _,
 										label: "Largura",
-										value: U.width,
-										onChange: (n) => Bz({ width: parseFloat(n) }),
+										value: W.width,
+										onChange: (n) => Vz({ width: parseFloat(n) }),
 										units: ["px"]
 									}),
 									/* @__PURE__ */ jsx(UnitInput, {
+										portalContainer: _,
 										label: "Altura",
-										value: U.height,
-										onChange: (n) => Bz({ height: parseFloat(n) }),
+										value: W.height,
+										onChange: (n) => Vz({ height: parseFloat(n) }),
 										units: ["px"]
 									}),
 									/* @__PURE__ */ jsx(UnitInput, {
+										portalContainer: _,
 										label: "Posição X",
-										value: U.x,
-										onChange: (n) => Bz({ x: parseFloat(n) }),
+										value: W.x,
+										onChange: (n) => Vz({ x: parseFloat(n) }),
 										units: ["px"]
 									}),
 									/* @__PURE__ */ jsx(UnitInput, {
+										portalContainer: _,
 										label: "Posição Y",
-										value: U.y,
-										onChange: (n) => Bz({ y: parseFloat(n) }),
+										value: W.y,
+										onChange: (n) => Vz({ y: parseFloat(n) }),
 										units: ["px"]
 									}),
 									/* @__PURE__ */ jsx(UnitInput, {
+										portalContainer: _,
 										label: "Z-Index",
-										value: Yz("zIndex", "auto"),
-										onChange: (n) => Gz({ zIndex: n === "" ? void 0 : parseInt(n) }),
+										value: Xz("zIndex", "auto"),
+										onChange: (n) => Kz({ zIndex: n === "" ? void 0 : parseInt(n) }),
 										units: [""],
 										placeholder: "Auto"
 									}),
@@ -21058,35 +21113,38 @@ const PropertiesDialog = () => {
 										as: "div",
 										children: "Overflow"
 									}), /* @__PURE__ */ jsxs(C$1, {
-										value: Yz("overflow", "visible"),
-										onValueChange: (n) => Gz({ overflow: n }),
-										children: [/* @__PURE__ */ jsx(u$3, { style: { width: "100%" } }), /* @__PURE__ */ jsxs(g$1, { children: [
-											/* @__PURE__ */ jsx(v$2, {
-												value: "visible",
-												children: "Visível"
-											}),
-											/* @__PURE__ */ jsx(v$2, {
-												value: "hidden",
-												children: "Oculto"
-											}),
-											/* @__PURE__ */ jsx(v$2, {
-												value: "scroll",
-												children: "Scroll"
-											}),
-											/* @__PURE__ */ jsx(v$2, {
-												value: "auto",
-												children: "Auto"
-											})
-										] })]
+										value: Xz("overflow", "visible"),
+										onValueChange: (n) => Kz({ overflow: n }),
+										children: [/* @__PURE__ */ jsx(u$3, { style: { width: "100%" } }), /* @__PURE__ */ jsxs(g$1, {
+											..._ && { container: _ },
+											children: [
+												/* @__PURE__ */ jsx(v$2, {
+													value: "visible",
+													children: "Visível"
+												}),
+												/* @__PURE__ */ jsx(v$2, {
+													value: "hidden",
+													children: "Oculto"
+												}),
+												/* @__PURE__ */ jsx(v$2, {
+													value: "scroll",
+													children: "Scroll"
+												}),
+												/* @__PURE__ */ jsx(v$2, {
+													value: "auto",
+													children: "Auto"
+												})
+											]
+										})]
 									})] })
 								]
 							})
 						}),
-						qz("Espaçamento", ["padding", "margin"]) && /* @__PURE__ */ jsxs(AccordionItem, {
+						Jz("Espaçamento", ["padding", "margin"]) && /* @__PURE__ */ jsxs(AccordionItem, {
 							title: "Espaçamento (Margin/Padding)",
-							isOpen: Z.spacing,
-							onToggle: () => zz("spacing"),
-							onReset: () => Kz([
+							isOpen: Az.spacing,
+							onToggle: () => Bz("spacing"),
+							onReset: () => qz([
 								"padding",
 								"paddingTop",
 								"paddingRight",
@@ -21101,21 +21159,22 @@ const PropertiesDialog = () => {
 							children: [/* @__PURE__ */ jsx(p, {
 								mb: "3",
 								children: /* @__PURE__ */ jsx(SideInput, {
+									portalContainer: _,
 									label: "Padding (Interno)",
 									values: {
-										top: Yz("paddingTop", Yz("padding")),
-										right: Yz("paddingRight", Yz("padding")),
-										bottom: Yz("paddingBottom", Yz("padding")),
-										left: Yz("paddingLeft", Yz("padding"))
+										top: Xz("paddingTop", Xz("padding")),
+										right: Xz("paddingRight", Xz("padding")),
+										bottom: Xz("paddingBottom", Xz("padding")),
+										left: Xz("paddingLeft", Xz("padding"))
 									},
 									onChange: (n) => {
-										n.top === n.right && n.right === n.bottom && n.bottom === n.left ? Gz({
+										n.top === n.right && n.right === n.bottom && n.bottom === n.left ? Kz({
 											padding: n.top,
 											paddingTop: void 0,
 											paddingRight: void 0,
 											paddingBottom: void 0,
 											paddingLeft: void 0
-										}) : Gz({
+										}) : Kz({
 											padding: void 0,
 											paddingTop: n.top,
 											paddingRight: n.right,
@@ -21125,21 +21184,22 @@ const PropertiesDialog = () => {
 									}
 								})
 							}), /* @__PURE__ */ jsx(p, { children: /* @__PURE__ */ jsx(SideInput, {
+								portalContainer: _,
 								label: "Margin (Externo)",
 								values: {
-									top: Yz("marginTop", Yz("margin")),
-									right: Yz("marginRight", Yz("margin")),
-									bottom: Yz("marginBottom", Yz("margin")),
-									left: Yz("marginLeft", Yz("margin"))
+									top: Xz("marginTop", Xz("margin")),
+									right: Xz("marginRight", Xz("margin")),
+									bottom: Xz("marginBottom", Xz("margin")),
+									left: Xz("marginLeft", Xz("margin"))
 								},
 								onChange: (n) => {
-									n.top === n.right && n.right === n.bottom && n.bottom === n.left ? Gz({
+									n.top === n.right && n.right === n.bottom && n.bottom === n.left ? Kz({
 										margin: n.top,
 										marginTop: void 0,
 										marginRight: void 0,
 										marginBottom: void 0,
 										marginLeft: void 0
-									}) : Gz({
+									}) : Kz({
 										margin: void 0,
 										marginTop: n.top,
 										marginRight: n.right,
@@ -21149,15 +21209,15 @@ const PropertiesDialog = () => {
 								}
 							}) })]
 						}),
-						qz("Bordas", [
+						Jz("Bordas", [
 							"border",
 							"radius",
 							"stroke"
 						]) && /* @__PURE__ */ jsxs(AccordionItem, {
 							title: "Bordas & Cantos",
-							isOpen: Z.borders,
-							onToggle: () => zz("borders"),
-							onReset: () => Kz([
+							isOpen: Az.borders,
+							onToggle: () => Bz("borders"),
+							onReset: () => qz([
 								"border",
 								"borderWidth",
 								"borderStyle",
@@ -21204,35 +21264,39 @@ const PropertiesDialog = () => {
 												as: "div",
 												children: "Estilo"
 											}), /* @__PURE__ */ jsxs(C$1, {
-												value: Yz("borderStyle", "none"),
-												onValueChange: (n) => Gz({ borderStyle: n }),
-												children: [/* @__PURE__ */ jsx(u$3, { style: { width: "100%" } }), /* @__PURE__ */ jsxs(g$1, { children: [
-													/* @__PURE__ */ jsx(v$2, {
-														value: "none",
-														children: "Nenhuma"
-													}),
-													/* @__PURE__ */ jsx(v$2, {
-														value: "solid",
-														children: "Sólida"
-													}),
-													/* @__PURE__ */ jsx(v$2, {
-														value: "dashed",
-														children: "Tracejada"
-													}),
-													/* @__PURE__ */ jsx(v$2, {
-														value: "dotted",
-														children: "Pontilhada"
-													}),
-													/* @__PURE__ */ jsx(v$2, {
-														value: "double",
-														children: "Dupla"
-													})
-												] })]
+												value: Xz("borderStyle", "none"),
+												onValueChange: (n) => Kz({ borderStyle: n }),
+												children: [/* @__PURE__ */ jsx(u$3, { style: { width: "100%" } }), /* @__PURE__ */ jsxs(g$1, {
+													..._ && { container: _ },
+													children: [
+														/* @__PURE__ */ jsx(v$2, {
+															value: "none",
+															children: "Nenhuma"
+														}),
+														/* @__PURE__ */ jsx(v$2, {
+															value: "solid",
+															children: "Sólida"
+														}),
+														/* @__PURE__ */ jsx(v$2, {
+															value: "dashed",
+															children: "Tracejada"
+														}),
+														/* @__PURE__ */ jsx(v$2, {
+															value: "dotted",
+															children: "Pontilhada"
+														}),
+														/* @__PURE__ */ jsx(v$2, {
+															value: "double",
+															children: "Dupla"
+														})
+													]
+												})]
 											})] }),
 											/* @__PURE__ */ jsx(UnitInput, {
+												portalContainer: _,
 												label: "Espessura",
-												value: Yz("borderWidth", "0px"),
-												onChange: (n) => Gz({ borderWidth: n })
+												value: Xz("borderWidth", "0px"),
+												onChange: (n) => Kz({ borderWidth: n })
 											}),
 											/* @__PURE__ */ jsxs(p, {
 												style: { gridColumn: "span 2" },
@@ -21243,8 +21307,8 @@ const PropertiesDialog = () => {
 													as: "div",
 													children: "Cor"
 												}), /* @__PURE__ */ jsx(ColorInput, {
-													color: Yz("borderColor", "#000000"),
-													onChange: (n) => Gz({ borderColor: n })
+													color: Xz("borderColor", "#000000"),
+													onChange: (n) => Kz({ borderColor: n })
 												})]
 											})
 										]
@@ -21253,21 +21317,22 @@ const PropertiesDialog = () => {
 							}), /* @__PURE__ */ jsx(p, {
 								mt: "3",
 								children: /* @__PURE__ */ jsx(SideInput, {
+									portalContainer: _,
 									label: "Arredondamento (Radius)",
 									values: {
-										top: Yz("borderTopLeftRadius", Yz("borderRadius")),
-										right: Yz("borderTopRightRadius", Yz("borderRadius")),
-										bottom: Yz("borderBottomRightRadius", Yz("borderRadius")),
-										left: Yz("borderBottomLeftRadius", Yz("borderRadius"))
+										top: Xz("borderTopLeftRadius", Xz("borderRadius")),
+										right: Xz("borderTopRightRadius", Xz("borderRadius")),
+										bottom: Xz("borderBottomRightRadius", Xz("borderRadius")),
+										left: Xz("borderBottomLeftRadius", Xz("borderRadius"))
 									},
 									onChange: (n) => {
-										n.top === n.right && n.right === n.bottom && n.bottom === n.left ? Gz({
+										n.top === n.right && n.right === n.bottom && n.bottom === n.left ? Kz({
 											borderRadius: n.top,
 											borderTopLeftRadius: void 0,
 											borderTopRightRadius: void 0,
 											borderBottomRightRadius: void 0,
 											borderBottomLeftRadius: void 0
-										}) : Gz({
+										}) : Kz({
 											borderRadius: void 0,
 											borderTopLeftRadius: n.top,
 											borderTopRightRadius: n.right,
@@ -21278,11 +21343,11 @@ const PropertiesDialog = () => {
 								})
 							})]
 						}),
-						qz("Efeitos", ["shadow", "sombra"]) && /* @__PURE__ */ jsx(AccordionItem, {
+						Jz("Efeitos", ["shadow", "sombra"]) && /* @__PURE__ */ jsx(AccordionItem, {
 							title: "Efeitos (Sombra)",
-							isOpen: Z.effects,
-							onToggle: () => zz("effects"),
-							onReset: () => Kz(["boxShadow", "textShadow"]),
+							isOpen: Az.effects,
+							onToggle: () => Bz("effects"),
+							onReset: () => qz(["boxShadow", "textShadow"]),
 							children: /* @__PURE__ */ jsxs(m$1, {
 								defaultValue: "box",
 								children: [/* @__PURE__ */ jsxs(b$1, { children: [/* @__PURE__ */ jsx(P$1, {
@@ -21317,8 +21382,8 @@ const PropertiesDialog = () => {
 															children: "Inset"
 														}), /* @__PURE__ */ jsx("input", {
 															type: "checkbox",
-															checked: eB.inset,
-															onChange: (n) => tB({ inset: n.target.checked })
+															checked: tB.inset,
+															onChange: (n) => nB({ inset: n.target.checked })
 														})]
 													})]
 												}),
@@ -21328,34 +21393,38 @@ const PropertiesDialog = () => {
 													mb: "2",
 													children: [
 														/* @__PURE__ */ jsx(UnitInput, {
+															portalContainer: _,
 															label: "X",
-															value: eB.x,
-															onChange: (n) => tB({ x: parseFloat(n) }),
+															value: tB.x,
+															onChange: (n) => nB({ x: parseFloat(n) }),
 															units: ["px"]
 														}),
 														/* @__PURE__ */ jsx(UnitInput, {
+															portalContainer: _,
 															label: "Y",
-															value: eB.y,
-															onChange: (n) => tB({ y: parseFloat(n) }),
+															value: tB.y,
+															onChange: (n) => nB({ y: parseFloat(n) }),
 															units: ["px"]
 														}),
 														/* @__PURE__ */ jsx(UnitInput, {
+															portalContainer: _,
 															label: "Blur",
-															value: eB.blur,
-															onChange: (n) => tB({ blur: parseFloat(n) }),
+															value: tB.blur,
+															onChange: (n) => nB({ blur: parseFloat(n) }),
 															units: ["px"]
 														}),
 														/* @__PURE__ */ jsx(UnitInput, {
+															portalContainer: _,
 															label: "Spread",
-															value: eB.spread,
-															onChange: (n) => tB({ spread: parseFloat(n) }),
+															value: tB.spread,
+															onChange: (n) => nB({ spread: parseFloat(n) }),
 															units: ["px"]
 														})
 													]
 												}),
 												/* @__PURE__ */ jsx(ColorInput, {
-													color: eB.color,
-													onChange: (n) => tB({ color: n })
+													color: tB.color,
+													onChange: (n) => nB({ color: n })
 												})
 											]
 										})
@@ -21381,39 +21450,42 @@ const PropertiesDialog = () => {
 													mb: "2",
 													children: [
 														/* @__PURE__ */ jsx(UnitInput, {
+															portalContainer: _,
 															label: "X",
-															value: $z(Yz("textShadow", "none")).x,
+															value: eB(Xz("textShadow", "none")).x,
 															onChange: (n) => {
-																let _ = $z(Yz("textShadow", "none"));
-																Gz({ textShadow: `${n}px ${_.y}px ${_.blur}px ${_.color}` });
+																let _ = eB(Xz("textShadow", "none"));
+																Kz({ textShadow: `${n}px ${_.y}px ${_.blur}px ${_.color}` });
 															},
 															units: ["px"]
 														}),
 														/* @__PURE__ */ jsx(UnitInput, {
+															portalContainer: _,
 															label: "Y",
-															value: $z(Yz("textShadow", "none")).y,
+															value: eB(Xz("textShadow", "none")).y,
 															onChange: (n) => {
-																let _ = $z(Yz("textShadow", "none"));
-																Gz({ textShadow: `${_.x}px ${n}px ${_.blur}px ${_.color}` });
+																let _ = eB(Xz("textShadow", "none"));
+																Kz({ textShadow: `${_.x}px ${n}px ${_.blur}px ${_.color}` });
 															},
 															units: ["px"]
 														}),
 														/* @__PURE__ */ jsx(UnitInput, {
+															portalContainer: _,
 															label: "Blur",
-															value: $z(Yz("textShadow", "none")).blur,
+															value: eB(Xz("textShadow", "none")).blur,
 															onChange: (n) => {
-																let _ = $z(Yz("textShadow", "none"));
-																Gz({ textShadow: `${_.x}px ${_.y}px ${n}px ${_.color}` });
+																let _ = eB(Xz("textShadow", "none"));
+																Kz({ textShadow: `${_.x}px ${_.y}px ${n}px ${_.color}` });
 															},
 															units: ["px"]
 														})
 													]
 												}),
 												/* @__PURE__ */ jsx(ColorInput, {
-													color: $z(Yz("textShadow", "none")).color,
+													color: eB(Xz("textShadow", "none")).color,
 													onChange: (n) => {
-														let _ = $z(Yz("textShadow", "none"));
-														Gz({ textShadow: `${_.x}px ${_.y}px ${_.blur}px ${n}` });
+														let _ = eB(Xz("textShadow", "none"));
+														Kz({ textShadow: `${_.x}px ${_.y}px ${_.blur}px ${n}` });
 													}
 												})
 											]
@@ -21422,19 +21494,19 @@ const PropertiesDialog = () => {
 								})]
 							})
 						}),
-						qz("Transform", [
+						Jz("Transform", [
 							"scale",
 							"rotate",
 							"skew",
 							"translate"
 						]) && /* @__PURE__ */ jsx(AccordionItem, {
 							title: "Transformação",
-							isOpen: Z.transform,
-							onToggle: () => zz("transform"),
-							onReset: () => Bz({
+							isOpen: Az.transform,
+							onToggle: () => Bz("transform"),
+							onReset: () => Vz({
 								rotation: 0,
 								style: {
-									...U.style,
+									...W.style,
 									transform: void 0
 								}
 							}),
@@ -21442,9 +21514,10 @@ const PropertiesDialog = () => {
 								columns: "2",
 								gap: "3",
 								children: [/* @__PURE__ */ jsx(UnitInput, {
+									portalContainer: _,
 									label: "Rotação (deg)",
-									value: U.rotation,
-									onChange: (n) => Bz({ rotation: parseFloat(n) }),
+									value: W.rotation,
+									onChange: (n) => Vz({ rotation: parseFloat(n) }),
 									units: ["deg"]
 								}), /* @__PURE__ */ jsxs(p, {
 									style: { gridColumn: "span 2" },
@@ -21457,8 +21530,8 @@ const PropertiesDialog = () => {
 											children: "Transform CSS (Scale, Skew, Translate)"
 										}),
 										/* @__PURE__ */ jsx(u$1, {
-											value: Yz("transform", ""),
-											onChange: (n) => Gz({ transform: n.target.value }),
+											value: Xz("transform", ""),
+											onChange: (n) => Kz({ transform: n.target.value }),
 											placeholder: "ex: scale(1.5) skewX(10deg)"
 										}),
 										/* @__PURE__ */ jsxs(p$2, {
@@ -21476,41 +21549,41 @@ const PropertiesDialog = () => {
 								})]
 							})
 						}),
-						!W && /* @__PURE__ */ jsxs(Fragment$1, { children: [
-							qz("Animação", ["animation"]) && /* @__PURE__ */ jsx(AccordionItem, {
+						!Z && /* @__PURE__ */ jsxs(Fragment$1, { children: [
+							Jz("Animação", ["animation"]) && /* @__PURE__ */ jsx(AccordionItem, {
 								title: "Animação",
-								isOpen: Z.animation,
-								onToggle: () => zz("animation"),
-								onReset: () => Bz({ animation: void 0 }),
+								isOpen: Az.animation,
+								onToggle: () => Bz("animation"),
+								onReset: () => Vz({ animation: void 0 }),
 								children: /* @__PURE__ */ jsx(AnimationSettings, {
-									element: U,
-									updateElement: E
+									element: W,
+									updateElement: O
 								})
 							}),
-							qz("Regras", ["condition"]) && /* @__PURE__ */ jsx(AccordionItem, {
+							Jz("Regras", ["condition"]) && /* @__PURE__ */ jsx(AccordionItem, {
 								title: "Regras Condicionais",
-								isOpen: Z.conditions,
-								onToggle: () => zz("conditions"),
-								onReset: () => Bz({ conditions: [] }),
+								isOpen: Az.conditions,
+								onToggle: () => Bz("conditions"),
+								onReset: () => Vz({ conditions: [] }),
 								children: /* @__PURE__ */ jsx(ConditionalSettings, {
-									element: U,
-									updateElement: E,
+									element: W,
+									updateElement: O,
 									availableProps: n.availableProps || []
 								})
 							}),
-							qz("Formatação", ["format"]) && /* @__PURE__ */ jsx(AccordionItem, {
+							Jz("Formatação", ["format"]) && /* @__PURE__ */ jsx(AccordionItem, {
 								title: "Formatação",
-								isOpen: Z.formatting,
-								onToggle: () => zz("formatting"),
-								onReset: () => Bz({ formatting: void 0 }),
+								isOpen: Az.formatting,
+								onToggle: () => Bz("formatting"),
+								onReset: () => Vz({ formatting: void 0 }),
 								children: /* @__PURE__ */ jsx(FormattingSettings, {
-									element: U,
-									updateElement: E
+									element: W,
+									updateElement: O
 								})
 							})
 						] })
 					]
-				}, U?.id ?? z.join(","))
+				}, W?.id ?? B.join(","))
 			]
 		})
 	});
@@ -21580,148 +21653,169 @@ var ShortcutRow = ({ icon: n, label: E, keys: O }) => /* @__PURE__ */ jsxs(p$1, 
 		})] }, E))
 	})]
 });
-const ShortcutsDialog = () => /* @__PURE__ */ jsxs(s$5, { children: [/* @__PURE__ */ jsx(n$3, { children: /* @__PURE__ */ jsxs(o, {
-	variant: "solid",
-	color: "amber",
-	radius: "full",
-	style: {
-		height: 36,
-		padding: "0 14px",
-		boxShadow: "0 4px 6px rgba(0,0,0,0.1)"
-	},
-	title: "Atalhos de Teclado",
-	children: [/* @__PURE__ */ jsx(QuestionMarkIcon, {
-		width: "18",
-		height: "18"
-	}), "Ajuda"]
-}) }), /* @__PURE__ */ jsxs(p$11, {
-	style: { maxWidth: 700 },
-	onPointerDown: (n) => n.stopPropagation(),
-	children: [
-		/* @__PURE__ */ jsx(g$3, { children: "Atalhos de Teclado" }),
-		/* @__PURE__ */ jsx(p$2, {
-			size: "2",
-			color: "gray",
-			mb: "4",
-			as: "p",
-			children: "Agilize seu fluxo de trabalho com estes atalhos."
-		}),
-		/* @__PURE__ */ jsxs(o$1, {
-			columns: {
-				initial: "1",
-				sm: "2"
-			},
-			gap: "6",
-			children: [/* @__PURE__ */ jsxs(p, { children: [
-				/* @__PURE__ */ jsx(p$2, {
-					size: "2",
-					weight: "bold",
-					mb: "2",
-					color: "blue",
-					children: "Edição Básica"
-				}),
-				/* @__PURE__ */ jsx(o$3, {
-					size: "4",
-					mb: "2"
-				}),
-				/* @__PURE__ */ jsx(ShortcutRow, {
-					icon: SymbolIcon,
-					label: "Desfazer",
-					keys: ["Ctrl", "Z"]
-				}),
-				/* @__PURE__ */ jsx(ShortcutRow, {
-					icon: SymbolIcon,
-					label: "Refazer",
-					keys: ["Ctrl", "Y"]
-				}),
-				/* @__PURE__ */ jsx(ShortcutRow, {
-					icon: ClipboardIcon,
-					label: "Copiar",
-					keys: ["Ctrl", "C"]
-				}),
-				/* @__PURE__ */ jsx(ShortcutRow, {
-					icon: ClipboardIcon,
-					label: "Colar",
-					keys: ["Ctrl", "V"]
-				}),
-				/* @__PURE__ */ jsx(ShortcutRow, {
-					icon: TrashIcon,
-					label: "Excluir",
-					keys: ["Delete"]
-				})
-			] }), /* @__PURE__ */ jsxs(p, { children: [
-				/* @__PURE__ */ jsx(p$2, {
-					size: "2",
-					weight: "bold",
-					mb: "2",
-					color: "blue",
-					children: "Navegação e Seleção"
-				}),
-				/* @__PURE__ */ jsx(o$3, {
-					size: "4",
-					mb: "2"
-				}),
-				/* @__PURE__ */ jsx(ShortcutRow, {
-					icon: MoveIcon,
-					label: "Mover Elemento",
-					keys: ["Setas"]
-				}),
-				/* @__PURE__ */ jsx(ShortcutRow, {
-					icon: MoveIcon,
-					label: "Mover Rápido",
-					keys: ["Shift", "Setas"]
-				}),
-				/* @__PURE__ */ jsx(ShortcutRow, {
-					icon: CursorArrowIcon,
-					label: "Multiseleção",
-					keys: ["Shift", "Click"]
-				}),
-				/* @__PURE__ */ jsx(ShortcutRow, {
-					icon: SpaceEvenlyHorizontallyIcon,
-					label: "Mover Canvas (Pan)",
-					keys: ["Espaço", "Arrastar"]
-				}),
-				/* @__PURE__ */ jsx(ShortcutRow, {
-					icon: MagnifyingGlassIcon,
-					label: "Zoom",
-					keys: ["Ctrl", "Scroll"]
-				})
-			] })]
-		}),
-		/* @__PURE__ */ jsx(p$1, {
-			justify: "end",
-			mt: "5",
-			children: /* @__PURE__ */ jsx(D$2, { children: /* @__PURE__ */ jsx(o, {
-				variant: "soft",
+const ShortcutsDialog = () => {
+	let { portalContainer: n } = useEditor();
+	return /* @__PURE__ */ jsxs(s$5, { children: [/* @__PURE__ */ jsx(n$3, { children: /* @__PURE__ */ jsxs(o, {
+		variant: "solid",
+		color: "amber",
+		radius: "full",
+		style: {
+			height: 36,
+			padding: "0 14px",
+			boxShadow: "0 4px 6px rgba(0,0,0,0.1)"
+		},
+		title: "Atalhos de Teclado",
+		children: [/* @__PURE__ */ jsx(QuestionMarkIcon, {
+			width: "18",
+			height: "18"
+		}), "Ajuda"]
+	}) }), /* @__PURE__ */ jsxs(p$11, {
+		...n && { container: n },
+		style: { maxWidth: 700 },
+		onPointerDown: (n) => n.stopPropagation(),
+		children: [
+			/* @__PURE__ */ jsx(g$3, { children: "Atalhos de Teclado" }),
+			/* @__PURE__ */ jsx(p$2, {
+				size: "2",
 				color: "gray",
-				children: "Fechar"
-			}) })
-		})
-	]
-})] }), EditorSettings = () => {
-	let { state: n, updateListSettings: E, setCanvasHeight: O, setGridSize: A } = useEditor(), [j, M] = useState(!1), [N, P] = useState(""), [z, B] = useState("asc"), [H, U] = useState("bottom"), [W, Z] = useState("down"), [Az, jz] = useState("150"), [Mz, Nz] = useState(""), [Pz, Fz] = useState("0"), [Lz, Rz] = useState("slideIn"), [zz, Bz] = useState(.3), [Vz, Hz] = useState("ease-out"), Gz = React.useRef(!1);
-	return useEffect(() => {
-		if (j && !Gz.current) {
-			Gz.current = !0, P(n.listSettings.sortProp || "__none__"), B(n.listSettings.sortOrder || "asc"), U(n.listSettings.newestPosition || "bottom"), Z(n.listSettings.scrollDirection || "down"), Nz(n.listSettings.containerHeight ? String(n.listSettings.containerHeight) : ""), jz(String(n.canvasHeight || 150)), Fz(String(n.gridSize || 0));
+				mb: "4",
+				as: "p",
+				children: "Agilize seu fluxo de trabalho com estes atalhos."
+			}),
+			/* @__PURE__ */ jsxs(o$1, {
+				columns: {
+					initial: "1",
+					sm: "2"
+				},
+				gap: "6",
+				children: [/* @__PURE__ */ jsxs(p, { children: [
+					/* @__PURE__ */ jsx(p$2, {
+						size: "2",
+						weight: "bold",
+						mb: "2",
+						color: "blue",
+						children: "Edição Básica"
+					}),
+					/* @__PURE__ */ jsx(o$3, {
+						size: "4",
+						mb: "2"
+					}),
+					/* @__PURE__ */ jsx(ShortcutRow, {
+						icon: SymbolIcon,
+						label: "Desfazer",
+						keys: ["Ctrl", "Z"]
+					}),
+					/* @__PURE__ */ jsx(ShortcutRow, {
+						icon: SymbolIcon,
+						label: "Refazer",
+						keys: ["Ctrl", "Y"]
+					}),
+					/* @__PURE__ */ jsx(ShortcutRow, {
+						icon: ClipboardIcon,
+						label: "Copiar",
+						keys: ["Ctrl", "C"]
+					}),
+					/* @__PURE__ */ jsx(ShortcutRow, {
+						icon: ClipboardIcon,
+						label: "Colar",
+						keys: ["Ctrl", "V"]
+					}),
+					/* @__PURE__ */ jsx(ShortcutRow, {
+						icon: TrashIcon,
+						label: "Excluir",
+						keys: ["Delete"]
+					})
+				] }), /* @__PURE__ */ jsxs(p, { children: [
+					/* @__PURE__ */ jsx(p$2, {
+						size: "2",
+						weight: "bold",
+						mb: "2",
+						color: "blue",
+						children: "Navegação e Seleção"
+					}),
+					/* @__PURE__ */ jsx(o$3, {
+						size: "4",
+						mb: "2"
+					}),
+					/* @__PURE__ */ jsx(ShortcutRow, {
+						icon: MoveIcon,
+						label: "Mover Elemento",
+						keys: ["Setas"]
+					}),
+					/* @__PURE__ */ jsx(ShortcutRow, {
+						icon: MoveIcon,
+						label: "Mover Rápido",
+						keys: ["Shift", "Setas"]
+					}),
+					/* @__PURE__ */ jsx(ShortcutRow, {
+						icon: CursorArrowIcon,
+						label: "Multiseleção",
+						keys: ["Shift", "Click"]
+					}),
+					/* @__PURE__ */ jsx(ShortcutRow, {
+						icon: SpaceEvenlyHorizontallyIcon,
+						label: "Mover Canvas (Pan)",
+						keys: ["Espaço", "Arrastar"]
+					}),
+					/* @__PURE__ */ jsx(ShortcutRow, {
+						icon: MagnifyingGlassIcon,
+						label: "Zoom",
+						keys: ["Ctrl", "Scroll"]
+					})
+				] })]
+			}),
+			/* @__PURE__ */ jsx(p$1, {
+				justify: "end",
+				mt: "5",
+				children: /* @__PURE__ */ jsx(D$2, { children: /* @__PURE__ */ jsx(o, {
+					variant: "soft",
+					color: "gray",
+					children: "Fechar"
+				}) })
+			})
+		]
+	})] });
+}, EditorSettings = () => {
+	let { state: n, portalContainer: E, updateListSettings: O, setCanvasHeight: A, setGridSize: j } = useEditor(), [M, N] = useState(!1), [P, z] = useState(""), [B, H] = useState("asc"), [U, W] = useState("bottom"), [Z, Az] = useState("down"), [jz, Mz] = useState("150"), [Nz, Pz] = useState(""), [Fz, Lz] = useState("0"), [Rz, zz] = useState("slideIn"), [Bz, Vz] = useState(.3), [Hz, Gz] = useState("ease-out"), Kz = React.useRef(!1);
+	useEffect(() => {
+		if (M && !Kz.current) {
+			Kz.current = !0, z(n.listSettings.sortProp || "__none__"), H(n.listSettings.sortOrder || "asc"), W(n.listSettings.newestPosition || "bottom"), Az(n.listSettings.scrollDirection || "down"), Pz(n.listSettings.containerHeight ? String(n.listSettings.containerHeight) : ""), Mz(String(n.canvasHeight || 150)), Lz(String(n.gridSize || 0));
 			let _ = n.listSettings.entryAnimation;
-			Rz(_?.type || "slideIn"), Bz(_?.duration || .3), Hz(_?.timingFunction || "ease-out");
+			zz(_?.type || "slideIn"), Vz(_?.duration || .3), Gz(_?.timingFunction || "ease-out");
 		}
-		j || (Gz.current = !1);
-	}, [j]), useEffect(() => {
-		if (!j) return;
-		let n = parseInt(Az, 10);
-		!isNaN(n) && n > 0 && O(n);
-		let _ = parseInt(Pz, 10);
-		!isNaN(_) && _ >= 0 && A(_);
+		M || (Kz.current = !1);
+	}, [M]), useEffect(() => {
+		if (!M) return;
+		let n = parseInt(jz, 10);
+		!isNaN(n) && n > 0 && A(n);
+		let _ = parseInt(Fz, 10);
+		!isNaN(_) && _ >= 0 && j(_);
 	}, [
-		Az,
-		Pz,
-		j,
-		O,
-		A
-	]), /* @__PURE__ */ jsxs(s$5, {
-		open: j,
-		onOpenChange: M,
+		jz,
+		Fz,
+		M,
+		A,
+		j
+	]);
+	let qz = () => {
+		let n = parseInt(Nz, 10), _ = parseInt(jz, 10), E = parseInt(Fz, 10), M = {
+			type: Rz,
+			duration: Number(Bz),
+			delay: 0,
+			timingFunction: Hz
+		};
+		O({
+			sortProp: P === "__none__" ? "" : P,
+			sortOrder: B,
+			newestPosition: U,
+			scrollDirection: Z,
+			containerHeight: !isNaN(n) && n > 0 ? n : void 0,
+			entryAnimation: M
+		}), !isNaN(_) && _ > 0 && A(_), !isNaN(E) && E >= 0 && j(E), N(!1);
+	};
+	return /* @__PURE__ */ jsxs(s$5, {
+		open: M,
+		onOpenChange: N,
 		children: [/* @__PURE__ */ jsx(n$3, { children: /* @__PURE__ */ jsxs(o, {
 			variant: "soft",
 			color: "gray",
@@ -21732,6 +21826,7 @@ const ShortcutsDialog = () => /* @__PURE__ */ jsxs(s$5, { children: [/* @__PURE_
 			},
 			children: [/* @__PURE__ */ jsx(GearIcon, {}), " Configurações"]
 		}) }), /* @__PURE__ */ jsxs(p$11, {
+			...E && { container: E },
 			style: { maxWidth: 600 },
 			children: [
 				/* @__PURE__ */ jsx(g$3, { children: "Configurações do Editor" }),
@@ -21768,14 +21863,15 @@ const ShortcutsDialog = () => /* @__PURE__ */ jsxs(s$5, { children: [/* @__PURE_
 											width: "100%",
 											justifyContent: "space-between"
 										},
-										children: [N === "__none__" ? "(Nenhum)" : n.availableProps.find((n) => n.dataName === N)?.name || N, /* @__PURE__ */ jsx(ChevronDownIcon, {})]
+										children: [P === "__none__" ? "(Nenhum)" : n.availableProps.find((n) => n.dataName === P)?.name || P, /* @__PURE__ */ jsx(ChevronDownIcon, {})]
 									}) }), /* @__PURE__ */ jsxs(g$2, {
+										...E && { container: E },
 										style: { zIndex: 1e5 },
 										children: [/* @__PURE__ */ jsx(v$4, {
-											onSelect: () => P("__none__"),
+											onSelect: () => z("__none__"),
 											children: "(Nenhum)"
 										}), n.availableProps.map((n) => /* @__PURE__ */ jsx(v$4, {
-											onSelect: () => P(n.dataName),
+											onSelect: () => z(n.dataName),
 											children: n.name
 										}, n.dataName))]
 									})] })]
@@ -21791,14 +21887,15 @@ const ShortcutsDialog = () => /* @__PURE__ */ jsxs(s$5, { children: [/* @__PURE_
 										width: 150,
 										justifyContent: "space-between"
 									},
-									children: [z === "asc" ? "Crescente (A-Z)" : "Decrescente (Z-A)", /* @__PURE__ */ jsx(ChevronDownIcon, {})]
+									children: [B === "asc" ? "Crescente (A-Z)" : "Decrescente (Z-A)", /* @__PURE__ */ jsx(ChevronDownIcon, {})]
 								}) }), /* @__PURE__ */ jsxs(g$2, {
+									...E && { container: E },
 									style: { zIndex: 1e5 },
 									children: [/* @__PURE__ */ jsx(v$4, {
-										onSelect: () => B("asc"),
+										onSelect: () => H("asc"),
 										children: "Crescente (A-Z)"
 									}), /* @__PURE__ */ jsx(v$4, {
-										onSelect: () => B("desc"),
+										onSelect: () => H("desc"),
 										children: "Decrescente (Z-A)"
 									})]
 								})] })] })]
@@ -21820,14 +21917,15 @@ const ShortcutsDialog = () => /* @__PURE__ */ jsxs(s$5, { children: [/* @__PURE_
 											width: "100%",
 											justifyContent: "space-between"
 										},
-										children: [H === "top" ? "Topo (Início)" : "Base (Final)", /* @__PURE__ */ jsx(ChevronDownIcon, {})]
+										children: [U === "top" ? "Topo (Início)" : "Base (Final)", /* @__PURE__ */ jsx(ChevronDownIcon, {})]
 									}) }), /* @__PURE__ */ jsxs(g$2, {
+										...E && { container: E },
 										style: { zIndex: 1e5 },
 										children: [/* @__PURE__ */ jsx(v$4, {
-											onSelect: () => U("top"),
+											onSelect: () => W("top"),
 											children: "Topo (Início)"
 										}), /* @__PURE__ */ jsx(v$4, {
-											onSelect: () => U("bottom"),
+											onSelect: () => W("bottom"),
 											children: "Base (Final)"
 										})]
 									})] })]
@@ -21845,14 +21943,15 @@ const ShortcutsDialog = () => /* @__PURE__ */ jsxs(s$5, { children: [/* @__PURE_
 											width: "100%",
 											justifyContent: "space-between"
 										},
-										children: [W === "down" ? "Descer (Padrão)" : "Subir (Chat)", /* @__PURE__ */ jsx(ChevronDownIcon, {})]
+										children: [Z === "down" ? "Descer (Padrão)" : "Subir (Chat)", /* @__PURE__ */ jsx(ChevronDownIcon, {})]
 									}) }), /* @__PURE__ */ jsxs(g$2, {
+										...E && { container: E },
 										style: { zIndex: 1e5 },
 										children: [/* @__PURE__ */ jsx(v$4, {
-											onSelect: () => Z("down"),
+											onSelect: () => Az("down"),
 											children: "Descer (Padrão)"
 										}), /* @__PURE__ */ jsx(v$4, {
-											onSelect: () => Z("up"),
+											onSelect: () => Az("up"),
 											children: "Subir (Chat)"
 										})]
 									})] })]
@@ -21879,8 +21978,8 @@ const ShortcutsDialog = () => /* @__PURE__ */ jsxs(s$5, { children: [/* @__PURE_
 										/* @__PURE__ */ jsx(u$1, {
 											type: "number",
 											min: "10",
-											value: Az,
-											onChange: (n) => jz(n.target.value)
+											value: jz,
+											onChange: (n) => Mz(n.target.value)
 										}),
 										/* @__PURE__ */ jsx(p$2, {
 											size: "1",
@@ -21901,8 +22000,8 @@ const ShortcutsDialog = () => /* @__PURE__ */ jsxs(s$5, { children: [/* @__PURE_
 											type: "number",
 											min: "0",
 											placeholder: "Auto (100%)",
-											value: Mz,
-											onChange: (n) => Nz(n.target.value)
+											value: Nz,
+											onChange: (n) => Pz(n.target.value)
 										}),
 										/* @__PURE__ */ jsx(p$2, {
 											size: "1",
@@ -21934,48 +22033,49 @@ const ShortcutsDialog = () => /* @__PURE__ */ jsxs(s$5, { children: [/* @__PURE_
 											width: "100%",
 											justifyContent: "space-between"
 										},
-										children: [Lz === "slideIn" ? "Slide (Padrão)" : Lz === "smoothSlideUp" ? "Slide Suave (Up)" : Lz === "fadeIn" ? "Fade In" : Lz === "popIn" ? "Pop In" : Lz === "blurIn" ? "Blur In" : Lz === "slideInLeft" ? "Slide (Esq)" : Lz === "slideInRight" ? "Slide (Dir)" : Lz === "zoomIn" ? "Zoom In" : Lz === "bounceIn" ? "Bounce" : "Nenhum", /* @__PURE__ */ jsx(ChevronDownIcon, {})]
+										children: [Rz === "slideIn" ? "Slide (Padrão)" : Rz === "smoothSlideUp" ? "Slide Suave (Up)" : Rz === "fadeIn" ? "Fade In" : Rz === "popIn" ? "Pop In" : Rz === "blurIn" ? "Blur In" : Rz === "slideInLeft" ? "Slide (Esq)" : Rz === "slideInRight" ? "Slide (Dir)" : Rz === "zoomIn" ? "Zoom In" : Rz === "bounceIn" ? "Bounce" : "Nenhum", /* @__PURE__ */ jsx(ChevronDownIcon, {})]
 									}) }), /* @__PURE__ */ jsxs(g$2, {
+										...E && { container: E },
 										style: { zIndex: 1e5 },
 										children: [
 											/* @__PURE__ */ jsx(v$4, {
-												onSelect: () => Rz("none"),
+												onSelect: () => zz("none"),
 												children: "Nenhum"
 											}),
 											/* @__PURE__ */ jsx(v$4, {
-												onSelect: () => Rz("slideIn"),
+												onSelect: () => zz("slideIn"),
 												children: "Slide (Padrão)"
 											}),
 											/* @__PURE__ */ jsx(v$4, {
-												onSelect: () => Rz("smoothSlideUp"),
+												onSelect: () => zz("smoothSlideUp"),
 												children: "Slide Suave (Up)"
 											}),
 											/* @__PURE__ */ jsx(v$4, {
-												onSelect: () => Rz("fadeIn"),
+												onSelect: () => zz("fadeIn"),
 												children: "Fade In"
 											}),
 											/* @__PURE__ */ jsx(v$4, {
-												onSelect: () => Rz("popIn"),
+												onSelect: () => zz("popIn"),
 												children: "Pop In"
 											}),
 											/* @__PURE__ */ jsx(v$4, {
-												onSelect: () => Rz("blurIn"),
+												onSelect: () => zz("blurIn"),
 												children: "Blur In"
 											}),
 											/* @__PURE__ */ jsx(v$4, {
-												onSelect: () => Rz("slideInLeft"),
+												onSelect: () => zz("slideInLeft"),
 												children: "Slide (Esq)"
 											}),
 											/* @__PURE__ */ jsx(v$4, {
-												onSelect: () => Rz("slideInRight"),
+												onSelect: () => zz("slideInRight"),
 												children: "Slide (Dir)"
 											}),
 											/* @__PURE__ */ jsx(v$4, {
-												onSelect: () => Rz("zoomIn"),
+												onSelect: () => zz("zoomIn"),
 												children: "Zoom In"
 											}),
 											/* @__PURE__ */ jsx(v$4, {
-												onSelect: () => Rz("bounceIn"),
+												onSelect: () => zz("bounceIn"),
 												children: "Bounce"
 											})
 										]
@@ -21989,8 +22089,8 @@ const ShortcutsDialog = () => /* @__PURE__ */ jsxs(s$5, { children: [/* @__PURE_
 										type: "number",
 										step: "0.1",
 										min: "0.1",
-										value: zz,
-										onChange: (n) => Bz(parseFloat(n.target.value) || .3)
+										value: Bz,
+										onChange: (n) => Vz(parseFloat(n.target.value) || .3)
 									})] }),
 									/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
 										size: "1",
@@ -22004,24 +22104,25 @@ const ShortcutsDialog = () => /* @__PURE__ */ jsxs(s$5, { children: [/* @__PURE_
 											width: "100%",
 											justifyContent: "space-between"
 										},
-										children: [Vz === "ease-out" ? "Ease Out" : Vz === "linear" ? "Linear" : Vz === "bounce" ? "Bounce" : "Ease", /* @__PURE__ */ jsx(ChevronDownIcon, {})]
+										children: [Hz === "ease-out" ? "Ease Out" : Hz === "linear" ? "Linear" : Hz === "bounce" ? "Bounce" : "Ease", /* @__PURE__ */ jsx(ChevronDownIcon, {})]
 									}) }), /* @__PURE__ */ jsxs(g$2, {
+										...E && { container: E },
 										style: { zIndex: 1e5 },
 										children: [
 											/* @__PURE__ */ jsx(v$4, {
-												onSelect: () => Hz("ease"),
+												onSelect: () => Gz("ease"),
 												children: "Ease"
 											}),
 											/* @__PURE__ */ jsx(v$4, {
-												onSelect: () => Hz("ease-out"),
+												onSelect: () => Gz("ease-out"),
 												children: "Ease Out"
 											}),
 											/* @__PURE__ */ jsx(v$4, {
-												onSelect: () => Hz("linear"),
+												onSelect: () => Gz("linear"),
 												children: "Linear"
 											}),
 											/* @__PURE__ */ jsx(v$4, {
-												onSelect: () => Hz("bounce"),
+												onSelect: () => Gz("bounce"),
 												children: "Bounce"
 											})
 										]
@@ -22047,8 +22148,8 @@ const ShortcutsDialog = () => /* @__PURE__ */ jsxs(s$5, { children: [/* @__PURE_
 											children: "Tamanho do Grid (px) - 0 para desativar"
 										}), /* @__PURE__ */ jsx(u$1, {
 											type: "number",
-											value: Pz,
-											onChange: (n) => Fz(n.target.value),
+											value: Fz,
+											onChange: (n) => Lz(n.target.value),
 											placeholder: "0"
 										})]
 									})
@@ -22066,22 +22167,7 @@ const ShortcutsDialog = () => /* @__PURE__ */ jsxs(s$5, { children: [/* @__PURE_
 						color: "gray",
 						children: "Cancelar"
 					}) }), /* @__PURE__ */ jsx(D$2, { children: /* @__PURE__ */ jsx(o, {
-						onClick: () => {
-							let n = parseInt(Mz, 10), _ = parseInt(Az, 10), j = parseInt(Pz, 10), P = {
-								type: Lz,
-								duration: Number(zz),
-								delay: 0,
-								timingFunction: Vz
-							};
-							E({
-								sortProp: N === "__none__" ? "" : N,
-								sortOrder: z,
-								newestPosition: H,
-								scrollDirection: W,
-								containerHeight: !isNaN(n) && n > 0 ? n : void 0,
-								entryAnimation: P
-							}), !isNaN(_) && _ > 0 && O(_), !isNaN(j) && j >= 0 && A(j), M(!1);
-						},
+						onClick: qz,
 						children: "Salvar Alterações"
 					}) })]
 				})
@@ -24638,16 +24724,16 @@ const SimpleLayers = () => {
 		}) : null })]
 	}) });
 }, SimpleProperties = () => {
-	let { state: n, updateElement: _, removeSelected: E, copy: O } = useEditor(), [A, j] = useState(!1), M = n.selectedElementIds[0], N = n.elements.find((n) => n.id === M);
-	if (!N) return null;
-	let P = (n) => {
-		_(N.id, n);
-	}, z = (n) => {
-		P({ style: {
-			...N.style,
+	let { state: n, portalContainer: _, updateElement: E, removeSelected: O, copy: A } = useEditor(), [j, M] = useState(!1), N = n.selectedElementIds[0], P = n.elements.find((n) => n.id === N);
+	if (!P) return null;
+	let z = (n) => {
+		E(P.id, n);
+	}, B = (n) => {
+		z({ style: {
+			...P.style,
 			...n
 		} });
-	}, B = N.style?.textAlign || "left", H = parseInt(N.style?.fontSize || "14", 10), U = parseInt(N.style?.borderWidth || "0", 10), W = parseInt(N.style?.padding || "0", 10), G = parseInt(N.style?.borderRadius || "0", 10), Z = Math.round((parseFloat(String(N.style?.opacity ?? "1")) || 1) * 100), Az = N.style?.fontFamily || "Arial", jz = normalizeFontWeightForSelect(N.style?.fontWeight, FONT_WEIGHT_OPTIONS), Mz = ensureFontInOptions(Az, n.availableFonts || [
+	}, H = P.style?.textAlign || "left", U = parseInt(P.style?.fontSize || "14", 10), W = parseInt(P.style?.borderWidth || "0", 10), G = parseInt(P.style?.padding || "0", 10), Z = parseInt(P.style?.borderRadius || "0", 10), Az = Math.round((parseFloat(String(P.style?.opacity ?? "1")) || 1) * 100), jz = P.style?.fontFamily || "Arial", Mz = normalizeFontWeightForSelect(P.style?.fontWeight, FONT_WEIGHT_OPTIONS), Nz = ensureFontInOptions(jz, n.availableFonts || [
 		"Arial",
 		"Helvetica",
 		"Times New Roman",
@@ -24667,36 +24753,36 @@ const SimpleLayers = () => {
 				children: [/* @__PURE__ */ jsx(p$2, {
 					size: "3",
 					weight: "bold",
-					children: getElementLabel(N.type)
+					children: getElementLabel(P.type)
 				}), /* @__PURE__ */ jsxs(p$1, {
 					gap: "2",
 					children: [
 						/* @__PURE__ */ jsx(o$2, {
 							variant: "soft",
-							color: N.locked ? "orange" : "gray",
-							onClick: () => P({ locked: !N.locked }),
-							title: N.locked ? "Desbloquear" : "Bloquear",
-							children: N.locked ? /* @__PURE__ */ jsx(LockClosedIcon, {}) : /* @__PURE__ */ jsx(LockOpen1Icon, {})
+							color: P.locked ? "orange" : "gray",
+							onClick: () => z({ locked: !P.locked }),
+							title: P.locked ? "Desbloquear" : "Bloquear",
+							children: P.locked ? /* @__PURE__ */ jsx(LockClosedIcon, {}) : /* @__PURE__ */ jsx(LockOpen1Icon, {})
 						}),
 						/* @__PURE__ */ jsx(o$2, {
 							variant: "soft",
-							color: N.hidden ? "blue" : "gray",
-							onClick: () => P({ hidden: !N.hidden }),
-							title: N.hidden ? "Mostrar" : "Ocultar",
-							children: N.hidden ? /* @__PURE__ */ jsx(EyeNoneIcon, {}) : /* @__PURE__ */ jsx(EyeOpenIcon, {})
+							color: P.hidden ? "blue" : "gray",
+							onClick: () => z({ hidden: !P.hidden }),
+							title: P.hidden ? "Mostrar" : "Ocultar",
+							children: P.hidden ? /* @__PURE__ */ jsx(EyeNoneIcon, {}) : /* @__PURE__ */ jsx(EyeOpenIcon, {})
 						}),
 						/* @__PURE__ */ jsx(o$3, { orientation: "vertical" }),
 						/* @__PURE__ */ jsx(o$2, {
 							variant: "soft",
 							color: "gray",
-							onClick: O,
+							onClick: A,
 							title: "Copiar",
 							children: /* @__PURE__ */ jsx(CopyIcon, {})
 						}),
 						/* @__PURE__ */ jsx(o$2, {
 							variant: "soft",
 							color: "red",
-							onClick: E,
+							onClick: O,
 							title: "Excluir",
 							children: /* @__PURE__ */ jsx(TrashIcon, {})
 						})
@@ -24704,19 +24790,19 @@ const SimpleLayers = () => {
 				})]
 			}),
 			/* @__PURE__ */ jsx(o$3, { size: "4" }),
-			(N.type === "text" || N.type === "text-container") && /* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
+			(P.type === "text" || P.type === "text-container") && /* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
 				size: "2",
 				weight: "bold",
 				mb: "2",
 				as: "div",
 				children: "Conteúdo"
 			}), /* @__PURE__ */ jsx(r$1, {
-				value: N.content,
-				onChange: (n) => P({ content: n.target.value }),
+				value: P.content,
+				onChange: (n) => z({ content: n.target.value }),
 				rows: 3,
 				placeholder: "Digite o texto aqui..."
 			})] }),
-			N.type === "image" && /* @__PURE__ */ jsxs(p, { children: [
+			P.type === "image" && /* @__PURE__ */ jsxs(p, { children: [
 				/* @__PURE__ */ jsx(p$2, {
 					size: "2",
 					weight: "bold",
@@ -24739,16 +24825,17 @@ const SimpleLayers = () => {
 							width: "100%",
 							justifyContent: "space-between"
 						},
-						children: [N.dataBinding ? n.availableProps.find((n) => n.dataName === N.dataBinding)?.name || N.dataBinding : "Nenhum (URL fixa)", /* @__PURE__ */ jsx(ChevronDownIcon, {})]
+						children: [P.dataBinding ? n.availableProps.find((n) => n.dataName === P.dataBinding)?.name || P.dataBinding : "Nenhum (URL fixa)", /* @__PURE__ */ jsx(ChevronDownIcon, {})]
 					}) }), /* @__PURE__ */ jsxs(g$2, {
+						..._ && { container: _ },
 						style: { zIndex: 1e5 },
 						children: [
 							/* @__PURE__ */ jsx(v$4, {
-								onSelect: () => P({ dataBinding: void 0 }),
+								onSelect: () => z({ dataBinding: void 0 }),
 								children: "Nenhum (URL fixa)"
 							}),
 							n.availableProps.map((n) => /* @__PURE__ */ jsx(v$4, {
-								onSelect: () => P({
+								onSelect: () => z({
 									dataBinding: n.dataName,
 									content: `{{${n.dataName}}}`
 								}),
@@ -24770,8 +24857,8 @@ const SimpleLayers = () => {
 						children: "URL ou {{variável}}"
 					}),
 					/* @__PURE__ */ jsx(u$1, {
-						value: N.content,
-						onChange: (n) => P({ content: n.target.value }),
+						value: P.content,
+						onChange: (n) => z({ content: n.target.value }),
 						placeholder: "https://... ou {{profilePicture}}"
 					}),
 					/* @__PURE__ */ jsx(p$2, {
@@ -24793,7 +24880,7 @@ const SimpleLayers = () => {
 				direction: "column",
 				gap: "3",
 				children: [
-					(N.type === "text" || N.type === "text-container") && /* @__PURE__ */ jsxs(Fragment$1, { children: [
+					(P.type === "text" || P.type === "text-container") && /* @__PURE__ */ jsxs(Fragment$1, { children: [
 						/* @__PURE__ */ jsxs(o$1, {
 							columns: "2",
 							gap: "3",
@@ -24811,13 +24898,14 @@ const SimpleLayers = () => {
 									justifyContent: "space-between"
 								},
 								children: [/* @__PURE__ */ jsx("span", {
-									style: { fontFamily: Az },
-									children: Az
+									style: { fontFamily: jz },
+									children: jz
 								}), /* @__PURE__ */ jsx(ChevronDownIcon, {})]
 							}) }), /* @__PURE__ */ jsx(g$2, {
+								..._ && { container: _ },
 								style: { zIndex: 1e5 },
-								children: Mz.map((n) => /* @__PURE__ */ jsx(v$4, {
-									onSelect: () => z({ fontFamily: n }),
+								children: Nz.map((n) => /* @__PURE__ */ jsx(v$4, {
+									onSelect: () => B({ fontFamily: n }),
 									style: { fontFamily: n },
 									children: n
 								}, n))
@@ -24834,35 +24922,36 @@ const SimpleLayers = () => {
 									width: "100%",
 									justifyContent: "space-between"
 								},
-								children: [jz === "normal" ? "Normal" : jz === "bold" ? "Negrito" : jz === "100" ? "Fina" : jz === "300" ? "Leve" : "Pesada", /* @__PURE__ */ jsx(ChevronDownIcon, {})]
+								children: [Mz === "normal" ? "Normal" : Mz === "bold" ? "Negrito" : Mz === "100" ? "Fina" : Mz === "300" ? "Leve" : "Pesada", /* @__PURE__ */ jsx(ChevronDownIcon, {})]
 							}) }), /* @__PURE__ */ jsxs(g$2, {
+								..._ && { container: _ },
 								style: { zIndex: 1e5 },
 								children: [
 									/* @__PURE__ */ jsx(v$4, {
-										onSelect: () => z({ fontWeight: "normal" }),
+										onSelect: () => B({ fontWeight: "normal" }),
 										children: "Normal"
 									}),
 									/* @__PURE__ */ jsx(v$4, {
 										onSelect: () => {
-											z({ fontWeight: "bold" });
+											B({ fontWeight: "bold" });
 										},
 										children: "Negrito"
 									}),
 									/* @__PURE__ */ jsx(v$4, {
 										onSelect: () => {
-											z({ fontWeight: "100" });
+											B({ fontWeight: "100" });
 										},
 										children: "Fina"
 									}),
 									/* @__PURE__ */ jsx(v$4, {
 										onSelect: () => {
-											z({ fontWeight: "300" });
+											B({ fontWeight: "300" });
 										},
 										children: "Leve"
 									}),
 									/* @__PURE__ */ jsx(v$4, {
 										onSelect: () => {
-											z({ fontWeight: "900" });
+											B({ fontWeight: "900" });
 										},
 										children: "Pesada"
 									})
@@ -24878,13 +24967,13 @@ const SimpleLayers = () => {
 								children: "Tamanho do Texto"
 							}), /* @__PURE__ */ jsxs(p$2, {
 								size: "1",
-								children: [H, "px"]
+								children: [U, "px"]
 							})]
 						}), /* @__PURE__ */ jsx(s, {
 							min: 8,
 							max: 72,
-							value: [H],
-							onValueChange: (n) => z({ fontSize: `${n[0]}px` })
+							value: [U],
+							onValueChange: (n) => B({ fontSize: `${n[0]}px` })
 						})] }),
 						/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
 							size: "1",
@@ -24896,21 +24985,21 @@ const SimpleLayers = () => {
 							gap: "2",
 							children: [
 								/* @__PURE__ */ jsx(o$2, {
-									variant: B === "left" ? "solid" : "soft",
+									variant: H === "left" ? "solid" : "soft",
 									color: "gray",
-									onClick: () => z({ textAlign: "left" }),
+									onClick: () => B({ textAlign: "left" }),
 									children: /* @__PURE__ */ jsx(TextAlignLeftIcon, {})
 								}),
 								/* @__PURE__ */ jsx(o$2, {
-									variant: B === "center" ? "solid" : "soft",
+									variant: H === "center" ? "solid" : "soft",
 									color: "gray",
-									onClick: () => z({ textAlign: "center" }),
+									onClick: () => B({ textAlign: "center" }),
 									children: /* @__PURE__ */ jsx(TextAlignCenterIcon, {})
 								}),
 								/* @__PURE__ */ jsx(o$2, {
-									variant: B === "right" ? "solid" : "soft",
+									variant: H === "right" ? "solid" : "soft",
 									color: "gray",
-									onClick: () => z({ textAlign: "right" }),
+									onClick: () => B({ textAlign: "right" }),
 									children: /* @__PURE__ */ jsx(TextAlignRightIcon, {})
 								})
 							]
@@ -24928,28 +25017,28 @@ const SimpleLayers = () => {
 								gap: "1",
 								children: [
 									/* @__PURE__ */ jsx(o$2, {
-										variant: N.style?.fontStyle === "italic" ? "solid" : "soft",
+										variant: P.style?.fontStyle === "italic" ? "solid" : "soft",
 										color: "gray",
 										onClick: (n) => {
-											n.stopPropagation(), z({ fontStyle: N.style?.fontStyle === "italic" ? "normal" : "italic" });
+											n.stopPropagation(), B({ fontStyle: P.style?.fontStyle === "italic" ? "normal" : "italic" });
 										},
 										title: "Itálico",
 										children: /* @__PURE__ */ jsx(FontItalicIcon, {})
 									}),
 									/* @__PURE__ */ jsx(o$2, {
-										variant: N.style?.textDecoration === "underline" ? "solid" : "soft",
+										variant: P.style?.textDecoration === "underline" ? "solid" : "soft",
 										color: "gray",
 										onClick: (n) => {
-											n.stopPropagation(), z({ textDecoration: N.style?.textDecoration === "underline" ? "none" : "underline" });
+											n.stopPropagation(), B({ textDecoration: P.style?.textDecoration === "underline" ? "none" : "underline" });
 										},
 										title: "Sublinhado",
 										children: /* @__PURE__ */ jsx(UnderlineIcon, {})
 									}),
 									/* @__PURE__ */ jsx(o$2, {
-										variant: N.style?.textDecoration === "line-through" ? "solid" : "soft",
+										variant: P.style?.textDecoration === "line-through" ? "solid" : "soft",
 										color: "gray",
 										onClick: (n) => {
-											n.stopPropagation(), z({ textDecoration: N.style?.textDecoration === "line-through" ? "none" : "line-through" });
+											n.stopPropagation(), B({ textDecoration: P.style?.textDecoration === "line-through" ? "none" : "line-through" });
 										},
 										title: "Tachado",
 										children: /* @__PURE__ */ jsx(StrikethroughIcon, {})
@@ -24968,24 +25057,25 @@ const SimpleLayers = () => {
 									width: "100%",
 									justifyContent: "space-between"
 								},
-								children: [(N.style?.textTransform || "none") === "none" ? "Nenhum" : N.style?.textTransform === "uppercase" ? "MAIÚSCULA" : N.style?.textTransform === "lowercase" ? "minúscula" : "Capitalizada", /* @__PURE__ */ jsx(ChevronDownIcon, {})]
+								children: [(P.style?.textTransform || "none") === "none" ? "Nenhum" : P.style?.textTransform === "uppercase" ? "MAIÚSCULA" : P.style?.textTransform === "lowercase" ? "minúscula" : "Capitalizada", /* @__PURE__ */ jsx(ChevronDownIcon, {})]
 							}) }), /* @__PURE__ */ jsxs(g$2, {
+								..._ && { container: _ },
 								style: { zIndex: 1e5 },
 								children: [
 									/* @__PURE__ */ jsx(v$4, {
-										onSelect: () => z({ textTransform: "none" }),
+										onSelect: () => B({ textTransform: "none" }),
 										children: "Nenhum"
 									}),
 									/* @__PURE__ */ jsx(v$4, {
-										onSelect: () => z({ textTransform: "uppercase" }),
+										onSelect: () => B({ textTransform: "uppercase" }),
 										children: "MAIÚSCULA"
 									}),
 									/* @__PURE__ */ jsx(v$4, {
-										onSelect: () => z({ textTransform: "lowercase" }),
+										onSelect: () => B({ textTransform: "lowercase" }),
 										children: "minúscula"
 									}),
 									/* @__PURE__ */ jsx(v$4, {
-										onSelect: () => z({ textTransform: "capitalize" }),
+										onSelect: () => B({ textTransform: "capitalize" }),
 										children: "Capitalizada"
 									})
 								]
@@ -25002,8 +25092,8 @@ const SimpleLayers = () => {
 								children: "Altura da Linha"
 							}), /* @__PURE__ */ jsx(u$1, {
 								placeholder: "Normal",
-								value: N.style?.lineHeight || "",
-								onChange: (n) => z({ lineHeight: n.target.value || "normal" })
+								value: P.style?.lineHeight || "",
+								onChange: (n) => B({ lineHeight: n.target.value || "normal" })
 							})] }), /* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
 								size: "1",
 								color: "gray",
@@ -25012,11 +25102,11 @@ const SimpleLayers = () => {
 								children: "Espaçamento"
 							}), /* @__PURE__ */ jsx(u$1, {
 								placeholder: "Normal",
-								value: N.style?.letterSpacing || "",
-								onChange: (n) => z({ letterSpacing: n.target.value || "normal" })
+								value: P.style?.letterSpacing || "",
+								onChange: (n) => B({ letterSpacing: n.target.value || "normal" })
 							})] })]
 						}),
-						N.type === "text-container" && /* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
+						P.type === "text-container" && /* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
 							size: "1",
 							color: "gray",
 							mb: "1",
@@ -25029,26 +25119,27 @@ const SimpleLayers = () => {
 								width: "100%",
 								justifyContent: "space-between"
 							},
-							children: [(N.style?.alignItems || "flex-start") === "flex-start" ? "Topo" : N.style?.alignItems === "center" ? "Centro" : "Base", /* @__PURE__ */ jsx(ChevronDownIcon, {})]
+							children: [(P.style?.alignItems || "flex-start") === "flex-start" ? "Topo" : P.style?.alignItems === "center" ? "Centro" : "Base", /* @__PURE__ */ jsx(ChevronDownIcon, {})]
 						}) }), /* @__PURE__ */ jsxs(g$2, {
+							..._ && { container: _ },
 							style: { zIndex: 1e5 },
 							children: [
 								/* @__PURE__ */ jsx(v$4, {
-									onSelect: () => z({ alignItems: "flex-start" }),
+									onSelect: () => B({ alignItems: "flex-start" }),
 									children: "Topo"
 								}),
 								/* @__PURE__ */ jsx(v$4, {
-									onSelect: () => z({ alignItems: "center" }),
+									onSelect: () => B({ alignItems: "center" }),
 									children: "Centro"
 								}),
 								/* @__PURE__ */ jsx(v$4, {
-									onSelect: () => z({ alignItems: "flex-end" }),
+									onSelect: () => B({ alignItems: "flex-end" }),
 									children: "Base"
 								})
 							]
 						})] })] })
 					] }),
-					N.type === "image" && /* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
+					P.type === "image" && /* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
 						size: "1",
 						color: "gray",
 						mb: "1",
@@ -25061,20 +25152,21 @@ const SimpleLayers = () => {
 							width: "100%",
 							justifyContent: "space-between"
 						},
-						children: [(N.style?.objectFit || "cover") === "cover" ? "Cobrir (Cover)" : N.style?.objectFit === "contain" ? "Conter (Contain)" : "Esticar (Fill)", /* @__PURE__ */ jsx(ChevronDownIcon, {})]
+						children: [(P.style?.objectFit || "cover") === "cover" ? "Cobrir (Cover)" : P.style?.objectFit === "contain" ? "Conter (Contain)" : "Esticar (Fill)", /* @__PURE__ */ jsx(ChevronDownIcon, {})]
 					}) }), /* @__PURE__ */ jsxs(g$2, {
+						..._ && { container: _ },
 						style: { zIndex: 1e5 },
 						children: [
 							/* @__PURE__ */ jsx(v$4, {
-								onSelect: () => z({ objectFit: "cover" }),
+								onSelect: () => B({ objectFit: "cover" }),
 								children: "Cobrir (Cover)"
 							}),
 							/* @__PURE__ */ jsx(v$4, {
-								onSelect: () => z({ objectFit: "contain" }),
+								onSelect: () => B({ objectFit: "contain" }),
 								children: "Conter (Contain)"
 							}),
 							/* @__PURE__ */ jsx(v$4, {
-								onSelect: () => z({ objectFit: "fill" }),
+								onSelect: () => B({ objectFit: "fill" }),
 								children: "Esticar (Fill)"
 							})
 						]
@@ -25089,17 +25181,17 @@ const SimpleLayers = () => {
 							as: "div",
 							children: "Cor de Fundo"
 						}), /* @__PURE__ */ jsx(ColorInput, {
-							color: N.style?.backgroundColor || "transparent",
-							onChange: (n) => z({ backgroundColor: n })
-						})] }), (N.type === "text" || N.type === "text-container") && /* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
+							color: P.style?.backgroundColor || "transparent",
+							onChange: (n) => B({ backgroundColor: n })
+						})] }), (P.type === "text" || P.type === "text-container") && /* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
 							size: "1",
 							color: "gray",
 							mb: "1",
 							as: "div",
 							children: "Cor do Texto"
 						}), /* @__PURE__ */ jsx(ColorInput, {
-							color: N.style?.color || "#000000",
-							onChange: (n) => z({ color: n })
+							color: P.style?.color || "#000000",
+							onChange: (n) => B({ color: n })
 						})] })]
 					}),
 					/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsxs(p$1, {
@@ -25111,27 +25203,27 @@ const SimpleLayers = () => {
 							children: "Borda (Espessura)"
 						}), /* @__PURE__ */ jsxs(p$2, {
 							size: "1",
-							children: [U, "px"]
+							children: [W, "px"]
 						})]
 					}), /* @__PURE__ */ jsx(s, {
 						min: 0,
 						max: 10,
-						value: [U],
-						onValueChange: (n) => z({
+						value: [W],
+						onValueChange: (n) => B({
 							borderWidth: `${n[0]}px`,
 							borderStyle: n[0] > 0 ? "solid" : "none",
-							borderColor: N.style?.borderColor || "#000000"
+							borderColor: P.style?.borderColor || "#000000"
 						})
 					})] }),
-					U > 0 && /* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
+					W > 0 && /* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsx(p$2, {
 						size: "1",
 						color: "gray",
 						mb: "1",
 						as: "div",
 						children: "Cor da Borda"
 					}), /* @__PURE__ */ jsx(ColorInput, {
-						color: N.style?.borderColor || "#000000",
-						onChange: (n) => z({ borderColor: n })
+						color: P.style?.borderColor || "#000000",
+						onChange: (n) => B({ borderColor: n })
 					})] }),
 					/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsxs(p$1, {
 						justify: "between",
@@ -25142,13 +25234,13 @@ const SimpleLayers = () => {
 							children: "Cantos Arredondados"
 						}), /* @__PURE__ */ jsxs(p$2, {
 							size: "1",
-							children: [G, "px"]
+							children: [Z, "px"]
 						})]
 					}), /* @__PURE__ */ jsx(s, {
 						min: 0,
 						max: 50,
-						value: [G],
-						onValueChange: (n) => z({ borderRadius: `${n[0]}px` })
+						value: [Z],
+						onValueChange: (n) => B({ borderRadius: `${n[0]}px` })
 					})] }),
 					/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsxs(p$1, {
 						justify: "between",
@@ -25159,13 +25251,13 @@ const SimpleLayers = () => {
 							children: "Opacidade"
 						}), /* @__PURE__ */ jsxs(p$2, {
 							size: "1",
-							children: [Z, "%"]
+							children: [Az, "%"]
 						})]
 					}), /* @__PURE__ */ jsx(s, {
 						min: 0,
 						max: 100,
-						value: [Z],
-						onValueChange: (n) => z({ opacity: n[0] / 100 })
+						value: [Az],
+						onValueChange: (n) => B({ opacity: n[0] / 100 })
 					})] }),
 					/* @__PURE__ */ jsxs(p, { children: [/* @__PURE__ */ jsxs(p$1, {
 						justify: "between",
@@ -25176,13 +25268,13 @@ const SimpleLayers = () => {
 							children: "Espaçamento Interno (Padding)"
 						}), /* @__PURE__ */ jsxs(p$2, {
 							size: "1",
-							children: [W, "px"]
+							children: [G, "px"]
 						})]
 					}), /* @__PURE__ */ jsx(s, {
 						min: 0,
 						max: 40,
-						value: [W],
-						onValueChange: (n) => z({ padding: `${n[0]}px` })
+						value: [G],
+						onValueChange: (n) => B({ padding: `${n[0]}px` })
 					})] })
 				]
 			})] }),
@@ -25192,7 +25284,7 @@ const SimpleLayers = () => {
 				style: { borderTop: "1px solid var(--gray-5)" },
 				children: [/* @__PURE__ */ jsxs(o, {
 					variant: "ghost",
-					onClick: () => j(!A),
+					onClick: () => M(!j),
 					style: {
 						width: "100%",
 						justifyContent: "space-between",
@@ -25206,15 +25298,15 @@ const SimpleLayers = () => {
 							size: "2",
 							children: "Mais opções"
 						})
-					}), jsx(A ? ChevronDownIcon : ChevronRightIcon, {})]
-				}), A && /* @__PURE__ */ jsx(p, {
+					}), jsx(j ? ChevronDownIcon : ChevronRightIcon, {})]
+				}), j && /* @__PURE__ */ jsx(p, {
 					mt: "3",
 					className: "advanced-properties-content",
-					children: /* @__PURE__ */ jsx(AdvancedPropertiesPanel, { elementId: N.id })
+					children: /* @__PURE__ */ jsx(AdvancedPropertiesPanel, { elementId: P.id })
 				})]
 			})
 		]
-	}, M);
+	}, N);
 };
 var getElementLabel = (n) => {
 	switch (n) {
@@ -25649,17 +25741,18 @@ const ViewToolbar = () => {
 		]
 	});
 }, WizardDialog = ({ isOpen: n, onClose: E, templates: O, onSelectTemplate: A, initialStep: j = 1, onFinishWizard: M, onStartTour: N }) => {
-	let [P, z] = useState(j), [B, H] = useState(null);
+	let { portalContainer: P } = useEditor(), [z, B] = useState(j), [H, U] = useState(null);
 	React.useEffect(() => {
-		n && j && z(j);
+		n && j && B(j);
 	}, [n, j]);
-	let U = () => {
-		P === 1 && B ? (A(O.find((n) => n.id === B) || null), z(2)) : P === 2 ? (E(), N && N()) : P === 3 && (M && M(), E());
+	let W = () => {
+		z === 1 && H ? (A(O.find((n) => n.id === H) || null), B(2)) : z === 2 ? (E(), N && N()) : z === 3 && (M && M(), E());
 	};
 	return /* @__PURE__ */ jsx(s$5, {
 		open: n,
 		onOpenChange: E,
 		children: /* @__PURE__ */ jsx(p$11, {
+			...P && { container: P },
 			style: { maxWidth: 800 },
 			children: /* @__PURE__ */ jsxs(p$1, {
 				direction: "column",
@@ -25674,12 +25767,12 @@ const ViewToolbar = () => {
 					}) }), /* @__PURE__ */ jsx(p$1, {
 						gap: "2",
 						children: /* @__PURE__ */ jsx(StepIndicator, {
-							current: P,
+							current: z,
 							total: 3
 						})
 					})]
 				}), /* @__PURE__ */ jsxs(p, { children: [
-					P === 1 && /* @__PURE__ */ jsxs(p$1, {
+					z === 1 && /* @__PURE__ */ jsxs(p$1, {
 						direction: "column",
 						gap: "4",
 						children: [
@@ -25696,13 +25789,13 @@ const ViewToolbar = () => {
 								columns: "3",
 								gap: "3",
 								children: [O.map((n) => /* @__PURE__ */ jsx(o$4, {
-									variant: B === n.id ? "surface" : "classic",
+									variant: H === n.id ? "surface" : "classic",
 									style: {
 										cursor: "pointer",
-										border: B === n.id ? "2px solid var(--accent-9)" : void 0,
-										backgroundColor: B === n.id ? "var(--accent-2)" : void 0
+										border: H === n.id ? "2px solid var(--accent-9)" : void 0,
+										backgroundColor: H === n.id ? "var(--accent-2)" : void 0
 									},
-									onClick: () => H(n.id),
+									onClick: () => U(n.id),
 									children: /* @__PURE__ */ jsxs(p$1, {
 										direction: "column",
 										gap: "2",
@@ -25739,13 +25832,13 @@ const ViewToolbar = () => {
 										]
 									})
 								}, n.id)), /* @__PURE__ */ jsx(o$4, {
-									variant: B === "blank" ? "surface" : "classic",
+									variant: H === "blank" ? "surface" : "classic",
 									style: {
 										cursor: "pointer",
-										border: B === "blank" ? "2px solid var(--accent-9)" : void 0,
-										backgroundColor: B === "blank" ? "var(--accent-2)" : void 0
+										border: H === "blank" ? "2px solid var(--accent-9)" : void 0,
+										backgroundColor: H === "blank" ? "var(--accent-2)" : void 0
 									},
-									onClick: () => H("blank"),
+									onClick: () => U("blank"),
 									children: /* @__PURE__ */ jsxs(p$1, {
 										direction: "column",
 										gap: "2",
@@ -25794,14 +25887,14 @@ const ViewToolbar = () => {
 									onClick: E,
 									children: "Pular Assistente"
 								}), /* @__PURE__ */ jsxs(o, {
-									onClick: U,
-									disabled: !B,
+									onClick: W,
+									disabled: !H,
 									children: ["Continuar ", /* @__PURE__ */ jsx(ArrowRightIcon, {})]
 								})]
 							})
 						]
 					}),
-					P === 2 && /* @__PURE__ */ jsxs(p$1, {
+					z === 2 && /* @__PURE__ */ jsxs(p$1, {
 						direction: "column",
 						gap: "4",
 						children: [
@@ -25880,16 +25973,16 @@ const ViewToolbar = () => {
 								children: [/* @__PURE__ */ jsxs(o, {
 									variant: "soft",
 									color: "gray",
-									onClick: () => z(1),
+									onClick: () => B(1),
 									children: [/* @__PURE__ */ jsx(ArrowRightIcon, { style: { transform: "rotate(180deg)" } }), " Voltar"]
 								}), /* @__PURE__ */ jsxs(o, {
-									onClick: U,
+									onClick: W,
 									children: ["Começar a Editar ", /* @__PURE__ */ jsx(ArrowRightIcon, {})]
 								})]
 							})
 						]
 					}),
-					P === 3 && /* @__PURE__ */ jsxs(p$1, {
+					z === 3 && /* @__PURE__ */ jsxs(p$1, {
 						direction: "column",
 						gap: "4",
 						children: [
@@ -25936,7 +26029,7 @@ const ViewToolbar = () => {
 									onClick: E,
 									children: "Voltar a Editar"
 								}), /* @__PURE__ */ jsxs(o, {
-									onClick: U,
+									onClick: W,
 									color: "green",
 									children: [/* @__PURE__ */ jsx(CheckIcon, {}), " Concluir e Exportar"]
 								})]
@@ -25978,7 +26071,7 @@ var StepIndicator = ({ current: n, total: _ }) => /* @__PURE__ */ jsx(p$1, {
 		} })]
 	}, E))
 }), EditorContent = ({ initialState: n, onSave: E, theme: O = "light", templates: A, activeTemplateId: j, onTemplateChange: M }) => {
-	let [N, P] = useState(!0), [z, B] = useState(!0), [H, U] = useState(!1), [W, G] = useState(!1), [Z, Az] = useState(A && A.length > 0 ? A[0].id : null), jz = React.useRef(null), [Mz, Nz] = useState(!1), [Pz, Fz] = useState(1), [Lz, Rz] = useState(!1), { addElement: zz, loadState: Bz, state: Vz, undo: Hz, redo: Gz, copy: Kz, paste: qz, removeSelected: Jz, updateElements: Yz } = useEditor(), Xz = React.useRef(!1);
+	let [N, P] = useState(!0), [z, B] = useState(!0), [H, U] = useState(!1), [W, G] = useState(!1), [Z, Az] = useState(A && A.length > 0 ? A[0].id : null), jz = React.useRef(null), [Mz, Nz] = useState(!1), [Pz, Fz] = useState(1), [Lz, Rz] = useState(!1), { addElement: zz, loadState: Bz, state: Vz, portalContainer: Hz, undo: Gz, redo: Kz, copy: qz, paste: Jz, removeSelected: Yz, updateElements: Xz } = useEditor(), Zz = React.useRef(!1);
 	React.useEffect(() => {
 		let n = () => {
 			let n = window.innerWidth < 768;
@@ -25986,7 +26079,7 @@ var StepIndicator = ({ current: n, total: _ }) => /* @__PURE__ */ jsx(p$1, {
 		};
 		return n(), window.addEventListener("resize", n), () => window.removeEventListener("resize", n);
 	}, []);
-	let Zz = () => {
+	let Qz = () => {
 		let n = {
 			elements: Vz.elements,
 			isList: Vz.isList,
@@ -26025,11 +26118,11 @@ var StepIndicator = ({ current: n, total: _ }) => /* @__PURE__ */ jsx(p$1, {
 	}, [zz]), React.useEffect(() => {
 		let n = (n) => {
 			if (!(document.activeElement?.tagName === "INPUT" || document.activeElement?.tagName === "TEXTAREA" || document.activeElement?.isContentEditable)) {
-				if ((n.ctrlKey || n.metaKey) && n.key === "z") n.shiftKey ? (n.preventDefault(), Gz()) : (n.preventDefault(), Hz());
-				else if ((n.ctrlKey || n.metaKey) && n.key === "y") n.preventDefault(), Gz();
-				else if ((n.ctrlKey || n.metaKey) && n.key === "c") n.preventDefault(), Kz();
-				else if ((n.ctrlKey || n.metaKey) && n.key === "v") n.preventDefault(), qz();
-				else if (n.key === "Delete" || n.key === "Backspace") Vz.selectedElementIds.length > 0 && (n.preventDefault(), Jz());
+				if ((n.ctrlKey || n.metaKey) && n.key === "z") n.shiftKey ? (n.preventDefault(), Kz()) : (n.preventDefault(), Gz());
+				else if ((n.ctrlKey || n.metaKey) && n.key === "y") n.preventDefault(), Kz();
+				else if ((n.ctrlKey || n.metaKey) && n.key === "c") n.preventDefault(), qz();
+				else if ((n.ctrlKey || n.metaKey) && n.key === "v") n.preventDefault(), Jz();
+				else if (n.key === "Delete" || n.key === "Backspace") Vz.selectedElementIds.length > 0 && (n.preventDefault(), Yz());
 				else if ([
 					"ArrowUp",
 					"ArrowDown",
@@ -26047,22 +26140,22 @@ var StepIndicator = ({ current: n, total: _ }) => /* @__PURE__ */ jsx(p$1, {
 								changes: j
 							});
 						}
-					}), E.length > 0 && Yz(E);
+					}), E.length > 0 && Xz(E);
 				}
 			}
 		};
 		return window.addEventListener("keydown", n), () => window.removeEventListener("keydown", n);
 	}, [
-		Hz,
 		Gz,
 		Kz,
 		qz,
 		Jz,
+		Yz,
 		Vz.selectedElementIds,
 		Vz.elements,
-		Yz
+		Xz
 	]);
-	let [Qz, $z] = useState(!1);
+	let [$z, eB] = useState(!1);
 	React.useEffect(() => {
 		if (n) try {
 			let _ = typeof n == "string" ? JSON.parse(n) : n;
@@ -26070,17 +26163,17 @@ var StepIndicator = ({ current: n, total: _ }) => /* @__PURE__ */ jsx(p$1, {
 		} catch (n) {
 			console.error("Failed to load initial state", n);
 		}
-		$z(!0);
+		eB(!0);
 	}, [n, Bz]), React.useEffect(() => {
-		Qz && (Xz.current || Vz.elements.length === 0 && (Xz.current = !0, Fz(1), Nz(!0)));
-	}, [Qz, Vz.elements]), React.useEffect(() => {
+		$z && (Zz.current || Vz.elements.length === 0 && (Zz.current = !0, Fz(1), Nz(!0)));
+	}, [$z, Vz.elements]), React.useEffect(() => {
 		!A || A.length === 0 || H && Az(j || A[0].id);
 	}, [
 		j,
 		H,
 		A
 	]);
-	let eB = React.useCallback((n) => {
+	let tB = React.useCallback((n) => {
 		if (n) try {
 			let _ = typeof n == "string" ? JSON.parse(n) : n;
 			if (Array.isArray(_)) {
@@ -26098,10 +26191,10 @@ var StepIndicator = ({ current: n, total: _ }) => /* @__PURE__ */ jsx(p$1, {
 	return React.useEffect(() => {
 		if (!A || A.length === 0 || !j || jz.current === j) return;
 		let n = A.find((n) => n.id === j);
-		n && (eB(n.state), jz.current = j);
+		n && (tB(n.state), jz.current = j);
 	}, [
 		j,
-		eB,
+		tB,
 		A
 	]), /* @__PURE__ */ jsx(R, {
 		appearance: O,
@@ -26332,6 +26425,7 @@ var StepIndicator = ({ current: n, total: _ }) => /* @__PURE__ */ jsx(p$1, {
 					open: H,
 					onOpenChange: U,
 					children: /* @__PURE__ */ jsxs(p$11, {
+						...Hz && { container: Hz },
 						style: { maxWidth: 450 },
 						children: [
 							/* @__PURE__ */ jsx(g$3, { children: "Galeria de Templates" }),
@@ -26394,7 +26488,7 @@ var StepIndicator = ({ current: n, total: _ }) => /* @__PURE__ */ jsx(p$1, {
 													return;
 												}
 												let n = A.find((n) => n.id === Z);
-												n && (eB(n.state), jz.current = Z);
+												n && (tB(n.state), jz.current = Z);
 											},
 											children: "Aplicar"
 										}) })]
@@ -26409,12 +26503,12 @@ var StepIndicator = ({ current: n, total: _ }) => /* @__PURE__ */ jsx(p$1, {
 					onClose: () => Nz(!1),
 					templates: A || [],
 					onSelectTemplate: (n) => {
-						n && eB(n.state);
+						n && tB(n.state);
 					},
 					onStartTour: () => Rz(!0),
 					initialStep: Pz,
 					onFinishWizard: () => {
-						Zz(), alert("Layout finalizado e exportado com sucesso!");
+						Qz(), alert("Layout finalizado e exportado com sucesso!");
 					}
 				}),
 				/* @__PURE__ */ jsx(OnboardingTour, {
@@ -26430,6 +26524,7 @@ const GenericEditor = (n) => /* @__PURE__ */ jsx(EditorProvider, {
 	isList: n.layout.isList,
 	availableProps: n.layout.props,
 	theme: n.theme,
+	portalContainer: n.portalContainer,
 	children: /* @__PURE__ */ jsx(EditorContent, { ...n })
 });
 var camelToKebab = (n) => n.replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, "$1-$2").toLowerCase(), hex8ToRgba = (n) => {

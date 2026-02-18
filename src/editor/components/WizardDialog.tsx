@@ -1,6 +1,7 @@
 import { ArrowRightIcon, CheckIcon, FileTextIcon, MagicWandIcon } from '@radix-ui/react-icons';
 import { Box, Button, Card, Dialog, Flex, Grid, Heading, Text } from '@radix-ui/themes';
 import React, { useState } from 'react';
+import { useEditor } from '../context';
 import type { ITemplate } from '../types';
 
 export interface WizardDialogProps {
@@ -14,6 +15,7 @@ export interface WizardDialogProps {
 }
 
 export const WizardDialog: React.FC<WizardDialogProps> = ({ isOpen, onClose, templates, onSelectTemplate, initialStep = 1, onFinishWizard, onStartTour }) => {
+    const { portalContainer } = useEditor();
     const [step, setStep] = useState(initialStep);
     const [selectedTemplateId, setSelectedTemplateId] = useState<string | null>(null);
 
@@ -39,7 +41,7 @@ export const WizardDialog: React.FC<WizardDialogProps> = ({ isOpen, onClose, tem
 
     return (
         <Dialog.Root open={isOpen} onOpenChange={onClose}>
-            <Dialog.Content style={{ maxWidth: 800 }}>
+            <Dialog.Content {...(portalContainer && { container: portalContainer })} style={{ maxWidth: 800 }}>
                 <Flex direction="column" gap="4">
                     <Flex justify="between" align="center">
                         <Dialog.Title>

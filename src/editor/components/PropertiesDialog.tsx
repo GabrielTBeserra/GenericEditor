@@ -90,12 +90,13 @@ interface UnitInputProps {
     max?: number;
     placeholder?: string;
     label?: string;
+    portalContainer?: HTMLElement | null;
 }
 
 /** Sentinel for empty unit - Radix Select.Item cannot use value="" */
 const EMPTY_UNIT = '__';
 
-const UnitInput: React.FC<UnitInputProps> = ({ value, onChange, units = ['px', '%', 'em', 'rem', 'vw', 'vh'], min, max, placeholder, label }) => {
+const UnitInput: React.FC<UnitInputProps> = ({ value, onChange, units = ['px', '%', 'em', 'rem', 'vw', 'vh'], min, max, placeholder, label, portalContainer }) => {
     const toSelectValue = (u: string) => (u === '' ? EMPTY_UNIT : u);
     const fromSelectValue = (v: string) => (v === EMPTY_UNIT ? '' : v);
 
@@ -149,7 +150,7 @@ const UnitInput: React.FC<UnitInputProps> = ({ value, onChange, units = ['px', '
                     }}
                 >
                     <Select.Trigger style={{ width: 60, borderTopLeftRadius: 0, borderBottomLeftRadius: 0, marginLeft: -1 }} />
-                    <Select.Content>
+                    <Select.Content {...(portalContainer && { container: portalContainer })}>
                         {units.map(u => <Select.Item key={u || EMPTY_UNIT} value={toSelectValue(u)}>{u || placeholder || '—'}</Select.Item>)}
                     </Select.Content>
                 </Select.Root>
@@ -162,9 +163,10 @@ interface SideInputProps {
     values: { top?: string, right?: string, bottom?: string, left?: string };
     onChange: (values: { top?: string, right?: string, bottom?: string, left?: string }) => void;
     label?: string;
+    portalContainer?: HTMLElement | null;
 }
 
-const SideInput: React.FC<SideInputProps> = ({ values, onChange, label }) => {
+const SideInput: React.FC<SideInputProps> = ({ values, onChange, label, portalContainer }) => {
     const [isLinked, setIsLinked] = useState(true);
 
     const handleAllChange = (val: string) => {
@@ -191,17 +193,13 @@ const SideInput: React.FC<SideInputProps> = ({ values, onChange, label }) => {
                 </Tooltip>
             </Flex>
             {isLinked ? (
-                <UnitInput
-                    value={values.top || ''}
-                    onChange={handleAllChange}
-                    placeholder="Todos"
-                />
+                <UnitInput portalContainer={portalContainer} value={values.top || ''} onChange={handleAllChange} placeholder="Todos" />
             ) : (
                 <Grid columns="2" gap="2">
-                    <UnitInput value={values.top} onChange={v => handleIndividualChange('top', v)} label="Top" />
-                    <UnitInput value={values.right} onChange={v => handleIndividualChange('right', v)} label="Right" />
-                    <UnitInput value={values.bottom} onChange={v => handleIndividualChange('bottom', v)} label="Bottom" />
-                    <UnitInput value={values.left} onChange={v => handleIndividualChange('left', v)} label="Left" />
+                    <UnitInput portalContainer={portalContainer} value={values.top} onChange={v => handleIndividualChange('top', v)} label="Top" />
+                    <UnitInput portalContainer={portalContainer} value={values.right} onChange={v => handleIndividualChange('right', v)} label="Right" />
+                    <UnitInput portalContainer={portalContainer} value={values.bottom} onChange={v => handleIndividualChange('bottom', v)} label="Bottom" />
+                    <UnitInput portalContainer={portalContainer} value={values.left} onChange={v => handleIndividualChange('left', v)} label="Left" />
                 </Grid>
             )}
         </Box>
@@ -218,7 +216,7 @@ const UnlinkIcon = () => (
 
 
 export const PropertiesDialog: React.FC = () => {
-    const { state, setPropertiesPanelOpen, updateElement, updateElements, removeSelected, copy, paste, addElement } = useEditor();
+    const { state, portalContainer, setPropertiesPanelOpen, updateElement, updateElements, removeSelected, copy, paste, addElement } = useEditor();
     const { isPropertiesPanelOpen, selectedElementIds, elements } = state;
 
     const selectedElements = useMemo(() => {
@@ -368,7 +366,7 @@ export const PropertiesDialog: React.FC = () => {
 
     return (
         <Dialog.Root open={isPropertiesPanelOpen} onOpenChange={setPropertiesPanelOpen}>
-            <Dialog.Content style={{ maxWidth: 500, width: '100%', maxHeight: '85vh', height: '100%', padding: 0, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+            <Dialog.Content {...(portalContainer && { container: portalContainer })} style={{ maxWidth: 500, width: '100%', maxHeight: '85vh', height: '100%', padding: 0, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
                 {/* Header */}
                 <Box style={{ borderBottom: '1px solid var(--gray-4)' }}>
                     <Flex justify="between" align="center" p="4" pb="2">
@@ -379,7 +377,7 @@ export const PropertiesDialog: React.FC = () => {
                         <Flex gap="2">
                             <DropdownMenu.Root>
                                 <DropdownMenu.Trigger><IconButton variant="ghost" color="gray"><BookmarkIcon /></IconButton></DropdownMenu.Trigger>
-                                <DropdownMenu.Content>
+                                <DropdownMenu.Content {...(portalContainer && { container: portalContainer })}>
                                     <DropdownMenu.Label>Presets</DropdownMenu.Label>
                                     {Object.keys(presets).length === 0 && (
                                         <DropdownMenu.Item disabled>Nenhum preset salvo</DropdownMenu.Item>
@@ -449,7 +447,7 @@ export const PropertiesDialog: React.FC = () => {
                                                     <CaretDownIcon />
                                                 </Button>
                                             </DropdownMenu.Trigger>
-                                            <DropdownMenu.Content style={{ zIndex: 100000 }}>
+                                            <DropdownMenu.Content {...(portalContainer && { container: portalContainer })} style={{ zIndex: 100000 }}>
                                                 <DropdownMenu.Item onSelect={() => handleUpdate({ dataBinding: undefined })}>Nenhum (URL fixa)</DropdownMenu.Item>
                                                 {(state.availableProps || []).map(p => (
                                                     <DropdownMenu.Item key={p.dataName} onSelect={() => handleUpdate({ dataBinding: p.dataName, content: `{{${p.dataName}}}` })}>
@@ -474,14 +472,14 @@ export const PropertiesDialog: React.FC = () => {
                                     <Text size="1" color="gray" mb="1" as="div">Família da Fonte</Text>
                                     <Select.Root value={currentFont} onValueChange={(val) => handleStyleUpdate({ fontFamily: val })}>
                                         <Select.Trigger style={{ width: '100%' }} placeholder="Selecione..." />
-                                        <Select.Content style={{ zIndex: 100000 }}>
+                                        <Select.Content {...(portalContainer && { container: portalContainer })} style={{ zIndex: 100000 }}>
                                             {fontOptionsForSelect.map(f => <Select.Item key={f} value={f}>{f}</Select.Item>)}
                                         </Select.Content>
                                     </Select.Root>
                                 </Box>
-                                <UnitInput label="Tamanho" value={getStyle('fontSize', '16px')} onChange={val => handleStyleUpdate({ fontSize: val })} />
-                                <UnitInput label="Altura da Linha" value={getStyle('lineHeight', 'normal')} onChange={val => handleStyleUpdate({ lineHeight: val })} units={['', 'px', 'em', '%']} placeholder="Normal" />
-                                <UnitInput label="Espaçamento" value={getStyle('letterSpacing', 'normal')} onChange={val => handleStyleUpdate({ letterSpacing: val })} units={['px', 'em']} placeholder="Normal" />
+                                <UnitInput portalContainer={portalContainer} label="Tamanho" value={getStyle('fontSize', '16px')} onChange={val => handleStyleUpdate({ fontSize: val })} />
+                                <UnitInput portalContainer={portalContainer} label="Altura da Linha" value={getStyle('lineHeight', 'normal')} onChange={val => handleStyleUpdate({ lineHeight: val })} units={['', 'px', 'em', '%']} placeholder="Normal" />
+                                <UnitInput portalContainer={portalContainer} label="Espaçamento" value={getStyle('letterSpacing', 'normal')} onChange={val => handleStyleUpdate({ letterSpacing: val })} units={['px', 'em']} placeholder="Normal" />
                                 <Box>
                                     <Text size="1" color="gray" mb="1" as="div">Peso</Text>
                                     <Select.Root
@@ -489,7 +487,7 @@ export const PropertiesDialog: React.FC = () => {
                                         onValueChange={(val) => handleStyleUpdate({ fontWeight: val })}
                                     >
                                         <Select.Trigger style={{ width: '100%' }} placeholder="Normal" />
-                                        <Select.Content style={{ zIndex: 100000 }}>
+                                        <Select.Content {...(portalContainer && { container: portalContainer })} style={{ zIndex: 100000 }}>
                                             <Select.Item value="100">100 - Thin</Select.Item>
                                             <Select.Item value="300">300 - Light</Select.Item>
                                             <Select.Item value="400">400 - Normal</Select.Item>
@@ -516,7 +514,7 @@ export const PropertiesDialog: React.FC = () => {
                                             <Text size="1" color="gray" mb="1" as="div">Transformação</Text>
                                             <Select.Root value={getStyle('textTransform', 'none') as string} onValueChange={(val) => handleStyleUpdate({ textTransform: val as any })}>
                                                 <Select.Trigger style={{ width: 100 }} />
-                                                <Select.Content>
+                                                <Select.Content {...(portalContainer && { container: portalContainer })}>
                                                     <Select.Item value="none">Nenhum</Select.Item>
                                                     <Select.Item value="uppercase">MAIÚSCULA</Select.Item>
                                                     <Select.Item value="lowercase">minúscula</Select.Item>
@@ -579,7 +577,7 @@ export const PropertiesDialog: React.FC = () => {
                                                 <Text size="1" color="gray" mb="1" as="div">Tamanho</Text>
                                                 <Select.Root value={getStyle('backgroundSize', 'auto') as string} onValueChange={v => handleStyleUpdate({ backgroundSize: v })}>
                                                     <Select.Trigger style={{ width: '100%' }} />
-                                                    <Select.Content>
+                                                    <Select.Content {...(portalContainer && { container: portalContainer })}>
                                                         <Select.Item value="auto">Auto</Select.Item>
                                                         <Select.Item value="cover">Cobrir (Cover)</Select.Item>
                                                         <Select.Item value="contain">Conter (Contain)</Select.Item>
@@ -591,7 +589,7 @@ export const PropertiesDialog: React.FC = () => {
                                                 <Text size="1" color="gray" mb="1" as="div">Repetição</Text>
                                                 <Select.Root value={getStyle('backgroundRepeat', 'repeat') as string} onValueChange={v => handleStyleUpdate({ backgroundRepeat: v })}>
                                                     <Select.Trigger style={{ width: '100%' }} />
-                                                    <Select.Content>
+                                                    <Select.Content {...(portalContainer && { container: portalContainer })}>
                                                         <Select.Item value="repeat">Repetir</Select.Item>
                                                         <Select.Item value="no-repeat">Não Repetir</Select.Item>
                                                         <Select.Item value="repeat-x">Horizontal</Select.Item>
@@ -617,7 +615,7 @@ export const PropertiesDialog: React.FC = () => {
                                     <Text size="1" color="gray" mb="1" as="div">Blend Mode</Text>
                                     <Select.Root value={getStyle('mixBlendMode', 'normal') as string} onValueChange={v => handleStyleUpdate({ mixBlendMode: v as any })}>
                                         <Select.Trigger style={{ width: '100%' }} />
-                                        <Select.Content>
+                                        <Select.Content {...(portalContainer && { container: portalContainer })}>
                                             <Select.Item value="normal">Normal</Select.Item>
                                             <Select.Item value="multiply">Multiply</Select.Item>
                                             <Select.Item value="screen">Screen</Select.Item>
@@ -631,7 +629,7 @@ export const PropertiesDialog: React.FC = () => {
                                     <Text size="1" color="gray" mb="1" as="div">Cursor</Text>
                                     <Select.Root value={getStyle('cursor', 'auto') as string} onValueChange={v => handleStyleUpdate({ cursor: v })}>
                                         <Select.Trigger style={{ width: '100%' }} />
-                                        <Select.Content>
+                                        <Select.Content {...(portalContainer && { container: portalContainer })}>
                                             <Select.Item value="auto">Auto</Select.Item>
                                             <Select.Item value="default">Padrão</Select.Item>
                                             <Select.Item value="pointer">Mãozinha</Select.Item>
@@ -649,16 +647,16 @@ export const PropertiesDialog: React.FC = () => {
                     {matchesSearch('Layout', ['width', 'height', 'x', 'y', 'z-index', 'overflow']) && (
                         <AccordionItem title="Layout & Dimensões" isOpen={openSections.layout} onToggle={() => toggleSection('layout')} onReset={() => handleUpdate({ width: 100, height: 100, x: 0, y: 0, style: { ...element.style, zIndex: undefined, overflow: undefined } })}>
                             <Grid columns="2" gap="3">
-                                <UnitInput label="Largura" value={element.width} onChange={v => handleUpdate({ width: parseFloat(v) })} units={['px']} />
-                                <UnitInput label="Altura" value={element.height} onChange={v => handleUpdate({ height: parseFloat(v) })} units={['px']} />
-                                <UnitInput label="Posição X" value={element.x} onChange={v => handleUpdate({ x: parseFloat(v) })} units={['px']} />
-                                <UnitInput label="Posição Y" value={element.y} onChange={v => handleUpdate({ y: parseFloat(v) })} units={['px']} />
-                                <UnitInput label="Z-Index" value={getStyle('zIndex', 'auto')} onChange={v => handleStyleUpdate({ zIndex: v === '' ? undefined : parseInt(v) })} units={['']} placeholder="Auto" />
+                                <UnitInput portalContainer={portalContainer} label="Largura" value={element.width} onChange={v => handleUpdate({ width: parseFloat(v) })} units={['px']} />
+                                <UnitInput portalContainer={portalContainer} label="Altura" value={element.height} onChange={v => handleUpdate({ height: parseFloat(v) })} units={['px']} />
+                                <UnitInput portalContainer={portalContainer} label="Posição X" value={element.x} onChange={v => handleUpdate({ x: parseFloat(v) })} units={['px']} />
+                                <UnitInput portalContainer={portalContainer} label="Posição Y" value={element.y} onChange={v => handleUpdate({ y: parseFloat(v) })} units={['px']} />
+                                <UnitInput portalContainer={portalContainer} label="Z-Index" value={getStyle('zIndex', 'auto')} onChange={v => handleStyleUpdate({ zIndex: v === '' ? undefined : parseInt(v) })} units={['']} placeholder="Auto" />
                                 <Box>
                                     <Text size="1" color="gray" mb="1" as="div">Overflow</Text>
                                     <Select.Root value={getStyle('overflow', 'visible') as string} onValueChange={v => handleStyleUpdate({ overflow: v })}>
                                         <Select.Trigger style={{ width: '100%' }} />
-                                        <Select.Content>
+                                        <Select.Content {...(portalContainer && { container: portalContainer })}>
                                             <Select.Item value="visible">Visível</Select.Item>
                                             <Select.Item value="hidden">Oculto</Select.Item>
                                             <Select.Item value="scroll">Scroll</Select.Item>
@@ -674,7 +672,7 @@ export const PropertiesDialog: React.FC = () => {
                     {matchesSearch('Espaçamento', ['padding', 'margin']) && (
                         <AccordionItem title="Espaçamento (Margin/Padding)" isOpen={openSections.spacing} onToggle={() => toggleSection('spacing')} onReset={() => handleResetStyle(['padding', 'paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft', 'margin', 'marginTop', 'marginRight', 'marginBottom', 'marginLeft'])}>
                             <Box mb="3">
-                                <SideInput
+                                <SideInput portalContainer={portalContainer}
                                     label="Padding (Interno)"
                                     values={{
                                         top: getStyle('paddingTop', getStyle('padding')),
@@ -692,7 +690,7 @@ export const PropertiesDialog: React.FC = () => {
                                 />
                             </Box>
                             <Box>
-                                <SideInput
+                                <SideInput portalContainer={portalContainer}
                                     label="Margin (Externo)"
                                     values={{
                                         top: getStyle('marginTop', getStyle('margin')),
@@ -729,7 +727,7 @@ export const PropertiesDialog: React.FC = () => {
                                             <Text size="1" color="gray" mb="1" as="div">Estilo</Text>
                                             <Select.Root value={getStyle('borderStyle', 'none') as string} onValueChange={v => handleStyleUpdate({ borderStyle: v })}>
                                                 <Select.Trigger style={{ width: '100%' }} />
-                                                <Select.Content>
+                                                <Select.Content {...(portalContainer && { container: portalContainer })}>
                                                     <Select.Item value="none">Nenhuma</Select.Item>
                                                     <Select.Item value="solid">Sólida</Select.Item>
                                                     <Select.Item value="dashed">Tracejada</Select.Item>
@@ -738,7 +736,7 @@ export const PropertiesDialog: React.FC = () => {
                                                 </Select.Content>
                                             </Select.Root>
                                         </Box>
-                                        <UnitInput label="Espessura" value={getStyle('borderWidth', '0px')} onChange={v => handleStyleUpdate({ borderWidth: v })} />
+                                        <UnitInput portalContainer={portalContainer} label="Espessura" value={getStyle('borderWidth', '0px')} onChange={v => handleStyleUpdate({ borderWidth: v })} />
                                         <Box style={{ gridColumn: 'span 2' }}>
                                             <Text size="1" color="gray" mb="1" as="div">Cor</Text>
                                             <ColorInput color={getStyle('borderColor', '#000000') as string} onChange={c => handleStyleUpdate({ borderColor: c })} />
@@ -748,7 +746,7 @@ export const PropertiesDialog: React.FC = () => {
                             </Tabs.Root>
 
                             <Box mt="3">
-                                <SideInput
+                                <SideInput portalContainer={portalContainer}
                                     label="Arredondamento (Radius)"
                                     values={{
                                         top: getStyle('borderTopLeftRadius', getStyle('borderRadius')),
@@ -799,10 +797,10 @@ export const PropertiesDialog: React.FC = () => {
                                                 </Flex>
                                             </Flex>
                                             <Grid columns="2" gap="2" mb="2">
-                                                <UnitInput label="X" value={shadowState.x} onChange={v => updateShadow({ x: parseFloat(v) })} units={['px']} />
-                                                <UnitInput label="Y" value={shadowState.y} onChange={v => updateShadow({ y: parseFloat(v) })} units={['px']} />
-                                                <UnitInput label="Blur" value={shadowState.blur} onChange={v => updateShadow({ blur: parseFloat(v) })} units={['px']} />
-                                                <UnitInput label="Spread" value={shadowState.spread} onChange={v => updateShadow({ spread: parseFloat(v) })} units={['px']} />
+                                                <UnitInput portalContainer={portalContainer} label="X" value={shadowState.x} onChange={v => updateShadow({ x: parseFloat(v) })} units={['px']} />
+                                                <UnitInput portalContainer={portalContainer} label="Y" value={shadowState.y} onChange={v => updateShadow({ y: parseFloat(v) })} units={['px']} />
+                                                <UnitInput portalContainer={portalContainer} label="Blur" value={shadowState.blur} onChange={v => updateShadow({ blur: parseFloat(v) })} units={['px']} />
+                                                <UnitInput portalContainer={portalContainer} label="Spread" value={shadowState.spread} onChange={v => updateShadow({ spread: parseFloat(v) })} units={['px']} />
                                             </Grid>
                                             <ColorInput color={shadowState.color} onChange={c => updateShadow({ color: c })} />
                                         </Box>
@@ -811,17 +809,17 @@ export const PropertiesDialog: React.FC = () => {
                                         <Box p="2" style={{ backgroundColor: 'var(--gray-3)', borderRadius: 'var(--radius-2)' }}>
                                             <Text size="1" weight="bold" mb="2" as="div">Text Shadow</Text>
                                             <Grid columns="2" gap="2" mb="2">
-                                                <UnitInput label="X" value={parseShadow(getStyle('textShadow', 'none') as string).x} onChange={v => {
+                                                <UnitInput portalContainer={portalContainer} label="X" value={parseShadow(getStyle('textShadow', 'none') as string).x} onChange={v => {
                                                     const current = parseShadow(getStyle('textShadow', 'none') as string);
                                                     const newVal = `${v}px ${current.y}px ${current.blur}px ${current.color}`;
                                                     handleStyleUpdate({ textShadow: newVal });
                                                 }} units={['px']} />
-                                                <UnitInput label="Y" value={parseShadow(getStyle('textShadow', 'none') as string).y} onChange={v => {
+                                                <UnitInput portalContainer={portalContainer} label="Y" value={parseShadow(getStyle('textShadow', 'none') as string).y} onChange={v => {
                                                     const current = parseShadow(getStyle('textShadow', 'none') as string);
                                                     const newVal = `${current.x}px ${v}px ${current.blur}px ${current.color}`;
                                                     handleStyleUpdate({ textShadow: newVal });
                                                 }} units={['px']} />
-                                                <UnitInput label="Blur" value={parseShadow(getStyle('textShadow', 'none') as string).blur} onChange={v => {
+                                                <UnitInput portalContainer={portalContainer} label="Blur" value={parseShadow(getStyle('textShadow', 'none') as string).blur} onChange={v => {
                                                     const current = parseShadow(getStyle('textShadow', 'none') as string);
                                                     const newVal = `${current.x}px ${current.y}px ${v}px ${current.color}`;
                                                     handleStyleUpdate({ textShadow: newVal });
@@ -843,7 +841,7 @@ export const PropertiesDialog: React.FC = () => {
                     {matchesSearch('Transform', ['scale', 'rotate', 'skew', 'translate']) && (
                         <AccordionItem title="Transformação" isOpen={openSections.transform} onToggle={() => toggleSection('transform')} onReset={() => handleUpdate({ rotation: 0, style: { ...element.style, transform: undefined } })}>
                             <Grid columns="2" gap="3">
-                                <UnitInput label="Rotação (deg)" value={element.rotation} onChange={v => handleUpdate({ rotation: parseFloat(v) })} units={['deg']} />
+                                <UnitInput portalContainer={portalContainer} label="Rotação (deg)" value={element.rotation} onChange={v => handleUpdate({ rotation: parseFloat(v) })} units={['deg']} />
                                 <Box style={{ gridColumn: 'span 2' }}>
                                     <Text size="1" color="gray" mb="1" as="div">Transform CSS (Scale, Skew, Translate)</Text>
                                     <TextField.Root

@@ -25,6 +25,8 @@ export interface EditorProps {
     templates?: ITemplate[];
     activeTemplateId?: string;
     onTemplateChange?: (templateId: string) => void;
+    /** Elemento para renderizar portais (modais, dropdowns). Passe o elemento em fullscreen para que modais apareçam. */
+    portalContainer?: HTMLElement | null;
 }
 
 const EditorContent: React.FC<EditorProps> = ({ initialState, onSave, theme = 'light', templates, activeTemplateId, onTemplateChange }) => {
@@ -37,7 +39,7 @@ const EditorContent: React.FC<EditorProps> = ({ initialState, onSave, theme = 'l
     const [isWizardOpen, setIsWizardOpen] = useState(false);
     const [wizardStep, setWizardStep] = useState(1);
     const [isTourOpen, setIsTourOpen] = useState(false);
-    const { addElement, loadState, state, undo, redo, copy, paste, removeSelected, updateElements } = useEditor();
+    const { addElement, loadState, state, portalContainer, undo, redo, copy, paste, removeSelected, updateElements } = useEditor();
     const hasAutoOpenedWizardRef = React.useRef(false);
 
     React.useEffect(() => {
@@ -436,7 +438,7 @@ const EditorContent: React.FC<EditorProps> = ({ initialState, onSave, theme = 'l
 
                 {/* Templates Modal */}
                 <Dialog.Root open={isTemplatesOpen} onOpenChange={setIsTemplatesOpen}>
-                    <Dialog.Content style={{ maxWidth: 450 }}>
+                    <Dialog.Content {...(portalContainer && { container: portalContainer })} style={{ maxWidth: 450 }}>
                         <Dialog.Title>Galeria de Templates</Dialog.Title>
                         <Dialog.Description size="2" mb="4">
                             Escolha um layout pré-definido para começar.
@@ -529,7 +531,7 @@ const EditorContent: React.FC<EditorProps> = ({ initialState, onSave, theme = 'l
 
 export const GenericEditor: React.FC<EditorProps> = (props) => {
     return (
-        <EditorProvider isList={props.layout.isList} availableProps={props.layout.props} theme={props.theme}>
+        <EditorProvider isList={props.layout.isList} availableProps={props.layout.props} theme={props.theme} portalContainer={props.portalContainer}>
             <EditorContent {...props} />
         </EditorProvider>
     );

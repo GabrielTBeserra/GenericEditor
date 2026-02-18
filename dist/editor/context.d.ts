@@ -95,6 +95,8 @@ export interface IAsset {
 }
 export interface IEditorContext {
     state: IEditorState;
+    /** Elemento para renderizar portais (Dialog, DropdownMenu, Select). Use o elemento em fullscreen para que modais apareçam. */
+    portalContainer: HTMLElement | null | undefined;
     setGridSize: (size: number) => void;
     setZoom: (zoom: number) => void;
     setPan: (pan: {
@@ -145,6 +147,7 @@ export declare const EditorProvider: React.FC<{
     isList?: boolean;
     availableProps?: IProp[];
     theme?: 'light' | 'dark';
+    portalContainer?: HTMLElement | null;
 }>;
 export declare const useEditor: () => IEditorContext;
 export {};

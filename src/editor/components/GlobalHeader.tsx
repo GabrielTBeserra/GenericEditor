@@ -13,7 +13,7 @@ interface GlobalHeaderProps {
 }
 
 export const GlobalHeader: React.FC<GlobalHeaderProps> = ({ onSave, templates, setIsTemplatesOpen, onFinish, onToggleSidebar }) => {
-    const { state, loadState, addElement } = useEditor();
+    const { state, portalContainer, loadState, addElement } = useEditor();
     const fileInputRef = useRef<HTMLInputElement>(null);
 
 
@@ -113,7 +113,7 @@ export const GlobalHeader: React.FC<GlobalHeaderProps> = ({ onSave, templates, s
                             <PlusIcon /> Adicionar
                         </Button>
                     </DropdownMenu.Trigger>
-                    <DropdownMenu.Content>
+                    <DropdownMenu.Content {...(portalContainer && { container: portalContainer })}>
                         <DropdownMenu.Item onSelect={() => handleAddElement('text')}>Texto</DropdownMenu.Item>
                         <DropdownMenu.Item onSelect={() => handleAddElement('image')}>Imagem</DropdownMenu.Item>
                         <DropdownMenu.Item onSelect={() => handleAddElement('box')}>Container / Grupo</DropdownMenu.Item>

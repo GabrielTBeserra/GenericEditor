@@ -53,6 +53,7 @@ export const AdvancedPropertiesPanel: React.FC<AdvancedPropertiesPanelProps> = (
 };
 
 export const AnimationSettings: React.FC<{ element: IElement; updateElement: (id: string, changes: Partial<IElement>) => void }> = ({ element, updateElement }) => {
+    const { portalContainer } = useEditor();
     const animation = element.animation || { type: 'none', duration: 1, delay: 0 };
 
     const handleUpdate = (updates: Partial<IElementAnimation>) => {
@@ -72,7 +73,7 @@ export const AnimationSettings: React.FC<{ element: IElement; updateElement: (id
                             <ChevronDownIcon />
                         </Button>
                     </DropdownMenu.Trigger>
-                    <DropdownMenu.Content style={{ zIndex: 100000 }}>
+                    <DropdownMenu.Content {...(portalContainer && { container: portalContainer })} style={{ zIndex: 100000 }}>
                         <DropdownMenu.Item onSelect={() => handleUpdate({ type: 'none' })}>Nenhuma</DropdownMenu.Item>
                         <DropdownMenu.Item onSelect={() => handleUpdate({ type: 'slideIn' })}>Slide In (Padrão)</DropdownMenu.Item>
                         <DropdownMenu.Item onSelect={() => handleUpdate({ type: 'fadeIn' })}>Fade In</DropdownMenu.Item>
@@ -126,7 +127,7 @@ export const AnimationSettings: React.FC<{ element: IElement; updateElement: (id
                                     <ChevronDownIcon />
                                 </Button>
                             </DropdownMenu.Trigger>
-                            <DropdownMenu.Content style={{ zIndex: 100000 }}>
+                            <DropdownMenu.Content {...(portalContainer && { container: portalContainer })} style={{ zIndex: 100000 }}>
                                 <DropdownMenu.Item onSelect={() => handleUpdate({ timingFunction: 'linear' })}>Linear</DropdownMenu.Item>
                                 <DropdownMenu.Item onSelect={() => handleUpdate({ timingFunction: 'ease' })}>Ease</DropdownMenu.Item>
                                 <DropdownMenu.Item onSelect={() => handleUpdate({ timingFunction: 'ease-in' })}>Ease In</DropdownMenu.Item>
@@ -155,6 +156,7 @@ export const AnimationSettings: React.FC<{ element: IElement; updateElement: (id
 };
 
 export const FormattingSettings: React.FC<{ element: IElement; updateElement: (id: string, changes: Partial<IElement>) => void }> = ({ element, updateElement }) => {
+    const { portalContainer } = useEditor();
     const formatting = element.formatting || { type: 'text' };
 
     const handleUpdate = (updates: Partial<IElementFormatting>) => {
@@ -189,7 +191,7 @@ export const FormattingSettings: React.FC<{ element: IElement; updateElement: (i
                                         <ChevronDownIcon />
                                     </Button>
                                 </DropdownMenu.Trigger>
-                                <DropdownMenu.Content style={{ zIndex: 100000 }}>
+                                <DropdownMenu.Content {...(portalContainer && { container: portalContainer })} style={{ zIndex: 100000 }}>
                                     <DropdownMenu.Item onSelect={() => updateElement(element.id, { containerExpansion: 'vertical' })}>Vertical (Altura Cresce)</DropdownMenu.Item>
                                     <DropdownMenu.Item onSelect={() => updateElement(element.id, { containerExpansion: 'horizontal' })}>Horizontal (Largura Cresce)</DropdownMenu.Item>
                                 </DropdownMenu.Content>
@@ -207,7 +209,7 @@ export const FormattingSettings: React.FC<{ element: IElement; updateElement: (i
                     onValueChange={(val) => handleUpdate({ type: val as IElementFormatting['type'] })}
                 >
                     <Select.Trigger style={{ width: '100%' }} />
-                    <Select.Content>
+                    <Select.Content {...(portalContainer && { container: portalContainer })}>
                         <Select.Item value="text">Texto (Padrão)</Select.Item>
                         <Select.Item value="boolean">Booleano (Sim/Não)</Select.Item>
                         <Select.Item value="date">Data</Select.Item>
@@ -260,7 +262,7 @@ export const FormattingSettings: React.FC<{ element: IElement; updateElement: (i
                             onValueChange={(val) => handleUpdate({ numberFormat: val as IElementFormatting['numberFormat'] })}
                         >
                             <Select.Trigger style={{ width: '100%' }} />
-                            <Select.Content>
+                            <Select.Content {...(portalContainer && { container: portalContainer })}>
                                 <Select.Item value="decimal">Decimal</Select.Item>
                                 <Select.Item value="currency">Moeda</Select.Item>
                                 <Select.Item value="percent">Porcentagem</Select.Item>
@@ -507,6 +509,7 @@ const BINDABLE_STYLE_PROPS: { key: string; label: string }[] = [
 ];
 
 export const StyleBindingsSettings: React.FC<{ element: IElement; updateElement: (id: string, changes: Partial<IElement>) => void; availableProps: IProp[] }> = ({ element, updateElement, availableProps }) => {
+    const { portalContainer } = useEditor();
     const styleBindings = element.styleBindings || {};
 
     const handleBindingChange = (styleProp: string, variableName: string | null) => {
@@ -535,7 +538,7 @@ export const StyleBindingsSettings: React.FC<{ element: IElement; updateElement:
                                 <ChevronDownIcon />
                             </Button>
                         </DropdownMenu.Trigger>
-                        <DropdownMenu.Content style={{ zIndex: 100000 }}>
+                        <DropdownMenu.Content {...(portalContainer && { container: portalContainer })} style={{ zIndex: 100000 }}>
                             <DropdownMenu.Item onSelect={() => handleBindingChange(key, null)}>Nenhum</DropdownMenu.Item>
                             {availableProps.map(p => (
                                 <DropdownMenu.Item key={p.dataName} onSelect={() => handleBindingChange(key, p.dataName)}>
@@ -554,6 +557,7 @@ export const StyleBindingsSettings: React.FC<{ element: IElement; updateElement:
 };
 
 export const ConditionalSettings: React.FC<{ element: IElement; updateElement: (id: string, changes: Partial<IElement>) => void; availableProps: IProp[] }> = ({ element, updateElement, availableProps }) => {
+    const { portalContainer } = useEditor();
     const conditions = element.conditions || [];
 
     const handleAdd = () => {
@@ -609,7 +613,7 @@ export const ConditionalSettings: React.FC<{ element: IElement; updateElement: (
                                             <ChevronDownIcon />
                                         </Button>
                                     </DropdownMenu.Trigger>
-                                    <DropdownMenu.Content style={{ zIndex: 100000 }}>
+                                    <DropdownMenu.Content {...(portalContainer && { container: portalContainer })} style={{ zIndex: 100000 }}>
                                         {availableProps.map(p => (
                                             <DropdownMenu.Item key={p.dataName} onSelect={() => handleUpdateRule(condition.id, { property: p.dataName })}>
                                                 {p.name}
@@ -628,7 +632,7 @@ export const ConditionalSettings: React.FC<{ element: IElement; updateElement: (
                                             <ChevronDownIcon />
                                         </Button>
                                     </DropdownMenu.Trigger>
-                                    <DropdownMenu.Content style={{ zIndex: 100000 }}>
+                                    <DropdownMenu.Content {...(portalContainer && { container: portalContainer })} style={{ zIndex: 100000 }}>
                                         <DropdownMenu.Item onSelect={() => handleUpdateRule(condition.id, { operator: 'equals' })}>Igual a</DropdownMenu.Item>
                                         <DropdownMenu.Item onSelect={() => handleUpdateRule(condition.id, { operator: 'notEquals' })}>Diferente de</DropdownMenu.Item>
                                         <DropdownMenu.Item onSelect={() => handleUpdateRule(condition.id, { operator: 'contains' })}>Contém</DropdownMenu.Item>

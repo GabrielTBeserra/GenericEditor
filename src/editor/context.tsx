@@ -97,6 +97,8 @@ export interface IAsset {
 
 export interface IEditorContext {
     state: IEditorState;
+    /** Elemento para renderizar portais (Dialog, DropdownMenu, Select). Use o elemento em fullscreen para que modais apareçam. */
+    portalContainer: HTMLElement | null | undefined;
     setGridSize: (size: number) => void;
     setZoom: (zoom: number) => void;
     setPan: (pan: { x: number, y: number }) => void;
@@ -141,7 +143,7 @@ const SAFE_FONTS = [
     'Palatino', 'Garamond', 'Bookman', 'Comic Sans MS', 'Trebuchet MS', 'Arial Black', 'Impact'
 ];
 
-export const EditorProvider: React.FC<{ children: ReactNode; isList?: boolean; availableProps?: IProp[]; theme?: 'light' | 'dark' }> = ({ children, isList = false, availableProps = [], theme = 'light' }) => {
+export const EditorProvider: React.FC<{ children: ReactNode; isList?: boolean; availableProps?: IProp[]; theme?: 'light' | 'dark'; portalContainer?: HTMLElement | null }> = ({ children, isList = false, availableProps = [], theme = 'light', portalContainer = null }) => {
     const [state, setState] = useState<IEditorState>({
         elements: [],
         selectedElementIds: [],
@@ -842,6 +844,7 @@ export const EditorProvider: React.FC<{ children: ReactNode; isList?: boolean; a
     return (
         <EditorContext.Provider value={React.useMemo(() => ({
             state,
+            portalContainer,
             setGridSize,
             setZoom,
             setPan,
@@ -872,7 +875,7 @@ export const EditorProvider: React.FC<{ children: ReactNode; isList?: boolean; a
             setPropertiesPanelOpen,
             addAsset,
             removeAsset
-        }), [state, addElement, removeElement, removeSelected, selectElement, setSelectedElements, moveElement, updateElement, updateElements, groupElements, ungroupElements, renameElement, addToGroup, removeFromGroup, resizeGroup, setMockData, updateListSettings, setCanvasHeight, loadState, undo, redo, jumpToHistory, copy, paste, setGridSize, setZoom, setPan, setSnapLines, addAsset, removeAsset, setPropertiesPanelOpen])}>
+        }), [state, portalContainer, addElement, removeElement, removeSelected, selectElement, setSelectedElements, moveElement, updateElement, updateElements, groupElements, ungroupElements, renameElement, addToGroup, removeFromGroup, resizeGroup, setMockData, updateListSettings, setCanvasHeight, loadState, undo, redo, jumpToHistory, copy, paste, setGridSize, setZoom, setPan, setSnapLines, addAsset, removeAsset, setPropertiesPanelOpen])}>
             {children}
         </EditorContext.Provider>
     );

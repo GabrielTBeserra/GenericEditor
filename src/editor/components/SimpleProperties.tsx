@@ -22,7 +22,7 @@ import { AdvancedPropertiesPanel } from './AdvancedPropertiesPanel';
 import { ColorInput } from './ColorPicker';
 
 export const SimpleProperties: React.FC = () => {
-    const { state, updateElement, removeSelected, copy } = useEditor();
+    const { state, portalContainer, updateElement, removeSelected, copy } = useEditor();
     const [isAdvancedOpen, setIsAdvancedOpen] = useState(false);
 
     // In Simple Mode, we focus on the first selected element
@@ -112,7 +112,7 @@ export const SimpleProperties: React.FC = () => {
                                     <ChevronDownIcon />
                                 </Button>
                             </DropdownMenu.Trigger>
-                            <DropdownMenu.Content style={{ zIndex: 100000 }}>
+                            <DropdownMenu.Content {...(portalContainer && { container: portalContainer })} style={{ zIndex: 100000 }}>
                                 <DropdownMenu.Item onSelect={() => handleUpdate({ dataBinding: undefined })}>Nenhum (URL fixa)</DropdownMenu.Item>
                                 {state.availableProps.map(p => (
                                     <DropdownMenu.Item key={p.dataName} onSelect={() => handleUpdate({ dataBinding: p.dataName, content: `{{${p.dataName}}}` })}>
@@ -158,7 +158,7 @@ export const SimpleProperties: React.FC = () => {
                                                 <ChevronDownIcon />
                                             </Button>
                                         </DropdownMenu.Trigger>
-                                        <DropdownMenu.Content style={{ zIndex: 100000 }}>
+                                        <DropdownMenu.Content {...(portalContainer && { container: portalContainer })} style={{ zIndex: 100000 }}>
                                             {fontOptions.map(font => (
                                                 <DropdownMenu.Item
                                                     key={font}
@@ -180,8 +180,8 @@ export const SimpleProperties: React.FC = () => {
                                                 <ChevronDownIcon />
                                             </Button>
                                         </DropdownMenu.Trigger>
-                                        <DropdownMenu.Content style={{ zIndex: 100000 }}>
-                                            <DropdownMenu.Item onSelect={() => handleStyleUpdate({ fontWeight: 'normal' })}>Normal</DropdownMenu.Item>
+                                        <DropdownMenu.Content {...(portalContainer && { container: portalContainer })} style={{ zIndex: 100000 }}>
+                                                <DropdownMenu.Item onSelect={() => handleStyleUpdate({ fontWeight: 'normal' })}>Normal</DropdownMenu.Item>
                                             <DropdownMenu.Item onSelect={() => { handleStyleUpdate({ fontWeight: 'bold' }); }}>Negrito</DropdownMenu.Item>
                                             <DropdownMenu.Item onSelect={() => { handleStyleUpdate({ fontWeight: '100' }); }}>Fina</DropdownMenu.Item>
                                             <DropdownMenu.Item onSelect={() => { handleStyleUpdate({ fontWeight: '300' }); }}>Leve</DropdownMenu.Item>
@@ -270,8 +270,8 @@ export const SimpleProperties: React.FC = () => {
                                                 <ChevronDownIcon />
                                             </Button>
                                         </DropdownMenu.Trigger>
-                                        <DropdownMenu.Content style={{ zIndex: 100000 }}>
-                                            <DropdownMenu.Item onSelect={() => handleStyleUpdate({ textTransform: 'none' })}>Nenhum</DropdownMenu.Item>
+                                        <DropdownMenu.Content {...(portalContainer && { container: portalContainer })} style={{ zIndex: 100000 }}>
+                                                <DropdownMenu.Item onSelect={() => handleStyleUpdate({ textTransform: 'none' })}>Nenhum</DropdownMenu.Item>
                                             <DropdownMenu.Item onSelect={() => handleStyleUpdate({ textTransform: 'uppercase' })}>MAIÚSCULA</DropdownMenu.Item>
                                             <DropdownMenu.Item onSelect={() => handleStyleUpdate({ textTransform: 'lowercase' })}>minúscula</DropdownMenu.Item>
                                             <DropdownMenu.Item onSelect={() => handleStyleUpdate({ textTransform: 'capitalize' })}>Capitalizada</DropdownMenu.Item>
@@ -309,8 +309,8 @@ export const SimpleProperties: React.FC = () => {
                                                 <ChevronDownIcon />
                                             </Button>
                                         </DropdownMenu.Trigger>
-                                        <DropdownMenu.Content style={{ zIndex: 100000 }}>
-                                            <DropdownMenu.Item onSelect={() => handleStyleUpdate({ alignItems: 'flex-start' })}>Topo</DropdownMenu.Item>
+                                        <DropdownMenu.Content {...(portalContainer && { container: portalContainer })} style={{ zIndex: 100000 }}>
+                                                <DropdownMenu.Item onSelect={() => handleStyleUpdate({ alignItems: 'flex-start' })}>Topo</DropdownMenu.Item>
                                             <DropdownMenu.Item onSelect={() => handleStyleUpdate({ alignItems: 'center' })}>Centro</DropdownMenu.Item>
                                             <DropdownMenu.Item onSelect={() => handleStyleUpdate({ alignItems: 'flex-end' })}>Base</DropdownMenu.Item>
                                         </DropdownMenu.Content>
@@ -330,8 +330,8 @@ export const SimpleProperties: React.FC = () => {
                                         <ChevronDownIcon />
                                     </Button>
                                 </DropdownMenu.Trigger>
-                                <DropdownMenu.Content style={{ zIndex: 100000 }}>
-                                    <DropdownMenu.Item onSelect={() => handleStyleUpdate({ objectFit: 'cover' })}>Cobrir (Cover)</DropdownMenu.Item>
+                                        <DropdownMenu.Content {...(portalContainer && { container: portalContainer })} style={{ zIndex: 100000 }}>
+                                                <DropdownMenu.Item onSelect={() => handleStyleUpdate({ objectFit: 'cover' })}>Cobrir (Cover)</DropdownMenu.Item>
                                     <DropdownMenu.Item onSelect={() => handleStyleUpdate({ objectFit: 'contain' })}>Conter (Contain)</DropdownMenu.Item>
                                     <DropdownMenu.Item onSelect={() => handleStyleUpdate({ objectFit: 'fill' })}>Esticar (Fill)</DropdownMenu.Item>
                                 </DropdownMenu.Content>
