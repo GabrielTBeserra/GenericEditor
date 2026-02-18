@@ -7,18 +7,12 @@ interface ColorPickerContentProps {
     onChange: (color: string) => void;
 }
 
+import { toHex } from '../utils/colorUtils';
+
 export const ColorPickerContent: React.FC<ColorPickerContentProps> = ({ color, onChange }) => {
-    // Ensure color is a valid hex string for the picker, defaulting to black if empty or invalid
-    // react-colorful expects hex format. Handle 'transparent' keyword.
-    
+    // Ensure color is a valid hex string for the picker
     const getSafeColor = (c: string) => {
-        if (c === 'transparent') return '#00000000';
-        if (!c) return '#000000';
-        // If it looks like a hex without hash, add it for the picker
-        if (/^[0-9A-Fa-f]{3,8}$/.test(c)) {
-            return '#' + c;
-        }
-        return c;
+        return toHex(c);
     };
     
     const safeColor = getSafeColor(color);

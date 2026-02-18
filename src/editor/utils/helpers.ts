@@ -1,5 +1,30 @@
 import type { IElementFormatting } from '../context';
 
+/**
+ * Ensures the value exists in options for Radix Select (which requires value to match a Select.Item).
+ * Returns the value if it's in options, otherwise returns fallback.
+ */
+export const normalizeSelectValue = <T extends string>(value: T | undefined | null, options: readonly T[], fallback: T): T => {
+    const v = value === undefined || value === null ? fallback : String(value) as T;
+    return options.includes(v) ? v : fallback;
+};
+
+/** Font weight options for Select. Maps 400/normal and 700/bold for consistency. */
+export const FONT_WEIGHT_OPTIONS = ['normal', 'bold', '100', '300', '900'] as const;
+export const FONT_WEIGHT_OPTIONS_FULL = ['100', '300', '400', '500', '600', '700', '900', 'normal', 'bold'] as const;
+
+export const normalizeFontWeightForSelect = (value: string | number | undefined | null, options: readonly string[] = FONT_WEIGHT_OPTIONS): string => {
+    const v = value === undefined || value === null ? 'normal' : String(value);
+    if (v === '400' || v === 'normal') return options.includes('400') ? '400' : 'normal';
+    if (v === '700' || v === 'bold') return options.includes('700') ? '700' : 'bold';
+    return options.includes(v) ? v : (options.includes('400') ? '400' : options[0] ?? 'normal');
+};
+
+/** Ensures font is in the list. If not, adds it at the beginning for Radix Select. */
+export const ensureFontInOptions = (currentFont: string, fontList: string[]): string[] => {
+    return fontList.includes(currentFont) ? fontList : [currentFont, ...fontList];
+};
+
 export const formatValue = (value: unknown, formatting: IElementFormatting): string => {
     if (value === undefined || value === null) return '';
 
@@ -44,6 +69,20 @@ export const formatValue = (value: unknown, formatting: IElementFormatting): str
         return num.toFixed(formatting.decimalPlaces || 0);
     }
     return String(value);
+};
+
+/** Verifica se o valor parece ser uma URL válida para imagem (http, https, data:, ou caminho relativo). */
+export const isValidImageUrl = (value: unknown): boolean => {
+    if (value === undefined || value === null) return false;
+    const s = String(value).trim();
+    if (!s) return false;
+    return (
+        s.startsWith('http://') ||
+        s.startsWith('https://') ||
+        s.startsWith('data:') ||
+        s.startsWith('/') ||
+        /^[a-zA-Z0-9][a-zA-Z0-9-+.]*:/.test(s) // protocol: (blob:, etc.)
+    );
 };
 
 export const checkCondition = (propValue: unknown, operator: string, ruleValue: string): boolean => {

@@ -73,6 +73,7 @@ interface IEditorState {
     historyDescriptions: string[];
     historyIndex: number;
     clipboard: IElement[];
+    isPropertiesPanelOpen: boolean;
     gridSize: number;
     zoom: number;
     pan: {
@@ -130,6 +131,7 @@ export interface IEditorContext {
     jumpToHistory: (index: number) => void;
     copy: () => void;
     paste: () => void;
+    setPropertiesPanelOpen: (open: boolean) => void;
     addAsset: (asset: IAsset) => void;
     removeAsset: (id: string) => void;
 }

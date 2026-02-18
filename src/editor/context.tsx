@@ -79,6 +79,7 @@ interface IEditorState {
     historyDescriptions: string[];
     historyIndex: number;
     clipboard: IElement[];
+    isPropertiesPanelOpen: boolean;
     gridSize: number; // 0 to disable
     zoom: number;
     pan: { x: number, y: number };
@@ -123,6 +124,7 @@ export interface IEditorContext {
     jumpToHistory: (index: number) => void;
     copy: () => void;
     paste: () => void;
+    setPropertiesPanelOpen: (open: boolean) => void;
     addAsset: (asset: IAsset) => void;
     removeAsset: (id: string) => void;
 }
@@ -169,6 +171,7 @@ export const EditorProvider: React.FC<{ children: ReactNode; isList?: boolean; a
         pan: { x: 0, y: 0 },
         snapLines: [],
         assets: [],
+        isPropertiesPanelOpen: false
     });
 
     // Load fonts
@@ -191,6 +194,10 @@ export const EditorProvider: React.FC<{ children: ReactNode; isList?: boolean; a
     React.useEffect(() => {
         setState(prev => ({ ...prev, isList, availableProps, theme }));
     }, [isList, availableProps, theme]);
+
+    const setPropertiesPanelOpen = React.useCallback((open: boolean) => {
+        setState(prev => ({ ...prev, isPropertiesPanelOpen: open }));
+    }, []);
 
     const setCanvasHeight = React.useCallback((height: number) => {
         setState(prev => ({ ...prev, canvasHeight: height }));
@@ -862,9 +869,10 @@ export const EditorProvider: React.FC<{ children: ReactNode; isList?: boolean; a
             jumpToHistory,
             copy,
             paste,
+            setPropertiesPanelOpen,
             addAsset,
             removeAsset
-        }), [state, addElement, removeElement, removeSelected, selectElement, setSelectedElements, moveElement, updateElement, updateElements, groupElements, ungroupElements, renameElement, addToGroup, removeFromGroup, resizeGroup, setMockData, updateListSettings, setCanvasHeight, loadState, undo, redo, jumpToHistory, copy, paste, setGridSize, setZoom, setPan, setSnapLines, addAsset, removeAsset])}>
+        }), [state, addElement, removeElement, removeSelected, selectElement, setSelectedElements, moveElement, updateElement, updateElements, groupElements, ungroupElements, renameElement, addToGroup, removeFromGroup, resizeGroup, setMockData, updateListSettings, setCanvasHeight, loadState, undo, redo, jumpToHistory, copy, paste, setGridSize, setZoom, setPan, setSnapLines, addAsset, removeAsset, setPropertiesPanelOpen])}>
             {children}
         </EditorContext.Provider>
     );

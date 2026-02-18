@@ -2,6 +2,7 @@ import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import type { IElement, IElementAnimation, IElementFormatting, IListSettings } from '../context';
 import type { GenericData } from '../types';
+import { isValidImageUrl } from './helpers';
 
 interface RenderOptions {
     isList?: boolean;
@@ -430,10 +431,12 @@ const vanillaRenderItem = (elements: IElement[], itemData: GenericData, _index =
             overflow: element.autoGrow ? 'visible' : 'hidden',
             whiteSpace: (element.type === 'text-container' && element.autoGrow && element.containerExpansion === 'horizontal') ? 'nowrap' : (element.autoGrow ? 'pre-wrap' : undefined),
             wordBreak: element.autoGrow ? 'break-word' : undefined,
+            ...(element.type === 'text-container' ? { display: 'flex', alignItems: (element.style?.alignItems as string) || 'flex-start', justifyContent: (element.style?.justifyContent as string) || 'flex-start' } : {}),
             ...element.style,
             ...conditionalStyles,
             ...bindingStyles,
-            ...getElementAnimationStyle(element.animation)
+            ...getElementAnimationStyle(element.animation),
+            ...(element.hidden ? { display: 'none' } : {})
         };
 
         return { content, imgSrc, baseStyle };
@@ -446,7 +449,8 @@ const vanillaRenderItem = (elements: IElement[], itemData: GenericData, _index =
             const imgStyle = styleObjectToString({
                 width: '100%', height: '100%', objectFit: element.style?.objectFit || 'cover', display: 'block'
             });
-            return `<div style="${styleString}"><img src="${imgSrc}" alt="Element" style="${imgStyle}" /></div>`;
+            const src = isValidImageUrl(imgSrc) ? imgSrc : 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+            return `<div style="${styleString}"><img src="${src.replace(/"/g, '&quot;')}" alt="Element" style="${imgStyle}" /></div>`;
         } else if (element.type === 'box') {
             return `<div style="${styleString}"></div>`;
         } else if (element.type === 'checkbox') {
@@ -537,10 +541,12 @@ const ElementRenderer: React.FC<{ element: IElement, itemData: GenericData }> = 
         overflow: element.autoGrow ? 'visible' : 'hidden',
         whiteSpace: (element.type === 'text-container' && element.autoGrow && element.containerExpansion === 'horizontal') ? 'nowrap' : (element.autoGrow ? 'pre-wrap' : undefined),
         wordBreak: element.autoGrow ? 'break-word' : undefined,
+        ...(element.type === 'text-container' ? { display: 'flex', alignItems: (element.style?.alignItems as string) || 'flex-start', justifyContent: (element.style?.justifyContent as string) || 'flex-start' } : {}),
         ...element.style,
         ...conditionalStyles,
         ...bindingStyles,
-        ...getElementAnimationStyle(element.animation)
+        ...getElementAnimationStyle(element.animation),
+        ...(element.hidden ? { display: 'none' } : {})
     };
 
     if (element.type === 'text' || element.type === 'text-container') {
@@ -555,7 +561,8 @@ const ElementRenderer: React.FC<{ element: IElement, itemData: GenericData }> = 
             objectFit: (element.style?.objectFit as React.CSSProperties['objectFit']) || 'cover',
             display: 'block'
         };
-        return <div style={baseStyle}><img src={imgSrc} alt="Element" style={imgStyle} /></div>;
+        const src = isValidImageUrl(imgSrc) ? imgSrc : 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+        return <div style={baseStyle}><img src={src} alt="Element" style={imgStyle} /></div>;
     } else if (element.type === 'box') {
         return <div style={baseStyle}></div>;
     } else if (element.type === 'checkbox') {
@@ -657,7 +664,8 @@ const HtmlDocument: React.FC<{ elements: IElement[], data: GenericData | Generic
         const justify = listSettings?.newestPosition === 'top' ? 'flex-start' : 'flex-end';
         const entryAnim: IElementAnimation = listSettings?.entryAnimation || { type: 'slideIn', duration: 0.3, delay: 0 };
         const entryAnimName = entryAnim.type === 'none' ? 'none' : entryAnim.type;
-        const entryAnimDuration = entryAnim.duration + 's';
+        const entryAnimDuration = (entryAnim.duration ?? 0.3) + 's';
+        const entryAnimDelay = (entryAnim.delay ?? 0) + 's';
         const entryAnimTiming = getSafeTimingFunction(entryAnim.timingFunction);
 
         const containerStyle: React.CSSProperties = {
@@ -681,7 +689,8 @@ const HtmlDocument: React.FC<{ elements: IElement[], data: GenericData | Generic
                         return (
                             <div key={i} className="list-item" style={{
                                 position: 'relative', minHeight, width: '100%', flexShrink: 0,
-                                animation: `${entryAnimName} ${entryAnimDuration} ${entryAnimTiming}`,
+                                animation: entryAnimName === 'none' ? undefined : `${entryAnimName} ${entryAnimDuration} ${entryAnimTiming} ${entryAnimDelay}`,
+                                animationFillMode: entryAnimName === 'none' ? undefined : 'both',
                                 marginBottom: '10px'
                             }}>
                                 {(() => {
@@ -740,6 +749,7 @@ const getRuntimeScript = (elements: IElement[], options: RenderOptions) => {
             const elements = ${JSON.stringify(elements)};
             
             // Helper functions definitions
+            const isValidImageUrl = ${isValidImageUrl.toString()};
             const camelToKebab = ${camelToKebab.toString()};
             const hex8ToRgba = ${hex8ToRgba.toString()};
             const styleObjectToString = ${styleObjectToString.toString()};
@@ -813,6 +823,7 @@ function renderTemplate(elements, data, options = {}) {
     const { isList, listSettings, canvasHeight } = options;
 
     // --- Helper Functions Injected from Editor Source ---
+    const isValidImageUrl = ${isValidImageUrl.toString()};
     const camelToKebab = ${camelToKebab.toString()};
     const hex8ToRgba = ${hex8ToRgba.toString()};
     const styleObjectToString = ${styleObjectToString.toString()};
@@ -878,9 +889,10 @@ function renderTemplate(elements, data, options = {}) {
         if (listSettings && listSettings.newestPosition === 'top') listData.reverse();
 
         const justify = (listSettings && listSettings.newestPosition === 'top') ? 'flex-start' : 'flex-end';
-        const entryAnim = (listSettings && listSettings.entryAnimation) || { type: 'slideIn', duration: 0.3 };
+        const entryAnim = (listSettings && listSettings.entryAnimation) || { type: 'slideIn', duration: 0.3, delay: 0 };
         const entryAnimName = entryAnim.type === 'none' ? 'none' : entryAnim.type;
-        const entryAnimDuration = entryAnim.duration + 's';
+        const entryAnimDuration = (entryAnim.duration ?? 0.3) + 's';
+        const entryAnimDelay = (entryAnim.delay ?? 0) + 's';
         const entryAnimTiming = getSafeTimingFunction(entryAnim.timingFunction);
 
         const containerStyle = styleObjectToString({
@@ -899,7 +911,8 @@ function renderTemplate(elements, data, options = {}) {
             const minHeight = computeItemHeight(elements, item, canvasHeight || 0);
             const itemStyle = styleObjectToString({
                 position: 'relative', minHeight: minHeight, width: '100%', flexShrink: 0,
-                animation: \`\${entryAnimName} \${entryAnimDuration} \${entryAnimTiming}\`,
+                animation: entryAnimName === 'none' ? undefined : \`\${entryAnimName} \${entryAnimDuration} \${entryAnimTiming} \${entryAnimDelay}\`,
+                animationFillMode: entryAnimName === 'none' ? undefined : 'both',
                 marginBottom: '10px'
             });
             const content = renderItem(elements, item);

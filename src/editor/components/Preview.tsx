@@ -4,7 +4,7 @@ import { AnimatePresence, motion, type Easing, type Transition, type Variants } 
 import React from 'react';
 import type { IElement, IElementAnimation } from '../context';
 import { useEditor } from '../context';
-import { formatValue } from '../utils/helpers';
+import { formatValue, isValidImageUrl } from '../utils/helpers';
 
 const getTimingFunction = (tf?: string): Easing => {
     switch (tf) {
@@ -160,7 +160,7 @@ const PreviewElementRenderer: React.FC<{ element: IElement; offsetY?: number; da
             )}
 
             {element.type === 'image' && (
-                content ? (
+                (content && isValidImageUrl(content)) ? (
                     <img
                         src={content}
                         alt="Element"
@@ -168,7 +168,7 @@ const PreviewElementRenderer: React.FC<{ element: IElement; offsetY?: number; da
                     />
                 ) : (
                     <Box style={{ width: '100%', height: '100%', backgroundColor: '#eee', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <Text size="1">Imagem</Text>
+                        <Text size="1">{content ? 'URL inválida' : 'Imagem'}</Text>
                     </Box>
                 )
             )}
@@ -342,13 +342,19 @@ export const Preview: React.FC = () => {
                 }
             }
 
+            const containerHeight = state.listSettings.containerHeight;
+            const listWrapperStyle: React.CSSProperties = {
+                width: '100%',
+                minHeight: containerHeight ? `${containerHeight}px` : '100%',
+                height: containerHeight ? `${containerHeight}px` : undefined,
+                overflowY: containerHeight ? 'auto' : undefined,
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: state.listSettings.newestPosition === 'top' ? 'flex-start' : 'flex-end',
+                padding: 16
+            };
             return (
-                <Flex
-                    direction="column"
-                    justify={state.listSettings.newestPosition === 'top' ? 'start' : 'end'}
-                    p="4"
-                    style={{ width: '100%', minHeight: '100%' }}
-                >
+                <Box style={listWrapperStyle}>
                     <AnimatePresence mode="popLayout">
                         {listData.map((item, index) => (
                             <ListItem
@@ -361,7 +367,7 @@ export const Preview: React.FC = () => {
                             />
                         ))}
                     </AnimatePresence>
-                </Flex>
+                </Box>
             );
         }
 

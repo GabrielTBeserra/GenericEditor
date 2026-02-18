@@ -126,7 +126,13 @@ export const SimpleSidebar: React.FC<SimpleSidebarProps> = ({ onClose }) => {
     return (
         <Flex direction="column" style={{ height: '100%' }}>
             {/* Top Section: Properties or Helper */}
-            <Box p="4" style={{ borderBottom: '1px solid var(--gray-5)', minHeight: '180px', flexShrink: 0 }}>
+            <Box p="4" style={{
+                borderBottom: '1px solid var(--gray-5)',
+                minHeight: '180px',
+                flexShrink: 0,
+                maxHeight: 'calc(100vh - 150px)', // Prevent taking full height
+                overflowY: 'auto' // Allow scrolling when properties expand
+            }}>
                 {hasSelection ? (
                     <SimpleProperties />
                 ) : (

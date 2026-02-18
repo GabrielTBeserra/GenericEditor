@@ -2,8 +2,8 @@ import { Box, Text } from '@radix-ui/themes';
 import { Resizable } from 're-resizable';
 import React, { useEffect, useRef, useState } from 'react';
 import { useEditor, type IElement } from '../context';
-import { checkCondition, formatValue } from '../utils/helpers';
-import { ElementContextMenu } from './ElementContextMenu';
+import { checkCondition, formatValue, isValidImageUrl } from '../utils/helpers';
+// ElementContextMenu removed in favor of PropertiesDialog
 
 interface DraggableElementProps {
     element: IElement;
@@ -11,9 +11,9 @@ interface DraggableElementProps {
 }
 
 export const DraggableElement: React.FC<DraggableElementProps> = React.memo(({ element, isSelected }) => {
-    const { selectElement, updateElement, updateElements, state, resizeGroup, setSnapLines } = useEditor();
+    const { selectElement, updateElement, updateElements, state, resizeGroup, setSnapLines, setPropertiesPanelOpen } = useEditor();
     const [isDragging, setIsDragging] = useState(false);
-    const [isResizing, setIsResizing] = useState(false);
+    const [, setIsResizing] = useState(false);
     const [isRotating, setIsRotating] = useState(false);
     const contentRef = useRef<HTMLDivElement>(null);
 
@@ -124,6 +124,13 @@ export const DraggableElement: React.FC<DraggableElementProps> = React.memo(({ e
                 // Click on selected (no shift) -> Exclusive select
                 selectElement(element.id, false);
             }
+        }
+    };
+
+    const handleDoubleClick = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        if (!element.locked) {
+            setPropertiesPanelOpen(true);
         }
     };
 
@@ -368,25 +375,28 @@ export const DraggableElement: React.FC<DraggableElementProps> = React.memo(({ e
     }, [displayContent, element.autoGrow, element.containerExpansion, element.style, element.width, element.formatting, updateElement, element.id, element.type]);
 
     const commonStyles: React.CSSProperties = {
-        position: 'relative', // Changed from absolute to relative to support autoGrow parent expansion
+        position: 'relative',
         left: 0,
         top: 0,
         width: '100%',
         height: element.autoGrow ? 'auto' : '100%',
         minHeight: element.autoGrow ? '100%' : undefined,
         padding: (element.type === 'image' || element.type === 'text') ? 0 : '8px',
-        border: (isSelected || isResizing) ? '2px solid var(--accent-9)' : '1px dashed transparent',
-        outline: 'none', // Removed internal outline to rely on border
+        // Border removed from here to avoid conflict with user styles.
+        // We now use a separate overlay for selection/hover feedback.
+        outline: 'none',
         cursor: isDragging ? 'grabbing' : 'grab',
         borderRadius: 'var(--radius-2)',
         overflow: element.autoGrow ? 'visible' : 'hidden',
         whiteSpace: element.autoGrow ? 'pre-wrap' : undefined,
         wordBreak: element.autoGrow ? 'break-word' : undefined,
         userSelect: 'none',
-        boxSizing: 'border-box', // Ensure padding doesn't affect dimensions
+        boxSizing: 'border-box',
         ...element.style,
         ...conditionalStyles
     };
+
+    const [isHovered, setIsHovered] = useState(false);
 
     return (
         <Resizable
@@ -408,7 +418,6 @@ export const DraggableElement: React.FC<DraggableElementProps> = React.memo(({ e
                 let newX = element.x ?? 0;
                 let newY = element.y ?? 0;
 
-                // Adjust position for left/top resizes
                 if (direction.includes('left')) {
                     newX -= d.width;
                 }
@@ -418,10 +427,6 @@ export const DraggableElement: React.FC<DraggableElementProps> = React.memo(({ e
 
                 if (element.type === 'group') {
                     resizeGroup(element.id, newWidth, newHeight);
-                    // Groups might need position update logic too if implemented in resizeGroup, 
-                    // but usually resizeGroup just scales children? 
-                    // If resizeGroup doesn't handle position shift, we might need to update group X/Y separately.
-                    // Assuming updateElement works for groups too for position:
                     updateElement(element.id, { x: newX, y: newY }, true);
                 } else {
                     updateElement(element.id, { width: newWidth, height: newHeight, x: newX, y: newY });
@@ -453,10 +458,9 @@ export const DraggableElement: React.FC<DraggableElementProps> = React.memo(({ e
                 height: element.autoGrow ? 'auto' : undefined,
                 display: (isHidden && !isSelected) ? 'none' : undefined,
                 opacity: (isHidden && isSelected) ? 0.4 : 1,
-                zIndex: isSelected ? 1000 : undefined,
-                // Removed outline to avoid double borders with inner content
+                zIndex: isSelected ? 1000 : (element.style?.zIndex !== undefined ? Number(element.style.zIndex) : undefined),
                 outline: 'none',
-                overflow: 'visible'
+                overflow: element.style?.overflow || (element.autoGrow ? 'visible' : 'hidden')
             }}
             enable={!element.autoGrow ? undefined : {
                 top: false, right: true, bottom: false, left: true,
@@ -465,158 +469,177 @@ export const DraggableElement: React.FC<DraggableElementProps> = React.memo(({ e
             lockAspectRatio={keepAspectRef.current}
             grid={state.gridSize > 0 ? [state.gridSize, state.gridSize] : undefined}
         >
-            <ElementContextMenu element={element}>
-                <div style={{ width: '100%', height: '100%', position: 'relative' }}>
-                    <Box
-                        ref={contentRef}
-                        style={{
-                            ...commonStyles,
-                            // Override for text-container horizontal expansion
-                            whiteSpace: (element.type === 'text-container' && element.autoGrow && element.containerExpansion === 'horizontal')
-                                ? 'nowrap'
-                                : commonStyles.whiteSpace,
-                            width: (element.type === 'text-container' && element.autoGrow && element.containerExpansion === 'horizontal')
-                                ? 'max-content'
-                                : '100%',
-                            height: (element.type === 'text-container' && element.autoGrow && element.containerExpansion === 'vertical')
-                                ? 'auto'
-                                : '100%'
-                        }}
-                        onPointerDown={handlePointerDown}
-                        onPointerMove={handlePointerMove}
-                        onPointerUp={handlePointerUp}
-                        onMouseDown={(e) => {
-                            // Prevent mousedown from bubbling to canvas and deselecting
-                            if (e.button === 0) e.stopPropagation();
-                        }}
-                        onClick={handleClick}
-                        title={element.name}
-                        onMouseEnter={(e) => {
-                            if (!isSelected) e.currentTarget.style.borderColor = 'var(--gray-6)';
-                        }}
-                        onMouseLeave={(e) => {
-                            if (!isSelected) e.currentTarget.style.borderColor = 'transparent';
-                        }}
-                        onDragOver={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            e.dataTransfer.dropEffect = 'copy';
-                        }}
-                        onDrop={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            const propName = e.dataTransfer.getData('application/x-editor-prop');
-                            if (propName) {
-                                if (element.type === 'text' || element.type === 'text-container') {
-                                    // Append variable to existing content
-                                    const newContent = element.content ? `${element.content} {{${propName}}}` : `{{${propName}}}`;
-                                    updateElement(element.id, {
-                                        content: newContent,
-                                        dataBinding: propName // Also set primary binding property
-                                    });
-                                } else if (element.type === 'image') {
-                                    // For image, bind to source
-                                    updateElement(element.id, {
-                                        dataBinding: propName,
-                                        content: `{{${propName}}}`
-                                    });
-                                } else if (element.type === 'checkbox') {
-                                    updateElement(element.id, {
-                                        dataBinding: propName
-                                    });
-                                }
-                            }
-                        }}
-                    >
-                        {element.type === 'text' && (
-                            <Text style={{ width: '100%', height: '100%' }}>{displayContent}</Text>
-                        )}
-                        {element.type === 'text-container' && (
-                            <Text style={{
-                                width: '100%',
-                                height: '100%',
-                                display: 'block'
-                            }}>
-                                {displayContent}
-                            </Text>
-                        )}
-                        {element.type === 'image' && (
-                            displayContent ? (
-                                <img
-                                    src={displayContent}
-                                    alt="Element"
-                                    style={{ width: '100%', height: '100%', objectFit: (element.style?.objectFit as React.CSSProperties['objectFit']) || 'cover', display: 'block', pointerEvents: 'none' }}
-                                />
-                            ) : (
-                                <Box style={{ width: '100%', height: '100%', backgroundColor: '#eee', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                    <Text size="1">Imagem Placeholder</Text>
-                                </Box>
-                            )
-                        )}
-                        {element.type === 'box' && (
-                            <Box style={{ width: '100%', height: '100%' }} />
-                        )}
-                        {element.type === 'group' && (
-                            <Box style={{
-                                width: '100%',
-                                height: '100%',
-                                border: isSelected ? '1px dashed var(--accent-9)' : '1px dashed var(--gray-6)',
-                                opacity: 0.5,
-                                pointerEvents: 'none'
-                            }}>
-                                <Text
-                                    size="1"
-                                    style={{
-                                        position: 'absolute',
-                                        top: 0,
-                                        left: 0,
-                                        backgroundColor: 'var(--accent-3)',
-                                        color: 'var(--accent-11)',
-                                        padding: '2px 6px',
-                                        fontSize: '10px',
-                                        borderBottomRightRadius: '4px'
-                                    }}
-                                >
-                                    {element.name || 'Grupo'}
-                                </Text>
-                            </Box>
-                        )}
-                    </Box>
+            <div
+                style={{ width: '100%', height: '100%', position: 'relative' }}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+            >
+                {/* Visual Feedback Overlay (Selection/Hover) */}
+                <div
+                    style={{
+                        position: 'absolute',
+                        top: 0, left: 0, right: 0, bottom: 0,
+                        pointerEvents: 'none',
+                        border: isSelected ? '2px solid var(--accent-9)' : (isHovered ? '1px dashed var(--gray-8)' : 'none'),
+                        borderRadius: element.style?.borderRadius || 'var(--radius-2)',
+                        // Match individual radii if present
+                        borderTopLeftRadius: element.style?.borderTopLeftRadius,
+                        borderTopRightRadius: element.style?.borderTopRightRadius,
+                        borderBottomRightRadius: element.style?.borderBottomRightRadius,
+                        borderBottomLeftRadius: element.style?.borderBottomLeftRadius,
+                        zIndex: 10
+                    }}
+                />
 
-                    {isSelected && (
-                        <Box
-                            className="rotate-handle"
-                            style={{
-                                position: 'absolute',
-                                top: -30,
-                                left: '50%',
-                                transform: 'translateX(-50%)',
-                                width: 12,
-                                height: 12,
-                                backgroundColor: 'var(--accent-9)',
-                                borderRadius: '50%',
-                                cursor: 'crosshair',
-                                zIndex: 50,
-                                boxShadow: '0 0 0 2px white'
-                            }}
-                            onMouseDown={handleRotateStart}
-                            onPointerDown={(e) => e.stopPropagation()}
-                        >
-                            <Box
+                <Box
+                    ref={contentRef}
+                    style={{
+                        ...commonStyles,
+                        // Ensure text-container is flex so alignItems works (needed when loaded from JSON without display)
+                        ...(element.type === 'text-container' && {
+                            display: 'flex',
+                            alignItems: (element.style?.alignItems as string) || 'flex-start',
+                            justifyContent: (element.style?.justifyContent as string) || 'flex-start'
+                        }),
+                        // Ensure content is above overlay if it has background
+                        zIndex: 2,
+                        // Override for text-container horizontal expansion
+                        whiteSpace: (element.type === 'text-container' && element.autoGrow && element.containerExpansion === 'horizontal')
+                            ? 'nowrap'
+                            : commonStyles.whiteSpace,
+                        width: (element.type === 'text-container' && element.autoGrow && element.containerExpansion === 'horizontal')
+                            ? 'max-content'
+                            : '100%',
+                        height: (element.type === 'text-container' && element.autoGrow && element.containerExpansion === 'vertical')
+                            ? 'auto'
+                            : '100%'
+                    }}
+                    onPointerDown={handlePointerDown}
+                    onPointerMove={handlePointerMove}
+                    onPointerUp={handlePointerUp}
+                    onMouseDown={(e) => {
+                        if (e.button === 0) e.stopPropagation();
+                    }}
+                    onClick={handleClick}
+                    onDoubleClick={handleDoubleClick}
+                    title={element.name}
+                    onDragOver={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        e.dataTransfer.dropEffect = 'copy';
+                    }}
+                    onDrop={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const propName = e.dataTransfer.getData('application/x-editor-prop');
+                        if (propName) {
+                            if (element.type === 'text' || element.type === 'text-container') {
+                                const newContent = element.content ? `${element.content} {{${propName}}}` : `{{${propName}}}`;
+                                updateElement(element.id, {
+                                    content: newContent,
+                                    dataBinding: propName
+                                });
+                            } else if (element.type === 'image') {
+                                updateElement(element.id, {
+                                    dataBinding: propName,
+                                    content: `{{${propName}}}`
+                                });
+                            } else if (element.type === 'checkbox') {
+                                updateElement(element.id, {
+                                    dataBinding: propName
+                                });
+                            }
+                        }
+                    }}
+                >
+                    {element.type === 'text' && (
+                        <Text style={{ width: '100%', height: '100%' }}>{displayContent}</Text>
+                    )}
+                    {element.type === 'text-container' && (
+                        <Text style={{
+                            width: '100%',
+                            height: '100%',
+                            display: 'block'
+                        }}>
+                            {displayContent}
+                        </Text>
+                    )}
+                    {element.type === 'image' && (
+                        (displayContent && isValidImageUrl(displayContent)) ? (
+                            <img
+                                src={displayContent}
+                                alt="Element"
+                                style={{ width: '100%', height: '100%', objectFit: (element.style?.objectFit as React.CSSProperties['objectFit']) || 'cover', display: 'block', pointerEvents: 'none' }}
+                            />
+                        ) : (
+                            <Box style={{ width: '100%', height: '100%', backgroundColor: '#eee', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                <Text size="1">{displayContent ? 'URL inválida' : 'Imagem Placeholder'}</Text>
+                            </Box>
+                        )
+                    )}
+                    {element.type === 'box' && (
+                        <Box style={{ width: '100%', height: '100%' }} />
+                    )}
+                    {element.type === 'group' && (
+                        <Box style={{
+                            width: '100%',
+                            height: '100%',
+                            border: isSelected ? '1px dashed var(--accent-9)' : '1px dashed var(--gray-6)',
+                            opacity: 0.5,
+                            pointerEvents: 'none'
+                        }}>
+                            <Text
+                                size="1"
                                 style={{
                                     position: 'absolute',
-                                    top: 12,
-                                    left: '50%',
-                                    width: 2,
-                                    height: 18,
-                                    backgroundColor: 'var(--accent-9)',
-                                    transform: 'translateX(-50%)'
+                                    top: 0,
+                                    left: 0,
+                                    backgroundColor: 'var(--accent-3)',
+                                    color: 'var(--accent-11)',
+                                    padding: '2px 6px',
+                                    fontSize: '10px',
+                                    borderBottomRightRadius: '4px'
                                 }}
-                            />
+                            >
+                                {element.name || 'Grupo'}
+                            </Text>
                         </Box>
                     )}
-                </div>
-            </ElementContextMenu>
+                </Box>
+
+                {isSelected && (
+                    <Box
+                        className="rotate-handle"
+                        style={{
+                            position: 'absolute',
+                            top: -30,
+                            left: '50%',
+                            transform: 'translateX(-50%)',
+                            width: 12,
+                            height: 12,
+                            backgroundColor: 'var(--accent-9)',
+                            borderRadius: '50%',
+                            cursor: 'crosshair',
+                            zIndex: 50,
+                            boxShadow: '0 0 0 2px white'
+                        }}
+                        onMouseDown={handleRotateStart}
+                        onPointerDown={(e) => e.stopPropagation()}
+                    >
+                        <Box
+                            style={{
+                                position: 'absolute',
+                                top: 12,
+                                left: '50%',
+                                width: 2,
+                                height: 18,
+                                backgroundColor: 'var(--accent-9)',
+                                transform: 'translateX(-50%)'
+                            }}
+                        />
+                    </Box>
+                )}
+            </div>
         </Resizable>
     );
 });

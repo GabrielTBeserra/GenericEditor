@@ -1,5 +1,5 @@
 import { Cross2Icon, DoubleArrowLeftIcon, DoubleArrowRightIcon, EyeNoneIcon, EyeOpenIcon, ListBulletIcon } from '@radix-ui/react-icons';
-import { Box, Button, Dialog, Flex, Grid, IconButton, Select, Separator, Text, Theme } from '@radix-ui/themes';
+import { Box, Button, Dialog, Flex, Grid, IconButton, Separator, Text, Theme } from '@radix-ui/themes';
 import '@radix-ui/themes/styles.css';
 import React, { useState } from 'react';
 import { Group, Panel } from 'react-resizable-panels';
@@ -9,6 +9,7 @@ import { GlobalHeader } from './components/GlobalHeader';
 import { Minimap } from './components/Minimap';
 import { OnboardingTour } from './components/OnboardingTour';
 import { Preview } from './components/Preview';
+import { PropertiesDialog } from './components/PropertiesDialog';
 import { Ruler } from './components/Ruler';
 import { ShortcutsDialog } from './components/ShortcutsDialog';
 import { SimpleSidebar } from './components/SimpleSidebar';
@@ -37,14 +38,7 @@ const EditorContent: React.FC<EditorProps> = ({ initialState, onSave, theme = 'l
     const [wizardStep, setWizardStep] = useState(1);
     const [isTourOpen, setIsTourOpen] = useState(false);
     const { addElement, loadState, state, undo, redo, copy, paste, removeSelected, updateElements } = useEditor();
-
-    // Auto-open Wizard if empty
-    React.useEffect(() => {
-        if (state.elements.length === 0) {
-            setWizardStep(1);
-            setIsWizardOpen(true);
-        }
-    }, []); // Only run on mount
+    const hasAutoOpenedWizardRef = React.useRef(false);
 
     React.useEffect(() => {
         const checkMobile = () => {
@@ -178,6 +172,7 @@ const EditorContent: React.FC<EditorProps> = ({ initialState, onSave, theme = 'l
         return () => window.removeEventListener('keydown', handleKeyDown);
     }, [undo, redo, copy, paste, removeSelected, state.selectedElementIds, state.elements, updateElements]);
 
+    const [initialLoadDone, setInitialLoadDone] = useState(false);
     // Load initial state if provided
     React.useEffect(() => {
         if (initialState) {
@@ -193,18 +188,31 @@ const EditorContent: React.FC<EditorProps> = ({ initialState, onSave, theme = 'l
                 console.error("Failed to load initial state", e);
             }
         }
+        setInitialLoadDone(true);
     }, [initialState, loadState]);
 
+    // Auto-open Wizard only when editor is empty after initial load (library: don't open if project has saved content)
+    React.useEffect(() => {
+        if (!initialLoadDone) return;
+        if (hasAutoOpenedWizardRef.current) return;
+        if (state.elements.length === 0) {
+            hasAutoOpenedWizardRef.current = true;
+            setWizardStep(1);
+            setIsWizardOpen(true);
+        }
+    }, [initialLoadDone, state.elements]);
+
+    // Sincroniza localTemplateId apenas quando o modal abre ou activeTemplateId muda externamente (ex: botões no App).
+    // Não incluir localTemplateId nas deps para não sobrescrever a seleção do usuário dentro do modal.
     React.useEffect(() => {
         if (!templates || templates.length === 0) return;
+        if (!isTemplatesOpen) return;
         if (activeTemplateId) {
             setLocalTemplateId(activeTemplateId);
-            return;
-        }
-        if (!localTemplateId) {
+        } else {
             setLocalTemplateId(templates[0].id);
         }
-    }, [activeTemplateId, localTemplateId, templates]);
+    }, [activeTemplateId, isTemplatesOpen, templates]);
 
     const applyTemplateState = React.useCallback((templateState: unknown) => {
         if (!templateState) return;
@@ -437,17 +445,25 @@ const EditorContent: React.FC<EditorProps> = ({ initialState, onSave, theme = 'l
                         {templates && templates.length > 0 ? (
                             <Flex direction="column" gap="3">
                                 <Box>
-                                    <Text size="2" weight="bold" as="div" mb="1">Selecione o Template</Text>
-                                    <Select.Root value={localTemplateId || ''} onValueChange={setLocalTemplateId}>
-                                        <Select.Trigger style={{ width: '100%' }} placeholder="Selecione um template..." />
-                                        <Select.Content>
-                                            {templates.map(template => (
-                                                <Select.Item key={template.id} value={template.id}>
-                                                    {template.name}
-                                                </Select.Item>
-                                            ))}
-                                        </Select.Content>
-                                    </Select.Root>
+                                    <Text size="2" weight="bold" as="div" mb="2">Selecione o Template</Text>
+                                    <Flex direction="column" gap="2">
+                                        {templates.map(template => (
+                                            <Button
+                                                key={template.id}
+                                                variant={localTemplateId === template.id ? 'solid' : 'soft'}
+                                                color={localTemplateId === template.id ? 'blue' : 'gray'}
+                                                size="2"
+                                                style={{
+                                                    width: '100%',
+                                                    justifyContent: 'flex-start',
+                                                    border: localTemplateId === template.id ? '2px solid var(--accent-9)' : undefined
+                                                }}
+                                                onClick={() => setLocalTemplateId(template.id)}
+                                            >
+                                                {template.name}
+                                            </Button>
+                                        ))}
+                                    </Flex>
                                 </Box>
 
                                 {localTemplateId && templates.find(t => t.id === localTemplateId)?.description && (
@@ -504,6 +520,8 @@ const EditorContent: React.FC<EditorProps> = ({ initialState, onSave, theme = 'l
                     isOpen={isTourOpen}
                     onClose={() => setIsTourOpen(false)}
                 />
+
+                <PropertiesDialog />
             </Flex>
         </Theme>
     );
