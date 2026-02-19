@@ -155,9 +155,16 @@ export const AnimationSettings: React.FC<{ element: IElement; updateElement: (id
     );
 };
 
+const FORMAT_TYPE_OPTIONS = ['text', 'boolean', 'date', 'number'] as const;
+type FormatTypeOption = (typeof FORMAT_TYPE_OPTIONS)[number];
+
 export const FormattingSettings: React.FC<{ element: IElement; updateElement: (id: string, changes: Partial<IElement>) => void }> = ({ element, updateElement }) => {
     const { portalContainer } = useEditor();
-    const formatting = element.formatting || { type: 'text' };
+    const rawFormatting = element.formatting || { type: 'text' };
+    const formatting = {
+        ...rawFormatting,
+        type: FORMAT_TYPE_OPTIONS.includes(rawFormatting.type as FormatTypeOption) ? rawFormatting.type : 'text'
+    };
 
     const handleUpdate = (updates: Partial<IElementFormatting>) => {
         updateElement(element.id, {
@@ -204,18 +211,23 @@ export const FormattingSettings: React.FC<{ element: IElement; updateElement: (i
 
             <Box>
                 <Text size="1" mb="1" as="div" color="gray">Tipo de Formatação</Text>
-                <Select.Root
-                    value={formatting.type}
-                    onValueChange={(val) => handleUpdate({ type: val as IElementFormatting['type'] })}
-                >
-                    <Select.Trigger style={{ width: '100%' }} />
-                    <Select.Content {...(portalContainer && { container: portalContainer })}>
-                        <Select.Item value="text">Texto (Padrão)</Select.Item>
-                        <Select.Item value="boolean">Booleano (Sim/Não)</Select.Item>
-                        <Select.Item value="date">Data</Select.Item>
-                        <Select.Item value="number">Número / Moeda</Select.Item>
-                    </Select.Content>
-                </Select.Root>
+                <DropdownMenu.Root>
+                    <DropdownMenu.Trigger asChild>
+                        <Button variant="soft" color="gray" size="2" style={{ width: '100%', justifyContent: 'space-between' }}>
+                            {formatting.type === 'text' && 'Texto (Padrão)'}
+                            {formatting.type === 'boolean' && 'Booleano (Sim/Não)'}
+                            {formatting.type === 'date' && 'Data'}
+                            {formatting.type === 'number' && 'Número / Moeda'}
+                            <ChevronDownIcon />
+                        </Button>
+                    </DropdownMenu.Trigger>
+                    <DropdownMenu.Content {...(portalContainer && { container: portalContainer })} style={{ zIndex: 100001 }}>
+                        <DropdownMenu.Item onSelect={() => handleUpdate({ type: 'text' })}>Texto (Padrão)</DropdownMenu.Item>
+                        <DropdownMenu.Item onSelect={() => handleUpdate({ type: 'boolean' })}>Booleano (Sim/Não)</DropdownMenu.Item>
+                        <DropdownMenu.Item onSelect={() => handleUpdate({ type: 'date' })}>Data</DropdownMenu.Item>
+                        <DropdownMenu.Item onSelect={() => handleUpdate({ type: 'number' })}>Número / Moeda</DropdownMenu.Item>
+                    </DropdownMenu.Content>
+                </DropdownMenu.Root>
             </Box>
 
             {formatting.type === 'boolean' && (

@@ -42,7 +42,7 @@ const AccordionItem: React.FC<{
     onReset?: () => void;
 }> = ({ title, isOpen, onToggle, children, onReset }) => {
     return (
-        <Box style={{ borderBottom: '1px solid var(--gray-4)' }}>
+        <Box style={{ borderBottom: '1px solid var(--gray-4)', paddingTop: 4, paddingBottom: 4, paddingLeft: 10, paddingRight: 10 }}>
             <Flex align="center" style={{ width: '100%' }}>
                 <Button
                     variant="ghost"
@@ -365,8 +365,8 @@ export const PropertiesDialog: React.FC = () => {
     };
 
     return (
-        <Dialog.Root open={isPropertiesPanelOpen} onOpenChange={setPropertiesPanelOpen}>
-            <Dialog.Content {...(portalContainer && { container: portalContainer })} style={{ maxWidth: 500, width: '100%', maxHeight: '85vh', height: '100%', padding: 0, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+        <Dialog.Root open={isPropertiesPanelOpen} onOpenChange={setPropertiesPanelOpen} modal={false}>
+            <Dialog.Content {...(portalContainer && { container: portalContainer })} style={{ maxWidth: 500, width: '100%', maxHeight: '85vh', height: '100%', padding: '0 15px', display: 'flex', flexDirection: 'column', overflow: 'hidden' }} onInteractOutside={(e) => { const target = e.target as HTMLElement; if (target?.closest?.('[data-radix-select-viewport]') || target?.closest?.('[data-radix-popper-content-wrapper]')) e.preventDefault(); }}>
                 {/* Header */}
                 <Box style={{ borderBottom: '1px solid var(--gray-4)' }}>
                     <Flex justify="between" align="center" p="4" pb="2">
