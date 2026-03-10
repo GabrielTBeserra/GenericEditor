@@ -1,6 +1,5 @@
 import { Box, Flex, Text } from '@radix-ui/themes';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import type { IElement } from '../context';
 import { useEditor } from '../context';
 import { DraggableElement } from './DraggableElement';
 import { SmartGuides } from './SmartGuides';
@@ -16,13 +15,7 @@ export const Canvas: React.FC<CanvasProps> = () => {
         setSelectedElements,
         addElement,
         setZoom,
-        setPan,
-        undo,
-        redo,
-        copy,
-        paste,
-        removeSelected,
-        updateElements
+        setPan
     } = useEditor();
     const canvasRef = useRef<HTMLDivElement>(null);
     const [selectionBox, setSelectionBox] = useState<{ x: number, y: number, width: number, height: number } | null>(null);
@@ -218,71 +211,8 @@ export const Canvas: React.FC<CanvasProps> = () => {
             // Ignore if input is focused (for other shortcuts)
             if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
 
-            // Undo/Redo
-            if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z') {
-                e.preventDefault();
-                if (e.shiftKey) {
-                    redo();
-                } else {
-                    undo();
-                }
-            }
-            // Redo (Ctrl+Y)
-            if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'y') {
-                e.preventDefault();
-                redo();
-            }
-            // Copy
-            if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'c') {
-                e.preventDefault();
-                copy();
-            }
-            // Paste
-            if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'v') {
-                e.preventDefault();
-                paste();
-            }
-            // Delete
-            if (e.key === 'Delete' || e.key === 'Backspace') {
-                // Prevent Backspace from navigating back
-                e.preventDefault();
-                removeSelected();
-            }
-            // Arrow Keys (Nudge)
-            if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
-                e.preventDefault();
-                const step = e.shiftKey ? 10 : 1;
-                // Batch update? updateElements takes array.
-                const updates: { id: string, changes: Partial<IElement> }[] = [];
-                state.selectedElementIds.forEach(id => {
-                    const el = state.elements.find(el => el.id === id);
-                    if (el) {
-                        let { x = 0, y = 0 } = el;
-                        if (e.key === 'ArrowUp') y -= step;
-                        if (e.key === 'ArrowDown') y += step;
-                        if (e.key === 'ArrowLeft') x -= step;
-                        if (e.key === 'ArrowRight') x += step;
-
-                        // Boundary check: Prevent left < 0
-                        x = Math.max(0, x);
-
-                        if (state.isList) {
-                            y = Math.max(0, y);
-                            const elHeight = el.height ?? 100;
-                            const canvasHeight = state.canvasHeight || 150;
-                            if (canvasHeight > 0) {
-                                y = Math.min(y, canvasHeight - elHeight);
-                            }
-                            y = Math.max(0, y);
-                        }
-
-                        updates.push({ id, changes: { x, y } });
-                    }
-                });
-                if (updates.length > 0) {
-                    updateElements(updates);
-                }
-            }
+            // Shortcuts de edição (Undo, Copy, etc.) e setas estão em index.tsx para evitar handlers duplicados
+            // Canvas mantém apenas: Space (pan) e handleKeyUp
         };
 
         const handleKeyUp = (e: KeyboardEvent) => {
@@ -298,7 +228,7 @@ export const Canvas: React.FC<CanvasProps> = () => {
             window.removeEventListener('keydown', handleKeyDown);
             window.removeEventListener('keyup', handleKeyUp);
         };
-    }, [undo, redo, copy, paste, removeSelected, updateElements, state.selectedElementIds, state.elements]);
+    }, []);
 
     // Canvas Resize Logic
     const isResizingCanvas = useRef(false);

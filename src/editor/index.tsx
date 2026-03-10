@@ -1,6 +1,7 @@
-import { Cross2Icon, DoubleArrowLeftIcon, DoubleArrowRightIcon, EyeNoneIcon, EyeOpenIcon, ListBulletIcon } from '@radix-ui/react-icons';
+import { Cross2Icon, DoubleArrowLeftIcon, DoubleArrowRightIcon, EyeNoneIcon, EyeOpenIcon, ListBulletIcon, ReaderIcon } from '@radix-ui/react-icons';
 import { Box, Button, Dialog, Flex, Grid, IconButton, Separator, Text, Theme } from '@radix-ui/themes';
 import '@radix-ui/themes/styles.css';
+import { AnimatePresence } from 'framer-motion';
 import React, { useState } from 'react';
 import { Group, Panel } from 'react-resizable-panels';
 import { AlignmentToolbar } from './components/AlignmentToolbar';
@@ -9,6 +10,8 @@ import { GlobalHeader } from './components/GlobalHeader';
 import { Minimap } from './components/Minimap';
 import { OnboardingTour } from './components/OnboardingTour';
 import { Preview } from './components/Preview';
+import { FeedbackModal } from './components/FeedbackModal';
+import { LoadingScreen } from './components/LoadingScreen';
 import { PropertiesDialog } from './components/PropertiesDialog';
 import { Ruler } from './components/Ruler';
 import { ShortcutsDialog } from './components/ShortcutsDialog';
@@ -39,7 +42,14 @@ const EditorContent: React.FC<EditorProps> = ({ initialState, onSave, theme = 'l
     const [isWizardOpen, setIsWizardOpen] = useState(false);
     const [wizardStep, setWizardStep] = useState(1);
     const [isTourOpen, setIsTourOpen] = useState(false);
-    const { addElement, loadState, state, portalContainer, undo, redo, copy, paste, removeSelected, updateElements } = useEditor();
+    const { addElement, loadState, state, portalContainer, undo, redo, copy, paste, removeSelected, updateElements, showAlert } = useEditor();
+
+    // Fechar o tour quando um modal abrir para evitar conflitos de z-index e foco
+    React.useEffect(() => {
+        if (state.isPropertiesPanelOpen || isWizardOpen) {
+            setIsTourOpen(false);
+        }
+    }, [state.isPropertiesPanelOpen, isWizardOpen]);
     const hasAutoOpenedWizardRef = React.useRef(false);
 
     React.useEffect(() => {
@@ -152,14 +162,23 @@ const EditorContent: React.FC<EditorProps> = ({ initialState, onSave, theme = 'l
                     const updates: { id: string, changes: Partial<IElement> }[] = [];
 
                     state.selectedElementIds.forEach(id => {
-                        const element = state.elements.find(el => el.id === id);
-                        if (element) {
-                            const change: Partial<IElement> = {};
-                            if (e.key === 'ArrowUp') change.y = element.y - step;
-                            if (e.key === 'ArrowDown') change.y = element.y + step;
-                            if (e.key === 'ArrowLeft') change.x = element.x - step;
-                            if (e.key === 'ArrowRight') change.x = element.x + step;
-                            updates.push({ id, changes: change });
+                        const el = state.elements.find(elem => elem.id === id);
+                        if (el) {
+                            let x = el.x ?? 0;
+                            let y = el.y ?? 0;
+                            if (e.key === 'ArrowUp') y -= step;
+                            if (e.key === 'ArrowDown') y += step;
+                            if (e.key === 'ArrowLeft') x -= step;
+                            if (e.key === 'ArrowRight') x += step;
+                            x = Math.max(0, x);
+                            if (state.isList) {
+                                y = Math.max(0, y);
+                                const elHeight = el.height ?? 100;
+                                const canvasHeight = state.canvasHeight || 150;
+                                if (canvasHeight > 0) y = Math.min(y, canvasHeight - elHeight);
+                                y = Math.max(0, y);
+                            }
+                            updates.push({ id, changes: { x, y } });
                         }
                     });
 
@@ -172,15 +191,16 @@ const EditorContent: React.FC<EditorProps> = ({ initialState, onSave, theme = 'l
 
         window.addEventListener('keydown', handleKeyDown);
         return () => window.removeEventListener('keydown', handleKeyDown);
-    }, [undo, redo, copy, paste, removeSelected, state.selectedElementIds, state.elements, updateElements]);
+    }, [undo, redo, copy, paste, removeSelected, state.selectedElementIds, state.elements, state.isList, state.canvasHeight, updateElements]);
 
     const [initialLoadDone, setInitialLoadDone] = useState(false);
-    // Load initial state if provided
+    // Load initial state if provided; show loading screen for a minimum time for a smoother UX
+    const minLoadingMs = 400;
     React.useEffect(() => {
+        const start = Date.now();
         if (initialState) {
             try {
                 const parsed = typeof initialState === 'string' ? JSON.parse(initialState) : initialState;
-                // Check if it's full state or just elements
                 if (Array.isArray(parsed)) {
                     loadState({ elements: parsed });
                 } else if (parsed.elements) {
@@ -190,7 +210,10 @@ const EditorContent: React.FC<EditorProps> = ({ initialState, onSave, theme = 'l
                 console.error("Failed to load initial state", e);
             }
         }
-        setInitialLoadDone(true);
+        const elapsed = Date.now() - start;
+        const remaining = Math.max(0, minLoadingMs - elapsed);
+        const t = setTimeout(() => setInitialLoadDone(true), remaining);
+        return () => clearTimeout(t);
     }, [initialState, loadState]);
 
     // Auto-open Wizard only when editor is empty after initial load (library: don't open if project has saved content)
@@ -244,8 +267,10 @@ const EditorContent: React.FC<EditorProps> = ({ initialState, onSave, theme = 'l
 
     return (
         <Theme appearance={theme} accentColor="blue" grayColor="slate" radius="large" scaling="105%">
-            <Flex direction="column" style={{ height: '100vh', width: '100%', overflow: 'hidden', backgroundColor: 'var(--gray-1)' }}>
-                <GlobalHeader
+            <Flex direction="column" style={{ height: '100vh', width: '100%', overflow: 'hidden', backgroundColor: 'var(--gray-1)', position: 'relative' }}>
+                {initialLoadDone && (
+                    <>
+                        <GlobalHeader
                     onSave={onSave}
                     templates={templates}
                     setIsTemplatesOpen={setIsTemplatesOpen}
@@ -254,6 +279,7 @@ const EditorContent: React.FC<EditorProps> = ({ initialState, onSave, theme = 'l
                         setIsWizardOpen(true);
                     }}
                     onToggleSidebar={() => setIsSidebarVisible(!isSidebarVisible)}
+                    onStartTour={() => setIsTourOpen(true)}
                 />
                 <Flex direction="row" style={{ flexGrow: 1, overflow: 'hidden' }}>
                     {/* Mobile Backdrop */}
@@ -337,6 +363,16 @@ const EditorContent: React.FC<EditorProps> = ({ initialState, onSave, theme = 'l
 
                             {/* Right Controls */}
                             <Flex gap="3" align="center">
+                                <Button
+                                    variant="soft"
+                                    color="blue"
+                                    size="2"
+                                    onClick={() => setIsTourOpen(true)}
+                                    title="Iniciar tour guiado"
+                                    style={{ cursor: 'pointer' }}
+                                >
+                                    <ReaderIcon /> Tour
+                                </Button>
                                 <ShortcutsDialog />
 
                                 <IconButton
@@ -514,7 +550,7 @@ const EditorContent: React.FC<EditorProps> = ({ initialState, onSave, theme = 'l
                     initialStep={wizardStep}
                     onFinishWizard={() => {
                         handleExport();
-                        alert("Layout finalizado e exportado com sucesso!");
+                        showAlert("Layout finalizado e exportado com sucesso!");
                     }}
                 />
 
@@ -523,7 +559,13 @@ const EditorContent: React.FC<EditorProps> = ({ initialState, onSave, theme = 'l
                     onClose={() => setIsTourOpen(false)}
                 />
 
+                <FeedbackModal />
                 <PropertiesDialog />
+                    </>
+                )}
+                <AnimatePresence>
+                    {!initialLoadDone && <LoadingScreen key="loading" />}
+                </AnimatePresence>
             </Flex>
         </Theme>
     );

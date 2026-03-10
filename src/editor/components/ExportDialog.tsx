@@ -5,7 +5,7 @@ import { useEditor } from '../context';
 import { getRendererCode } from '../utils/htmlGenerator';
 
 export const ExportDialog: React.FC<{ onSaveExternal?: (json: string) => void }> = ({ onSaveExternal }) => {
-    const { state, loadState } = useEditor();
+    const { state, loadState, showAlert } = useEditor();
     const [copiedJson, setCopiedJson] = useState(false);
     const [copiedCode, setCopiedCode] = useState(false);
     const [importJson, setImportJson] = useState('');
@@ -31,13 +31,13 @@ export const ExportDialog: React.FC<{ onSaveExternal?: (json: string) => void }>
     const handleSaveExternal = () => {
         if (onSaveExternal) {
             onSaveExternal(fullStateJson);
-            alert('Enviado para salvamento externo!');
+            showAlert('Enviado para salvamento externo!');
         }
     };
 
     const handleSaveLocal = () => {
         localStorage.setItem('editor_save_test', fullStateJson);
-        alert('Salvo no LocalStorage com sucesso!');
+        showAlert('Salvo no LocalStorage com sucesso!');
     };
 
     const handleLoadLocal = () => {
@@ -46,12 +46,12 @@ export const ExportDialog: React.FC<{ onSaveExternal?: (json: string) => void }>
             try {
                 const parsed = JSON.parse(saved);
                 loadState(parsed);
-                alert('Carregado com sucesso!');
+                showAlert('Carregado com sucesso!');
             } catch (e) {
-                alert('Erro ao carregar JSON.');
+                showAlert('Erro ao carregar JSON.');
             }
         } else {
-            alert('Nenhum save encontrado no LocalStorage.');
+            showAlert('Nenhum save encontrado no LocalStorage.');
         }
     };
 
@@ -65,13 +65,13 @@ export const ExportDialog: React.FC<{ onSaveExternal?: (json: string) => void }>
             } else if (parsed.elements) {
                 loadState(parsed);
             } else {
-                alert('Formato de JSON inválido.');
+                showAlert('Formato de JSON inválido.');
                 return;
             }
-            alert('Importado com sucesso!');
+            showAlert('Importado com sucesso!');
             setImportJson('');
         } catch (e) {
-            alert('Erro ao analisar JSON: ' + (e as Error).message);
+            showAlert('Erro ao analisar JSON: ' + (e as Error).message);
         }
     };
 

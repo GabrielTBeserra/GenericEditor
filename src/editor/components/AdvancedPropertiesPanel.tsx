@@ -212,6 +212,7 @@ export const FormattingSettings: React.FC<{ element: IElement; updateElement: (i
             <Box>
                 <Text size="1" mb="1" as="div" color="gray">Tipo de Formatação</Text>
                 <DropdownMenu.Root>
+                    {/* @ts-expect-error Radix Trigger accepts asChild but types may be narrow */}
                     <DropdownMenu.Trigger asChild>
                         <Button variant="soft" color="gray" size="2" style={{ width: '100%', justifyContent: 'space-between' }}>
                             {formatting.type === 'text' && 'Texto (Padrão)'}

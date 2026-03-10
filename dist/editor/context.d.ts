@@ -85,6 +85,17 @@ interface IEditorState {
         position: number;
     }[];
     assets: IAsset[];
+    feedback?: {
+        type: 'alert' | 'confirm' | 'prompt';
+        message: string;
+        onConfirm?: () => void;
+        onCancel?: () => void;
+        onPromptSubmit?: (v: string) => void;
+        promptDefaultValue?: string;
+        confirmLabel?: string;
+        cancelLabel?: string;
+        title?: string;
+    };
 }
 export interface IAsset {
     id: string;
@@ -136,6 +147,10 @@ export interface IEditorContext {
     setPropertiesPanelOpen: (open: boolean) => void;
     addAsset: (asset: IAsset) => void;
     removeAsset: (id: string) => void;
+    showAlert: (message: string) => void;
+    showConfirm: (message: string, onConfirm: () => void, onCancel?: () => void) => void;
+    showPrompt: (message: string, onSubmit: (value: string) => void, onCancel?: () => void, defaultValue?: string) => void;
+    clearFeedback: () => void;
 }
 export interface ISnapGuide {
     type: 'horizontal' | 'vertical';

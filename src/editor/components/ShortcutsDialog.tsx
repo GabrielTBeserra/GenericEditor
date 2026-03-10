@@ -37,6 +37,7 @@ export const ShortcutsDialog: React.FC = () => {
         <Dialog.Root>
             <Dialog.Trigger>
                 <Button
+                    id="tour-shortcuts-trigger"
                     variant="solid"
                     color="amber"
                     radius="full"

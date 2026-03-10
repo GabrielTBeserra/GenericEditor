@@ -85,6 +85,7 @@ interface IEditorState {
     pan: { x: number, y: number };
     snapLines: { orientation: 'horizontal' | 'vertical', position: number }[];
     assets: IAsset[];
+    feedback?: { type: 'alert'|'confirm'|'prompt'; message: string; onConfirm?: () => void; onCancel?: () => void; onPromptSubmit?: (v: string) => void; promptDefaultValue?: string; confirmLabel?: string; cancelLabel?: string; title?: string };
 }
 
 export interface IAsset {
@@ -129,6 +130,10 @@ export interface IEditorContext {
     setPropertiesPanelOpen: (open: boolean) => void;
     addAsset: (asset: IAsset) => void;
     removeAsset: (id: string) => void;
+    showAlert: (message: string) => void;
+    showConfirm: (message: string, onConfirm: () => void, onCancel?: () => void) => void;
+    showPrompt: (message: string, onSubmit: (value: string) => void, onCancel?: () => void, defaultValue?: string) => void;
+    clearFeedback: () => void;
 }
 
 export interface ISnapGuide {
@@ -841,6 +846,63 @@ export const EditorProvider: React.FC<{ children: ReactNode; isList?: boolean; a
         setState(prev => ({ ...prev, assets: prev.assets.filter(a => a.id !== id) }));
     }, []);
 
+    const clearFeedback = React.useCallback(() => {
+        setState(prev => ({ ...prev, feedback: undefined }));
+    }, []);
+
+    const showAlert = React.useCallback((message: string) => {
+        setState(prev => ({
+            ...prev,
+            feedback: {
+                type: 'alert',
+                message,
+                onConfirm: () => setState(p => ({ ...p, feedback: undefined }))
+            }
+        }));
+    }, []);
+
+    const showConfirm = React.useCallback((message: string, onConfirm: () => void, onCancel?: () => void) => {
+        setState(prev => ({
+            ...prev,
+            feedback: {
+                type: 'confirm',
+                message,
+                onConfirm: () => {
+                    setState(p => ({ ...p, feedback: undefined }));
+                    onConfirm();
+                },
+                onCancel: () => {
+                    setState(p => ({ ...p, feedback: undefined }));
+                    onCancel?.();
+                }
+            }
+        }));
+    }, []);
+
+    const showPrompt = React.useCallback((
+        message: string,
+        onSubmit: (value: string) => void,
+        onCancel?: () => void,
+        defaultValue?: string
+    ) => {
+        setState(prev => ({
+            ...prev,
+            feedback: {
+                type: 'prompt',
+                message,
+                promptDefaultValue: defaultValue,
+                onPromptSubmit: (value) => {
+                    setState(p => ({ ...p, feedback: undefined }));
+                    onSubmit(value);
+                },
+                onCancel: () => {
+                    setState(p => ({ ...p, feedback: undefined }));
+                    onCancel?.();
+                }
+            }
+        }));
+    }, []);
+
     return (
         <EditorContext.Provider value={React.useMemo(() => ({
             state,
@@ -874,8 +936,12 @@ export const EditorProvider: React.FC<{ children: ReactNode; isList?: boolean; a
             paste,
             setPropertiesPanelOpen,
             addAsset,
-            removeAsset
-        }), [state, portalContainer, addElement, removeElement, removeSelected, selectElement, setSelectedElements, moveElement, updateElement, updateElements, groupElements, ungroupElements, renameElement, addToGroup, removeFromGroup, resizeGroup, setMockData, updateListSettings, setCanvasHeight, loadState, undo, redo, jumpToHistory, copy, paste, setGridSize, setZoom, setPan, setSnapLines, addAsset, removeAsset, setPropertiesPanelOpen])}>
+            removeAsset,
+            showAlert,
+            showConfirm,
+            showPrompt,
+            clearFeedback
+        }), [state, portalContainer, addElement, removeElement, removeSelected, selectElement, setSelectedElements, moveElement, updateElement, updateElements, groupElements, ungroupElements, renameElement, addToGroup, removeFromGroup, resizeGroup, setMockData, updateListSettings, setCanvasHeight, loadState, undo, redo, jumpToHistory, copy, paste, setGridSize, setZoom, setPan, setSnapLines, addAsset, removeAsset, setPropertiesPanelOpen, showAlert, showConfirm, showPrompt, clearFeedback])}>
             {children}
         </EditorContext.Provider>
     );

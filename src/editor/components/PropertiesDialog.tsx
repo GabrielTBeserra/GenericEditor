@@ -25,7 +25,7 @@ import {
     TrashIcon,
     UnderlineIcon
 } from '@radix-ui/react-icons';
-import { Box, Button, Dialog, DropdownMenu, Flex, Grid, IconButton, SegmentedControl, Select, Slider, Tabs, Text, TextArea, TextField, Tooltip } from '@radix-ui/themes';
+import { Badge, Box, Button, Dialog, DropdownMenu, Flex, Grid, IconButton, SegmentedControl, Select, Slider, Tabs, Text, TextArea, TextField, Tooltip } from '@radix-ui/themes';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useEditor, type IElement } from '../context';
 import { ensureFontInOptions, FONT_WEIGHT_OPTIONS_FULL, normalizeFontWeightForSelect } from '../utils/helpers';
@@ -216,7 +216,7 @@ const UnlinkIcon = () => (
 
 
 export const PropertiesDialog: React.FC = () => {
-    const { state, portalContainer, setPropertiesPanelOpen, updateElement, updateElements, removeSelected, copy, paste, addElement } = useEditor();
+    const { state, portalContainer, setPropertiesPanelOpen, updateElement, updateElements, removeSelected, copy, paste, addElement, showPrompt } = useEditor();
     const { isPropertiesPanelOpen, selectedElementIds, elements } = state;
 
     const selectedElements = useMemo(() => {
@@ -310,6 +310,13 @@ export const PropertiesDialog: React.FC = () => {
         handleStyleUpdate(effectiveReset);
     };
 
+    const insertTokenIntoContent = (token: string) => {
+        const current = element.content || '';
+        if (current.includes(token)) return;
+        const next = current ? `${current} ${token}` : token;
+        handleUpdate({ content: next });
+    };
+
     const matchesSearch = (sectionTitle: string, keywords: string[]) => {
         if (!searchTerm) return true;
         const term = searchTerm.toLowerCase();
@@ -365,6 +372,7 @@ export const PropertiesDialog: React.FC = () => {
     };
 
     return (
+        // @ts-expect-error Radix Dialog.Root accepts modal but types may not include it
         <Dialog.Root open={isPropertiesPanelOpen} onOpenChange={setPropertiesPanelOpen} modal={false}>
             <Dialog.Content {...(portalContainer && { container: portalContainer })} style={{ maxWidth: 500, width: '100%', maxHeight: '85vh', height: '100%', padding: '0 15px', display: 'flex', flexDirection: 'column', overflow: 'hidden' }} onInteractOutside={(e) => { const target = e.target as HTMLElement; if (target?.closest?.('[data-radix-select-viewport]') || target?.closest?.('[data-radix-popper-content-wrapper]')) e.preventDefault(); }}>
                 {/* Header */}
@@ -396,10 +404,10 @@ export const PropertiesDialog: React.FC = () => {
                                         </DropdownMenu.Item>
                                     ))}
                                     <DropdownMenu.Separator />
-                                    <DropdownMenu.Item onSelect={(e) => {
-                                        e.preventDefault(); // Prevent closing to allow prompt
-                                        const name = prompt("Nome do novo preset:");
-                                        if (name) savePreset(name);
+                                    <DropdownMenu.Item onSelect={() => {
+                                        showPrompt("Nome do novo preset:", (name) => {
+                                            if (name.trim()) savePreset(name.trim());
+                                        }, undefined, "");
                                     }}>
                                         <PlusIcon style={{ marginRight: 8 }} /> Salvar Atual
                                     </DropdownMenu.Item>
@@ -434,7 +442,36 @@ export const PropertiesDialog: React.FC = () => {
                                 {(element.type === 'text' || element.type === 'text-container') && (
                                     <>
                                         <Text size="1" color="gray" mb="1" as="div">Texto</Text>
-                                        <TextArea value={element.content || ''} onChange={e => handleUpdate({ content: e.target.value })} rows={4} placeholder="Texto ou {{variavel}}..." />
+                                        <TextArea
+                                            value={element.content || ''}
+                                            onChange={e => handleUpdate({ content: e.target.value })}
+                                            rows={4}
+                                            placeholder="Texto ou {{variavel}}..."
+                                        />
+                                        {state.availableProps && state.availableProps.length > 0 && (
+                                            <Box mt="2">
+                                                <Text size="1" color="gray" mb="1" as="div">
+                                                    Variáveis disponíveis
+                                                </Text>
+                                                <Flex wrap="wrap" gap="1">
+                                                    {state.availableProps.map((prop) => {
+                                                        const token = `{{${prop.dataName}}}`;
+                                                        return (
+                                                            <Badge
+                                                                key={prop.dataName}
+                                                                variant="soft"
+                                                                color="blue"
+                                                                style={{ cursor: 'pointer' }}
+                                                                onClick={() => insertTokenIntoContent(token)}
+                                                            >
+                                                                <span style={{ fontWeight: 500 }}>{prop.name}</span>&nbsp;
+                                                                <span style={{ opacity: 0.7 }}>{token}</span>
+                                                            </Badge>
+                                                        );
+                                                    })}
+                                                </Flex>
+                                            </Box>
+                                        )}
                                     </>
                                 )}
                                 {element.type === 'image' && (
@@ -457,7 +494,35 @@ export const PropertiesDialog: React.FC = () => {
                                             </DropdownMenu.Content>
                                         </DropdownMenu.Root>
                                         <Text size="1" color="gray" mb="1" as="div">URL ou {'{{variável}}'}</Text>
-                                        <TextField.Root value={element.content || ''} onChange={e => handleUpdate({ content: e.target.value })} placeholder="https://... ou {{profilePicture}}" />
+                                        <TextField.Root
+                                            value={element.content || ''}
+                                            onChange={e => handleUpdate({ content: e.target.value })}
+                                            placeholder="https://... ou {{profilePicture}}"
+                                        />
+                                        {state.availableProps && state.availableProps.length > 0 && (
+                                            <Box mt="2">
+                                                <Text size="1" color="gray" mb="1" as="div">
+                                                    Variáveis para vincular
+                                                </Text>
+                                                <Flex wrap="wrap" gap="1">
+                                                    {state.availableProps.map((prop) => {
+                                                        const token = `{{${prop.dataName}}}`;
+                                                        return (
+                                                            <Badge
+                                                                key={prop.dataName}
+                                                                variant="soft"
+                                                                color={element.dataBinding === prop.dataName ? 'green' : 'gray'}
+                                                                style={{ cursor: 'pointer' }}
+                                                                onClick={() => handleUpdate({ dataBinding: prop.dataName, content: token })}
+                                                            >
+                                                                <span style={{ fontWeight: 500 }}>{prop.name}</span>&nbsp;
+                                                                <span style={{ opacity: 0.7 }}>{token}</span>
+                                                            </Badge>
+                                                        );
+                                                    })}
+                                                </Flex>
+                                            </Box>
+                                        )}
                                     </>
                                 )}
                             </Box>

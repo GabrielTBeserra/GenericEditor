@@ -1,4 +1,4 @@
-import { CheckIcon, DownloadIcon, FileTextIcon, ListBulletIcon, PlusIcon, Share1Icon, UploadIcon } from '@radix-ui/react-icons';
+import { CheckIcon, DownloadIcon, FileTextIcon, ListBulletIcon, PlusIcon, ReaderIcon, Share1Icon, UploadIcon } from '@radix-ui/react-icons';
 import { Box, Button, DropdownMenu, Flex, IconButton, Text } from '@radix-ui/themes';
 import React, { useRef } from 'react';
 import { useEditor } from '../context';
@@ -10,10 +10,11 @@ interface GlobalHeaderProps {
     setIsTemplatesOpen: (isOpen: boolean) => void;
     onFinish?: () => void;
     onToggleSidebar?: () => void;
+    onStartTour?: () => void;
 }
 
-export const GlobalHeader: React.FC<GlobalHeaderProps> = ({ onSave, templates, setIsTemplatesOpen, onFinish, onToggleSidebar }) => {
-    const { state, portalContainer, loadState, addElement } = useEditor();
+export const GlobalHeader: React.FC<GlobalHeaderProps> = ({ onSave, templates, setIsTemplatesOpen, onFinish, onToggleSidebar, onStartTour }) => {
+    const { state, portalContainer, loadState, addElement, showAlert } = useEditor();
     const fileInputRef = useRef<HTMLInputElement>(null);
 
 
@@ -55,7 +56,7 @@ export const GlobalHeader: React.FC<GlobalHeaderProps> = ({ onSave, templates, s
                 loadState(parsedState);
             } catch (error) {
                 console.error("Failed to import layout", error);
-                alert("Erro ao importar layout. Arquivo inválido.");
+                showAlert("Erro ao importar layout. Arquivo inválido.");
             }
         };
         reader.readAsText(file);
@@ -139,6 +140,12 @@ export const GlobalHeader: React.FC<GlobalHeaderProps> = ({ onSave, templates, s
                 {templates && templates.length > 0 && (
                     <Button variant="soft" color="gray" onClick={() => setIsTemplatesOpen(true)} style={{ cursor: 'pointer' }}>
                         <FileTextIcon /> Templates
+                    </Button>
+                )}
+
+                {onStartTour && (
+                    <Button variant="soft" color="blue" onClick={onStartTour} style={{ cursor: 'pointer' }} title="Iniciar tour guiado">
+                        <ReaderIcon /> Tour
                     </Button>
                 )}
 

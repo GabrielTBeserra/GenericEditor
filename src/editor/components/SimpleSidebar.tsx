@@ -126,13 +126,16 @@ export const SimpleSidebar: React.FC<SimpleSidebarProps> = ({ onClose }) => {
     return (
         <Flex direction="column" style={{ height: '100%' }}>
             {/* Top Section: Properties or Helper */}
-            <Box p="4" style={{
-                borderBottom: '1px solid var(--gray-5)',
-                minHeight: '180px',
-                flexShrink: 0,
-                maxHeight: 'calc(100vh - 150px)', // Prevent taking full height
-                overflowY: 'auto' // Allow scrolling when properties expand
-            }}>
+            <Box
+                p="4"
+                style={{
+                    borderBottom: '1px solid var(--gray-5)',
+                    minHeight: '180px',
+                    flexShrink: 0,
+                    maxHeight: 'calc(100vh - 150px)', // Prevent taking full height
+                    overflowY: 'auto' // Allow scrolling when properties expand
+                }}
+            >
                 {hasSelection ? (
                     <SimpleProperties />
                 ) : (
@@ -167,6 +170,7 @@ export const SimpleSidebar: React.FC<SimpleSidebarProps> = ({ onClose }) => {
                                     icon={<FileTextIcon width="20" height="20" />}
                                     label="Texto"
                                     onClick={() => handleAddBlock('text')}
+                                    data-tour="block-text"
                                 />
                                 <BlockCard
                                     icon={<ImageIcon width="20" height="20" />}
@@ -221,10 +225,11 @@ export const SimpleSidebar: React.FC<SimpleSidebarProps> = ({ onClose }) => {
     );
 };
 
-const BlockCard: React.FC<{ icon: React.ReactNode, label: string, onClick: () => void }> = ({ icon, label, onClick }) => (
+const BlockCard: React.FC<{ icon: React.ReactNode, label: string, onClick: () => void; 'data-tour'?: string }> = ({ icon, label, onClick, 'data-tour': dataTour }) => (
     <Card
         style={{ cursor: 'pointer', transition: 'all 0.2s' }}
         onClick={onClick}
+        {...(dataTour ? { 'data-tour': dataTour } : {})}
     >
         <Flex direction="column" align="center" gap="2" p="2">
             <Box style={{ color: 'var(--accent-9)' }}>
